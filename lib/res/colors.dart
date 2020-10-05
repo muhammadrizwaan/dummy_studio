@@ -61,9 +61,14 @@ class AppColors{
   static final colorRedLightShade= Color.fromRGBO(255,205,210,1);
   static final colorTealWhiteShade= Color.fromRGBO(224,242,241,1);
 
+  // App colors
+  static final colorBlack= Color.fromRGBO(28, 40, 38, 1);
+  static final lightGray= Color.fromRGBO(244, 245, 247, 1);
+  static final yellow= Color.fromRGBO(255, 182, 39, 1);
+  static final grey= Color.fromRGBO(194, 194, 194, 1);
+
 
   //Hex color code
-
   static final blueLight = "#2196F3";
   static final purpleLight = "#3F51B5";
   static final colorRedLight = "#d32f2f";

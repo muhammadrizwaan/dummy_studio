@@ -10,4 +10,7 @@ class Assets {
   static const String montserratBold = "Montserrat-Bold";
   static const String montserratExtraLightItalic = "Montserrat-ExtraLightItalic";
 
+// App Fonts
+  static const String poppinsRegular = "Poppins-Regular";
+  static const String poppinsLight = "Poppins-Light";
 }
