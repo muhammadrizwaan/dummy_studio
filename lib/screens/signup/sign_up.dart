@@ -37,17 +37,14 @@ class _SignUPState extends State<SignUP> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Positioned(
-                top: 0,
-                child: CommonWidgets.getAppBar(
-                    iconName: 'back_arrow_otp.png',
-                    text: "Already have an account? ",
-                    clickableText: "Login",
-                    onTap: (){Navigator.push(context, SlideRightRoute(page: Login()));},
-                    onPress: () {
-                      Navigator.pop(context);
-                    }),
-              ),
+              CommonWidgets.getAppBar(
+                  iconName: 'back_arrow_otp.png',
+                  text: "Already have an account? ",
+                  clickableText: "Login",
+                  onTap: (){Navigator.push(context, SlideRightRoute(page: Login()));},
+                  onPress: () {
+                    Navigator.pop(context);
+                  }),
               Expanded(
                 child: ListView(
                   children: [

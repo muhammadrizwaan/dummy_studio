@@ -37,17 +37,14 @@ class _ForgotPassowrdState extends State<ForgotPassowrd> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Positioned(
-                top: 0,
-                child: CommonWidgets.getAppBar(
-                    iconName: 'cross_icon.png',
-                    text: "Reset ",
-                    clickableText: "Password",
-                    onTap: (){},
-                    onPress: () {
-                      Navigator.pop(context);
-                    }),
-              ),
+              CommonWidgets.getAppBar(
+                  iconName: 'cross_icon.png',
+                  text: "Reset ",
+                  clickableText: "Password",
+                  onTap: (){},
+                  onPress: () {
+                    Navigator.pop(context);
+                  }),
               Expanded(
                 child: ListView(
                   children: [

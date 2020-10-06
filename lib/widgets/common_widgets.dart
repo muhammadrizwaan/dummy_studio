@@ -14,7 +14,7 @@ class CommonWidgets{
       width: AppSizes.width,
       height: AppSizes.height * 0.06,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(color: AppColors.yellow,),
         color: AppColors.yellow,
       ),
@@ -64,6 +64,54 @@ class CommonWidgets{
                     ..onTap = () => onTap(),
                 ),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  static Widget tabsAppBar1({@required String text, @required String iconName, @required Function onPress}){
+    return Container(
+      padding: EdgeInsets.all(AppSizes.width * 0.05),
+      // color: AppColors.white,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            text,
+            style: TextStyle(
+              fontFamily: Assets.poppinsMedium,
+              fontSize: 22,
+              color: AppColors.colorBlack
+            ),
+          ),
+          GestureDetector(
+              onTap: () => onPress(),
+              child: Image(image: AssetImage('$iconName'))
+          ),
+        ],
+      ),
+    );
+  }
+  static Widget tabsAppBar2({@required String text, @required String iconName, @required Function onPress}){
+    return Container(
+      padding: EdgeInsets.all(AppSizes.width * 0.05),
+      // color: AppColors.white,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          GestureDetector(
+              onTap: () => onPress(),
+              child: Image(image: AssetImage('$iconName'))
+          ),
+          SizedBox(width: 20,),
+          Text(
+            text,
+            style: TextStyle(
+                fontFamily: Assets.poppinsMedium,
+                fontSize: 22,
+                color: AppColors.colorBlack
             ),
           ),
         ],

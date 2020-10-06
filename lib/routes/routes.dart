@@ -1,6 +1,7 @@
 
 
 import 'package:truckoom_shipper/screens/Splash/Splash.dart';
+import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
 import 'package:truckoom_shipper/screens/businessInformation/business_information.dart';
 import 'package:truckoom_shipper/screens/businessSignup/business_signup.dart';
 import 'package:truckoom_shipper/screens/checkUserType/check_user.dart';
@@ -22,6 +23,7 @@ class Routes{
   static const String reset = '/reset';
   static const String businessSignup = '/businessSignup';
   static const String businessInformation = '/businessInformation';
+  static const String bottomTab = '/bottomTab';
 
 
   static final routes = {
@@ -35,5 +37,6 @@ class Routes{
       reset: (context) => ResetPassword(),
       businessSignup: (context) => BusinessSignup(),
       businessInformation: (context) => BusinessInformation(),
+      bottomTab: (context) => BottomTab(),
   };
 }

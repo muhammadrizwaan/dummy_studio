@@ -45,17 +45,14 @@ class _OTPAuthenticationState extends State<OTPAuthentication> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Positioned(
-                top: 0,
-                child: CommonWidgets.getAppBar(
-                    iconName: 'back_arrow_otp.png',
-                    text: "",
-                    clickableText: "",
-                    onTap: (){},
-                    onPress: () {
-                      Navigator.pop(context);
-                    }),
-              ),
+              CommonWidgets.getAppBar(
+                  iconName: 'back_arrow_otp.png',
+                  text: "",
+                  clickableText: "",
+                  onTap: (){},
+                  onPress: () {
+                    Navigator.pop(context);
+                  }),
               Expanded(
                 child: ListView(
                   children: [
