@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
 import 'package:truckoom_shipper/screens/forgotPassword/forgot_password.dart';
 import 'package:truckoom_shipper/screens/login/login_components.dart';
 import 'package:truckoom_shipper/screens/phoneNumber/phone_number.dart';
@@ -42,17 +43,14 @@ class _LoginState extends State<Login> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Positioned(
-                    top: 0,
-                    child: CommonWidgets.getAppBar(
-                        iconName: 'back_arrow_otp.png',
-                        text: "Forgot ",
-                        clickableText: "Password",
-                        onTap: (){Navigator.push(context, SlideRightRoute(page: ForgotPassowrd()));},
-                        onPress: () {
-                          Navigator.pop(context);
-                        }),
-                  ),
+                  CommonWidgets.getAppBar(
+                      iconName: 'back_arrow_otp.png',
+                      text: "Forgot ",
+                      clickableText: "Password",
+                      onTap: (){Navigator.push(context, SlideRightRoute(page: ForgotPassowrd()));},
+                      onPress: () {
+                        Navigator.pop(context);
+                      }),
                   Expanded(
                     child: ListView(
                       children: [
@@ -85,7 +83,7 @@ class _LoginState extends State<Login> {
                               CommonWidgets.getBottomButton(
                                   text: "Login",
                                   onPress: () {
-                                    // Navigator.push(context, SlideRightRoute(page: OTPAuthentication()));
+                                    Navigator.push(context, SlideRightRoute(page: BottomTab()));
                                   }
                               ),
                             ],

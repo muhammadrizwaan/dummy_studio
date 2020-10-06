@@ -46,17 +46,14 @@ class _PhoneNumberState extends State<PhoneNumber> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Positioned(
-                top: 0,
-                child: CommonWidgets.getAppBar(
-                    iconName: 'back_arrow_otp.png',
-                    text: "",
-                    clickableText: "",
-                    onTap: (){},
-                    onPress: () {
-                      Navigator.pop(context, SlideRightRoute(page: PhoneNumber()));
-                    }),
-              ),
+              CommonWidgets.getAppBar(
+                  iconName: 'back_arrow_otp.png',
+                  text: "",
+                  clickableText: "",
+                  onTap: (){},
+                  onPress: () {
+                    Navigator.pop(context, SlideRightRoute(page: PhoneNumber()));
+                  }),
               Expanded(
                 child: ListView(
                   children: [

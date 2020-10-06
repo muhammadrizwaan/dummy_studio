@@ -49,7 +49,7 @@ class _CheckUserState extends State<CheckUser> {
                  setState(() {
                    button_indiviual = !button_indiviual;
                  });
-                 Navigator.pushReplacement(context, SlideRightRoute(page: SignUP()));
+                 Navigator.push(context, SlideRightRoute(page: Login()));
                },
                state: button_indiviual),
            SizedBox(height: AppSizes.height * 0.03,),
