@@ -166,18 +166,15 @@ class _BusinessSignupState extends State<BusinessSignup> {
                             children: [
                               TableRow(
                                   children: [
-                                    Container(
-                                      alignment: Alignment.topLeft,
-                                      child: Checkbox(
-                                        checkColor: AppColors.white,
-                                        activeColor: AppColors.yellow,
-                                        value: onCheck,
-                                        onChanged: (bool value) {
-                                          setState(() {
-                                            onCheck = !value;
-                                          });
-                                        },
-                                      ),
+                                    Checkbox(
+                                      checkColor: AppColors.white,
+                                      activeColor: AppColors.yellow,
+                                      value: onCheck,
+                                      onChanged: (bool value) {
+                                        setState(() {
+                                          onCheck = value;
+                                        });
+                                      },
                                     ),
                                     RichText(
                                       text: TextSpan(
@@ -206,6 +203,15 @@ class _BusinessSignupState extends State<BusinessSignup> {
 
                           ),
                           SizedBox(height: 10,),
+                          // _businessSignupComponents.checkTermAndCondition(
+                          //   onCheck: onCheck,
+                          //   onChanged: (onCheck){
+                          //     setState(() {
+                          //       onCheck = true;
+                          //     });
+                          //   },
+                          //   onTap: (){}
+                          // ),
                           CommonWidgets.getBottomButton(
                               text: "Next",
                               onPress: () {
