@@ -66,6 +66,11 @@ class AppColors{
   static final lightGray= Color.fromRGBO(244, 245, 247, 1);
   static final yellow= Color.fromRGBO(255, 182, 39, 1);
   static final grey= Color.fromRGBO(194, 194, 194, 1);
+  static final borderColor= Color.fromRGBO(0, 0, 0, 0.16);
+  static final locationText= Color.fromRGBO(112, 112, 112, 1);
+  static final status= Color.fromRGBO(0, 0, 0, 1);
+  static final redColor= Color.fromRGBO(212, 14, 14, 1);
+  static final emailTextColor= Color.fromRGBO(81, 92, 111, 1);
 
 
   //Hex color code
