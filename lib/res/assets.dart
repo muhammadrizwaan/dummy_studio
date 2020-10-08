@@ -29,6 +29,10 @@ class Assets {
   static const String df_pk_job = "assets/png/df_pk_job.png";
   static const String rightArrow = "assets/png/right_arrow_icon.png";
   static const String profileImg = "assets/png/profile.png";
+  static const String linkIcon = "assets/png/link_icon.png";
+
+  static const String addProfileImg = "assets/png/add_profile_icon.png";
+  static const String editProfileIcon = "assets/png/edit_profile_icon.png";
 
 
 

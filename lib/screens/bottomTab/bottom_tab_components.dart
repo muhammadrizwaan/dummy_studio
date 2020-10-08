@@ -1,4 +1,5 @@
 
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:truckoom_shipper/res/assets.dart';
@@ -59,6 +60,7 @@ class BottomTabComponents {
                   fontWeight: FontWeight.bold
                 ),
               ),
+              SizedBox(height: AppSizes.height * 0.01,),
               Text('$vehicleDetail',
                 style: TextStyle(
                     fontSize:11,
@@ -173,6 +175,7 @@ class BottomTabComponents {
                               // fontWeight: FontWeight.bold
                           ),
                         ),
+                        SizedBox(height: AppSizes.height * 0.01,),
                         Text(destinationLocation,
                           style: TextStyle(
                               fontSize:12,
@@ -196,6 +199,7 @@ class BottomTabComponents {
                           // fontWeight: FontWeight.bold
                       ),
                     ),
+                    SizedBox(height: AppSizes.height * 0.01,),
                     Text(endDate,
                       style: TextStyle(
                           fontSize:12,
@@ -338,6 +342,7 @@ class BottomTabComponents {
                             // fontWeight: FontWeight.bold
                           ),
                         ),
+                        SizedBox(height: AppSizes.height * 0.01,),
                         Text(destinationLocation,
                           style: TextStyle(
                             fontSize:12,
@@ -361,6 +366,7 @@ class BottomTabComponents {
                         // fontWeight: FontWeight.bold
                       ),
                     ),
+                    SizedBox(height: AppSizes.height * 0.01,),
                     Text(endDate,
                       style: TextStyle(
                         fontSize:12,
@@ -407,42 +413,46 @@ class BottomTabComponents {
 
   // ££££££££££££££££££££££££  More Components  £££££££££££££££££££££££££££
 
-  Widget getProfileContainer({@required String ProfileImg, @required String name, @required String email, }){
-    return Container(
-      padding: EdgeInsets.all(AppSizes.width * 0.05),
-      child: Row(
-        children: [
-          SizedBox(width: AppSizes.width * 0.02,),
-          // CircleAvatar(
-          //   backgroundImage: AssetImage(ProfileImg),
-          //   radius: 40.0,
-          //   foregroundColor: AppColors.white,
-          // ),
-          Image(image: AssetImage(Assets.profileImg),),
-          SizedBox(width: AppSizes.width * 0.03,),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(name,
-                style: TextStyle(
-                  fontSize:22,
-                  fontFamily: Assets.robotoBold,
-                  color: AppColors.yellow,
-                  fontWeight: FontWeight.bold
+  Widget getProfileContainer({@required Function onPress,@required String ProfileImg, @required String name, @required String email, }){
+    return GestureDetector(
+      onTap: () => onPress(),
+      child: Container(
+        // color: AppColors.yellow,
+        padding: EdgeInsets.all(AppSizes.width * 0.05),
+        child: Row(
+          children: [
+            SizedBox(width: AppSizes.width * 0.02,),
+            CircleAvatar(
+              backgroundImage: AssetImage(ProfileImg),
+              radius: 50.0,
+              backgroundColor: AppColors.white,
+            ),
+            // Image(image: AssetImage(Assets.profileImg),),
+            SizedBox(width: AppSizes.width * 0.03,),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(name,
+                  style: TextStyle(
+                    fontSize:22,
+                    fontFamily: Assets.robotoBold,
+                    color: AppColors.yellow,
+                    fontWeight: FontWeight.bold
+                  ),
                 ),
-              ),
-              SizedBox(height: AppSizes.height * 0.01,),
-              Text(email,
-                style: TextStyle(
-                  fontSize:12,
-                  fontFamily: Assets.poppinsLight,
-                  color: AppColors.emailTextColor,
-                  // fontWeight: FontWeight.bold
+                SizedBox(height: AppSizes.height * 0.01,),
+                Text(email,
+                  style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsLight,
+                    color: AppColors.emailTextColor,
+                    // fontWeight: FontWeight.bold
+                  ),
                 ),
-              ),
-            ],
-          )
-        ],
+              ],
+            )
+          ],
+        ),
       ),
     );
 
@@ -503,9 +513,6 @@ class BottomTabComponents {
       ),
     );
   }
-
-
-
 
 
 }
