@@ -9,6 +9,12 @@ import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab_components.dart';
 import 'package:truckoom_shipper/screens/forgotPassword/forgot_password.dart';
+import 'package:truckoom_shipper/screens/history/history.dart';
+import 'package:truckoom_shipper/screens/individualProfile/individual_profile.dart';
+import 'package:truckoom_shipper/screens/invoice/invoice.dart';
+import 'package:truckoom_shipper/screens/notifications/notifications.dart';
+import 'package:truckoom_shipper/screens/referrals/referrals.dart';
+import 'package:truckoom_shipper/screens/signup/sign_up.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 class BottomTab extends StatefulWidget {
@@ -92,7 +98,7 @@ class _BottomTabState extends State<BottomTab> {
                   ),
                 ),
                 title: Text(
-                  "Transections",
+                  "Transactions",
                   style: TextStyle(
                     color: _currentIndex == 2 ? AppColors.yellow : AppColors
                         .grey,
@@ -314,6 +320,10 @@ class _BottomTabState extends State<BottomTab> {
       );
     }
     else if (_currentIndex == 2){
+
+      //    Transaction  Screen
+
+
       return Container(
           height: AppSizes.height,
           width: AppSizes.width,
@@ -323,7 +333,9 @@ class _BottomTabState extends State<BottomTab> {
               CommonWidgets.tabsAppBar1(
                   text: "Transaction",
                   iconName: Assets.bellIconUnpress,
-                  onPress: (){}
+                  onPress: (){
+                    Navigator.push(context, SlideRightRoute(page: Notifications()));
+                  }
               ),
               Divider(height: 10,),
               Expanded(
@@ -341,7 +353,9 @@ class _BottomTabState extends State<BottomTab> {
                               startDate: "11 Aug, 12:00am",
                               endDate: "12 Aug, 11:00pm",
                               price: "Price: AED 260",
-                              onInvoice: () {},
+                              onInvoice: () {
+                                Navigator.push(context, SlideRightRoute(page: Invoice()));
+                              },
                           ),
                           SizedBox(height: AppSizes.height * 0.02,),
                           _bottomTabComponents.getTransectionsContainer(
@@ -351,7 +365,9 @@ class _BottomTabState extends State<BottomTab> {
                             startDate: "11 Aug, 12:00am",
                             endDate: "12 Aug, 11:00pm",
                             price: "Price: AED 260",
-                            onInvoice: () {},
+                            onInvoice: () {
+                              Navigator.push(context, SlideRightRoute(page: Invoice()));
+                            },
                           ),
                           SizedBox(height: AppSizes.height * 0.02,),
                           _bottomTabComponents.getTransectionsContainer(
@@ -361,7 +377,9 @@ class _BottomTabState extends State<BottomTab> {
                             startDate: "11 Aug, 12:00am",
                             endDate: "12 Aug, 11:00pm",
                             price: "Price: AED 260",
-                            onInvoice: () {},
+                            onInvoice: () {
+                              Navigator.push(context, SlideRightRoute(page: Invoice()));
+                            },
                           ),
                           SizedBox(height: AppSizes.height * 0.02,),
                           _bottomTabComponents.getTransectionsContainer(
@@ -371,7 +389,9 @@ class _BottomTabState extends State<BottomTab> {
                             startDate: "11 Aug, 12:00am",
                             endDate: "12 Aug, 11:00pm",
                             price: "Price: AED 260",
-                            onInvoice: () {},
+                            onInvoice: () {
+                              Navigator.push(context, SlideRightRoute(page: Invoice()));
+                            },
                           ),
                           SizedBox(height: AppSizes.height * 0.02,),
                         ]
@@ -385,6 +405,11 @@ class _BottomTabState extends State<BottomTab> {
       );
     }
     else if (_currentIndex == 3){
+
+
+      //   More component
+
+
       return Container(
           height: AppSizes.height,
           width: AppSizes.width,
@@ -394,26 +419,32 @@ class _BottomTabState extends State<BottomTab> {
               CommonWidgets.tabsAppBar1(
                   text: "More",
                   iconName: Assets.bellIconUnpress,
-                  onPress: (){}
+                  onPress: (){
+                    Navigator.push(context, SlideRightRoute(page: Notifications()));
+                  }
               ),
               Divider(height: 10,),
               _bottomTabComponents.getProfileContainer(
                   ProfileImg: Assets.profileImg,
                   name: 'Matthew',
-                  email: 'Matthew@gmail.com'
+                  email: 'Matthew@gmail.com',
+                  onPress: (){
+                    // Navigator.push(context, SlideRightRoute(page: IndividualProfile()));
+                  }
               ),
-              // SizedBox(height: AppSizes.height * 0.01,),
               Divider(height: 10,),
               _bottomTabComponents.touchableButton(
                   text: 'History',
                   onPress: (){
-                    Navigator.push(context, SlideRightRoute(page: ForgotPassowrd()));
+                    Navigator.push(context, SlideRightRoute(page: History()));
                   }
               ),
               Divider(height: 10,),
               _bottomTabComponents.touchableButton(
                   text: 'Referrals',
-                  onPress: (){}
+                  onPress: (){
+                    Navigator.push(context, SlideRightRoute(page: Referrals()));
+                  }
               ),
               Divider(height: 10,),
               _bottomTabComponents.touchableButton(
@@ -425,7 +456,6 @@ class _BottomTabState extends State<BottomTab> {
                   text: 'SOS',
                   onPress: (){}
               )
-
             ],
           )
       );
