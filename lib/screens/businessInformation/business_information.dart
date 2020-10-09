@@ -7,6 +7,7 @@ import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/businessInformation/business_information_components.dart';
+import 'package:truckoom_shipper/screens/businessProfile/business_profile.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
@@ -150,7 +151,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           CommonWidgets.getBottomButton(
                               text: "Submit",
                               onPress: () {
-                                // Navigator.push(context, SlideRightRoute(page: OTPAuthentication()));
+                                Navigator.push(context, SlideRightRoute(page: BusinessProfile()));
                               }
                           ),
                         ],

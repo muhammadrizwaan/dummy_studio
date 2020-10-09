@@ -429,7 +429,7 @@ class _BottomTabState extends State<BottomTab> {
                   name: 'Matthew',
                   email: 'Matthew@gmail.com',
                   onPress: (){
-                    // Navigator.push(context, SlideRightRoute(page: IndividualProfile()));
+                    Navigator.push(context, SlideRightRoute(page: IndividualProfile()));
                   }
               ),
               Divider(height: 10,),
