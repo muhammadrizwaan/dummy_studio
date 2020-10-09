@@ -71,6 +71,7 @@ class AppColors{
   static final status= Color.fromRGBO(0, 0, 0, 1);
   static final redColor= Color.fromRGBO(212, 14, 14, 1);
   static final emailTextColor= Color.fromRGBO(81, 92, 111, 1);
+  static final profileTextColor= Color.fromRGBO(141, 147, 146, 1);
 
 
   //Hex color code

@@ -444,7 +444,7 @@ class BottomTabComponents {
                 Text(email,
                   style: TextStyle(
                     fontSize:12,
-                    fontFamily: Assets.poppinsLight,
+                    fontFamily: Assets.poppinsRegular,
                     color: AppColors.emailTextColor,
                     // fontWeight: FontWeight.bold
                   ),
