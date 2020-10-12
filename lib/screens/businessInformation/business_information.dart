@@ -151,7 +151,30 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           CommonWidgets.getBottomButton(
                               text: "Submit",
                               onPress: () {
-                                Navigator.push(context, SlideRightRoute(page: BusinessProfile()));
+                                CommonWidgets.getAlertDialouge(context: context, child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Your Signup is successfully Done",
+                                      style:
+                                      TextStyle(color: AppColors.black,letterSpacing: 0.4),
+                                    ),
+                                    GestureDetector(
+                                      onTap: (){
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.only(top: AppSizes.height*0.06),
+                                        child: Text(
+                                          "Click and Continue",
+                                          style: TextStyle(
+                                              color: AppColors.yellow,fontSize: 12
+                                          ),),
+                                      ),
+                                    ),
+
+                                  ],
+                                ), text: null);
                               }
                           ),
                         ],

@@ -49,6 +49,10 @@ class Assets {
   static const String userLocation = "assets/png/user_location.png";
   static const String percentageIcon = "assets/png/percentage_icon.png";
   static const String signature = "assets/png/signature.png";
+  static const String success = "assets/png/icon_successfull.png";
+  static const String card_number = "assets/png/icon_card_number.png";
+  static const String joint = "assets/png/icon_loc@3x.png";
+  static const String location = "assets/png/location_icon.png";
 
 
 
