@@ -64,14 +64,14 @@ class _BottomTabState extends State<BottomTab> {
                     height: 40,
                     width: 50,
                     color:
-                        _currentIndex == 0 ? AppColors.yellow : AppColors.grey,
+                    _currentIndex == 0 ? AppColors.yellow : AppColors.grey,
                   ),
                 ),
                 title: Text(
                   "Book Load",
                   style: TextStyle(
                     color:
-                        _currentIndex == 0 ? AppColors.yellow : AppColors.grey,
+                    _currentIndex == 0 ? AppColors.yellow : AppColors.grey,
                   ),
                 )),
             BottomNavigationBarItem(
@@ -81,7 +81,7 @@ class _BottomTabState extends State<BottomTab> {
                     height: 40,
                     width: 50,
                     color:
-                        _currentIndex == 1 ? AppColors.yellow : AppColors.grey,
+                    _currentIndex == 1 ? AppColors.yellow : AppColors.grey,
                   ),
                 ),
                 title: Text(
@@ -117,14 +117,14 @@ class _BottomTabState extends State<BottomTab> {
                     height: 40,
                     width: 50,
                     color:
-                        _currentIndex == 3 ? AppColors.yellow : AppColors.grey,
+                    _currentIndex == 3 ? AppColors.yellow : AppColors.grey,
                   ),
                 ),
                 title: Text(
                   "More",
                   style: TextStyle(
                     color:
-                        _currentIndex == 3 ? AppColors.yellow : AppColors.grey,
+                    _currentIndex == 3 ? AppColors.yellow : AppColors.grey,
                   ),
                 )),
           ],
@@ -155,7 +155,7 @@ class _BottomTabState extends State<BottomTab> {
               ),
               Padding(
                 padding:
-                    EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
+                EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
                 child: _bottomTabComponents.getTextField(
                     leftIcon: Assets.searchIcon,
                     textEditingController: search,
@@ -249,11 +249,11 @@ class _BottomTabState extends State<BottomTab> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CommonWidgets.tabsAppBar1(
-                  text: "My Jobs",
-                  iconName: Assets.walletIcon,
-                  onPress: (){
-                    Navigator.push(context, SlideRightRoute(page: Wallet()));
-                  },
+                text: "My Jobs",
+                iconName: Assets.walletIcon,
+                onPress: () {
+                  Navigator.push(context, SlideRightRoute(page: Wallet()));
+                },
               ),
               Divider(
                 height: 10,
@@ -272,7 +272,8 @@ class _BottomTabState extends State<BottomTab> {
                     _bottomTabComponents.onSelectViewType(
                         text: "Active",
                         onPress: () {
-                          Navigator.push(context, SlideRightRoute(page: LoadDetail()));
+                          Navigator.push(
+                              context, SlideRightRoute(page: LoadDetail()));
                         }
                     ),
                     SizedBox(
@@ -379,11 +380,12 @@ class _BottomTabState extends State<BottomTab> {
                 child: ListView(
                   children: [
                     Container(
-                      margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
+                      margin: EdgeInsets.symmetric(
+                          horizontal: AppSizes.width * 0.05),
                       child: Column(
-                        children: [
-                          SizedBox(height: AppSizes.height * 0.02,),
-                          _bottomTabComponents.getTransectionsContainer(
+                          children: [
+                            SizedBox(height: AppSizes.height * 0.02,),
+                            _bottomTabComponents.getTransectionsContainer(
                               jobDetail: "1100 KG Container",
                               pickUpLocation: "ABC Port:",
                               destinationLocation: "227 Building, UAE:",
@@ -391,47 +393,51 @@ class _BottomTabState extends State<BottomTab> {
                               endDate: "12 Aug, 11:00pm",
                               price: "Price: AED 260",
                               onInvoice: () {
-                                Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
+                                Navigator.push(context,
+                                    SlideRightRoute(page: InvoiceDetail()));
                               },
-                          ),
-                          SizedBox(height: AppSizes.height * 0.02,),
-                          _bottomTabComponents.getTransectionsContainer(
-                            jobDetail: "1100 KG Container",
-                            pickUpLocation: "ABC Port:",
-                            destinationLocation: "227 Building, UAE:",
-                            startDate: "11 Aug, 12:00am",
-                            endDate: "12 Aug, 11:00pm",
-                            price: "Price: AED 260",
-                            onInvoice: () {
-                              Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
-                            },
-                          ),
-                          SizedBox(height: AppSizes.height * 0.02,),
-                          _bottomTabComponents.getTransectionsContainer(
-                            jobDetail: "1100 KG Container",
-                            pickUpLocation: "ABC Port:",
-                            destinationLocation: "227 Building, UAE:",
-                            startDate: "11 Aug, 12:00am",
-                            endDate: "12 Aug, 11:00pm",
-                            price: "Price: AED 260",
-                            onInvoice: () {
-                              Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
-                            },
-                          ),
-                          SizedBox(height: AppSizes.height * 0.02,),
-                          _bottomTabComponents.getTransectionsContainer(
-                            jobDetail: "1100 KG Container",
-                            pickUpLocation: "ABC Port:",
-                            destinationLocation: "227 Building, UAE:",
-                            startDate: "11 Aug, 12:00am",
-                            endDate: "12 Aug, 11:00pm",
-                            price: "Price: AED 260",
-                            onInvoice: () {
-                              Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
-                            },
-                          ),
-                          SizedBox(height: AppSizes.height * 0.02,),
-                        ]
+                            ),
+                            SizedBox(height: AppSizes.height * 0.02,),
+                            _bottomTabComponents.getTransectionsContainer(
+                              jobDetail: "1100 KG Container",
+                              pickUpLocation: "ABC Port:",
+                              destinationLocation: "227 Building, UAE:",
+                              startDate: "11 Aug, 12:00am",
+                              endDate: "12 Aug, 11:00pm",
+                              price: "Price: AED 260",
+                              onInvoice: () {
+                                Navigator.push(context,
+                                    SlideRightRoute(page: InvoiceDetail()));
+                              },
+                            ),
+                            SizedBox(height: AppSizes.height * 0.02,),
+                            _bottomTabComponents.getTransectionsContainer(
+                              jobDetail: "1100 KG Container",
+                              pickUpLocation: "ABC Port:",
+                              destinationLocation: "227 Building, UAE:",
+                              startDate: "11 Aug, 12:00am",
+                              endDate: "12 Aug, 11:00pm",
+                              price: "Price: AED 260",
+                              onInvoice: () {
+                                Navigator.push(context,
+                                    SlideRightRoute(page: InvoiceDetail()));
+                              },
+                            ),
+                            SizedBox(height: AppSizes.height * 0.02,),
+                            _bottomTabComponents.getTransectionsContainer(
+                              jobDetail: "1100 KG Container",
+                              pickUpLocation: "ABC Port:",
+                              destinationLocation: "227 Building, UAE:",
+                              startDate: "11 Aug, 12:00am",
+                              endDate: "12 Aug, 11:00pm",
+                              price: "Price: AED 260",
+                              onInvoice: () {
+                                Navigator.push(context,
+                                    SlideRightRoute(page: InvoiceDetail()));
+                              },
+                            ),
+                            SizedBox(height: AppSizes.height * 0.02,),
+                          ]
                       ),
                     )
                   ],
@@ -488,15 +494,16 @@ class _BottomTabState extends State<BottomTab> {
               Divider(height: 10,),
               _bottomTabComponents.touchableButton(
                   text: 'Contact Us',
-                  onPress: (){
+                  onPress: () {
                     Navigator.push(context, SlideRightRoute(page: ContactUs()));
                   }
               ),
               Divider(height: 10,),
               _bottomTabComponents.getSOSbutton(
                   text: 'SOS',
-                  onPress: (){
-                    Navigator.push(context, SlideRightRoute(page: DriverDetails()));
+                  onPress: () {
+                    Navigator.push(
+                        context, SlideRightRoute(page: DriverDetails()));
                   }
               )
             ],
@@ -518,8 +525,9 @@ class _BottomTabState extends State<BottomTab> {
                   children: [
                     Container(
                       margin: EdgeInsets.only(
-                          left: AppSizes.width * 0.08,
-                          right: AppSizes.width * 0.08),
+                        left: AppSizes.width * 0.08,
+                        right: AppSizes.width * 0.08,
+                      ),
                       height: AppSizes.height * 0.25,
                       width: AppSizes.width,
                     ),
@@ -549,10 +557,11 @@ class _BottomTabState extends State<BottomTab> {
                             child: ListView(
                               children: [
                                 Container(
-                                    margin:
-                                    EdgeInsets.only(left: AppSizes.width * 0.025),
-                                    child: CommonWidgets.getLableText(
-                                        text: "Vehicle Type")),
+                                  margin:
+                                  EdgeInsets.only(left: AppSizes.width * 0.025),
+                                  child: CommonWidgets.getLableText(
+                                      text: "Vehicle Type"),
+                                ),
                                 Container(
                                   margin: EdgeInsets.only(
                                       top: AppSizes.height * 0.01,
@@ -574,7 +583,8 @@ class _BottomTabState extends State<BottomTab> {
                                                 children: [
                                                   Icon(FontAwesomeIcons.truck),
                                                   SizedBox(
-                                                    width: AppSizes.width * 0.05,
+                                                    width: AppSizes.width *
+                                                        0.05,
                                                   ),
                                                   Text(
                                                     "Reefers",
@@ -599,7 +609,8 @@ class _BottomTabState extends State<BottomTab> {
                                         padding: EdgeInsets.all(15),
                                         decoration: BoxDecoration(
                                             color: AppColors.grey,
-                                            borderRadius: BorderRadius.circular(7)),
+                                            borderRadius: BorderRadius.circular(
+                                                7)),
                                         child: Column(
                                           crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -634,7 +645,8 @@ class _BottomTabState extends State<BottomTab> {
                                                 children: [
                                                   Icon(FontAwesomeIcons.truck),
                                                   SizedBox(
-                                                    width: AppSizes.width * 0.05,
+                                                    width: AppSizes.width *
+                                                        0.05,
                                                   ),
                                                   Text(
                                                     "4.2 Ton",
@@ -659,7 +671,8 @@ class _BottomTabState extends State<BottomTab> {
                                         padding: EdgeInsets.all(15),
                                         decoration: BoxDecoration(
                                             color: AppColors.grey,
-                                            borderRadius: BorderRadius.circular(7)),
+                                            borderRadius: BorderRadius.circular(
+                                                7)),
                                         child: Column(
                                           crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -674,10 +687,10 @@ class _BottomTabState extends State<BottomTab> {
                                   ),
                                 ),
                                 Container(
-                                  margin:EdgeInsets.only(top: AppSizes.height*0.025),
+                                  margin: EdgeInsets.only(
+                                      top: AppSizes.height * 0.025),
                                   child: GestureDetector(
-                                    onTap: () {
-                                    },
+                                    onTap: () {},
                                     child: Text(
                                       "Click & Continue",
                                       textAlign: TextAlign.center,
@@ -691,6 +704,16 @@ class _BottomTabState extends State<BottomTab> {
                                 ),
                               ],
                             ),
-                          );
-
+                          ),
+                        ],
+                      ),),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      }
+    };
+  }
 }
