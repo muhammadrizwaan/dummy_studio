@@ -74,6 +74,8 @@ class AppColors{
   static final profileTextColor= Color.fromRGBO(141, 147, 146, 1);
   static final lightGrayBackgroundColor= Color.fromRGBO(212, 212, 212, 1);
   static final addVehicleBorderColor= Color.fromRGBO(193, 191, 191, 1);
+  static final alertContainer= Color.fromRGBO(244, 245, 247, 1);
+  static final dragContainer= Color.fromRGBO(195, 205, 214, 1);
 
 
   //Hex color code
