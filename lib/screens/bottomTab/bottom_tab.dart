@@ -1,3 +1,6 @@
+
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -61,14 +64,14 @@ class _BottomTabState extends State<BottomTab> {
                     height: 40,
                     width: 50,
                     color:
-                        _currentIndex == 0 ? AppColors.yellow : AppColors.grey,
+                    _currentIndex == 0 ? AppColors.yellow : AppColors.grey,
                   ),
                 ),
                 title: Text(
                   "Book Load",
                   style: TextStyle(
                     color:
-                        _currentIndex == 0 ? AppColors.yellow : AppColors.grey,
+                    _currentIndex == 0 ? AppColors.yellow : AppColors.grey,
                   ),
                 )),
             BottomNavigationBarItem(
@@ -78,31 +81,32 @@ class _BottomTabState extends State<BottomTab> {
                     height: 40,
                     width: 50,
                     color:
-                        _currentIndex == 1 ? AppColors.yellow : AppColors.grey,
+                    _currentIndex == 1 ? AppColors.yellow : AppColors.grey,
                   ),
                 ),
                 title: Text(
                   "My Jobs",
                   style: TextStyle(
-                    color:
-                        _currentIndex == 1 ? AppColors.yellow : AppColors.grey,
+                    color: _currentIndex == 1 ? AppColors.yellow : AppColors
+                        .grey,
                   ),
-                )),
+                )
+            ),
             BottomNavigationBarItem(
                 icon: GestureDetector(
                   child: Image.asset(
                     Assets.transactionIcon,
                     height: 40,
                     width: 50,
-                    color:
-                        _currentIndex == 2 ? AppColors.yellow : AppColors.grey,
+                    color: _currentIndex == 2 ? AppColors.yellow : AppColors
+                        .grey,
                   ),
                 ),
                 title: Text(
                   "Transactions",
                   style: TextStyle(
-                    color:
-                        _currentIndex == 2 ? AppColors.yellow : AppColors.grey,
+                    color: _currentIndex == 2 ? AppColors.yellow : AppColors
+                        .grey,
                   ),
                 )
             ),
@@ -113,14 +117,14 @@ class _BottomTabState extends State<BottomTab> {
                     height: 40,
                     width: 50,
                     color:
-                        _currentIndex == 3 ? AppColors.yellow : AppColors.grey,
+                    _currentIndex == 3 ? AppColors.yellow : AppColors.grey,
                   ),
                 ),
                 title: Text(
                   "More",
                   style: TextStyle(
                     color:
-                        _currentIndex == 3 ? AppColors.yellow : AppColors.grey,
+                    _currentIndex == 3 ? AppColors.yellow : AppColors.grey,
                   ),
                 )),
           ],
@@ -151,7 +155,7 @@ class _BottomTabState extends State<BottomTab> {
               ),
               Padding(
                 padding:
-                    EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
+                EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
                 child: _bottomTabComponents.getTextField(
                     leftIcon: Assets.searchIcon,
                     textEditingController: search,
@@ -245,7 +249,12 @@ class _BottomTabState extends State<BottomTab> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CommonWidgets.tabsAppBar1(
-                  text: "My Jobs", iconName: Assets.walletIcon, onPress: () {}),
+                text: "My Jobs",
+                iconName: Assets.walletIcon,
+                onPress: () {
+                  Navigator.push(context, SlideRightRoute(page: Wallet()));
+                },
+              ),
               Divider(
                 height: 10,
               ),
@@ -261,7 +270,12 @@ class _BottomTabState extends State<BottomTab> {
                 child: Row(
                   children: [
                     _bottomTabComponents.onSelectViewType(
-                        text: "Active", onPress: () {}),
+                        text: "Active",
+                        onPress: () {
+                          Navigator.push(
+                              context, SlideRightRoute(page: LoadDetail()));
+                        }
+                    ),
                     SizedBox(
                       width: AppSizes.width * 0.02,
                     ),
@@ -270,11 +284,8 @@ class _BottomTabState extends State<BottomTab> {
                     SizedBox(
                       width: AppSizes.width * 0.02,
                     ),
-                    SizedBox(width: AppSizes.width * 0.02,),
                     _bottomTabComponents.onSelectViewType(
-                        text: "Completed",
-                        onPress: () {}
-                    ),
+                        text: "Completed", onPress: () {}),
                   ],
                 ),
               ),
@@ -282,10 +293,25 @@ class _BottomTabState extends State<BottomTab> {
                 child: ListView(
                   children: [
                     Container(
-                      margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
+                      margin: EdgeInsets.symmetric(
+                          horizontal: AppSizes.width * 0.05),
                       child: Column(
                         children: [
-                          SizedBox(height: AppSizes.height * 0.02,),
+                          SizedBox(
+                            height: AppSizes.height * 0.02,
+                          ),
+                          _bottomTabComponents.getJobContainer(
+                              jobDetail: "1100 KG Container - Port Pickup",
+                              pickUpLocation: "ABC Port:",
+                              destinationLocation: "227 Building, UAE:",
+                              startDate: "11 Aug, 12:00am",
+                              endDate: "12 Aug, 11:00pm",
+                              status: "Active",
+                              onEdit: () {},
+                              onDelete: () {}),
+                          SizedBox(
+                            height: AppSizes.height * 0.02,
+                          ),
                           _bottomTabComponents.getJobContainer(
                               jobDetail: "1100 KG Container - Port Pickup",
                               pickUpLocation: "ABC Port:",
@@ -318,20 +344,10 @@ class _BottomTabState extends State<BottomTab> {
                               endDate: "12 Aug, 11:00pm",
                               status: "Active",
                               onEdit: () {},
-                              onDelete: () {}
+                              onDelete: () {}),
+                          SizedBox(
+                            height: AppSizes.height * 0.02,
                           ),
-                          SizedBox(height: AppSizes.height * 0.02,),
-                          _bottomTabComponents.getJobContainer(
-                              jobDetail: "1100 KG Container - Port Pickup",
-                              pickUpLocation: "ABC Port:",
-                              destinationLocation: "227 Building, UAE:",
-                              startDate: "11 Aug, 12:00am",
-                              endDate: "12 Aug, 11:00pm",
-                              status: "Active",
-                              onEdit: () {},
-                              onDelete: () {}
-                          ),
-                          SizedBox(height: AppSizes.height * 0.02,),
                         ],
                       ),
                     )
@@ -359,82 +375,17 @@ class _BottomTabState extends State<BottomTab> {
               Divider(
                 height: 10,
               ),
+              Divider(height: 10,),
               Expanded(
                 child: ListView(
                   children: [
                     Container(
                       margin: EdgeInsets.symmetric(
                           horizontal: AppSizes.width * 0.05),
-                      child: Column(children: [
-                        SizedBox(
-                          height: AppSizes.height * 0.02,
-                        ),
-                        _bottomTabComponents.getTransectionsContainer(
-                          jobDetail: "1100 KG Container",
-                          pickUpLocation: "ABC Port:",
-                          destinationLocation: "227 Building, UAE:",
-                          startDate: "11 Aug, 12:00am",
-                          endDate: "12 Aug, 11:00pm",
-                          price: "Price: AED 260",
-                          onInvoice: () {
-                            Navigator.push(
-                                context, SlideRightRoute(page: Invoice()));
-                          },
-                        ),
-                        SizedBox(
-                          height: AppSizes.height * 0.02,
-                        ),
-                        _bottomTabComponents.getTransectionsContainer(
-                          jobDetail: "1100 KG Container",
-                          pickUpLocation: "ABC Port:",
-                          destinationLocation: "227 Building, UAE:",
-                          startDate: "11 Aug, 12:00am",
-                          endDate: "12 Aug, 11:00pm",
-                          price: "Price: AED 260",
-                          onInvoice: () {
-                            Navigator.push(
-                                context, SlideRightRoute(page: Invoice()));
-                          },
-                        ),
-                        SizedBox(
-                          height: AppSizes.height * 0.02,
-                        ),
-                        _bottomTabComponents.getTransectionsContainer(
-                          jobDetail: "1100 KG Container",
-                          pickUpLocation: "ABC Port:",
-                          destinationLocation: "227 Building, UAE:",
-                          startDate: "11 Aug, 12:00am",
-                          endDate: "12 Aug, 11:00pm",
-                          price: "Price: AED 260",
-                          onInvoice: () {
-                            Navigator.push(
-                                context, SlideRightRoute(page: Invoice()));
-                          },
-                        ),
-                        SizedBox(
-                          height: AppSizes.height * 0.02,
-                        ),
-                        _bottomTabComponents.getTransectionsContainer(
-                          jobDetail: "1100 KG Container",
-                          pickUpLocation: "ABC Port:",
-                          destinationLocation: "227 Building, UAE:",
-                          startDate: "11 Aug, 12:00am",
-                          endDate: "12 Aug, 11:00pm",
-                          price: "Price: AED 260",
-                          onInvoice: () {
-                            Navigator.push(
-                                context, SlideRightRoute(page: Invoice()));
-                          },
-                        ),
-                        SizedBox(
-                          height: AppSizes.height * 0.02,
-                        ),
-                      ]),
-                      margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
                       child: Column(
-                        children: [
-                          SizedBox(height: AppSizes.height * 0.02,),
-                          _bottomTabComponents.getTransectionsContainer(
+                          children: [
+                            SizedBox(height: AppSizes.height * 0.02,),
+                            _bottomTabComponents.getTransectionsContainer(
                               jobDetail: "1100 KG Container",
                               pickUpLocation: "ABC Port:",
                               destinationLocation: "227 Building, UAE:",
@@ -442,47 +393,51 @@ class _BottomTabState extends State<BottomTab> {
                               endDate: "12 Aug, 11:00pm",
                               price: "Price: AED 260",
                               onInvoice: () {
-                                Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
+                                Navigator.push(context,
+                                    SlideRightRoute(page: InvoiceDetail()));
                               },
-                          ),
-                          SizedBox(height: AppSizes.height * 0.02,),
-                          _bottomTabComponents.getTransectionsContainer(
-                            jobDetail: "1100 KG Container",
-                            pickUpLocation: "ABC Port:",
-                            destinationLocation: "227 Building, UAE:",
-                            startDate: "11 Aug, 12:00am",
-                            endDate: "12 Aug, 11:00pm",
-                            price: "Price: AED 260",
-                            onInvoice: () {
-                              Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
-                            },
-                          ),
-                          SizedBox(height: AppSizes.height * 0.02,),
-                          _bottomTabComponents.getTransectionsContainer(
-                            jobDetail: "1100 KG Container",
-                            pickUpLocation: "ABC Port:",
-                            destinationLocation: "227 Building, UAE:",
-                            startDate: "11 Aug, 12:00am",
-                            endDate: "12 Aug, 11:00pm",
-                            price: "Price: AED 260",
-                            onInvoice: () {
-                              Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
-                            },
-                          ),
-                          SizedBox(height: AppSizes.height * 0.02,),
-                          _bottomTabComponents.getTransectionsContainer(
-                            jobDetail: "1100 KG Container",
-                            pickUpLocation: "ABC Port:",
-                            destinationLocation: "227 Building, UAE:",
-                            startDate: "11 Aug, 12:00am",
-                            endDate: "12 Aug, 11:00pm",
-                            price: "Price: AED 260",
-                            onInvoice: () {
-                              Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
-                            },
-                          ),
-                          SizedBox(height: AppSizes.height * 0.02,),
-                        ]
+                            ),
+                            SizedBox(height: AppSizes.height * 0.02,),
+                            _bottomTabComponents.getTransectionsContainer(
+                              jobDetail: "1100 KG Container",
+                              pickUpLocation: "ABC Port:",
+                              destinationLocation: "227 Building, UAE:",
+                              startDate: "11 Aug, 12:00am",
+                              endDate: "12 Aug, 11:00pm",
+                              price: "Price: AED 260",
+                              onInvoice: () {
+                                Navigator.push(context,
+                                    SlideRightRoute(page: InvoiceDetail()));
+                              },
+                            ),
+                            SizedBox(height: AppSizes.height * 0.02,),
+                            _bottomTabComponents.getTransectionsContainer(
+                              jobDetail: "1100 KG Container",
+                              pickUpLocation: "ABC Port:",
+                              destinationLocation: "227 Building, UAE:",
+                              startDate: "11 Aug, 12:00am",
+                              endDate: "12 Aug, 11:00pm",
+                              price: "Price: AED 260",
+                              onInvoice: () {
+                                Navigator.push(context,
+                                    SlideRightRoute(page: InvoiceDetail()));
+                              },
+                            ),
+                            SizedBox(height: AppSizes.height * 0.02,),
+                            _bottomTabComponents.getTransectionsContainer(
+                              jobDetail: "1100 KG Container",
+                              pickUpLocation: "ABC Port:",
+                              destinationLocation: "227 Building, UAE:",
+                              startDate: "11 Aug, 12:00am",
+                              endDate: "12 Aug, 11:00pm",
+                              price: "Price: AED 260",
+                              onInvoice: () {
+                                Navigator.push(context,
+                                    SlideRightRoute(page: InvoiceDetail()));
+                              },
+                            ),
+                            SizedBox(height: AppSizes.height * 0.02,),
+                          ]
                       ),
                     )
                   ],
@@ -536,25 +491,24 @@ class _BottomTabState extends State<BottomTab> {
               Divider(
                 height: 10,
               ),
+              Divider(height: 10,),
               _bottomTabComponents.touchableButton(
-                  text: 'Contact Us', onPress: () {}),
-              Divider(
-                height: 10,
                   text: 'Contact Us',
-                  onPress: (){
+                  onPress: () {
                     Navigator.push(context, SlideRightRoute(page: ContactUs()));
                   }
               ),
-              _bottomTabComponents.getSOSbutton(text: 'SOS', onPress: () {})
               Divider(height: 10,),
               _bottomTabComponents.getSOSbutton(
                   text: 'SOS',
-                  onPress: (){
-                    Navigator.push(context, SlideRightRoute(page: DriverDetails()));
+                  onPress: () {
+                    Navigator.push(
+                        context, SlideRightRoute(page: DriverDetails()));
                   }
               )
             ],
-          ));
+          )
+      );
     }
   }
 
@@ -571,8 +525,9 @@ class _BottomTabState extends State<BottomTab> {
                   children: [
                     Container(
                       margin: EdgeInsets.only(
-                          left: AppSizes.width * 0.08,
-                          right: AppSizes.width * 0.08),
+                        left: AppSizes.width * 0.08,
+                        right: AppSizes.width * 0.08,
+                      ),
                       height: AppSizes.height * 0.25,
                       width: AppSizes.width,
                     ),
@@ -602,10 +557,11 @@ class _BottomTabState extends State<BottomTab> {
                             child: ListView(
                               children: [
                                 Container(
-                                    margin:
-                                    EdgeInsets.only(left: AppSizes.width * 0.025),
-                                    child: CommonWidgets.getLableText(
-                                        text: "Vehicle Type")),
+                                  margin:
+                                  EdgeInsets.only(left: AppSizes.width * 0.025),
+                                  child: CommonWidgets.getLableText(
+                                      text: "Vehicle Type"),
+                                ),
                                 Container(
                                   margin: EdgeInsets.only(
                                       top: AppSizes.height * 0.01,
@@ -627,7 +583,8 @@ class _BottomTabState extends State<BottomTab> {
                                                 children: [
                                                   Icon(FontAwesomeIcons.truck),
                                                   SizedBox(
-                                                    width: AppSizes.width * 0.05,
+                                                    width: AppSizes.width *
+                                                        0.05,
                                                   ),
                                                   Text(
                                                     "Reefers",
@@ -652,14 +609,15 @@ class _BottomTabState extends State<BottomTab> {
                                         padding: EdgeInsets.all(15),
                                         decoration: BoxDecoration(
                                             color: AppColors.grey,
-                                            borderRadius: BorderRadius.circular(7)),
+                                            borderRadius: BorderRadius.circular(
+                                                7)),
                                         child: Column(
                                           crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                           children: [
                                             Row(children: [
                                               Row(children: []),
-                                            ]),
+                                            ],),
                                           ],
                                         ),
                                       ),
@@ -687,7 +645,8 @@ class _BottomTabState extends State<BottomTab> {
                                                 children: [
                                                   Icon(FontAwesomeIcons.truck),
                                                   SizedBox(
-                                                    width: AppSizes.width * 0.05,
+                                                    width: AppSizes.width *
+                                                        0.05,
                                                   ),
                                                   Text(
                                                     "4.2 Ton",
@@ -712,7 +671,8 @@ class _BottomTabState extends State<BottomTab> {
                                         padding: EdgeInsets.all(15),
                                         decoration: BoxDecoration(
                                             color: AppColors.grey,
-                                            borderRadius: BorderRadius.circular(7)),
+                                            borderRadius: BorderRadius.circular(
+                                                7)),
                                         child: Column(
                                           crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -727,11 +687,10 @@ class _BottomTabState extends State<BottomTab> {
                                   ),
                                 ),
                                 Container(
-                                  margin:EdgeInsets.only(top: AppSizes.height*0.025),
+                                  margin: EdgeInsets.only(
+                                      top: AppSizes.height * 0.025),
                                   child: GestureDetector(
-                                    onTap: () {
-                                      hideLoader(context);
-                                    },
+                                    onTap: () {},
                                     child: Text(
                                       "Click & Continue",
                                       textAlign: TextAlign.center,
@@ -746,5 +705,15 @@ class _BottomTabState extends State<BottomTab> {
                               ],
                             ),
                           ),
-
+                        ],
+                      ),),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      }
+    };
+  }
 }

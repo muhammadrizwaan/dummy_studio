@@ -10,17 +10,15 @@ import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 
-class CommonWidgets {
-  static Widget getBottomButton(
-      {@required String text, @required Function onPress}) {
+class CommonWidgets{
+
+  static Widget getBottomButton({@required String text, @required Function onPress}){
     return Container(
       width: AppSizes.width,
       height: AppSizes.height * 0.06,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: AppColors.yellow,
-        ),
+        border: Border.all(color: AppColors.yellow,),
         color: AppColors.yellow,
       ),
       child: FlatButton(
@@ -51,22 +49,27 @@ class CommonWidgets {
         children: [
           GestureDetector(
               onTap: () => onPress(),
-              child: Image(image: AssetImage('assets/png/$iconName'))),
+              child: Image(image: AssetImage('assets/png/$iconName'))
+          ),
+
           RichText(
             text: TextSpan(
               text: text,
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 12,
-                  fontFamily: Assets.poppinsRegular),
+                  fontFamily: Assets.poppinsRegular
+              ),
               children: <TextSpan>[
-                TextSpan(
-                  text: clickableText,
+                TextSpan(text: clickableText,
                   style: TextStyle(
                       color: Colors.amber,
                       fontSize: 12,
-                      fontFamily: Assets.poppinsRegular),
-                  recognizer: TapGestureRecognizer()..onTap = () => onTap(),
+                      fontFamily: Assets.poppinsRegular
+
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () => onTap(),
                 ),
               ],
             ),
@@ -76,10 +79,7 @@ class CommonWidgets {
     );
   }
 
-  static Widget tabsAppBar1(
-      {@required String text,
-      @required String iconName,
-      @required Function onPress}) {
+  static Widget tabsAppBar1({@required String text, @required String iconName, @required Function onPress}){
     return Container(
       padding: EdgeInsets.all(AppSizes.width * 0.05),
       // color: AppColors.white,
@@ -190,7 +190,6 @@ class CommonWidgets {
     );
   }
 
-  // ignore: missing_return
   static Widget getAlertDialouge({@required BuildContext context, @required Widget child,@required String text}){
     showDialog(context: context,
     builder: (BuildContext context ){
@@ -322,6 +321,38 @@ actions: <Widget>[
     );
   }
 
+  static Widget getWalletPriceBox({@required String walletPrice}){
+    return Container(
+      width: AppSizes.width,
+      height: AppSizes.height * 0.1,
+      color: AppColors.lightGrayBackgroundColor,
+      margin: EdgeInsets.symmetric(vertical: AppSizes.height * 0.02),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text('AED',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: Assets.poppinsRegular,
+              color: AppColors.yellow,
+              fontWeight: FontWeight.bold
+            ),
+          ),
+          SizedBox(height: AppSizes.height * 0.01,),
+          Text(walletPrice,
+            style: TextStyle(
+                fontSize: 28,
+                fontFamily: Assets.poppinsRegular,
+                color: AppColors.colorBlack,
+                // fontWeight: FontWeight.bold
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   static Widget getPayField(
       {@required bool isPassword,
         @required String leftIcon,
@@ -356,36 +387,4 @@ actions: <Widget>[
       )
     );
   }
-  static Widget getWalletPriceBox({@required String walletPrice}){
-    return Container(
-      width: AppSizes.width,
-      height: AppSizes.height * 0.1,
-      color: AppColors.lightGrayBackgroundColor,
-      margin: EdgeInsets.symmetric(vertical: AppSizes.height * 0.02),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text('AED',
-            style: TextStyle(
-              fontSize: 15,
-              fontFamily: Assets.poppinsRegular,
-              color: AppColors.yellow,
-              fontWeight: FontWeight.bold
-            ),
-          ),
-          SizedBox(height: AppSizes.height * 0.01,),
-          Text(walletPrice,
-            style: TextStyle(
-                fontSize: 28,
-                fontFamily: Assets.poppinsRegular,
-                color: AppColors.colorBlack,
-                // fontWeight: FontWeight.bold
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
 }
