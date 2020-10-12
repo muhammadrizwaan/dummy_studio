@@ -30,11 +30,25 @@ class Assets {
   static const String rightArrow = "assets/png/right_arrow_icon.png";
   static const String profileImg = "assets/png/profile.png";
   static const String linkIcon = "assets/png/link_icon.png";
+  static const String nameIcon = "assets/png/name_icon.png";
 
   static const String addProfileImg = "assets/png/add_profile_icon.png";
   static const String editProfileIcon = "assets/png/edit_profile_icon.png";
   static const String crossIcon = "assets/png/cross_icon.png";
   static const String licenceImg = "assets/png/licenceImg.png";
+  static const String messageIcon = "assets/png/message_icon.png";
+  static const String starIcon = "assets/png/star_icon.png";
+  static const String locationIcon = "assets/png/location_icon.png";
+  static const String phoneNumber = "assets/png/icon_phone_pn.png";
+  static const String vehicle = "assets/png/vehicle.png";
+  static const String goodsType = "assets/png/goods_type.png";
+
+  static const String locationCircleIcon = "assets/png/location_circle_icon.png";
+  static const String ratingReviewIcon = "assets/png/rating_review_icon.png";
+  static const String invoiceLogo = "assets/png/invoice_logo.png";
+  static const String userLocation = "assets/png/user_location.png";
+  static const String percentageIcon = "assets/png/percentage_icon.png";
+  static const String signature = "assets/png/signature.png";
 
 
 
@@ -44,5 +58,6 @@ class Assets {
   static const String poppinsRegular = "Poppins-Regular";
   static const String poppinsLight = "Poppins-Light";
   static const String poppinsMedium = "Poppins-Medium";
+  static const String poppinsBold = "Poppins-Bold";
   static const String robotoBold = "Roboto-Bold";
 }

@@ -176,4 +176,36 @@ class CommonWidgets{
     );
   }
 
+  static Widget getWalletPriceBox({@required String walletPrice}){
+    return Container(
+      width: AppSizes.width,
+      height: AppSizes.height * 0.1,
+      color: AppColors.lightGrayBackgroundColor,
+      margin: EdgeInsets.symmetric(vertical: AppSizes.height * 0.02),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text('AED',
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: Assets.poppinsRegular,
+              color: AppColors.yellow,
+              fontWeight: FontWeight.bold
+            ),
+          ),
+          SizedBox(height: AppSizes.height * 0.01,),
+          Text(walletPrice,
+            style: TextStyle(
+                fontSize: 28,
+                fontFamily: Assets.poppinsRegular,
+                color: AppColors.colorBlack,
+                // fontWeight: FontWeight.bold
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
 }
