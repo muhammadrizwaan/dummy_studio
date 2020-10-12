@@ -72,6 +72,8 @@ class AppColors{
   static final redColor= Color.fromRGBO(212, 14, 14, 1);
   static final emailTextColor= Color.fromRGBO(81, 92, 111, 1);
   static final profileTextColor= Color.fromRGBO(141, 147, 146, 1);
+  static final lightGrayBackgroundColor= Color.fromRGBO(212, 212, 212, 1);
+  static final addVehicleBorderColor= Color.fromRGBO(193, 191, 191, 1);
 
 
   //Hex color code

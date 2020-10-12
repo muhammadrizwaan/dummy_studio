@@ -8,13 +8,18 @@ import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab_components.dart';
+import 'package:truckoom_shipper/screens/contact_us/contact_us.dart';
+import 'package:truckoom_shipper/screens/driver_details/driver_details.dart';
 import 'package:truckoom_shipper/screens/forgotPassword/forgot_password.dart';
 import 'package:truckoom_shipper/screens/history/history.dart';
 import 'package:truckoom_shipper/screens/individualProfile/individual_profile.dart';
 import 'package:truckoom_shipper/screens/invoice/invoice.dart';
+import 'package:truckoom_shipper/screens/invoiceDetail/invoice_detail.dart';
+import 'package:truckoom_shipper/screens/loadDetails/load_details.dart';
 import 'package:truckoom_shipper/screens/notifications/notifications.dart';
 import 'package:truckoom_shipper/screens/referrals/referrals.dart';
 import 'package:truckoom_shipper/screens/signup/sign_up.dart';
+import 'package:truckoom_shipper/screens/wallet/wallet.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 class BottomTab extends StatefulWidget {
@@ -230,7 +235,9 @@ class _BottomTabState extends State<BottomTab> {
               CommonWidgets.tabsAppBar1(
                   text: "My Jobs",
                   iconName: Assets.walletIcon,
-                  onPress: (){}
+                  onPress: (){
+                    Navigator.push(context, SlideRightRoute(page: Wallet()));
+                  }
               ),
               Divider(height: 10,),
               SizedBox(height: AppSizes.height * 0.03,),
@@ -242,7 +249,9 @@ class _BottomTabState extends State<BottomTab> {
                   children: [
                     _bottomTabComponents.onSelectViewType(
                         text: "Active",
-                        onPress: () {}
+                        onPress: () {
+                          Navigator.push(context, SlideRightRoute(page: LoadDetail()));
+                        }
                     ),
                     SizedBox(width: AppSizes.width * 0.02,),
                     _bottomTabComponents.onSelectViewType(
@@ -354,7 +363,7 @@ class _BottomTabState extends State<BottomTab> {
                               endDate: "12 Aug, 11:00pm",
                               price: "Price: AED 260",
                               onInvoice: () {
-                                Navigator.push(context, SlideRightRoute(page: Invoice()));
+                                Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
                               },
                           ),
                           SizedBox(height: AppSizes.height * 0.02,),
@@ -366,7 +375,7 @@ class _BottomTabState extends State<BottomTab> {
                             endDate: "12 Aug, 11:00pm",
                             price: "Price: AED 260",
                             onInvoice: () {
-                              Navigator.push(context, SlideRightRoute(page: Invoice()));
+                              Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
                             },
                           ),
                           SizedBox(height: AppSizes.height * 0.02,),
@@ -378,7 +387,7 @@ class _BottomTabState extends State<BottomTab> {
                             endDate: "12 Aug, 11:00pm",
                             price: "Price: AED 260",
                             onInvoice: () {
-                              Navigator.push(context, SlideRightRoute(page: Invoice()));
+                              Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
                             },
                           ),
                           SizedBox(height: AppSizes.height * 0.02,),
@@ -390,7 +399,7 @@ class _BottomTabState extends State<BottomTab> {
                             endDate: "12 Aug, 11:00pm",
                             price: "Price: AED 260",
                             onInvoice: () {
-                              Navigator.push(context, SlideRightRoute(page: Invoice()));
+                              Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
                             },
                           ),
                           SizedBox(height: AppSizes.height * 0.02,),
@@ -449,12 +458,16 @@ class _BottomTabState extends State<BottomTab> {
               Divider(height: 10,),
               _bottomTabComponents.touchableButton(
                   text: 'Contact Us',
-                  onPress: (){}
+                  onPress: (){
+                    Navigator.push(context, SlideRightRoute(page: ContactUs()));
+                  }
               ),
               Divider(height: 10,),
               _bottomTabComponents.getSOSbutton(
                   text: 'SOS',
-                  onPress: (){}
+                  onPress: (){
+                    Navigator.push(context, SlideRightRoute(page: DriverDetails()));
+                  }
               )
             ],
           )
