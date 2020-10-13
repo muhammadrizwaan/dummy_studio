@@ -151,30 +151,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           CommonWidgets.getBottomButton(
                               text: "Submit",
                               onPress: () {
-                                CommonWidgets.getAlertDialouge(context: context, child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "Your Signup is successfully Done",
-                                      style:
-                                      TextStyle(color: AppColors.black,letterSpacing: 0.4),
-                                    ),
-                                    GestureDetector(
-                                      onTap: (){
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Container(
-                                        margin: EdgeInsets.only(top: AppSizes.height*0.06),
-                                        child: Text(
-                                          "Click and Continue",
-                                          style: TextStyle(
-                                              color: AppColors.yellow,fontSize: 12
-                                          ),),
-                                      ),
-                                    ),
-
-                                  ],
-                                ), text: null);
+                                _alertDialogueContainer();
                               }
                           ),
                         ],
@@ -188,5 +165,117 @@ class _BusinessInformationState extends State<BusinessInformation> {
         ),
       ),
     );
+  }
+
+  _alertDialogueContainer() {
+    return {
+      {
+        showDialog(
+          context: context,
+          builder: (_) {
+            return Material(
+              color: AppColors.blackTextColor.withOpacity(0.5),
+              child: Center(
+                child: Stack(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(
+                          left: AppSizes.width * 0.08,
+                          right: AppSizes.width * 0.08),
+                      height: AppSizes.height * 0.25,
+                      width: AppSizes.width,
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                        left: AppSizes.width * 0.12,
+                        right: AppSizes.width * 0.12,
+                        top: AppSizes.width * 0.07,
+                      ),
+                      padding: EdgeInsets.only(
+                        top: AppSizes.height * 0.08,
+                      ),
+                      height: AppSizes.height * 0.23,
+                      width: AppSizes.width,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border:
+                        Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
+                        borderRadius: BorderRadius.circular(
+                          10,
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Your Signup is Successfully",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              decoration: TextDecoration.none,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            "Done",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              decoration: TextDecoration.none,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              hideLoader(context);
+                            },
+                            child: Text(
+                              "Click & Continue",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                decoration: TextDecoration.none,
+                                fontSize: 16,
+                                color: AppColors.yellow,
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: AppSizes.width * 0.45),
+                      height: AppSizes.width * 0.15,
+                      width: AppSizes.width * 0.15,
+                      decoration: BoxDecoration(
+                        color: AppColors.yellow,
+                        border:
+                        Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
+                        borderRadius: BorderRadius.circular(
+                          10,
+                        ),
+                      ),
+                      child: Icon(
+                        Icons.check,
+                        color: Colors.white,
+                        size: 40,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        )
+      },
+    };
+  }
+
+  hideLoader(BuildContext context) {
+    Navigator.push(context, SlideRightRoute(page: BusinessProfile()));
   }
 }

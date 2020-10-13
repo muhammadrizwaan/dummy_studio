@@ -6,6 +6,7 @@ import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/screens/bank/bank_screen.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 class Payment extends StatefulWidget {
@@ -18,89 +19,91 @@ class _PaymentState extends State<Payment> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         body: Container(
             height: AppSizes.height,
             width: AppSizes.width,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Stack(
               children: [
-                CommonWidgets.tabsAppBar2(
-                    text: "Payment Method",
-                    iconName: Assets.backArrow,
-                    onPress: () {
-                      Navigator.pop(context);
-                    }),
-                Expanded(
-                  child: ListView(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(AppSizes.width * 0.05),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 30,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CommonWidgets.tabsAppBar2(
+                        text: "Payment Method",
+                        iconName: Assets.backArrow,
+                        onPress: () {
+                          Navigator.pop(context);
+                        }),
+                    Divider(height: 10,),
+                    CommonWidgets.getWalletPriceBox(
+                        walletPrice: "258,000.00"
+                    ),
+                    Expanded(
+                      child: ListView(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(AppSizes.width * 0.05),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                CommonWidgets.getLableText(text: 'Payment Method'),
+                                SizedBox(height: AppSizes.height * 0.02),
+                                CommonWidgets.getPayField(
+                                    isPassword: false,
+                                    leftIcon: 'name_icon.png',
+                                    // textEditingController: email,
+                                    hintText: "Mathew due"),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                CommonWidgets.getPayField(
+                                    isPassword: false,
+                                    leftIcon: 'icon_card_number.png',
+                                    // textEditingController: email,
+                                    hintText: "0123-0123-0123"),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                CommonWidgets.getPayField(
+                                    isPassword: false,
+                                    leftIcon: 'icon_card_number.png',
+                                    // textEditingController: email,
+                                    hintText: "012"),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                CommonWidgets.getPayField(
+                                    isPassword: false,
+                                    leftIcon: 'icon_card_number.png',
+                                    // textEditingController: email,
+                                    hintText: "01/2020"),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                              ],
                             ),
-                            CommonWidgets.getLableText(text: "Payment Method"),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            CommonWidgets.getPayField(
-                                isPassword: false,
-                                leftIcon: 'name_icon.png',
-                                // textEditingController: email,
-                                hintText: "Mathew due"),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            CommonWidgets.getLableText(text: "Card Number"),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            CommonWidgets.getPayField(
-                                isPassword: false,
-                                leftIcon: 'icon_card_number.png',
-                                // textEditingController: email,
-                                hintText: "0123-0123-0123"),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            CommonWidgets.getLableText(text: "CVC Code"),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            CommonWidgets.getPayField(
-                                isPassword: false,
-                                leftIcon: 'icon_card_number.png',
-                                // textEditingController: email,
-                                hintText: "012"),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            CommonWidgets.getLableText(text: "Expiry Date"),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            CommonWidgets.getPayField(
-                                isPassword: false,
-                                leftIcon: 'icon_card_number.png',
-                                // textEditingController: email,
-                                hintText: "01/2020"),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            CommonWidgets.getBottomButton(
-                                text: "SIGNUP",
-                                onPress: () {
-                                  _alertDialogueContainer();
-                                })
-                          ],
-                        ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                Positioned(
+                    bottom: 0,
+                    child: Container(
+                      // margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
+                      child: CommonWidgets.applyCouponContainer(
+                          text: 'Apply Coupon',
+                          onPress: (){
+                            Navigator.push(context, SlideRightRoute(page: Bank()));
+                          },
+                          onCouponPress: (){
+                            _alertDialogueContainer();
+                          }
                       )
-                    ],
-                  ),
-                )
+                    )
+                ),
               ],
             )),
       ),

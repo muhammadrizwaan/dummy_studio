@@ -62,7 +62,7 @@ class LoadDetailComponents {
                       ),
                     ),
                     Container(
-                      height: AppSizes.height * 0.06,
+                      // height: AppSizes.height * 0.08,
                       width: AppSizes.width * 0.7,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -118,7 +118,13 @@ class LoadDetailComponents {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image(image: AssetImage(Assets.percentageIcon)),
+          Container(
+            width: 18,
+              height: 18,
+              child: Image(image: AssetImage(Assets.percentageIcon),
+                fit: BoxFit.cover,
+              )
+          ),
           SizedBox(width: AppSizes.width * 0.01,),
           Container(
             child: Column(
@@ -221,5 +227,4 @@ class LoadDetailComponents {
       ),
     );
   }
-
 }

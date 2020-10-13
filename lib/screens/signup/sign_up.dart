@@ -159,8 +159,7 @@ class _SignUPState extends State<SignUP> {
                           CommonWidgets.getBottomButton(
                               text: "SIGNUP",
                               onPress: () {
-                                Navigator.push(context, SlideRightRoute(page: Maps()));
-                                //_alertDialogueContainer();
+                                _alertDialogueContainer();
                               })
                         ],
                       ),
@@ -174,24 +173,6 @@ class _SignUPState extends State<SignUP> {
       ),
     );
   }
- _clickContainer(){
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: GestureDetector(
-        onTap: (){
-          Navigator.of(context).pop();
-        },
-        child: Container(
-          margin: EdgeInsets.only(top: AppSizes.height*0.06),
-          child: Text(
-            "Click and Continue",
-            style: TextStyle(
-                color: AppColors.yellow,fontSize: 12
-            ),),
-        ),
-      ),
-    );
- }
 
   _alertDialogueContainer() {
     return {
@@ -235,7 +216,7 @@ class _SignUPState extends State<SignUP> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            "You Sign up successfully",
+                            "Your Signup is Successfully",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               decoration: TextDecoration.none,
@@ -302,6 +283,9 @@ class _SignUPState extends State<SignUP> {
   }
 
   hideLoader(BuildContext context) {
-    Navigator.of(context).pop();
+    // Navigator.of(context).pop();
+    Navigator.push(context, SlideRightRoute(page: Maps()));
   }
+
+
 }

@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:location/location.dart';
+import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
+import 'package:truckoom_shipper/screens/maps/maps_components.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 import 'maps_provider.dart';
@@ -19,6 +22,7 @@ class Maps extends StatefulWidget {
 }
 
 class _MapsState extends State<Maps> {
+  MapComponents _mapComponents;
 
   Completer<GoogleMapController> _controller = Completer();
 
@@ -49,6 +53,7 @@ class _MapsState extends State<Maps> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    _mapComponents = MapComponents();
     provider = Provider.of<MapsProvider>(context, listen: false);
   }
 
@@ -206,183 +211,230 @@ class _MapsState extends State<Maps> {
                 decoration: BoxDecoration(
                   color: AppColors.lightGray,
                 ),),
-                  
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, SlideRightRoute(page: BottomTab()));
+                  },
+                  child: Container(
+                    height: AppSizes.height*0.05,
+                    width: AppSizes.width*0.85,
 
+                    margin: EdgeInsets.only(top: AppSizes.height*0.02,left: AppSizes.width*0.04,right: AppSizes.width*0.04),
+                    decoration: BoxDecoration(
+                        color: AppColors.lightGray,
+                        borderRadius: BorderRadius.circular(10)
 
-                Container(
-                  height: AppSizes.height*0.05,
-                  width: AppSizes.width*0.85,
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: AppColors.lightGray,
+                              borderRadius: BorderRadius.circular(8)
+                          ),
 
-                  margin: EdgeInsets.only(top: AppSizes.height*0.02,left: AppSizes.width*0.04,right: AppSizes.width*0.04),
-                  decoration: BoxDecoration(
-                    color: AppColors.lightGray,
-                      borderRadius: BorderRadius.circular(10)
-
-                  ),
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: AppColors.lightGray,
-                          borderRadius: BorderRadius.circular(8)
+                          child: Row(
+                            children: [Image.asset(Assets.location)],
+                          ),
                         ),
-
-                        child: Row(
-                          children: [Image.asset(Assets.location)],
-                        ),
-                      ),
-                      SizedBox(width: AppSizes.width*0.03,),
-                      Row(
-                        children: [
-                          Text(
-                            "at Australia",
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-
-                Container(
-                  height: AppSizes.height*0.05,
-                  width: AppSizes.width*0.85,
-
-                  margin: EdgeInsets.only(top: AppSizes.height*0.02,left: AppSizes.width*0.04,right: AppSizes.width*0.04),
-                  decoration: BoxDecoration(
-                      color: AppColors.lightGray,
-                      borderRadius: BorderRadius.circular(10)
-
-                  ),
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            color: AppColors.lightGray,
-                            borderRadius: BorderRadius.circular(8)
-                        ),
-
-                        child: Row(
-                          children: [Image.asset(Assets.location)],
-                        ),
-                      ),
-                      SizedBox(width: AppSizes.width*0.03,),
-                      Row(
-                        children: [
-                          Text(
-                            "at Australia",
-                          )
-                        ],
-                      )
-                    ],
+                        SizedBox(width: AppSizes.width*0.03,),
+                        Row(
+                          children: [
+                            Text(
+                              "at Australia",
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: Assets.poppinsLight,
+                                  color: AppColors.colorBlack
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
 
-                Container(
-                  height: AppSizes.height*0.05,
-                  width: AppSizes.width*0.85,
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, SlideRightRoute(page: BottomTab()));
+                  },
+                  child: Container(
+                    height: AppSizes.height*0.05,
+                    width: AppSizes.width*0.85,
 
-                  margin: EdgeInsets.only(top: AppSizes.height*0.02,left: AppSizes.width*0.04,right: AppSizes.width*0.04),
-                  decoration: BoxDecoration(
-                      color: AppColors.lightGray,
-                      borderRadius: BorderRadius.circular(10)
+                    margin: EdgeInsets.only(top: AppSizes.height*0.02,left: AppSizes.width*0.04,right: AppSizes.width*0.04),
+                    decoration: BoxDecoration(
+                        color: AppColors.lightGray,
+                        borderRadius: BorderRadius.circular(10)
 
-                  ),
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            color: AppColors.lightGray,
-                            borderRadius: BorderRadius.circular(8)
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: AppColors.lightGray,
+                              borderRadius: BorderRadius.circular(8)
+                          ),
+
+                          child: Row(
+                            children: [Image.asset(Assets.location)],
+                          ),
                         ),
-
-                        child: Row(
-                          children: [Image.asset(Assets.location)],
-                        ),
-                      ),
-                      SizedBox(width: AppSizes.width*0.03,),
-                      Row(
-                        children: [
-                          Text(
-                            "at Australia",
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-
-                Container(
-                  height: AppSizes.height*0.05,
-                  width: AppSizes.width*0.85,
-
-                  margin: EdgeInsets.only(top: AppSizes.height*0.02,left: AppSizes.width*0.04,right: AppSizes.width*0.04),
-                  decoration: BoxDecoration(
-                      color: AppColors.lightGray,
-                      borderRadius: BorderRadius.circular(10)
-
-                  ),
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            color: AppColors.lightGray,
-                            borderRadius: BorderRadius.circular(8)
-                        ),
-
-                        child: Row(
-                          children: [Image.asset(Assets.location)],
-                        ),
-                      ),
-                      SizedBox(width: AppSizes.width*0.03,),
-                      Row(
-                        children: [
-                          Text(
-                            "at Australia",
-                          )
-                        ],
-                      )
-                    ],
+                        SizedBox(width: AppSizes.width*0.03,),
+                        Row(
+                          children: [
+                            Text(
+                              "at Australia",
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: Assets.poppinsLight,
+                                  color: AppColors.colorBlack
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
 
-                Container(
-                  height: AppSizes.height*0.05,
-                  width: AppSizes.width*0.85,
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, SlideRightRoute(page: BottomTab()));
+                  },
+                  child: Container(
+                    height: AppSizes.height*0.05,
+                    width: AppSizes.width*0.85,
 
-                  margin: EdgeInsets.only(top: AppSizes.height*0.02,left: AppSizes.width*0.04,right: AppSizes.width*0.04),
-                  decoration: BoxDecoration(
-                      color: AppColors.lightGray,
-                      borderRadius: BorderRadius.circular(10)
+                    margin: EdgeInsets.only(top: AppSizes.height*0.02,left: AppSizes.width*0.04,right: AppSizes.width*0.04),
+                    decoration: BoxDecoration(
+                        color: AppColors.lightGray,
+                        borderRadius: BorderRadius.circular(10)
 
-                  ),
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            color: AppColors.lightGray,
-                            borderRadius: BorderRadius.circular(8)
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: AppColors.lightGray,
+                              borderRadius: BorderRadius.circular(8)
+                          ),
+
+                          child: Row(
+                            children: [Image.asset(Assets.location)],
+                          ),
                         ),
-
-                        child: Row(
-                          children: [Image.asset(Assets.location)],
-                        ),
-                      ),
-                      SizedBox(width: AppSizes.width*0.03,),
-                      Row(
-                        children: [
-                          Text(
-                            "at Australia",
-                          )
-                        ],
-                      )
-                    ],
+                        SizedBox(width: AppSizes.width*0.03,),
+                        Row(
+                          children: [
+                            Text(
+                              "at Australia",
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: Assets.poppinsLight,
+                                  color: AppColors.colorBlack
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   ),
-                )
+                ),
+
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, SlideRightRoute(page: BottomTab()));
+                  },
+                  child: Container(
+                    height: AppSizes.height*0.05,
+                    width: AppSizes.width*0.85,
+
+                    margin: EdgeInsets.only(top: AppSizes.height*0.02,left: AppSizes.width*0.04,right: AppSizes.width*0.04),
+                    decoration: BoxDecoration(
+                        color: AppColors.lightGray,
+                        borderRadius: BorderRadius.circular(10)
+
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: AppColors.lightGray,
+                              borderRadius: BorderRadius.circular(8)
+                          ),
+
+                          child: Row(
+                            children: [Image.asset(Assets.location)],
+                          ),
+                        ),
+                        SizedBox(width: AppSizes.width*0.03,),
+                        Row(
+                          children: [
+                            Text(
+                              "at Australia",
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: Assets.poppinsLight,
+                                  color: AppColors.colorBlack
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, SlideRightRoute(page: BottomTab()));
+                  },
+                  child: Container(
+                    height: AppSizes.height*0.05,
+                    width: AppSizes.width*0.85,
+
+                    margin: EdgeInsets.only(top: AppSizes.height*0.02,left: AppSizes.width*0.04,right: AppSizes.width*0.04),
+                    decoration: BoxDecoration(
+                        color: AppColors.lightGray,
+                        borderRadius: BorderRadius.circular(10)
+
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: AppColors.lightGray,
+                              borderRadius: BorderRadius.circular(8)
+                          ),
+
+                          child: Row(
+                            children: [Image.asset(Assets.location)],
+                          ),
+                        ),
+                        SizedBox(width: AppSizes.width*0.03,),
+                        Row(
+                          children: [
+                            Text(
+                              "at Australia",
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: Assets.poppinsLight,
+                                  color: AppColors.colorBlack
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

@@ -54,7 +54,7 @@ class _CheckUserState extends State<CheckUser> {
                state: button_indiviual),
            SizedBox(height: AppSizes.height * 0.03,),
            checkUserComponents.getBottomButton(
-               text: "Business",
+               text: "Business Owner",
                onPress: (){
                  setState(() {
                    button_businees = !button_businees;

@@ -8,6 +8,7 @@ import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/screens/bank/bank_screen.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab_components.dart';
 import 'package:truckoom_shipper/screens/contact_us/contact_us.dart';
 import 'package:truckoom_shipper/screens/driver_details/driver_details.dart';
@@ -18,6 +19,7 @@ import 'package:truckoom_shipper/screens/invoice/invoice.dart';
 import 'package:truckoom_shipper/screens/invoiceDetail/invoice_detail.dart';
 import 'package:truckoom_shipper/screens/loadDetails/load_details.dart';
 import 'package:truckoom_shipper/screens/notifications/notifications.dart';
+import 'package:truckoom_shipper/screens/payment/payment.dart';
 import 'package:truckoom_shipper/screens/referrals/referrals.dart';
 import 'package:truckoom_shipper/screens/signup/sign_up.dart';
 import 'package:truckoom_shipper/screens/wallet/wallet.dart';
@@ -173,19 +175,32 @@ class _BottomTabState extends State<BottomTab> {
                           _bottomTabComponents.getVehicleDetail(
                               leftIcon: Assets.vehicle_img,
                               vehicleType: 'Toyota Prius',
-                              vehicleDetail: 'Weight Capacity: 22kg'),
+                              vehicleDetail: 'Weight Capacity: 22kg',
+                              onTap: (){
+                                _alertDialogueContainer();
+                              }
+                          ),
                           SizedBox(
                             height: AppSizes.height * 0.01,
                           ),
-                          GestureDetector(
-                            onTap: () {
+                          _bottomTabComponents.getVehicleDetail(
+                            leftIcon: Assets.vehicle_img,
+                            vehicleType: 'Toyota Prius',
+                            vehicleDetail: 'Weight Capacity: 22kg',
+                            onTap: (){
                               _alertDialogueContainer();
-                            },
-                            child: _bottomTabComponents.getVehicleDetail(
+                            }
+                          ),
+                          SizedBox(
+                            height: AppSizes.height * 0.01,
+                          ),
+                          _bottomTabComponents.getVehicleDetail(
                               leftIcon: Assets.vehicle_img,
                               vehicleType: 'Toyota Prius',
                               vehicleDetail: 'Weight Capacity: 22kg',
-                            ),
+                              onTap: (){
+                                _alertDialogueContainer();
+                              }
                           ),
                           SizedBox(
                             height: AppSizes.height * 0.01,
@@ -193,42 +208,52 @@ class _BottomTabState extends State<BottomTab> {
                           _bottomTabComponents.getVehicleDetail(
                               leftIcon: Assets.vehicle_img,
                               vehicleType: 'Toyota Prius',
-                              vehicleDetail: 'Weight Capacity: 22kg'),
+                              vehicleDetail: 'Weight Capacity: 22kg',
+                              onTap: (){
+                                _alertDialogueContainer();
+                              }
+                          ),
                           SizedBox(
                             height: AppSizes.height * 0.01,
                           ),
                           _bottomTabComponents.getVehicleDetail(
                               leftIcon: Assets.vehicle_img,
                               vehicleType: 'Toyota Prius',
-                              vehicleDetail: 'Weight Capacity: 22kg'),
+                              vehicleDetail: 'Weight Capacity: 22kg',
+                              onTap: (){
+                                _alertDialogueContainer();
+                              }),
                           SizedBox(
                             height: AppSizes.height * 0.01,
                           ),
                           _bottomTabComponents.getVehicleDetail(
                               leftIcon: Assets.vehicle_img,
                               vehicleType: 'Toyota Prius',
-                              vehicleDetail: 'Weight Capacity: 22kg'),
+                              vehicleDetail: 'Weight Capacity: 22kg',
+                              onTap: (){
+                                _alertDialogueContainer();
+                              }
+                          ),
                           SizedBox(
                             height: AppSizes.height * 0.01,
                           ),
                           _bottomTabComponents.getVehicleDetail(
                               leftIcon: Assets.vehicle_img,
                               vehicleType: 'Toyota Prius',
-                              vehicleDetail: 'Weight Capacity: 22kg'),
+                              vehicleDetail: 'Weight Capacity: 22kg',
+                              onTap: (){
+                                _alertDialogueContainer();
+                              }),
                           SizedBox(
                             height: AppSizes.height * 0.01,
                           ),
                           _bottomTabComponents.getVehicleDetail(
                               leftIcon: Assets.vehicle_img,
                               vehicleType: 'Toyota Prius',
-                              vehicleDetail: 'Weight Capacity: 22kg'),
-                          SizedBox(
-                            height: AppSizes.height * 0.01,
-                          ),
-                          _bottomTabComponents.getVehicleDetail(
-                              leftIcon: Assets.vehicle_img,
-                              vehicleType: 'Toyota Prius',
-                              vehicleDetail: 'Weight Capacity: 22kg'),
+                              vehicleDetail: 'Weight Capacity: 22kg',
+                              onTap: (){
+                                _alertDialogueContainer();
+                              }),
                           SizedBox(
                             height: AppSizes.height * 0.01,
                           ),
@@ -252,6 +277,7 @@ class _BottomTabState extends State<BottomTab> {
                 text: "My Jobs",
                 iconName: Assets.walletIcon,
                 onPress: () {
+                  // Navigator.push(context, SlideRightRoute(page: Wallet()));
                   Navigator.push(context, SlideRightRoute(page: Wallet()));
                 },
               ),
@@ -272,8 +298,8 @@ class _BottomTabState extends State<BottomTab> {
                     _bottomTabComponents.onSelectViewType(
                         text: "Active",
                         onPress: () {
-                          Navigator.push(
-                              context, SlideRightRoute(page: LoadDetail()));
+                          // Navigator.push(
+                          //     context, SlideRightRoute(page: LoadDetail()));
                         }
                     ),
                     SizedBox(
@@ -305,10 +331,8 @@ class _BottomTabState extends State<BottomTab> {
                               pickUpLocation: "ABC Port:",
                               destinationLocation: "227 Building, UAE:",
                               startDate: "11 Aug, 12:00am",
-                              endDate: "12 Aug, 11:00pm",
                               status: "Active",
-                              onEdit: () {},
-                              onDelete: () {}),
+                              onTap: () {}),
                           SizedBox(
                             height: AppSizes.height * 0.02,
                           ),
@@ -317,10 +341,8 @@ class _BottomTabState extends State<BottomTab> {
                               pickUpLocation: "ABC Port:",
                               destinationLocation: "227 Building, UAE:",
                               startDate: "11 Aug, 12:00am",
-                              endDate: "12 Aug, 11:00pm",
                               status: "Active",
-                              onEdit: () {},
-                              onDelete: () {}),
+                              onTap: () {}),
                           SizedBox(
                             height: AppSizes.height * 0.02,
                           ),
@@ -329,10 +351,8 @@ class _BottomTabState extends State<BottomTab> {
                               pickUpLocation: "ABC Port:",
                               destinationLocation: "227 Building, UAE:",
                               startDate: "11 Aug, 12:00am",
-                              endDate: "12 Aug, 11:00pm",
                               status: "Active",
-                              onEdit: () {},
-                              onDelete: () {}),
+                              onTap: () {}),
                           SizedBox(
                             height: AppSizes.height * 0.02,
                           ),
@@ -341,10 +361,8 @@ class _BottomTabState extends State<BottomTab> {
                               pickUpLocation: "ABC Port:",
                               destinationLocation: "227 Building, UAE:",
                               startDate: "11 Aug, 12:00am",
-                              endDate: "12 Aug, 11:00pm",
                               status: "Active",
-                              onEdit: () {},
-                              onDelete: () {}),
+                              onTap: () {}),
                           SizedBox(
                             height: AppSizes.height * 0.02,
                           ),
@@ -392,6 +410,8 @@ class _BottomTabState extends State<BottomTab> {
                               startDate: "11 Aug, 12:00am",
                               endDate: "12 Aug, 11:00pm",
                               price: "Price: AED 260",
+                              status: "Completed",
+                              onTap: (){},
                               onInvoice: () {
                                 Navigator.push(context,
                                     SlideRightRoute(page: InvoiceDetail()));
@@ -405,6 +425,8 @@ class _BottomTabState extends State<BottomTab> {
                               startDate: "11 Aug, 12:00am",
                               endDate: "12 Aug, 11:00pm",
                               price: "Price: AED 260",
+                              status: "Completed",
+                              onTap: (){},
                               onInvoice: () {
                                 Navigator.push(context,
                                     SlideRightRoute(page: InvoiceDetail()));
@@ -418,6 +440,8 @@ class _BottomTabState extends State<BottomTab> {
                               startDate: "11 Aug, 12:00am",
                               endDate: "12 Aug, 11:00pm",
                               price: "Price: AED 260",
+                              status: "Completed",
+                              onTap: (){},
                               onInvoice: () {
                                 Navigator.push(context,
                                     SlideRightRoute(page: InvoiceDetail()));
@@ -431,6 +455,8 @@ class _BottomTabState extends State<BottomTab> {
                               startDate: "11 Aug, 12:00am",
                               endDate: "12 Aug, 11:00pm",
                               price: "Price: AED 260",
+                              status: "Completed",
+                              onTap: (){},
                               onInvoice: () {
                                 Navigator.push(context,
                                     SlideRightRoute(page: InvoiceDetail()));
@@ -528,7 +554,7 @@ class _BottomTabState extends State<BottomTab> {
                         left: AppSizes.width * 0.08,
                         right: AppSizes.width * 0.08,
                       ),
-                      height: AppSizes.height * 0.25,
+                      height: AppSizes.height * 0.28,
                       width: AppSizes.width,
                     ),
                     Container(
@@ -540,7 +566,7 @@ class _BottomTabState extends State<BottomTab> {
                       padding: EdgeInsets.only(
                         top: AppSizes.height * 0.04,
                       ),
-                      height: AppSizes.height * 0.30,
+                      height: AppSizes.height * 0.35,
                       width: AppSizes.width * 0.90,
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -690,7 +716,9 @@ class _BottomTabState extends State<BottomTab> {
                                   margin: EdgeInsets.only(
                                       top: AppSizes.height * 0.025),
                                   child: GestureDetector(
-                                    onTap: () {},
+                                    onTap: () {
+                                      Navigator.push(context, SlideRightRoute(page: LoadDetail()));
+                                    },
                                     child: Text(
                                       "Click & Continue",
                                       textAlign: TextAlign.center,
@@ -707,6 +735,24 @@ class _BottomTabState extends State<BottomTab> {
                           ),
                         ],
                       ),),
+                    Container(
+                      margin: EdgeInsets.only(left: AppSizes.width * 0.45),
+                      height: AppSizes.width * 0.15,
+                      width: AppSizes.width * 0.15,
+                      decoration: BoxDecoration(
+                        color: AppColors.yellow,
+                        border:
+                        Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
+                        borderRadius: BorderRadius.circular(
+                          10,
+                        ),
+                      ),
+                      child: Icon(
+                        FontAwesomeIcons.truck,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                    ),
                   ],
                 ),
               ),
