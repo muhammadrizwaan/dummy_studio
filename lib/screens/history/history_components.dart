@@ -15,6 +15,7 @@ class HistoryComponents{
         @required String endDate,
         @required String rating,
         @required String status,
+        @required Function onTap
       })
   {
     return Container(
@@ -29,13 +30,33 @@ class HistoryComponents{
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(jobDetail,
-            style: TextStyle(
-                fontSize:12,
-                fontFamily: Assets.poppinsRegular,
-                color: AppColors.colorBlack,
-                fontWeight: FontWeight.bold
-            ),
+          Row(
+            children: [
+              Text('001',
+                style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsMedium,
+                    color: AppColors.yellow,
+                    fontWeight: FontWeight.bold
+                ),
+              ),
+              Text(' : ',
+                style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsRegular,
+                    color: AppColors.colorBlack,
+                    fontWeight: FontWeight.bold
+                ),
+              ),
+              Text(jobDetail,
+                style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsRegular,
+                    color: AppColors.colorBlack,
+                    fontWeight: FontWeight.bold
+                ),
+              ),
+            ],
           ),
           SizedBox(height: AppSizes.height * 0.01,),
           Container(
@@ -140,6 +161,39 @@ class HistoryComponents{
                     color: AppColors.yellow,
                     fontWeight: FontWeight.bold
                 ),
+              ),
+            ],
+          ),
+          SizedBox(height: AppSizes.height * 0.01,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Vehicle Type:',
+                style: TextStyle(
+                  fontSize:12,
+                  fontFamily: Assets.poppinsRegular,
+                  color: AppColors.status,
+                  // fontWeight: FontWeight.bold
+                ),
+              ),
+              Row(
+                children: [
+                  Text('Suzuki',
+                    style: TextStyle(
+                        fontSize:12,
+                        fontFamily: Assets.poppinsMedium,
+                        color: AppColors.colorBlack,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  SizedBox(width: AppSizes.width * 0.01,),
+                  GestureDetector(
+                    onTap: () => onTap(),
+                    child: Image(image: AssetImage(Assets.informationIcon),
+                      color: AppColors.colorBlack,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

@@ -149,7 +149,7 @@ class _BankState extends State<Bank> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            "You Sign up successfully",
+                            "Your Payment is successfully",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               decoration: TextDecoration.none,
@@ -158,7 +158,7 @@ class _BankState extends State<Bank> {
                             ),
                           ),
                           Text(
-                            "Done",
+                            "done",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               decoration: TextDecoration.none,
@@ -200,7 +200,7 @@ class _BankState extends State<Bank> {
                         ),
                       ),
                       child: Icon(
-                        Icons.check,
+                        Icons.payment,
                         color: Colors.white,
                         size: 40,
                       ),

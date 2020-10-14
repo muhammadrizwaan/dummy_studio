@@ -7,6 +7,7 @@ import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/loadDetails/load_details_components.dart';
+import 'package:truckoom_shipper/screens/payment/payment.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 class LoadDetail extends StatefulWidget {
@@ -55,10 +56,10 @@ class _LoadDetailState extends State<LoadDetail> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           _loadDetailComponents.getLocationContainer(),
-                          _loadDetailComponents.getLocation(
-                              pick_up: '1 Ash Park, Pembroke Dock, SA7254, Drury Lane, Oldham, OL9 7PH',
-                              destination: '1 Ash Park, Pembroke Dock, SA6478, Drury Lane, Dubai, OL9 7PH'
-                          ),
+                          // _loadDetailComponents.getLocation(
+                          //     pick_up: '1 Ash Park, Pembroke Dock, SA7254, Drury Lane, Oldham, OL9 7PH',
+                          //     destination: '1 Ash Park, Pembroke Dock, SA6478, Drury Lane, Dubai, OL9 7PH'
+                          // ),
                           SizedBox(height: AppSizes.height * 0.01),
                           _loadDetailComponents.getExpectedRate(),
                           SizedBox(height: AppSizes.height * 0.03,),
@@ -361,7 +362,7 @@ class _LoadDetailState extends State<LoadDetail> {
                           CommonWidgets.getBottomButton(
                               text: "Next",
                               onPress: () {
-                                // Navigator.push(context, SlideRightRoute(page: BusinessInformation()));
+                                Navigator.push(context, SlideRightRoute(page: Payment()));
                               }
                           ),
                         ],

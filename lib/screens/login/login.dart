@@ -8,6 +8,7 @@ import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
 import 'package:truckoom_shipper/screens/forgotPassword/forgot_password.dart';
 import 'package:truckoom_shipper/screens/login/login_components.dart';
+import 'package:truckoom_shipper/screens/maps/maps_screen.dart';
 import 'package:truckoom_shipper/screens/phoneNumber/phone_number.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
@@ -83,7 +84,8 @@ class _LoginState extends State<Login> {
                               CommonWidgets.getBottomButton(
                                   text: "Login",
                                   onPress: () {
-                                    Navigator.push(context, SlideRightRoute(page: BottomTab()));
+                                    // Navigator.push(context, SlideRightRoute(page: BottomTab()));
+                                    Navigator.push(context, SlideRightRoute(page: Maps()));
                                   }
                               ),
                             ],

@@ -36,6 +36,51 @@ class CommonWidgets{
     );
   }
 
+  static Widget applyCouponContainer({@required String text, @required Function onPress, @required Function onCouponPress, }){
+    return Container(
+      margin:EdgeInsets.all(AppSizes.width *0.05) ,
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: () => onCouponPress(),
+            child: Container(
+                height: AppSizes.height * 0.056,
+                width: AppSizes.width * 0.13,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15)
+                ),
+                child: Image(image: AssetImage(Assets.couponIcon),
+                  fit: BoxFit.cover,
+                )
+            ),
+          ),
+          SizedBox(width: AppSizes.width * 0.02),
+          Container(
+            width: AppSizes.width * 0.76,
+            height: AppSizes.height * 0.06,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: AppColors.yellow,),
+              color: AppColors.yellow,
+            ),
+            child: FlatButton(
+              onPressed: () => onPress(),
+              child: Text(
+                text,
+                style: TextStyle(
+                  decoration: TextDecoration.none,
+                  fontSize: 15,
+                  color: AppColors.white,
+                  fontFamily: Assets.poppinsLight,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   static Widget getAppBar(
       {@required String text,
       @required String iconName,
@@ -372,6 +417,7 @@ actions: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              SizedBox(width: AppSizes.width * 0.01),
               Icon(Icons.radio_button_checked,color: AppColors.yellow,),
               SizedBox(width: AppSizes.width*0.03,),
               Text(hintText,style: TextStyle(color: AppColors.black),)

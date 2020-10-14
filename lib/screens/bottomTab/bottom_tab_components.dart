@@ -34,7 +34,7 @@ class BottomTabComponents {
   }
 
   Widget getVehicleDetail(
-      { @required String leftIcon, @required String vehicleType, @required String vehicleDetail}) {
+      { @required String leftIcon, @required String vehicleType, @required String vehicleDetail, @required Function onTap, }) {
     return Container(
       // height: AppSizes.height * 0.05,
       margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
@@ -46,31 +46,40 @@ class BottomTabComponents {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image(image: AssetImage('$leftIcon')) ,
-          SizedBox(width: AppSizes.width * 0.02,),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start ,
+          Row(
             children: [
-              Text('$vehicleType',
-                style: TextStyle(
-                  fontSize:12,
-                  fontFamily: Assets.poppinsMedium,
-                  color: AppColors.colorBlack,
-                  fontWeight: FontWeight.bold
-                ),
-              ),
-              SizedBox(height: AppSizes.height * 0.01,),
-              Text('$vehicleDetail',
-                style: TextStyle(
-                    fontSize:11,
-                    fontFamily: Assets.poppinsRegular,
-                    color: AppColors.colorBlack,
-                    // fontWeight: FontWeight.bold
-                ),
-              ),
+              Image(image: AssetImage('$leftIcon')) ,
+              SizedBox(width: AppSizes.width * 0.02,),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start ,
+                children: [
+                  Text('$vehicleType',
+                    style: TextStyle(
+                      fontSize:12,
+                      fontFamily: Assets.poppinsMedium,
+                      color: AppColors.colorBlack,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  SizedBox(height: AppSizes.height * 0.01,),
+                  Text('$vehicleDetail',
+                    style: TextStyle(
+                        fontSize:11,
+                        fontFamily: Assets.poppinsRegular,
+                        color: AppColors.colorBlack,
+                        // fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ],
+              )
             ],
-          )
+          ),
+          GestureDetector(
+            onTap: () => onTap(),
+              child: Image(image: AssetImage(Assets.informationIcon))
+          ) ,
         ],
       )
     );
@@ -126,10 +135,8 @@ class BottomTabComponents {
         @required String pickUpLocation,
         @required String destinationLocation,
         @required String startDate,
-        @required String endDate,
         @required String status,
-        @required Function onEdit,
-        @required Function onDelete
+        @required Function onTap
       })
   {
     return Container(
@@ -144,13 +151,33 @@ class BottomTabComponents {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(jobDetail,
-            style: TextStyle(
-              fontSize:12,
-              fontFamily: Assets.poppinsRegular,
-              color: AppColors.colorBlack,
-              fontWeight: FontWeight.bold
-            ),
+          Row(
+            children: [
+              Text('001',
+                style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsMedium,
+                    color: AppColors.yellow,
+                    fontWeight: FontWeight.bold
+                ),
+              ),
+              Text(' : ',
+                style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsRegular,
+                    color: AppColors.colorBlack,
+                    fontWeight: FontWeight.bold
+                ),
+              ),
+              Text(jobDetail,
+                style: TextStyle(
+                  fontSize:12,
+                  fontFamily: Assets.poppinsRegular,
+                  color: AppColors.colorBlack,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+            ],
           ),
           SizedBox(height: AppSizes.height * 0.01,),
           Container(
@@ -189,7 +216,6 @@ class BottomTabComponents {
                   ],
                 ),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(startDate,
                       style: TextStyle(
@@ -200,17 +226,8 @@ class BottomTabComponents {
                       ),
                     ),
                     SizedBox(height: AppSizes.height * 0.01,),
-                    Text(endDate,
-                      style: TextStyle(
-                          fontSize:12,
-                          fontFamily: Assets.poppinsRegular,
-                          color: AppColors.colorBlack,
-                          // fontWeight: FontWeight.bold
-                      ),
-                    ),
                   ],
                 )
-
               ],
             ),
           ),
@@ -238,32 +255,34 @@ class BottomTabComponents {
           ),
           SizedBox(height: AppSizes.height * 0.01,),
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Image(image: AssetImage(Assets.edit_icon),
-
-              ),
-              SizedBox(width: AppSizes.width * 0.01,),
-              Text('Edit',
-                style: TextStyle(
-                    fontSize:12,
-                    fontFamily: Assets.poppinsMedium,
-                    color: AppColors.yellow,
-                    // fontWeight: FontWeight.bold
-                ),
-              ),
-              SizedBox(width: AppSizes.width * 0.04,),
-              Image(image: AssetImage(Assets.delete_icon),
-
-              ),
-              SizedBox(width: AppSizes.width * 0.01,),
-              Text('Delete',
+              Text('Vehicle Type:',
                 style: TextStyle(
                   fontSize:12,
-                  fontFamily: Assets.poppinsMedium,
-                  color: AppColors.redColor,
+                  fontFamily: Assets.poppinsRegular,
+                  color: AppColors.status,
                   // fontWeight: FontWeight.bold
                 ),
+              ),
+              Row(
+                children: [
+                  Text('Suzuki',
+                    style: TextStyle(
+                      fontSize:12,
+                      fontFamily: Assets.poppinsMedium,
+                      color: AppColors.colorBlack,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  SizedBox(width: AppSizes.width * 0.01,),
+                  GestureDetector(
+                    onTap: () => onTap(),
+                    child: Image(image: AssetImage(Assets.informationIcon),
+                      color: AppColors.colorBlack,
+                    ),
+                  ),
+                ],
               ),
             ],
           )
@@ -283,7 +302,9 @@ class BottomTabComponents {
         @required String startDate,
         @required String endDate,
         @required String price,
+        @required String status,
         @required Function onInvoice,
+        @required Function onTap,
       })
   {
     return Container(
@@ -301,13 +322,33 @@ class BottomTabComponents {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(jobDetail,
-                style: TextStyle(
-                    fontSize:12,
-                    fontFamily: Assets.poppinsRegular,
-                    color: AppColors.colorBlack,
-                    fontWeight: FontWeight.bold
-                ),
+              Row(
+                children: [
+                  Text('001',
+                    style: TextStyle(
+                        fontSize:12,
+                        fontFamily: Assets.poppinsMedium,
+                        color: AppColors.yellow,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  Text(' : ',
+                    style: TextStyle(
+                        fontSize:12,
+                        fontFamily: Assets.poppinsRegular,
+                        color: AppColors.colorBlack,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  Text(jobDetail,
+                    style: TextStyle(
+                        fontSize:12,
+                        fontFamily: Assets.poppinsRegular,
+                        color: AppColors.colorBlack,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ],
               ),
               Text(price,
                 style: TextStyle(
@@ -381,7 +422,62 @@ class BottomTabComponents {
               ],
             ),
           ),
-          SizedBox(height: AppSizes.height * 0.04,),
+          SizedBox(height: AppSizes.height * 0.01),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Status',
+                style: TextStyle(
+                  fontSize:12,
+                  fontFamily: Assets.poppinsRegular,
+                  color: AppColors.status,
+                  // fontWeight: FontWeight.bold
+                ),
+              ),
+              Text(status,
+                style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsMedium,
+                    color: AppColors.yellow,
+                    fontWeight: FontWeight.bold
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: AppSizes.height * 0.01,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Vehicle Type:',
+                style: TextStyle(
+                  fontSize:12,
+                  fontFamily: Assets.poppinsRegular,
+                  color: AppColors.status,
+                  // fontWeight: FontWeight.bold
+                ),
+              ),
+              Row(
+                children: [
+                  Text('Suzuki',
+                    style: TextStyle(
+                        fontSize:12,
+                        fontFamily: Assets.poppinsMedium,
+                        color: AppColors.colorBlack,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  SizedBox(width: AppSizes.width * 0.01,),
+                  GestureDetector(
+                    onTap: () => onTap(),
+                    child: Image(image: AssetImage(Assets.informationIcon),
+                      color: AppColors.colorBlack,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          SizedBox(height: AppSizes.height * 0.02,),
           Container(
             width: AppSizes.width,
             height: AppSizes.height * 0.06,
@@ -403,7 +499,7 @@ class BottomTabComponents {
               ),
             ),
           ),
-          SizedBox(height: AppSizes.height * 0.02,),
+          SizedBox(height: AppSizes.height * 0.01,),
         ],
       ),
     );

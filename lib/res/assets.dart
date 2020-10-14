@@ -53,6 +53,8 @@ class Assets {
   static const String card_number = "assets/png/icon_card_number.png";
   static const String joint = "assets/png/icon_loc@3x.png";
   static const String location = "assets/png/location_icon.png";
+  static const String couponIcon = "assets/png/coupon_icon.png";
+  static const String informationIcon = "assets/png/information_icon.png";
 
 
 
