@@ -17,7 +17,7 @@ class LoginProvider extends ChangeNotifier {
   GenericDecodeEncode genericDecodeEncode = GenericDecodeEncode();
   TokenResponse tokenResponse = TokenResponse();
 
-  Loader _loader = Loader();
+  CustomPopup _loader = CustomPopup();
   Dio dio = Dio();
   String token = "";
   String tempToken = "";

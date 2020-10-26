@@ -28,7 +28,7 @@ class _CheckUserState extends State<CheckUser> {
     // TODO: implement initState
     super.initState();
     button_businees =  false;
-    button_indiviual = true;
+    button_indiviual = false;
     checkUserComponents = CheckUserComponents();
   }
   @override

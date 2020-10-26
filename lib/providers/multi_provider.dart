@@ -18,14 +18,12 @@ import 'package:truckoom_shipper/screens/invoiceDetail/invoice_detail_provider.d
 import 'package:truckoom_shipper/screens/language/language_provider.dart';
 import 'package:truckoom_shipper/screens/loadDetails/load_details_provider.dart';
 import 'package:truckoom_shipper/screens/login/login_provider.dart';
-import 'package:truckoom_shipper/screens/maps/maps_provider.dart';
 import 'package:truckoom_shipper/screens/notifications/notifications_provider.dart';
 import 'package:truckoom_shipper/screens/otpAuthentication/otp_authentication_provider.dart';
 import 'package:truckoom_shipper/screens/payment/payment_provider.dart';
 import 'package:truckoom_shipper/screens/phoneNumber/phone_number_provider.dart';
 import 'package:truckoom_shipper/screens/referrals/referrals_provider.dart';
 import 'package:truckoom_shipper/screens/resetPassword/reset_password_provider.dart';
-import 'package:truckoom_shipper/screens/signup/sign_up_provider.dart';
 import 'package:truckoom_shipper/screens/wallet/wallet_provier.dart';
 
 final multiProviders = [
@@ -35,10 +33,6 @@ final multiProviders = [
   ),
   ChangeNotifierProvider<LoginProvider>(
     create: (_) => LoginProvider(),
-    lazy: true,
-  ),
-  ChangeNotifierProvider<MapsProvider>(
-    create: (_) => MapsProvider(),
     lazy: true,
   ),
   ChangeNotifierProvider<BottomTabProvider>(

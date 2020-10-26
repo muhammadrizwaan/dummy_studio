@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fluttericon/entypo_icons.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
@@ -36,11 +37,12 @@ class ReferralsComponents{
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Image(image: AssetImage('$leftIcon')) ,
+          Icon(Entypo.attach, size: 20,),
           Container(
             // color: AppColors.yellow,
             height: AppSizes.height * 0.06,
-            width: AppSizes.width * 0.8,
+            width: AppSizes.width * 0.75,
+            padding: EdgeInsets.only(bottom: 10),
             margin: EdgeInsets.only(left: 5),
             child: TextField(
               // style: ,

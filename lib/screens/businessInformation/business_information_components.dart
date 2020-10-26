@@ -1,22 +1,24 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/linearicons_free_icons.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 
 class BusinessInformationComponents {
-  Widget getBusinessSignupStep(){
+  Widget getBusinessSignupStep() {
     return Row(
       children: [
-        Text('Step ',
+        Text(
+          'Step ',
           style: TextStyle(
             fontSize: 15,
             fontFamily: Assets.poppinsRegular,
             color: AppColors.grey,
           ),
         ),
-        Text('02',
+        Text(
+          '02',
           style: TextStyle(
             fontSize: 15,
             fontFamily: Assets.poppinsRegular,
@@ -27,42 +29,44 @@ class BusinessInformationComponents {
     );
   }
 
-  Widget getImagePicker({@required Function onPress,}){
+  Widget getImagePicker({
+    @required Function onPress,
+  }) {
     return GestureDetector(
       onTap: () => onPress(),
       child: Container(
-        height: AppSizes.height * 0.07,
-        width: AppSizes.width*0.85,
+        height: AppSizes.height * 0.06,
+        width: AppSizes.width,
         decoration: BoxDecoration(
           color: AppColors.lightGray,
           border: Border.all(color: AppColors.lightGray),
           borderRadius: BorderRadius.circular(5),
         ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image(image: AssetImage('assets/png/plus_icon.png')),
-              Text(' Attach Copy of License',
-                style: TextStyle(
-                  fontFamily: Assets.poppinsLight,
-                  fontSize: 12,
-                  color: AppColors.colorBlack,
-                ),
-              )
-        ],
-      ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image(image: AssetImage('assets/png/plus_icon.png')),
+            Text(
+              ' Attach Copy of License',
+              style: TextStyle(
+                fontFamily: Assets.poppinsMedium,
+                fontSize: 12,
+                color: AppColors.colorBlack,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
 
   Widget getTextField(
       {@required bool isPassword,
-        @required String leftIcon,
-        @required TextEditingController textEditingController,
-        @required String hintText}) {
+      @required TextEditingController textEditingController,
+      @required String hintText}) {
     return Container(
       height: AppSizes.height * 0.07,
-      width: AppSizes.width*0.85,
+      width: AppSizes.width * 0.85,
       padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.02),
       decoration: BoxDecoration(
         color: AppColors.lightGray,
@@ -73,7 +77,13 @@ class BusinessInformationComponents {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.asset(leftIcon),
+          Opacity(
+            opacity: 0.6,
+            child: Icon(
+              LineariconsFree.license,
+              size: 20,
+            ),
+          ),
           Center(
             child: Container(
               // color: AppColors.yellow,

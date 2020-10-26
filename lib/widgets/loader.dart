@@ -2,10 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/widgets/text_views.dart';
 
-class Loader {
+import '../res/assets.dart';
+
+class CustomPopup {
   showLoader({
     BuildContext context,
+    Function onPress,
   }) {
     showDialog(
       context: context,
@@ -28,12 +32,15 @@ class Loader {
                     right: AppSizes.width * 0.12,
                     top: AppSizes.width * 0.07,
                   ),
-                  padding: EdgeInsets.only(top: AppSizes.height*0.08,),
-                  height: AppSizes.height * 0.23,
+                  padding: EdgeInsets.only(
+                    top: AppSizes.height * 0.08,
+                  ),
+                  height: AppSizes.height * 0.2,
                   width: AppSizes.width,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    border: Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
+                    border:
+                    Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
                     borderRadius: BorderRadius.circular(
                       10,
                     ),
@@ -43,51 +50,35 @@ class Loader {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        "You Sign up successfully",
+                        "Sign up successful !",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          decoration: TextDecoration.none,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      Text(
-                        "Done",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          decoration: TextDecoration.none,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
+                            decoration: TextDecoration.none,
+                            fontSize: 15,
+                            color: AppColors.colorBlack,
+                            fontFamily: Assets.poppinsMedium,
+                            fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
                         height: 20,
                       ),
                       GestureDetector(
-                        onTap: (){
-                          hideLoader(context);
-                        },
-                        child: Text(
-                          "Click & Continue",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            decoration: TextDecoration.none,
-                            fontSize: 16,
-                            color: AppColors.yellow,
-                            fontWeight: FontWeight.w300,
-                          ),
-                        ),
+                        onTap: () => onPress(),
+                        child: TextView.getContinueText04("Tap & Continue", color: AppColors.yellow,),
                       ),
                     ],
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: AppSizes.width * 0.45),
+                  margin: EdgeInsets.only(
+                    left: AppSizes.width * 0.425,
+                  ),
                   height: AppSizes.width * 0.15,
                   width: AppSizes.width * 0.15,
                   decoration: BoxDecoration(
                     color: AppColors.yellow,
-                    border: Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
+                    border:
+                    Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
                     borderRadius: BorderRadius.circular(
                       10,
                     ),

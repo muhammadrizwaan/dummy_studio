@@ -6,14 +6,13 @@ import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
-import 'package:truckoom_shipper/screens/bank/bank_screen.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
-import 'package:truckoom_shipper/screens/maps/maps_screen.dart';
-import 'package:truckoom_shipper/screens/payment/payment.dart';
 import 'package:truckoom_shipper/screens/signup/sign_up_components.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/loader.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
+
+import '../bottomTab/bottom_tab.dart';
 
 class SignUP extends StatefulWidget {
   String tag;
@@ -26,12 +25,12 @@ class SignUP extends StatefulWidget {
 
 class _SignUPState extends State<SignUP> {
   SignUpComponents _signUpComponents;
-  Loader _loader;
+  CustomPopup _loader;
   TextEditingController name, email, password, confirm_password;
   bool onCheck = false;
 
   void initState() {
-    _loader = Loader();
+    _loader = CustomPopup();
     super.initState();
   }
 
@@ -152,8 +151,7 @@ class _SignUPState extends State<SignUP> {
   }
 
   _alertDialogueContainer() {
-    return {
-      {
+    return {{
         showDialog(
           context: context,
           builder: (_) {
@@ -207,12 +205,7 @@ class _SignUPState extends State<SignUP> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.pushReplacement(
-                                  context,
-                                  SlideRightRoute(
-                                      page: Maps(
-                                    tag: widget.tag,
-                                  )));
+                              Navigator.pushReplacement(context, SlideRightRoute(page: BottomTab(tag: widget.tag,)));
                             },
                             child: TextView.getContinueText04("Tap & Continue", color: AppColors.yellow,),
                           ),
@@ -249,10 +242,6 @@ class _SignUPState extends State<SignUP> {
     };
   }
 
-  hideLoader(BuildContext context) {
-    // Navigator.of(context).pop();
-    Navigator.push(context, SlideRightRoute(page: Maps()));
-  }
 
   _getTermsAndCondition() {
     return Row(

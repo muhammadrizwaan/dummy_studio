@@ -9,8 +9,10 @@ import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/businessInformation/business_information_components.dart';
 import 'package:truckoom_shipper/screens/businessProfile/business_profile.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
-import 'package:truckoom_shipper/screens/maps/maps_screen.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
+
+import '../../animations/slide_right.dart';
+import '../bottomTab/bottom_tab.dart';
 
 class BusinessInformation extends StatefulWidget {
   String tag;
@@ -46,11 +48,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
           height: AppSizes.height,
           width: AppSizes.width,
           color: AppColors.white,
-          padding: EdgeInsets.only(
-            left: AppSizes.width * 0.08,
-            right: AppSizes.width * 0.08,
-            top: AppSizes.width * 0.08,
-          ),
+          padding: EdgeInsets.all(AppSizes.width * 0.05),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -129,7 +127,6 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           ),
                           _businessInformationComponents.getTextField(
                               isPassword: true,
-                              leftIcon: Assets.licenseIcon,
                               textEditingController: license_date,
                               hintText: "09/22/2030"),
 
@@ -144,7 +141,47 @@ class _BusinessInformationState extends State<BusinessInformation> {
                             height: 30,
                           ),
 
-                          _getTermsAndCondition(),
+                          Container(
+                            child: Row(
+                              // crossAxisAlignment: CrossAxisAlignment.start,
+                              // mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Checkbox(
+                                  checkColor: AppColors.white,
+                                  activeColor: AppColors.yellow,
+                                  value: onCheck,
+                                  onChanged: (bool value) {
+                                    setState(() {
+                                      onCheck = value;
+                                    });
+                                  },
+                                ),
+                                Container(
+                                  width: AppSizes.width * 0.75,
+                                  child: RichText(
+                                    text: TextSpan(
+                                        text:
+                                            'By creating an account you agree to our ',
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 12),
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                              text: 'Term and Conditions',
+                                              style: TextStyle(
+                                                  color: Colors.amber,
+                                                  fontSize: 12,
+                                                  fontFamily:
+                                                      Assets.poppinsRegular),
+                                              recognizer: TapGestureRecognizer()
+                                                ..onTap = () {
+                                                  // navigate to desired screen
+                                                })
+                                        ]),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
                           SizedBox(
                             height: 10,
                           ),
@@ -208,7 +245,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            "Sign up successful !",
+                            "Signup successful !",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 decoration: TextDecoration.none,
@@ -222,12 +259,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.pushReplacement(
-                                  context,
-                                  SlideRightRoute(
-                                      page: Maps(
-                                    tag: widget.tag,
-                                  )));
+                              Navigator.pushReplacement(context, SlideRightRoute(page: BottomTab(tag: widget.tag,)));
                             },
                             child: Text(
                               "Tap & Continue",
@@ -273,65 +305,5 @@ class _BusinessInformationState extends State<BusinessInformation> {
 
   hideLoader(BuildContext context) {
     Navigator.push(context, SlideRightRoute(page: BusinessProfile()));
-  }
-
-  _getTermsAndCondition() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Container(
-              margin: EdgeInsets.only(bottom: 25),
-              height: AppSizes.height * 0.04,
-              width: AppSizes.width * 0.07,
-              child: Checkbox(
-                checkColor: AppColors.white,
-                activeColor: AppColors.yellow,
-                value: onCheck,
-                onChanged: (bool value) {
-                  setState(() {
-                    onCheck = value;
-                  });
-                },
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          width: 10,
-        ),
-        Row(
-          children: [
-            Container(
-              height: AppSizes.height * 0.07,
-              width: AppSizes.width * 0.69,
-              child: RichText(
-                text: TextSpan(
-                    text: 'By creating an account you agree to our ',
-                    style: TextStyle(
-                      wordSpacing: 0.5,
-                      color: Colors.black,
-                      fontSize: 13,
-                    ),
-                    children: <TextSpan>[
-                      TextSpan(
-                          text: 'Term and Conditions',
-                          style: TextStyle(
-                              color: Colors.amber,
-                              fontSize: 12,
-                              fontFamily: Assets.poppinsMedium,
-                              fontWeight: FontWeight.bold),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              // navigate to desired screen
-                            })
-                    ]),
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
   }
 }
