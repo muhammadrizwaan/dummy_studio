@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/entypo_icons.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
@@ -71,7 +72,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              CommonWidgets.getHeading1Text(
+                              CommonWidgets.getHeadingText(
                                   text: 'Business Information'),
                               _businessInformationComponents
                                   .getBusinessSignupStep()
@@ -81,48 +82,48 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           SizedBox(
                             height: 30,
                           ),
-                          CommonWidgets.getLableText(text: "Business Name"),
+                          CommonWidgets.getSubHeadingText(text: "Business Name"),
                           SizedBox(
                             height: 10,
                           ),
                           CommonWidgets.getTextField(
                               isPassword: false,
-                              leftIcon: 'name_icon.png',
+                              leftIcon: Entypo.user,
                               textEditingController: business_name,
                               hintText: "Enter Business Name"),
                           SizedBox(
                             height: 30,
                           ),
-                          CommonWidgets.getLableText(text: "Contact Number"),
+                          CommonWidgets.getSubHeadingText(text: "Contact Number"),
                           SizedBox(
                             height: 10,
                           ),
                           CommonWidgets.getTextField(
                               isPassword: false,
-                              leftIcon: 'icon_phone_pn.png',
+                              leftIcon: Entypo.mobile,
                               textEditingController: contact_number,
                               hintText: "Enter Contact Number"),
                           SizedBox(
                             height: 30,
                           ),
-                          CommonWidgets.getLableText(text: "TRN"),
+                          CommonWidgets.getSubHeadingText(text: "TRN"),
                           SizedBox(
                             height: 10,
                           ),
                           CommonWidgets.getTextField(
                               isPassword: true,
-                              leftIcon: 'password_icon.png',
+                              leftIcon: Entypo.mobile,
                               textEditingController: trn,
                               hintText: "Enter TRN"),
                           SizedBox(
                             height: 30,
                           ),
-                          CommonWidgets.getLableText(
+                          CommonWidgets.getSubHeadingText(
                               text: "License Expiry Date"),
                           SizedBox(
                             height: 10,
                           ),
-                          CommonWidgets.getTextField(
+                          _businessInformationComponents.getTextField(
                               isPassword: true,
                               leftIcon: 'license_icon.png',
                               textEditingController: license_date,
@@ -180,50 +181,6 @@ class _BusinessInformationState extends State<BusinessInformation> {
                               ],
                             ),
                           ),
-                          // Table(
-                          //   columnWidths: {0: FlexColumnWidth(0.15)},
-                          //   children: [
-                          //     TableRow(
-                          //         children: [
-                          //           Container(
-                          //             alignment: Alignment.topLeft,
-                          //             child: Checkbox(
-                          //               checkColor: AppColors.white,
-                          //               activeColor: AppColors.yellow,
-                          //               value: onCheck,
-                          //               onChanged: (bool value) {
-                          //                 setState(() {
-                          //                   onCheck = value;
-                          //                 });
-                          //               },
-                          //             ),
-                          //           ),
-                          //           RichText(
-                          //             text: TextSpan(
-                          //                 text: 'By creating an account you agree to our ',
-                          //                 style: TextStyle(
-                          //                     color: Colors.black, fontSize: 12),
-                          //                 children: <TextSpan>[
-                          //                   TextSpan(text: 'Term and Conditions',
-                          //                       style: TextStyle(
-                          //                           color: Colors.amber,
-                          //                           fontSize: 12,
-                          //                           fontFamily: Assets.poppinsRegular
-                          //
-                          //                       ),
-                          //                       recognizer: TapGestureRecognizer()
-                          //                         ..onTap = () {
-                          //                           // navigate to desired screen
-                          //                         }
-                          //                   )
-                          //                 ]
-                          //             ),
-                          //           )
-                          //         ]
-                          //     )
-                          //   ],
-                          //
-                          // ),
                           SizedBox(
                             height: 10,
                           ),

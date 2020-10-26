@@ -729,7 +729,7 @@ class _BottomTabState extends State<BottomTab> {
                                 Container(
                                   margin: EdgeInsets.only(
                                       left: AppSizes.width * 0.025),
-                                  child: CommonWidgets.getLableText(
+                                  child: CommonWidgets.getSubHeadingText(
                                       text: "Vehicle Type"),
                                 ),
                                 Container(
@@ -807,7 +807,7 @@ class _BottomTabState extends State<BottomTab> {
                                 Container(
                                   margin: EdgeInsets.only(
                                       left: AppSizes.width * 0.025),
-                                  child: CommonWidgets.getLableText(
+                                  child: CommonWidgets.getSubHeadingText(
                                       text: "Vehicle Category"),
                                 ),
                                 Container(

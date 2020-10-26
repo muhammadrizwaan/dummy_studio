@@ -1,10 +1,11 @@
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/providers/multi_provider.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/routes/routes.dart';
 
-import 'res/colors.dart';
 
 void main() {
   runApp(MyApp());

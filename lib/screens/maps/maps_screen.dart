@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/linecons_icons.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:location/location.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
@@ -14,6 +16,7 @@ import 'package:truckoom_shipper/screens/maps/maps_components.dart';
 import 'package:truckoom_shipper/screens/wallet/wallet.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
+import '../../res/sizes.dart';
 import 'maps_provider.dart';
 
 final Map<String, Marker> _markers = {};
@@ -112,23 +115,9 @@ class _MapsState extends State<Maps> {
               onMapCreated: _onMapCreated,
               myLocationEnabled: true,
             ),
-            Container(
-              alignment: Alignment.bottomCenter,
-              child: DraggableScrollableSheet(
-                initialChildSize: 0.3,
-                minChildSize: 0.05,
-                maxChildSize: 0.9,
-                builder: (BuildContext context, myscrollController) {
-                  return Container(
-                    color: Color.fromRGBO(19, 192, 21, 0),
-                    child: ListView(
-                      controller: myscrollController,
-                      children: [
-                        _bottomNavigationContainer(),
-                      ],
-                    ),
-                  );
-                },
+            SlidingUpPanel(
+              panel: Center(
+                child: _bottomNavigationContainer(),
               ),
             ),
           ],
@@ -138,10 +127,9 @@ class _MapsState extends State<Maps> {
   }
 
   _bottomNavigationContainer() {
-
      return Container(
       height: AppSizes.height,
-      padding: EdgeInsets.all(15),
+      padding: EdgeInsets.only(top:20 , left: 15, right: 15),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.only(
@@ -204,7 +192,7 @@ class _MapsState extends State<Maps> {
                               ),
                               decoration: InputDecoration(
                                 // contentPadding: EdgeInsets.symmetric(vertical: AppSizes.height* 0.001),
-                                prefixIcon: Image.asset(Assets.location),
+                                prefixIcon: Icon(Linecons.location, size: 20,),
                                 hintText:"Search Pickup Location",
                                 border: InputBorder.none,
                                 hintStyle: TextStyle(
@@ -235,7 +223,7 @@ class _MapsState extends State<Maps> {
                                 ),
                                 decoration: InputDecoration(
                                   // contentPadding: EdgeInsets.symmetric(vertical: AppSizes.height* 0.001),
-                                  prefixIcon: Image.asset(Assets.location),
+                                  prefixIcon: Icon(Linecons.location, size: 20,),
                                   hintText:"Search DropOff Location",
                                   border: InputBorder.none,
                                   hintStyle: TextStyle(
@@ -286,7 +274,7 @@ class _MapsState extends State<Maps> {
                           ),
 
                           child: Row(
-                            children: [Image.asset(Assets.location)],
+                            children: [Icon(Linecons.location, size: 20,)],
                           ),
                         ),
                         SizedBox(width: AppSizes.width*0.03,),
@@ -331,7 +319,7 @@ class _MapsState extends State<Maps> {
                           ),
 
                           child: Row(
-                            children: [Image.asset(Assets.location)],
+                            children: [Icon(Linecons.location, size: 20,)],
                           ),
                         ),
                         SizedBox(width: AppSizes.width*0.03,),
@@ -376,7 +364,7 @@ class _MapsState extends State<Maps> {
                           ),
 
                           child: Row(
-                            children: [Image.asset(Assets.location)],
+                            children: [Icon(Linecons.location, size: 20,)],
                           ),
                         ),
                         SizedBox(width: AppSizes.width*0.03,),
@@ -421,7 +409,7 @@ class _MapsState extends State<Maps> {
                           ),
 
                           child: Row(
-                            children: [Image.asset(Assets.location)],
+                            children: [Icon(Linecons.location, size: 20,)],
                           ),
                         ),
                         SizedBox(width: AppSizes.width*0.03,),
@@ -466,7 +454,7 @@ class _MapsState extends State<Maps> {
                           ),
 
                           child: Row(
-                            children: [Image.asset(Assets.location)],
+                            children: [Icon(Linecons.location, size: 20,)],
                           ),
                         ),
                         SizedBox(width: AppSizes.width*0.03,),

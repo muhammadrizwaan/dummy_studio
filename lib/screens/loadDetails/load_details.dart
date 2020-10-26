@@ -69,7 +69,7 @@ class _LoadDetailState extends State<LoadDetail> {
                           SizedBox(height: AppSizes.height * 0.01),
                           _loadDetailComponents.getExpectedRate(),
                           SizedBox(height: AppSizes.height * 0.03,),
-                          CommonWidgets.getLableText(
+                          CommonWidgets.getSubHeadingText(
                               text: "Pickup Date and Time"
                           ),
                           SizedBox(height: 10,),
@@ -152,7 +152,7 @@ class _LoadDetailState extends State<LoadDetail> {
 
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
-                          CommonWidgets.getLableText(
+                          CommonWidgets.getSubHeadingText(
                               text: "Receiver Name"
                           ),
                           SizedBox(height: 10,),
@@ -162,7 +162,7 @@ class _LoadDetailState extends State<LoadDetail> {
                               textEditingController: null
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
-                          CommonWidgets.getLableText(
+                          CommonWidgets.getSubHeadingText(
                               text: "Receiver Phone"
                           ),
                           SizedBox(height: 10,),
@@ -172,7 +172,7 @@ class _LoadDetailState extends State<LoadDetail> {
                               textEditingController: null
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
-                          CommonWidgets.getLableText(
+                          CommonWidgets.getSubHeadingText(
                               text: "Good type"
                           ),
                           SizedBox(height: 10,),
@@ -243,7 +243,7 @@ class _LoadDetailState extends State<LoadDetail> {
 
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
-                          CommonWidgets.getLableText(
+                          CommonWidgets.getSubHeadingText(
                               text: "Weight"
                           ),
                           SizedBox(height: 10,),
@@ -322,7 +322,7 @@ class _LoadDetailState extends State<LoadDetail> {
 
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
-                          CommonWidgets.getLableText(
+                          CommonWidgets.getSubHeadingText(
                               text: "No. of Vehicle"
                           ),
                           SizedBox(height: 10,),
@@ -413,7 +413,7 @@ class _LoadDetailState extends State<LoadDetail> {
                           // ),
                           // SizedBox(height: 10,),
                           SizedBox(height: AppSizes.height * 0.03,),
-                          CommonWidgets.getLableText(
+                          CommonWidgets.getSubHeadingText(
                               text: "Description"
                           ),
                           SizedBox(height: AppSizes.height * 0.01),

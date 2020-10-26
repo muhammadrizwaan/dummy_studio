@@ -11,7 +11,7 @@ class CheckUserComponents {
   Widget getBottomButton({@required String text, @required Function onPress, @required bool state}){
     return Container(
       width: AppSizes.width,
-      height: AppSizes.height * 0.06,
+      height: AppSizes.height * 0.07,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
         // border: Border.all(color: state ? AppColors.yellow : Colors.grey,),

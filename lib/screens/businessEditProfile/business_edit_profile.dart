@@ -3,6 +3,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/entypo_icons.dart';
+import 'package:fluttericon/web_symbols_icons.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
@@ -61,62 +63,62 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                               onPress: (){}
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
-                          CommonWidgets.getLableText(
+                          CommonWidgets.getSubHeadingText(
                               text: 'Full Name'
                           ),
                           SizedBox(height: AppSizes.height * 0.01,),
                           CommonWidgets.getTextField(
                               isPassword: false,
-                              leftIcon: 'name_icon.png',
+                              leftIcon: Entypo.user,
                               textEditingController: name,
                               hintText: 'Matthew'
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
-                          CommonWidgets.getLableText(
+                          CommonWidgets.getSubHeadingText(
                               text: 'Email'
                           ),
                           SizedBox(height: AppSizes.height * 0.01,),
                           CommonWidgets.getTextField(
                               isPassword: false,
-                              leftIcon: 'email_icon.png',
+                              leftIcon: Icons.mail,
                               textEditingController: email,
                               hintText: 'MatthewLawson@mail.com'
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
-                          CommonWidgets.getLableText(
+                          CommonWidgets.getSubHeadingText(
                               text: 'Business Name'
                           ),
                           SizedBox(height: AppSizes.height * 0.01,),
                           CommonWidgets.getTextField(
                               isPassword: false,
-                              leftIcon: 'name_icon.png',
+                              leftIcon: Entypo.user,
                               textEditingController: business_name,
                               hintText: 'Augue vestibulum'
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
-                          CommonWidgets.getLableText(
+                          CommonWidgets.getSubHeadingText(
                               text: 'Contact Number'
                           ),
                           SizedBox(height: AppSizes.height * 0.01,),
                           CommonWidgets.getTextField(
                               isPassword: false,
-                              leftIcon: 'icon_phone_pn.png',
+                              leftIcon: Entypo.mobile,
                               textEditingController: phone_number,
                               hintText: '(430)214-7475'
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
-                          CommonWidgets.getLableText(
+                          CommonWidgets.getSubHeadingText(
                               text: 'TRN'
                           ),
                           SizedBox(height: AppSizes.height * 0.01,),
                           CommonWidgets.getTextField(
                               isPassword: false,
-                              leftIcon: 'icon_phone_pn.png',
+                              leftIcon: Entypo.mobile,
                               textEditingController: trn,
                               hintText: '430(845785)'
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
-                          CommonWidgets.getLableText(
+                          CommonWidgets.getSubHeadingText(
                               text: 'Country'
                           ),
                           SizedBox(height: AppSizes.height * 0.01,),

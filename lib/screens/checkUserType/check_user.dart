@@ -38,7 +38,7 @@ class _CheckUserState extends State<CheckUser> {
       width: AppSizes.width,
       color: AppColors.white,
      child: Container(
-       margin: EdgeInsets.all(AppSizes.width * 0.05),
+       padding: EdgeInsets.only(left: AppSizes.width * 0.08, right: AppSizes.width*0.08, top: AppSizes.width*0.08),
        child: Stack(
          children: [
            Positioned(
@@ -51,7 +51,7 @@ class _CheckUserState extends State<CheckUser> {
                    clickableText: "",
                    onTap: () {},
                    onPress: () {
-                     Navigator.pop(context, SlideRightRoute(page: CheckUser()));
+                     Navigator.pop(context);
                    }),
              ),
            ),
@@ -62,7 +62,7 @@ class _CheckUserState extends State<CheckUser> {
                Image(image: AssetImage('assets/png/logo_splash.png')),
                SizedBox(height: AppSizes.height * 0.09,),
                checkUserComponents.getBottomButton(
-                   text: "Indiviual",
+                   text: "Individual",
                    onPress: (){
                      setState(() {
                        button_indiviual = true;
