@@ -1,7 +1,10 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:truckoom_shipper/models/api_models/login_response.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs_components.dart';
+import 'package:truckoom_shipper/screens/individualPayment/individual_payment.dart';
+import 'package:truckoom_shipper/screens/notifications/notifications.dart';
+import 'package:truckoom_shipper/screens/payment/payment.dart';
 
 import '../../../../animations/slide_right.dart';
 import '../../../../res/assets.dart';
@@ -16,12 +19,12 @@ class MyJobs extends StatefulWidget {
   String tag;
 
   MyJobs({@required this.tag});
+
   @override
   _MyJobsState createState() => _MyJobsState();
 }
 
 class _MyJobsState extends State<MyJobs> {
-
   MyJobsComponents _jobsComponents;
 
   @override
@@ -30,6 +33,7 @@ class _MyJobsState extends State<MyJobs> {
     super.initState();
     _jobsComponents = MyJobsComponents();
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,10 +45,14 @@ class _MyJobsState extends State<MyJobs> {
           children: [
             CommonWidgets.tabsAppBar1(
               text: "My Jobs",
-              iconName: widget.tag == Strings.indiviual ? Assets.bellIconUnpress : Assets.walletIcon,
+              iconName: widget.tag == Strings.indiviual
+                  ? Assets.bellIconUnpress
+                  : Assets.walletIcon,
               onPress: () {
-                // Navigator.push(context, SlideRightRoute(page: Wallet()));
-                Navigator.push(context, SlideRightRoute(page: Wallet()));
+                widget.tag == Strings.indiviual
+                    ? Navigator.push(
+                        context, SlideRightRoute(page: Notifications()))
+                    : Navigator.push(context, SlideRightRoute(page: Wallet()));
               },
             ),
             Divider(
@@ -62,21 +70,37 @@ class _MyJobsState extends State<MyJobs> {
               child: Row(
                 children: [
                   _jobsComponents.onSelectViewType(
-                      text: "Active",
+                      text: "Active", onPress: () {}),
+                  SizedBox(
+                    width: AppSizes.width * 0.02,
+                  ),
+                  _jobsComponents.onSelectViewType(
+                      text: "In Processing",
                       onPress: () {
-                        // Navigator.push(
-                        //     context, SlideRightRoute(page: LoadDetail()));
+                        if (widget.tag == Strings.indiviual) {
+                          Navigator.push(
+                              context,
+                              SlideRightRoute(
+                                  page: IndividualPayment(
+                                tag: widget.tag,
+                              )));
+                        } else if (widget.tag == Strings.business) {
+                          Navigator.push(
+                              context,
+                              SlideRightRoute(
+                                  page: Payment(
+                                tag: widget.tag,
+                              )));
+                        }
                       }),
                   SizedBox(
                     width: AppSizes.width * 0.02,
                   ),
                   _jobsComponents.onSelectViewType(
-                      text: "In Processing", onPress: () {}),
-                  SizedBox(
-                    width: AppSizes.width * 0.02,
-                  ),
-                  _jobsComponents.onSelectViewType(
-                      text: "Completed", onPress: () {}),
+                      text: "Completed",
+                      onPress: () {
+                        // Navigator.push(context, SlideRightRoute(page: DriverDetails()));
+                      }),
                 ],
               ),
             ),
@@ -84,8 +108,8 @@ class _MyJobsState extends State<MyJobs> {
               child: ListView(
                 children: [
                   Container(
-                    margin: EdgeInsets.symmetric(
-                        horizontal: AppSizes.width * 0.05),
+                    margin:
+                        EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
                     child: Column(
                       children: [
                         SizedBox(
@@ -98,6 +122,7 @@ class _MyJobsState extends State<MyJobs> {
                             startDate: "11 Aug,",
                             time: '12:00am',
                             status: "Active",
+                            price: "AED 260",
                             onTap: () {}),
                         SizedBox(
                           height: AppSizes.height * 0.02,
@@ -109,6 +134,7 @@ class _MyJobsState extends State<MyJobs> {
                             startDate: "11 Aug,",
                             time: '12:00am',
                             status: "Active",
+                            price: "AED 260",
                             onTap: () {}),
                         SizedBox(
                           height: AppSizes.height * 0.02,
@@ -120,6 +146,7 @@ class _MyJobsState extends State<MyJobs> {
                             startDate: "11 Aug,",
                             time: '12:00am',
                             status: "Active",
+                            price: "AED 260",
                             onTap: () {}),
                         SizedBox(
                           height: AppSizes.height * 0.02,
@@ -131,6 +158,7 @@ class _MyJobsState extends State<MyJobs> {
                             startDate: "11 Aug,",
                             time: '12:00am',
                             status: "Active",
+                            price: "AED 260",
                             onTap: () {}),
                         SizedBox(
                           height: AppSizes.height * 0.02,

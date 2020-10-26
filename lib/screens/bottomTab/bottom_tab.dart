@@ -1,26 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
-import 'package:truckoom_shipper/res/sizes.dart';
-import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab_components.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/book_load/book_load.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/history/history.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/more/more.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs.dart';
-import 'package:truckoom_shipper/screens/businessProfile/business_profile.dart';
-import 'package:truckoom_shipper/screens/contact_us/contact_us.dart';
-import 'package:truckoom_shipper/screens/individualProfile/individual_profile.dart';
-import 'package:truckoom_shipper/screens/invoiceDetail/invoice_detail.dart';
-import 'package:truckoom_shipper/screens/loadDetails/load_details.dart';
-import 'package:truckoom_shipper/screens/notifications/notifications.dart';
-import 'package:truckoom_shipper/screens/referrals/referrals.dart';
-import 'package:truckoom_shipper/screens/wallet/wallet.dart';
-import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
-import '../history/history.dart';
 
 class BottomTab extends StatefulWidget {
   String tag;

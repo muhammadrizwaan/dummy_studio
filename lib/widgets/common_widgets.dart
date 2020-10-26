@@ -426,9 +426,6 @@ class CommonWidgets {
                 color: AppColors.yellow,
                 fontWeight: FontWeight.bold),
           ),
-          SizedBox(
-            height: AppSizes.height * 0.01,
-          ),
           Text(
             walletPrice,
             style: TextStyle(

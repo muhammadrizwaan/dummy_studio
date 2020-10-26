@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/history/history_components.dart';
 
 import '../../../../animations/slide_right.dart';
 import '../../../../res/assets.dart';
 import '../../../../res/colors.dart';
 import '../../../../res/sizes.dart';
 import '../../../../widgets/common_widgets.dart';
-import '../../../history/history_components.dart';
-import '../../../history/history_components.dart';
 import '../../../invoiceDetail/invoice_detail.dart';
 
 class HistoryScreen extends StatefulWidget {
@@ -20,7 +19,7 @@ class HistoryScreen extends StatefulWidget {
 
 class _HistoryScreenState extends State<HistoryScreen> {
 
-  HistoryComponents _components;
+  HistoryComponents _historyComponents;
   String price;
 
   @override
@@ -28,7 +27,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
     // TODO: implement initState
     super.initState();
     price = "";
-    _components = HistoryComponents();
+    _historyComponents = HistoryComponents();
   }
   @override
   Widget build(BuildContext context) {
@@ -56,14 +55,16 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       SizedBox(
                         height: AppSizes.height * 0.02,
                       ),
-                      _components.getTransectionsContainer(
+                      _historyComponents.getTransectionsContainer(
                         jobDetail: "01",
                         pickUpLocation: "ABC Port:",
                         destinationLocation: "227 Building, UAE:",
-                        startDate: "11 Aug, 12:00am",
-                        endDate: "12 Aug, 11:00pm",
-                        price: "Price: AED 260",
+                        startDate: "11 Aug,",
+                        endDate: "12 Aug,",
+                        price: "AED 260",
                         status: "Completed",
+                        startTime: "11:00pm",
+                        endTime: "11:00pm",
                         onTap: () {},
                         onInvoice: () {
                           Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
@@ -72,46 +73,55 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       SizedBox(
                         height: AppSizes.height * 0.02,
                       ),
-                      _components.getTransectionsContainer(
+                      _historyComponents.getTransectionsContainer(
                         jobDetail: "01",
                         pickUpLocation: "ABC Port:",
                         destinationLocation: "227 Building, UAE:",
-                        startDate: "11 Aug, 12:00am",
-                        endDate: "12 Aug, 11:00pm",
-                        price: "Price: AED 260",
+                        startDate: "11 Aug,",
+                        endDate: "12 Aug,",
+                        price: "AED 260",
                         status: "Completed",
+                        startTime: "11:00pm",
+                        endTime: "11:00pm",
                         onTap: () {},
                         onInvoice: () {
+                          Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
                         },
                       ),
                       SizedBox(
                         height: AppSizes.height * 0.02,
                       ),
-                      _components.getTransectionsContainer(
+                      _historyComponents.getTransectionsContainer(
                         jobDetail: "01",
                         pickUpLocation: "ABC Port:",
                         destinationLocation: "227 Building, UAE:",
-                        startDate: "11 Aug, 12:00am",
-                        endDate: "12 Aug, 11:00pm",
-                        price: "Price: AED 260",
+                        startDate: "11 Aug,",
+                        endDate: "12 Aug,",
+                        price: "AED 260",
                         status: "Completed",
+                        startTime: "11:00pm",
+                        endTime: "11:00pm",
                         onTap: () {},
                         onInvoice: () {
+                          Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
                         },
                       ),
                       SizedBox(
                         height: AppSizes.height * 0.02,
                       ),
-                      _components.getTransectionsContainer(
+                      _historyComponents.getTransectionsContainer(
                         jobDetail: "01",
                         pickUpLocation: "ABC Port:",
                         destinationLocation: "227 Building, UAE:",
-                        startDate: "11 Aug, 12:00am",
-                        endDate: "12 Aug, 11:00pm",
-                        price: "Price: AED 260",
+                        startDate: "11 Aug,",
+                        endDate: "12 Aug,",
+                        price: "AED 260",
                         status: "Completed",
+                        startTime: "11:00pm",
+                        endTime: "11:00pm",
                         onTap: () {},
                         onInvoice: () {
+                          Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
                         },
                       ),
                       SizedBox(

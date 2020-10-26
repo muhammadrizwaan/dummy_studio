@@ -208,7 +208,7 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
                           CommonWidgets.getBottomButton(
-                              text: "Submit",
+                              text: "Update",
                               onPress: () {
                                 // Navigator.push(context, SlideRightRoute(page: OTPAuthentication()));
                               }

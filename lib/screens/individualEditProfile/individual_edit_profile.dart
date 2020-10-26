@@ -103,7 +103,7 @@ class _IndividualEditProfileState extends State<IndividualEditProfile> {
                           ),
                           SizedBox(height: 30,),
                           CommonWidgets.getBottomButton(
-                              text: "Submit",
+                              text: "Update",
                               onPress: () {
                                 // Navigator.push(context, SlideRightRoute(page: OTPAuthentication()));
                               }

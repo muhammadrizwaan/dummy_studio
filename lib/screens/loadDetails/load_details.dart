@@ -425,38 +425,46 @@ class _LoadDetailState extends State<LoadDetail> {
                           SizedBox(height: AppSizes.height * 0.04),
                           Row(
                             children: [
-                              Container(
-                                  width: AppSizes.width * 0.25,
-                                  height: AppSizes.height * 0.12,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Image(image: AssetImage(Assets.vehicle_img),
-                                    fit: BoxFit.cover,
-                                  )
-                              ),
+                              // Container(
+                              //     width: AppSizes.width * 0.25,
+                              //     height: AppSizes.height * 0.12,
+                              //     decoration: BoxDecoration(
+                              //       borderRadius: BorderRadius.circular(10),
+                              //     ),
+                              //     child: Image(image: AssetImage(Assets.vehicle_img),
+                              //       fit: BoxFit.cover,
+                              //     )
+                              // ),
+                              // SizedBox(width: AppSizes.width * 0.03),
+                              // Container(
+                              //     width: AppSizes.width * 0.25,
+                              //     height: AppSizes.height * 0.12,
+                              //     decoration: BoxDecoration(
+                              //       borderRadius: BorderRadius.circular(10),
+                              //     ),
+                              //     child: Image(image: AssetImage(Assets.vehicle_img),
+                              //       fit: BoxFit.cover,
+                              //     )
+                              // ),
                               SizedBox(width: AppSizes.width * 0.03),
-                              Container(
-                                  width: AppSizes.width * 0.25,
-                                  height: AppSizes.height * 0.12,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
+                              Column(
+                                children: [
+                                  Container(
+                                      width: AppSizes.width * 0.25,
+                                      height: AppSizes.height * 0.12,
+                                      decoration: BoxDecoration(
+                                        color: AppColors.lightGray,
+                                        border: Border.all(color: AppColors.addVehicleBorderColor),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Icon(Icons.add_circle),
+                                      // child: Image(image: AssetImage(Assets.addProfileImg),)
                                   ),
-                                  child: Image(image: AssetImage(Assets.vehicle_img),
-                                    fit: BoxFit.cover,
-                                  )
-                              ),
-                              SizedBox(width: AppSizes.width * 0.03),
-                              Container(
-                                  width: AppSizes.width * 0.25,
-                                  height: AppSizes.height * 0.12,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.lightGray,
-                                    border: Border.all(color: AppColors.addVehicleBorderColor),
-                                    borderRadius: BorderRadius.circular(10),
+                                  SizedBox(height: AppSizes.height * 0.02),
+                                  CommonWidgets.getSubHeadingText(
+                                      text: "Upload Images"
                                   ),
-                                  child: Icon(Icons.add_circle),
-                                  // child: Image(image: AssetImage(Assets.addProfileImg),)
+                                ],
                               )
                             ],
                           ),
@@ -465,13 +473,12 @@ class _LoadDetailState extends State<LoadDetail> {
                           CommonWidgets.getBottomButton(
                               text: "Next",
                               onPress: () {
-                                // Navigator.push(context, SlideRightRoute(page: Payment(tag: widget.tag,)));
-                                if(widget.tag == Strings.indiviual){
-                                  Navigator.push(context, SlideRightRoute(page: IndividualPayment(tag: widget.tag,)));
-                                }
-                                else if(widget.tag == Strings.business){
-                                  Navigator.push(context, SlideRightRoute(page: Payment(tag: widget.tag,)));
-                                }
+                                // if(widget.tag == Strings.indiviual){
+                                //   Navigator.push(context, SlideRightRoute(page: IndividualPayment(tag: widget.tag,)));
+                                // }
+                                // else if(widget.tag == Strings.business){
+                                //   Navigator.push(context, SlideRightRoute(page: Payment(tag: widget.tag,)));
+                                // }
                               }
                           ),
                         ],

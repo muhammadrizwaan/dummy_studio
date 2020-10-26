@@ -75,7 +75,8 @@ class _PhoneNumberState extends State<PhoneNumber> {
                             height: 40,
                           ),
                           CommonWidgets.getHeadingText(
-                              text: 'Enter Phone Number'),
+                              text: 'Enter Phone Number',
+                          ),
                           SizedBox(
                             height: 30,
                           ),

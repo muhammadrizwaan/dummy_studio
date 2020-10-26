@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:truckoom_shipper/models/api_models/login_response.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/more/more_components.dart';
+import 'package:truckoom_shipper/screens/businessProfile/business_profile.dart';
 
-import '../../../../animations/slide_right.dart';
-import '../../../../animations/slide_right.dart';
 import '../../../../animations/slide_right.dart';
 import '../../../../res/assets.dart';
 import '../../../../res/colors.dart';
@@ -53,7 +53,12 @@ class _MoreState extends State<More> {
               name: 'Matthew',
               email: 'Matthew@gmail.com',
               onPress: () {
-                Navigator.push(context, SlideRightRoute(page: IndividualProfile()));
+                if(widget.tag == Strings.indiviual){
+                  Navigator.push(context, SlideRightRoute(page: IndividualProfile()));
+                }
+                else if(widget.tag == Strings.business){
+                  Navigator.push(context, SlideRightRoute(page: BusinessProfile()));
+                }
               },
             ),
             Divider(
@@ -80,7 +85,7 @@ class _MoreState extends State<More> {
             _moreComponents.getSOSbutton(
               text: 'Language',
               onPress: () {
-                // Navigator.push(
+                // Navigator.pop(
                 //     context, SlideRightRoute(page: DriverDetails()));
               },
             ),
@@ -90,8 +95,6 @@ class _MoreState extends State<More> {
             _moreComponents.touchableButton(
               text: 'Logout',
               onPress: () {
-                // Navigator.push(
-                //     context, SlideRightRoute(page: DriverDetails()));
               },
             ),
             Divider(

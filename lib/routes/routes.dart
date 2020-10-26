@@ -1,5 +1,6 @@
 import 'package:truckoom_shipper/screens/Splash/Splash.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/history/history.dart';
 import 'package:truckoom_shipper/screens/businessEditProfile/business_edit_profile.dart';
 import 'package:truckoom_shipper/screens/businessInformation/business_information.dart';
 import 'package:truckoom_shipper/screens/businessProfile/business_profile.dart';
@@ -8,7 +9,6 @@ import 'package:truckoom_shipper/screens/checkUserType/check_user.dart';
 import 'package:truckoom_shipper/screens/contact_us/contact_us.dart';
 import 'package:truckoom_shipper/screens/driver_details/driver_details.dart';
 import 'package:truckoom_shipper/screens/forgotPassword/forgot_password.dart';
-import 'package:truckoom_shipper/screens/history/history.dart';
 import 'package:truckoom_shipper/screens/individualEditProfile/individual_edit_profile.dart';
 import 'package:truckoom_shipper/screens/individualPayment/individual_payment.dart';
 import 'package:truckoom_shipper/screens/individualProfile/individual_profile.dart';
@@ -70,7 +70,7 @@ class Routes {
     individualEditProfile: (context) => IndividualEditProfile(),
     businessProfile: (context) => BusinessProfile(),
     businessEditProfile: (context) => BusinessEditProfile(),
-    history: (context) => History(),
+    history: (context) => HistoryScreen(),
     invoice: (context) => Invoice(),
     referrals: (context) => Referrals(),
     wallet: (context) => Wallet(),

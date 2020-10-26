@@ -16,6 +16,8 @@ class HistoryComponents{
     @required String endDate,
     @required String price,
     @required String status,
+    @required String startTime,
+    @required String endTime,
     @required Function onInvoice,
     @required Function onTap,
   }) {
@@ -49,14 +51,6 @@ class HistoryComponents{
                         fontSize: 12,
                         fontFamily: Assets.poppinsMedium,
                         color: AppColors.yellow,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    ' : ',
-                    style: TextStyle(
-                        fontSize: 12,
-                        fontFamily: Assets.poppinsRegular,
-                        color: AppColors.colorBlack,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
@@ -127,27 +121,74 @@ class HistoryComponents{
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      startDate,
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontFamily: Assets.poppinsRegular,
-                        color: AppColors.colorBlack,
-                        // fontWeight: FontWeight.bold
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          startDate,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: Assets.poppinsRegular,
+                            color: AppColors.dateColor,
+                            // fontWeight: FontWeight.bold
+                          ),
+                        ),
+                        Text(
+                          startTime,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: Assets.poppinsRegular,
+                            color: AppColors.colorBlack,
+                            // fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(
                       height: AppSizes.height * 0.01,
                     ),
-                    Text(
-                      endDate,
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontFamily: Assets.poppinsRegular,
-                        color: AppColors.colorBlack,
-                        // fontWeight: FontWeight.bold
-                      ),
-                    ),
+                    Row(
+                      children: [
+                        Text(
+                          startDate,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: Assets.poppinsRegular,
+                            color: AppColors.dateColor,
+                            // fontWeight: FontWeight.bold
+                          ),
+                        ),
+                        Text(
+                          startTime,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: Assets.poppinsRegular,
+                            color: AppColors.colorBlack,
+                            // fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ],
+                    )
+                    // Text(
+                    //   startDate,
+                    //   style: TextStyle(
+                    //     fontSize: 12,
+                    //     fontFamily: Assets.poppinsRegular,
+                    //     color: AppColors.colorBlack,
+                    //     // fontWeight: FontWeight.bold
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: AppSizes.height * 0.01,
+                    // ),
+                    // Text(
+                    //   endDate,
+                    //   style: TextStyle(
+                    //     fontSize: 12,
+                    //     fontFamily: Assets.poppinsRegular,
+                    //     color: AppColors.colorBlack,
+                    //     // fontWeight: FontWeight.bold
+                    //   ),
+                    // ),
                   ],
                 )
               ],
@@ -158,11 +199,11 @@ class HistoryComponents{
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Status',
+                'Status:',
                 style: TextStyle(
                   fontSize: 12,
                   fontFamily: Assets.poppinsRegular,
-                  color: AppColors.status,
+                  color: AppColors.locationText,
                   // fontWeight: FontWeight.bold
                 ),
               ),
@@ -187,7 +228,7 @@ class HistoryComponents{
                 style: TextStyle(
                   fontSize: 12,
                   fontFamily: Assets.poppinsRegular,
-                  color: AppColors.status,
+                  color: AppColors.locationText,
                   // fontWeight: FontWeight.bold
                 ),
               ),
@@ -222,7 +263,7 @@ class HistoryComponents{
             width: AppSizes.width,
             height: AppSizes.height * 0.06,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(5),
               border: Border.all(
                 color: AppColors.yellow,
               ),
@@ -231,7 +272,7 @@ class HistoryComponents{
             child: FlatButton(
               onPressed: () => onInvoice(),
               child: Text(
-                'view Invoice',
+                'View Invoice',
                 // text,
                 style: TextStyle(
                   decoration: TextDecoration.none,
