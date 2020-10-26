@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/entypo_icons.dart';
+import 'package:fluttericon/linecons_icons.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
@@ -12,6 +13,7 @@ import 'package:truckoom_shipper/screens/businessInformation/business_informatio
 import 'package:truckoom_shipper/screens/businessSignup/business_signup_components.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
+import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class BusinessSignup extends StatefulWidget {
   String tag;
@@ -41,7 +43,11 @@ class _BusinessSignupState extends State<BusinessSignup> {
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         body: Container(
-          padding: EdgeInsets.all(AppSizes.width * 0.05),
+          padding: EdgeInsets.only(
+            left: AppSizes.width * 0.08,
+            right: AppSizes.width * 0.08,
+            top: AppSizes.width * 0.08,
+          ),
           height: AppSizes.height,
           width: AppSizes.width,
           color: AppColors.white,
@@ -126,7 +132,7 @@ class _BusinessSignupState extends State<BusinessSignup> {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(right: 10),
-                                  child: Image(image: AssetImage('assets/png/location_icon.png')),
+                                  child: Icon(Linecons.location, size: 20,),
                                 ) ,
                                 Expanded(
                                   child: DropdownButtonHideUnderline(
@@ -135,46 +141,33 @@ class _BusinessSignupState extends State<BusinessSignup> {
                                         value: _value,
                                         items: [
                                           DropdownMenuItem(
-                                            child: Text("Netherlands",
-                                              style: TextStyle(
-                                                  decoration: TextDecoration.none,
-                                                  fontFamily: Assets.poppinsLight,
-                                                  fontSize: 12,
-                                                  color: AppColors.colorBlack
-                                              ),
+                                            child: TextView.getLightText04(
+                                              "Netherlands",
+                                              color: AppColors.colorBlack,
                                             ),
                                             value: 1,
                                           ),
                                           DropdownMenuItem(
-                                            child: Text("New Zealand",
-                                              style: TextStyle(
-                                                  decoration: TextDecoration.none,
-                                                  fontFamily: Assets.poppinsLight,
-                                                  fontSize: 12,
-                                                  color: AppColors.colorBlack
-                                              ),),
+                                            child: TextView.getLightText04(
+                                              "New Zealand",
+                                              color: AppColors.colorBlack,
+                                            ),
                                             value: 2,
                                           ),
                                           DropdownMenuItem(
-                                              child: Text("Nepal",
-                                                style: TextStyle(
-                                                    decoration: TextDecoration.none,
-                                                    fontFamily: Assets.poppinsLight,
-                                                    fontSize: 12,
-                                                    color: AppColors.colorBlack
-                                                ),),
-                                              value: 3
+                                            child: TextView.getLightText04(
+                                              "Nepal",
+                                              color: AppColors.colorBlack,
+                                            ),
+                                            value: 3,
                                           ),
                                           DropdownMenuItem(
-                                              child: Text("Malaysia",
-                                                style: TextStyle(
-                                                    decoration: TextDecoration.none,
-                                                    fontFamily: Assets.poppinsLight,
-                                                    fontSize: 12,
-                                                    color: AppColors.colorBlack
-                                                ),),
+                                              child: TextView.getLightText04(
+                                                "Malaysia",
+                                                color: AppColors.colorBlack,
+                                              ),
                                               value: 4
-                                          )
+                                          ),
                                         ],
                                         onChanged: (value) {
                                           setState(() {
@@ -186,103 +179,10 @@ class _BusinessSignupState extends State<BusinessSignup> {
                                 ),
                               ],
                             ),
-
                           ),
                           SizedBox(height: 30,),
-
-                          Container(
-                            child: Row(
-                              // crossAxisAlignment: CrossAxisAlignment.start,
-                              // mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Checkbox(
-                                  checkColor: AppColors.white,
-                                  activeColor: AppColors.yellow,
-                                  value: onCheck,
-                                  onChanged: (bool value) {
-                                    setState(() {
-                                      onCheck = value;
-                                    });
-                                  },
-                                ),
-                                Container(
-                                  width: AppSizes.width * 0.75,
-                                  child: RichText(
-                                    text: TextSpan(
-                                        text:
-                                        'By creating an account you agree to our ',
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 12),
-                                        children: <TextSpan>[
-                                          TextSpan(
-                                              text: 'Term and Conditions',
-                                              style: TextStyle(
-                                                  color: Colors.amber,
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                  Assets.poppinsRegular),
-                                              recognizer: TapGestureRecognizer()
-                                                ..onTap = () {
-                                                  // navigate to desired screen
-                                                })
-                                        ]),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-
-                          // Table(
-                          //   columnWidths: {0: FlexColumnWidth(0.15)},
-                          //   children: [
-                          //     TableRow(
-                          //         children: [
-                          //           Checkbox(
-                          //             checkColor: AppColors.white,
-                          //             activeColor: AppColors.yellow,
-                          //             value: onCheck,
-                          //             onChanged: (bool value) {
-                          //               setState(() {
-                          //                 onCheck = value;
-                          //               });
-                          //             },
-                          //           ),
-                          //           RichText(
-                          //             text: TextSpan(
-                          //                 text: 'By creating an account you agree to our ',
-                          //                 style: TextStyle(
-                          //                     color: Colors.black, fontSize: 12),
-                          //                 children: <TextSpan>[
-                          //                   TextSpan(text: 'Term and Conditions',
-                          //                       style: TextStyle(
-                          //                           color: Colors.amber,
-                          //                           fontSize: 12,
-                          //                           fontFamily: Assets.poppinsRegular
-                          //
-                          //                       ),
-                          //                       recognizer: TapGestureRecognizer()
-                          //                         ..onTap = () {
-                          //                           // navigate to desired screen
-                          //                         }
-                          //                   )
-                          //                 ]
-                          //             ),
-                          //           )
-                          //         ]
-                          //     )
-                          //   ],
-                          //
-                          // ),
+                          _getTermsAndCondition(),
                           SizedBox(height: 10,),
-                          // _businessSignupComponents.checkTermAndCondition(
-                          //   onCheck: onCheck,
-                          //   onChanged: (onCheck){
-                          //     setState(() {
-                          //       onCheck = true;
-                          //     });
-                          //   },
-                          //   onTap: (){}
-                          // ),
                           CommonWidgets.getBottomButton(
                               text: "Next",
                               onPress: () {
@@ -301,4 +201,65 @@ class _BusinessSignupState extends State<BusinessSignup> {
       ),
     );
   }
+
+  _getTermsAndCondition() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Container(
+              margin: EdgeInsets.only(bottom: 25),
+              height: AppSizes.height * 0.04,
+              width: AppSizes.width * 0.07,
+              child: Checkbox(
+                checkColor: AppColors.white,
+                activeColor: AppColors.yellow,
+                value: onCheck,
+                onChanged: (bool value) {
+                  setState(() {
+                    onCheck = value;
+                  });
+                },
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Row(
+          children: [
+            Container(
+              height: AppSizes.height * 0.07,
+              width: AppSizes.width * 0.69,
+              child: RichText(
+                text: TextSpan(
+                    text: 'By creating an account you agree to our ',
+                    style: TextStyle(
+                      wordSpacing: 0.5,
+                      color: Colors.black,
+                      fontSize: 13,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: 'Term and Conditions',
+                          style: TextStyle(
+                              color: Colors.amber,
+                              fontSize: 12,
+                              fontFamily: Assets.poppinsMedium,
+                              fontWeight: FontWeight.bold),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              // navigate to desired screen
+                            })
+                    ]),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
 }

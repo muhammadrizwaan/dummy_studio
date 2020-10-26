@@ -46,7 +46,11 @@ class _BusinessInformationState extends State<BusinessInformation> {
           height: AppSizes.height,
           width: AppSizes.width,
           color: AppColors.white,
-          padding: EdgeInsets.all(AppSizes.width * 0.05),
+          padding: EdgeInsets.only(
+            left: AppSizes.width * 0.08,
+            right: AppSizes.width * 0.08,
+            top: AppSizes.width * 0.08,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -125,7 +129,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           ),
                           _businessInformationComponents.getTextField(
                               isPassword: true,
-                              leftIcon: 'license_icon.png',
+                              leftIcon: Assets.licenseIcon,
                               textEditingController: license_date,
                               hintText: "09/22/2030"),
 
@@ -140,47 +144,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                             height: 30,
                           ),
 
-                          Container(
-                            child: Row(
-                              // crossAxisAlignment: CrossAxisAlignment.start,
-                              // mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Checkbox(
-                                  checkColor: AppColors.white,
-                                  activeColor: AppColors.yellow,
-                                  value: onCheck,
-                                  onChanged: (bool value) {
-                                    setState(() {
-                                      onCheck = value;
-                                    });
-                                  },
-                                ),
-                                Container(
-                                  width: AppSizes.width * 0.75,
-                                  child: RichText(
-                                    text: TextSpan(
-                                        text:
-                                            'By creating an account you agree to our ',
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 12),
-                                        children: <TextSpan>[
-                                          TextSpan(
-                                              text: 'Term and Conditions',
-                                              style: TextStyle(
-                                                  color: Colors.amber,
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      Assets.poppinsRegular),
-                                              recognizer: TapGestureRecognizer()
-                                                ..onTap = () {
-                                                  // navigate to desired screen
-                                                })
-                                        ]),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
+                          _getTermsAndCondition(),
                           SizedBox(
                             height: 10,
                           ),
@@ -244,7 +208,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            "Signup successful !",
+                            "Sign up successful !",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 decoration: TextDecoration.none,
@@ -253,16 +217,6 @@ class _BusinessInformationState extends State<BusinessInformation> {
                                 fontFamily: Assets.poppinsMedium,
                                 fontWeight: FontWeight.bold),
                           ),
-                          // Text(
-                          //   "Done",
-                          //   textAlign: TextAlign.center,
-                          //   style: TextStyle(
-                          //       decoration: TextDecoration.none,
-                          //       fontSize: 15,
-                          //       color: AppColors.colorBlack,
-                          //       fontFamily: Assets.poppinsMedium,
-                          //       fontWeight: FontWeight.bold),
-                          // ),
                           SizedBox(
                             height: 20,
                           ),
@@ -319,5 +273,65 @@ class _BusinessInformationState extends State<BusinessInformation> {
 
   hideLoader(BuildContext context) {
     Navigator.push(context, SlideRightRoute(page: BusinessProfile()));
+  }
+
+  _getTermsAndCondition() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Container(
+              margin: EdgeInsets.only(bottom: 25),
+              height: AppSizes.height * 0.04,
+              width: AppSizes.width * 0.07,
+              child: Checkbox(
+                checkColor: AppColors.white,
+                activeColor: AppColors.yellow,
+                value: onCheck,
+                onChanged: (bool value) {
+                  setState(() {
+                    onCheck = value;
+                  });
+                },
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Row(
+          children: [
+            Container(
+              height: AppSizes.height * 0.07,
+              width: AppSizes.width * 0.69,
+              child: RichText(
+                text: TextSpan(
+                    text: 'By creating an account you agree to our ',
+                    style: TextStyle(
+                      wordSpacing: 0.5,
+                      color: Colors.black,
+                      fontSize: 13,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: 'Term and Conditions',
+                          style: TextStyle(
+                              color: Colors.amber,
+                              fontSize: 12,
+                              fontFamily: Assets.poppinsMedium,
+                              fontWeight: FontWeight.bold),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              // navigate to desired screen
+                            })
+                    ]),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
   }
 }

@@ -31,8 +31,8 @@ class BusinessInformationComponents {
     return GestureDetector(
       onTap: () => onPress(),
       child: Container(
-        height: AppSizes.height * 0.06,
-        width: AppSizes.width,
+        height: AppSizes.height * 0.07,
+        width: AppSizes.width*0.85,
         decoration: BoxDecoration(
           color: AppColors.lightGray,
           border: Border.all(color: AppColors.lightGray),
@@ -44,7 +44,7 @@ class BusinessInformationComponents {
               Image(image: AssetImage('assets/png/plus_icon.png')),
               Text(' Attach Copy of License',
                 style: TextStyle(
-                  fontFamily: Assets.poppinsMedium,
+                  fontFamily: Assets.poppinsLight,
                   fontSize: 12,
                   color: AppColors.colorBlack,
                 ),
