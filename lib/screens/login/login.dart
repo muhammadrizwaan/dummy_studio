@@ -8,19 +8,16 @@ import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
-import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
 import 'package:truckoom_shipper/screens/checkUserType/check_user.dart';
 import 'package:truckoom_shipper/screens/forgotPassword/forgot_password.dart';
 import 'package:truckoom_shipper/screens/login/login_components.dart';
 import 'package:truckoom_shipper/screens/login/login_provider.dart';
-import 'package:truckoom_shipper/screens/maps/maps_screen.dart';
-import 'package:truckoom_shipper/screens/phoneNumber/phone_number.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 import '../../res/sizes.dart';
-import '../../res/sizes.dart';
-import '../../res/sizes.dart';
+import '../../res/strings.dart';
+import '../bottomTab/bottom_tab.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -98,7 +95,7 @@ class _LoginState extends State<Login> {
                               CommonWidgets.getBottomButton(
                                   text: "Login",
                                   onPress: () {
-                                    Navigator.pushReplacement(context, SlideRightRoute(page: Maps(tag: Strings.indiviual)));
+                                    Navigator.pushReplacement(context, SlideRightRoute(page: BottomTab(tag: Strings.indiviual,)));
                                     // _loginProvider.getLogin(context: context, email: email.text, password: password.text );
                                   }
                               ),

@@ -17,7 +17,6 @@ import 'package:truckoom_shipper/screens/invoiceDetail/invoice_detail.dart';
 import 'package:truckoom_shipper/screens/language/language.dart';
 import 'package:truckoom_shipper/screens/loadDetails/load_details.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
-import 'package:truckoom_shipper/screens/maps/maps_screen.dart';
 import 'package:truckoom_shipper/screens/notifications/notifications.dart';
 import 'package:truckoom_shipper/screens/otpAuthentication/otp_authentication.dart';
 import 'package:truckoom_shipper/screens/phoneNumber/phone_number.dart';
@@ -51,7 +50,6 @@ class Routes {
   static const String driverDetails = '/driverDetails';
   static const String loadDetails = '/loadDetails';
   static const String invoiceDetail = '/invoiceDetail';
-  static const String maps = '/maps';
   static const String language = '/language';
   static const String individualPayment = '/individualPayment';
 
@@ -80,7 +78,6 @@ class Routes {
     driverDetails: (context) => DriverDetails(),
     loadDetails: (context) => LoadDetail(),
     invoiceDetail: (context) => InvoiceDetail(),
-    maps: (context) => Maps(),
     language: (context) => Language(),
     individualPayment: (context) => IndividualPayment(),
   };

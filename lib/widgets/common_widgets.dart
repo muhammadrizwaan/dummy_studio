@@ -155,7 +155,7 @@ class CommonWidgets {
       @required String iconName,
       @required Function onPress}) {
     return Container(
-      padding: EdgeInsets.all(AppSizes.width * 0.05),
+      padding: EdgeInsets.only(left: AppSizes.width * 0.05, top: AppSizes.width * 0.05, bottom: AppSizes.width * 0.05),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -168,11 +168,10 @@ class CommonWidgets {
           Text(
             text,
             style: TextStyle(
-              fontFamily: Assets.poppinsMedium,
-              fontSize: 20,
-              color: AppColors.colorBlack,
-              // fontWeight: FontWeight.bold
-            ),
+                fontFamily: Assets.poppinsMedium,
+                fontSize: 20,
+                color: AppColors.colorBlack,
+                fontWeight: FontWeight.bold),
           ),
         ],
       ),
@@ -216,11 +215,11 @@ class CommonWidgets {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Opacity(
-            opacity: 0.7,
+              opacity: 0.7,
               child: Icon(
-            leftIcon,
+                leftIcon,
                 size: 20,
-          )),
+              )),
           Center(
             child: Container(
               // color: AppColors.yellow,

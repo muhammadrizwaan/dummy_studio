@@ -9,8 +9,10 @@ import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/businessInformation/business_information_components.dart';
 import 'package:truckoom_shipper/screens/businessProfile/business_profile.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
-import 'package:truckoom_shipper/screens/maps/maps_screen.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
+
+import '../../animations/slide_right.dart';
+import '../bottomTab/bottom_tab.dart';
 
 class BusinessInformation extends StatefulWidget {
   String tag;
@@ -125,7 +127,6 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           ),
                           _businessInformationComponents.getTextField(
                               isPassword: true,
-                              leftIcon: 'license_icon.png',
                               textEditingController: license_date,
                               hintText: "09/22/2030"),
 
@@ -253,27 +254,12 @@ class _BusinessInformationState extends State<BusinessInformation> {
                                 fontFamily: Assets.poppinsMedium,
                                 fontWeight: FontWeight.bold),
                           ),
-                          // Text(
-                          //   "Done",
-                          //   textAlign: TextAlign.center,
-                          //   style: TextStyle(
-                          //       decoration: TextDecoration.none,
-                          //       fontSize: 15,
-                          //       color: AppColors.colorBlack,
-                          //       fontFamily: Assets.poppinsMedium,
-                          //       fontWeight: FontWeight.bold),
-                          // ),
                           SizedBox(
                             height: 20,
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.pushReplacement(
-                                  context,
-                                  SlideRightRoute(
-                                      page: Maps(
-                                    tag: widget.tag,
-                                  )));
+                              Navigator.pushReplacement(context, SlideRightRoute(page: BottomTab(tag: widget.tag,)));
                             },
                             child: Text(
                               "Tap & Continue",
