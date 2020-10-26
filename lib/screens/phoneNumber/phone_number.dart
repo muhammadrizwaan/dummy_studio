@@ -1,8 +1,8 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
+import 'package:truckoom_shipper/screens/checkUserType/check_user.dart';
 import 'package:truckoom_shipper/screens/otpAuthentication/otp_authentication.dart';
 import 'package:truckoom_shipper/screens/phoneNumber/phone_number_components.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
@@ -13,10 +13,12 @@ import '../../res/sizes.dart';
 import '../../res/sizes.dart';
 
 class PhoneNumber extends StatefulWidget {
+  String tag;
+
+  PhoneNumber({@required this.tag});
 
   @override
   _PhoneNumberState createState() => _PhoneNumberState();
-
 }
 
 class _PhoneNumberState extends State<PhoneNumber> {
@@ -50,9 +52,9 @@ class _PhoneNumberState extends State<PhoneNumber> {
                   iconName: 'back_arrow_otp.png',
                   text: "",
                   clickableText: "",
-                  onTap: (){},
+                  onTap: () {},
                   onPress: () {
-                    Navigator.pop(context, SlideRightRoute(page: PhoneNumber()));
+                    Navigator.pop(context, SlideRightRoute(page: CheckUser()));
                   }),
               Expanded(
                 child: ListView(
@@ -62,69 +64,72 @@ class _PhoneNumberState extends State<PhoneNumber> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          CommonWidgets.getHeading1Text(text: 'Enter Phone Number'),
-                          SizedBox(height: 30,),
+                          CommonWidgets.getHeading1Text(
+                              text: 'Enter Phone Number'),
+                          SizedBox(
+                            height: 30,
+                          ),
                           CommonWidgets.getLableText(text: "Phone Number"),
-                          SizedBox(height: 10,),
+                          SizedBox(
+                            height: 10,
+                          ),
                           CommonWidgets.getTextField(
                               isPassword: false,
                               leftIcon: 'icon_phone_pn.png',
                               textEditingController: phone_number,
-                              hintText: "Enter Phone Number"
+                              hintText: "Enter Phone Number"),
+                          SizedBox(
+                            height: 30,
                           ),
-                          SizedBox(height: 30,),
-
-                          Table(
-                            columnWidths: {0: FlexColumnWidth(0.15)},
-                            children: [
-                              TableRow(
-                                children: [
-                                  Container(
-                                    alignment: Alignment.topLeft,
-                                    child: Checkbox(
-                                      checkColor: AppColors.white,
-                                      activeColor: AppColors.yellow,
-                                      value: onCheck,
-                                      onChanged: (bool value) {
-                                        setState(() {
-                                          onCheck = value;
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                  RichText(
+                          Container(
+                            child: Row(
+                              // crossAxisAlignment: CrossAxisAlignment.start,
+                              // mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Checkbox(
+                                  checkColor: AppColors.white,
+                                  activeColor: AppColors.yellow,
+                                  value: onCheck,
+                                  onChanged: (bool value) {
+                                    setState(() {
+                                      onCheck = value;
+                                    });
+                                  },
+                                ),
+                                Container(
+                                  width: AppSizes.width * 0.75,
+                                  child: RichText(
                                     text: TextSpan(
-                                        text: 'By creating an account you agree to our ',
+                                        text:
+                                            'By creating an account you agree to our ',
                                         style: TextStyle(
                                             color: Colors.black, fontSize: 12),
                                         children: <TextSpan>[
-                                          TextSpan(text: 'Term and Conditions',
-                                            style: TextStyle(
-                                                color: Colors.amber,
-                                                fontSize: 12,
-                                                fontFamily: Assets.poppinsRegular
-
-                                            ),
-                                            recognizer: TapGestureRecognizer()
-                                              ..onTap = () {
-                                                // navigate to desired screen
-                                              }
-                                          )
-                                        ]
-                                    ),
-                                  )
-                                ]
-                              )
-                            ],
-
+                                          TextSpan(
+                                              text: 'Term and Conditions',
+                                              style: TextStyle(
+                                                  color: Colors.amber,
+                                                  fontSize: 12,
+                                                  fontFamily:
+                                                      Assets.poppinsRegular),
+                                              recognizer: TapGestureRecognizer()
+                                                ..onTap = () {
+                                                  // navigate to desired screen
+                                                })
+                                        ]),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
-                          SizedBox(height: 10,),
+                          SizedBox(
+                            height: 10,
+                          ),
                           CommonWidgets.getBottomButton(
                               text: "Next",
                               onPress: () {
-                                Navigator.push(context, SlideRightRoute(page: OTPAuthentication()));
-                              }
-                              ),
+                                Navigator.push(context, SlideRightRoute(page: OTPAuthentication(tag: widget.tag,)));
+                              }),
                         ],
                       ),
                     )

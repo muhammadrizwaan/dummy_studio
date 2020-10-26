@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/routes/routes.dart';
 import 'package:truckoom_shipper/screens/businessSignup/business_signup.dart';
 import 'package:truckoom_shipper/screens/checkUserType/check_user_components.dart';
@@ -26,7 +27,8 @@ class _CheckUserState extends State<CheckUser> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    button_businees = button_indiviual = false;
+    button_businees =  false;
+    button_indiviual = true;
     checkUserComponents = CheckUserComponents();
   }
   @override
@@ -37,31 +39,51 @@ class _CheckUserState extends State<CheckUser> {
       color: AppColors.white,
      child: Container(
        margin: EdgeInsets.all(AppSizes.width * 0.05),
-       child: Column(
-         mainAxisAlignment: MainAxisAlignment.center,
-         crossAxisAlignment: CrossAxisAlignment.center,
+       child: Stack(
          children: [
-           Image(image: AssetImage('assets/png/logo_splash.png')),
-           SizedBox(height: AppSizes.height * 0.09,),
-           checkUserComponents.getBottomButton(
-               text: "Indiviual",
-               onPress: (){
-                 setState(() {
-                   button_indiviual = !button_indiviual;
-                 });
-                 Navigator.push(context, SlideRightRoute(page: Login()));
-               },
-               state: button_indiviual),
-           SizedBox(height: AppSizes.height * 0.03,),
-           checkUserComponents.getBottomButton(
-               text: "Business Owner",
-               onPress: (){
-                 setState(() {
-                   button_businees = !button_businees;
-                 });
-                 Navigator.push(context, SlideRightRoute(page: BusinessSignup()));
-               },
-               state: button_businees,
+           Positioned(
+             top: 0,
+             child: Container(
+               margin: EdgeInsets.symmetric(vertical: AppSizes.height * 0.04),
+               child: CommonWidgets.getAppBar(
+                   iconName: 'back_arrow_otp.png',
+                   text: "",
+                   clickableText: "",
+                   onTap: () {},
+                   onPress: () {
+                     Navigator.pop(context, SlideRightRoute(page: CheckUser()));
+                   }),
+             ),
+           ),
+           Column(
+             mainAxisAlignment: MainAxisAlignment.center,
+             crossAxisAlignment: CrossAxisAlignment.center,
+             children: [
+               Image(image: AssetImage('assets/png/logo_splash.png')),
+               SizedBox(height: AppSizes.height * 0.09,),
+               checkUserComponents.getBottomButton(
+                   text: "Indiviual",
+                   onPress: (){
+                     setState(() {
+                       button_indiviual = true;
+                       button_businees = false;
+                     });
+                     Navigator.push(context, SlideRightRoute(page: PhoneNumber(tag: Strings.indiviual,)));
+                   },
+                   state: button_indiviual),
+               SizedBox(height: AppSizes.height * 0.03,),
+               checkUserComponents.getBottomButton(
+                 text: "Business Owner",
+                 onPress: (){
+                   setState(() {
+                     button_indiviual = false;
+                     button_businees = true;
+                   });
+                   Navigator.push(context, SlideRightRoute(page: PhoneNumber(tag: Strings.business,)));
+                 },
+                 state: button_businees,
+               ),
+             ],
            ),
          ],
        ),

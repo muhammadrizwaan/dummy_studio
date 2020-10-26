@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
@@ -23,9 +24,16 @@ class HistoryComponents{
       // width: AppSizes.width,
       padding: EdgeInsets.all(AppSizes.width * 0.02),
       decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border.all(color: AppColors.borderColor),
-        borderRadius: BorderRadius.circular(10),
+          color: AppColors.white,
+          // border: Border.all(color: AppColors.borderColor),
+          borderRadius: BorderRadius.circular(5),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey[500].withOpacity(0.3),
+                spreadRadius: 1,
+                blurRadius: 1,
+                offset: Offset(0, 0))
+          ]
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

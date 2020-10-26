@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:truckoom_shipper/res/assets.dart';
+import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/invoiceDetail/invoice_detail_components.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
@@ -24,6 +25,7 @@ class _InvoiceDetailState extends State<InvoiceDetail> {
     return SafeArea(
       child: Scaffold(
         body: Container(
+          color: AppColors.white,
           child: Column(
             children: [
               CommonWidgets.tabsAppBar2(

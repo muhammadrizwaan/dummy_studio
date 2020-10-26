@@ -12,6 +12,8 @@ import 'package:truckoom_shipper/screens/individualEditProfile/individual_edit_p
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 class BusinessProfile extends StatefulWidget {
+  String tag;
+  BusinessProfile({@required this.tag});
   @override
   _BusinessProfileState createState() => _BusinessProfileState();
 }

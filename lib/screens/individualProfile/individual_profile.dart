@@ -11,6 +11,8 @@ import 'package:truckoom_shipper/screens/individualProfile/individual_profile_co
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 class IndividualProfile extends StatefulWidget {
+  String tag;
+  IndividualProfile({@required this.tag});
   @override
   _IndividualProfileState createState() => _IndividualProfileState();
 }

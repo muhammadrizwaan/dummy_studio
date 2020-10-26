@@ -8,8 +8,10 @@ import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
 import 'package:truckoom_shipper/screens/maps/maps_components.dart';
+import 'package:truckoom_shipper/screens/wallet/wallet.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 import 'maps_provider.dart';
@@ -17,6 +19,9 @@ import 'maps_provider.dart';
 final Map<String, Marker> _markers = {};
 
 class Maps extends StatefulWidget {
+  String tag;
+
+  Maps({@required this.tag});
   @override
   _MapsState createState() => _MapsState();
 }
@@ -61,47 +66,74 @@ class _MapsState extends State<Maps> {
   Widget build(BuildContext context) {
     Provider.of<MapsProvider>(context, listen: true);
     return SafeArea(
-      child: Stack(children: [
-        MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: Scaffold(
-            resizeToAvoidBottomInset: false,
-            body: Stack(
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Container(
+            width: AppSizes.width,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                GoogleMap(
-                  initialCameraPosition: CameraPosition(
-                    target: _center,
-                    zoom: 5,
-                  ),
-                  mapType: MapType.terrain,
-                  trafficEnabled: true,
-                  onMapCreated: _onMapCreated,
-                  myLocationEnabled: true,
-                ),
-                Container(
-                  alignment: Alignment.bottomCenter,
-                  child: DraggableScrollableSheet(
-                    initialChildSize: 0.3,
-                    minChildSize: 0.05,
-                    maxChildSize: 0.9,
-                    builder: (BuildContext context, myscrollController) {
-                      return Container(
-                        color: Color.fromRGBO(19, 192, 21, 0),
-                        child: ListView(
-                          controller: myscrollController,
-                          children: [
-                            _bottomNavigationContainer(),
-                          ],
-                        ),
-                      );
-                    },
+                Text(
+                  'Book a Load',
+                  style: TextStyle(
+                    color: AppColors.black,
+                    fontFamily: Assets.poppinsMedium,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
+                GestureDetector(
+                  onTap: (){Navigator.push(context, SlideRightRoute(page: Wallet()));},
+                    child: Image(image: AssetImage(Assets.walletIcon),)
+                )
               ],
             ),
           ),
+          backgroundColor: AppColors.white,
+          // iconTheme: IconThemeData(color: Color.fromRGBO(49, 49, 49, 1)),
         ),
-      ]),
+        body: Stack(
+          children: [
+            CommonWidgets.tabsAppBar2(
+                text: 'Book a Load',
+                iconName: Assets.walletIcon,
+                onPress: (){}
+            ),
+            SizedBox(height: AppSizes.height * 0.04),
+            GoogleMap(
+              initialCameraPosition: CameraPosition(
+                target: _center,
+                zoom: 5,
+              ),
+              mapType: MapType.terrain,
+              trafficEnabled: true,
+              onMapCreated: _onMapCreated,
+              myLocationEnabled: true,
+            ),
+            Container(
+              alignment: Alignment.bottomCenter,
+              child: DraggableScrollableSheet(
+                initialChildSize: 0.3,
+                minChildSize: 0.05,
+                maxChildSize: 0.9,
+                builder: (BuildContext context, myscrollController) {
+                  return Container(
+                    color: Color.fromRGBO(19, 192, 21, 0),
+                    child: ListView(
+                      controller: myscrollController,
+                      children: [
+                        _bottomNavigationContainer(),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -164,7 +196,14 @@ class _MapsState extends State<Maps> {
                               borderRadius : BorderRadius.circular(10)
                             ),
                             child: TextField(
+                              style: TextStyle(
+                                  decoration: TextDecoration.none,
+                                  fontFamily: Assets.poppinsLight,
+                                  fontSize: 12,
+                                  color: AppColors.colorBlack
+                              ),
                               decoration: InputDecoration(
+                                // contentPadding: EdgeInsets.symmetric(vertical: AppSizes.height* 0.001),
                                 prefixIcon: Image.asset(Assets.location),
                                 hintText:"Search Pickup Location",
                                 border: InputBorder.none,
@@ -188,7 +227,14 @@ class _MapsState extends State<Maps> {
                                   borderRadius : BorderRadius.circular(10)
                               ),
                               child: TextField(
+                                style: TextStyle(
+                                    decoration: TextDecoration.none,
+                                    fontFamily: Assets.poppinsLight,
+                                    fontSize: 12,
+                                    color: AppColors.colorBlack
+                                ),
                                 decoration: InputDecoration(
+                                  // contentPadding: EdgeInsets.symmetric(vertical: AppSizes.height* 0.001),
                                   prefixIcon: Image.asset(Assets.location),
                                   hintText:"Search DropOff Location",
                                   border: InputBorder.none,
@@ -211,9 +257,14 @@ class _MapsState extends State<Maps> {
                 decoration: BoxDecoration(
                   color: AppColors.lightGray,
                 ),),
+                SizedBox(height: AppSizes.height * 0.02),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: _mapComponents.getLocationPickupText(text: "Pickup Location"),
+                ),
                 GestureDetector(
                   onTap: (){
-                    Navigator.push(context, SlideRightRoute(page: BottomTab()));
+                    Navigator.push(context, SlideRightRoute(page: BottomTab(tag: widget.tag,)));
                   },
                   child: Container(
                     height: AppSizes.height*0.05,
@@ -258,7 +309,7 @@ class _MapsState extends State<Maps> {
 
                 GestureDetector(
                   onTap: (){
-                    Navigator.push(context, SlideRightRoute(page: BottomTab()));
+                    Navigator.push(context, SlideRightRoute(page: BottomTab(tag: widget.tag,)));
                   },
                   child: Container(
                     height: AppSizes.height*0.05,
@@ -303,7 +354,7 @@ class _MapsState extends State<Maps> {
 
                 GestureDetector(
                   onTap: (){
-                    Navigator.push(context, SlideRightRoute(page: BottomTab()));
+                    Navigator.push(context, SlideRightRoute(page: BottomTab(tag: widget.tag,)));
                   },
                   child: Container(
                     height: AppSizes.height*0.05,
@@ -348,7 +399,7 @@ class _MapsState extends State<Maps> {
 
                 GestureDetector(
                   onTap: (){
-                    Navigator.push(context, SlideRightRoute(page: BottomTab()));
+                    Navigator.push(context, SlideRightRoute(page: BottomTab(tag: widget.tag,)));
                   },
                   child: Container(
                     height: AppSizes.height*0.05,
@@ -393,7 +444,7 @@ class _MapsState extends State<Maps> {
 
                 GestureDetector(
                   onTap: (){
-                    Navigator.push(context, SlideRightRoute(page: BottomTab()));
+                    Navigator.push(context, SlideRightRoute(page: BottomTab(tag: widget.tag,)));
                   },
                   child: Container(
                     height: AppSizes.height*0.05,

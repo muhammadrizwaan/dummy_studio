@@ -6,11 +6,16 @@ import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/res/strings.dart';
+import 'package:truckoom_shipper/screens/bank/bank_screen.dart';
+import 'package:truckoom_shipper/screens/individualPayment/individual_payment.dart';
 import 'package:truckoom_shipper/screens/loadDetails/load_details_components.dart';
 import 'package:truckoom_shipper/screens/payment/payment.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 class LoadDetail extends StatefulWidget {
+  String tag;
+  LoadDetail({@required this.tag});
   @override
   _LoadDetailState createState() => _LoadDetailState();
 }
@@ -22,6 +27,7 @@ class _LoadDetailState extends State<LoadDetail> {
   @override
   void initState() {
     super.initState();
+    print(widget.tag);
     _loadDetailComponents = LoadDetailComponents();
   }
   @override
@@ -56,10 +62,10 @@ class _LoadDetailState extends State<LoadDetail> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           _loadDetailComponents.getLocationContainer(),
-                          // _loadDetailComponents.getLocation(
-                          //     pick_up: '1 Ash Park, Pembroke Dock, SA7254, Drury Lane, Oldham, OL9 7PH',
-                          //     destination: '1 Ash Park, Pembroke Dock, SA6478, Drury Lane, Dubai, OL9 7PH'
-                          // ),
+                          _loadDetailComponents.getLocation(
+                              pick_up: '1 Ash Park, Pembroke Dock, SA7254, Drury Lane, Oldham, OL9 7PH',
+                              destination: '1 Ash Park, Pembroke Dock, SA6478, Drury Lane, Dubai, OL9 7PH'
+                          ),
                           SizedBox(height: AppSizes.height * 0.01),
                           _loadDetailComponents.getExpectedRate(),
                           SizedBox(height: AppSizes.height * 0.03,),
@@ -74,7 +80,7 @@ class _LoadDetailState extends State<LoadDetail> {
                             decoration: BoxDecoration(
                               color: AppColors.lightGray,
                               border: Border.all(color: AppColors.lightGray),
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(5),
                             ),
                             child: Row(
                               children: [
@@ -89,19 +95,47 @@ class _LoadDetailState extends State<LoadDetail> {
                                         value: _value,
                                         items: [
                                           DropdownMenuItem(
-                                            child: Text("Select"),
+                                            child: Text("Select",
+                                              style: TextStyle(
+                                                decoration: TextDecoration.none,
+                                                fontFamily: Assets.poppinsLight,
+                                                fontSize: 12,
+                                                color: AppColors.colorBlack
+                                              ),
+                                            ),
                                             value: 1,
                                           ),
                                           DropdownMenuItem(
-                                            child: Text("New Zealand"),
+                                            child: Text("New Zealand",
+                                              style: TextStyle(
+                                                  decoration: TextDecoration.none,
+                                                  fontFamily: Assets.poppinsLight,
+                                                  fontSize: 12,
+                                                  color: AppColors.colorBlack
+                                              ),
+                                            ),
                                             value: 2,
                                           ),
                                           DropdownMenuItem(
-                                              child: Text("Nepal"),
+                                              child: Text("Nepal",
+                                                style: TextStyle(
+                                                    decoration: TextDecoration.none,
+                                                    fontFamily: Assets.poppinsLight,
+                                                    fontSize: 12,
+                                                    color: AppColors.colorBlack
+                                                ),
+                                              ),
                                               value: 3
                                           ),
                                           DropdownMenuItem(
-                                              child: Text("Malaysia"),
+                                              child: Text("Malaysia",
+                                                style: TextStyle(
+                                                    decoration: TextDecoration.none,
+                                                    fontFamily: Assets.poppinsLight,
+                                                    fontSize: 12,
+                                                    color: AppColors.colorBlack
+                                                ),
+                                              ),
                                               value: 4
                                           )
                                         ],
@@ -139,7 +173,7 @@ class _LoadDetailState extends State<LoadDetail> {
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
                           CommonWidgets.getLableText(
-                              text: "Goodtype"
+                              text: "Good type"
                           ),
                           SizedBox(height: 10,),
                           Container(
@@ -149,7 +183,7 @@ class _LoadDetailState extends State<LoadDetail> {
                             decoration: BoxDecoration(
                               color: AppColors.lightGray,
                               border: Border.all(color: AppColors.lightGray),
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(5),
                             ),
                             child: Row(
                               children: [
@@ -164,15 +198,35 @@ class _LoadDetailState extends State<LoadDetail> {
                                         value: _value,
                                         items: [
                                           DropdownMenuItem(
-                                            child: Text("Cargo"),
+                                            child: Text("Cargo",
+                                              style: TextStyle(
+                                                  decoration: TextDecoration.none,
+                                                  fontFamily: Assets.poppinsLight,
+                                                  fontSize: 12,
+                                                  color: AppColors.colorBlack
+                                              ),
+                                            ),
                                             value: 1,
                                           ),
                                           DropdownMenuItem(
-                                            child: Text("Bulldozers."),
+                                            child: Text("Bulldozers.",
+                                              style: TextStyle(
+                                                  decoration: TextDecoration.none,
+                                                  fontFamily: Assets.poppinsLight,
+                                                  fontSize: 12,
+                                                  color: AppColors.colorBlack
+                                              ),
+                                            ),
                                             value: 2,
                                           ),
                                           DropdownMenuItem(
-                                              child: Text("Mini Excavators"),
+                                              child: Text("Mini Excavators",
+                                                style: TextStyle(
+                                                    decoration: TextDecoration.none,
+                                                    fontFamily: Assets.poppinsLight,
+                                                    fontSize: 12,
+                                                    color: AppColors.colorBlack
+                                                ),),
                                               value: 3
                                           ),
                                         ],
@@ -200,7 +254,7 @@ class _LoadDetailState extends State<LoadDetail> {
                             decoration: BoxDecoration(
                               color: AppColors.lightGray,
                               border: Border.all(color: AppColors.lightGray),
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(5),
                             ),
                             child: Row(
                               children: [
@@ -215,19 +269,43 @@ class _LoadDetailState extends State<LoadDetail> {
                                         value: _value,
                                         items: [
                                           DropdownMenuItem(
-                                            child: Text("45 Ton"),
+                                            child: Text("45 Ton",
+                                              style: TextStyle(
+                                                  decoration: TextDecoration.none,
+                                                  fontFamily: Assets.poppinsLight,
+                                                  fontSize: 12,
+                                                  color: AppColors.colorBlack
+                                              ),),
                                             value: 1,
                                           ),
                                           DropdownMenuItem(
-                                            child: Text("50 Ton"),
+                                            child: Text("50 Ton",
+                                              style: TextStyle(
+                                                  decoration: TextDecoration.none,
+                                                  fontFamily: Assets.poppinsLight,
+                                                  fontSize: 12,
+                                                  color: AppColors.colorBlack
+                                              ),),
                                             value: 2,
                                           ),
                                           DropdownMenuItem(
-                                              child: Text("55 Ton"),
+                                              child: Text("55 Ton",
+                                                style: TextStyle(
+                                                    decoration: TextDecoration.none,
+                                                    fontFamily: Assets.poppinsLight,
+                                                    fontSize: 12,
+                                                    color: AppColors.colorBlack
+                                                ),),
                                               value: 3
                                           ),
                                           DropdownMenuItem(
-                                              child: Text("60 Ton"),
+                                              child: Text("60 Ton",
+                                                style: TextStyle(
+                                                    decoration: TextDecoration.none,
+                                                    fontFamily: Assets.poppinsLight,
+                                                    fontSize: 12,
+                                                    color: AppColors.colorBlack
+                                                ),),
                                               value: 4
                                           )
                                         ],
@@ -255,7 +333,7 @@ class _LoadDetailState extends State<LoadDetail> {
                             decoration: BoxDecoration(
                               color: AppColors.lightGray,
                               border: Border.all(color: AppColors.lightGray),
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(5),
                             ),
                             child: Row(
                               children: [
@@ -270,19 +348,44 @@ class _LoadDetailState extends State<LoadDetail> {
                                         value: _value,
                                         items: [
                                           DropdownMenuItem(
-                                            child: Text("55"),
+                                            child: Text("55",
+                                              style: TextStyle(
+                                                  decoration: TextDecoration.none,
+                                                  fontFamily: Assets.poppinsLight,
+                                                  fontSize: 12,
+                                                  color: AppColors.colorBlack
+                                              ),),
                                             value: 1,
                                           ),
                                           DropdownMenuItem(
-                                            child: Text("New Zealand"),
+                                            child: Text("60",
+                                              style: TextStyle(
+                                                  decoration: TextDecoration.none,
+                                                  fontFamily: Assets.poppinsLight,
+                                                  fontSize: 12,
+                                                  color: AppColors.colorBlack
+                                              ),),
                                             value: 2,
                                           ),
                                           DropdownMenuItem(
-                                              child: Text("Nepal"),
+                                              child: Text("65",
+                                                style: TextStyle(
+                                                    decoration: TextDecoration.none,
+                                                    fontFamily: Assets.poppinsLight,
+                                                    fontSize: 12,
+                                                    color: AppColors.colorBlack
+                                                ),),
                                               value: 3
                                           ),
                                           DropdownMenuItem(
-                                              child: Text("Malaysia"),
+                                              child: Text("70",
+                                                style: TextStyle(
+                                                    decoration: TextDecoration.none,
+                                                    fontFamily: Assets.poppinsLight,
+                                                    fontSize: 12,
+                                                    color: AppColors.colorBlack
+                                                ),
+                                              ),
                                               value: 4
                                           )
                                         ],
@@ -298,17 +401,17 @@ class _LoadDetailState extends State<LoadDetail> {
                             ),
 
                           ),
-                          SizedBox(height: AppSizes.height * 0.03,),
-                          CommonWidgets.getLableText(
-                              text: "Note"
-                          ),
-                          SizedBox(height: AppSizes.height * 0.01,),
-                          _loadDetailComponents.getNameTextField(
-                              leftIcon: Assets.messageIcon,
-                              hintText: 'Pellentesque lobortis nec',
-                              textEditingController: null
-                          ),
-                          SizedBox(height: 10,),
+                          // SizedBox(height: AppSizes.height * 0.03,),
+                          // CommonWidgets.getLableText(
+                          //     text: "Note"
+                          // ),
+                          // SizedBox(height: AppSizes.height * 0.01,),
+                          // _loadDetailComponents.getNameTextField(
+                          //     leftIcon: Assets.messageIcon,
+                          //     hintText: 'Pellentesque lobortis nec',
+                          //     textEditingController: null
+                          // ),
+                          // SizedBox(height: 10,),
                           SizedBox(height: AppSizes.height * 0.03,),
                           CommonWidgets.getLableText(
                               text: "Description"
@@ -362,7 +465,13 @@ class _LoadDetailState extends State<LoadDetail> {
                           CommonWidgets.getBottomButton(
                               text: "Next",
                               onPress: () {
-                                Navigator.push(context, SlideRightRoute(page: Payment()));
+                                // Navigator.push(context, SlideRightRoute(page: Payment(tag: widget.tag,)));
+                                if(widget.tag == Strings.indiviual){
+                                  Navigator.push(context, SlideRightRoute(page: IndividualPayment(tag: widget.tag,)));
+                                }
+                                else if(widget.tag == Strings.business){
+                                  Navigator.push(context, SlideRightRoute(page: Payment(tag: widget.tag,)));
+                                }
                               }
                           ),
                         ],
