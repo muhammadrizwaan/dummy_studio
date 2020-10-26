@@ -50,7 +50,7 @@ class _IndividualPaymentState extends State<IndividualPayment> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                CommonWidgets.getLableText(text: 'Payment Method'),
+                                CommonWidgets.getSubHeadingText(text: 'Payment Method'),
                                 SizedBox(height: AppSizes.height * 0.02),
                                 CommonWidgets.getPayField(
                                     isPassword: false,

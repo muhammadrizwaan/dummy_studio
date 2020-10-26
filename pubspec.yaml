@@ -37,6 +37,8 @@ dependencies:
   location_web: ^1.0.0
   dio: ^3.0.10
   device_info: ^0.4.2+9
+  sliding_up_panel: ^1.0.2
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -90,10 +92,9 @@ flutter:
       fonts:
         - asset: fonts/Poppins-Bold.ttf
 
-    - family: PoppinsRegular
+    - family: Poppins-SemiBold
       fonts:
         - asset: fonts/Poppins-SemiBold.ttf
-#
     - family: Roboto-Bold
       fonts:
         - asset: fonts/Roboto-Bold.ttf

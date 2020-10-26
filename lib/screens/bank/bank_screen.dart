@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/entypo_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
@@ -44,53 +46,53 @@ class _BankState extends State<Bank> {
                             SizedBox(
                               height: 30,
                             ),
-                            CommonWidgets.getLableText(
+                            CommonWidgets.getSubHeadingText(
                                 text: "Account Holder Name"),
                             SizedBox(
                               height: 10,
                             ),
                             CommonWidgets.getTextField(
                                 isPassword: false,
-                                leftIcon: 'name_icon.png',
+                                leftIcon: Entypo.user,
                                 // textEditingController: name,
                                 hintText: "Enter Account Holder Name"
                             ),
                             SizedBox(
                               height: 30,
                             ),
-                            CommonWidgets.getLableText(text: "Card Number"),
+                            CommonWidgets.getSubHeadingText(text: "Card Number"),
                             SizedBox(
                               height: 10,
                             ),
                             CommonWidgets.getTextField(
                                 isPassword: false,
-                                leftIcon: 'card_icon.png',
+                                leftIcon: MdiIcons.dialpad,
                                 // textEditingController: name,
                                 hintText: "Enter Card Number"
                             ),
                             SizedBox(
                               height: 30,
                             ),
-                            CommonWidgets.getLableText(text: "CVC Code"),
+                            CommonWidgets.getSubHeadingText(text: "CVC Code"),
                             SizedBox(
                               height: 10,
                             ),
                             CommonWidgets.getTextField(
                                 isPassword: false,
-                                leftIcon: 'card_icon.png',
+                                leftIcon: MdiIcons.dialpad,
                                 // textEditingController: name,
                                 hintText: "Enter CVC Code"
                             ),
                             SizedBox(
                               height: 30,
                             ),
-                            CommonWidgets.getLableText(text: "Expiry Date"),
+                            CommonWidgets.getSubHeadingText(text: "Expiry Date"),
                             SizedBox(
                               height: 10,
                             ),
                             CommonWidgets.getTextField(
                                 isPassword: false,
-                                leftIcon: 'card_icon.png',
+                                leftIcon: MdiIcons.dialpad,
                                 // textEditingController: name,
                                 hintText: "Enter Expiry Date"
                             ),

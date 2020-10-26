@@ -3,6 +3,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/entypo_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/colors.dart';
@@ -16,6 +17,10 @@ import 'package:truckoom_shipper/screens/login/login_provider.dart';
 import 'package:truckoom_shipper/screens/maps/maps_screen.dart';
 import 'package:truckoom_shipper/screens/phoneNumber/phone_number.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
+
+import '../../res/sizes.dart';
+import '../../res/sizes.dart';
+import '../../res/sizes.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -41,12 +46,12 @@ class _LoginState extends State<Login> {
     Provider.of<LoginProvider>(context, listen: true);
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
         body: Container(
           height: AppSizes.height,
           width: AppSizes.width,
           color: AppColors.white,
-          padding: EdgeInsets.all(AppSizes.width * 0.05),
+          padding: EdgeInsets.only(left: AppSizes.width * 0.08, right: AppSizes.width*0.08, top: AppSizes.width*0.08),
           child: Stack(
             children: [
               Column(
@@ -70,32 +75,43 @@ class _LoginState extends State<Login> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               SizedBox(height: AppSizes.height * 0.06,),
-                              CommonWidgets.getHeading1Text(text: 'Login Now'),
+                              CommonWidgets.getHeadingText(text: 'Login Now'),
                               SizedBox(height: AppSizes.height * 0.04,),
-                              CommonWidgets.getLableText(text: "Email/Phone Number"),
+                              CommonWidgets.getSubHeadingText(text: "Email/Phone Number"),
                               SizedBox(height: AppSizes.height * 0.01,),
                               CommonWidgets.getTextField(
                                   isPassword: false,
-                                  leftIcon: 'name_icon.png',
+                                  leftIcon: Entypo.user,
                                   textEditingController: email,
                                   hintText: "Email/Phone Number"
                               ),
                               SizedBox(height: AppSizes.height * 0.03,),
-                              CommonWidgets.getLableText(text: "Password"),
+                              CommonWidgets.getSubHeadingText(text: "Password"),
                               SizedBox(height: AppSizes.height * 0.01,),
                               CommonWidgets.getTextField(
                                   isPassword: true,
-                                  leftIcon: 'password_icon.png',
+                                  leftIcon: Entypo.lock,
                                   textEditingController: password,
                                   hintText: "Enter Password"
                               ),
-                              SizedBox(height: AppSizes.height * 0.04,),
+                              SizedBox(height: AppSizes.height * 0.08,),
                               CommonWidgets.getBottomButton(
                                   text: "Login",
                                   onPress: () {
                                     Navigator.pushReplacement(context, SlideRightRoute(page: Maps(tag: Strings.indiviual)));
                                     // _loginProvider.getLogin(context: context, email: email.text, password: password.text );
                                   }
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: AppSizes.height*0.25,),
+                                alignment: Alignment.center,
+                                child: _loginComponents.getBottomRichText(
+                                    text: "Don't have an account? ",
+                                    clickableText: 'SIGN UP',
+                                    onTap: () {
+                                      Navigator.push(context, SlideRightRoute(page: CheckUser()));
+                                    }
+                                ),
                               ),
                             ],
                           ),
@@ -104,19 +120,6 @@ class _LoginState extends State<Login> {
                     ),
                   )
                 ],
-              ),
-              Positioned(
-                bottom: 0,
-                child: Container(
-                  margin: EdgeInsets.only(left: MediaQuery.of(context).size.width/5, bottom: MediaQuery.of(context).size.height*0.02,),
-                  child: _loginComponents.getBottomRichText(
-                      text: "Don't have an account? ",
-                      clickableText: 'SIGN UP',
-                      onTap: () {
-                        Navigator.push(context, SlideRightRoute(page: CheckUser()));
-                      }
-                  ),
-                )
               ),
             ],
           ),

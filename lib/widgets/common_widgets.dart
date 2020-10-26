@@ -7,13 +7,16 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/widgets/text_views.dart';
+
+import '../res/colors.dart';
 
 class CommonWidgets {
   static Widget getBottomButton(
       {@required String text, @required Function onPress}) {
     return Container(
       width: AppSizes.width,
-      height: AppSizes.height * 0.06,
+      height: AppSizes.height * 0.07,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
         border: Border.all(
@@ -23,14 +26,9 @@ class CommonWidgets {
       ),
       child: FlatButton(
         onPressed: () => onPress(),
-        child: Text(
+        child: TextView.getBottomButtonText04(
           text,
-          style: TextStyle(
-            decoration: TextDecoration.none,
-            fontSize: 15,
-            color: AppColors.white,
-            fontFamily: Assets.poppinsLight,
-          ),
+          color: AppColors.white.withOpacity(0.7),
         ),
       ),
     );
@@ -104,16 +102,18 @@ class CommonWidgets {
             text: TextSpan(
               text: text,
               style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 12,
-                  fontFamily: Assets.poppinsRegular),
+                color: Colors.black,
+                fontSize: 12,
+                fontFamily: Assets.poppinsRegular,
+              ),
               children: <TextSpan>[
                 TextSpan(
                   text: clickableText,
                   style: TextStyle(
-                      color: Colors.amber,
-                      fontSize: 12,
-                      fontFamily: Assets.poppinsRegular),
+                    color: Colors.amber,
+                    fontSize: 12,
+                    fontFamily: Assets.poppinsRegular,
+                  ),
                   recognizer: TapGestureRecognizer()..onTap = () => onTap(),
                 ),
               ],
@@ -140,8 +140,7 @@ class CommonWidgets {
                 fontFamily: Assets.poppinsMedium,
                 fontSize: 22,
                 color: AppColors.colorBlack,
-                fontWeight: FontWeight.bold
-            ),
+                fontWeight: FontWeight.bold),
           ),
           GestureDetector(
               onTap: () => onPress(),
@@ -157,18 +156,6 @@ class CommonWidgets {
       @required Function onPress}) {
     return Container(
       padding: EdgeInsets.all(AppSizes.width * 0.05),
-      // decoration: BoxDecoration(
-      //   color: AppColors.white,
-      //   boxShadow: [
-      //     BoxShadow(
-      //       color:Colors.grey[500].withOpacity(0.3),
-      //       spreadRadius: 1,
-      //       blurRadius: 1,
-      //       offset: Offset(0,0)
-      //     )
-      //   ]
-      // ),
-      // color: AppColors.white,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -181,10 +168,10 @@ class CommonWidgets {
           Text(
             text,
             style: TextStyle(
-                fontFamily: Assets.poppinsMedium,
-                fontSize: 20,
-                color: AppColors.colorBlack,
-                // fontWeight: FontWeight.bold
+              fontFamily: Assets.poppinsMedium,
+              fontSize: 20,
+              color: AppColors.colorBlack,
+              // fontWeight: FontWeight.bold
             ),
           ),
         ],
@@ -192,43 +179,32 @@ class CommonWidgets {
     );
   }
 
-  static Widget getHeading1Text({@required String text}) {
+  static Widget getHeadingText({@required String text}) {
     return Container(
-      // margin: EdgeInsets.only(left: AppSizes.width * 0.03),
-      child: Text(
+      child: TextView.getHeadingText04(
         text,
-        style: TextStyle(
-            decoration: TextDecoration.none,
-            color: AppColors.colorBlack,
-            fontSize: 20,
-            fontFamily: Assets.poppinsMedium,
-            fontWeight: FontWeight.bold),
+        color: AppColors.colorBlack,
       ),
     );
   }
 
-  static Widget getLableText({@required String text}) {
+  static Widget getSubHeadingText({@required String text}) {
     return Container(
-      child: Text(
+      child: TextView.getLabelText04(
         text,
-        style: TextStyle(
-          decoration: TextDecoration.none,
-          color: AppColors.colorBlack,
-          fontSize: 14,
-          fontFamily: Assets.poppinsRegular,
-        ),
+        color: AppColors.colorBlack.withOpacity(0.45),
       ),
     );
   }
 
   static Widget getTextField(
       {@required bool isPassword,
-      @required String leftIcon,
+      @required IconData leftIcon,
       @required TextEditingController textEditingController,
       @required String hintText}) {
     return Container(
-      height: AppSizes.height * 0.06,
-      width: AppSizes.width,
+      height: AppSizes.height * 0.07,
+      width: AppSizes.width * 0.85,
       padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.02),
       decoration: BoxDecoration(
         color: AppColors.lightGray,
@@ -239,30 +215,32 @@ class CommonWidgets {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image(image: AssetImage('assets/png/$leftIcon')),
+          Opacity(
+            opacity: 0.7,
+              child: Icon(
+            leftIcon,
+                size: 20,
+          )),
           Center(
             child: Container(
               // color: AppColors.yellow,
-              width: AppSizes.width * 0.7,
+              width: AppSizes.width * 0.65,
               // height: AppSizes.height * 0.05,
               child: TextField(
                 style: TextStyle(
-                    decoration: TextDecoration.none,
-                    fontFamily: Assets.poppinsLight,
-                    fontSize: 12,
-                    color: AppColors.colorBlack),
+                  decoration: TextDecoration.none,
+                  fontFamily: Assets.poppinsLight,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                ),
                 controller: textEditingController,
                 obscureText: isPassword,
                 decoration: InputDecoration(
-                  // contentPadding: EdgeInsets.symmetric(vertical: AppSizes.height* 0.007),
-                  // prefixIcon: Image(image: AssetImage('assets/png/$leftIcon')),
-                  // suffixIcon:
-                  //     Image(image: AssetImage('assets/png/check_circle_fill_pn.png')),
                   hintText: hintText,
                   border: InputBorder.none,
                   hintStyle: TextStyle(
                     decoration: TextDecoration.none,
-                    fontSize: 14,
+                    fontSize: 13,
                     fontFamily: Assets.poppinsLight,
                   ),
                 ),
@@ -485,7 +463,9 @@ class CommonWidgets {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Image(image: AssetImage(leftIcon),),
+              Image(
+                image: AssetImage(leftIcon),
+              ),
               // Icon(
               //   Icons.radio_button_checked,
               //   color: AppColors.yellow,
@@ -506,7 +486,9 @@ class CommonWidgets {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Image(image: AssetImage(Assets.rightArrow),),
+              Image(
+                image: AssetImage(Assets.rightArrow),
+              ),
               // Icon(
               //   Icons.arrow_forward_ios,
               //   color: AppColors.colorBlack,

@@ -42,7 +42,7 @@ class _ContactUsState extends State<ContactUs> {
                   SizedBox(height: AppSizes.height * 0.03,),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05, vertical: AppSizes.height * 0.01),
-                    child: CommonWidgets.getLableText(
+                    child: CommonWidgets.getSubHeadingText(
                         text: 'Full Name'
                     ),
                   ),
@@ -57,7 +57,7 @@ class _ContactUsState extends State<ContactUs> {
                   SizedBox(height: AppSizes.height * 0.01,),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05, vertical: AppSizes.height * 0.01),
-                    child: CommonWidgets.getLableText(
+                    child: CommonWidgets.getSubHeadingText(
                         text: 'Message'
                     ),
                   ),

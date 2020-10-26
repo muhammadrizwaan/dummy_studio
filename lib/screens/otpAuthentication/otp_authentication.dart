@@ -4,6 +4,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/entypo_icons.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
@@ -45,7 +46,11 @@ class _OTPAuthenticationState extends State<OTPAuthentication> {
           height: AppSizes.height,
           width: AppSizes.width,
           color: AppColors.white,
-          padding: EdgeInsets.all(AppSizes.width * 0.05),
+          padding: EdgeInsets.only(
+            left: AppSizes.width * 0.08,
+            right: AppSizes.width * 0.08,
+            top: AppSizes.width * 0.08,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -66,15 +71,18 @@ class _OTPAuthenticationState extends State<OTPAuthentication> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          CommonWidgets.getHeading1Text(text: 'OTP Authentication'),
+                          SizedBox(
+                            height: 40,
+                          ),
+                          CommonWidgets.getHeadingText(text: 'OTP Authentication'),
                           SizedBox(height: 30,),
                           _otpAuthenticationComponents.getOTPLableText(text: "Enter the 4-digit code sent to you at"),
                           SizedBox(height: 20,),
-                          CommonWidgets.getLableText(text: "Enter Verification Code"),
+                          CommonWidgets.getSubHeadingText(text: "Enter Verification Code"),
                           SizedBox(height: 10,),
                           CommonWidgets.getTextField(
                               isPassword: true,
-                              leftIcon: 'icon_phone_pn.png',
+                              leftIcon: Entypo.mobile,
                               textEditingController: otp_code,
                               hintText: "Enter Verification Code"
                           ),

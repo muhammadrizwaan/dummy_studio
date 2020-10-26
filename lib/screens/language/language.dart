@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
@@ -9,6 +7,12 @@ import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
 import 'package:truckoom_shipper/screens/phoneNumber/phone_number.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
+import 'package:truckoom_shipper/widgets/text_views.dart';
+
+import '../../res/colors.dart';
+import '../../res/colors.dart';
+import '../../res/colors.dart';
+import '../../res/sizes.dart';
 
 class Language extends StatefulWidget {
   @override
@@ -17,6 +21,7 @@ class Language extends StatefulWidget {
 
 class _LanguageState extends State<Language> {
   int _value = 1;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -26,7 +31,7 @@ class _LanguageState extends State<Language> {
           height: AppSizes.height,
           width: AppSizes.width,
           color: AppColors.white,
-          padding: EdgeInsets.all(AppSizes.width * 0.05),
+          padding: EdgeInsets.only(left: AppSizes.width * 0.08, right: AppSizes.width*0.08),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -39,14 +44,19 @@ class _LanguageState extends State<Language> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(height: AppSizes.height * 0.1),
-                          CommonWidgets.getHeading1Text(text: 'Choose Language'),
-                          SizedBox(height: 30,),
-                          CommonWidgets.getLableText(text: "Select Language"),
-                          SizedBox(height: 10,),
+                          SizedBox(height: AppSizes.height * 0.25),
+                          CommonWidgets.getHeadingText(
+                              text: 'Choose Language'),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          CommonWidgets.getSubHeadingText(text: "Select Language"),
+                          SizedBox(
+                            height: 10,
+                          ),
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 10),
-                            height: AppSizes.height * 0.06,
+                            height: AppSizes.height * 0.07,
                             width: AppSizes.width,
                             decoration: BoxDecoration(
                               color: AppColors.lightGray,
@@ -57,83 +67,60 @@ class _LanguageState extends State<Language> {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(right: 10),
-                                  child: Icon(Icons.language,
-                                    color: AppColors.colorBlack,
+                                  child: Icon(
+                                    Icons.language,
+                                    color: AppColors.colorBlack.withOpacity(0.75),
                                   ),
                                   // child: Image(image: AssetImage('assets/png/location_icon.png')),
-                                ) ,
+                                ),
                                 Expanded(
                                   child: DropdownButtonHideUnderline(
                                     child: DropdownButton(
-
                                         value: _value,
                                         items: [
                                           DropdownMenuItem(
-                                            child: Text("Select",
-                                              style: TextStyle(
-                                                  decoration: TextDecoration.none,
-                                                  fontFamily: Assets.poppinsLight,
-                                                  fontSize: 12,
-                                                  color: AppColors.colorBlack
-                                              ),
+                                            child: TextView.getLightText04(
+                                              "Select",
+                                              color: AppColors.colorBlack,
                                             ),
                                             value: 1,
                                           ),
                                           DropdownMenuItem(
-                                            child: Text("English",
-                                              style: TextStyle(
-                                                  decoration: TextDecoration.none,
-                                                  fontFamily: Assets.poppinsLight,
-                                                  fontSize: 12,
-                                                  color: AppColors.colorBlack
-                                              ),
+                                            child: TextView.getLightText04(
+                                              "English",
+                                              color: AppColors.colorBlack,
                                             ),
                                             value: 2,
                                           ),
                                           DropdownMenuItem(
-                                              child: Text("Urdu",
-                                                style: TextStyle(
-                                                    decoration: TextDecoration.none,
-                                                    fontFamily: Assets.poppinsLight,
-                                                    fontSize: 12,
-                                                    color: AppColors.colorBlack
-                                                ),
-                                              ),
-                                              value: 3
-                                          ),
+                                              child: TextView.getLightText04("اردو", color: AppColors.colorBlack),
+                                              value: 3),
                                           DropdownMenuItem(
-                                              child: Text("Arabic",
-                                                style: TextStyle(
-                                                    decoration: TextDecoration.none,
-                                                    fontFamily: Assets.poppinsLight,
-                                                    fontSize: 12,
-                                                    color: AppColors.colorBlack
-                                                ),
-                                              ),
-                                              value: 4
-                                          ),
+                                              child: TextView.getLightText04( "عربی", color: AppColors.colorBlack,),
+                                              value: 4),
                                         ],
                                         onChanged: (value) {
                                           setState(() {
                                             _value = value;
                                           });
-                                        }
-                                    ),
+                                        }),
                                   ),
                                 ),
                               ],
                             ),
-
                           ),
-                          SizedBox(height: 30,),
-
-                          SizedBox(height: 10,),
+                          SizedBox(
+                            height: 50,
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
                           CommonWidgets.getBottomButton(
                               text: "Next",
                               onPress: () {
-                                Navigator.push(context, SlideRightRoute(page: Login()));
-                              }
-                          ),
+                                Navigator.push(
+                                    context, SlideRightRoute(page: Login()));
+                              }),
                         ],
                       ),
                     )

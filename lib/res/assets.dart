@@ -70,6 +70,7 @@ class Assets {
   static const String poppinsLight = "Poppins-Light";
   static const String poppinsMedium = "Poppins-Medium";
   static const String poppinsBold = "Poppins-Bold";
+  static const String poppinsSemiBold = "Poppins-SemiBold";
   static const String robotoBold = "Roboto-Bold";
 
   // static const String turretBold = "TurretRoad-ExtraBold";

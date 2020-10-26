@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/entypo_icons.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
@@ -67,50 +68,50 @@ class _BusinessSignupState extends State<BusinessSignup> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              CommonWidgets.getHeading1Text(text: 'Signup'),
+                              CommonWidgets.getHeadingText(text: 'Signup'),
                               _businessSignupComponents.getBusinessSignupStep()
                             ],
                           ),
                           // CommonWidgets.getHeading1Text(text: 'Signup'),
                           SizedBox(height: 30,),
-                          CommonWidgets.getLableText(text: "Full Name"),
+                          CommonWidgets.getSubHeadingText(text: "Full Name"),
                           SizedBox(height: 10,),
                           CommonWidgets.getTextField(
                               isPassword: false,
-                              leftIcon: 'name_icon.png',
+                              leftIcon: Entypo.user,
                               textEditingController: name,
                               hintText: "Enter Name"
                           ),
                           SizedBox(height: 30,),
-                          CommonWidgets.getLableText(text: "Email"),
+                          CommonWidgets.getSubHeadingText(text: "Email"),
                           SizedBox(height: 10,),
                           CommonWidgets.getTextField(
                               isPassword: false,
-                              leftIcon: 'email_icon.png',
+                              leftIcon: Icons.mail,
                               textEditingController: email,
                               hintText: "Enter Email"
                           ),
                           SizedBox(height: 30,),
-                          CommonWidgets.getLableText(text: "Password"),
+                          CommonWidgets.getSubHeadingText(text: "Password"),
                           SizedBox(height: 10,),
                           CommonWidgets.getTextField(
                               isPassword: true,
-                              leftIcon: 'password_icon.png',
+                              leftIcon: Entypo.lock,
                               textEditingController: password,
                               hintText: "Enter Password"
                           ),
 
                           SizedBox(height: 30,),
-                          CommonWidgets.getLableText(text: "Confirm Password"),
+                          CommonWidgets.getSubHeadingText(text: "Confirm Password"),
                           SizedBox(height: 10,),
                           CommonWidgets.getTextField(
                               isPassword: true,
-                              leftIcon: 'password_icon.png',
+                              leftIcon: Entypo.lock,
                               textEditingController: confirm_Password,
                               hintText: "Confirm Password"
                           ),
                           SizedBox(height: 30,),
-                          CommonWidgets.getLableText(text: "City"),
+                          CommonWidgets.getSubHeadingText(text: "City"),
                           SizedBox(height: 10,),
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 10),

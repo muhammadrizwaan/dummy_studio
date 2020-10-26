@@ -57,15 +57,15 @@ class _ForgotPassowrdState extends State<ForgotPassowrd> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(height: AppSizes.height * 0.06,),
-                          CommonWidgets.getHeading1Text(text: 'Forgot Password'),
+                          CommonWidgets.getHeadingText(text: 'Forgot Password'),
                           SizedBox(height: AppSizes.height * 0.02,),
                           _forgotPasswordComponent.getOTPLableText(text: "Please Enter your Email Credentials"),
                           SizedBox(height: AppSizes.height * 0.05,),
-                          CommonWidgets.getLableText(text: "Email"),
+                          CommonWidgets.getSubHeadingText(text: "Email"),
                           SizedBox(height: AppSizes.height * 0.01,),
                           CommonWidgets.getTextField(
                               isPassword: false,
-                              leftIcon: 'email_icon.png',
+                              leftIcon: Icons.mail,
                               textEditingController: email,
                               hintText: "jerry.ellis@mail.com"
                           ),
