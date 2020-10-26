@@ -35,6 +35,8 @@ dependencies:
   geolocator: ^4.0.3
   location: ^3.0.2
   location_web: ^1.0.0
+  dio: ^3.0.10
+  device_info: ^0.4.2+9
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -72,37 +74,30 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Poppins
+    - family: Poppins-Regular
       fonts:
-        - asset: assets/fonts/popins/Poppins-Medium.ttf
-        - asset: assets/fonts/popins/Poppins-Regular.ttf
-        - asset: assets/fonts/popins/Poppins-Light.ttf
-        - asset: assets/fonts/popins/Poppins-Bold.ttf
-        - asset: assets/fonts/popins/Poppins-SemiBold.ttf
-#    - family: Poppins-Regular
-#      fonts:
-#        - asset: assets/fonts/popins/Poppins-Regular.ttf
-#    - family: Poppins-LightItalic
-#      fonts:
-#        - asset: assets/fonts/popins/Poppins-LightItalic.ttf
-    - family: Roboto
-      fonts:
-        - asset: assets/fonts/roboto/Roboto-Bold.ttf
+        - asset: fonts/Poppins-Regular.ttf
 
-#    - family: Roboto
-#      fonts:
-#        - assets: assets/fonts/roboto/Roboto-Bold.ttf
-#   fonts:
-#     - family: Schyler
-#       fonts:
-#         - asset: fonts/Schyler-Regular.ttf
-#         - asset: fonts/Schyler-Italic.ttf
-#           style: italic
-#     - family: Trajan Pro
-#       fonts:
-#         - asset: fonts/TrajanPro.ttf
-#         - asset: fonts/TrajanPro_Bold.ttf
-#           weight: 700
+    - family: Poppins-Light
+      fonts:
+        - asset: fonts/Poppins-Light.ttf
+
+    - family: Poppins-Medium
+      fonts:
+        - asset: fonts/Poppins-Medium.ttf
+
+    - family: Poppins-Bold
+      fonts:
+        - asset: fonts/Poppins-Bold.ttf
+
+    - family: PoppinsRegular
+      fonts:
+        - asset: fonts/Poppins-SemiBold.ttf
+#
+    - family: Roboto-Bold
+      fonts:
+        - asset: fonts/Roboto-Bold.ttf
+
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

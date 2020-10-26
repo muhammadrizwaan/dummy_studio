@@ -6,6 +6,7 @@ import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 class Bank extends StatefulWidget {
@@ -30,6 +31,7 @@ class _BankState extends State<Bank> {
                     onPress: () {
                       Navigator.pop(context);
                     }),
+                Divider(height: 10),
                 Expanded(
                   child: ListView(
                     children: [
@@ -47,11 +49,12 @@ class _BankState extends State<Bank> {
                             SizedBox(
                               height: 10,
                             ),
-                            CommonWidgets.getBankField(
+                            CommonWidgets.getTextField(
                                 isPassword: false,
                                 leftIcon: 'name_icon.png',
-                                // textEditingController: email,
-                                hintText: "Mathew due"),
+                                // textEditingController: name,
+                                hintText: "Enter Account Holder Name"
+                            ),
                             SizedBox(
                               height: 30,
                             ),
@@ -59,11 +62,12 @@ class _BankState extends State<Bank> {
                             SizedBox(
                               height: 10,
                             ),
-                            CommonWidgets.getBankField(
+                            CommonWidgets.getTextField(
                                 isPassword: false,
-                                leftIcon: 'icon_card_number.png',
-                                // textEditingController: email,
-                                hintText: "0123-0123-0123"),
+                                leftIcon: 'card_icon.png',
+                                // textEditingController: name,
+                                hintText: "Enter Card Number"
+                            ),
                             SizedBox(
                               height: 30,
                             ),
@@ -71,23 +75,25 @@ class _BankState extends State<Bank> {
                             SizedBox(
                               height: 10,
                             ),
-                            CommonWidgets.getBankField(
+                            CommonWidgets.getTextField(
                                 isPassword: false,
-                                leftIcon: 'icon_card_number.png',
-                                // textEditingController: email,
-                                hintText: "012"),
+                                leftIcon: 'card_icon.png',
+                                // textEditingController: name,
+                                hintText: "Enter CVC Code"
+                            ),
                             SizedBox(
                               height: 30,
                             ),
                             CommonWidgets.getLableText(text: "Expiry Date"),
                             SizedBox(
-                              height: 30,
+                              height: 10,
                             ),
-                            CommonWidgets.getBankField(
+                            CommonWidgets.getTextField(
                                 isPassword: false,
-                                leftIcon: 'icon_card_number.png',
-                                // textEditingController: email,
-                                hintText: "01/2020"),
+                                leftIcon: 'card_icon.png',
+                                // textEditingController: name,
+                                hintText: "Enter Expiry Date"
+                            ),
                             SizedBox(
                               height: 30,
                             ),
@@ -107,6 +113,7 @@ class _BankState extends State<Bank> {
       ),
     );
   }
+
   _alertDialogueContainer() {
     return {
       {
@@ -134,7 +141,7 @@ class _BankState extends State<Bank> {
                       padding: EdgeInsets.only(
                         top: AppSizes.height * 0.08,
                       ),
-                      height: AppSizes.height * 0.23,
+                      height: AppSizes.height * 0.2,
                       width: AppSizes.width,
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -148,66 +155,71 @@ class _BankState extends State<Bank> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(
-                            "Your Payment is successfully",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              decoration: TextDecoration.none,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Text(
-                            "done",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              decoration: TextDecoration.none,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              hideLoader(context);
-                            },
-                            child: Text(
-                              "Click & Continue",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                decoration: TextDecoration.none,
-                                fontSize: 16,
-                                color: AppColors.yellow,
-                                fontWeight: FontWeight.w300,
-                              ),
-                            ),
-                          ),
-                        ],
+                        Text(
+                        "Payment successful !",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            decoration: TextDecoration.none,
+                            fontSize: 15,
+                            color: AppColors.colorBlack,
+                            fontFamily: Assets.poppinsMedium,
+                            fontWeight: FontWeight.bold),
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: AppSizes.width * 0.45),
-                      height: AppSizes.width * 0.15,
-                      width: AppSizes.width * 0.15,
-                      decoration: BoxDecoration(
-                        color: AppColors.yellow,
-                        border:
-                        Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
+                      // Text(
+                      //   "Done",
+                      //   textAlign: TextAlign.center,
+                      //   style: TextStyle(
+                      //       decoration: TextDecoration.none,
+                      //       fontSize: 15,
+                      //       color: AppColors.colorBlack,
+                      //       fontFamily: Assets.poppinsMedium,
+                      //       fontWeight: FontWeight.bold),
+                      // ),
+                      SizedBox(
+                        height: 20,
                       ),
-                      child: Icon(
-                        Icons.payment,
-                        color: Colors.white,
-                        size: 40,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, SlideRightRoute(
+                              page: BottomTab()));
+                          // hideLoader(context);
+                        },
+                        child: Text(
+                          "Tap & Continue",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              decoration: TextDecoration.none,
+                              fontSize: 12,
+                              color: AppColors.yellow,
+                              fontFamily: Assets.poppinsRegular,
+                              fontWeight: FontWeight.bold),
+                        // ),
                       ),
                     ),
                   ],
                 ),
               ),
+              Container(
+                margin: EdgeInsets.only(left: AppSizes.width * 0.425),
+                height: AppSizes.width * 0.15,
+                width: AppSizes.width * 0.15,
+                decoration: BoxDecoration(
+                  color: AppColors.yellow,
+                  border:
+                  Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
+                  borderRadius: BorderRadius.circular(
+                    10,
+                  ),
+                ),
+                child: Icon(
+                  Icons.payment,
+                  color: Colors.white,
+                  size: 40,
+                ),
+              ),
+              ],
+            ),)
+            ,
             );
           },
         )

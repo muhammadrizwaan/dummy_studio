@@ -55,7 +55,12 @@ class Assets {
   static const String location = "assets/png/location_icon.png";
   static const String couponIcon = "assets/png/coupon_icon.png";
   static const String informationIcon = "assets/png/information_icon.png";
-
+  static const String truckIcon = "assets/png/truck_icon.png";
+  static const String truckMainIcon = "assets/png/truck_MainIcon.png";
+  static const String licenseIcon = "assets/png/license_icon.png";
+  static const String radioActiveIcon = "assets/png/radio_active_icon.png";
+  static const String radioUnactiveIcon = "assets/png/radio_unactive_icon.png";
+  static const String cardIcon = "assets/png/card_icon.png";
 
 
 
@@ -66,4 +71,6 @@ class Assets {
   static const String poppinsMedium = "Poppins-Medium";
   static const String poppinsBold = "Poppins-Bold";
   static const String robotoBold = "Roboto-Bold";
+
+  // static const String turretBold = "TurretRoad-ExtraBold";
 }

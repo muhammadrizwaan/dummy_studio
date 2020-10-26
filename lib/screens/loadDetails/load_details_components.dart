@@ -20,12 +20,12 @@ class LoadDetailComponents {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: AppSizes.height * 0.11,
+                height: AppSizes.height * 0.12,
                 child: Image(image: AssetImage(Assets.userLocation),
                   fit: BoxFit.cover,
                 ),
               ),
-              SizedBox(width: AppSizes.width * 0.05),
+              SizedBox(width: AppSizes.width * 0.03),
               Container(
                 // height: AppSizes.height * 0.14,
                 child: Column(
@@ -33,7 +33,7 @@ class LoadDetailComponents {
                   // crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      height: AppSizes.height * 0.08,
+                      height: AppSizes.height * 0.082,
                       width: AppSizes.width * 0.7,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -50,6 +50,7 @@ class LoadDetailComponents {
                               // fontWeight: FontWeight.bold
                             ),
                           ),
+                          SizedBox(height: AppSizes.height * 0.002),
                           Text('1 Ash Park, Pembroke Dock, SA7254, Drury Lane, Oldham, OL9 7PH',
                             style: TextStyle(
                               fontFamily: Assets.poppinsLight,
@@ -61,6 +62,7 @@ class LoadDetailComponents {
                         ],
                       ),
                     ),
+                    SizedBox(height: AppSizes.height * 0.01),
                     Container(
                       // height: AppSizes.height * 0.08,
                       width: AppSizes.width * 0.7,
@@ -79,6 +81,7 @@ class LoadDetailComponents {
                               // fontWeight: FontWeight.bold
                             ),
                           ),
+                          SizedBox(height: AppSizes.height * 0.002),
                           Text('1 Ash Park, Pembroke Dock, SA6478, Drury Lane, Dubai, OL9 7PH',
                             style: TextStyle(
                               fontFamily: Assets.poppinsLight,
@@ -125,12 +128,12 @@ class LoadDetailComponents {
                 fit: BoxFit.cover,
               )
           ),
-          SizedBox(width: AppSizes.width * 0.01,),
+          SizedBox(width: AppSizes.width * 0.03,),
           Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Expected Rate',
+                Text('Rate',
                   style: TextStyle(
                     fontFamily: Assets.poppinsRegular,
                     fontSize: 12,
@@ -138,7 +141,7 @@ class LoadDetailComponents {
                   ),
                 ),
                 SizedBox(height: AppSizes.height * 0.01,),
-                Text('AED5000',
+                Text('AED 10,000',
                   style: TextStyle(
                       fontFamily: Assets.poppinsLight,
                       fontSize: 12,
@@ -158,25 +161,44 @@ class LoadDetailComponents {
     return Container(
       height: AppSizes.height * 0.06,
       width: AppSizes.width,
+      padding: EdgeInsets.only(left: 10),
       decoration: BoxDecoration(
         color: AppColors.lightGray,
-        border: Border.all(color: AppColors.borderColor),
-        borderRadius: BorderRadius.circular(10),
+        // border: Border.all(color: AppColors.borderColor),
+        borderRadius: BorderRadius.circular(5),
       ),
-      child: TextField(
-        controller: textEditingController,
-        // readOnly: true,
-        decoration: InputDecoration(
-          prefixIcon: Image(image: AssetImage('$leftIcon')) ,
-          hintText: hintText,
-          border: InputBorder.none,
-          hintStyle: TextStyle(
-            decoration: TextDecoration.none,
-            fontSize: 12,
-            color: AppColors.colorBlack,
-            fontFamily: Assets.poppinsLight,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image(image: AssetImage('$leftIcon')) ,
+          Container(
+            margin: EdgeInsets.only(left: 5),
+            width: AppSizes.width * 0.8,
+            // color: AppColors.yellow,
+            child: TextField(
+              style: TextStyle(
+                  decoration: TextDecoration.none,
+                  fontFamily: Assets.poppinsLight,
+                  fontSize: 12,
+                  color: AppColors.colorBlack
+              ),
+              controller: textEditingController,
+              // readOnly: true,
+              decoration: InputDecoration(
+                // contentPadding: EdgeInsets.symmetric(vertical: AppSizes.height* 0.012),
+                // prefixIcon: Image(image: AssetImage('$leftIcon')) ,
+                hintText: hintText,
+                border: InputBorder.none,
+                hintStyle: TextStyle(
+                  decoration: TextDecoration.none,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                  fontFamily: Assets.poppinsLight,
+                ),
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -186,11 +208,11 @@ class LoadDetailComponents {
     return Container(
       height: AppSizes.height * 0.12,
       width: AppSizes.width,
-      padding: EdgeInsets.all(AppSizes.width *0.02),
+      padding: EdgeInsets.symmetric( horizontal: AppSizes.width * 0.03),
       decoration: BoxDecoration(
         color: AppColors.lightGray,
-        border: Border.all(color: AppColors.borderColor),
-        borderRadius: BorderRadius.circular(10),
+        // border: Border.all(color: AppColors.borderColor),
+        borderRadius: BorderRadius.circular(5),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -204,6 +226,12 @@ class LoadDetailComponents {
           Container(
             width: AppSizes.width * 0.75,
             child: TextField(
+                style: TextStyle(
+                    decoration: TextDecoration.none,
+                    fontFamily: Assets.poppinsLight,
+                    fontSize: 12,
+                    color: AppColors.colorBlack
+                ),
                 keyboardType: TextInputType.multiline,
                 minLines: 1,//Normal textInputField will be displayed
                 maxLines: 5,

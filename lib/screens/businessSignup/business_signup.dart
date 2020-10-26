@@ -13,6 +13,9 @@ import 'package:truckoom_shipper/screens/login/login.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 class BusinessSignup extends StatefulWidget {
+  String tag;
+
+  BusinessSignup({@required this.tag});
   @override
   _BusinessSignupState createState() => _BusinessSignupState();
 }
@@ -107,7 +110,7 @@ class _BusinessSignupState extends State<BusinessSignup> {
                               hintText: "Confirm Password"
                           ),
                           SizedBox(height: 30,),
-                          CommonWidgets.getLableText(text: "Country"),
+                          CommonWidgets.getLableText(text: "City"),
                           SizedBox(height: 10,),
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 10),
@@ -116,7 +119,7 @@ class _BusinessSignupState extends State<BusinessSignup> {
                             decoration: BoxDecoration(
                               color: AppColors.lightGray,
                               border: Border.all(color: AppColors.lightGray),
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(5),
                             ),
                             child: Row(
                               children: [
@@ -131,19 +134,44 @@ class _BusinessSignupState extends State<BusinessSignup> {
                                         value: _value,
                                         items: [
                                           DropdownMenuItem(
-                                            child: Text("Netherlands"),
+                                            child: Text("Netherlands",
+                                              style: TextStyle(
+                                                  decoration: TextDecoration.none,
+                                                  fontFamily: Assets.poppinsLight,
+                                                  fontSize: 12,
+                                                  color: AppColors.colorBlack
+                                              ),
+                                            ),
                                             value: 1,
                                           ),
                                           DropdownMenuItem(
-                                            child: Text("New Zealand"),
+                                            child: Text("New Zealand",
+                                              style: TextStyle(
+                                                  decoration: TextDecoration.none,
+                                                  fontFamily: Assets.poppinsLight,
+                                                  fontSize: 12,
+                                                  color: AppColors.colorBlack
+                                              ),),
                                             value: 2,
                                           ),
                                           DropdownMenuItem(
-                                              child: Text("Nepal"),
+                                              child: Text("Nepal",
+                                                style: TextStyle(
+                                                    decoration: TextDecoration.none,
+                                                    fontFamily: Assets.poppinsLight,
+                                                    fontSize: 12,
+                                                    color: AppColors.colorBlack
+                                                ),),
                                               value: 3
                                           ),
                                           DropdownMenuItem(
-                                              child: Text("Malaysia"),
+                                              child: Text("Malaysia",
+                                                style: TextStyle(
+                                                    decoration: TextDecoration.none,
+                                                    fontFamily: Assets.poppinsLight,
+                                                    fontSize: 12,
+                                                    color: AppColors.colorBlack
+                                                ),),
                                               value: 4
                                           )
                                         ],
@@ -161,47 +189,89 @@ class _BusinessSignupState extends State<BusinessSignup> {
                           ),
                           SizedBox(height: 30,),
 
-                          Table(
-                            columnWidths: {0: FlexColumnWidth(0.15)},
-                            children: [
-                              TableRow(
-                                  children: [
-                                    Checkbox(
-                                      checkColor: AppColors.white,
-                                      activeColor: AppColors.yellow,
-                                      value: onCheck,
-                                      onChanged: (bool value) {
-                                        setState(() {
-                                          onCheck = value;
-                                        });
-                                      },
-                                    ),
-                                    RichText(
-                                      text: TextSpan(
-                                          text: 'By creating an account you agree to our ',
-                                          style: TextStyle(
-                                              color: Colors.black, fontSize: 12),
-                                          children: <TextSpan>[
-                                            TextSpan(text: 'Term and Conditions',
-                                                style: TextStyle(
-                                                    color: Colors.amber,
-                                                    fontSize: 12,
-                                                    fontFamily: Assets.poppinsRegular
-
-                                                ),
-                                                recognizer: TapGestureRecognizer()
-                                                  ..onTap = () {
-                                                    // navigate to desired screen
-                                                  }
-                                            )
-                                          ]
-                                      ),
-                                    )
-                                  ]
-                              )
-                            ],
-
+                          Container(
+                            child: Row(
+                              // crossAxisAlignment: CrossAxisAlignment.start,
+                              // mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Checkbox(
+                                  checkColor: AppColors.white,
+                                  activeColor: AppColors.yellow,
+                                  value: onCheck,
+                                  onChanged: (bool value) {
+                                    setState(() {
+                                      onCheck = value;
+                                    });
+                                  },
+                                ),
+                                Container(
+                                  width: AppSizes.width * 0.75,
+                                  child: RichText(
+                                    text: TextSpan(
+                                        text:
+                                        'By creating an account you agree to our ',
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 12),
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                              text: 'Term and Conditions',
+                                              style: TextStyle(
+                                                  color: Colors.amber,
+                                                  fontSize: 12,
+                                                  fontFamily:
+                                                  Assets.poppinsRegular),
+                                              recognizer: TapGestureRecognizer()
+                                                ..onTap = () {
+                                                  // navigate to desired screen
+                                                })
+                                        ]),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
+
+                          // Table(
+                          //   columnWidths: {0: FlexColumnWidth(0.15)},
+                          //   children: [
+                          //     TableRow(
+                          //         children: [
+                          //           Checkbox(
+                          //             checkColor: AppColors.white,
+                          //             activeColor: AppColors.yellow,
+                          //             value: onCheck,
+                          //             onChanged: (bool value) {
+                          //               setState(() {
+                          //                 onCheck = value;
+                          //               });
+                          //             },
+                          //           ),
+                          //           RichText(
+                          //             text: TextSpan(
+                          //                 text: 'By creating an account you agree to our ',
+                          //                 style: TextStyle(
+                          //                     color: Colors.black, fontSize: 12),
+                          //                 children: <TextSpan>[
+                          //                   TextSpan(text: 'Term and Conditions',
+                          //                       style: TextStyle(
+                          //                           color: Colors.amber,
+                          //                           fontSize: 12,
+                          //                           fontFamily: Assets.poppinsRegular
+                          //
+                          //                       ),
+                          //                       recognizer: TapGestureRecognizer()
+                          //                         ..onTap = () {
+                          //                           // navigate to desired screen
+                          //                         }
+                          //                   )
+                          //                 ]
+                          //             ),
+                          //           )
+                          //         ]
+                          //     )
+                          //   ],
+                          //
+                          // ),
                           SizedBox(height: 10,),
                           // _businessSignupComponents.checkTermAndCondition(
                           //   onCheck: onCheck,
@@ -215,7 +285,7 @@ class _BusinessSignupState extends State<BusinessSignup> {
                           CommonWidgets.getBottomButton(
                               text: "Next",
                               onPress: () {
-                                Navigator.push(context, SlideRightRoute(page: BusinessInformation()));
+                                Navigator.push(context, SlideRightRoute(page: BusinessInformation(tag: widget.tag,)));
                               }
                           ),
                         ],

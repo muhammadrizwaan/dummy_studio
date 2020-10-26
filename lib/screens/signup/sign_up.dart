@@ -14,6 +14,10 @@ import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/loader.dart';
 
 class SignUP extends StatefulWidget {
+  String tag;
+
+  SignUP({@required this.tag});
+
   @override
   _SignUPState createState() => _SignUPState();
 }
@@ -113,45 +117,46 @@ class _SignUPState extends State<SignUP> {
                           SizedBox(
                             height: 30,
                           ),
-                          Table(
-                            columnWidths: {0: FlexColumnWidth(0.15)},
-                            children: [
-                              TableRow(children: [
-                                Container(
-                                  alignment: Alignment.topLeft,
-                                  child: Checkbox(
-                                    checkColor: AppColors.white,
-                                    activeColor: AppColors.yellow,
-                                    value: onCheck,
-                                    onChanged: (bool value) {
-                                      setState(() {
-                                        onCheck = value;
-                                      });
-                                    },
-                                  ),
+                          Container(
+                            child: Row(
+                              // crossAxisAlignment: CrossAxisAlignment.start,
+                              // mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Checkbox(
+                                  checkColor: AppColors.white,
+                                  activeColor: AppColors.yellow,
+                                  value: onCheck,
+                                  onChanged: (bool value) {
+                                    setState(() {
+                                      onCheck = value;
+                                    });
+                                  },
                                 ),
-                                RichText(
-                                  text: TextSpan(
-                                      text:
-                                          'By creating an account you agree to our ',
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 12),
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                            text: 'Term and Conditions',
-                                            style: TextStyle(
-                                                color: Colors.amber,
-                                                fontSize: 12,
-                                                fontFamily:
-                                                    Assets.poppinsRegular),
-                                            recognizer: TapGestureRecognizer()
-                                              ..onTap = () {
-                                                // navigate to desired screen
-                                              })
-                                      ]),
+                                Container(
+                                  width: AppSizes.width * 0.75,
+                                  child: RichText(
+                                    text: TextSpan(
+                                        text:
+                                        'By creating an account you agree to our ',
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 12),
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                              text: 'Term and Conditions',
+                                              style: TextStyle(
+                                                  color: Colors.amber,
+                                                  fontSize: 12,
+                                                  fontFamily:
+                                                  Assets.poppinsRegular),
+                                              recognizer: TapGestureRecognizer()
+                                                ..onTap = () {
+                                                  Navigator.push(context, SlideRightRoute(page: Maps(tag: widget.tag,)));
+                                                })
+                                        ]),
+                                  ),
                                 )
-                              ])
-                            ],
+                              ],
+                            ),
                           ),
                           SizedBox(
                             height: 10,
@@ -201,7 +206,7 @@ class _SignUPState extends State<SignUP> {
                       padding: EdgeInsets.only(
                         top: AppSizes.height * 0.08,
                       ),
-                      height: AppSizes.height * 0.23,
+                      height: AppSizes.height * 0.2,
                       width: AppSizes.width,
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -216,46 +221,48 @@ class _SignUPState extends State<SignUP> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            "Your Signup is Successfully",
+                            "Signup successful !",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              decoration: TextDecoration.none,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                            ),
+                                decoration: TextDecoration.none,
+                                fontSize: 15,
+                                color: AppColors.colorBlack,
+                                fontFamily: Assets.poppinsMedium,
+                                fontWeight: FontWeight.bold),
                           ),
-                          Text(
-                            "Done",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              decoration: TextDecoration.none,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
+                          // Text(
+                          //   "Done",
+                          //   textAlign: TextAlign.center,
+                          //   style: TextStyle(
+                          //       decoration: TextDecoration.none,
+                          //       fontSize: 15,
+                          //       color: AppColors.colorBlack,
+                          //       fontFamily: Assets.poppinsMedium,
+                          //       fontWeight: FontWeight.bold),
+                          // ),
                           SizedBox(
                             height: 20,
                           ),
                           GestureDetector(
                             onTap: () {
-                              hideLoader(context);
+                              Navigator.pushReplacement(context, SlideRightRoute(page: Maps(tag: widget.tag,)));
                             },
                             child: Text(
-                              "Click & Continue",
+                              "Tap & Continue",
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                decoration: TextDecoration.none,
-                                fontSize: 16,
-                                color: AppColors.yellow,
-                                fontWeight: FontWeight.w300,
-                              ),
+                                  decoration: TextDecoration.none,
+                                  fontSize: 12,
+                                  color: AppColors.yellow,
+                                  fontFamily: Assets.poppinsRegular,
+                                  fontWeight: FontWeight.bold),
                             ),
                           ),
                         ],
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: AppSizes.width * 0.45),
+                      margin: EdgeInsets.only(left: AppSizes.width * 0.425,),
                       height: AppSizes.width * 0.15,
                       width: AppSizes.width * 0.15,
                       decoration: BoxDecoration(

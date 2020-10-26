@@ -1,13 +1,18 @@
 
 
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
+import 'package:truckoom_shipper/screens/checkUserType/check_user.dart';
 import 'package:truckoom_shipper/screens/forgotPassword/forgot_password.dart';
 import 'package:truckoom_shipper/screens/login/login_components.dart';
+import 'package:truckoom_shipper/screens/login/login_provider.dart';
 import 'package:truckoom_shipper/screens/maps/maps_screen.dart';
 import 'package:truckoom_shipper/screens/phoneNumber/phone_number.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
@@ -19,20 +24,24 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   LoginComponents _loginComponents;
+  LoginProvider _loginProvider;
   TextEditingController email, password;
 
   @override
   void initState() {
     _loginComponents = LoginComponents();
+    _loginProvider = Provider.of<LoginProvider>(context, listen: false);
+    _loginProvider.init(context);
     email = TextEditingController();
     password = TextEditingController();
   }
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<LoginProvider>(context, listen: true);
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: true,
+        resizeToAvoidBottomInset: false,
         body: Container(
           height: AppSizes.height,
           width: AppSizes.width,
@@ -69,7 +78,7 @@ class _LoginState extends State<Login> {
                                   isPassword: false,
                                   leftIcon: 'name_icon.png',
                                   textEditingController: email,
-                                  hintText: "Enter Email"
+                                  hintText: "Email/Phone Number"
                               ),
                               SizedBox(height: AppSizes.height * 0.03,),
                               CommonWidgets.getLableText(text: "Password"),
@@ -84,8 +93,8 @@ class _LoginState extends State<Login> {
                               CommonWidgets.getBottomButton(
                                   text: "Login",
                                   onPress: () {
-                                    // Navigator.push(context, SlideRightRoute(page: BottomTab()));
-                                    Navigator.push(context, SlideRightRoute(page: Maps()));
+                                    Navigator.pushReplacement(context, SlideRightRoute(page: Maps(tag: Strings.indiviual)));
+                                    // _loginProvider.getLogin(context: context, email: email.text, password: password.text );
                                   }
                               ),
                             ],
@@ -99,12 +108,12 @@ class _LoginState extends State<Login> {
               Positioned(
                 bottom: 0,
                 child: Container(
-                  margin: EdgeInsets.only(left: MediaQuery.of(context).size.width/4, bottom: MediaQuery.of(context).size.height*0.02,),
+                  margin: EdgeInsets.only(left: MediaQuery.of(context).size.width/5, bottom: MediaQuery.of(context).size.height*0.02,),
                   child: _loginComponents.getBottomRichText(
                       text: "Don't have an account? ",
                       clickableText: 'SIGN UP',
                       onTap: () {
-                        Navigator.push(context, SlideRightRoute(page: PhoneNumber()));
+                        Navigator.push(context, SlideRightRoute(page: CheckUser()));
                       }
                   ),
                 )

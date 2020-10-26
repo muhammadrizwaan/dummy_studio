@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:truckoom_shipper/res/assets.dart';
@@ -8,101 +6,162 @@ import 'package:truckoom_shipper/res/sizes.dart';
 
 class BottomTabComponents {
   Widget getTextField(
-      { @required String leftIcon,@required TextEditingController textEditingController, @required String hintText}) {
+      {@required String leftIcon,
+      @required TextEditingController textEditingController,
+      @required String hintText}) {
     return Container(
       height: AppSizes.height * 0.05,
       width: AppSizes.width,
+      padding: EdgeInsets.only(left: 10),
       decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border.all(color: AppColors.borderColor),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: TextField(
-        controller: textEditingController,
-        decoration: InputDecoration(
-          prefixIcon: Image(image: AssetImage('$leftIcon')) ,
-          hintText: hintText,
-          border: InputBorder.none,
-          hintStyle: TextStyle(
-            decoration: TextDecoration.none,
-            fontSize: 14,
-            fontFamily: Assets.poppinsLight,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget getVehicleDetail(
-      { @required String leftIcon, @required String vehicleType, @required String vehicleDetail, @required Function onTap, }) {
-    return Container(
-      // height: AppSizes.height * 0.05,
-      margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
-        padding: EdgeInsets.all(AppSizes.width * 0.03),
-      width: AppSizes.width,
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border.all(color: AppColors.borderColor),
-        borderRadius: BorderRadius.circular(10),
+          color: AppColors.white,
+          // border: Border.all(color: AppColors.borderColor),
+          borderRadius: BorderRadius.circular(5),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey[500].withOpacity(0.3),
+                spreadRadius: 1,
+                blurRadius: 1,
+                offset: Offset(0, 0))
+          ]
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              Image(image: AssetImage('$leftIcon')) ,
-              SizedBox(width: AppSizes.width * 0.02,),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start ,
-                children: [
-                  Text('$vehicleType',
-                    style: TextStyle(
-                      fontSize:12,
-                      fontFamily: Assets.poppinsMedium,
-                      color: AppColors.colorBlack,
-                      fontWeight: FontWeight.bold
-                    ),
+          Image(image: AssetImage('$leftIcon')),
+          Center(
+            child: Container(
+              // color: AppColors.yellow,
+              height: AppSizes.height * 0.05,
+              width: AppSizes.width * 0.8,
+              padding: EdgeInsets.only(top: 15),
+              child: TextField(
+                style: TextStyle(
+                    decoration: TextDecoration.none,
+                    fontFamily: Assets.poppinsLight,
+                    fontSize: 12,
+                    color: AppColors.colorBlack),
+                controller: textEditingController,
+                decoration: InputDecoration(
+                  // prefixIcon: Image(image: AssetImage('$leftIcon')) ,
+                  hintText: hintText,
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(
+                    decoration: TextDecoration.none,
+                    fontSize: 14,
+                    fontFamily: Assets.poppinsLight,
                   ),
-                  SizedBox(height: AppSizes.height * 0.01,),
-                  Text('$vehicleDetail',
-                    style: TextStyle(
-                        fontSize:11,
-                        fontFamily: Assets.poppinsRegular,
-                        color: AppColors.colorBlack,
-                        // fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ],
-              )
-            ],
+                ),
+              ),
+            ),
           ),
-          GestureDetector(
-            onTap: () => onTap(),
-              child: Image(image: AssetImage(Assets.informationIcon))
-          ) ,
         ],
-      )
+      ),
     );
   }
 
+  Widget getVehicleDetail({
+    @required String leftIcon,
+    @required String vehicleType,
+    @required String vehicleDetail,
+    @required String Category,
+    @required Function onTap,
+    @required Function onLoadDetail,
+  }) {
+    return GestureDetector(
+      onTap: () => onLoadDetail(),
+      child: Container(
+          // height: AppSizes.height * 0.05,
+          margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
+          padding: EdgeInsets.all(AppSizes.width * 0.03),
+          width: AppSizes.width,
+          decoration: BoxDecoration(
+              color: AppColors.white,
+              // border: Border.all(color: AppColors.borderColor),
+              borderRadius: BorderRadius.circular(5),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey[500].withOpacity(0.3),
+                    spreadRadius: 1,
+                    blurRadius: 1,
+                    offset: Offset(0, 0))
+              ]
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Image(image: AssetImage('$leftIcon')),
+                  SizedBox(
+                    width: AppSizes.width * 0.02,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '$vehicleType',
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: Assets.poppinsMedium,
+                            color: AppColors.colorBlack,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: AppSizes.height * 0.01,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'Capacity: $vehicleDetail | ',
+                            style: TextStyle(
+                              fontSize: 11,
+                              fontFamily: Assets.poppinsRegular,
+                              color: AppColors.colorBlack,
+                              // fontWeight: FontWeight.bold
+                            ),
+                          ),
+                          Text(
+                            'Category: $Category',
+                            style: TextStyle(
+                              fontSize: 11,
+                              fontFamily: Assets.poppinsRegular,
+                              color: AppColors.colorBlack,
+                              // fontWeight: FontWeight.bold
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              GestureDetector(
+                  onTap: () => onTap(),
+                  child: Image(image: AssetImage(Assets.informationIcon))),
+            ],
+          )),
+    );
+  }
 
   //  £££££££££££££££££££££££££££   My Jobs Components   £££££££££££££££££££
 
-  Widget getSelectViewText (){
+  Widget getSelectViewText() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
-      child: Text('Select View',
+      child: Text(
+        'Select View',
         style: TextStyle(
-            fontSize:14,
+            fontSize: 14,
             fontFamily: Assets.poppinsLight,
             color: AppColors.colorBlack,
-            fontWeight: FontWeight.bold
-        ),
+            fontWeight: FontWeight.bold),
       ),
     );
   }
 
-  Widget onSelectViewType({@required String text, @required Function onPress}){
+  Widget onSelectViewType({@required String text, @required Function onPress}) {
     return GestureDetector(
       onTap: () => onPress(),
       child: Container(
@@ -117,12 +176,13 @@ class BottomTabComponents {
           border: Border.all(color: AppColors.yellow),
           borderRadius: BorderRadius.circular(5),
         ),
-        child: Text('$text',
+        child: Text(
+          '$text',
           style: TextStyle(
-              fontSize:12,
-              fontFamily: Assets.poppinsLight,
-              color: AppColors.yellow,
-              // fontWeight: FontWeight.bold
+            fontSize: 12,
+            fontFamily: Assets.poppinsLight,
+            color: AppColors.yellow,
+            // fontWeight: FontWeight.bold
           ),
         ),
       ),
@@ -130,85 +190,99 @@ class BottomTabComponents {
   }
 
   Widget getJobContainer(
-      {
-        @required String jobDetail,
-        @required String pickUpLocation,
-        @required String destinationLocation,
-        @required String startDate,
-        @required String status,
-        @required Function onTap
-      })
-  {
+      {@required String jobDetail,
+      @required String pickUpLocation,
+      @required String destinationLocation,
+      @required String startDate,
+      @required String time,
+      @required String status,
+      @required Function onTap}) {
     return Container(
       // height: AppSizes.height * 0.05,
       // width: AppSizes.width,
       padding: EdgeInsets.all(AppSizes.width * 0.02),
       decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border.all(color: AppColors.borderColor),
-        borderRadius: BorderRadius.circular(10),
+          color: AppColors.white,
+          // border: Border.all(color: AppColors.borderColor),
+          borderRadius: BorderRadius.circular(5),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey[500].withOpacity(0.3),
+                spreadRadius: 1,
+                blurRadius: 1,
+                offset: Offset(0, 0))
+          ]
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Text('001',
+              Text(
+                'Job ID:',
                 style: TextStyle(
-                    fontSize:12,
+                    fontSize: 12,
                     fontFamily: Assets.poppinsMedium,
                     color: AppColors.yellow,
-                    fontWeight: FontWeight.bold
-                ),
+                    fontWeight: FontWeight.bold),
               ),
-              Text(' : ',
+              Text(
+                ' : ',
                 style: TextStyle(
-                    fontSize:12,
+                    fontSize: 12,
                     fontFamily: Assets.poppinsRegular,
                     color: AppColors.colorBlack,
-                    fontWeight: FontWeight.bold
-                ),
+                    fontWeight: FontWeight.bold),
               ),
-              Text(jobDetail,
+              Text(
+                jobDetail,
                 style: TextStyle(
-                  fontSize:12,
-                  fontFamily: Assets.poppinsRegular,
-                  color: AppColors.colorBlack,
-                  fontWeight: FontWeight.bold
-                ),
+                    fontSize: 12,
+                    fontFamily: Assets.poppinsRegular,
+                    color: AppColors.colorBlack,
+                    fontWeight: FontWeight.bold),
               ),
             ],
           ),
-          SizedBox(height: AppSizes.height * 0.01,),
+          SizedBox(
+            height: AppSizes.height * 0.01,
+          ),
           Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    Image(image: AssetImage(Assets.df_pk_job),
+                    Image(
+                      image: AssetImage(Assets.df_pk_job),
                       height: 40,
                       width: 20,
                     ),
-                    SizedBox(width: AppSizes.width * 0.01,),
+                    SizedBox(
+                      width: AppSizes.width * 0.01,
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(pickUpLocation,
+                        Text(
+                          pickUpLocation,
                           style: TextStyle(
-                              fontSize:12,
-                              fontFamily: Assets.poppinsRegular,
-                              color: AppColors.locationText,
-                              // fontWeight: FontWeight.bold
+                            fontSize: 12,
+                            fontFamily: Assets.poppinsRegular,
+                            color: AppColors.locationText,
+                            // fontWeight: FontWeight.bold
                           ),
                         ),
-                        SizedBox(height: AppSizes.height * 0.01,),
-                        Text(destinationLocation,
+                        SizedBox(
+                          height: AppSizes.height * 0.01,
+                        ),
+                        Text(
+                          destinationLocation,
                           style: TextStyle(
-                              fontSize:12,
-                              fontFamily: Assets.poppinsRegular,
-                              color: AppColors.locationText,
-                              // fontWeight: FontWeight.bold
+                            fontSize: 12,
+                            fontFamily: Assets.poppinsRegular,
+                            color: AppColors.locationText,
+                            // fontWeight: FontWeight.bold
                           ),
                         ),
                       ],
@@ -217,49 +291,71 @@ class BottomTabComponents {
                 ),
                 Column(
                   children: [
-                    Text(startDate,
-                      style: TextStyle(
-                          fontSize:12,
-                          fontFamily: Assets.poppinsRegular,
-                          color: AppColors.colorBlack,
-                          // fontWeight: FontWeight.bold
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          startDate,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: Assets.poppinsRegular,
+                            color: AppColors.dateColor,
+                            // fontWeight: FontWeight.bold
+                          ),
+                        ),
+                        Text(
+                          time,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: Assets.poppinsRegular,
+                            color: AppColors.colorBlack,
+                            // fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(height: AppSizes.height * 0.01,),
+                    SizedBox(
+                      height: AppSizes.height * 0.01,
+                    ),
                   ],
                 )
               ],
             ),
           ),
-          SizedBox(height: AppSizes.height * 0.01,),
+          SizedBox(
+            height: AppSizes.height * 0.01,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Status',
+              Text(
+                'Status',
                 style: TextStyle(
-                  fontSize:12,
+                  fontSize: 12,
                   fontFamily: Assets.poppinsRegular,
                   color: AppColors.status,
                   // fontWeight: FontWeight.bold
                 ),
               ),
-              Text(status,
+              Text(
+                status,
                 style: TextStyle(
-                  fontSize:12,
-                  fontFamily: Assets.poppinsMedium,
-                  color: AppColors.yellow,
-                  fontWeight: FontWeight.bold
-                ),
+                    fontSize: 12,
+                    fontFamily: Assets.poppinsMedium,
+                    color: AppColors.yellow,
+                    fontWeight: FontWeight.bold),
               ),
             ],
           ),
-          SizedBox(height: AppSizes.height * 0.01,),
+          SizedBox(
+            height: AppSizes.height * 0.01,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Vehicle Type:',
+              Text(
+                'Vehicle Type:',
                 style: TextStyle(
-                  fontSize:12,
+                  fontSize: 12,
                   fontFamily: Assets.poppinsRegular,
                   color: AppColors.status,
                   // fontWeight: FontWeight.bold
@@ -267,18 +363,21 @@ class BottomTabComponents {
               ),
               Row(
                 children: [
-                  Text('Suzuki',
+                  Text(
+                    'Suzuki',
                     style: TextStyle(
-                      fontSize:12,
-                      fontFamily: Assets.poppinsMedium,
-                      color: AppColors.colorBlack,
-                      fontWeight: FontWeight.bold
-                    ),
+                        fontSize: 12,
+                        fontFamily: Assets.poppinsMedium,
+                        color: AppColors.colorBlack,
+                        fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(width: AppSizes.width * 0.01,),
+                  SizedBox(
+                    width: AppSizes.width * 0.01,
+                  ),
                   GestureDetector(
                     onTap: () => onTap(),
-                    child: Image(image: AssetImage(Assets.informationIcon),
+                    child: Image(
+                      image: AssetImage(Assets.informationIcon),
                       color: AppColors.colorBlack,
                     ),
                   ),
@@ -291,30 +390,34 @@ class BottomTabComponents {
     );
   }
 
-
   // £££££££££££££££££££££     Transections Components ££££££££££££££££££££££££
 
-  Widget getTransectionsContainer(
-      {
-        @required String jobDetail,
-        @required String pickUpLocation,
-        @required String destinationLocation,
-        @required String startDate,
-        @required String endDate,
-        @required String price,
-        @required String status,
-        @required Function onInvoice,
-        @required Function onTap,
-      })
-  {
+  Widget getTransectionsContainer({
+    @required String jobDetail,
+    @required String pickUpLocation,
+    @required String destinationLocation,
+    @required String startDate,
+    @required String endDate,
+    @required String price,
+    @required String status,
+    @required Function onInvoice,
+    @required Function onTap,
+  }) {
     return Container(
       // height: AppSizes.height * 0.05,
       // width: AppSizes.width,
       padding: EdgeInsets.all(AppSizes.width * 0.02),
       decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border.all(color: AppColors.borderColor),
-        borderRadius: BorderRadius.circular(10),
+          color: AppColors.white,
+          // border: Border.all(color: AppColors.borderColor),
+          borderRadius: BorderRadius.circular(5),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey[500].withOpacity(0.3),
+                spreadRadius: 1,
+                blurRadius: 1,
+                offset: Offset(0, 0))
+          ]
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -324,69 +427,78 @@ class BottomTabComponents {
             children: [
               Row(
                 children: [
-                  Text('001',
+                  Text(
+                    'Job ID: ',
                     style: TextStyle(
-                        fontSize:12,
+                        fontSize: 12,
                         fontFamily: Assets.poppinsMedium,
                         color: AppColors.yellow,
-                        fontWeight: FontWeight.bold
-                    ),
+                        fontWeight: FontWeight.bold),
                   ),
-                  Text(' : ',
+                  Text(
+                    ' : ',
                     style: TextStyle(
-                        fontSize:12,
+                        fontSize: 12,
                         fontFamily: Assets.poppinsRegular,
                         color: AppColors.colorBlack,
-                        fontWeight: FontWeight.bold
-                    ),
+                        fontWeight: FontWeight.bold),
                   ),
-                  Text(jobDetail,
+                  Text(
+                    jobDetail,
                     style: TextStyle(
-                        fontSize:12,
+                        fontSize: 12,
                         fontFamily: Assets.poppinsRegular,
                         color: AppColors.colorBlack,
-                        fontWeight: FontWeight.bold
-                    ),
+                        fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
-              Text(price,
+              Text(
+                price,
                 style: TextStyle(
-                    fontSize:12,
+                    fontSize: 12,
                     fontFamily: Assets.poppinsMedium,
                     color: AppColors.yellow,
-                    fontWeight: FontWeight.bold
-                ),
+                    fontWeight: FontWeight.bold),
               ),
             ],
           ),
-          SizedBox(height: AppSizes.height * 0.01,),
+          SizedBox(
+            height: AppSizes.height * 0.01,
+          ),
           Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    Image(image: AssetImage(Assets.df_pk_job),
+                    Image(
+                      image: AssetImage(Assets.df_pk_job),
                       height: 40,
                       width: 20,
                     ),
-                    SizedBox(width: AppSizes.width * 0.01,),
+                    SizedBox(
+                      width: AppSizes.width * 0.01,
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(pickUpLocation,
+                        Text(
+                          pickUpLocation,
                           style: TextStyle(
-                            fontSize:12,
+                            fontSize: 12,
                             fontFamily: Assets.poppinsRegular,
                             color: AppColors.locationText,
                             // fontWeight: FontWeight.bold
                           ),
                         ),
-                        SizedBox(height: AppSizes.height * 0.01,),
-                        Text(destinationLocation,
+                        SizedBox(
+                          height: AppSizes.height * 0.01,
+                        ),
+                        Text(
+                          destinationLocation,
                           style: TextStyle(
-                            fontSize:12,
+                            fontSize: 12,
                             fontFamily: Assets.poppinsRegular,
                             color: AppColors.locationText,
                             // fontWeight: FontWeight.bold
@@ -399,18 +511,22 @@ class BottomTabComponents {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(startDate,
+                    Text(
+                      startDate,
                       style: TextStyle(
-                        fontSize:12,
+                        fontSize: 12,
                         fontFamily: Assets.poppinsRegular,
                         color: AppColors.colorBlack,
                         // fontWeight: FontWeight.bold
                       ),
                     ),
-                    SizedBox(height: AppSizes.height * 0.01,),
-                    Text(endDate,
+                    SizedBox(
+                      height: AppSizes.height * 0.01,
+                    ),
+                    Text(
+                      endDate,
                       style: TextStyle(
-                        fontSize:12,
+                        fontSize: 12,
                         fontFamily: Assets.poppinsRegular,
                         color: AppColors.colorBlack,
                         // fontWeight: FontWeight.bold
@@ -418,7 +534,6 @@ class BottomTabComponents {
                     ),
                   ],
                 )
-
               ],
             ),
           ),
@@ -426,31 +541,35 @@ class BottomTabComponents {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Status',
+              Text(
+                'Status',
                 style: TextStyle(
-                  fontSize:12,
+                  fontSize: 12,
                   fontFamily: Assets.poppinsRegular,
                   color: AppColors.status,
                   // fontWeight: FontWeight.bold
                 ),
               ),
-              Text(status,
+              Text(
+                status,
                 style: TextStyle(
-                    fontSize:12,
+                    fontSize: 12,
                     fontFamily: Assets.poppinsMedium,
                     color: AppColors.yellow,
-                    fontWeight: FontWeight.bold
-                ),
+                    fontWeight: FontWeight.bold),
               ),
             ],
           ),
-          SizedBox(height: AppSizes.height * 0.01,),
+          SizedBox(
+            height: AppSizes.height * 0.01,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Vehicle Type:',
+              Text(
+                'Vehicle Type:',
                 style: TextStyle(
-                  fontSize:12,
+                  fontSize: 12,
                   fontFamily: Assets.poppinsRegular,
                   color: AppColors.status,
                   // fontWeight: FontWeight.bold
@@ -458,18 +577,21 @@ class BottomTabComponents {
               ),
               Row(
                 children: [
-                  Text('Suzuki',
+                  Text(
+                    'Suzuki',
                     style: TextStyle(
-                        fontSize:12,
+                        fontSize: 12,
                         fontFamily: Assets.poppinsMedium,
                         color: AppColors.colorBlack,
-                        fontWeight: FontWeight.bold
-                    ),
+                        fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(width: AppSizes.width * 0.01,),
+                  SizedBox(
+                    width: AppSizes.width * 0.01,
+                  ),
                   GestureDetector(
                     onTap: () => onTap(),
-                    child: Image(image: AssetImage(Assets.informationIcon),
+                    child: Image(
+                      image: AssetImage(Assets.informationIcon),
                       color: AppColors.colorBlack,
                     ),
                   ),
@@ -477,18 +599,23 @@ class BottomTabComponents {
               ),
             ],
           ),
-          SizedBox(height: AppSizes.height * 0.02,),
+          SizedBox(
+            height: AppSizes.height * 0.02,
+          ),
           Container(
             width: AppSizes.width,
             height: AppSizes.height * 0.06,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: AppColors.yellow,),
+              border: Border.all(
+                color: AppColors.yellow,
+              ),
               color: AppColors.yellow,
             ),
             child: FlatButton(
               onPressed: () => onInvoice(),
-              child: Text('view Invoice',
+              child: Text(
+                'view Invoice',
                 // text,
                 style: TextStyle(
                   decoration: TextDecoration.none,
@@ -499,17 +626,22 @@ class BottomTabComponents {
               ),
             ),
           ),
-          SizedBox(height: AppSizes.height * 0.01,),
+          SizedBox(
+            height: AppSizes.height * 0.01,
+          ),
         ],
       ),
     );
   }
 
-
-
   // ££££££££££££££££££££££££  More Components  £££££££££££££££££££££££££££
 
-  Widget getProfileContainer({@required Function onPress,@required String ProfileImg, @required String name, @required String email, }){
+  Widget getProfileContainer({
+    @required Function onPress,
+    @required String ProfileImg,
+    @required String name,
+    @required String email,
+  }) {
     return GestureDetector(
       onTap: () => onPress(),
       child: Container(
@@ -517,29 +649,36 @@ class BottomTabComponents {
         padding: EdgeInsets.all(AppSizes.width * 0.05),
         child: Row(
           children: [
-            SizedBox(width: AppSizes.width * 0.02,),
+            SizedBox(
+              width: AppSizes.width * 0.02,
+            ),
             CircleAvatar(
               backgroundImage: AssetImage(ProfileImg),
               radius: 50.0,
               backgroundColor: AppColors.white,
             ),
             // Image(image: AssetImage(Assets.profileImg),),
-            SizedBox(width: AppSizes.width * 0.03,),
+            SizedBox(
+              width: AppSizes.width * 0.03,
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(name,
+                Text(
+                  name,
                   style: TextStyle(
-                    fontSize:22,
-                    fontFamily: Assets.robotoBold,
-                    color: AppColors.yellow,
-                    fontWeight: FontWeight.bold
-                  ),
+                      fontSize: 22,
+                      fontFamily: Assets.robotoBold,
+                      color: AppColors.yellow,
+                      fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: AppSizes.height * 0.01,),
-                Text(email,
+                SizedBox(
+                  height: AppSizes.height * 0.01,
+                ),
+                Text(
+                  email,
                   style: TextStyle(
-                    fontSize:12,
+                    fontSize: 12,
                     fontFamily: Assets.poppinsRegular,
                     color: AppColors.emailTextColor,
                     // fontWeight: FontWeight.bold
@@ -551,36 +690,35 @@ class BottomTabComponents {
         ),
       ),
     );
+  }
 
-    }
-
-
-    Widget touchableButton({@required String text, @required Function onPress}) {
-      return GestureDetector(
-        onTap: () => onPress(),
-        child: Container(
-          height: AppSizes.height * 0.06,
-          width: AppSizes.width,
-          color: AppColors.white,
-          padding: EdgeInsets.only(left: AppSizes.width * 0.08),
-          child: Row(
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              // SizedBox(width: AppSizes.width * 0.08,),
-              Text(text,
-                style: TextStyle(
-                  fontSize:12,
-                  fontFamily: Assets.poppinsLight,
-                  color: AppColors.colorBlack,
-                  // fontWeight: FontWeight.bold
-                ),
+  Widget touchableButton({@required String text, @required Function onPress}) {
+    return GestureDetector(
+      onTap: () => onPress(),
+      child: Container(
+        height: AppSizes.height * 0.06,
+        width: AppSizes.width,
+        color: AppColors.white,
+        padding: EdgeInsets.only(left: AppSizes.width * 0.08),
+        child: Row(
+          // crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            // SizedBox(width: AppSizes.width * 0.08,),
+            Text(
+              text,
+              style: TextStyle(
+                fontSize: 12,
+                fontFamily: Assets.poppinsLight,
+                color: AppColors.colorBlack,
+                // fontWeight: FontWeight.bold
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-      );
-    }
+      ),
+    );
+  }
 
   Widget getSOSbutton({@required String text, @required Function onPress}) {
     return GestureDetector(
@@ -595,20 +733,21 @@ class BottomTabComponents {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             // SizedBox(width: AppSizes.width * 0.08,),
-            Text(text,
+            Text(
+              text,
               style: TextStyle(
-                fontSize:12,
+                fontSize: 12,
                 fontFamily: Assets.poppinsLight,
                 color: AppColors.colorBlack,
                 // fontWeight: FontWeight.bold
               ),
             ),
-            Image(image: AssetImage(Assets.rightArrow),),
+            Image(
+              image: AssetImage(Assets.rightArrow),
+            ),
           ],
         ),
       ),
     );
   }
-
-
 }

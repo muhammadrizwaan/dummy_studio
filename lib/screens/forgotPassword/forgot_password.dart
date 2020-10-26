@@ -6,6 +6,7 @@ import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/forgotPassword/forgot_password_components.dart';
+import 'package:truckoom_shipper/screens/login/login.dart';
 import 'package:truckoom_shipper/screens/resetPassword/reset_password.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
@@ -39,8 +40,10 @@ class _ForgotPassowrdState extends State<ForgotPassowrd> {
             children: [
               CommonWidgets.getAppBar(
                   iconName: 'cross_icon.png',
-                  text: "Reset ",
-                  clickableText: "Password",
+                  text: " ",
+                  clickableText: "",
+                  // text: "Reset ",
+                  // clickableText: "Password",
                   onTap: (){},
                   onPress: () {
                     Navigator.pop(context);
@@ -62,15 +65,15 @@ class _ForgotPassowrdState extends State<ForgotPassowrd> {
                           SizedBox(height: AppSizes.height * 0.01,),
                           CommonWidgets.getTextField(
                               isPassword: false,
-                              leftIcon: 'icon_phone_pn.png',
+                              leftIcon: 'email_icon.png',
                               textEditingController: email,
-                              hintText: "Enter Email"
+                              hintText: "jerry.ellis@mail.com"
                           ),
                           SizedBox(height: AppSizes.height * 0.06,),
                           CommonWidgets.getBottomButton(
                               text: "Submit",
                               onPress: () {
-                                Navigator.push(context, SlideRightRoute(page: ResetPassword()));
+                                Navigator.push(context, SlideRightRoute(page: Login()));
                               }
                           ),
                         ],

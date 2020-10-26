@@ -10,6 +10,9 @@ import 'package:truckoom_shipper/screens/bank/bank_screen.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 class Payment extends StatefulWidget {
+  String tag;
+  Payment({@required this.tag});
+
   @override
   _PaymentState createState() => _PaymentState();
 }
@@ -51,33 +54,33 @@ class _PaymentState extends State<Payment> {
                                 SizedBox(height: AppSizes.height * 0.02),
                                 CommonWidgets.getPayField(
                                     isPassword: false,
-                                    leftIcon: 'name_icon.png',
+                                    leftIcon: Assets.radioActiveIcon,
                                     // textEditingController: email,
-                                    hintText: "Mathew due"),
+                                    hintText: "Bank Transfer"),
                                 SizedBox(
                                   height: 10,
                                 ),
                                 CommonWidgets.getPayField(
                                     isPassword: false,
-                                    leftIcon: 'icon_card_number.png',
+                                    leftIcon: Assets.radioUnactiveIcon,
                                     // textEditingController: email,
-                                    hintText: "0123-0123-0123"),
+                                    hintText: "Payment Gateway"),
                                 SizedBox(
                                   height: 10,
                                 ),
                                 CommonWidgets.getPayField(
                                     isPassword: false,
-                                    leftIcon: 'icon_card_number.png',
+                                    leftIcon: Assets.radioUnactiveIcon,
                                     // textEditingController: email,
-                                    hintText: "012"),
+                                    hintText: "Wallet"),
                                 SizedBox(
                                   height: 10,
                                 ),
                                 CommonWidgets.getPayField(
                                     isPassword: false,
-                                    leftIcon: 'icon_card_number.png',
+                                    leftIcon: Assets.radioUnactiveIcon,
                                     // textEditingController: email,
-                                    hintText: "01/2020"),
+                                    hintText: "Cash"),
                                 SizedBox(
                                   height: 30,
                                 ),
@@ -94,7 +97,7 @@ class _PaymentState extends State<Payment> {
                     child: Container(
                       // margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
                       child: CommonWidgets.applyCouponContainer(
-                          text: 'Apply Coupon',
+                          text: 'Submit',
                           onPress: (){
                             Navigator.push(context, SlideRightRoute(page: Bank()));
                           },
@@ -163,6 +166,12 @@ class _PaymentState extends State<Payment> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: TextField(
+                              style: TextStyle(
+                                  decoration: TextDecoration.none,
+                                  fontFamily: Assets.poppinsLight,
+                                  fontSize: 12,
+                                  color: AppColors.colorBlack
+                              ),
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: "Enter Promo Code",

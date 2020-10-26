@@ -11,25 +11,41 @@ class ContactUsComponents{
     return Container(
       height: AppSizes.height * 0.06,
       width: AppSizes.width,
+      padding: EdgeInsets.only(left: 10),
       decoration: BoxDecoration(
         color: AppColors.lightGray,
-        border: Border.all(color: AppColors.borderColor),
-        borderRadius: BorderRadius.circular(10),
+        // border: Border.all(color: AppColors.borderColor),
+        borderRadius: BorderRadius.circular(5),
       ),
-      child: TextField(
-        controller: textEditingController,
-        // readOnly: true,
-        decoration: InputDecoration(
-          prefixIcon: Image(image: AssetImage('$leftIcon')) ,
-          hintText: hintText,
-          border: InputBorder.none,
-          hintStyle: TextStyle(
-            decoration: TextDecoration.none,
-            fontSize: 12,
-            color: AppColors.colorBlack,
-            fontFamily: Assets.poppinsLight,
+      child: Row(
+        children: [
+          Image(image: AssetImage('$leftIcon')) ,
+          Container(
+            margin: EdgeInsets.only(left: 5),
+            width: AppSizes.width * 0.8,
+            child: TextField(
+              style: TextStyle(
+                  decoration: TextDecoration.none,
+                  fontFamily: Assets.poppinsLight,
+                  fontSize: 12,
+                  color: AppColors.colorBlack
+              ),
+              controller: textEditingController,
+              // readOnly: true,
+              decoration: InputDecoration(
+                // prefixIcon: Image(image: AssetImage('$leftIcon')) ,
+                hintText: hintText,
+                border: InputBorder.none,
+                hintStyle: TextStyle(
+                  decoration: TextDecoration.none,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                  fontFamily: Assets.poppinsLight,
+                ),
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -39,11 +55,11 @@ class ContactUsComponents{
     return Container(
       height: AppSizes.height * 0.12,
       width: AppSizes.width,
-      padding: EdgeInsets.all(AppSizes.width *0.02),
+      padding: EdgeInsets.symmetric( horizontal: AppSizes.width * 0.03),
       decoration: BoxDecoration(
         color: AppColors.lightGray,
-        border: Border.all(color: AppColors.borderColor),
-        borderRadius: BorderRadius.circular(10),
+        // border: Border.all(color: AppColors.borderColor),
+        borderRadius: BorderRadius.circular(5),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -57,6 +73,12 @@ class ContactUsComponents{
           Container(
             width: AppSizes.width * 0.75,
             child: TextField(
+                style: TextStyle(
+                    decoration: TextDecoration.none,
+                    fontFamily: Assets.poppinsLight,
+                    fontSize: 12,
+                    color: AppColors.colorBlack
+                ),
               keyboardType: TextInputType.multiline,
               minLines: 1,//Normal textInputField will be displayed
               maxLines: 5,

@@ -36,7 +36,7 @@ class BusinessInformationComponents {
         decoration: BoxDecoration(
           color: AppColors.lightGray,
           border: Border.all(color: AppColors.lightGray),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(5),
         ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

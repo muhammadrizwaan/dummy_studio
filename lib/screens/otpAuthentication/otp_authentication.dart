@@ -8,12 +8,17 @@ import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/res/strings.dart';
+import 'package:truckoom_shipper/screens/businessSignup/business_signup.dart';
 import 'package:truckoom_shipper/screens/signup/sign_up.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 import 'otp_authentication_components.dart';
 
 class OTPAuthentication extends StatefulWidget {
+  String tag;
+
+  OTPAuthentication({@required this.tag});
   @override
   _OTPAuthenticationState createState() => _OTPAuthenticationState();
 }
@@ -65,13 +70,13 @@ class _OTPAuthenticationState extends State<OTPAuthentication> {
                           SizedBox(height: 30,),
                           _otpAuthenticationComponents.getOTPLableText(text: "Enter the 4-digit code sent to you at"),
                           SizedBox(height: 20,),
-                          CommonWidgets.getLableText(text: "Enter Varification Code"),
+                          CommonWidgets.getLableText(text: "Enter Verification Code"),
                           SizedBox(height: 10,),
                           CommonWidgets.getTextField(
                               isPassword: true,
                               leftIcon: 'icon_phone_pn.png',
                               textEditingController: otp_code,
-                              hintText: "Enter Varification Code"
+                              hintText: "Enter Verification Code"
                           ),
                           SizedBox(height: 30,),
                           _otpAuthenticationComponents.getRichText(
@@ -83,7 +88,12 @@ class _OTPAuthenticationState extends State<OTPAuthentication> {
                           CommonWidgets.getBottomButton(
                               text: "Submit",
                               onPress: () {
-                                Navigator.push(context, SlideRightRoute(page: SignUP()));
+                                if(widget.tag == Strings.indiviual){
+                                  Navigator.push(context, SlideRightRoute(page: SignUP(tag: widget.tag,)));
+                                }
+                                else if(widget.tag == Strings.business){
+                                  Navigator.push(context, SlideRightRoute(page: BusinessSignup(tag: widget.tag,)));
+                                }
                               }
                           ),
                         ],

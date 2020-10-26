@@ -142,19 +142,47 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                                         value: _value,
                                         items: [
                                           DropdownMenuItem(
-                                            child: Text("Netherlands"),
+                                            child: Text("Netherlands",
+                                              style: TextStyle(
+                                                  decoration: TextDecoration.none,
+                                                  fontFamily: Assets.poppinsLight,
+                                                  fontSize: 12,
+                                                  color: AppColors.colorBlack
+                                              ),
+                                            ),
                                             value: 1,
                                           ),
                                           DropdownMenuItem(
-                                            child: Text("New Zealand"),
+                                            child: Text("New Zealand",
+                                              style: TextStyle(
+                                                  decoration: TextDecoration.none,
+                                                  fontFamily: Assets.poppinsLight,
+                                                  fontSize: 12,
+                                                  color: AppColors.colorBlack
+                                              ),
+                                            ),
                                             value: 2,
                                           ),
                                           DropdownMenuItem(
-                                              child: Text("Nepal"),
+                                              child: Text("Nepal",
+                                                style: TextStyle(
+                                                    decoration: TextDecoration.none,
+                                                    fontFamily: Assets.poppinsLight,
+                                                    fontSize: 12,
+                                                    color: AppColors.colorBlack
+                                                ),
+                                              ),
                                               value: 3
                                           ),
                                           DropdownMenuItem(
-                                              child: Text("Malaysia"),
+                                              child: Text("Malaysia",
+                                                style: TextStyle(
+                                                    decoration: TextDecoration.none,
+                                                    fontFamily: Assets.poppinsLight,
+                                                    fontSize: 12,
+                                                    color: AppColors.colorBlack
+                                                ),
+                                              ),
                                               value: 4
                                           )
                                         ],
