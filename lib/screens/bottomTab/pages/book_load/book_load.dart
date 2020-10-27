@@ -36,6 +36,8 @@ class _BookLoadState extends State<BookLoad> {
   LatLng _center = LatLng(30.3753, 69.3451);
   BookLoadComponents _bookLoadComponents;
   int _value = 1;
+  bool pickUpLocation, dropOffLoction;
+  int count;
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
@@ -56,6 +58,9 @@ class _BookLoadState extends State<BookLoad> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    pickUpLocation = false;
+    count = 0;
+    dropOffLoction = false;
     _bookLoadComponents = BookLoadComponents();
   }
 
@@ -164,35 +169,42 @@ class _BookLoadState extends State<BookLoad> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        margin: EdgeInsets.only(
-                            top: AppSizes.height * 0.02,
-                            left: AppSizes.width * 0.03),
-                        padding: EdgeInsets.only(
-                          left: AppSizes.width * 0.03,
-                        ),
-                        height: AppSizes.height * 0.05,
-                        width: AppSizes.width * 0.85,
-                        decoration: BoxDecoration(
-                            color: AppColors.lightGray,
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Linecons.location,
-                              size: 20,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            TextView.getLabelText04(
-                              "Select Pickup location",
-                              color: Colors.black.withOpacity(
-                                0.6,
+                      GestureDetector(
+                        onTap: (){
+                          setState(() {
+                            pickUpLocation = !pickUpLocation;
+                          });
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(
+                              top: AppSizes.height * 0.02,
+                              left: AppSizes.width * 0.03),
+                          padding: EdgeInsets.only(
+                            left: AppSizes.width * 0.03,
+                          ),
+                          height: AppSizes.height * 0.06,
+                          width: AppSizes.width * 0.85,
+                          decoration: BoxDecoration(
+                              color:  AppColors.lightGray,
+                              border: pickUpLocation ? Border.all(color: AppColors.yellow) : Border.all(color: AppColors.yellow.withOpacity(0)),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Linecons.location,
+                                size: 20,
                               ),
-                            ),
-                          ],
-                        ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              TextView.getLabelText04(
+                                pickUpLocation ? "Urbana, IL" : "Select Pick up location",
+                                color: Colors.black.withOpacity(
+                                  0.6,
+                                ),
+                              ),
+                            ],
+                          ),
 
 //                              child: TextField(
 //                                style: TextStyle(
@@ -215,23 +227,33 @@ class _BookLoadState extends State<BookLoad> {
 //                                ),
 //
 //                              ),
+                        ),
                       ),
                       SizedBox(
                         height: AppSizes.height * 0.04,
                       ),
                       GestureDetector(
                         onTap: (){
-                          Navigator.push(context, SlideRightRoute(page: SelectVehicle()));
+                          if(count == 0){
+                            setState(() {
+                              dropOffLoction =! dropOffLoction;
+                            });
+                          }
+                          count ++;
+                          if(count != 0){
+                            Navigator.push(context, SlideRightRoute(page: SelectVehicle()));
+                          }
                         },
                         child: Container(
                           margin: EdgeInsets.only(left: AppSizes.width * 0.03),
                           padding: EdgeInsets.only(
                             left: AppSizes.width * 0.03,
                           ),
-                          height: AppSizes.height * 0.05,
+                          height: AppSizes.height * 0.06,
                           width: AppSizes.width * 0.85,
                           decoration: BoxDecoration(
                               color: AppColors.lightGray,
+                              border: dropOffLoction ? Border.all(color: AppColors.yellow) : Border.all(color: AppColors.yellow.withOpacity(0)),
                               borderRadius: BorderRadius.circular(10)),
                           child: Row(
                             children: [
@@ -243,7 +265,7 @@ class _BookLoadState extends State<BookLoad> {
                                 width: 10,
                               ),
                               TextView.getLabelText04(
-                                "Select Drop off location",
+                                dropOffLoction ? "Chicago, IL" : "Select Drop off location",
                                 color: Colors.black.withOpacity(
                                   0.6,
                                 ),
