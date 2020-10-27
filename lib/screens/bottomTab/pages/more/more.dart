@@ -46,61 +46,67 @@ class _MoreState extends State<More> {
                 text: "More", iconName: Assets.bellIconUnpress, onPress: () {
                   Navigator.push(context, SlideRightRoute(page: Notifications()));
             }),
-            Divider(
-              height: 10,
-            ),
-            _moreComponents.getProfileContainer(
-              ProfileImg: Assets.profileImg,
-              name: 'Matthew',
-              email: 'Matthew@gmail.com',
-              onPress: () {
-                if(widget.tag == Strings.indiviual){
-                  Navigator.push(context, SlideRightRoute(page: IndividualProfile()));
-                }
-                else if(widget.tag == Strings.business){
-                  Navigator.push(context, SlideRightRoute(page: BusinessProfile()));
-                }
-              },
-            ),
-            Divider(
-              height: 10,
-            ),
-            _moreComponents.touchableButton(
-              text: 'Referrals',
-              onPress: () {
-                Navigator.push(context, SlideRightRoute(page: Referrals()));
-              },
-            ),
-            Divider(
-              height: 10,
-            ),
-            _moreComponents.touchableButton(
-              text: 'Contact Us',
-              onPress: () {
-                Navigator.push(context, SlideRightRoute(page: ContactUs()));
-              },
-            ),
-            Divider(
-              height: 10,
-            ),
-            // _moreComponents.getSOSbutton(
-            //   text: 'Language',
-            //   onPress: () {
-            //     // Navigator.pop(
-            //     //     context, SlideRightRoute(page: DriverDetails()));
-            //   },
-            // ),
-            FAQStatelessContainer(),
-            Divider(
-              height: 10,
-            ),
-            _moreComponents.touchableButton(
-              text: 'Logout',
-              onPress: () {
-              },
-            ),
-            Divider(
-              height: 10,
+            Expanded(
+              child: ListView(
+                children: [
+                  Divider(
+                    height: 10,
+                  ),
+                  _moreComponents.getProfileContainer(
+                    ProfileImg: Assets.profileImg,
+                    name: 'Matthew',
+                    email: 'Matthew@gmail.com',
+                    onPress: () {
+                      if(widget.tag == Strings.indiviual){
+                        Navigator.push(context, SlideRightRoute(page: IndividualProfile()));
+                      }
+                      else if(widget.tag == Strings.business){
+                        Navigator.push(context, SlideRightRoute(page: BusinessProfile()));
+                      }
+                    },
+                  ),
+                  Divider(
+                    height: 10,
+                  ),
+                  _moreComponents.touchableButton(
+                    text: 'Referrals',
+                    onPress: () {
+                      Navigator.push(context, SlideRightRoute(page: Referrals()));
+                    },
+                  ),
+                  Divider(
+                    height: 10,
+                  ),
+                  _moreComponents.touchableButton(
+                    text: 'Contact Us',
+                    onPress: () {
+                      Navigator.push(context, SlideRightRoute(page: ContactUs()));
+                    },
+                  ),
+                  Divider(
+                    height: 10,
+                  ),
+                  // _moreComponents.getSOSbutton(
+                  //   text: 'Language',
+                  //   onPress: () {
+                  //     // Navigator.pop(
+                  //     //     context, SlideRightRoute(page: DriverDetails()));
+                  //   },
+                  // ),
+                  FAQStatelessContainer(),
+                  Divider(
+                    height: 10,
+                  ),
+                  _moreComponents.touchableButton(
+                    text: 'Logout',
+                    onPress: () {
+                    },
+                  ),
+                  Divider(
+                    height: 10,
+                  ),
+                ],
+              ),
             ),
           ],
         ));

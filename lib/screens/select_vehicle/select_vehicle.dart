@@ -17,7 +17,6 @@ class SelectVehicle extends StatefulWidget {
 }
 
 class _SelectVehicleState extends State<SelectVehicle> {
-
   int _value = 1;
 
   SelectVechileComponents _selectVehicleComponents;
@@ -32,6 +31,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
     search = TextEditingController();
     isSelect = false;
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -54,16 +54,20 @@ class _SelectVehicleState extends State<SelectVehicle> {
                 ),
                 Padding(
                   padding:
-                  EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
+                      EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
                   child: _selectVehicleComponents.getTextField(
                       leftIcon: Assets.searchIcon,
                       textEditingController: search,
                       hintText: "Search"),
                 ),
-                SizedBox(height: AppSizes.height * 0.02,),
+                SizedBox(
+                  height: AppSizes.height * 0.02,
+                ),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 10),
-                  margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05,),
+                  margin: EdgeInsets.symmetric(
+                    horizontal: AppSizes.width * 0.05,
+                  ),
                   height: AppSizes.height * 0.06,
                   width: AppSizes.width,
                   decoration: BoxDecoration(
@@ -76,8 +80,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
                             spreadRadius: 1,
                             blurRadius: 1,
                             offset: Offset(0, 0))
-                      ]
-                  ),
+                      ]),
                   child: Row(
                     children: [
                       Padding(
@@ -89,11 +92,10 @@ class _SelectVehicleState extends State<SelectVehicle> {
                               size: 20,
                             )),
                         // child: Image(image: AssetImage(Assets.vehicle)),
-                      ) ,
+                      ),
                       Expanded(
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton(
-
                               value: _value,
                               items: [
                                 DropdownMenuItem(
@@ -115,27 +117,23 @@ class _SelectVehicleState extends State<SelectVehicle> {
                                       "Category 2",
                                       color: AppColors.colorBlack,
                                     ),
-                                    value: 3
-                                ),
+                                    value: 3),
                                 DropdownMenuItem(
                                     child: TextView.getLightText04(
                                       "Category 3",
                                       color: AppColors.colorBlack,
                                     ),
-                                    value: 4
-                                )
+                                    value: 4)
                               ],
                               onChanged: (value) {
                                 setState(() {
                                   _value = value;
                                 });
-                              }
-                          ),
+                              }),
                         ),
                       ),
                     ],
                   ),
-
                 ),
                 SizedBox(height: AppSizes.height * 0.02),
                 Expanded(
@@ -148,145 +146,153 @@ class _SelectVehicleState extends State<SelectVehicle> {
                               height: AppSizes.height * 0.01,
                             ),
                             _selectVehicleComponents.getVehicleDetail(
-                                leftIcon: Assets.vehicle_img,
-                                vehicleType: 'Toyota Prius',
-                                vehicleDetail: '22 Ton',
-                                Category: 'Cargo',
-                                onLoadDetail: (){
-                                  setState(() {
-                                    isSelect = !isSelect;
-                                  });
-                                  Navigator.push(context, SlideRightRoute(page: LoadDetail()));
-                                  //show button
-                                },
-                                onTap: () {
-                                  //Show information
-                                },
+                              leftIcon: Assets.vehicle_img,
+                              vehicleType: 'Toyota Prius',
+                              vehicleDetail: '22 Ton',
+                              Category: 'Cargo',
+                              onLoadDetail: () {
+                                setState(() {
+                                  isSelect = !isSelect;
+                                });
+                                Navigator.push(context,
+                                    SlideRightRoute(page: LoadDetail()));
+                                //show button
+                              },
+                              isSelect: isSelect,
+                              onTap: () {
+                                //Show information
+                              },
+                            ),
+                            SizedBox(
+                              height: AppSizes.height * 0.01,
+                            ),
+                            _selectVehicleComponents.getVehicleDetail(
+                              leftIcon: Assets.vehicle_img,
+                              vehicleType: 'Toyota Prius',
+                              vehicleDetail: '22 Ton',
+                              Category: 'Cargo',
+                              onLoadDetail: () {
+                                setState(() {
+                                  isSelect = !isSelect;
+                                });
+                                //show button
+                              },
+                              isSelect: false,
+                              onTap: () {
+                                //Show information
+                              },
+                            ),
+                            SizedBox(
+                              height: AppSizes.height * 0.01,
+                            ),
+                            _selectVehicleComponents.getVehicleDetail(
+                              leftIcon: Assets.vehicle_img,
+                              vehicleType: 'Toyota Prius',
+                              vehicleDetail: '22 Ton',
+                              Category: 'Cargo',
+                              onLoadDetail: () {
+                                setState(() {
+                                  isSelect = !isSelect;
+                                });
+                                //show button
+                              },
+                              onTap: () {
+                                //Show information
+                              },
+                              isSelect: false,
+                            ),
+                            SizedBox(
+                              height: AppSizes.height * 0.01,
+                            ),
+                            _selectVehicleComponents.getVehicleDetail(
+                              leftIcon: Assets.vehicle_img,
+                              vehicleType: 'Toyota Prius',
+                              vehicleDetail: '22 Ton',
+                              Category: 'Cargo',
+                              onLoadDetail: () {
+                                setState(() {
+                                  isSelect = !isSelect;
+                                });
+                                //show button
+                              },
+                              isSelect: false,
+                              onTap: () {
+                                //Show information
+                              },
+                            ),
+                            SizedBox(
+                              height: AppSizes.height * 0.01,
+                            ),
+                            _selectVehicleComponents.getVehicleDetail(
+                              leftIcon: Assets.vehicle_img,
+                              vehicleType: 'Toyota Prius',
+                              vehicleDetail: '22 Ton',
+                              Category: 'Cargo',
+                              onLoadDetail: () {
+                                setState(() {
+                                  isSelect = !isSelect;
+                                });
+                                //show button
+                              },
+                              isSelect: false,
+                              onTap: () {
+                                //Show information
+                              },
+                            ),
+                            SizedBox(
+                              height: AppSizes.height * 0.01,
+                            ),
+                            _selectVehicleComponents.getVehicleDetail(
+                              leftIcon: Assets.vehicle_img,
+                              vehicleType: 'Toyota Prius',
+                              vehicleDetail: '22 Ton',
+                              Category: 'Cargo',
+                              onLoadDetail: () {
+                                setState(() {
+                                  isSelect = !isSelect;
+                                });
+                                //show button
+                              },
+                              isSelect: false,
+                              onTap: () {
+                                //Show information
+                              },
+                            ),
+                            SizedBox(
+                              height: AppSizes.height * 0.01,
+                            ),
+                            _selectVehicleComponents.getVehicleDetail(
+                              leftIcon: Assets.vehicle_img,
+                              vehicleType: 'Toyota Prius',
+                              vehicleDetail: '22 Ton',
+                              Category: 'Cargo',
+                              onLoadDetail: () {
+                                setState(() {
+                                  isSelect = !isSelect;
+                                });
+                                //show button
+                              },
+                              isSelect: false,
+                              onTap: () {
+                                //Show information
+                              },
+                            ),
+                            SizedBox(
+                              height: AppSizes.height * 0.01,
+                            ),
+                            _selectVehicleComponents.getVehicleDetail(
+                              leftIcon: Assets.vehicle_img,
+                              vehicleType: 'Toyota Prius',
+                              vehicleDetail: '22 Ton',
+                              Category: 'Cargo',
+                              onLoadDetail: () {
+                                setState(() {
+                                  isSelect = !isSelect;
+                                });
 
-                            ),
-                            SizedBox(
-                              height: AppSizes.height * 0.01,
-                            ),
-                            _selectVehicleComponents.getVehicleDetail(
-                              leftIcon: Assets.vehicle_img,
-                              vehicleType: 'Toyota Prius',
-                              vehicleDetail: '22 Ton',
-                              Category: 'Cargo',
-                              onLoadDetail: (){
-                                setState(() {
-                                  isSelect = !isSelect;
-                                });
                                 //show button
                               },
-                              onTap: () {
-                                //Show information
-                              },
-                            ),
-                            SizedBox(
-                              height: AppSizes.height * 0.01,
-                            ),
-                            _selectVehicleComponents.getVehicleDetail(
-                              leftIcon: Assets.vehicle_img,
-                              vehicleType: 'Toyota Prius',
-                              vehicleDetail: '22 Ton',
-                              Category: 'Cargo',
-                              onLoadDetail: (){
-                                setState(() {
-                                  isSelect = !isSelect;
-                                });
-                                //show button
-                              },
-                              onTap: () {
-                                //Show information
-                              },
-                            ),
-                            SizedBox(
-                              height: AppSizes.height * 0.01,
-                            ),
-                            _selectVehicleComponents.getVehicleDetail(
-                              leftIcon: Assets.vehicle_img,
-                              vehicleType: 'Toyota Prius',
-                              vehicleDetail: '22 Ton',
-                              Category: 'Cargo',
-                              onLoadDetail: (){
-                                setState(() {
-                                  isSelect = !isSelect;
-                                });
-                                //show button
-                              },
-                              onTap: () {
-                                //Show information
-                              },
-                            ),
-                            SizedBox(
-                              height: AppSizes.height * 0.01,
-                            ),
-                            _selectVehicleComponents.getVehicleDetail(
-                              leftIcon: Assets.vehicle_img,
-                              vehicleType: 'Toyota Prius',
-                              vehicleDetail: '22 Ton',
-                              Category: 'Cargo',
-                              onLoadDetail: (){
-                                setState(() {
-                                  isSelect = !isSelect;
-                                });
-                                //show button
-                              },
-                              onTap: () {
-                                //Show information
-                              },
-                            ),
-                            SizedBox(
-                              height: AppSizes.height * 0.01,
-                            ),
-                            _selectVehicleComponents.getVehicleDetail(
-                              leftIcon: Assets.vehicle_img,
-                              vehicleType: 'Toyota Prius',
-                              vehicleDetail: '22 Ton',
-                              Category: 'Cargo',
-                              onLoadDetail: (){
-                                setState(() {
-                                  isSelect = !isSelect;
-                                });
-                                //show button
-                              },
-                              onTap: () {
-                                //Show information
-                              },
-                            ),
-                            SizedBox(
-                              height: AppSizes.height * 0.01,
-                            ),
-                            _selectVehicleComponents.getVehicleDetail(
-                              leftIcon: Assets.vehicle_img,
-                              vehicleType: 'Toyota Prius',
-                              vehicleDetail: '22 Ton',
-                              Category: 'Cargo',
-                              onLoadDetail: (){
-                                setState(() {
-                                  isSelect = !isSelect;
-                                });
-                                //show button
-                              },
-                              onTap: () {
-                                //Show information
-                              },
-                            ),
-                            SizedBox(
-                              height: AppSizes.height * 0.01,
-                            ),
-                            _selectVehicleComponents.getVehicleDetail(
-                              leftIcon: Assets.vehicle_img,
-                              vehicleType: 'Toyota Prius',
-                              vehicleDetail: '22 Ton',
-                              Category: 'Cargo',
-                              onLoadDetail: (){
-                                setState(() {
-                                  isSelect = !isSelect;
-                                });
-
-                                //show button
-                              },
+                              isSelect: false,
                               onTap: () {
                                 //Show information
                               },

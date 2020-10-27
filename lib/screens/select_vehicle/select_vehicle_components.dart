@@ -65,6 +65,7 @@ class SelectVechileComponents {
     @required String leftIcon,
     @required String vehicleType,
     @required String vehicleDetail,
+    @required bool isSelect,
     @required String Category,
     @required Function onTap,
     @required Function onLoadDetail,
@@ -75,7 +76,7 @@ class SelectVechileComponents {
       padding: EdgeInsets.all(AppSizes.width * 0.03),
       width: AppSizes.width,
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: isSelect ? Color.fromRGBO(0, 0, 0, 0.16) : Colors.white,
           // border: Border.all(color: AppColors.borderColor),
           borderRadius: BorderRadius.circular(5),
           boxShadow: [

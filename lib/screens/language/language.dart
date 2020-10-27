@@ -76,6 +76,7 @@ class _LanguageState extends State<Language> {
                                 Expanded(
                                   child: DropdownButtonHideUnderline(
                                     child: DropdownButton(
+                                      icon: Icon(Icons.keyboard_arrow_down),
                                         value: _value,
                                         items: [
                                           DropdownMenuItem(

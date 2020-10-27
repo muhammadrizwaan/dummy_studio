@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/entypo_icons.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/routes/routes.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
@@ -157,8 +157,8 @@ class _BankState extends State<Bank> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(context, SlideRightRoute(
-                              page: BottomTab()));
+                          hideLoader(context);
+                          Navigator.pushNamedAndRemoveUntil(context, Routes.bottomTab, (r) => false);
                           // hideLoader(context);
                         },
                         child: Text(

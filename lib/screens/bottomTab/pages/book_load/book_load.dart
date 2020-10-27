@@ -120,6 +120,10 @@ class _BookLoadState extends State<BookLoad> {
               myLocationEnabled: true,
             ),
             SlidingUpPanel(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(15,),
+                topRight: Radius.circular(15,),
+              ),
               panel: Center(
                 child: _bottomNavigationContainer(),
               ),
@@ -320,219 +324,228 @@ class _BookLoadState extends State<BookLoad> {
                       text: "Pickup Location"),
                 ),
                 Container(
-                  height: AppSizes.height * 0.05,
-                  width: AppSizes.width * 0.85,
-                  margin: EdgeInsets.only(
-                      top: AppSizes.height * 0.02,
-                      left: AppSizes.width * 0.04,
-                      right: AppSizes.width * 0.04),
-                  decoration: BoxDecoration(
-                      color: AppColors.lightGray,
-                      borderRadius: BorderRadius.circular(10)),
+                  height: AppSizes.height*0.06,
+                  width: AppSizes.width,
+                  color: Colors.white,
+                  margin: EdgeInsets.only(top: AppSizes.width*0.03, left: AppSizes.width*0.05,),
                   child: Row(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(10),
+                        width: AppSizes.width*0.12,
+                        height: AppSizes.height*0.06,
                         decoration: BoxDecoration(
-                            color: AppColors.lightGray,
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Linecons.location,
-                              size: 20,
-                            )
-                          ],
+                          borderRadius: BorderRadius.circular(08,),
+                          color: Color.fromRGBO(214, 214, 214, 1),
                         ),
+                        child: Icon(Linecons.location, size: 20,),
                       ),
                       SizedBox(
-                        width: AppSizes.width * 0.03,
+                        width: 20,
                       ),
-                      Row(
-                        children: [
-                          Text(
-                            "at Australia",
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: Assets.poppinsLight,
-                                color: AppColors.colorBlack),
-                          )
-                        ],
-                      )
+                      Container(
+                        width: AppSizes.width*0.50,
+                        child: TextView.getLabelText04("at Australia", color: AppColors.colorBlack.withOpacity(0.6)),
+                      ),
+
                     ],
                   ),
                 ),
                 Container(
-                  height: AppSizes.height * 0.05,
-                  width: AppSizes.width * 0.85,
-                  margin: EdgeInsets.only(
-                      top: AppSizes.height * 0.02,
-                      left: AppSizes.width * 0.04,
-                      right: AppSizes.width * 0.04),
-                  decoration: BoxDecoration(
-                      color: AppColors.lightGray,
-                      borderRadius: BorderRadius.circular(10)),
+                  height: 1,
+                  margin: EdgeInsets.only(top: 10, left: AppSizes.width*0.05, right: AppSizes.width*0.05,),
+                  color: AppColors.colorBlack.withOpacity(0.2),
+                ),
+                Container(
+                  height: AppSizes.height*0.06,
+                  width: AppSizes.width,
+                  color: Colors.white,
+                  margin: EdgeInsets.only(top: AppSizes.width*0.03, left: AppSizes.width*0.05,),
                   child: Row(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(10),
+                        width: AppSizes.width*0.12,
+                        height: AppSizes.height*0.06,
                         decoration: BoxDecoration(
-                            color: AppColors.lightGray,
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Linecons.location,
-                              size: 20,
-                            )
-                          ],
+                          borderRadius: BorderRadius.circular(08,),
+                          color: Color.fromRGBO(214, 214, 214, 1),
                         ),
+                        child: Icon(Linecons.location, size: 20,),
                       ),
                       SizedBox(
-                        width: AppSizes.width * 0.03,
+                        width: 20,
                       ),
-                      Row(
-                        children: [
-                          Text(
-                            "at Australia",
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: Assets.poppinsLight,
-                                color: AppColors.colorBlack),
-                          )
-                        ],
-                      )
+                      Container(
+                        width: AppSizes.width*0.50,
+                        child: TextView.getLabelText04("at Australia", color: AppColors.colorBlack.withOpacity(0.6)),
+                      ),
+
                     ],
                   ),
                 ),
                 Container(
-                  height: AppSizes.height * 0.05,
-                  width: AppSizes.width * 0.85,
-                  margin: EdgeInsets.only(
-                      top: AppSizes.height * 0.02,
-                      left: AppSizes.width * 0.04,
-                      right: AppSizes.width * 0.04),
-                  decoration: BoxDecoration(
-                      color: AppColors.lightGray,
-                      borderRadius: BorderRadius.circular(10)),
+                  height: 1,
+                  margin: EdgeInsets.only(top: 10, left: AppSizes.width*0.05, right: AppSizes.width*0.05,),
+                  color: AppColors.colorBlack.withOpacity(0.2),
+                ),
+                Container(
+                  height: AppSizes.height*0.06,
+                  width: AppSizes.width,
+                  color: Colors.white,
+                  margin: EdgeInsets.only(top: AppSizes.width*0.03, left: AppSizes.width*0.05,),
                   child: Row(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(10),
+                        width: AppSizes.width*0.12,
+                        height: AppSizes.height*0.06,
                         decoration: BoxDecoration(
-                            color: AppColors.lightGray,
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Linecons.location,
-                              size: 20,
-                            )
-                          ],
+                          borderRadius: BorderRadius.circular(08,),
+                          color: Color.fromRGBO(214, 214, 214, 1),
                         ),
+                        child: Icon(Linecons.location, size: 20,),
                       ),
                       SizedBox(
-                        width: AppSizes.width * 0.03,
+                        width: 20,
                       ),
-                      Row(
-                        children: [
-                          Text(
-                            "at Australia",
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: Assets.poppinsLight,
-                                color: AppColors.colorBlack),
-                          )
-                        ],
-                      )
+                      Container(
+                        width: AppSizes.width*0.50,
+                        child: TextView.getLabelText04("at Australia", color: AppColors.colorBlack.withOpacity(0.6)),
+                      ),
+
                     ],
                   ),
                 ),
                 Container(
-                  height: AppSizes.height * 0.05,
-                  width: AppSizes.width * 0.85,
-                  margin: EdgeInsets.only(
-                      top: AppSizes.height * 0.02,
-                      left: AppSizes.width * 0.04,
-                      right: AppSizes.width * 0.04),
-                  decoration: BoxDecoration(
-                      color: AppColors.lightGray,
-                      borderRadius: BorderRadius.circular(10)),
+                  height: 1,
+                  margin: EdgeInsets.only(top: 10, left: AppSizes.width*0.05, right: AppSizes.width*0.05,),
+                  color: AppColors.colorBlack.withOpacity(0.2),
+                ),
+                Container(
+                  height: AppSizes.height*0.06,
+                  width: AppSizes.width,
+                  color: Colors.white,
+                  margin: EdgeInsets.only(top: AppSizes.width*0.03, left: AppSizes.width*0.05,),
                   child: Row(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(10),
+                        width: AppSizes.width*0.12,
+                        height: AppSizes.height*0.06,
                         decoration: BoxDecoration(
-                            color: AppColors.lightGray,
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Linecons.location,
-                              size: 20,
-                            )
-                          ],
+                          borderRadius: BorderRadius.circular(08,),
+                          color: Color.fromRGBO(214, 214, 214, 1),
                         ),
+                        child: Icon(Linecons.location, size: 20,),
                       ),
                       SizedBox(
-                        width: AppSizes.width * 0.03,
+                        width: 20,
                       ),
-                      Row(
-                        children: [
-                          Text(
-                            "at Australia",
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: Assets.poppinsLight,
-                                color: AppColors.colorBlack),
-                          )
-                        ],
-                      )
+                      Container(
+                        width: AppSizes.width*0.50,
+                        child: TextView.getLabelText04("at Australia", color: AppColors.colorBlack.withOpacity(0.6)),
+                      ),
+
                     ],
                   ),
                 ),
                 Container(
-                  height: AppSizes.height * 0.05,
-                  width: AppSizes.width * 0.85,
-                  margin: EdgeInsets.only(
-                      top: AppSizes.height * 0.02,
-                      left: AppSizes.width * 0.04,
-                      right: AppSizes.width * 0.04),
-                  decoration: BoxDecoration(
-                      color: AppColors.lightGray,
-                      borderRadius: BorderRadius.circular(10)),
+                  height: 1,
+                  margin: EdgeInsets.only(top: 10, left: AppSizes.width*0.05, right: AppSizes.width*0.05,),
+                  color: AppColors.colorBlack.withOpacity(0.2),
+                ),
+                Container(
+                  height: AppSizes.height*0.06,
+                  width: AppSizes.width,
+                  color: Colors.white,
+                  margin: EdgeInsets.only(top: AppSizes.width*0.03, left: AppSizes.width*0.05,),
                   child: Row(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(10),
+                        width: AppSizes.width*0.12,
+                        height: AppSizes.height*0.06,
                         decoration: BoxDecoration(
-                            color: AppColors.lightGray,
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Linecons.location,
-                              size: 20,
-                            )
-                          ],
+                          borderRadius: BorderRadius.circular(08,),
+                          color: Color.fromRGBO(214, 214, 214, 1),
                         ),
+                        child: Icon(Linecons.location, size: 20,),
                       ),
                       SizedBox(
-                        width: AppSizes.width * 0.03,
+                        width: 20,
                       ),
-                      Row(
-                        children: [
-                          Text(
-                            "at Australia",
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: Assets.poppinsLight,
-                                color: AppColors.colorBlack),
-                          )
-                        ],
-                      )
+                      Container(
+                        width: AppSizes.width*0.50,
+                        child: TextView.getLabelText04("at Australia", color: AppColors.colorBlack.withOpacity(0.6)),
+                      ),
+
                     ],
                   ),
+                ),
+                Container(
+                  height: 1,
+                  margin: EdgeInsets.only(top: 10, left: AppSizes.width*0.05, right: AppSizes.width*0.05,),
+                  color: AppColors.colorBlack.withOpacity(0.2),
+                ),
+                Container(
+                  height: AppSizes.height*0.06,
+                  width: AppSizes.width,
+                  color: Colors.white,
+                  margin: EdgeInsets.only(top: AppSizes.width*0.03, left: AppSizes.width*0.05,),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: AppSizes.width*0.12,
+                        height: AppSizes.height*0.06,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(08,),
+                          color: Color.fromRGBO(214, 214, 214, 1),
+                        ),
+                        child: Icon(Linecons.location, size: 20,),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Container(
+                        width: AppSizes.width*0.50,
+                        child: TextView.getLabelText04("at Australia", color: AppColors.colorBlack.withOpacity(0.6)),
+                      ),
+
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 1,
+                  margin: EdgeInsets.only(top: 10, left: AppSizes.width*0.05, right: AppSizes.width*0.05,),
+                  color: AppColors.colorBlack.withOpacity(0.2),
+                ),
+                Container(
+                  height: AppSizes.height*0.06,
+                  width: AppSizes.width,
+                  color: Colors.white,
+                  margin: EdgeInsets.only(top: AppSizes.width*0.03, left: AppSizes.width*0.05,),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: AppSizes.width*0.12,
+                        height: AppSizes.height*0.06,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(08,),
+                          color: Color.fromRGBO(214, 214, 214, 1),
+                        ),
+                        child: Icon(Linecons.location, size: 20,),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Container(
+                        width: AppSizes.width*0.50,
+                        child: TextView.getLabelText04("at Australia", color: AppColors.colorBlack.withOpacity(0.6)),
+                      ),
+
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 1,
+                  margin: EdgeInsets.only(top: 10, left: AppSizes.width*0.05, right: AppSizes.width*0.05,),
+                  color: AppColors.colorBlack.withOpacity(0.2),
                 ),
               ],
             ),

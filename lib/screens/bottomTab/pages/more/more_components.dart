@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:truckoom_shipper/widgets/text_views.dart';
 
 import '../../../../res/assets.dart';
 import '../../../../res/colors.dart';
@@ -12,7 +13,7 @@ class MoreComponents{
     return GestureDetector(
       onTap: () => onPress(),
       child: Container(
-        height: AppSizes.height * 0.06,
+        height: AppSizes.height * 0.08,
         width: AppSizes.width,
         color: AppColors.white,
         padding: EdgeInsets.only(left: AppSizes.width * 0.08),
@@ -21,15 +22,7 @@ class MoreComponents{
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             // SizedBox(width: AppSizes.width * 0.08,),
-            Text(
-              text,
-              style: TextStyle(
-                fontSize: 12,
-                fontFamily: Assets.poppinsLight,
-                color: AppColors.colorBlack,
-                // fontWeight: FontWeight.bold
-              ),
-            ),
+            TextView.getLabelText04(text, color: AppColors.colorBlack.withOpacity(0.6)),
           ],
         ),
       ),
