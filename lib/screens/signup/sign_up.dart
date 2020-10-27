@@ -109,7 +109,7 @@ class _SignUPState extends State<SignUP> {
                           _getTermsAndCondition(),
                           SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getBottomButton(
-                            text: "SIGN UP",
+                            text: "Sign up",
                             onPress: () {
                               _alertDialogueContainer();
                             },

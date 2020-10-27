@@ -446,7 +446,7 @@ class CommonWidgets {
       @required TextEditingController textEditingController,
       @required String hintText}) {
     return Container(
-        height: AppSizes.height * 0.06,
+        height: AppSizes.height * 0.07,
         width: AppSizes.width,
         padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.02),
         decoration: BoxDecoration(

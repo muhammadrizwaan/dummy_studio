@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -6,8 +5,7 @@ import '../../../../res/assets.dart';
 import '../../../../res/colors.dart';
 import '../../../../res/sizes.dart';
 
-class MyJobsComponents{
-
+class MyJobsComponents {
   Widget onSelectViewType({@required String text, @required Function onPress}) {
     return GestureDetector(
       onTap: () => onPress(),
@@ -38,13 +36,13 @@ class MyJobsComponents{
 
   Widget getJobContainer(
       {@required String jobDetail,
-        @required String pickUpLocation,
-        @required String destinationLocation,
-        @required String startDate,
-        @required String time,
-        @required String status,
-        @required String price,
-        @required Function onTap}) {
+      @required String pickUpLocation,
+      @required String destinationLocation,
+      @required String startDate,
+      @required String time,
+      @required String status,
+      @required String price,
+      @required Function onTap}) {
     return Container(
       // height: AppSizes.height * 0.05,
       // width: AppSizes.width,
@@ -59,8 +57,7 @@ class MyJobsComponents{
                 spreadRadius: 1,
                 blurRadius: 1,
                 offset: Offset(0, 0))
-          ]
-      ),
+          ]),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -80,10 +77,10 @@ class MyJobsComponents{
                   Text(
                     jobDetail,
                     style: TextStyle(
-                        fontSize: 12,
-                        fontFamily: Assets.poppinsRegular,
-                        color: AppColors.colorBlack,
-                        fontWeight: FontWeight.bold),
+                      fontSize: 12,
+                      fontFamily: Assets.poppinsRegular,
+                      color: AppColors.colorBlack,
+                    ),
                   ),
                 ],
               ),
@@ -221,10 +218,10 @@ class MyJobsComponents{
                   Text(
                     'Suzuki',
                     style: TextStyle(
-                        fontSize: 12,
-                        fontFamily: Assets.poppinsMedium,
-                        color: AppColors.colorBlack,
-                        fontWeight: FontWeight.bold),
+                      fontSize: 12,
+                      fontFamily: Assets.poppinsMedium,
+                      color: Colors.black,
+                    ),
                   ),
                   SizedBox(
                     width: AppSizes.width * 0.01,

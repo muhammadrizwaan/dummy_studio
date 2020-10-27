@@ -105,12 +105,15 @@ class _BottomTabState extends State<BottomTab> {
                 )),
             BottomNavigationBarItem(
                 icon: GestureDetector(
-                  child: Image.asset(
-                    Assets.transactionIcon,
-                    height: 40,
-                    width: 50,
-                    color:
-                        _currentIndex == 2 ? AppColors.yellow : AppColors.grey,
+                  child: Container(
+                    margin: EdgeInsets.only(top: 10),
+                    child: Image.asset(
+                      Assets.transactionIcon,
+                      height: 30,
+                      width: 25,
+                      color:
+                          _currentIndex == 2 ? AppColors.yellow : AppColors.grey,
+                    ),
                   ),
                 ),
                 title: Text(
