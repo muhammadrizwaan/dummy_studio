@@ -1,3 +1,4 @@
+import 'package:truckoom_shipper/models/api_models/login_response.dart';
 import 'package:truckoom_shipper/screens/Splash/Splash.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/history/history.dart';
@@ -75,7 +76,7 @@ class Routes {
     referrals: (context) => Referrals(),
     wallet: (context) => Wallet(),
     contactUs: (context) => ContactUs(),
-    driverDetails: (context) => DriverDetails(),
+    driverDetails: (context) => DriverDetailScreen(),
     loadDetails: (context) => LoadDetail(),
     invoiceDetail: (context) => InvoiceDetail(),
     language: (context) => Language(),

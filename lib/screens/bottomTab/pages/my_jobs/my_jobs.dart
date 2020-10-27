@@ -2,13 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:truckoom_shipper/models/api_models/login_response.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs_components.dart';
+import 'package:truckoom_shipper/screens/driver_details/driver_details.dart';
 import 'package:truckoom_shipper/screens/individualPayment/individual_payment.dart';
 import 'package:truckoom_shipper/screens/notifications/notifications.dart';
 import 'package:truckoom_shipper/screens/payment/payment.dart';
 
 import '../../../../animations/slide_right.dart';
 import '../../../../res/assets.dart';
-import '../../../../res/assets.dart';
+
 import '../../../../res/colors.dart';
 import '../../../../res/sizes.dart';
 import '../../../../res/strings.dart';
@@ -69,14 +70,16 @@ class _MyJobsState extends State<MyJobs> {
               margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
               child: Row(
                 children: [
-                  _jobsComponents.onSelectViewType(
-                      text: "Active", onPress: () {}),
+                  _jobsComponents.onSelectViewType(text: "Active", onPress: (){
+                    Navigator.push(context, SlideRightRoute(page: DriverDetailScreen()));
+                  }),
                   SizedBox(
                     width: AppSizes.width * 0.02,
                   ),
                   _jobsComponents.onSelectViewType(
                       text: "In Processing",
                       onPress: () {
+
                         if (widget.tag == Strings.indiviual) {
                           Navigator.push(
                               context,

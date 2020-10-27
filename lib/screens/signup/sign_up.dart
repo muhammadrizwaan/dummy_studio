@@ -70,73 +70,51 @@ class _SignUPState extends State<SignUP> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          CommonWidgets.getHeadingText(text: 'Signup'),
-                          SizedBox(
-                            height: 30,
-                          ),
+                          CommonWidgets.getHeadingText(text: 'Sign up'),
+                          SizedBox(height: AppSizes.height * 0.04),
                           CommonWidgets.getSubHeadingText(text: "Full Name"),
-                          SizedBox(
-                            height: 10,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getTextField(
                               isPassword: false,
                               leftIcon: Entypo.user,
                               textEditingController: name,
                               hintText: "Enter Name"),
-                          SizedBox(
-                            height: 30,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "Email"),
-                          SizedBox(
-                            height: 10,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getTextField(
                             isPassword: false,
                             leftIcon: Icons.email,
                             textEditingController: email,
                             hintText: "Enter Email",
                           ),
-                          SizedBox(
-                            height: 30,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "Password"),
-                          SizedBox(
-                            height: 10,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getTextField(
                               isPassword: true,
                               leftIcon: Entypo.lock,
                               textEditingController: password,
                               hintText: "Enter Password"),
-                          SizedBox(
-                            height: 30,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(
                               text: "Confirm Password"),
-                          SizedBox(
-                            height: 10,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getTextField(
                               isPassword: true,
                               leftIcon: Entypo.lock,
                               textEditingController: confirm_password,
                               hintText: "Confirm Password"),
-                          SizedBox(
-                            height: 30,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.03),
                           _getTermsAndCondition(),
-                          SizedBox(
-                            height: 10,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getBottomButton(
-                            text: "SIGNUP",
+                            text: "SIGN UP",
                             onPress: () {
                               _alertDialogueContainer();
                             },
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.02),
                         ],
                       ),
                     )
@@ -191,7 +169,7 @@ class _SignUPState extends State<SignUP> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            "Sign up successful !",
+                            "Sign up Successful!",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 decoration: TextDecoration.none,
@@ -289,7 +267,8 @@ class _SignUPState extends State<SignUP> {
                               color: Colors.amber,
                               fontSize: 12,
                               fontFamily: Assets.poppinsMedium,
-                              fontWeight: FontWeight.bold),
+                              // fontWeight: FontWeight.bold
+                          ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               // navigate to desired screen

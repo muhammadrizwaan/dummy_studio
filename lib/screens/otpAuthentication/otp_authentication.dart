@@ -88,7 +88,7 @@ class _OTPAuthenticationState extends State<OTPAuthentication> {
                           ),
                           SizedBox(height: 30,),
                           _otpAuthenticationComponents.getRichText(
-                              text: "I don't receive code. ",
+                              text: "I didn’t receive code. ",
                               clickableText: 'Resend Code',
                               onTap: () {}
                           ),

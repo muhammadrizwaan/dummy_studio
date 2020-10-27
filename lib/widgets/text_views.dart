@@ -84,4 +84,38 @@ class TextView {
     );
   }
 
+  static Text getRoundTripText04(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 3,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        decoration: TextDecoration.none,
+        fontSize: 14,
+        fontFamily: Assets.poppinsMedium,
+        // fontWeight: FontWeight.bold,
+        color: color,
+      ),
+    );
+  }
+
+  static Text getLabel2Text04(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 3,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        decoration: TextDecoration.none,
+        fontSize: 12,
+        fontFamily: Assets.poppinsLight,
+        // fontWeight: FontWeight.bold,
+        color: color,
+      ),
+    );
+  }
+
 }

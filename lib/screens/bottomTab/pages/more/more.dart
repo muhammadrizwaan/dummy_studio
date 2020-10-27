@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:truckoom_shipper/models/api_models/login_response.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/more/more_components.dart';
 import 'package:truckoom_shipper/screens/businessProfile/business_profile.dart';
+import 'package:truckoom_shipper/widgets/faq.dart';
 
 import '../../../../animations/slide_right.dart';
 import '../../../../res/assets.dart';
@@ -82,13 +83,14 @@ class _MoreState extends State<More> {
             Divider(
               height: 10,
             ),
-            _moreComponents.getSOSbutton(
-              text: 'Language',
-              onPress: () {
-                // Navigator.pop(
-                //     context, SlideRightRoute(page: DriverDetails()));
-              },
-            ),
+            // _moreComponents.getSOSbutton(
+            //   text: 'Language',
+            //   onPress: () {
+            //     // Navigator.pop(
+            //     //     context, SlideRightRoute(page: DriverDetails()));
+            //   },
+            // ),
+            FAQStatelessContainer(),
             Divider(
               height: 10,
             ),

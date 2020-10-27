@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/linecons_icons.dart';
 import 'package:truckoom_shipper/screens/select_vehicle/select_vehicle_components.dart';
+import 'package:truckoom_shipper/widgets/text_views.dart';
 
 import '../../animations/slide_right.dart';
 import '../../res/assets.dart';
@@ -80,7 +82,13 @@ class _SelectVehicleState extends State<SelectVehicle> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(right: 10),
-                        child: Image(image: AssetImage(Assets.vehicle)),
+                        child: Opacity(
+                            opacity: 0.7,
+                            child: Icon(
+                              Linecons.truck,
+                              size: 20,
+                            )),
+                        // child: Image(image: AssetImage(Assets.vehicle)),
                       ) ,
                       Expanded(
                         child: DropdownButtonHideUnderline(
@@ -89,43 +97,30 @@ class _SelectVehicleState extends State<SelectVehicle> {
                               value: _value,
                               items: [
                                 DropdownMenuItem(
-                                  child: Text("Select Category",
-                                    style: TextStyle(
-                                        decoration: TextDecoration.none,
-                                        fontFamily: Assets.poppinsLight,
-                                        fontSize: 12,
-                                        color: AppColors.colorBlack
-                                    ),),
+                                  child: TextView.getLightText04(
+                                    "Select",
+                                    color: AppColors.colorBlack,
+                                  ),
                                   value: 1,
                                 ),
                                 DropdownMenuItem(
-                                  child: Text("Category 1",
-                                    style: TextStyle(
-                                        decoration: TextDecoration.none,
-                                        fontFamily: Assets.poppinsLight,
-                                        fontSize: 12,
-                                        color: AppColors.colorBlack
-                                    ),),
+                                  child: TextView.getLightText04(
+                                    "Category 1",
+                                    color: AppColors.colorBlack,
+                                  ),
                                   value: 2,
                                 ),
                                 DropdownMenuItem(
-                                    child: Text("Category 2",
-                                      style: TextStyle(
-                                          decoration: TextDecoration.none,
-                                          fontFamily: Assets.poppinsLight,
-                                          fontSize: 12,
-                                          color: AppColors.colorBlack
-                                      ),),
+                                    child: TextView.getLightText04(
+                                      "Category 2",
+                                      color: AppColors.colorBlack,
+                                    ),
                                     value: 3
                                 ),
                                 DropdownMenuItem(
-                                    child: Text("Category 3",
-                                      style: TextStyle(
-                                          decoration: TextDecoration.none,
-                                          fontFamily: Assets.poppinsLight,
-                                          fontSize: 12,
-                                          color: AppColors.colorBlack
-                                      ),
+                                    child: TextView.getLightText04(
+                                      "Category 3",
+                                      color: AppColors.colorBlack,
                                     ),
                                     value: 4
                                 )
@@ -142,6 +137,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
                   ),
 
                 ),
+                SizedBox(height: AppSizes.height * 0.02),
                 Expanded(
                   child: ListView(
                     children: [
@@ -149,7 +145,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
                         child: Column(
                           children: [
                             SizedBox(
-                              height: AppSizes.height * 0.03,
+                              height: AppSizes.height * 0.01,
                             ),
                             _selectVehicleComponents.getVehicleDetail(
                                 leftIcon: Assets.vehicle_img,

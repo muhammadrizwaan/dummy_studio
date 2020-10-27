@@ -48,7 +48,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
           height: AppSizes.height,
           width: AppSizes.width,
           color: AppColors.white,
-          padding: EdgeInsets.all(AppSizes.width * 0.05),
+          padding: EdgeInsets.only(left: AppSizes.width * 0.08, right: AppSizes.width*0.08, top: AppSizes.width*0.08),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -81,115 +81,53 @@ class _BusinessInformationState extends State<BusinessInformation> {
                             ],
                           ),
                           // CommonWidgets.getHeading1Text(text: 'Signup'),
-                          SizedBox(
-                            height: 30,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.04),
                           CommonWidgets.getSubHeadingText(text: "Business Name"),
-                          SizedBox(
-                            height: 10,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getTextField(
                               isPassword: false,
                               leftIcon: Entypo.user,
                               textEditingController: business_name,
                               hintText: "Enter Business Name"),
-                          SizedBox(
-                            height: 30,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "Contact Number"),
-                          SizedBox(
-                            height: 10,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getTextField(
                               isPassword: false,
                               leftIcon: Entypo.mobile,
                               textEditingController: contact_number,
                               hintText: "Enter Contact Number"),
-                          SizedBox(
-                            height: 30,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "TRN"),
-                          SizedBox(
-                            height: 10,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getTextField(
                               isPassword: true,
                               leftIcon: Entypo.mobile,
                               textEditingController: trn,
                               hintText: "Enter TRN"),
-                          SizedBox(
-                            height: 30,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(
                               text: "License Expiry Date"),
-                          SizedBox(
-                            height: 10,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.01),
                           _businessInformationComponents.getTextField(
                               isPassword: true,
                               textEditingController: license_date,
-                              hintText: "09/22/2030"),
-
-                          SizedBox(
-                            height: 30,
+                              hintText: "09/22/2030"
                           ),
+                          SizedBox(height: AppSizes.height * 0.03),
                           _businessInformationComponents.getImagePicker(
                               onPress: () {
                             // Navigator.push(context, SlideRightRoute(page: OTPAuthentication()));
                           }),
-                          SizedBox(
-                            height: 30,
-                          ),
-
-                          Container(
-                            child: Row(
-                              // crossAxisAlignment: CrossAxisAlignment.start,
-                              // mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Checkbox(
-                                  checkColor: AppColors.white,
-                                  activeColor: AppColors.yellow,
-                                  value: onCheck,
-                                  onChanged: (bool value) {
-                                    setState(() {
-                                      onCheck = value;
-                                    });
-                                  },
-                                ),
-                                Container(
-                                  width: AppSizes.width * 0.75,
-                                  child: RichText(
-                                    text: TextSpan(
-                                        text:
-                                            'By creating an account you agree to our ',
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 12),
-                                        children: <TextSpan>[
-                                          TextSpan(
-                                              text: 'Term and Conditions',
-                                              style: TextStyle(
-                                                  color: Colors.amber,
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      Assets.poppinsRegular),
-                                              recognizer: TapGestureRecognizer()
-                                                ..onTap = () {
-                                                  // navigate to desired screen
-                                                })
-                                        ]),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.02),
+                          _getTermsAndCondition(),
+                          SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getBottomButton(
                               text: "Sign up",
                               onPress: () {
                                 _alertDialogueContainer();
                               }),
+                          SizedBox(height: AppSizes.height * 0.02),
                         ],
                       ),
                     )
@@ -200,6 +138,67 @@ class _BusinessInformationState extends State<BusinessInformation> {
           ),
         ),
       ),
+    );
+  }
+
+  _getTermsAndCondition() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Container(
+              margin: EdgeInsets.only(bottom: 25),
+              height: AppSizes.height * 0.04,
+              width: AppSizes.width * 0.07,
+              child: Checkbox(
+                checkColor: AppColors.white,
+                activeColor: AppColors.yellow,
+                value: onCheck,
+                onChanged: (bool value) {
+                  setState(() {
+                    onCheck = value;
+                  });
+                },
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Row(
+          children: [
+            Container(
+              height: AppSizes.height * 0.07,
+              width: AppSizes.width * 0.69,
+              child: RichText(
+                text: TextSpan(
+                    text: 'By creating an account you agree to our ',
+                    style: TextStyle(
+                      wordSpacing: 0.5,
+                      color: Colors.black,
+                      fontSize: 13,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: 'Term and Conditions',
+                          style: TextStyle(
+                            color: Colors.amber,
+                            fontSize: 12,
+                            fontFamily: Assets.poppinsMedium,
+                            // fontWeight: FontWeight.bold
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              // navigate to desired screen
+                            })
+                    ]),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
@@ -245,7 +244,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            "Signup successful !",
+                            "Sign up Successful!",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 decoration: TextDecoration.none,

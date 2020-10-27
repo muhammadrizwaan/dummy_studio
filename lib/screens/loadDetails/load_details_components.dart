@@ -103,19 +103,6 @@ class LoadDetailComponents {
     );
   }
 
-  Widget getLocation({@required String pick_up, @required String destination}){
-    return Container(
-      child: Row(
-        children: [
-          // Image(image: AssetImage(Assets.df_pk_job),
-          //   height: AppSizes.height * 0.15,
-          //   width: AppSizes.width * 0.1,
-          // )
-        ],
-      ),
-    );
-  }
-
   Widget getExpectedRate(){
     return Container(
       child: Row(
@@ -157,9 +144,9 @@ class LoadDetailComponents {
   }
 
   Widget getNameTextField(
-      { @required String leftIcon, @required String hintText, @required TextEditingController textEditingController,}) {
+      { @required IconData leftIcon, @required String hintText, @required TextEditingController textEditingController,}) {
     return Container(
-      height: AppSizes.height * 0.06,
+      height: AppSizes.height * 0.07,
       width: AppSizes.width,
       padding: EdgeInsets.only(left: 10),
       decoration: BoxDecoration(
@@ -170,23 +157,27 @@ class LoadDetailComponents {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image(image: AssetImage('$leftIcon')) ,
+          Opacity(
+              opacity: 0.7,
+              child: Icon(
+                leftIcon,
+                size: 20,
+              )),
+          // Image(image: AssetImage('$leftIcon')) ,
           Container(
             margin: EdgeInsets.only(left: 5),
             width: AppSizes.width * 0.8,
             // color: AppColors.yellow,
             child: TextField(
               style: TextStyle(
-                  decoration: TextDecoration.none,
-                  fontFamily: Assets.poppinsLight,
-                  fontSize: 12,
-                  color: AppColors.colorBlack
+                decoration: TextDecoration.none,
+                fontFamily: Assets.poppinsLight,
+                fontSize: 12,
+                color: AppColors.colorBlack,
               ),
               controller: textEditingController,
               // readOnly: true,
               decoration: InputDecoration(
-                // contentPadding: EdgeInsets.symmetric(vertical: AppSizes.height* 0.012),
-                // prefixIcon: Image(image: AssetImage('$leftIcon')) ,
                 hintText: hintText,
                 border: InputBorder.none,
                 hintStyle: TextStyle(
@@ -204,7 +195,7 @@ class LoadDetailComponents {
   }
 
   Widget getMessageTextField(
-      { @required String leftIcon, @required String hintText, @required TextEditingController textEditingController,}) {
+      { @required IconData leftIcon, @required String hintText, @required TextEditingController textEditingController,}) {
     return Container(
       height: AppSizes.height * 0.12,
       width: AppSizes.width,
@@ -220,7 +211,14 @@ class LoadDetailComponents {
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 15),
-            child: Image(image: AssetImage(Assets.messageIcon)),
+            child: Opacity(
+              opacity: 0.7,
+              child: Icon(
+                leftIcon,
+                size: 20,
+              ),
+            ),
+            // child: Image(image: AssetImage(Assets.messageIcon)),
           ),
           SizedBox(width: AppSizes.width * 0.02,),
           Container(

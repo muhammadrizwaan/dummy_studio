@@ -74,32 +74,32 @@ class _BusinessSignupState extends State<BusinessSignup> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              CommonWidgets.getHeadingText(text: 'Signup'),
+                              CommonWidgets.getHeadingText(text: 'Sign up'),
                               _businessSignupComponents.getBusinessSignupStep()
                             ],
                           ),
                           // CommonWidgets.getHeading1Text(text: 'Signup'),
-                          SizedBox(height: 30,),
+                          SizedBox(height: AppSizes.height * 0.04),
                           CommonWidgets.getSubHeadingText(text: "Full Name"),
-                          SizedBox(height: 10,),
+                          SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getTextField(
                               isPassword: false,
                               leftIcon: Entypo.user,
                               textEditingController: name,
                               hintText: "Enter Name"
                           ),
-                          SizedBox(height: 30,),
+                          SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "Email"),
-                          SizedBox(height: 10,),
+                          SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getTextField(
                               isPassword: false,
                               leftIcon: Icons.mail,
                               textEditingController: email,
                               hintText: "Enter Email"
                           ),
-                          SizedBox(height: 30,),
+                          SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "Password"),
-                          SizedBox(height: 10,),
+                          SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getTextField(
                               isPassword: true,
                               leftIcon: Entypo.lock,
@@ -107,18 +107,18 @@ class _BusinessSignupState extends State<BusinessSignup> {
                               hintText: "Enter Password"
                           ),
 
-                          SizedBox(height: 30,),
+                          SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "Confirm Password"),
-                          SizedBox(height: 10,),
+                          SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getTextField(
                               isPassword: true,
                               leftIcon: Entypo.lock,
                               textEditingController: confirm_Password,
                               hintText: "Confirm Password"
                           ),
-                          SizedBox(height: 30,),
+                          SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "City"),
-                          SizedBox(height: 10,),
+                          SizedBox(height: AppSizes.height * 0.01),
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 10),
                             height: AppSizes.height * 0.06,
@@ -180,15 +180,16 @@ class _BusinessSignupState extends State<BusinessSignup> {
                               ],
                             ),
                           ),
-                          SizedBox(height: 30,),
+                          SizedBox(height: AppSizes.height * 0.02),
                           _getTermsAndCondition(),
-                          SizedBox(height: 10,),
+                          SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getBottomButton(
                               text: "Next",
                               onPress: () {
                                 Navigator.push(context, SlideRightRoute(page: BusinessInformation(tag: widget.tag,)));
                               }
                           ),
+                          SizedBox(height: AppSizes.height * 0.02),
                         ],
                       ),
                     )
@@ -248,7 +249,8 @@ class _BusinessSignupState extends State<BusinessSignup> {
                               color: Colors.amber,
                               fontSize: 12,
                               fontFamily: Assets.poppinsMedium,
-                              fontWeight: FontWeight.bold),
+                              // fontWeight: FontWeight.bold
+                          ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               // navigate to desired screen

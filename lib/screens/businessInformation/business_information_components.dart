@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/linearicons_free_icons.dart';
@@ -34,27 +35,39 @@ class BusinessInformationComponents {
   }) {
     return GestureDetector(
       onTap: () => onPress(),
-      child: Container(
-        height: AppSizes.height * 0.06,
-        width: AppSizes.width,
-        decoration: BoxDecoration(
-          color: AppColors.lightGray,
-          border: Border.all(color: AppColors.lightGray),
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image(image: AssetImage('assets/png/plus_icon.png')),
-            Text(
-              ' Attach Copy of License',
-              style: TextStyle(
-                fontFamily: Assets.poppinsMedium,
-                fontSize: 12,
-                color: AppColors.colorBlack,
+      child: Center(
+        child: DottedBorder(
+          color: AppColors.addVehicleBorderColor,
+          // dashPattern: [6, 3, 2, 3],
+          strokeWidth: 1,
+          borderType: BorderType.RRect,
+          radius: Radius.circular(5),
+          // padding: EdgeInsets.all(16),
+          child: ClipRRect(
+            borderRadius:
+            BorderRadius.all(Radius.circular(5)),
+            child: Container(
+              width: AppSizes.width * 0.82,
+              height: AppSizes.height * 0.07,
+              decoration: BoxDecoration(
+                color: AppColors.lightGray,
               ),
-            )
-          ],
+              child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image(image: AssetImage('assets/png/plus_icon.png')),
+                Text(
+                  ' Attach Copy of License',
+                  style: TextStyle(
+                    fontFamily: Assets.poppinsMedium,
+                    fontSize: 12,
+                    color: AppColors.colorBlack,
+                  ),
+                )
+              ],
+            ),
+            ),
+          ),
         ),
       ),
     );
