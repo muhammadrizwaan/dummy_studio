@@ -82,7 +82,7 @@ class _LoginState extends State<Login> {
                                   textEditingController: email,
                                   hintText: "Email/Phone Number"
                               ),
-                              SizedBox(height: AppSizes.height * 0.03,),
+                              SizedBox(height: AppSizes.height * 0.02,),
                               CommonWidgets.getSubHeadingText(text: "Password"),
                               SizedBox(height: AppSizes.height * 0.01,),
                               CommonWidgets.getTextField(

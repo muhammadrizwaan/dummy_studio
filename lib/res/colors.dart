@@ -100,4 +100,5 @@ class AppColors{
   static const darkGreyBlueTextColor = Color.fromRGBO(38, 47, 86, 1);
   static const lightGreyBlueTextColor = Color.fromRGBO(124, 132, 148, 1);
   static const emailLableColor = Color.fromRGBO(193, 199, 208, 1);
+  static const roundTripColor = Color.fromRGBO(29, 29, 29, 1);
 }

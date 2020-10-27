@@ -1,20 +1,24 @@
 
+
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
-import 'package:truckoom_shipper/screens/businessEditProfile/business_edit_profile.dart';
-import 'package:truckoom_shipper/screens/driver_details/driver_details_components.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
-class DriverDetails extends StatefulWidget {
+import 'driver_details_components.dart';
+
+class DriverDetailScreen extends StatefulWidget {
+  final String tag;
+  DriverDetailScreen({@required this.tag});
   @override
-  _DriverDetailsState createState() => _DriverDetailsState();
+  _DriverDetailScreenState createState() => _DriverDetailScreenState();
 }
 
-class _DriverDetailsState extends State<DriverDetails> {
+class _DriverDetailScreenState extends State<DriverDetailScreen> {
   DriverDetailComponents _driverDetailComponents;
 
   @override

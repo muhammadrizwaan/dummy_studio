@@ -49,7 +49,7 @@ class _ReferralsState extends State<Referrals> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(height: AppSizes.height * 0.03,),
-                              _referralsComponents.getReferralsText(),
+                              CommonWidgets.getSubHeadingText(text: "Referrals Link"),
                               SizedBox(height: AppSizes.height * 0.01,),
                               _referralsComponents.getLinkField(
                                   leftIcon: Assets.linkIcon,

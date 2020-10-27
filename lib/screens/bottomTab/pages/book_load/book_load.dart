@@ -6,6 +6,7 @@ import 'package:location/location.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:truckoom_shipper/screens/adding_drop_off/adding_drop_off.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/book_load/book_load_components.dart';
+import 'package:truckoom_shipper/screens/notifications/notifications.dart';
 import 'package:truckoom_shipper/screens/select_vehicle/select_vehicle.dart';
 import 'package:truckoom_shipper/screens/select_vehicle/select_vehicle_components.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
@@ -87,6 +88,9 @@ class _BookLoadState extends State<BookLoad> {
                 ),
                 GestureDetector(
                     onTap: () {
+                      widget.tag == Strings.indiviual ?
+                      Navigator.push(context, SlideRightRoute(page: Notifications()))
+                          :
                       Navigator.push(context, SlideRightRoute(page: Wallet()));
                     },
                     child: Image(

@@ -38,6 +38,7 @@ dependencies:
   dio: ^3.0.10
   device_info: ^0.4.2+9
   sliding_up_panel: ^1.0.2
+  dotted_border: ^1.0.6
 
 
 

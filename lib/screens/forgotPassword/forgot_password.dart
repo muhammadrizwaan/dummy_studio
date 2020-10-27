@@ -33,7 +33,11 @@ class _ForgotPassowrdState extends State<ForgotPassowrd> {
           height: AppSizes.height,
           width: AppSizes.width,
           color: AppColors.white,
-          padding: EdgeInsets.all(AppSizes.width * 0.05),
+          padding: EdgeInsets.only(
+            left: AppSizes.width * 0.08,
+            right: AppSizes.width * 0.08,
+            top: AppSizes.width * 0.08,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -76,6 +80,7 @@ class _ForgotPassowrdState extends State<ForgotPassowrd> {
                                 Navigator.push(context, SlideRightRoute(page: Login()));
                               }
                           ),
+                          SizedBox(height: AppSizes.height * 0.01,)
                         ],
                       ),
                     )

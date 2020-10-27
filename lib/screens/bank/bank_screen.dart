@@ -38,67 +38,52 @@ class _BankState extends State<Bank> {
                   child: ListView(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(AppSizes.width * 0.05),
+                        padding: EdgeInsets.only(
+                          left: AppSizes.width * 0.08,
+                          right: AppSizes.width * 0.08,
+                        ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            SizedBox(
-                              height: 30,
-                            ),
+                            SizedBox(height: AppSizes.height * 0.04),
                             CommonWidgets.getSubHeadingText(
                                 text: "Account Holder Name"),
-                            SizedBox(
-                              height: 10,
-                            ),
+                            SizedBox(height: AppSizes.height * 0.01),
                             CommonWidgets.getTextField(
                                 isPassword: false,
                                 leftIcon: Entypo.user,
                                 // textEditingController: name,
                                 hintText: "Enter Account Holder Name"
                             ),
-                            SizedBox(
-                              height: 30,
-                            ),
+                            SizedBox(height: AppSizes.height * 0.02),
                             CommonWidgets.getSubHeadingText(text: "Card Number"),
-                            SizedBox(
-                              height: 10,
-                            ),
+                            SizedBox(height: AppSizes.height * 0.01),
                             CommonWidgets.getTextField(
                                 isPassword: false,
                                 leftIcon: MdiIcons.dialpad,
                                 // textEditingController: name,
                                 hintText: "Enter Card Number"
                             ),
-                            SizedBox(
-                              height: 30,
-                            ),
+                            SizedBox(height: AppSizes.height * 0.02),
                             CommonWidgets.getSubHeadingText(text: "CVC Code"),
-                            SizedBox(
-                              height: 10,
-                            ),
+                            SizedBox(height: AppSizes.height * 0.01),
                             CommonWidgets.getTextField(
                                 isPassword: false,
                                 leftIcon: MdiIcons.dialpad,
                                 // textEditingController: name,
                                 hintText: "Enter CVC Code"
                             ),
-                            SizedBox(
-                              height: 30,
-                            ),
+                            SizedBox(height: AppSizes.height * 0.02),
                             CommonWidgets.getSubHeadingText(text: "Expiry Date"),
-                            SizedBox(
-                              height: 10,
-                            ),
+                            SizedBox(height: AppSizes.height * 0.01),
                             CommonWidgets.getTextField(
                                 isPassword: false,
                                 leftIcon: MdiIcons.dialpad,
                                 // textEditingController: name,
                                 hintText: "Enter Expiry Date"
                             ),
-                            SizedBox(
-                              height: 30,
-                            ),
+                            SizedBox(height: AppSizes.height * 0.04),
                             CommonWidgets.getBottomButton(
                                 text: "ADD",
                                 onPress: () {
@@ -158,7 +143,7 @@ class _BankState extends State<Bank> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                         Text(
-                        "Payment successful !",
+                        "Payment Successful!",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             decoration: TextDecoration.none,
@@ -167,16 +152,6 @@ class _BankState extends State<Bank> {
                             fontFamily: Assets.poppinsMedium,
                             fontWeight: FontWeight.bold),
                       ),
-                      // Text(
-                      //   "Done",
-                      //   textAlign: TextAlign.center,
-                      //   style: TextStyle(
-                      //       decoration: TextDecoration.none,
-                      //       fontSize: 15,
-                      //       color: AppColors.colorBlack,
-                      //       fontFamily: Assets.poppinsMedium,
-                      //       fontWeight: FontWeight.bold),
-                      // ),
                       SizedBox(
                         height: 20,
                       ),

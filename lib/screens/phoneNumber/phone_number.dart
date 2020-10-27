@@ -75,7 +75,8 @@ class _PhoneNumberState extends State<PhoneNumber> {
                             height: 40,
                           ),
                           CommonWidgets.getHeadingText(
-                              text: 'Enter Phone Number'),
+                              text: 'Enter Phone Number',
+                          ),
                           SizedBox(
                             height: 30,
                           ),
@@ -88,9 +89,7 @@ class _PhoneNumberState extends State<PhoneNumber> {
                               leftIcon: Entypo.mobile,
                               textEditingController: phone_number,
                               hintText: "Enter Phone Number"),
-                          SizedBox(
-                            height: 30,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.03),
                           _getTermsAndCondition(),
                           SizedBox(
                             height: 10,
@@ -164,7 +163,8 @@ class _PhoneNumberState extends State<PhoneNumber> {
                               color: Colors.amber,
                               fontSize: 12,
                               fontFamily: Assets.poppinsMedium,
-                              fontWeight: FontWeight.bold),
+                              // fontWeight: FontWeight.bold
+                          ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               // navigate to desired screen

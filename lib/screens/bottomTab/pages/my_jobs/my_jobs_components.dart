@@ -12,7 +12,7 @@ class MyJobsComponents{
     return GestureDetector(
       onTap: () => onPress(),
       child: Container(
-        // margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
+        margin: EdgeInsets.only(bottom: AppSizes.width * 0.05),
         padding: EdgeInsets.symmetric(
           horizontal: AppSizes.width * 0.03,
           vertical: AppSizes.width * 0.02,
@@ -43,6 +43,7 @@ class MyJobsComponents{
         @required String startDate,
         @required String time,
         @required String status,
+        @required String price,
         @required Function onTap}) {
     return Container(
       // height: AppSizes.height * 0.05,
@@ -64,29 +65,34 @@ class MyJobsComponents{
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Row(
+                children: [
+                  Text(
+                    'Job ID: ',
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontFamily: Assets.poppinsMedium,
+                        color: AppColors.yellow,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    jobDetail,
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontFamily: Assets.poppinsRegular,
+                        color: AppColors.colorBlack,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
               Text(
-                'Job ID:',
+                price,
                 style: TextStyle(
                     fontSize: 12,
                     fontFamily: Assets.poppinsMedium,
                     color: AppColors.yellow,
-                    fontWeight: FontWeight.bold),
-              ),
-              Text(
-                ' : ',
-                style: TextStyle(
-                    fontSize: 12,
-                    fontFamily: Assets.poppinsRegular,
-                    color: AppColors.colorBlack,
-                    fontWeight: FontWeight.bold),
-              ),
-              Text(
-                jobDetail,
-                style: TextStyle(
-                    fontSize: 12,
-                    fontFamily: Assets.poppinsRegular,
-                    color: AppColors.colorBlack,
                     fontWeight: FontWeight.bold),
               ),
             ],
@@ -102,8 +108,6 @@ class MyJobsComponents{
                   children: [
                     Image(
                       image: AssetImage(Assets.df_pk_job),
-                      height: 40,
-                      width: 20,
                     ),
                     SizedBox(
                       width: AppSizes.width * 0.01,
@@ -136,34 +140,38 @@ class MyJobsComponents{
                     ),
                   ],
                 ),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          startDate,
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontFamily: Assets.poppinsRegular,
-                            color: AppColors.dateColor,
-                            // fontWeight: FontWeight.bold
+                Container(
+                  height: AppSizes.height * 0.06,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            startDate,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontFamily: Assets.poppinsRegular,
+                              color: AppColors.dateColor,
+                              // fontWeight: FontWeight.bold
+                            ),
                           ),
-                        ),
-                        Text(
-                          time,
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontFamily: Assets.poppinsRegular,
-                            color: AppColors.colorBlack,
-                            // fontWeight: FontWeight.bold
+                          Text(
+                            time,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontFamily: Assets.poppinsRegular,
+                              color: AppColors.colorBlack,
+                              // fontWeight: FontWeight.bold
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: AppSizes.height * 0.01,
-                    ),
-                  ],
+                        ],
+                      ),
+                      SizedBox(
+                        height: AppSizes.height * 0.01,
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),
@@ -175,11 +183,11 @@ class MyJobsComponents{
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Status',
+                'Status:',
                 style: TextStyle(
                   fontSize: 12,
                   fontFamily: Assets.poppinsRegular,
-                  color: AppColors.status,
+                  color: AppColors.locationText,
                   // fontWeight: FontWeight.bold
                 ),
               ),
@@ -204,7 +212,7 @@ class MyJobsComponents{
                 style: TextStyle(
                   fontSize: 12,
                   fontFamily: Assets.poppinsRegular,
-                  color: AppColors.status,
+                  color: AppColors.locationText,
                   // fontWeight: FontWeight.bold
                 ),
               ),
