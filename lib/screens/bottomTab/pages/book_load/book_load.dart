@@ -243,10 +243,13 @@ class _BookLoadState extends State<BookLoad> {
                               dropOffLoction =! dropOffLoction;
                             });
                           }
-                          count ++;
                           if(count != 0){
+                            count = 0 ;
+                            pickUpLocation = false;
+                            dropOffLoction = false;
                             Navigator.push(context, SlideRightRoute(page: SelectVehicle()));
                           }
+                          count ++;
                         },
                         child: Container(
                           margin: EdgeInsets.only(left: AppSizes.width * 0.03),
