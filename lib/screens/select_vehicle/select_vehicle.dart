@@ -100,8 +100,8 @@ class _SelectVehicleState extends State<SelectVehicle> {
                               items: [
                                 DropdownMenuItem(
                                   child: TextView.getLightText04(
-                                    "Select",
-                                    color: AppColors.colorBlack,
+                                    "Select Category",
+                                    color: AppColors.lightGray.withOpacity(0.3),
                                   ),
                                   value: 1,
                                 ),

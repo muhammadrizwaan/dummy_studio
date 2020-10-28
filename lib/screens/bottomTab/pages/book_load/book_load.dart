@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:truckoom_shipper/screens/adding_drop_off/adding_drop_off.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/book_load/book_load_components.dart';
@@ -93,9 +95,8 @@ class _BookLoadState extends State<BookLoad> {
                           :
                       Navigator.push(context, SlideRightRoute(page: Wallet()));
                     },
-                    child: Image(
-                      image: AssetImage(widget.tag == Strings.indiviual ?  Assets.bellIconUnpress :Assets.walletIcon),
-                    ))
+                    child: Icon(FontAwesome5.bell, size: 20, color: AppColors.colorBlack.withOpacity(0.6),),
+                ),
               ],
             ),
           ),
@@ -321,7 +322,7 @@ class _BookLoadState extends State<BookLoad> {
                 Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: _bookLoadComponents.getLocationPickupText(
-                      text: "Pickup Location"),
+                      text: dropOffLoction ? "Drop off location" : "Pickup Location" ),
                 ),
                 Container(
                   height: AppSizes.height*0.06,
@@ -335,7 +336,7 @@ class _BookLoadState extends State<BookLoad> {
                         height: AppSizes.height*0.06,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(08,),
-                          color: Color.fromRGBO(214, 214, 214, 1),
+                          color:  AppColors.lightGray,
                         ),
                         child: Icon(Linecons.location, size: 20,),
                       ),
@@ -367,7 +368,7 @@ class _BookLoadState extends State<BookLoad> {
                         height: AppSizes.height*0.06,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(08,),
-                          color: Color.fromRGBO(214, 214, 214, 1),
+                          color:  AppColors.lightGray,
                         ),
                         child: Icon(Linecons.location, size: 20,),
                       ),
@@ -399,7 +400,7 @@ class _BookLoadState extends State<BookLoad> {
                         height: AppSizes.height*0.06,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(08,),
-                          color: Color.fromRGBO(214, 214, 214, 1),
+                          color:  AppColors.lightGray,
                         ),
                         child: Icon(Linecons.location, size: 20,),
                       ),
@@ -431,7 +432,7 @@ class _BookLoadState extends State<BookLoad> {
                         height: AppSizes.height*0.06,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(08,),
-                          color: Color.fromRGBO(214, 214, 214, 1),
+                          color:  AppColors.lightGray,
                         ),
                         child: Icon(Linecons.location, size: 20,),
                       ),
@@ -463,7 +464,7 @@ class _BookLoadState extends State<BookLoad> {
                         height: AppSizes.height*0.06,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(08,),
-                          color: Color.fromRGBO(214, 214, 214, 1),
+                          color:  AppColors.lightGray,
                         ),
                         child: Icon(Linecons.location, size: 20,),
                       ),
@@ -495,7 +496,7 @@ class _BookLoadState extends State<BookLoad> {
                         height: AppSizes.height*0.06,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(08,),
-                          color: Color.fromRGBO(214, 214, 214, 1),
+                          color:  AppColors.lightGray,
                         ),
                         child: Icon(Linecons.location, size: 20,),
                       ),
@@ -527,7 +528,7 @@ class _BookLoadState extends State<BookLoad> {
                         height: AppSizes.height*0.06,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(08,),
-                          color: Color.fromRGBO(214, 214, 214, 1),
+                          color:  AppColors.lightGray,
                         ),
                         child: Icon(Linecons.location, size: 20,),
                       ),

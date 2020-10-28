@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/octicons_icons.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
@@ -202,10 +203,7 @@ class PlacedComponents{
                   ),
                   GestureDetector(
                     onTap: () => onTap(),
-                    child: Image(
-                      image: AssetImage(Assets.informationIcon),
-                      color: AppColors.colorBlack,
-                    ),
+                    child: Icon(Octicons.info, size: 20, color: AppColors.colorBlack.withOpacity(0.70),),
                   ),
                 ],
               ),

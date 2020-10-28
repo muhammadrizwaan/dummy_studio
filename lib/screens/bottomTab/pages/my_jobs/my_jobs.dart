@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/elusive_icons.dart';
 import 'package:truckoom_shipper/models/api_models/login_response.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs_components.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/accepted/accepted.dart';
@@ -29,13 +30,16 @@ class MyJobs extends StatefulWidget {
 
 class _MyJobsState extends State<MyJobs> {
   MyJobsComponents _jobsComponents;
+  int count;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    count = 0;
     _jobsComponents = MyJobsComponents();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -68,67 +72,71 @@ class _MyJobsState extends State<MyJobs> {
               SizedBox(
                 height: AppSizes.height * 0.02,
               ),
-              TabBar(
-                isScrollable: true,
-                unselectedLabelColor: Colors.redAccent,
-                indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: AppColors.yellow,
+              Container(
+                padding: EdgeInsets.only(left: AppSizes.width*0.03,),
+                child: TabBar(
+                  isScrollable: true,
+                  unselectedLabelColor: AppColors.yellow,
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  indicator: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: AppColors.yellow,
+                  ),
+                  tabs: [
+                    Container(
+                      width: AppSizes.width * 0.25,
+                      height: AppSizes.height*0.06,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: AppColors.yellow,
+                        ),
+                        borderRadius: BorderRadius.circular(08),
+                      ),
+                      child: Tab(
+                        child: Text("Placed",),
+                      ),
+                    ),
+                    Container(
+                      width: AppSizes.width * 0.25,
+                      height: AppSizes.height*0.06,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: AppColors.yellow,
+                        ),
+                        borderRadius: BorderRadius.circular(08),
+                      ),
+                      child: Tab(
+                        child: Text("Accepted",),
+                      ),
+                    ),
+                    Container(
+                      width: AppSizes.width * 0.25,
+                      height: AppSizes.height*0.06,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: AppColors.yellow,
+                        ),
+                        borderRadius: BorderRadius.circular(08),
+                      ),
+                      child: Tab(
+                        child: Text("In Process",),
+                      ),
+                    ),
+                    Container(
+                      width: AppSizes.width * 0.25,
+                      height: AppSizes.height*0.06,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: AppColors.yellow,
+                        ),
+                        borderRadius: BorderRadius.circular(08),
+                      ),
+                      child: Tab(
+                        child: Text("Dispatched",),
+                      ),
+                    ),
+                  ],
                 ),
-                tabs: [
-                  Container(
-                    width: AppSizes.width * 0.25,
-                    height: AppSizes.height*0.06,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: AppColors.yellow,
-                      ),
-                      borderRadius: BorderRadius.circular(08),
-                    ),
-                    child: Tab(
-                      child: Text("Placed"),
-                    ),
-                  ),
-                  Container(
-                    width: AppSizes.width * 0.25,
-                    height: AppSizes.height*0.06,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: AppColors.yellow,
-                      ),
-                      borderRadius: BorderRadius.circular(08),
-                    ),
-                    child: Tab(
-                      child: Text("Accepted"),
-                    ),
-                  ),
-                  Container(
-                    width: AppSizes.width * 0.25,
-                    height: AppSizes.height*0.06,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: AppColors.yellow,
-                      ),
-                      borderRadius: BorderRadius.circular(08),
-                    ),
-                    child: Tab(
-                      child: Text("In Process"),
-                    ),
-                  ),
-                  Container(
-                    width: AppSizes.width * 0.25,
-                    height: AppSizes.height*0.06,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: AppColors.yellow,
-                      ),
-                      borderRadius: BorderRadius.circular(08),
-                    ),
-                    child: Tab(
-                      child: Text("Dispatched"),
-                    ),
-                  ),
-                ],
               ),
               SizedBox(
                 height: 10,
@@ -147,71 +155,6 @@ class _MyJobsState extends State<MyJobs> {
                   ],
                 ),
               ),
-//            Expanded(
-//              child: ListView(
-//                children: [
-//                  Container(
-//                    margin:
-//                        EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
-//                    child: Column(
-//                      children: [
-//                        SizedBox(
-//                          height: AppSizes.height * 0.02,
-//                        ),
-//                        _jobsComponents.getJobContainer(
-//                            jobDetail: "01",
-//                            pickUpLocation: "ABC Port:",
-//                            destinationLocation: "227 Building, UAE:",
-//                            startDate: "11 Aug,",
-//                            time: '12:00am',
-//                            status: "Active",
-//                            price: "AED 260",
-//                            onTap: () {}),
-//                        SizedBox(
-//                          height: AppSizes.height * 0.02,
-//                        ),
-//                        _jobsComponents.getJobContainer(
-//                            jobDetail: "01",
-//                            pickUpLocation: "ABC Port:",
-//                            destinationLocation: "227 Building, UAE:",
-//                            startDate: "11 Aug,",
-//                            time: '12:00am',
-//                            status: "Active",
-//                            price: "AED 260",
-//                            onTap: () {}),
-//                        SizedBox(
-//                          height: AppSizes.height * 0.02,
-//                        ),
-//                        _jobsComponents.getJobContainer(
-//                            jobDetail: "01",
-//                            pickUpLocation: "ABC Port:",
-//                            destinationLocation: "227 Building, UAE:",
-//                            startDate: "11 Aug,",
-//                            time: '12:00am',
-//                            status: "Active",
-//                            price: "AED 260",
-//                            onTap: () {}),
-//                        SizedBox(
-//                          height: AppSizes.height * 0.02,
-//                        ),
-//                        _jobsComponents.getJobContainer(
-//                            jobDetail: "01",
-//                            pickUpLocation: "ABC Port:",
-//                            destinationLocation: "227 Building, UAE:",
-//                            startDate: "11 Aug,",
-//                            time: '12:00am',
-//                            status: "Active",
-//                            price: "AED 260",
-//                            onTap: () {}),
-//                        SizedBox(
-//                          height: AppSizes.height * 0.02,
-//                        ),
-//                      ],
-//                    ),
-//                  )
-//                ],
-//              ),
-//            ),
             ],
           )),
     );

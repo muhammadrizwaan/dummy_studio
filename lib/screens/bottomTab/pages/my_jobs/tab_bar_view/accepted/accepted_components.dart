@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/octicons_icons.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
@@ -199,10 +200,7 @@ class AcceptedComponents{
                     width: AppSizes.width * 0.01,
                   ),
                   GestureDetector(
-                    child: Image(
-                      image: AssetImage(Assets.informationIcon),
-                      color: AppColors.colorBlack,
-                    ),
+                    child: Icon(Octicons.info, size: 20, color: AppColors.colorBlack.withOpacity(0.70),),
                   ),
                 ],
               ),
@@ -216,7 +214,7 @@ class AcceptedComponents{
               GestureDetector(
                 onTap: () => onClickPay(),
                 child: Container(
-                  height: AppSizes.height*0.065,
+                  height: AppSizes.height*0.055,
                   width: AppSizes.width*0.38,
                   decoration: BoxDecoration(
                     color: AppColors.yellow,
@@ -230,7 +228,7 @@ class AcceptedComponents{
                 width: 20,
               ),
               Container(
-                height: AppSizes.height*0.065,
+                height: AppSizes.height*0.055,
                 width: AppSizes.width*0.38,
                 decoration: BoxDecoration(
                   color: Colors.white,
