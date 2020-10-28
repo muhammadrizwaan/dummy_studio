@@ -1,10 +1,13 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/entypo_icons.dart';
 import 'package:fluttericon/linearicons_free_icons.dart';
+import 'package:fluttericon/web_symbols_icons.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class BusinessInformationComponents {
   Widget getBusinessSignupStep() {
@@ -55,15 +58,8 @@ class BusinessInformationComponents {
               child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image(image: AssetImage('assets/png/plus_icon.png')),
-                Text(
-                  ' Attach Copy of License',
-                  style: TextStyle(
-                    fontFamily: Assets.poppinsMedium,
-                    fontSize: 12,
-                    color: AppColors.colorBlack,
-                  ),
-                )
+               Icon(WebSymbols.plus_circle, size: 15, color: AppColors.colorBlack.withOpacity(0.9),),
+                TextView.getLabelText04(' Attach Copy of License', color: AppColors.colorBlack.withOpacity(0.4),),
               ],
             ),
             ),

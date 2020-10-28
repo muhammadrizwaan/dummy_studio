@@ -44,12 +44,10 @@ class _ContactUsState extends State<ContactUs> {
                 children: [
                   CommonWidgets.tabsAppBar2(
                       text: 'Contact Us',
-                      iconName: Assets.backArrow,
                       onPress: (){
                         Navigator.pop(context);
                       }
                   ),
-                  Divider(height: 10,),
                   SizedBox(height: AppSizes.height * 0.03,),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05, vertical: AppSizes.height * 0.01),
@@ -61,7 +59,7 @@ class _ContactUsState extends State<ContactUs> {
                     padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05, ),
                     child: _contactUsComponents.getNameTextField(
                         leftIcon: Entypo.user,
-                        hintText: 'Enter Full Name',
+                        hintText: 'Full Name',
                         textEditingController: null
                     ),
                   ),
@@ -76,7 +74,7 @@ class _ContactUsState extends State<ContactUs> {
                     padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05, ),
                     child: _contactUsComponents.getMessageTextField(
                         leftIcon: Icons.message,
-                        hintText: 'Enter Message',
+                        hintText: 'Message',
                         textEditingController: null
                     ),
                   ),

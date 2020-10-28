@@ -8,17 +8,17 @@ import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
-class FAQStatelessContainer extends StatefulWidget {
+class LanguageContainer extends StatefulWidget {
   // final FAQ faq;
   // int pageIndex;
 
-  FAQStatelessContainer();
+  LanguageContainer();
 
   @override
-  _FAQStatelessContainerState createState() => _FAQStatelessContainerState();
+  _LanguageContainerState createState() => _LanguageContainerState();
 }
 
-class _FAQStatelessContainerState extends State<FAQStatelessContainer> {
+class _LanguageContainerState extends State<LanguageContainer> {
 
   bool isExpanded;
 
@@ -33,7 +33,7 @@ class _FAQStatelessContainerState extends State<FAQStatelessContainer> {
 
   Widget buildTiles() {
     return Container(
-      color: isExpanded ? Color.fromRGBO(212, 212, 212, 1).withOpacity(0.5) : Colors.white,
+      color: isExpanded ? AppColors.lightGray : Colors.white,
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
         child: ExpansionTile(
@@ -42,7 +42,7 @@ class _FAQStatelessContainerState extends State<FAQStatelessContainer> {
               isExpanded = value;
             });
           },
-          trailing: Icon(isExpanded ? FontAwesome5.chevron_down : FontAwesome5.chevron_right, size: 20, ),
+          trailing: Icon(isExpanded ? FontAwesome5.chevron_down : FontAwesome5.chevron_right, size: 20, color: AppColors.colorBlack.withOpacity(0.4), ),
           title: Container(
             padding: EdgeInsets.only(left: AppSizes.width*0.03),
             child: TextView.getLabelText04("Language", color: AppColors.colorBlack.withOpacity(0.6)),
@@ -50,38 +50,42 @@ class _FAQStatelessContainerState extends State<FAQStatelessContainer> {
           ),
           children: [
             Container(
-              color: Color.fromRGBO(212, 212, 212, 1).withOpacity(0.5),
+              color: AppColors.lightGray,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: AppSizes.height * 0.04,
+                    height: 1,
+                    color: AppColors.colorBlack.withOpacity(0.1),
+                  ),
+                  Container(
+                    height: AppSizes.height * 0.06,
                     padding: EdgeInsets.only(left: AppSizes.width*0.08),
                     child: Align(
                         alignment: Alignment.centerLeft,
                         child: TextView.getLabelText04("English", color: AppColors.colorBlack.withOpacity(0.6))),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 05),
                   Container(
                     height: 1,
-                    color: AppColors.colorBlack.withOpacity(0.2),
+                    color: AppColors.colorBlack.withOpacity(0.1),
                   ),
                   Container(
-                    height: AppSizes.height * 0.04,
+                    height: AppSizes.height * 0.06,
                     padding: EdgeInsets.only(left: AppSizes.width*0.08),
                     child: Align(
                         alignment: Alignment.centerLeft,
                         child: TextView.getLabelText04("اردو", color: AppColors.colorBlack.withOpacity(0.6))),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 05),
                   Container(
                     height: 1,
-                    color: AppColors.colorBlack.withOpacity(0.2),
+                    color: AppColors.colorBlack.withOpacity(0.1),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 05),
                   Container(
-                    height: AppSizes.height * 0.04,
+                    height: AppSizes.height * 0.06,
                     padding: EdgeInsets.only(left: AppSizes.width*0.08),
                     child: Align(
                         alignment: Alignment.centerLeft,

@@ -126,6 +126,9 @@ class AcceptedComponents{
                               // fontWeight: FontWeight.bold
                             ),
                           ),
+                          SizedBox(
+                            width: 4,
+                          ),
                           Text(
                             time,
                             style: TextStyle(
@@ -221,7 +224,7 @@ class AcceptedComponents{
                     borderRadius: BorderRadius.circular(08,),
                   ),
                   alignment: Alignment.center,
-                  child: TextView.getBottomButtonText04("Pay", color: Colors.white.withOpacity(0.8,)),
+                  child: TextView.getLabelText04("Pay", color: Colors.white.withOpacity(0.8,)),
                 ),
               ),
               SizedBox(
@@ -236,7 +239,7 @@ class AcceptedComponents{
                   border: Border.all(color: AppColors.yellow,)
                 ),
                 alignment: Alignment.center,
-                child: TextView.getBottomButtonText04("Cancel", color: AppColors.yellow.withOpacity(0.8,)),
+                child: TextView.getLabelText04("Cancel", color: AppColors.yellow.withOpacity(0.8,)),
               ),
             ],
           ),

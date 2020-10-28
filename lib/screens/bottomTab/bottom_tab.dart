@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/linearicons_free_icons.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab_components.dart';
@@ -73,8 +74,8 @@ class _BottomTabState extends State<BottomTab> {
                 icon: GestureDetector(
                   child: Image.asset(
                     Assets.bookLoadIcon,
-                    height: 40,
-                    width: 50,
+                    height: 20,
+                    width: 20,
                     color:
                         _currentIndex == 0 ? AppColors.yellow : AppColors.grey,
                   ),
@@ -88,13 +89,8 @@ class _BottomTabState extends State<BottomTab> {
                 )),
             BottomNavigationBarItem(
                 icon: GestureDetector(
-                  child: Image.asset(
-                    Assets.jobsIcon,
-                    height: 40,
-                    width: 50,
-                    color:
-                        _currentIndex == 1 ? AppColors.yellow : AppColors.grey,
-                  ),
+                  child: Icon(LineariconsFree.briefcase, size: 20,  color:
+                  _currentIndex == 1 ? AppColors.yellow : AppColors.grey,)
                 ),
                 title: Text(
                   "My Jobs",
@@ -106,9 +102,9 @@ class _BottomTabState extends State<BottomTab> {
             BottomNavigationBarItem(
                 icon: GestureDetector(
                   child: Image.asset(
-                    Assets.transactionIcon,
-                    height: 40,
-                    width: 50,
+                    "assets/png/icon_history.png",
+                    height: 20,
+                    width: 20,
                     color:
                         _currentIndex == 2 ? AppColors.yellow : AppColors.grey,
                   ),
@@ -124,8 +120,8 @@ class _BottomTabState extends State<BottomTab> {
                 icon: GestureDetector(
                   child: Image.asset(
                     Assets.moreIcon,
-                    height: 40,
-                    width: 50,
+                    height: 20,
+                    width: 20,
                     color:
                         _currentIndex == 3 ? AppColors.yellow : AppColors.grey,
                   ),

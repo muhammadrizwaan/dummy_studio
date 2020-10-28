@@ -34,11 +34,10 @@ class _PaymentState extends State<Payment> {
                   children: [
                     CommonWidgets.tabsAppBar2(
                         text: "Payment Method",
-                        iconName: Assets.backArrow,
                         onPress: () {
                           Navigator.pop(context);
-                        }),
-                    Divider(height: 10,),
+                        },
+                    ),
                     CommonWidgets.getWalletPriceBox(
                         walletPrice: "258,000.00"
                     ),
@@ -51,29 +50,28 @@ class _PaymentState extends State<Payment> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                CommonWidgets.getSubHeadingText(text: 'Payment Method'),
                                 SizedBox(height: AppSizes.height * 0.02),
                                 CommonWidgets.getPayField(
                                     isPassword: false,
                                     leftIcon: Assets.radioActiveIcon,
                                     // textEditingController: email,
+                                    hintText: "Credit Card"),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                CommonWidgets.getPayField(
+                                    isPassword: false,
+                                    leftIcon: Assets.radioUnactiveIcon,
+                                    // textEditingController: email,
+                                    hintText: "Credit"),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                CommonWidgets.getPayField(
+                                    isPassword: false,
+                                    leftIcon: Assets.radioUnactiveIcon,
+                                    // textEditingController: email,
                                     hintText: "Bank Transfer"),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                CommonWidgets.getPayField(
-                                    isPassword: false,
-                                    leftIcon: Assets.radioUnactiveIcon,
-                                    // textEditingController: email,
-                                    hintText: "Payment Gateway"),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                CommonWidgets.getPayField(
-                                    isPassword: false,
-                                    leftIcon: Assets.radioUnactiveIcon,
-                                    // textEditingController: email,
-                                    hintText: "Wallet"),
                                 SizedBox(
                                   height: 10,
                                 ),
@@ -86,7 +84,7 @@ class _PaymentState extends State<Payment> {
                                   height: 30,
                                 ),
                                 Container(
-                                  height: AppSizes.height*0.25,
+                                  height: AppSizes.height*0.20,
                                   width: AppSizes.width,
                                   decoration: BoxDecoration(
                                     color: AppColors.lightGray,
@@ -99,10 +97,10 @@ class _PaymentState extends State<Payment> {
                                         height: AppSizes.height*0.06,
                                         width: AppSizes.width,
                                         padding: EdgeInsets.only(top: AppSizes.width*0.05, left: AppSizes.width*0.03,),
-                                        child: TextView.getLabelText04("Load Summary", color: AppColors.black),
+                                        child: TextView.getLabelHeadingText04("Load Summary", color: AppColors.black),
                                       ),
                                       SizedBox(
-                                        height: 20,
+                                        height: 10,
                                       ),
                                       Container(
                                         padding: EdgeInsets.only(left: AppSizes.width*0.03, right: AppSizes.width*0.03),
@@ -121,7 +119,7 @@ class _PaymentState extends State<Payment> {
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
-                                            TextView.getLabelText04("Discount", color: AppColors.black.withOpacity(0.6)),
+                                            TextView.getLabelText04("Discount", color: AppColors.black.withOpacity(0.6),),
                                             TextView.getLabelText04("AED 250", color: AppColors.black.withOpacity(0.6)),
                                           ],
                                         ),
@@ -132,16 +130,42 @@ class _PaymentState extends State<Payment> {
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
-                                            TextView.getLabelText04("Total Amount", color: AppColors.black),
-                                            TextView.getLabelText04("AED 250", color: AppColors.black),
+                                            TextView.getLabelHeadingText04("Total Amount", color: AppColors.black),
+                                            TextView.getLabelHeadingText04("AED 250", color: AppColors.black),
                                           ],
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
+                                Container(
+                                  padding: EdgeInsets.only(left: AppSizes.width*0.03, right: AppSizes.width*0.03, top: AppSizes.width*0.03,),
+                                  child: RichText(
+                                    text: TextSpan(
+                                        text: 'Note:  ',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontFamily: Assets.poppinsRegular,
+                                          color: AppColors.yellow,
+                                        ),
+                                        children: <TextSpan>[
+                                          TextSpan(text: 'Payment is due in advance for approved jobs unless agreed upon otherwise',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily: Assets.poppinsRegular,
+                                                color: AppColors.colorBlack.withOpacity(0.4),
+                                              ),
+                                              recognizer: TapGestureRecognizer()
+                                                ..onTap = () {
+                                                  // open desired screen
+                                                }
+                                          ),
+                                        ]
+                                    ),
+                                  ),
+                                ),
                                 SizedBox(
-                                  height: 60,
+                                  height: 50,
                                 ),
                               ],
                             ),
@@ -264,7 +288,6 @@ class _PaymentState extends State<Payment> {
                                   "Apply",
                                   style: TextStyle(
                                     decoration: TextDecoration.none,
-                                    fontSize: 15,
                                     color: AppColors.white,
                                     fontFamily: Assets.poppinsLight,
                                   ),

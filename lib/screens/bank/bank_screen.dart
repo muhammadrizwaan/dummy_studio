@@ -29,7 +29,6 @@ class _BankState extends State<Bank> {
               children: [
                 CommonWidgets.tabsAppBar2(
                     text: "Bank Transfer",
-                    iconName: Assets.backArrow,
                     onPress: () {
                       Navigator.pop(context);
                     }),
@@ -54,7 +53,7 @@ class _BankState extends State<Bank> {
                                 isPassword: false,
                                 leftIcon: Entypo.user,
                                 // textEditingController: name,
-                                hintText: "Enter Account Holder Name"
+                                hintText: "Account Holder Name"
                             ),
                             SizedBox(height: AppSizes.height * 0.02),
                             CommonWidgets.getSubHeadingText(text: "Card Number"),
@@ -63,7 +62,7 @@ class _BankState extends State<Bank> {
                                 isPassword: false,
                                 leftIcon: MdiIcons.dialpad,
                                 // textEditingController: name,
-                                hintText: "Enter Card Number"
+                                hintText: "Card Number"
                             ),
                             SizedBox(height: AppSizes.height * 0.02),
                             CommonWidgets.getSubHeadingText(text: "CVC Code"),
@@ -72,7 +71,7 @@ class _BankState extends State<Bank> {
                                 isPassword: false,
                                 leftIcon: MdiIcons.dialpad,
                                 // textEditingController: name,
-                                hintText: "Enter CVC Code"
+                                hintText: "CVC Code"
                             ),
                             SizedBox(height: AppSizes.height * 0.02),
                             CommonWidgets.getSubHeadingText(text: "Expiry Date"),
@@ -81,11 +80,11 @@ class _BankState extends State<Bank> {
                                 isPassword: false,
                                 leftIcon: MdiIcons.dialpad,
                                 // textEditingController: name,
-                                hintText: "Enter Expiry Date"
+                                hintText: "Expiry Date"
                             ),
                             SizedBox(height: AppSizes.height * 0.04),
                             CommonWidgets.getBottomButton(
-                                text: "ADD",
+                                text: "Add",
                                 onPress: () {
                                   _alertDialogueContainer();
                                 })
@@ -143,14 +142,13 @@ class _BankState extends State<Bank> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                         Text(
-                        "Payment Successful!",
+                        "Payment Successful",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             decoration: TextDecoration.none,
-                            fontSize: 15,
+                            fontSize: 18,
                             color: AppColors.colorBlack,
-                            fontFamily: Assets.poppinsMedium,
-                            fontWeight: FontWeight.bold),
+                            fontFamily: Assets.poppinsMedium,),
                       ),
                       SizedBox(
                         height: 20,
@@ -169,7 +167,7 @@ class _BankState extends State<Bank> {
                               fontSize: 12,
                               color: AppColors.yellow,
                               fontFamily: Assets.poppinsRegular,
-                              fontWeight: FontWeight.bold),
+                          ),
                         // ),
                       ),
                     ),

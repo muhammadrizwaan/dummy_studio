@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
+import 'package:fluttericon/linecons_icons.dart';
+import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/history/history_components.dart';
 
 import '../../../../animations/slide_right.dart';
@@ -39,7 +42,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
           children: [
             CommonWidgets.tabsAppBar1(
                 text: "History",
-                iconName: Assets.bellIconUnpress,
+                iconName: widget.tag == Strings.indiviual
+                    ? FontAwesome5.bell
+                    : Linecons.wallet,
                 onPress: () {
                 }),
             SizedBox(

@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
@@ -36,21 +37,35 @@ class _NotificationsState extends State<Notifications> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CommonWidgets.tabsAppBar2(
-                      text: 'Notifications',
-                      iconName: Assets.backArrow,
-                      onPress: (){
-                        Navigator.pop(context);
-                      }
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 30),
-                    child: Image(image: AssetImage(Assets.bellIconPressed),),
-                  )
-                ],
+              Container(
+                height: AppSizes.height * 0.09,
+                width: AppSizes.width,
+                padding: EdgeInsets.only(
+                    left: AppSizes.width * 0.05, right: AppSizes.width * 0.05),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        _getBackButton(),
+                        Text(
+                          "Notifications",
+                          style: TextStyle(
+                            decoration: TextDecoration.none,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: Assets.poppinsRegular,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        _getEditButton(),
+                      ],
+                    ),
+                  ],
+                ),
               ),
               Divider(height: 10,),
               Expanded(
@@ -137,4 +152,19 @@ class _NotificationsState extends State<Notifications> {
       ),
     );
   }
+  _getBackButton() {
+    return GestureDetector(
+        onTap: () {
+          Navigator.pop(context);
+        },
+        child: Icon(Icons.arrow_back_ios, size: 25,));
+  }
+
+  _getEditButton() {
+    return GestureDetector(
+        onTap: () {
+        },
+        child: Icon(FontAwesome5.bell, size: 20, color: AppColors.yellow,));
+  }
+
 }

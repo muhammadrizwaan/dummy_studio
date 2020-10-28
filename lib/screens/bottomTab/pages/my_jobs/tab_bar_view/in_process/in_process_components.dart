@@ -1,34 +1,31 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/octicons_icons.dart';
+import 'package:truckoom_shipper/animations/slide_right.dart';
+import 'package:truckoom_shipper/models/api_models/login_response.dart';
+import 'package:truckoom_shipper/res/assets.dart';
+import 'package:truckoom_shipper/res/colors.dart';
+import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/screens/driver_details/driver_details.dart';
+import 'package:truckoom_shipper/widgets/text_views.dart';
 
-import '../../../../res/assets.dart';
-import '../../../../res/colors.dart';
-import '../../../../res/sizes.dart';
-
-class HistoryComponents{
-  Widget getTransectionsContainer({
-    @required String jobDetail,
-    @required String pickUpLocation,
-    @required String destinationLocation,
-    @required String startDate,
-    @required String endDate,
-    @required String price,
-    @required String status,
-    @required String startTime,
-    @required String endTime,
-    @required Function onInvoice,
-    @required Function onTap,
-  }) {
+class InProcessComponents {
+  Widget getJobContainer(
+      {
+        @required BuildContext context,
+        @required String jobDetail,
+      @required String pickUpLocation,
+      @required String destinationLocation,
+      @required String startDate,
+      @required String time,
+      @required String status,
+      @required String price,
+      @required Function onClickPay}) {
     return Container(
-      // height: AppSizes.height * 0.05,
-      // width: AppSizes.width,
-      padding: EdgeInsets.all(AppSizes.width * 0.02),
+      padding: EdgeInsets.all(AppSizes.width * 0.03),
       decoration: BoxDecoration(
           color: AppColors.white,
-          // border: Border.all(color: AppColors.borderColor),
+          border: Border.all(color: AppColors.borderColor),
           borderRadius: BorderRadius.circular(5),
           boxShadow: [
             BoxShadow(
@@ -36,8 +33,7 @@ class HistoryComponents{
                 spreadRadius: 1,
                 blurRadius: 1,
                 offset: Offset(0, 0))
-          ]
-      ),
+          ]),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -85,8 +81,6 @@ class HistoryComponents{
                   children: [
                     Image(
                       image: AssetImage(Assets.df_pk_job),
-                      height: 40,
-                      width: 20,
                     ),
                     SizedBox(
                       width: AppSizes.width * 0.01,
@@ -119,70 +113,48 @@ class HistoryComponents{
                     ),
                   ],
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          startDate,
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontFamily: Assets.poppinsRegular,
-                            color: AppColors.dateColor,
-                            // fontWeight: FontWeight.bold
+                Container(
+                  height: AppSizes.height * 0.06,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            startDate,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontFamily: Assets.poppinsRegular,
+                              color: AppColors.dateColor,
+                              // fontWeight: FontWeight.bold
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 4,
-                        ),
-                        Text(
-                          startTime,
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontFamily: Assets.poppinsRegular,
-                            color: AppColors.colorBlack,
-                            fontWeight: FontWeight.bold,
-                            // fontWeight: FontWeight.bold
+                          SizedBox(
+                            width: 4,
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: AppSizes.height * 0.01,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          startDate,
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontFamily: Assets.poppinsRegular,
-                            color: AppColors.dateColor,
-                            // fontWeight: FontWeight.bold
+                          Text(
+                            time,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontFamily: Assets.poppinsRegular,
+                              color: AppColors.colorBlack,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 4,
-                        ),
-                        Text(
-                          startTime,
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontFamily: Assets.poppinsRegular,
-                            color: AppColors.colorBlack,
-                            fontWeight: FontWeight.bold,
-                            // fontWeight: FontWeight.bold
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
+                        ],
+                      ),
+                      SizedBox(
+                        height: AppSizes.height * 0.01,
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),
           ),
-          SizedBox(height: AppSizes.height * 0.01),
+          SizedBox(
+            height: AppSizes.height * 0.01,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -234,15 +206,18 @@ class HistoryComponents{
                     width: AppSizes.width * 0.01,
                   ),
                   GestureDetector(
-                    onTap: () => onTap(),
-                    child:Icon(Octicons.info, size: 20, color: AppColors.colorBlack.withOpacity(0.70),),
+                    child: Icon(
+                      Octicons.info,
+                      size: 20,
+                      color: AppColors.colorBlack.withOpacity(0.70),
+                    ),
                   ),
                 ],
               ),
             ],
           ),
           SizedBox(
-            height: AppSizes.height * 0.02,
+            height: AppSizes.height * 0.01,
           ),
           Container(
             width: AppSizes.width,
@@ -255,21 +230,14 @@ class HistoryComponents{
               color: AppColors.yellow,
             ),
             child: FlatButton(
-              onPressed: () => onInvoice(),
-              child: Text(
-                'View Invoice',
-                // text,
-                style: TextStyle(
-                  decoration: TextDecoration.none,
-                  fontSize: 15,
-                  color: AppColors.white,
-                  fontFamily: Assets.poppinsLight,
-                ),
+              onPressed: () {
+                Navigator.push(context, SlideRightRoute(page: DriverDetailScreen()));
+              },
+              child: TextView.getLabelText04(
+                "See Driver Detail",
+                color: AppColors.white.withOpacity(0.95),
               ),
             ),
-          ),
-          SizedBox(
-            height: AppSizes.height * 0.01,
           ),
         ],
       ),

@@ -109,7 +109,7 @@ class _SignUPState extends State<SignUP> {
                           _getTermsAndCondition(),
                           SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getBottomButton(
-                            text: "SIGN UP",
+                            text: "Sign up",
                             onPress: () {
                               _alertDialogueContainer();
                             },
@@ -129,7 +129,8 @@ class _SignUPState extends State<SignUP> {
   }
 
   _alertDialogueContainer() {
-    return {{
+    return {
+      {
         showDialog(
           context: context,
           builder: (_) {
@@ -169,11 +170,11 @@ class _SignUPState extends State<SignUP> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            "Sign up Successful!",
+                            "Sign up Successful",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 decoration: TextDecoration.none,
-                                fontSize: 15,
+                                fontSize: 20,
                                 color: AppColors.colorBlack,
                                 fontFamily: Assets.poppinsMedium,
                                 fontWeight: FontWeight.bold),
@@ -183,9 +184,15 @@ class _SignUPState extends State<SignUP> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.pushReplacement(context, SlideRightRoute(page: BottomTab(tag: widget.tag,)));
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  SlideRightRoute(
+                                      page: BottomTab(tag: widget.tag)),
+                                  (Route<dynamic> route) => false);
                             },
-                            child: TextView.getContinueText04("Tap & Continue", color: AppColors.yellow,),
+                            child: TextView.getContinueText04(
+                              "Tap & Continue",
+                              color: AppColors.yellow,
+                            ),
                           ),
                         ],
                       ),
@@ -220,7 +227,6 @@ class _SignUPState extends State<SignUP> {
     };
   }
 
-
   _getTermsAndCondition() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -252,6 +258,7 @@ class _SignUPState extends State<SignUP> {
             Container(
               height: AppSizes.height * 0.07,
               width: AppSizes.width * 0.69,
+              padding: EdgeInsets.only(top: 2),
               child: RichText(
                 text: TextSpan(
                     text: 'By creating an account you agree to our ',
@@ -265,10 +272,10 @@ class _SignUPState extends State<SignUP> {
                       TextSpan(
                           text: 'Term and Conditions',
                           style: TextStyle(
-                              color: Colors.amber,
-                              fontSize: 12,
-                              fontFamily: Assets.poppinsMedium,
-                              // fontWeight: FontWeight.bold
+                            color: Colors.amber,
+                            fontSize: 12,
+                            fontFamily: Assets.poppinsMedium,
+                            // fontWeight: FontWeight.bold
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {

@@ -109,10 +109,10 @@ class LoadDetailComponents {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: 18,
-              height: 18,
-              child: Image(image: AssetImage(Assets.percentageIcon),
-                fit: BoxFit.cover,
+            width: 21,
+              height: 21,
+              child: Image(image: AssetImage(Assets.percentageIcon,),
+                fit: BoxFit.fill,
               )
           ),
           SizedBox(width: AppSizes.width * 0.03,),

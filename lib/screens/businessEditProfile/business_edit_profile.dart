@@ -4,6 +4,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/entypo_icons.dart';
+import 'package:fluttericon/linecons_icons.dart';
 import 'package:fluttericon/web_symbols_icons.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
@@ -42,12 +43,11 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
             children: [
               CommonWidgets.tabsAppBar1(
                   text: 'Edit Profile',
-                  iconName: Assets.crossIcon,
+                  iconName: Icons.close,
                   onPress: (){
                     Navigator.pop(context);
                   }
               ),
-              Divider(height: 10,),
               Expanded(
                 child: ListView(
                   children: [
@@ -135,12 +135,12 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(right: 10),
-                                  child: Image(image: AssetImage('assets/png/location_icon.png')),
+                                  child:Icon(Linecons.location, size: 20,)
                                 ) ,
                                 Expanded(
                                   child: DropdownButtonHideUnderline(
                                     child: DropdownButton(
-
+                                        icon: Icon(Icons.keyboard_arrow_down),
                                         value: _value,
                                         items: [
                                           DropdownMenuItem(

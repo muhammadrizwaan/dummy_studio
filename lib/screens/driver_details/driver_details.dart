@@ -42,12 +42,10 @@ class _DriverDetailScreenState extends State<DriverDetailScreen> {
             children: [
               CommonWidgets.tabsAppBar2(
                   text: 'Driver Details',
-                  iconName: Assets.backArrow,
                   onPress: (){
                     Navigator.pop(context);
                   }
               ),
-              Divider(height: 10,),
               Expanded(
                 child: ListView(
                   children: [

@@ -63,7 +63,7 @@ class _ForgotPassowrdState extends State<ForgotPassowrd> {
                           SizedBox(height: AppSizes.height * 0.06,),
                           CommonWidgets.getHeadingText(text: 'Forgot Password'),
                           SizedBox(height: AppSizes.height * 0.02,),
-                          _forgotPasswordComponent.getOTPLableText(text: "Please Enter your Email Credentials"),
+                          _forgotPasswordComponent.getOTPLableText(text: "Please Enter your Email"),
                           SizedBox(height: AppSizes.height * 0.05,),
                           CommonWidgets.getSubHeadingText(text: "Email"),
                           SizedBox(height: AppSizes.height * 0.01,),

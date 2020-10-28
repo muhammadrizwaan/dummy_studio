@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/elusive_icons.dart';
 import 'package:fluttericon/entypo_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
@@ -86,7 +87,7 @@ class _BusinessSignupState extends State<BusinessSignup> {
                               isPassword: false,
                               leftIcon: Entypo.user,
                               textEditingController: name,
-                              hintText: "Enter Name"
+                              hintText: "Name"
                           ),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "Email"),
@@ -95,7 +96,7 @@ class _BusinessSignupState extends State<BusinessSignup> {
                               isPassword: false,
                               leftIcon: Icons.mail,
                               textEditingController: email,
-                              hintText: "Enter Email"
+                              hintText: "Email"
                           ),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "Password"),
@@ -104,7 +105,7 @@ class _BusinessSignupState extends State<BusinessSignup> {
                               isPassword: true,
                               leftIcon: Entypo.lock,
                               textEditingController: password,
-                              hintText: "Enter Password"
+                              hintText: "Password"
                           ),
 
                           SizedBox(height: AppSizes.height * 0.02),
@@ -132,12 +133,12 @@ class _BusinessSignupState extends State<BusinessSignup> {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(right: 10),
-                                  child: Icon(Linecons.location, size: 20,),
+                                  child: Icon(Elusive.location, size: 20, color: AppColors.colorBlack.withOpacity(0.8),),
                                 ) ,
                                 Expanded(
                                   child: DropdownButtonHideUnderline(
                                     child: DropdownButton(
-
+                                        icon: Icon(Icons.keyboard_arrow_down),
                                         value: _value,
                                         items: [
                                           DropdownMenuItem(
@@ -234,9 +235,10 @@ class _BusinessSignupState extends State<BusinessSignup> {
             Container(
               height: AppSizes.height * 0.07,
               width: AppSizes.width * 0.69,
+              padding: EdgeInsets.only(top: 2),
               child: RichText(
                 text: TextSpan(
-                    text: 'By creating an account you agree to our ',
+                    text: 'By creating an account, you agree to our. ',
                     style: TextStyle(
                       wordSpacing: 0.5,
                       color: Colors.black,

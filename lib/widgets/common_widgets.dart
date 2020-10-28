@@ -46,14 +46,15 @@ class CommonWidgets {
           GestureDetector(
             onTap: () => onCouponPress(),
             child: Container(
-                height: AppSizes.height * 0.056,
-                width: AppSizes.width * 0.13,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(15)),
-                child: Image(
-                  image: AssetImage(Assets.couponIcon),
-                  fit: BoxFit.cover,
-                )),
+              height: AppSizes.height * 0.05,
+              width: AppSizes.width * 0.1,
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(15)),
+              child: Image(
+                image: AssetImage(Assets.couponIcon),
+                fit: BoxFit.fill,
+              ),
+            ),
           ),
           SizedBox(width: AppSizes.width * 0.02),
           Container(
@@ -97,13 +98,16 @@ class CommonWidgets {
         children: [
           GestureDetector(
               onTap: () => onPress(),
-              child: Image(image: AssetImage('assets/png/$iconName'))),
+              child: Image(
+                image: AssetImage('assets/png/$iconName'),
+              )),
           RichText(
             text: TextSpan(
               text: text,
               style: TextStyle(
-                color: Colors.black,
+                color: Colors.black.withOpacity(0.8),
                 fontSize: 12,
+                fontWeight: FontWeight.bold,
                 fontFamily: Assets.poppinsRegular,
               ),
               children: <TextSpan>[
@@ -126,7 +130,7 @@ class CommonWidgets {
 
   static Widget tabsAppBar1(
       {@required String text,
-      @required String iconName,
+      @required IconData iconName,
       @required Function onPress}) {
     return Container(
       padding: EdgeInsets.all(AppSizes.width * 0.05),
@@ -148,14 +152,20 @@ class CommonWidgets {
           Text(
             text,
             style: TextStyle(
-                fontFamily: Assets.poppinsMedium,
-                fontSize: 22,
-                color: AppColors.colorBlack,
-                fontWeight: FontWeight.bold),
+              fontFamily: Assets.poppinsMedium,
+              fontSize: 22,
+              color: AppColors.colorBlack,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           GestureDetector(
-              onTap: () => onPress(),
-              child: Image(image: AssetImage('$iconName'))),
+            onTap: () => onPress(),
+            child: Icon(
+              iconName,
+              size: 25,
+              color: AppColors.colorBlack.withOpacity(0.6),
+            ),
+          ),
         ],
       ),
     );
@@ -163,16 +173,34 @@ class CommonWidgets {
 
   static Widget tabsAppBar2(
       {@required String text,
-      @required String iconName,
       @required Function onPress}) {
     return Container(
-      padding: EdgeInsets.only(left: AppSizes.width * 0.05, top: AppSizes.width * 0.05, bottom: AppSizes.width * 0.05),
+      padding: EdgeInsets.only(
+        left: AppSizes.width * 0.05,
+        top: AppSizes.width * 0.05,
+        bottom: AppSizes.width * 0.05,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 1,
+            blurRadius: 1,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           GestureDetector(
-              onTap: () => onPress(),
-              child: Image(image: AssetImage('$iconName'))),
+            onTap: () => onPress(),
+            child: Icon(
+              Icons.arrow_back_ios,
+              size: 20,
+            ),
+          ),
           SizedBox(
             width: 20,
           ),
@@ -423,7 +451,7 @@ class CommonWidgets {
     return Container(
       width: AppSizes.width,
       height: AppSizes.height * 0.1,
-      color: AppColors.lightGrayBackgroundColor,
+      color: AppColors.lightGray,
       margin: EdgeInsets.symmetric(vertical: AppSizes.height * 0.02),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -457,7 +485,7 @@ class CommonWidgets {
       @required TextEditingController textEditingController,
       @required String hintText}) {
     return Container(
-        height: AppSizes.height * 0.06,
+        height: AppSizes.height * 0.07,
         width: AppSizes.width,
         padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.02),
         decoration: BoxDecoration(

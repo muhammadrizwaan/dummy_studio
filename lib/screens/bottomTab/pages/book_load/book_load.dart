@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/elusive_icons.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:truckoom_shipper/screens/adding_drop_off/adding_drop_off.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/book_load/book_load_components.dart';
-import 'package:truckoom_shipper/screens/notifications/notifications.dart';
 import 'package:truckoom_shipper/screens/select_vehicle/select_vehicle.dart';
 import 'package:truckoom_shipper/screens/select_vehicle/select_vehicle_components.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
@@ -29,6 +28,7 @@ class BookLoad extends StatefulWidget {
   String tag;
 
   BookLoad({@required this.tag});
+
   @override
   _BookLoadState createState() => _BookLoadState();
 }
@@ -89,13 +89,20 @@ class _BookLoadState extends State<BookLoad> {
                   ),
                 ),
                 GestureDetector(
-                    onTap: () {
-                      widget.tag == Strings.indiviual ?
-                      Navigator.push(context, SlideRightRoute(page: Notifications()))
-                          :
-                      Navigator.push(context, SlideRightRoute(page: Wallet()));
-                    },
-                    child: Icon(FontAwesome5.bell, size: 20, color: AppColors.colorBlack.withOpacity(0.6),),
+                  onTap: () {
+                    Navigator.push(context, SlideRightRoute(page: Wallet()));
+                  },
+                  child: widget.tag == Strings.indiviual
+                      ? Icon(
+                          FontAwesome5.bell,
+                          size: 25,
+                          color: AppColors.colorBlack.withOpacity(0.6),
+                        )
+                      : Icon(
+                          Linecons.wallet,
+                          size: 20,
+                          color: AppColors.colorBlack.withOpacity(0.6),
+                        ),
                 ),
               ],
             ),
@@ -107,7 +114,6 @@ class _BookLoadState extends State<BookLoad> {
           children: [
             CommonWidgets.tabsAppBar2(
                 text: 'Book a Load',
-                iconName: Assets.walletIcon,
                 onPress: () {}),
             SizedBox(height: AppSizes.height * 0.04),
             GoogleMap(
@@ -121,9 +127,12 @@ class _BookLoadState extends State<BookLoad> {
               myLocationEnabled: true,
             ),
             SlidingUpPanel(
+              isDraggable: true,
+              minHeight: AppSizes.height*0.25,
+              maxHeight: AppSizes.height*0.75,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(15,),
                 topRight: Radius.circular(15,),
+                topLeft: Radius.circular(15,),
               ),
               panel: Center(
                 child: _bottomNavigationContainer(),
@@ -165,55 +174,61 @@ class _BookLoadState extends State<BookLoad> {
                           color: AppColors.dragContainer,
                           borderRadius: BorderRadius.circular(10))),
                 ),
-                Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  Container(
-                    margin: EdgeInsets.only(top: AppSizes.height * 0.03),
-                    height: AppSizes.height * 0.1,
-                    child: Row(
-                      children: [
-                        Image.asset(Assets.joint),
-                      ],
-                    ),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      GestureDetector(
-                        onTap: (){
-                          setState(() {
-                            pickUpLocation = !pickUpLocation;
-                          });
-                        },
-                        child: Container(
-                          margin: EdgeInsets.only(
-                              top: AppSizes.height * 0.02,
-                              left: AppSizes.width * 0.03),
-                          padding: EdgeInsets.only(
-                            left: AppSizes.width * 0.03,
-                          ),
-                          height: AppSizes.height * 0.06,
-                          width: AppSizes.width * 0.85,
-                          decoration: BoxDecoration(
-                              color:  AppColors.lightGray,
-                              border: pickUpLocation ? Border.all(color: AppColors.yellow) : Border.all(color: AppColors.yellow.withOpacity(0)),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Linecons.location,
-                                size: 20,
+                      Container(
+                        margin: EdgeInsets.only(top: AppSizes.height * 0.03),
+                        height: AppSizes.height * 0.11,
+                        child: Row(
+                          children: [
+                            Image.asset(Assets.joint),
+                          ],
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                pickUpLocation = !pickUpLocation;
+                              });
+                            },
+                            child: Container(
+                              margin: EdgeInsets.only(
+                                top: AppSizes.height * 0.02,
+                                left: AppSizes.width * 0.03,
                               ),
-                              SizedBox(
-                                width: 10,
+                              padding: EdgeInsets.only(
+                                left: AppSizes.width * 0.03,
                               ),
-                              TextView.getLabelText04(
-                                pickUpLocation ? "Urbana, IL" : "Select Pick up location",
-                                color: Colors.black.withOpacity(
-                                  0.6,
-                                ),
+                              height: AppSizes.height * 0.06,
+                              width: AppSizes.width * 0.85,
+                              decoration: BoxDecoration(
+                                  color: AppColors.lightGray,
+                                  border: pickUpLocation
+                                      ? Border.all(color: AppColors.yellow)
+                                      : Border.all(
+                                          color: AppColors.yellow.withOpacity(0)),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Row(
+                                children: [
+                                  Icon(Elusive.location, size: 20, color: AppColors.colorBlack.withOpacity(0.8),),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  TextView.getLabelText04(
+                                    pickUpLocation
+                                        ? "Sharjah, SL"
+                                        : "Select Pickup Location",
+                                    color: Colors.black.withOpacity(
+                                      0.6,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
 
 //                              child: TextField(
 //                                style: TextStyle(
@@ -236,54 +251,58 @@ class _BookLoadState extends State<BookLoad> {
 //                                ),
 //
 //                              ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: AppSizes.height * 0.04,
-                      ),
-                      GestureDetector(
-                        onTap: (){
-                          if(count == 0){
-                            setState(() {
-                              dropOffLoction =! dropOffLoction;
-                            });
-                          }
-                          if(count != 0){
-                            count = 0 ;
-                            pickUpLocation = false;
-                            dropOffLoction = false;
-                            Navigator.push(context, SlideRightRoute(page: SelectVehicle()));
-                          }
-                          count ++;
-                        },
-                        child: Container(
-                          margin: EdgeInsets.only(left: AppSizes.width * 0.03),
-                          padding: EdgeInsets.only(
-                            left: AppSizes.width * 0.03,
+                            ),
                           ),
-                          height: AppSizes.height * 0.06,
-                          width: AppSizes.width * 0.85,
-                          decoration: BoxDecoration(
-                              color: AppColors.lightGray,
-                              border: dropOffLoction ? Border.all(color: AppColors.yellow) : Border.all(color: AppColors.yellow.withOpacity(0)),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Linecons.location,
-                                size: 20,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              TextView.getLabelText04(
-                                dropOffLoction ? "Chicago, IL" : "Select Drop off location",
-                                color: Colors.black.withOpacity(
-                                  0.6,
-                                ),
-                              ),
-                            ],
+                          SizedBox(
+                            height: AppSizes.height * 0.04,
                           ),
+                          GestureDetector(
+                            onTap: () {
+                              if (count == 0) {
+                                setState(() {
+                                  dropOffLoction = !dropOffLoction;
+                                });
+                              }
+                              if (count != 0) {
+                                count = 0;
+                                pickUpLocation = false;
+                                dropOffLoction = false;
+                                Navigator.push(context,
+                                    SlideRightRoute(page: SelectVehicle()));
+                              }
+                              count++;
+                            },
+                            child: Container(
+                              margin:
+                                  EdgeInsets.only(left: AppSizes.width * 0.03),
+                              padding: EdgeInsets.only(
+                                left: AppSizes.width * 0.03,
+                              ),
+                              height: AppSizes.height * 0.06,
+                              width: AppSizes.width * 0.85,
+                              decoration: BoxDecoration(
+                                  color: AppColors.lightGray,
+                                  border: dropOffLoction
+                                      ? Border.all(color: AppColors.yellow)
+                                      : Border.all(
+                                          color: AppColors.yellow.withOpacity(0)),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Row(
+                                children: [
+                                  Icon(Elusive.location, size: 20, color: AppColors.colorBlack.withOpacity(0.8),),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  TextView.getLabelText04(
+                                    dropOffLoction
+                                        ? "Al Ain, AL"
+                                        : "Select Drop off Location",
+                                    color: Colors.black.withOpacity(
+                                      0.6,
+                                    ),
+                                  ),
+                                ],
+                              ),
 //                              child: TextField(
 //                                style: TextStyle(
 //                                    decoration: TextDecoration.none,
@@ -305,11 +324,13 @@ class _BookLoadState extends State<BookLoad> {
 //                                ),
 //
 //                              )
-                        ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ]),
+                ),
                 Container(
                   height: AppSizes.height * 0.005,
                   width: AppSizes.width,
@@ -322,231 +343,212 @@ class _BookLoadState extends State<BookLoad> {
                 Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: _bookLoadComponents.getLocationPickupText(
-                      text: dropOffLoction ? "Drop off location" : "Pickup Location" ),
+                    text: dropOffLoction
+                        ? "Drop off Location"
+                        : "Pickup Location",
+                  ),
                 ),
                 Container(
-                  height: AppSizes.height*0.06,
-                  width: AppSizes.width,
-                  color: Colors.white,
-                  margin: EdgeInsets.only(top: AppSizes.width*0.03, left: AppSizes.width*0.05,),
+                  height: AppSizes.height * 0.05,
+                  width: AppSizes.width * 0.85,
+                  margin: EdgeInsets.only(
+                    top: AppSizes.height * 0.02,
+                    left: AppSizes.width * 0.04,
+                    right: AppSizes.width * 0.04,
+                  ),
+                  decoration: BoxDecoration(
+                      color: AppColors.white,
+                      borderRadius: BorderRadius.circular(10)),
                   child: Row(
                     children: [
                       Container(
-                        width: AppSizes.width*0.12,
-                        height: AppSizes.height*0.06,
+                        padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(08,),
-                          color:  AppColors.lightGray,
+                            color: AppColors.lightGray,
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Row(
+                          children: [
+                            Icon(Elusive.location, size: 20, color: AppColors.colorBlack.withOpacity(0.8),),
+                          ],
                         ),
-                        child: Icon(Linecons.location, size: 20,),
                       ),
                       SizedBox(
-                        width: 20,
+                        width: AppSizes.width * 0.03,
                       ),
                       Container(
-                        width: AppSizes.width*0.50,
-                        child: TextView.getLabelText04("at Australia", color: AppColors.colorBlack.withOpacity(0.6)),
-                      ),
-
+                        color: AppColors.white,
+                        child: Text(
+                          "at Ras Al Khaimah",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: Assets.poppinsLight,
+                            color: AppColors.colorBlack,
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
                 Container(
-                  height: 1,
-                  margin: EdgeInsets.only(top: 10, left: AppSizes.width*0.05, right: AppSizes.width*0.05,),
-                  color: AppColors.colorBlack.withOpacity(0.2),
-                ),
-                Container(
-                  height: AppSizes.height*0.06,
-                  width: AppSizes.width,
-                  color: Colors.white,
-                  margin: EdgeInsets.only(top: AppSizes.width*0.03, left: AppSizes.width*0.05,),
+                  height: AppSizes.height * 0.05,
+                  width: AppSizes.width * 0.85,
+                  margin: EdgeInsets.only(
+                    top: AppSizes.height * 0.02,
+                    left: AppSizes.width * 0.04,
+                    right: AppSizes.width * 0.04,
+                  ),
+                  decoration: BoxDecoration(
+                      color: AppColors.white,
+                      borderRadius: BorderRadius.circular(10)),
                   child: Row(
                     children: [
                       Container(
-                        width: AppSizes.width*0.12,
-                        height: AppSizes.height*0.06,
+                        padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(08,),
-                          color:  AppColors.lightGray,
+                            color: AppColors.lightGray,
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Row(
+                          children: [
+                            Icon(Elusive.location, size: 20, color: AppColors.colorBlack.withOpacity(0.8),),
+                          ],
                         ),
-                        child: Icon(Linecons.location, size: 20,),
                       ),
                       SizedBox(
-                        width: 20,
+                        width: AppSizes.width * 0.03,
                       ),
-                      Container(
-                        width: AppSizes.width*0.50,
-                        child: TextView.getLabelText04("at Australia", color: AppColors.colorBlack.withOpacity(0.6)),
-                      ),
-
+                      Row(
+                        children: [
+                          Text(
+                            "at Khor Fakkan",
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: Assets.poppinsLight,
+                                color: AppColors.colorBlack),
+                          )
+                        ],
+                      )
                     ],
                   ),
                 ),
                 Container(
-                  height: 1,
-                  margin: EdgeInsets.only(top: 10, left: AppSizes.width*0.05, right: AppSizes.width*0.05,),
-                  color: AppColors.colorBlack.withOpacity(0.2),
-                ),
-                Container(
-                  height: AppSizes.height*0.06,
-                  width: AppSizes.width,
-                  color: Colors.white,
-                  margin: EdgeInsets.only(top: AppSizes.width*0.03, left: AppSizes.width*0.05,),
+                  height: AppSizes.height * 0.05,
+                  width: AppSizes.width * 0.85,
+                  margin: EdgeInsets.only(
+                      top: AppSizes.height * 0.02,
+                      left: AppSizes.width * 0.04,
+                      right: AppSizes.width * 0.04),
+                  decoration: BoxDecoration(
+                      color: AppColors.white,
+                      borderRadius: BorderRadius.circular(10)),
                   child: Row(
                     children: [
                       Container(
-                        width: AppSizes.width*0.12,
-                        height: AppSizes.height*0.06,
+                        padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(08,),
-                          color:  AppColors.lightGray,
+                            color: AppColors.lightGray,
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Row(
+                          children: [
+                            Icon(Elusive.location, size: 20, color: AppColors.colorBlack.withOpacity(0.8),),
+                          ],
                         ),
-                        child: Icon(Linecons.location, size: 20,),
                       ),
                       SizedBox(
-                        width: 20,
+                        width: AppSizes.width * 0.03,
                       ),
-                      Container(
-                        width: AppSizes.width*0.50,
-                        child: TextView.getLabelText04("at Australia", color: AppColors.colorBlack.withOpacity(0.6)),
-                      ),
-
+                      Row(
+                        children: [
+                          Text(
+                            "at Ruwais",
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: Assets.poppinsLight,
+                                color: AppColors.colorBlack),
+                          )
+                        ],
+                      )
                     ],
                   ),
                 ),
                 Container(
-                  height: 1,
-                  margin: EdgeInsets.only(top: 10, left: AppSizes.width*0.05, right: AppSizes.width*0.05,),
-                  color: AppColors.colorBlack.withOpacity(0.2),
-                ),
-                Container(
-                  height: AppSizes.height*0.06,
-                  width: AppSizes.width,
-                  color: Colors.white,
-                  margin: EdgeInsets.only(top: AppSizes.width*0.03, left: AppSizes.width*0.05,),
+                  height: AppSizes.height * 0.05,
+                  width: AppSizes.width * 0.85,
+                  margin: EdgeInsets.only(
+                      top: AppSizes.height * 0.02,
+                      left: AppSizes.width * 0.04,
+                      right: AppSizes.width * 0.04),
+                  decoration: BoxDecoration(
+                      color: AppColors.white,
+                      borderRadius: BorderRadius.circular(10)),
                   child: Row(
                     children: [
                       Container(
-                        width: AppSizes.width*0.12,
-                        height: AppSizes.height*0.06,
+                        padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(08,),
-                          color:  AppColors.lightGray,
+                            color: AppColors.lightGray,
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Row(
+                          children: [
+                            Icon(Elusive.location, size: 20, color: AppColors.colorBlack.withOpacity(0.8),),
+                          ],
                         ),
-                        child: Icon(Linecons.location, size: 20,),
                       ),
                       SizedBox(
-                        width: 20,
+                        width: AppSizes.width * 0.03,
                       ),
-                      Container(
-                        width: AppSizes.width*0.50,
-                        child: TextView.getLabelText04("at Australia", color: AppColors.colorBlack.withOpacity(0.6)),
-                      ),
-
+                      Row(
+                        children: [
+                          Text(
+                            "at Hatta",
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: Assets.poppinsLight,
+                                color: AppColors.colorBlack),
+                          )
+                        ],
+                      )
                     ],
                   ),
                 ),
                 Container(
-                  height: 1,
-                  margin: EdgeInsets.only(top: 10, left: AppSizes.width*0.05, right: AppSizes.width*0.05,),
-                  color: AppColors.colorBlack.withOpacity(0.2),
-                ),
-                Container(
-                  height: AppSizes.height*0.06,
-                  width: AppSizes.width,
-                  color: Colors.white,
-                  margin: EdgeInsets.only(top: AppSizes.width*0.03, left: AppSizes.width*0.05,),
+                  height: AppSizes.height * 0.05,
+                  width: AppSizes.width * 0.85,
+                  margin: EdgeInsets.only(
+                      top: AppSizes.height * 0.02,
+                      left: AppSizes.width * 0.04,
+                      right: AppSizes.width * 0.04),
+                  decoration: BoxDecoration(
+                      color: AppColors.white,
+                      borderRadius: BorderRadius.circular(10)),
                   child: Row(
                     children: [
                       Container(
-                        width: AppSizes.width*0.12,
-                        height: AppSizes.height*0.06,
+                        padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(08,),
-                          color:  AppColors.lightGray,
+                            color: AppColors.lightGray,
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Row(
+                          children: [
+                            Icon(Elusive.location, size: 20, color: AppColors.colorBlack.withOpacity(0.8),),
+                          ],
                         ),
-                        child: Icon(Linecons.location, size: 20,),
                       ),
                       SizedBox(
-                        width: 20,
+                        width: AppSizes.width * 0.03,
                       ),
-                      Container(
-                        width: AppSizes.width*0.50,
-                        child: TextView.getLabelText04("at Australia", color: AppColors.colorBlack.withOpacity(0.6)),
-                      ),
-
+                      Row(
+                        children: [
+                          Text(
+                            "at Ar-Rams",
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: Assets.poppinsLight,
+                                color: AppColors.colorBlack),
+                          )
+                        ],
+                      )
                     ],
                   ),
-                ),
-                Container(
-                  height: 1,
-                  margin: EdgeInsets.only(top: 10, left: AppSizes.width*0.05, right: AppSizes.width*0.05,),
-                  color: AppColors.colorBlack.withOpacity(0.2),
-                ),
-                Container(
-                  height: AppSizes.height*0.06,
-                  width: AppSizes.width,
-                  color: Colors.white,
-                  margin: EdgeInsets.only(top: AppSizes.width*0.03, left: AppSizes.width*0.05,),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: AppSizes.width*0.12,
-                        height: AppSizes.height*0.06,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(08,),
-                          color:  AppColors.lightGray,
-                        ),
-                        child: Icon(Linecons.location, size: 20,),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Container(
-                        width: AppSizes.width*0.50,
-                        child: TextView.getLabelText04("at Australia", color: AppColors.colorBlack.withOpacity(0.6)),
-                      ),
-
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 1,
-                  margin: EdgeInsets.only(top: 10, left: AppSizes.width*0.05, right: AppSizes.width*0.05,),
-                  color: AppColors.colorBlack.withOpacity(0.2),
-                ),
-                Container(
-                  height: AppSizes.height*0.06,
-                  width: AppSizes.width,
-                  color: Colors.white,
-                  margin: EdgeInsets.only(top: AppSizes.width*0.03, left: AppSizes.width*0.05,),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: AppSizes.width*0.12,
-                        height: AppSizes.height*0.06,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(08,),
-                          color:  AppColors.lightGray,
-                        ),
-                        child: Icon(Linecons.location, size: 20,),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Container(
-                        width: AppSizes.width*0.50,
-                        child: TextView.getLabelText04("at Australia", color: AppColors.colorBlack.withOpacity(0.6)),
-                      ),
-
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 1,
-                  margin: EdgeInsets.only(top: 10, left: AppSizes.width*0.05, right: AppSizes.width*0.05,),
-                  color: AppColors.colorBlack.withOpacity(0.2),
                 ),
               ],
             ),

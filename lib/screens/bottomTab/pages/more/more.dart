@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
+import 'package:fluttericon/linecons_icons.dart';
 import 'package:truckoom_shipper/models/api_models/login_response.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/more/more_components.dart';
 import 'package:truckoom_shipper/screens/businessProfile/business_profile.dart';
-import 'package:truckoom_shipper/widgets/faq.dart';
+import 'package:truckoom_shipper/widgets/language_expandable_container.dart';
 
 import '../../../../animations/slide_right.dart';
 import '../../../../res/assets.dart';
@@ -43,15 +45,12 @@ class _MoreState extends State<More> {
         child: Column(
           children: [
             CommonWidgets.tabsAppBar1(
-                text: "More", iconName: Assets.bellIconUnpress, onPress: () {
+                text: "More", iconName: FontAwesome5.bell, onPress: () {
                   Navigator.push(context, SlideRightRoute(page: Notifications()));
             }),
             Expanded(
               child: ListView(
                 children: [
-                  Divider(
-                    height: 10,
-                  ),
                   _moreComponents.getProfileContainer(
                     ProfileImg: Assets.profileImg,
                     name: 'Matthew',
@@ -93,7 +92,7 @@ class _MoreState extends State<More> {
                   //     //     context, SlideRightRoute(page: DriverDetails()));
                   //   },
                   // ),
-                  FAQStatelessContainer(),
+                  LanguageContainer(),
                   Divider(
                     height: 10,
                   ),
@@ -111,4 +110,6 @@ class _MoreState extends State<More> {
           ],
         ));
   }
+
+
 }

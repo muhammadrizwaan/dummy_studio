@@ -1,7 +1,9 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/elusive_icons.dart';
 import 'package:fluttericon/entypo_icons.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:truckoom_shipper/res/assets.dart';
@@ -51,11 +53,9 @@ class _LoadDetailState extends State<LoadDetail> {
             children: [
               CommonWidgets.tabsAppBar2(
                   text: 'Add Book a Load Details',
-                  iconName: Assets.backArrow,
                   onPress: () {
                     Navigator.pop(context);
                   }),
-              Divider(height: 10),
               Expanded(
                 child: ListView(
                   children: [
@@ -114,15 +114,12 @@ class _LoadDetailState extends State<LoadDetail> {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(right: 10),
-                                  child: Icon(
-                                    Linecons.location,
-                                    size: 20,
-                                  ),
-                                  // child: Image(image: AssetImage('assets/png/location_icon.png')),
+                                  child:  Icon(Elusive.location, size: 20, color: AppColors.colorBlack.withOpacity(0.8),),
                                 ),
                                 Expanded(
                                   child: DropdownButtonHideUnderline(
                                     child: DropdownButton(
+                                        icon: Icon(Icons.keyboard_arrow_down),
                                         value: _dateTime,
                                         items: [
                                           DropdownMenuItem(
@@ -199,6 +196,7 @@ class _LoadDetailState extends State<LoadDetail> {
                                 Expanded(
                                   child: DropdownButtonHideUnderline(
                                     child: DropdownButton(
+                                        icon: Icon(Icons.keyboard_arrow_down),
                                         value: _goodType,
                                         items: [
                                           DropdownMenuItem(
@@ -251,14 +249,15 @@ class _LoadDetailState extends State<LoadDetail> {
                                   child: Opacity(
                                       opacity: 0.7,
                                       child: Icon(
-                                        Linecons.truck,
-                                        size: 20,
+                                        FontAwesome5.truck,
+                                        size: 18,
                                       )),
                                   // child: Image(image: AssetImage(Assets.vehicle)),
                                 ),
                                 Expanded(
                                   child: DropdownButtonHideUnderline(
                                     child: DropdownButton(
+                                        icon: Icon(Icons.keyboard_arrow_down),
                                         value: _weight,
                                         items: [
                                           DropdownMenuItem(
@@ -318,14 +317,15 @@ class _LoadDetailState extends State<LoadDetail> {
                                   child: Opacity(
                                       opacity: 0.7,
                                       child: Icon(
-                                        Linecons.truck,
-                                        size: 20,
+                                        FontAwesome5.truck,
+                                        size: 18,
                                       )),
                                   // child: Image(image: AssetImage(Assets.vehicle)),
                                 ),
                                 Expanded(
                                   child: DropdownButtonHideUnderline(
                                     child: DropdownButton(
+                                        icon: Icon(Icons.keyboard_arrow_down),
                                         value: _noOfVehicle,
                                         items: [
                                           DropdownMenuItem(
@@ -370,7 +370,7 @@ class _LoadDetailState extends State<LoadDetail> {
                           SizedBox(height: AppSizes.height * 0.01),
                           _loadDetailComponents.getMessageTextField(
                               leftIcon: Icons.message,
-                              hintText: 'Enter description',
+                              hintText: 'Description',
                               textEditingController: null),
                           SizedBox(height: AppSizes.height * 0.03),
                           Row(
