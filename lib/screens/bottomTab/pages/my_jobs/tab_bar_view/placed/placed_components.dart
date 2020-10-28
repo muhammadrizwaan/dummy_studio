@@ -1,55 +1,30 @@
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/octicons_icons.dart';
+import 'package:truckoom_shipper/res/assets.dart';
+import 'package:truckoom_shipper/res/colors.dart';
+import 'package:truckoom_shipper/res/sizes.dart';
 
-import '../../../../res/assets.dart';
-import '../../../../res/colors.dart';
-import '../../../../res/sizes.dart';
-
-class MyJobsComponents {
-  Widget onSelectViewType({@required String text, @required Function onPress}) {
-    return GestureDetector(
-      onTap: () => onPress(),
-      child: Container(
-        margin: EdgeInsets.only(bottom: AppSizes.width * 0.05),
-        padding: EdgeInsets.symmetric(
-          horizontal: AppSizes.width * 0.03,
-          vertical: AppSizes.width * 0.02,
-        ),
-        // width: AppSizes.width,
-        decoration: BoxDecoration(
-          color: AppColors.white,
-          border: Border.all(color: AppColors.yellow),
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: Text(
-          '$text',
-          style: TextStyle(
-            fontSize: 12,
-            fontFamily: Assets.poppinsLight,
-            color: AppColors.yellow,
-            // fontWeight: FontWeight.bold
-          ),
-        ),
-      ),
-    );
-  }
+class PlacedComponents{
 
   Widget getJobContainer(
       {@required String jobDetail,
-      @required String pickUpLocation,
-      @required String destinationLocation,
-      @required String startDate,
-      @required String time,
-      @required String status,
-      @required String price,
-      @required Function onTap}) {
+        @required String pickUpLocation,
+        @required String destinationLocation,
+        @required String startDate,
+        @required String time,
+        @required String status,
+        @required String price,
+        @required Function onTap}) {
     return Container(
       // height: AppSizes.height * 0.05,
       // width: AppSizes.width,
       padding: EdgeInsets.all(AppSizes.width * 0.03),
       decoration: BoxDecoration(
           color: AppColors.white,
-           border: Border.all(color: AppColors.borderColor),
+          border: Border.all(color: AppColors.borderColor),
           borderRadius: BorderRadius.circular(5),
           boxShadow: [
             BoxShadow(
@@ -77,10 +52,10 @@ class MyJobsComponents {
                   Text(
                     jobDetail,
                     style: TextStyle(
-                      fontSize: 12,
-                      fontFamily: Assets.poppinsRegular,
-                      color: AppColors.colorBlack,
-                    ),
+                        fontSize: 12,
+                        fontFamily: Assets.poppinsRegular,
+                        color: AppColors.colorBlack,
+                        fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -218,40 +193,23 @@ class MyJobsComponents {
                   Text(
                     'Suzuki',
                     style: TextStyle(
-                      fontSize: 12,
-                      fontFamily: Assets.poppinsMedium,
-                      color: Colors.black,
-                    ),
+                        fontSize: 12,
+                        fontFamily: Assets.poppinsMedium,
+                        color: AppColors.colorBlack,
+                        fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     width: AppSizes.width * 0.01,
                   ),
                   GestureDetector(
                     onTap: () => onTap(),
-                    child: Image(
-                      image: AssetImage(Assets.informationIcon),
-                      color: AppColors.colorBlack,
-                    ),
+                    child: Icon(Octicons.info, size: 20, color: AppColors.colorBlack.withOpacity(0.70),),
                   ),
                 ],
               ),
             ],
           )
         ],
-      ),
-    );
-  }
-
-  Widget getSelectViewText() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
-      child: Text(
-        'Select View',
-        style: TextStyle(
-            fontSize: 14,
-            fontFamily: Assets.poppinsLight,
-            color: AppColors.colorBlack,
-            fontWeight: FontWeight.bold),
       ),
     );
   }

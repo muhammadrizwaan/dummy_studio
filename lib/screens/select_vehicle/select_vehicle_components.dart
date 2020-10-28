@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/octicons_icons.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../res/assets.dart';
 import '../../res/colors.dart';
@@ -65,6 +67,7 @@ class SelectVechileComponents {
     @required String leftIcon,
     @required String vehicleType,
     @required String vehicleDetail,
+    @required bool isSelect,
     @required String Category,
     @required Function onTap,
     @required Function onLoadDetail,
@@ -75,7 +78,7 @@ class SelectVechileComponents {
       padding: EdgeInsets.all(AppSizes.width * 0.03),
       width: AppSizes.width,
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: isSelect ? Color.fromRGBO(0, 0, 0, 0.16) : Colors.white,
           // border: Border.all(color: AppColors.borderColor),
           borderRadius: BorderRadius.circular(5),
           boxShadow: [
@@ -139,9 +142,7 @@ class SelectVechileComponents {
           ),
           GestureDetector(
             onTap: () => onTap(),
-            child: Image(
-              image: AssetImage(Assets.informationIcon),
-            ),
+            child: Icon(Octicons.info, size: 20, color: AppColors.colorBlack.withOpacity(0.70),),
           ),
         ],
       ),

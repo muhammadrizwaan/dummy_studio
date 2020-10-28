@@ -15,7 +15,7 @@ class TextView {
         fontSize: 12,
         fontWeight: FontWeight.w300,
         fontFamily: Assets.poppinsMedium,
-        color: color,
+        color: Color.fromRGBO(28, 40, 38, 1),
       ),
     );
   }

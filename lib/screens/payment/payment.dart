@@ -8,6 +8,7 @@ import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/bank/bank_screen.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
+import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class Payment extends StatefulWidget {
   String tag;
@@ -83,6 +84,64 @@ class _PaymentState extends State<Payment> {
                                     hintText: "Cash"),
                                 SizedBox(
                                   height: 30,
+                                ),
+                                Container(
+                                  height: AppSizes.height*0.25,
+                                  width: AppSizes.width,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.lightGray,
+                                    border: Border.all(color: AppColors.lightGray),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: AppSizes.height*0.06,
+                                        width: AppSizes.width,
+                                        padding: EdgeInsets.only(top: AppSizes.width*0.05, left: AppSizes.width*0.03,),
+                                        child: TextView.getLabelText04("Load Summary", color: AppColors.black),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.only(left: AppSizes.width*0.03, right: AppSizes.width*0.03),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            TextView.getLabelText04("Amount", color: AppColors.black.withOpacity(0.6)),
+                                            TextView.getLabelText04("AED 500", color: AppColors.black.withOpacity(0.6)),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.only(left: AppSizes.width*0.03, right: AppSizes.width*0.03, top: AppSizes.width*0.02),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            TextView.getLabelText04("Discount", color: AppColors.black.withOpacity(0.6)),
+                                            TextView.getLabelText04("AED 250", color: AppColors.black.withOpacity(0.6)),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.only(left: AppSizes.width*0.03, right: AppSizes.width*0.03, top: AppSizes.width*0.02),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            TextView.getLabelText04("Total Amount", color: AppColors.black),
+                                            TextView.getLabelText04("AED 250", color: AppColors.black),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 60,
                                 ),
                               ],
                             ),

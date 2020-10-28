@@ -258,6 +258,7 @@ class _SignUPState extends State<SignUP> {
                     style: TextStyle(
                       wordSpacing: 0.5,
                       color: Colors.black,
+                      fontWeight: FontWeight.w400,
                       fontSize: 13,
                     ),
                     children: <TextSpan>[

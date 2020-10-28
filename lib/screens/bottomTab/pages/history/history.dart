@@ -42,8 +42,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 iconName: Assets.bellIconUnpress,
                 onPress: () {
                 }),
-            Divider(
-              height: 10,
+            SizedBox(
+              height: 20,
             ),
             Expanded(
               child: ListView(
