@@ -12,6 +12,8 @@ import '../../widgets/common_widgets.dart';
 import '../loadDetails/load_details.dart';
 
 class SelectVehicle extends StatefulWidget {
+  String tag;
+  SelectVehicle({@required this.tag});
   @override
   _SelectVehicleState createState() => _SelectVehicleState();
 }

@@ -1,5 +1,7 @@
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/screens/Splash/splash_provider.dart';
+import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_detail_provider.dart';
+import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_details.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab_provider.dart';
 import 'package:truckoom_shipper/screens/businessEditProfile/business_edit_profile_provider.dart';
@@ -14,6 +16,7 @@ import 'package:truckoom_shipper/screens/individualPayment/individual_payment_pr
 import 'package:truckoom_shipper/screens/individualProfile/individual_profile_provider.dart';
 import 'package:truckoom_shipper/screens/invoice/invoice_provider.dart';
 import 'package:truckoom_shipper/screens/invoiceDetail/invoice_detail_provider.dart';
+import 'package:truckoom_shipper/screens/jobDetails/job_details_provider.dart';
 import 'package:truckoom_shipper/screens/language/language_provider.dart';
 import 'package:truckoom_shipper/screens/loadDetails/load_details_provider.dart';
 import 'package:truckoom_shipper/screens/login/login_provider.dart';
@@ -124,6 +127,14 @@ final multiProviders = [
   ),
   ChangeNotifierProvider<IndividualPaymentProvider>(
     create: (_) => IndividualPaymentProvider(),
+    lazy: true,
+  ),
+  ChangeNotifierProvider<JobDetailsProvider>(
+    create: (_) => JobDetailsProvider(),
+    lazy: true,
+  ),
+  ChangeNotifierProvider<BookLoadDetailProvider>(
+    create: (_) => BookLoadDetailProvider(),
     lazy: true,
   ),
 ];

@@ -1,5 +1,6 @@
 import 'package:truckoom_shipper/models/api_models/login_response.dart';
 import 'package:truckoom_shipper/screens/Splash/Splash.dart';
+import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_details.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/history/history.dart';
 import 'package:truckoom_shipper/screens/businessEditProfile/business_edit_profile.dart';
@@ -15,6 +16,7 @@ import 'package:truckoom_shipper/screens/individualPayment/individual_payment.da
 import 'package:truckoom_shipper/screens/individualProfile/individual_profile.dart';
 import 'package:truckoom_shipper/screens/invoice/invoice.dart';
 import 'package:truckoom_shipper/screens/invoiceDetail/invoice_detail.dart';
+import 'package:truckoom_shipper/screens/jobDetails/job_details.dart';
 import 'package:truckoom_shipper/screens/language/language.dart';
 import 'package:truckoom_shipper/screens/loadDetails/load_details.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
@@ -53,6 +55,8 @@ class Routes {
   static const String invoiceDetail = '/invoiceDetail';
   static const String language = '/language';
   static const String individualPayment = '/individualPayment';
+  static const String jobDetails = '/jobDetails';
+  static const String bookLoadDetails = '/bookLoadDetails';
 
   static final routes = {
     splash: (context) => Splash(),
@@ -81,5 +85,7 @@ class Routes {
     invoiceDetail: (context) => InvoiceDetail(),
     language: (context) => Language(),
     individualPayment: (context) => IndividualPayment(),
+    jobDetails: (context) => JobDetails(),
+    bookLoadDetails: (context) => BookLoadDetails(),
   };
 }

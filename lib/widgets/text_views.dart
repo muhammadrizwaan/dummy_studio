@@ -118,4 +118,21 @@ class TextView {
     );
   }
 
+  static Text getDescriptionText(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 10,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        decoration: TextDecoration.none,
+        fontSize: 12,
+        fontFamily: Assets.poppinsLight,
+        // fontWeight: FontWeight.bold,
+        color: color,
+      ),
+    );
+  }
+
 }

@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +5,7 @@ import '../../../../res/assets.dart';
 import '../../../../res/colors.dart';
 import '../../../../res/sizes.dart';
 
-class HistoryComponents{
+class HistoryComponents {
   Widget getTransectionsContainer({
     @required String jobDetail,
     @required String pickUpLocation,
@@ -51,16 +49,15 @@ class HistoryComponents{
                         fontSize: 12,
                         fontFamily: Assets.poppinsMedium,
                         color: AppColors.yellow,
-                        fontWeight: FontWeight.bold
-                    ),
+                        fontWeight: FontWeight.bold),
                   ),
                   Text(
                     jobDetail,
                     style: TextStyle(
-                        fontSize: 12,
-                        fontFamily: Assets.poppinsRegular,
-                        color: AppColors.colorBlack,
-                        // fontWeight: FontWeight.bold
+                      fontSize: 12,
+                      fontFamily: Assets.poppinsRegular,
+                      color: AppColors.colorBlack,
+                      // fontWeight: FontWeight.bold
                     ),
                   ),
                 ],
@@ -102,9 +99,7 @@ class HistoryComponents{
                             // fontWeight: FontWeight.bold
                           ),
                         ),
-                        SizedBox(
-                          height: AppSizes.height * 0.01,
-                        ),
+                        SizedBox(height: AppSizes.height * 0.01),
                         Text(
                           destinationLocation,
                           style: TextStyle(

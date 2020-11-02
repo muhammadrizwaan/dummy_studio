@@ -4,25 +4,18 @@ import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'package:truckoom_shipper/screens/adding_drop_off/adding_drop_off.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/book_load/book_load_components.dart';
+import 'package:truckoom_shipper/screens/jobDetails/job_details.dart';
 import 'package:truckoom_shipper/screens/notifications/notifications.dart';
 import 'package:truckoom_shipper/screens/select_vehicle/select_vehicle.dart';
-import 'package:truckoom_shipper/screens/select_vehicle/select_vehicle_components.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
 import '../../../../animations/slide_right.dart';
-import '../../../../animations/slide_right.dart';
-import '../../../../animations/slide_right.dart';
-import '../../../../res/assets.dart';
 import '../../../../res/assets.dart';
 import '../../../../res/colors.dart';
 import '../../../../res/sizes.dart';
-import '../../../../res/sizes.dart';
 import '../../../../res/strings.dart';
-import '../../../../widgets/common_widgets.dart';
 import '../../../wallet/wallet.dart';
 
 class BookLoad extends StatefulWidget {
@@ -101,14 +94,9 @@ class _BookLoadState extends State<BookLoad> {
             ),
           ),
           backgroundColor: AppColors.white,
-          // iconTheme: IconThemeData(color: Color.fromRGBO(49, 49, 49, 1)),
         ),
         body: Stack(
           children: [
-            CommonWidgets.tabsAppBar2(
-                text: 'Book a Load',
-                iconName: Assets.walletIcon,
-                onPress: () {}),
             SizedBox(height: AppSizes.height * 0.04),
             GoogleMap(
               initialCameraPosition: CameraPosition(
@@ -215,27 +203,6 @@ class _BookLoadState extends State<BookLoad> {
                             ],
                           ),
 
-//                              child: TextField(
-//                                style: TextStyle(
-//                                    decoration: TextDecoration.none,
-//                                    fontFamily: Assets.poppinsLight,
-//                                    fontSize: 12,
-//                                    color: AppColors.colorBlack
-//                                ),
-//                                decoration: InputDecoration(
-//                                  // contentPadding: EdgeInsets.symmetric(vertical: AppSizes.height* 0.001),
-//                                  prefixIcon: Icon(Linecons.location, size: 20,),
-//                                  hintText:"Search Pickup Location",
-//                                  border: InputBorder.none,
-//                                  hintStyle: TextStyle(
-//                                    decoration: TextDecoration.none,
-//                                    fontSize: 14,
-//                                    fontFamily: Assets.poppinsLight,
-//                                  ),
-//
-//                                ),
-//
-//                              ),
                         ),
                       ),
                       SizedBox(
@@ -252,7 +219,8 @@ class _BookLoadState extends State<BookLoad> {
                             count = 0 ;
                             pickUpLocation = false;
                             dropOffLoction = false;
-                            Navigator.push(context, SlideRightRoute(page: SelectVehicle()));
+                            Navigator.push(context, SlideRightRoute(page: JobDetails(tag: widget.tag,)));
+                            // Navigator.push(context, SlideRightRoute(page: SelectVehicle()));
                           }
                           count ++;
                         },
@@ -284,27 +252,6 @@ class _BookLoadState extends State<BookLoad> {
                               ),
                             ],
                           ),
-//                              child: TextField(
-//                                style: TextStyle(
-//                                    decoration: TextDecoration.none,
-//                                    fontFamily: Assets.poppinsLight,
-//                                    fontSize: 12,
-//                                    color: AppColors.colorBlack
-//                                ),
-//                                decoration: InputDecoration(
-//                                  // contentPadding: EdgeInsets.symmetric(vertical: AppSizes.height* 0.001),
-//                                  prefixIcon: Icon(Linecons.location, size: 20,),
-//                                  hintText:"Search DropOff Location",
-//                                  border: InputBorder.none,
-//                                  hintStyle: TextStyle(
-//                                    decoration: TextDecoration.none,
-//                                    fontSize: 14,
-//                                    fontFamily: Assets.poppinsLight,
-//                                  ),
-//
-//                                ),
-//
-//                              )
                         ),
                       ),
                     ],

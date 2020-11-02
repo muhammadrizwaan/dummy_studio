@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:fluttericon/entypo_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_details.dart';
 import 'package:truckoom_shipper/screens/loadDetails/load_details_components.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
@@ -412,12 +414,7 @@ class _LoadDetailState extends State<LoadDetail> {
                           CommonWidgets.getBottomButton(
                               text: "Next",
                               onPress: () {
-                                // if(widget.tag == Strings.indiviual){
-                                //   Navigator.push(context, SlideRightRoute(page: IndividualPayment(tag: widget.tag,)));
-                                // }
-                                // else if(widget.tag == Strings.business){
-                                //   Navigator.push(context, SlideRightRoute(page: Payment(tag: widget.tag,)));
-                                // }
+                                Navigator.push(context, SlideRightRoute(page: BookLoadDetails()));
                               }),
                         ],
                       ),

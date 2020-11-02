@@ -62,44 +62,5 @@ class ReferralsComponents{
         ),
       ),
     );
-    // return Container(
-    //   height: AppSizes.height * 0.06,
-    //   width: AppSizes.width,
-    //   padding: EdgeInsets.only(left: 10),
-    //   decoration: BoxDecoration(
-    //     color: AppColors.lightGray,
-    //     border: Border.all(color: AppColors.borderColor),
-    //     borderRadius: BorderRadius.circular(5),
-    //   ),
-    //   child: Row(
-    //     crossAxisAlignment: CrossAxisAlignment.center,
-    //     mainAxisAlignment: MainAxisAlignment.start,
-    //     children: [
-    //       Icon(Entypo.attach, size: 20,),
-    //       Container(
-    //         // color: AppColors.yellow,
-    //         height: AppSizes.height * 0.06,
-    //         width: AppSizes.width * 0.75,
-    //         padding: EdgeInsets.only(bottom: 10),
-    //         margin: EdgeInsets.only(left: 5),
-    //         child: TextField(
-    //           // style: ,
-    //           readOnly: true,
-    //           decoration: InputDecoration(
-    //             // prefixIcon: Image(image: AssetImage('$leftIcon')) ,
-    //             hintText: hintText,
-    //             border: InputBorder.none,
-    //             hintStyle: TextStyle(
-    //               decoration: TextDecoration.none,
-    //               fontSize: 12,
-    //               color: AppColors.colorBlack,
-    //               fontFamily: Assets.poppinsLight,
-    //             ),
-    //           ),
-    //         ),
-    //       ),
-    //     ],
-    //   ),
-    // );
   }
 }
