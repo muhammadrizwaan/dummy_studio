@@ -31,7 +31,7 @@ class SelectVechileComponents {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image(image: AssetImage('$leftIcon')),
+          Icon(Icons.search, size: 20, color: AppColors.colorBlack.withOpacity(0.6),),
           Center(
             child: Container(
               // color: AppColors.yellow,
@@ -78,7 +78,7 @@ class SelectVechileComponents {
       padding: EdgeInsets.all(AppSizes.width * 0.03),
       width: AppSizes.width,
       decoration: BoxDecoration(
-          color: isSelect ? Color.fromRGBO(0, 0, 0, 0.16) : Colors.white,
+          color: isSelect ? AppColors.lightGray : Colors.white,
           // border: Border.all(color: AppColors.borderColor),
           borderRadius: BorderRadius.circular(5),
           boxShadow: [

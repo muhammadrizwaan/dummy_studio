@@ -28,7 +28,7 @@ class TextView {
       maxLines: 3,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
-        fontSize: 20,
+        fontSize: 22,
         fontWeight: FontWeight.w500,
         fontFamily: Assets.poppinsMedium,
         color: color,
@@ -46,6 +46,22 @@ class TextView {
       style: TextStyle(
         fontSize: 14,
         fontFamily: Assets.poppinsRegular,
+        color: color,
+      ),
+    );
+  }
+
+  static Text getLabelHeadingText04(final text, {@required final color,  final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 3,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        fontSize: 14,
+        fontFamily: Assets.poppinsRegular,
+        fontWeight: FontWeight.bold,
         color: color,
       ),
     );

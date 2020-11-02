@@ -88,7 +88,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                               isPassword: false,
                               leftIcon: Entypo.user,
                               textEditingController: business_name,
-                              hintText: "Enter Business Name"),
+                              hintText: "Business Name"),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "Contact Number"),
                           SizedBox(height: AppSizes.height * 0.01),
@@ -96,7 +96,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                               isPassword: false,
                               leftIcon: Entypo.mobile,
                               textEditingController: contact_number,
-                              hintText: "Enter Contact Number"),
+                              hintText: "Contact Number"),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "TRN"),
                           SizedBox(height: AppSizes.height * 0.01),
@@ -104,7 +104,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                               isPassword: true,
                               leftIcon: Entypo.mobile,
                               textEditingController: trn,
-                              hintText: "Enter TRN"),
+                              hintText: "TRN"),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(
                               text: "License Expiry Date"),
@@ -174,7 +174,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
               width: AppSizes.width * 0.69,
               child: RichText(
                 text: TextSpan(
-                    text: 'By creating an account you agree to our ',
+                    text: 'By creating an account, you agree to our. ',
                     style: TextStyle(
                       wordSpacing: 0.5,
                       color: Colors.black,
@@ -244,21 +244,24 @@ class _BusinessInformationState extends State<BusinessInformation> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            "Sign up Successful!",
+                            "Signup Successful",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 decoration: TextDecoration.none,
-                                fontSize: 15,
+                                fontSize: 18,
                                 color: AppColors.colorBlack,
                                 fontFamily: Assets.poppinsMedium,
-                                fontWeight: FontWeight.bold),
+                            ),
                           ),
                           SizedBox(
                             height: 20,
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.pushReplacement(context, SlideRightRoute(page: BottomTab(tag: widget.tag,)));
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  SlideRightRoute(
+                                      page: BottomTab(tag: widget.tag)),
+                                      (Route<dynamic> route) => false);
                             },
                             child: Text(
                               "Tap & Continue",

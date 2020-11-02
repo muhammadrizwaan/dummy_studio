@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
+import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class OTPAuthenticationComponents {
 
@@ -11,15 +12,7 @@ class OTPAuthenticationComponents {
 
   Widget getOTPLableText({@required String text}){
     return Container(
-      child: Text(
-        text,
-        style: TextStyle(
-          decoration: TextDecoration.none,
-          color: AppColors.colorBlack,
-          fontSize: 14,
-          fontFamily: Assets.poppinsLight,
-        ),
-      ),
+      child: TextView.getLabelText04(text, color: AppColors.colorBlack.withOpacity(0.5),),
     );
   }
 

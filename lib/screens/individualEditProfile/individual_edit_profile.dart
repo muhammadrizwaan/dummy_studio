@@ -40,7 +40,7 @@ class _IndividualEditProfileState extends State<IndividualEditProfile> {
             children: [
               CommonWidgets.tabsAppBar1(
                   text: 'Edit Profile',
-                  iconName: Assets.crossIcon,
+                  iconName: Icons.close,
                   onPress: (){
                     Navigator.pop(context);
                   }

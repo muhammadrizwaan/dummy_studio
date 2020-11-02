@@ -128,6 +128,9 @@ class PlacedComponents{
                               // fontWeight: FontWeight.bold
                             ),
                           ),
+                          SizedBox(
+                            width: 4,
+                          ),
                           Text(
                             time,
                             style: TextStyle(

@@ -187,10 +187,6 @@ class DriverDetailComponents {
                 // foregroundColor: AppColors.white,
                 backgroundColor: AppColors.yellow,
               ),
-              // Image(image: AssetImage('$leftIcon'),
-              //   width: 50,
-              //   height: 50,
-              // ) ,
               SizedBox(width: AppSizes.width * 0.03,),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -208,7 +204,7 @@ class DriverDetailComponents {
                     style: TextStyle(
                       fontSize:10,
                       fontFamily: Assets.poppinsLight,
-                      color: AppColors.colorBlack,
+                      color: AppColors.profileTextColor,
                       // fontWeight: FontWeight.bold
                     ),
                   ),
@@ -226,7 +222,7 @@ class DriverDetailComponents {
                   style: TextStyle(
                     fontSize:10,
                     fontFamily: Assets.poppinsLight,
-                    color: AppColors.colorBlack,
+                    color: AppColors.profileTextColor,
                     // fontWeight: FontWeight.bold
                   ),
                 ),
@@ -241,7 +237,7 @@ class DriverDetailComponents {
                       style: TextStyle(
                         fontSize:10,
                         fontFamily: Assets.poppinsLight,
-                        color: AppColors.colorBlack,
+                        color: AppColors.profileTextColor,
                         // fontWeight: FontWeight.bold
                       ),
                     )

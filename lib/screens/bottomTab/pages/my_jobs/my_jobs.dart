@@ -1,18 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttericon/elusive_icons.dart';
-import 'package:truckoom_shipper/models/api_models/login_response.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
+import 'package:fluttericon/linecons_icons.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs_components.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/accepted/accepted.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/dispatch/dispatch.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/in_process/in_process.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/placed/placed.dart';
-import 'package:truckoom_shipper/screens/driver_details/driver_details.dart';
-import 'package:truckoom_shipper/screens/individualPayment/individual_payment.dart';
 import 'package:truckoom_shipper/screens/notifications/notifications.dart';
-import 'package:truckoom_shipper/screens/payment/payment.dart';
-
 import '../../../../animations/slide_right.dart';
-import '../../../../res/assets.dart';
-
 import '../../../../res/colors.dart';
 import '../../../../res/sizes.dart';
 import '../../../../res/strings.dart';
@@ -55,8 +51,8 @@ class _MyJobsState extends State<MyJobs> {
               CommonWidgets.tabsAppBar1(
                 text: "My Jobs",
                 iconName: widget.tag == Strings.indiviual
-                    ? Assets.bellIconUnpress
-                    : Assets.walletIcon,
+                    ? FontAwesome5.bell
+                    : Linecons.wallet,
                 onPress: () {
                   widget.tag == Strings.indiviual
                       ? Navigator.push(
@@ -73,11 +69,11 @@ class _MyJobsState extends State<MyJobs> {
                 height: AppSizes.height * 0.02,
               ),
               Container(
-                padding: EdgeInsets.only(left: AppSizes.width*0.03,),
+                padding: EdgeInsets.only(left: AppSizes.width*0.03),
                 child: TabBar(
                   isScrollable: true,
                   unselectedLabelColor: AppColors.yellow,
-                  indicatorSize: TabBarIndicatorSize.tab,
+                  indicatorSize: TabBarIndicatorSize.label,
                   indicator: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: AppColors.yellow,
@@ -85,7 +81,7 @@ class _MyJobsState extends State<MyJobs> {
                   tabs: [
                     Container(
                       width: AppSizes.width * 0.25,
-                      height: AppSizes.height*0.06,
+                      height: AppSizes.height*0.055,
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: AppColors.yellow,
@@ -98,7 +94,7 @@ class _MyJobsState extends State<MyJobs> {
                     ),
                     Container(
                       width: AppSizes.width * 0.25,
-                      height: AppSizes.height*0.06,
+                      height: AppSizes.height*0.055,
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: AppColors.yellow,
@@ -111,7 +107,7 @@ class _MyJobsState extends State<MyJobs> {
                     ),
                     Container(
                       width: AppSizes.width * 0.25,
-                      height: AppSizes.height*0.06,
+                      height: AppSizes.height*0.055,
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: AppColors.yellow,
@@ -124,7 +120,7 @@ class _MyJobsState extends State<MyJobs> {
                     ),
                     Container(
                       width: AppSizes.width * 0.25,
-                      height: AppSizes.height*0.06,
+                      height: AppSizes.height*0.055,
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: AppColors.yellow,
@@ -146,12 +142,8 @@ class _MyJobsState extends State<MyJobs> {
                   children: [
                     Placed(),
                     Accepted(),
-                    Container(
-                      color: Colors.teal,
-                    ),
-                    Container(
-                      color: Colors.blueAccent,
-                    ),
+                    InProcess(),
+                    Dispatch(),
                   ],
                 ),
               ),

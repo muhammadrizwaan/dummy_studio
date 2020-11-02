@@ -84,7 +84,7 @@ class _OTPAuthenticationState extends State<OTPAuthentication> {
                               isPassword: true,
                               leftIcon: Entypo.mobile,
                               textEditingController: otp_code,
-                              hintText: "Enter Verification Code"
+                              hintText: "Verification Code"
                           ),
                           SizedBox(height: 30,),
                           _otpAuthenticationComponents.getRichText(

@@ -50,7 +50,7 @@ class ReferralsComponents{
                     border: InputBorder.none,
                     hintStyle: TextStyle(
                       decoration: TextDecoration.none,
-                      fontSize: 12,
+                      fontSize: 13,
                       color: AppColors.colorBlack,
                       fontFamily: Assets.poppinsLight,
                     ),

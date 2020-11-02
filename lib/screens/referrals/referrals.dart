@@ -34,12 +34,10 @@ class _ReferralsState extends State<Referrals> {
               children: [
                 CommonWidgets.tabsAppBar2(
                     text: "Referrals",
-                    iconName: Assets.backArrow,
                     onPress: (){
                       Navigator.pop(context);
                     }
                 ),
-                Divider(height: 10,),
                 Expanded(
                   child: ListView(
                     children: [
@@ -53,7 +51,7 @@ class _ReferralsState extends State<Referrals> {
                               SizedBox(height: AppSizes.height * 0.01,),
                               _referralsComponents.getLinkField(
                                   leftIcon: Assets.linkIcon,
-                                  hintText: "Https://Play.Google.Com/Store/Apps...."
+                                  hintText: "https://play.google.com/store/apps/details..."
                               ),
                               SizedBox(height: AppSizes.height * 0.03,),
                               CommonWidgets.getBottomButton(

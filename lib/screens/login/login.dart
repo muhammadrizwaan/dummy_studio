@@ -96,7 +96,6 @@ class _LoginState extends State<Login> {
                                   text: "Login",
                                   onPress: () {
                                     Navigator.pushReplacement(context, SlideRightRoute(page: BottomTab(tag: Strings.indiviual,)));
-                                    // _loginProvider.getLogin(context: context, email: email.text, password: password.text );
                                   }
                               ),
                               Container(

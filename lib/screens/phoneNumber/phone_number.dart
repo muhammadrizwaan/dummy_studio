@@ -88,7 +88,7 @@ class _PhoneNumberState extends State<PhoneNumber> {
                               isPassword: false,
                               leftIcon: Entypo.mobile,
                               textEditingController: phone_number,
-                              hintText: "Enter Phone Number"),
+                              hintText: "Phone Number"),
                           SizedBox(height: AppSizes.height * 0.03),
                           _getTermsAndCondition(),
                           SizedBox(
@@ -148,9 +148,10 @@ class _PhoneNumberState extends State<PhoneNumber> {
             Container(
               height: AppSizes.height * 0.07,
               width: AppSizes.width * 0.69,
+              padding: EdgeInsets.only(top: 2),
               child: RichText(
                 text: TextSpan(
-                    text: 'By creating an account you agree to our ',
+                    text: 'By creating an account, you agree to our. ',
                     style: TextStyle(
                       wordSpacing: 0.5,
                       color: Colors.black,

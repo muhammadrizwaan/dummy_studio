@@ -74,11 +74,11 @@ class InvoiceDetailComponents{
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('To - Anguilla',
+                          Text('From - Anguilla',
                             style: TextStyle(
                                 fontFamily: Assets.poppinsRegular,
                                 fontSize: 12,
-                                color: AppColors.colorBlack,
+                                color: AppColors.colorBlack.withOpacity(0.4),
                                 // fontWeight: FontWeight.bold
                             ),
                           ),
@@ -103,11 +103,11 @@ class InvoiceDetailComponents{
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('From - Australia',
+                          Text('To - Australia',
                             style: TextStyle(
                               fontFamily: Assets.poppinsRegular,
                               fontSize: 12,
-                              color: AppColors.colorBlack,
+                              color: AppColors.colorBlack.withOpacity(0.4),
                               // fontWeight: FontWeight.bold
                             ),
                           ),
@@ -131,21 +131,32 @@ class InvoiceDetailComponents{
           Divider(height: 10,),
           SizedBox(height: AppSizes.height * 0.02),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('ID: 5431443675434214',
+              Text('ID:',
                 style: TextStyle(
                     fontFamily: Assets.poppinsRegular,
-                    fontSize: 10,
+                    fontSize: 13,
                     color: AppColors.colorBlack,
                     // fontWeight: FontWeight.bold
                 ),
               ),
+              SizedBox(
+                width: 04,
+              ),
+              Text("5431443675434214", style: TextStyle(
+                fontFamily: Assets.poppinsRegular,
+                fontSize: 13,
+                color: AppColors.colorBlack.withOpacity(0.4,),
+                // fontWeight: FontWeight.bold
+              ),),
+              SizedBox(
+                width: 80,
+              ),
               Text('Today: 5:15 pm',
                 style: TextStyle(
                   fontFamily: Assets.poppinsRegular,
-                  fontSize: 10,
-                  color: AppColors.colorBlack,
+                  fontSize: 12,
+                  color: AppColors.colorBlack.withOpacity(0.4),
                   // fontWeight: FontWeight.bold
                 ),
               ),
@@ -208,7 +219,7 @@ class InvoiceDetailComponents{
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('TOTAL PRICE:',
+              Text('Total Price:',
                 style: TextStyle(
                   fontFamily: Assets.poppinsLight,
                   fontSize: 12,

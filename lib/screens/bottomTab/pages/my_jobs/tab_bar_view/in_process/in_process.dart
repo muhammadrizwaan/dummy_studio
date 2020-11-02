@@ -3,21 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/accepted/accepted_components.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/in_process/in_process_components.dart';
 import 'package:truckoom_shipper/screens/payment/payment.dart';
 
-class Accepted extends StatefulWidget {
+class InProcess extends StatefulWidget {
   @override
-  _AcceptedState createState() => _AcceptedState();
+  _InProcessState createState() => _InProcessState();
 }
 
-class _AcceptedState extends State<Accepted> {
-  AcceptedComponents _acceptedComponents;
+class _InProcessState extends State<InProcess> {
+  InProcessComponents _inProcessComponents;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _acceptedComponents = AcceptedComponents();
+    _inProcessComponents = InProcessComponents();
   }
 
   @override
@@ -32,13 +33,14 @@ class _AcceptedState extends State<Accepted> {
               SizedBox(
                 height: AppSizes.height * 0.02,
               ),
-              _acceptedComponents.getJobContainer(
+              _inProcessComponents.getJobContainer(
+                context: context,
                 jobDetail: "01",
                 pickUpLocation: "ABC Port:",
                 destinationLocation: "227 Building, UAE:",
                 startDate: "11 Aug,",
                 time: '12:00am',
-                status: "Accepted",
+                status: "Job Approved",
                 price: "AED 260",
                 onClickPay: () {
                   Navigator.push(context, SlideRightRoute(page: Payment()));
@@ -47,39 +49,42 @@ class _AcceptedState extends State<Accepted> {
               SizedBox(
                 height: AppSizes.height * 0.02,
               ),
-              _acceptedComponents.getJobContainer(
+              _inProcessComponents.getJobContainer(
+                context: context,
                 jobDetail: "01",
                 pickUpLocation: "ABC Port:",
                 destinationLocation: "227 Building, UAE:",
                 startDate: "11 Aug,",
                 time: '12:00am',
-                status: "Accepted",
+                status: "Job Approved",
                 price: "AED 260",
                 onClickPay: () {},
               ),
               SizedBox(
                 height: AppSizes.height * 0.02,
               ),
-              _acceptedComponents.getJobContainer(
+              _inProcessComponents.getJobContainer(
+                context: context,
                 jobDetail: "01",
                 pickUpLocation: "ABC Port:",
                 destinationLocation: "227 Building, UAE:",
                 startDate: "11 Aug,",
                 time: '12:00am',
-                status: "Accepted",
+                status: "Job Approved",
                 price: "AED 260",
                 onClickPay: () {},
               ),
               SizedBox(
                 height: AppSizes.height * 0.02,
               ),
-              _acceptedComponents.getJobContainer(
+              _inProcessComponents.getJobContainer(
+                context: context,
                 jobDetail: "01",
                 pickUpLocation: "ABC Port:",
                 destinationLocation: "227 Building, UAE:",
                 startDate: "11 Aug,",
                 time: '12:00am',
-                status: "Accepted",
+                status: "Job Approved",
                 price: "AED 260",
                 onClickPay: () {},
               ),

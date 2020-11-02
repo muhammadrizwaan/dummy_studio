@@ -33,7 +33,6 @@ class _IndividualPaymentState extends State<IndividualPayment> {
                   children: [
                     CommonWidgets.tabsAppBar2(
                         text: "Payment Method",
-                        iconName: Assets.backArrow,
                         onPress: () {
                           Navigator.pop(context);
                         }),

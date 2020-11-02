@@ -20,7 +20,6 @@ class _WalletState extends State<Wallet> {
             children: [
               CommonWidgets.tabsAppBar2(
                   text: 'Wallet',
-                  iconName: Assets.backArrow,
                   onPress: (){
                     Navigator.pop(context);
                   }
