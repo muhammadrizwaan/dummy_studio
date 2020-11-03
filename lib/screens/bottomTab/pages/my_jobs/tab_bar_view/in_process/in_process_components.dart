@@ -19,6 +19,7 @@ class InProcessComponents {
       @required String status,
       @required String price,
       @required Function onTap,
+      @required Function onAlert,
       @required Function onClickPay}) {
     return GestureDetector(
       onTap: ()=> onTap(),
@@ -207,6 +208,7 @@ class InProcessComponents {
                       width: AppSizes.width * 0.01,
                     ),
                     GestureDetector(
+                      onTap: ()=> onAlert(),
                       child: Icon(
                         Octicons.info,
                         size: 20,

@@ -7,6 +7,7 @@ import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/placed/placed_components.dart';
 import 'package:truckoom_shipper/screens/jobDetails/job_details.dart';
+import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
 import '../../../../bottom_tab.dart';
@@ -64,7 +65,9 @@ class _PlacedState extends State<Placed> {
                 time: '12:00am',
                 status: "Active",
                 price: "AED 260",
-                onAlert: () {},
+                onAlert: () {
+                  _onDescriptionAlert();
+                },
                 onTap: () {
                   Navigator.push(context, SlideRightRoute(page: JobDetails()));
                 },
@@ -80,6 +83,9 @@ class _PlacedState extends State<Placed> {
                   time: '12:00am',
                   status: "Active",
                   price: "AED 260",
+                  onAlert: () {
+                    _onDescriptionAlert();
+                  },
                   onTap: () {}),
               SizedBox(
                 height: AppSizes.height * 0.02,
@@ -92,6 +98,9 @@ class _PlacedState extends State<Placed> {
                 time: '12:00am',
                 status: "Active",
                 price: "AED 260",
+                onAlert: () {
+                  _onDescriptionAlert();
+                },
                 onTap: () {
                   Navigator.push(context, SlideRightRoute(page: JobDetails()));
                 },
@@ -123,8 +132,8 @@ class _PlacedState extends State<Placed> {
                         right: AppSizes.width * 0.12,
                         top: AppSizes.width * 0.07,
                       ),
-                      // padding: Edg,
-                      height: AppSizes.height * 0.25,
+                      padding: EdgeInsets.all(AppSizes.height * 0.02),
+                      height: AppSizes.height * 0.23,
                       width: AppSizes.width,
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -138,32 +147,68 @@ class _PlacedState extends State<Placed> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: AppSizes.height* 0.02),
-                          TextView.getLabelHeadingText04(
+                          // SizedBox(height: AppSizes.height* 0.02),
+                          TextView.getAlertDescriptionText(
                               Strings.description,
                               color: AppColors.colorBlack
+                          ),
+                          SizedBox(width: AppSizes.width * 0.05),
+                          Container(
+                            height: AppSizes.height * 0.15,
+                            padding: EdgeInsets.all(AppSizes.height * 0.01),
+                            margin: EdgeInsets.only(top: AppSizes.height * 0.005),
+                            decoration: BoxDecoration(
+                              color: AppColors.alertContainer,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Opacity(
+                                  opacity: 0.6,
+                                  child: Icon(
+                                    Icons.message,
+                                    size: 20,
+                                  ),
+                                ),
+                                SizedBox(width: AppSizes.width * 0.01),
+                                Container(
+                                  width: AppSizes.width * 0.55,
+                                  child: TextView.getLabel2Text04(
+                                      "Vivamus eget aliquam dui. Integer eu arcu vel arcu suscipit ultrices quis non mauris. Aenean scelerisque, sem eu dictum commodo,ligula",
+                                      color: AppColors.colorBlack
+                                  ),
+                                )
+                              ],
+                            ),
                           )
                         ],
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(
-                        left: AppSizes.width * 0.81,
-                        top: AppSizes.height * 0.015
-                      ),
-                      height: AppSizes.width * 0.1,
-                      width: AppSizes.width * 0.1,
-                      decoration: BoxDecoration(
-                        color: AppColors.white,
-                        border: Border.all(color: AppColors.yellow),
-                        borderRadius: BorderRadius.circular(
-                          50,
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(
+                          left: AppSizes.width * 0.81,
+                          top: AppSizes.height * 0.015
                         ),
-                      ),
-                      child: Icon(
-                        Icons.clear,
-                        color: AppColors.yellow,
-                        size: 25,
+                        height: AppSizes.width * 0.1,
+                        width: AppSizes.width * 0.1,
+                        decoration: BoxDecoration(
+                          color: AppColors.white,
+                          border: Border.all(color: AppColors.yellow),
+                          borderRadius: BorderRadius.circular(
+                            50,
+                          ),
+                        ),
+                        child: Icon(
+                          Icons.clear,
+                          color: AppColors.yellow,
+                          size: 25,
+                        ),
                       ),
                     ),
                   ],

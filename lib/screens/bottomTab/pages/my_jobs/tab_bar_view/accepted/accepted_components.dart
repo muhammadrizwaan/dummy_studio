@@ -19,6 +19,7 @@ class AcceptedComponents{
         @required String price,
         @required Function onClickPay,
         @required Function onTap,
+        @required Function onAlert
       }) {
     return GestureDetector(
       onTap: ()=> onTap(),
@@ -207,6 +208,7 @@ class AcceptedComponents{
                       width: AppSizes.width * 0.01,
                     ),
                     GestureDetector(
+                      onTap: ()=> onAlert(),
                       child: Icon(Octicons.info, size: 20, color: AppColors.colorBlack.withOpacity(0.70),),
                     ),
                   ],
