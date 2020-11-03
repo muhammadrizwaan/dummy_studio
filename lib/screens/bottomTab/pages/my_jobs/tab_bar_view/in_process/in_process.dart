@@ -4,6 +4,7 @@ import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/accepted/accepted_components.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/in_process/in_process_components.dart';
+import 'package:truckoom_shipper/screens/jobDetails/job_details.dart';
 import 'package:truckoom_shipper/screens/payment/payment.dart';
 
 class InProcess extends StatefulWidget {
@@ -42,6 +43,9 @@ class _InProcessState extends State<InProcess> {
                 time: '12:00am',
                 status: "Job Approved",
                 price: "AED 260",
+                onTap: (){
+                  Navigator.push(context, SlideRightRoute(page: JobDetails()));
+                },
                 onClickPay: () {
                   Navigator.push(context, SlideRightRoute(page: Payment()));
                 },
@@ -58,6 +62,9 @@ class _InProcessState extends State<InProcess> {
                 time: '12:00am',
                 status: "Job Approved",
                 price: "AED 260",
+                onTap: (){
+                  Navigator.push(context, SlideRightRoute(page: JobDetails()));
+                },
                 onClickPay: () {},
               ),
               SizedBox(
@@ -72,6 +79,9 @@ class _InProcessState extends State<InProcess> {
                 time: '12:00am',
                 status: "Job Approved",
                 price: "AED 260",
+                onTap: (){
+                  Navigator.push(context, SlideRightRoute(page: JobDetails()));
+                },
                 onClickPay: () {},
               ),
               SizedBox(
@@ -86,6 +96,9 @@ class _InProcessState extends State<InProcess> {
                 time: '12:00am',
                 status: "Job Approved",
                 price: "AED 260",
+                onTap: (){
+                  Navigator.push(context, SlideRightRoute(page: JobDetails()));
+                },
                 onClickPay: () {},
               ),
               SizedBox(

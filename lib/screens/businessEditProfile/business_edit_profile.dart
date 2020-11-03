@@ -52,7 +52,7 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                 child: ListView(
                   children: [
                     Container(
-                      padding: EdgeInsets.all(AppSizes.width * 0.05),
+                      padding: EdgeInsets.only(left: AppSizes.width * 0.08, right: AppSizes.width*0.08, top: AppSizes.width*0.08),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -124,12 +124,12 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                           SizedBox(height: AppSizes.height * 0.01,),
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 10),
-                            height: AppSizes.height * 0.06,
+                            height: AppSizes.height * 0.07,
                             width: AppSizes.width,
                             decoration: BoxDecoration(
                               color: AppColors.lightGray,
                               border: Border.all(color: AppColors.lightGray),
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(5),
                             ),
                             child: Row(
                               children: [
@@ -213,6 +213,7 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                                 // Navigator.push(context, SlideRightRoute(page: OTPAuthentication()));
                               }
                           ),
+                          SizedBox(height: AppSizes.height * 0.02),
                         ],
                       ),
                     )

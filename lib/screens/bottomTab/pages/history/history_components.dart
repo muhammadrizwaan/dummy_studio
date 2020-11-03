@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/octicons_icons.dart';
@@ -8,7 +6,7 @@ import '../../../../res/assets.dart';
 import '../../../../res/colors.dart';
 import '../../../../res/sizes.dart';
 
-class HistoryComponents{
+class HistoryComponents {
   Widget getTransectionsContainer({
     @required String jobDetail,
     @required String pickUpLocation,
@@ -57,10 +55,11 @@ class HistoryComponents{
                   Text(
                     jobDetail,
                     style: TextStyle(
-                        fontSize: 12,
-                        fontFamily: Assets.poppinsRegular,
-                        color: AppColors.colorBlack,
-                        fontWeight: FontWeight.bold),
+                      fontSize: 12,
+                      fontFamily: Assets.poppinsRegular,
+                      color: AppColors.colorBlack,
+                      // fontWeight: FontWeight.bold
+                    ),
                   ),
                 ],
               ),
@@ -85,8 +84,6 @@ class HistoryComponents{
                   children: [
                     Image(
                       image: AssetImage(Assets.df_pk_job),
-                      height: 40,
-                      width: 20,
                     ),
                     SizedBox(
                       width: AppSizes.width * 0.01,
@@ -103,9 +100,7 @@ class HistoryComponents{
                             // fontWeight: FontWeight.bold
                           ),
                         ),
-                        SizedBox(
-                          height: AppSizes.height * 0.01,
-                        ),
+                        SizedBox(height: AppSizes.height * 0.01),
                         Text(
                           destinationLocation,
                           style: TextStyle(
@@ -225,10 +220,10 @@ class HistoryComponents{
                   Text(
                     'Suzuki',
                     style: TextStyle(
-                        fontSize: 12,
-                        fontFamily: Assets.poppinsMedium,
-                        color: AppColors.colorBlack,
-                        fontWeight: FontWeight.bold),
+                      fontSize: 12,
+                      fontFamily: Assets.poppinsMedium,
+                      color: Colors.black,
+                    ),
                   ),
                   SizedBox(
                     width: AppSizes.width * 0.01,

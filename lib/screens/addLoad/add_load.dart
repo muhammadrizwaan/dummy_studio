@@ -4,26 +4,26 @@ import 'package:flutter/material.dart';
 import 'package:fluttericon/elusive_icons.dart';
 import 'package:fluttericon/entypo_icons.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
-import 'package:fluttericon/linecons_icons.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:truckoom_shipper/res/assets.dart';
+import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
-import 'package:truckoom_shipper/screens/loadDetails/load_details_components.dart';
+import 'package:truckoom_shipper/screens/addLoad/add_load_components.dart';
+import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_details.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
-class LoadDetail extends StatefulWidget {
+class AddLoad extends StatefulWidget {
   String tag;
 
-  LoadDetail({@required this.tag});
+  AddLoad({@required this.tag});
 
   @override
-  _LoadDetailState createState() => _LoadDetailState();
+  _AddLoadState createState() => _AddLoadState();
 }
 
-class _LoadDetailState extends State<LoadDetail> {
-  LoadDetailComponents _loadDetailComponents;
+class _AddLoadState extends State<AddLoad> {
+  AddLoadComponents _addLoadComponents;
   bool switchState = false;
   int _dateTime = 1;
   int _goodType = 1;
@@ -34,7 +34,7 @@ class _LoadDetailState extends State<LoadDetail> {
   void initState() {
     super.initState();
     print(widget.tag);
-    _loadDetailComponents = LoadDetailComponents();
+    _addLoadComponents = AddLoadComponents();
   }
 
   @override
@@ -65,9 +65,9 @@ class _LoadDetailState extends State<LoadDetail> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          _loadDetailComponents.getLocationContainer(),
+                          _addLoadComponents.getLocationContainer(),
                           SizedBox(height: AppSizes.height * 0.01),
-                          _loadDetailComponents.getExpectedRate(),
+                          _addLoadComponents.getExpectedRate(),
                           SizedBox(
                             height: AppSizes.height * 0.02,
                           ),
@@ -157,7 +157,7 @@ class _LoadDetailState extends State<LoadDetail> {
                           CommonWidgets.getSubHeadingText(
                               text: "Receiver Name"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          _loadDetailComponents.getNameTextField(
+                          _addLoadComponents.getNameTextField(
                               leftIcon: Entypo.user,
                               hintText: 'Receiver Name',
                               textEditingController: null),
@@ -165,7 +165,7 @@ class _LoadDetailState extends State<LoadDetail> {
                           CommonWidgets.getSubHeadingText(
                               text: "Receiver Phone"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          _loadDetailComponents.getNameTextField(
+                          _addLoadComponents.getNameTextField(
                               leftIcon: Entypo.mobile,
                               hintText: '(333)465-2835',
                               textEditingController: null),
@@ -368,7 +368,7 @@ class _LoadDetailState extends State<LoadDetail> {
                           SizedBox(height: AppSizes.height * 0.02,),
                           CommonWidgets.getSubHeadingText(text: "Description"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          _loadDetailComponents.getMessageTextField(
+                          _addLoadComponents.getMessageTextField(
                               leftIcon: Icons.message,
                               hintText: 'Description',
                               textEditingController: null),
@@ -412,12 +412,7 @@ class _LoadDetailState extends State<LoadDetail> {
                           CommonWidgets.getBottomButton(
                               text: "Next",
                               onPress: () {
-                                // if(widget.tag == Strings.indiviual){
-                                //   Navigator.push(context, SlideRightRoute(page: IndividualPayment(tag: widget.tag,)));
-                                // }
-                                // else if(widget.tag == Strings.business){
-                                //   Navigator.push(context, SlideRightRoute(page: Payment(tag: widget.tag,)));
-                                // }
+                                Navigator.push(context, SlideRightRoute(page: BookLoadDetails()));
                               }),
                         ],
                       ),

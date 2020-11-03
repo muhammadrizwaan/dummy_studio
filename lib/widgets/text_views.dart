@@ -134,4 +134,37 @@ class TextView {
     );
   }
 
+  static Text getDescriptionText(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 10,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        decoration: TextDecoration.none,
+        fontSize: 12,
+        fontFamily: Assets.poppinsLight,
+        // fontWeight: FontWeight.bold,
+        color: color,
+      ),
+    );
+  }
+
+  static Text getAppBarText(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        fontSize: 22,
+        fontWeight: FontWeight.w500,
+        fontFamily: Assets.poppinsMedium,
+        color: color,
+      ),
+    );
+  }
+
 }

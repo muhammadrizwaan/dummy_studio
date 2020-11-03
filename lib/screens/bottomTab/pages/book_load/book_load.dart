@@ -8,6 +8,8 @@ import 'package:location/location.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:truckoom_shipper/screens/adding_drop_off/adding_drop_off.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/book_load/book_load_components.dart';
+import 'package:truckoom_shipper/screens/confirmBookLoad/confirm_book_load.dart';
+import 'package:truckoom_shipper/screens/jobDetails/job_details.dart';
 import 'package:truckoom_shipper/screens/select_vehicle/select_vehicle.dart';
 import 'package:truckoom_shipper/screens/select_vehicle/select_vehicle_components.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
@@ -229,28 +231,6 @@ class _BookLoadState extends State<BookLoad> {
                                   ),
                                 ],
                               ),
-
-//                              child: TextField(
-//                                style: TextStyle(
-//                                    decoration: TextDecoration.none,
-//                                    fontFamily: Assets.poppinsLight,
-//                                    fontSize: 12,
-//                                    color: AppColors.colorBlack
-//                                ),
-//                                decoration: InputDecoration(
-//                                  // contentPadding: EdgeInsets.symmetric(vertical: AppSizes.height* 0.001),
-//                                  prefixIcon: Icon(Linecons.location, size: 20,),
-//                                  hintText:"Search Pickup Location",
-//                                  border: InputBorder.none,
-//                                  hintStyle: TextStyle(
-//                                    decoration: TextDecoration.none,
-//                                    fontSize: 14,
-//                                    fontFamily: Assets.poppinsLight,
-//                                  ),
-//
-//                                ),
-//
-//                              ),
                             ),
                           ),
                           SizedBox(
@@ -267,8 +247,7 @@ class _BookLoadState extends State<BookLoad> {
                                 count = 0;
                                 pickUpLocation = false;
                                 dropOffLoction = false;
-                                Navigator.push(context,
-                                    SlideRightRoute(page: SelectVehicle()));
+                                Navigator.push(context, SlideRightRoute(page: ConfirmBookLoad()));
                               }
                               count++;
                             },
@@ -303,27 +282,6 @@ class _BookLoadState extends State<BookLoad> {
                                   ),
                                 ],
                               ),
-//                              child: TextField(
-//                                style: TextStyle(
-//                                    decoration: TextDecoration.none,
-//                                    fontFamily: Assets.poppinsLight,
-//                                    fontSize: 12,
-//                                    color: AppColors.colorBlack
-//                                ),
-//                                decoration: InputDecoration(
-//                                  // contentPadding: EdgeInsets.symmetric(vertical: AppSizes.height* 0.001),
-//                                  prefixIcon: Icon(Linecons.location, size: 20,),
-//                                  hintText:"Search DropOff Location",
-//                                  border: InputBorder.none,
-//                                  hintStyle: TextStyle(
-//                                    decoration: TextDecoration.none,
-//                                    fontSize: 14,
-//                                    fontFamily: Assets.poppinsLight,
-//                                  ),
-//
-//                                ),
-//
-//                              )
                             ),
                           ),
                         ],
