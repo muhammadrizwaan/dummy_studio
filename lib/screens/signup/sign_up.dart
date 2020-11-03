@@ -184,6 +184,7 @@ class _SignUPState extends State<SignUP> {
                           ),
                           GestureDetector(
                             onTap: () {
+
                               Navigator.of(context).pushAndRemoveUntil(
                                   SlideRightRoute(
                                       page: BottomTab(tag: widget.tag)),

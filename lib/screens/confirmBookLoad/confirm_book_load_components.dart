@@ -1,16 +1,27 @@
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 
-class JobDetailsComponents{
+class ConfirmBookLoadComponents{
   Widget getLocationContainer(){
     return Container(
       margin: EdgeInsets.only(top: AppSizes.height * 0.05),
-      color:Colors.white,
+      padding: EdgeInsets.all(AppSizes.width * 0.05),
+      decoration: BoxDecoration(
+        color:Colors.white,
+        boxShadow: [
+          BoxShadow(
+              color: Colors.grey[500].withOpacity(0.3),
+              spreadRadius: 1,
+              blurRadius: 1,
+              offset: Offset(0, 0))
+        ],
+        borderRadius: BorderRadius.circular(10),
+        // border: Border.all(color: AppColors.borderColor)
+      ),
       child: Column(
         children: [
           Row(
@@ -41,7 +52,7 @@ class JobDetailsComponents{
                         children: [
                           Text('Pickup Location',
                             style: TextStyle(
-                              fontFamily: Assets.poppinsRegular,
+                              fontFamily: Assets.poppinsLight,
                               fontSize: 12,
                               color: AppColors.colorBlack,
                               // fontWeight: FontWeight.bold
@@ -72,7 +83,7 @@ class JobDetailsComponents{
                         children: [
                           Text('Dropoff Location',
                             style: TextStyle(
-                              fontFamily: Assets.poppinsRegular,
+                              fontFamily: Assets.poppinsLight,
                               fontSize: 12,
                               color: AppColors.colorBlack,
                               // fontWeight: FontWeight.bold
@@ -84,7 +95,6 @@ class JobDetailsComponents{
                               fontFamily: Assets.poppinsLight,
                               fontSize: 12,
                               color: AppColors.colorBlack,
-                              // fontWeight: FontWeight.bold
                             ),
                           ),
                         ],
@@ -96,57 +106,6 @@ class JobDetailsComponents{
             ],
           ),
         ],
-      ),
-    );
-  }
-  Widget getExpectedRate(){
-    return Container(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-              width: 18,
-              height: 18,
-              child: Image(image: AssetImage(Assets.percentageIcon),
-                fit: BoxFit.cover,
-              )
-          ),
-          SizedBox(width: AppSizes.width * 0.03,),
-          Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Rate',
-                  style: TextStyle(
-                      fontFamily: Assets.poppinsRegular,
-                      fontSize: 12,
-                      color: AppColors.colorBlack
-                  ),
-                ),
-                SizedBox(height: AppSizes.height * 0.001),
-                Text('AED 10,000',
-                  style: TextStyle(
-                      fontFamily: Assets.poppinsLight,
-                      fontSize: 12,
-                      color: AppColors.colorBlack
-                  ),
-                )
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-  Widget getLoadImages({@required String images}){
-    return Container(
-      height: AppSizes.height * 0.08,
-      width: AppSizes.width * 0.008,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5)
-      ),
-      child: Image(image: AssetImage(images),
-        fit: BoxFit.contain,
       ),
     );
   }

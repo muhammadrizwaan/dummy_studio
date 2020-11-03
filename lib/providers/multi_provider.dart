@@ -1,13 +1,13 @@
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/screens/Splash/splash_provider.dart';
+import 'package:truckoom_shipper/screens/addLoad/add_load_provider.dart';
 import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_detail_provider.dart';
-import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_details.dart';
-import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab_provider.dart';
 import 'package:truckoom_shipper/screens/businessEditProfile/business_edit_profile_provider.dart';
 import 'package:truckoom_shipper/screens/businessProfile/business_profile_provider.dart';
 import 'package:truckoom_shipper/screens/businessSignup/business_signup_provider.dart';
 import 'package:truckoom_shipper/screens/checkUserType/check_user_provider.dart';
+import 'package:truckoom_shipper/screens/confirmBookLoad/confirm_book_load_Provider.dart';
 import 'package:truckoom_shipper/screens/contact_us/contact_us_provider.dart';
 import 'package:truckoom_shipper/screens/driver_details/driver_details_provider.dart';
 import 'package:truckoom_shipper/screens/forgotPassword/forgot_password_provider.dart';
@@ -18,7 +18,6 @@ import 'package:truckoom_shipper/screens/invoice/invoice_provider.dart';
 import 'package:truckoom_shipper/screens/invoiceDetail/invoice_detail_provider.dart';
 import 'package:truckoom_shipper/screens/jobDetails/job_details_provider.dart';
 import 'package:truckoom_shipper/screens/language/language_provider.dart';
-import 'package:truckoom_shipper/screens/loadDetails/load_details_provider.dart';
 import 'package:truckoom_shipper/screens/login/login_provider.dart';
 import 'package:truckoom_shipper/screens/notifications/notifications_provider.dart';
 import 'package:truckoom_shipper/screens/otpAuthentication/otp_authentication_provider.dart';
@@ -89,8 +88,8 @@ final multiProviders = [
     create: (_) => LanguageProvier(),
     lazy: true,
   ),
-  ChangeNotifierProvider<LoadDetailProvider>(
-    create: (_) => LoadDetailProvider(),
+  ChangeNotifierProvider<AddLoadProvider>(
+    create: (_) => AddLoadProvider(),
     lazy: true,
   ),
   ChangeNotifierProvider<LoginProvider>(
@@ -135,6 +134,10 @@ final multiProviders = [
   ),
   ChangeNotifierProvider<BookLoadDetailProvider>(
     create: (_) => BookLoadDetailProvider(),
+    lazy: true,
+  ),
+  ChangeNotifierProvider<ConfirmBookLoadProvider>(
+    create: (_) => ConfirmBookLoadProvider(),
     lazy: true,
   ),
 ];

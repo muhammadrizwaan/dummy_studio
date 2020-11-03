@@ -4,6 +4,7 @@ import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/accepted/accepted_components.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/dispatch/dispatch_components.dart';
+import 'package:truckoom_shipper/screens/jobDetails/job_details.dart';
 import 'package:truckoom_shipper/screens/payment/payment.dart';
 
 class Dispatch extends StatefulWidget {
@@ -41,6 +42,9 @@ class _DispatchState extends State<Dispatch> {
                 time: '12:00am',
                 status: "Delivered",
                 price: "AED 260",
+                onTap: (){
+                  Navigator.push(context, SlideRightRoute(page: JobDetails()));
+                },
                 onClickPay: () {
                   Navigator.push(context, SlideRightRoute(page: Payment()));
                 },
@@ -56,7 +60,12 @@ class _DispatchState extends State<Dispatch> {
                 time: '12:00am',
                 status: "Delivered",
                 price: "AED 260",
-                onClickPay: () {},
+                onTap: (){
+                  Navigator.push(context, SlideRightRoute(page: JobDetails()));
+                },
+                onClickPay: () {
+                  Navigator.push(context, SlideRightRoute(page: Payment()));
+                },
               ),
               SizedBox(
                 height: AppSizes.height * 0.02,
@@ -69,7 +78,12 @@ class _DispatchState extends State<Dispatch> {
                 time: '12:00am',
                 status: "Delivered",
                 price: "AED 260",
-                onClickPay: () {},
+                onTap: (){
+                  Navigator.push(context, SlideRightRoute(page: JobDetails()));
+                },
+                onClickPay: () {
+                  Navigator.push(context, SlideRightRoute(page: Payment()));
+                },
               ),
               SizedBox(
                 height: AppSizes.height * 0.02,
@@ -82,7 +96,12 @@ class _DispatchState extends State<Dispatch> {
                 time: '12:00am',
                 status: "Delivered",
                 price: "AED 260",
-                onClickPay: () {},
+                onTap: (){
+                  Navigator.push(context, SlideRightRoute(page: JobDetails()));
+                },
+                onClickPay: () {
+                  Navigator.push(context, SlideRightRoute(page: Payment()));
+                },
               ),
               SizedBox(
                 height: AppSizes.height * 0.02,

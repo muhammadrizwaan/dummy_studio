@@ -95,7 +95,7 @@ class SelectVechileComponents {
             onTap: () => onLoadDetail(),
             child: Row(
               children: [
-                Image(image: AssetImage('$leftIcon')),
+                Image(image: AssetImage(leftIcon)),
                 SizedBox(
                   width: AppSizes.width * 0.02,
                 ),

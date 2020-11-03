@@ -137,4 +137,16 @@ class BookLoadDetailComponents {
       ),
     );
   }
+  Widget getLoadImages({@required String images}){
+    return Container(
+      height: AppSizes.height * 0.08,
+      width: AppSizes.width * 0.008,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5)
+      ),
+      child: Image(image: AssetImage(images),
+        fit: BoxFit.contain,
+      ),
+    );
+  }
 }

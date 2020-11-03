@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
+import 'package:truckoom_shipper/models/imagesModal.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_detail_components.dart';
+import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs.dart';
 import 'package:truckoom_shipper/screens/select_vehicle/select_vehicle.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
@@ -34,52 +37,31 @@ class _BookLoadDetailsState extends State<BookLoadDetails> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            elevation: 16,
-            title: Container(
-              width: AppSizes.width,
-              child: Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      size: 25,
-                      color: AppColors.colorBlack.withOpacity(0.6),
-                    ),
-                  ),
-                  SizedBox(width: AppSizes.width * 0.03),
-                  Text(
-                    'Book a Load Details',
-                    style: TextStyle(
-                      color: AppColors.black,
-                      fontFamily: Assets.poppinsMedium,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            backgroundColor: AppColors.white,
-          ),
-          body: Stack(
+          body: Column(
             children: [
-              GoogleMap(
-                initialCameraPosition: CameraPosition(target: _center, zoom: 5),
+              CommonWidgets.tabsAppBar2(
+                  text: Strings.bookLoadDetails,
+                  onPress: (){Navigator.pop(context);}
               ),
-              SlidingUpPanel(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15)),
-                panel: _onSlidingUpPanel(),
+              SizedBox(height: AppSizes.height * 0.005),
+              Expanded(
+                child: Stack(
+                  children: [
+                    GoogleMap(
+                      initialCameraPosition: CameraPosition(target: _center, zoom: 5),
+                    ),
+                    SlidingUpPanel(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15)),
+                      panel: _onSlidingUpPanel(),
+                    )
+                  ],
+                ),
               )
             ],
-          )),
+          )
+      ),
     );
   }
 
@@ -167,14 +149,36 @@ class _BookLoadDetailsState extends State<BookLoadDetails> {
               "Aenean sed nibh a magna posuere tempor. Nunc faucibus pellentesque nunc in aliquet. Donec congue, nunc vel tempor.Aenean sed nibh a magna posuere tempor. Nunc faucibus pellentesque nunc in aliquet.",
               color: AppColors.colorBlack
           ),
+          SizedBox(height: AppSizes.height * 0.02),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(child: _bookLoadDetailComponents.getLoadImages(images: Assets.vehicle_img)),
+              Expanded(child: _bookLoadDetailComponents.getLoadImages(images: Assets.vehicle_img)),
+              Expanded(child: _bookLoadDetailComponents.getLoadImages(images: Assets.vehicle_img)),
+              Expanded(child: _bookLoadDetailComponents.getLoadImages(images: Assets.vehicle_img)),
+              Expanded(child: _bookLoadDetailComponents.getLoadImages(images: Assets.vehicle_img)),
+            ],
+          ),
 
+          // Container(
+          //   child: ListView.builder(
+          //     itemCount: getAllImages.length,
+          //       itemBuilder: (context, index){
+          //       return _bookLoadDetailComponents.getLoadImages(
+          //           images: getAllImages[index].imagePath
+          //       );
+          //       }
+          //   ),
+          // ),
           SizedBox(height: AppSizes.height * 0.03),
           CommonWidgets.getBottomButton(
               text: "Submit",
               onPress: (){
-                Navigator.push(context, SlideRightRoute(page: SelectVehicle(tag: widget.tag)));
+                Navigator.push(context, SlideRightRoute(page: BottomTab(tag: widget.tag)));
               }
-          )
+          ),
+          SizedBox(height: AppSizes.height * 0.02),
         ],
       ),
     );

@@ -15,4 +15,9 @@ class Strings {
   static const String goodType = "Good Type";
   static const String weight = "Weight";
   static const String description = "Description";
+  static const String notification = "Notification";
+  static const String profile = "Profile";
+  static const String bookLoad = "Book Load";
+  static const String bookLoadDetails = "Book a Load Details";
+  static const String jobDetails = "Job Details";
 }

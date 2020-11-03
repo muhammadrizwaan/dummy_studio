@@ -151,4 +151,20 @@ class TextView {
     );
   }
 
+  static Text getAppBarText(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        fontSize: 22,
+        fontWeight: FontWeight.w500,
+        fontFamily: Assets.poppinsMedium,
+        color: color,
+      ),
+    );
+  }
+
 }
