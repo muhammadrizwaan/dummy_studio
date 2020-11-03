@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
-import 'package:fluttericon/linecons_icons.dart';
+import 'package:truckoom_shipper/screens/addLoad/add_load.dart';
 import 'package:truckoom_shipper/screens/select_vehicle/select_vehicle_components.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
@@ -10,9 +10,10 @@ import '../../res/assets.dart';
 import '../../res/colors.dart';
 import '../../res/sizes.dart';
 import '../../widgets/common_widgets.dart';
-import '../loadDetails/load_details.dart';
 
 class SelectVehicle extends StatefulWidget {
+  String tag;
+  SelectVehicle({@required this.tag});
   @override
   _SelectVehicleState createState() => _SelectVehicleState();
 }
@@ -328,7 +329,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
                 child: FlatButton(
                   onPressed: () {
                     Navigator.push(context,
-                        SlideRightRoute(page: LoadDetail()));
+                        SlideRightRoute(page: AddLoad(tag: widget.tag)));
                   },
                   child: TextView.getBottomButtonText04(
                     "Next",

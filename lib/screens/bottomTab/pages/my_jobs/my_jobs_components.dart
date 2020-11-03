@@ -77,10 +77,10 @@ class MyJobsComponents {
                   Text(
                     jobDetail,
                     style: TextStyle(
-                        fontSize: 12,
-                        fontFamily: Assets.poppinsRegular,
-                        color: AppColors.colorBlack,
-                        fontWeight: FontWeight.bold),
+                      fontSize: 12,
+                      fontFamily: Assets.poppinsRegular,
+                      color: AppColors.colorBlack,
+                    ),
                   ),
                 ],
               ),
@@ -218,10 +218,10 @@ class MyJobsComponents {
                   Text(
                     'Suzuki',
                     style: TextStyle(
-                        fontSize: 12,
-                        fontFamily: Assets.poppinsMedium,
-                        color: AppColors.colorBlack,
-                        fontWeight: FontWeight.bold),
+                      fontSize: 12,
+                      fontFamily: Assets.poppinsMedium,
+                      color: Colors.black,
+                    ),
                   ),
                   SizedBox(
                     width: AppSizes.width * 0.01,
