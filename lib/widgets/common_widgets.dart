@@ -8,6 +8,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
 import '../res/colors.dart';
@@ -564,8 +565,8 @@ class CommonWidgets {
             ],
           ),
           GestureDetector(
-            onTap: ()=> onBellTap(),
-            child: Icon(FontAwesome5.edit, size: 20,)
+              onTap: ()=> onBellTap(),
+              child: Icon(FontAwesome5.edit, size: 20,)
           )
         ],
       ),
