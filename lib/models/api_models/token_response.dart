@@ -4,8 +4,9 @@ class TokenResponse {
   int expiresIn;
   String refreshToken;
 
-  // TokenResponse({this.accessToken, this.tokenType, this.expiresIn, this.refreshToken});
-  TokenResponse.empty();
+  TokenResponse(
+      {this.accessToken, this.tokenType, this.expiresIn, this.refreshToken});
+
   TokenResponse.fromJson(Map<String, dynamic> json) {
     accessToken = json['access_token'];
     tokenType = json['token_type'];
