@@ -122,13 +122,62 @@ class TextView {
       text,
       textAlign: textAlign,
       softWrap: true,
-      maxLines: 3,
+      maxLines: 4,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
         decoration: TextDecoration.none,
         fontSize: 12,
         fontFamily: Assets.poppinsLight,
         // fontWeight: FontWeight.bold,
+        color: color,
+      ),
+    );
+  }
+
+  static Text getDescriptionText(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 10,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        decoration: TextDecoration.none,
+        fontSize: 12,
+        fontFamily: Assets.poppinsLight,
+        color: color,
+      ),
+    );
+  }
+
+  static Text getAppBarText(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        fontSize: 22,
+        fontWeight: FontWeight.w500,
+        fontFamily: Assets.poppinsMedium,
+        color: color,
+      ),
+    );
+  }
+
+  static Text getAlertDescriptionText(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 3,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        decoration: TextDecoration.none,
+        fontSize: 14,
+        fontFamily: Assets.poppinsRegular,
+        fontWeight: FontWeight.w500,
         color: color,
       ),
     );

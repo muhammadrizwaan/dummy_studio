@@ -46,46 +46,16 @@ class _IndividualProfileState extends State<IndividualProfile> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Container(
-                height: AppSizes.height * 0.09,
-                width: AppSizes.width,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
-                      spreadRadius: 1,
-                      blurRadius: 1,
-                      offset: Offset(0, 3), // changes position of shadow
-                    ),
-                  ],
-                ),
-                padding: EdgeInsets.only(
-                    left: AppSizes.width * 0.05, right: AppSizes.width * 0.05),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        _getBackButton(),
-                        Text(
-                          "Profile",
-                          style: TextStyle(
-                            decoration: TextDecoration.none,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: Assets.poppinsRegular,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        _getEditButton(),
-                      ],
-                    ),
-                  ],
-                ),
+              CommonWidgets.ProfileAppBar(
+                  heading: Strings.profile,
+                  onTap: (){Navigator.pop(context);},
+                  onBellTap: (){
+                    Navigator.push(context, SlideRightRoute(page: IndividualEditProfile()));
+                    // widget.tag == Strings.indiviual
+                    //     ? Navigator.push(context, SlideRightRoute(page: IndividualEditProfile()))
+                    //     : Navigator.push(
+                    //     context, SlideRightRoute(page: BusinessEditProfile()));
+                  }
               ),
               Expanded(
                 child: ListView(
@@ -101,8 +71,7 @@ class _IndividualProfileState extends State<IndividualProfile> {
                               profileImg: Assets.profileImg
                           ),
                           SizedBox(height: AppSizes.height * 0.05,),
-                          _individualProfileComponents
-                              .getIndividualProfileContainer(
+                          _individualProfileComponents.getIndividualProfileContainer(
                               name: 'Mathew Lawson',
                               email: 'MathewLawson@gmail.com',
                               password: '********'
@@ -120,23 +89,4 @@ class _IndividualProfileState extends State<IndividualProfile> {
     );
   }
 
-  _getBackButton() {
-    return GestureDetector(
-        onTap: () {
-          Navigator.pop(context);
-        },
-        child: Icon(Icons.arrow_back_ios, size: 25,));
-  }
-
-  _getEditButton() {
-    return GestureDetector(
-        onTap: () {
-          widget.tag == Strings.indiviual
-              ? Navigator.push(
-              context, SlideRightRoute(page: IndividualEditProfile()))
-              : Navigator.push(
-              context, SlideRightRoute(page: BusinessEditProfile()));
-        },
-        child: Icon(FontAwesome5.edit, size: 20,));
-  }
 }

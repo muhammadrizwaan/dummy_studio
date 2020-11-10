@@ -2,11 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/elusive_icons.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
 import '../res/colors.dart';
@@ -172,8 +174,7 @@ class CommonWidgets {
   }
 
   static Widget tabsAppBar2(
-      {@required String text,
-      @required Function onPress}) {
+      {@required String text, @required Function onPress}) {
     return Container(
       padding: EdgeInsets.only(
         left: AppSizes.width * 0.05,
@@ -201,17 +202,14 @@ class CommonWidgets {
               size: 20,
             ),
           ),
-          SizedBox(
-            width: 20,
-          ),
-          Text(
-            text,
-            style: TextStyle(
-                fontFamily: Assets.poppinsMedium,
-                fontSize: 20,
-                color: AppColors.colorBlack,
-                fontWeight: FontWeight.bold),
-          ),
+          SizedBox(width: 10),
+          Container(
+              width: AppSizes.width * 0.85,
+              child: TextView.getAppBarText(
+                  text, color:
+              AppColors.colorBlack
+              )
+          )
         ],
       ),
     );
@@ -531,5 +529,47 @@ class CommonWidgets {
             ],
           ),
         ]));
+  }
+  static Widget ProfileAppBar(
+      { @required String heading,
+        @required Function onTap,
+        @required Function onBellTap
+      }) {
+    return Container(
+      decoration: BoxDecoration(
+          color: AppColors.white,
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 1,
+                blurRadius: 1,
+                offset: Offset(0,3)
+            )
+          ]
+      ),
+      padding: EdgeInsets.all(AppSizes.width * 0.05),
+      margin: EdgeInsets.only(bottom: AppSizes.height * 0.02),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              GestureDetector(
+                  onTap: () => onTap(),
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    size: 20,
+                  )),
+              SizedBox(width: AppSizes.width * 0.02),
+              TextView.getAppBarText(heading, color: AppColors.colorBlack)
+            ],
+          ),
+          GestureDetector(
+              onTap: ()=> onBellTap(),
+              child: Icon(FontAwesome5.edit, size: 20,)
+          )
+        ],
+      ),
+    );
   }
 }

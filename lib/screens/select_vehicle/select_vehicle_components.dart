@@ -69,7 +69,7 @@ class SelectVechileComponents {
     @required String vehicleDetail,
     @required bool isSelect,
     @required String Category,
-    @required Function onTap,
+    @required Function onAlert,
     @required Function onLoadDetail,
   }) {
     return Container(
@@ -95,7 +95,7 @@ class SelectVechileComponents {
             onTap: () => onLoadDetail(),
             child: Row(
               children: [
-                Image(image: AssetImage('$leftIcon')),
+                Image(image: AssetImage(leftIcon)),
                 SizedBox(
                   width: AppSizes.width * 0.02,
                 ),
@@ -141,7 +141,7 @@ class SelectVechileComponents {
             ),
           ),
           GestureDetector(
-            onTap: () => onTap(),
+            onTap: () => onAlert(),
             child: Icon(Octicons.info, size: 20, color: AppColors.colorBlack.withOpacity(0.70),),
           ),
         ],
