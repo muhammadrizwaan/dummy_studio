@@ -5,16 +5,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/entypo_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
-import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
 import 'package:truckoom_shipper/screens/checkUserType/check_user.dart';
 import 'package:truckoom_shipper/screens/forgotPassword/forgot_password.dart';
 import 'package:truckoom_shipper/screens/login/login_components.dart';
 import 'package:truckoom_shipper/screens/login/login_provider.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../res/sizes.dart';
 import '../../res/strings.dart';
 import '../bottomTab/bottom_tab.dart';
@@ -28,12 +28,14 @@ class _LoginState extends State<Login> {
   LoginComponents _loginComponents;
   LoginProvider _loginProvider;
   TextEditingController email, password;
+  int count;
 
   @override
   void initState() {
     _loginComponents = LoginComponents();
     _loginProvider = Provider.of<LoginProvider>(context, listen: false);
     _loginProvider.init(context);
+    count = 0;
     email = TextEditingController();
     password = TextEditingController();
   }
@@ -95,7 +97,8 @@ class _LoginState extends State<Login> {
                               CommonWidgets.getBottomButton(
                                   text: "Login",
                                   onPress: () {
-                                    Navigator.pushReplacement(context, SlideRightRoute(page: BottomTab(tag: Strings.indiviual,)));
+                                    _loginProvider.getLogin(context: context, email: email.text, password: password.text);
+                                    // Navigator.pushReplacement(context, SlideRightRoute(page: BottomTab(tag: Strings.indiviual,)));
                                   }
                               ),
                               Container(

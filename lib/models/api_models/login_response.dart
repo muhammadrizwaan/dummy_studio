@@ -5,7 +5,6 @@ class LoginResponse {
 
   // LoginResponse({this.message, this.code, this.result});
   LoginResponse.empty();
-
   LoginResponse.fromJson(Map<String, dynamic> json) {
     message = json['Message'];
     code = json['Code'];
@@ -29,18 +28,20 @@ class Result {
   String email;
   String password;
   String phone;
-  String address;
+  Null address;
   int userTypeId;
   int userStatusId;
   String fullName;
   int cityId;
   String deviceId;
+  Null emiratesId;
   bool isBusinessAccount;
   bool isActive;
+  Null isAvailable;
   String createdOn;
   int createdBy;
-  String updatedOn;
-  String updatedBy;
+  Null updatedOn;
+  Null updatedBy;
   List<CompanyInformations> companyInformations;
   List<UserDocuments> userDocuments;
   List<DriverDetails> driverDetails;
@@ -57,8 +58,10 @@ class Result {
         this.fullName,
         this.cityId,
         this.deviceId,
+        this.emiratesId,
         this.isBusinessAccount,
         this.isActive,
+        this.isAvailable,
         this.createdOn,
         this.createdBy,
         this.updatedOn,
@@ -79,8 +82,10 @@ class Result {
     fullName = json['FullName'];
     cityId = json['CityId'];
     deviceId = json['DeviceId'];
+    emiratesId = json['EmiratesId'];
     isBusinessAccount = json['IsBusinessAccount'];
     isActive = json['IsActive'];
+    isAvailable = json['IsAvailable'];
     createdOn = json['CreatedOn'];
     createdBy = json['CreatedBy'];
     updatedOn = json['UpdatedOn'];
@@ -123,8 +128,10 @@ class Result {
     data['FullName'] = this.fullName;
     data['CityId'] = this.cityId;
     data['DeviceId'] = this.deviceId;
+    data['EmiratesId'] = this.emiratesId;
     data['IsBusinessAccount'] = this.isBusinessAccount;
     data['IsActive'] = this.isActive;
+    data['IsAvailable'] = this.isAvailable;
     data['CreatedOn'] = this.createdOn;
     data['CreatedBy'] = this.createdBy;
     data['UpdatedOn'] = this.updatedOn;
@@ -153,9 +160,10 @@ class CompanyInformations {
   String companyName;
   String contactNumber;
   String tRN;
-  String companyLandline;
-  String licenseExpiryDate;
-  String companyAddress;
+  Null companyLandline;
+  Null licenseExpiryDate;
+  Null companyAddress;
+  int userId;
 
   CompanyInformations(
       {this.companyId,
@@ -164,7 +172,8 @@ class CompanyInformations {
         this.tRN,
         this.companyLandline,
         this.licenseExpiryDate,
-        this.companyAddress});
+        this.companyAddress,
+        this.userId});
 
   CompanyInformations.fromJson(Map<String, dynamic> json) {
     companyId = json['CompanyId'];
@@ -174,6 +183,7 @@ class CompanyInformations {
     companyLandline = json['CompanyLandline'];
     licenseExpiryDate = json['LicenseExpiryDate'];
     companyAddress = json['CompanyAddress'];
+    userId = json['UserId'];
   }
 
   Map<String, dynamic> toJson() {
@@ -185,6 +195,7 @@ class CompanyInformations {
     data['CompanyLandline'] = this.companyLandline;
     data['LicenseExpiryDate'] = this.licenseExpiryDate;
     data['CompanyAddress'] = this.companyAddress;
+    data['UserId'] = this.userId;
     return data;
   }
 }
@@ -194,15 +205,27 @@ class UserDocuments {
   int userId;
   int documentTypeId;
   String filePath;
+  bool isActive;
+  String updatedOn;
+  int updatedBy;
 
   UserDocuments(
-      {this.userDocumentId, this.userId, this.documentTypeId, this.filePath});
+      {this.userDocumentId,
+        this.userId,
+        this.documentTypeId,
+        this.filePath,
+        this.isActive,
+        this.updatedOn,
+        this.updatedBy});
 
   UserDocuments.fromJson(Map<String, dynamic> json) {
     userDocumentId = json['UserDocumentId'];
     userId = json['UserId'];
     documentTypeId = json['DocumentTypeId'];
     filePath = json['FilePath'];
+    isActive = json['IsActive'];
+    updatedOn = json['UpdatedOn'];
+    updatedBy = json['UpdatedBy'];
   }
 
   Map<String, dynamic> toJson() {
@@ -211,6 +234,9 @@ class UserDocuments {
     data['UserId'] = this.userId;
     data['DocumentTypeId'] = this.documentTypeId;
     data['FilePath'] = this.filePath;
+    data['IsActive'] = this.isActive;
+    data['UpdatedOn'] = this.updatedOn;
+    data['UpdatedBy'] = this.updatedBy;
     return data;
   }
 }
@@ -220,7 +246,7 @@ class DriverDetails {
   int driverId;
   String licenseFrontPath;
   String licenseBackPath;
-  int emiratesId;
+  Null emiratesId;
 
   DriverDetails(
       {this.driverDetailId,
