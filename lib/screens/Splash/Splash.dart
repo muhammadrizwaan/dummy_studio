@@ -1,24 +1,14 @@
 
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/routes/routes.dart';
-import 'package:truckoom_shipper/screens/addLoad/add_load.dart';
-import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_details.dart';
-import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
-import 'package:truckoom_shipper/screens/businessEditProfile/business_edit_profile.dart';
-import 'package:truckoom_shipper/screens/businessProfile/business_profile.dart';
-import 'package:truckoom_shipper/screens/businessSignup/business_signup.dart';
+import 'package:truckoom_shipper/screens/Splash/splash_provider.dart';
 import 'package:truckoom_shipper/screens/checkUserType/check_user.dart';
-import 'package:truckoom_shipper/screens/forgotPassword/forgot_password.dart';
-import 'package:truckoom_shipper/screens/individualEditProfile/individual_edit_profile.dart';
-import 'package:truckoom_shipper/screens/individualProfile/individual_profile.dart';
-import 'package:truckoom_shipper/screens/invoiceDetail/invoice_detail.dart';
-import 'package:truckoom_shipper/screens/jobDetails/job_details.dart';
 import 'package:truckoom_shipper/screens/language/language.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
-import 'package:truckoom_shipper/screens/resetPassword/reset_password.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -27,6 +17,8 @@ class Splash extends StatefulWidget {
 
 
 class _SplashState extends State<Splash> {
+
+  SplashProvider _provider;
 
   void onDelay() async{
     await Future.delayed(Duration(seconds: 3), (){
@@ -39,9 +31,12 @@ class _SplashState extends State<Splash> {
   void initState() {
     super.initState();
      onDelay();
+     _provider = Provider.of<SplashProvider>(context, listen:false);
+     _provider.init(context: context);
   }
   @override
   Widget build(BuildContext context) {
+    Provider.of<SplashProvider>(context, listen:true);
     AppSizes.initializeSize(context);
     return Container(
       height: AppSizes.height,
