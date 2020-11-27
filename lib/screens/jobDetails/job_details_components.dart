@@ -105,8 +105,8 @@ class JobDetailsComponents{
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-              width: 18,
-              height: 18,
+              width: 20,
+              height: 20,
               child: Image(image: AssetImage(Assets.percentageIcon),
                 fit: BoxFit.cover,
               )

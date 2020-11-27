@@ -130,7 +130,7 @@ class _BookLoadState extends State<BookLoad> {
             ),
             SlidingUpPanel(
               isDraggable: true,
-              minHeight: AppSizes.height*0.25,
+              minHeight: AppSizes.height*0.30,
               maxHeight: AppSizes.height*0.75,
               borderRadius: BorderRadius.only(
                 topRight: Radius.circular(15,),

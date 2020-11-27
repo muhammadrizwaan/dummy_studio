@@ -188,32 +188,38 @@ class DriverDetailComponents {
                 backgroundColor: AppColors.yellow,
               ),
               SizedBox(width: AppSizes.width * 0.03,),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(userName,
-                    style: TextStyle(
-                        fontSize:12,
-                        fontFamily: Assets.poppinsRegular,
-                        color: AppColors.colorBlack,
-                        fontWeight: FontWeight.bold
+              Container(
+                width: AppSizes.width*0.5,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(userName,
+                      maxLines: 3,
+                      style: TextStyle(
+                          fontSize:12,
+                          fontFamily: Assets.poppinsRegular,
+                          color: AppColors.colorBlack,
+                          fontWeight: FontWeight.bold
+                      ),
                     ),
-                  ),
-                  SizedBox(height: AppSizes.height * 0.01,),
-                  Text(message,
-                    style: TextStyle(
-                      fontSize:10,
-                      fontFamily: Assets.poppinsLight,
-                      color: AppColors.profileTextColor,
-                      // fontWeight: FontWeight.bold
+                    SizedBox(height: AppSizes.height * 0.01,),
+                    Text(message,
+                      style: TextStyle(
+                        fontSize:10,
+                        fontFamily: Assets.poppinsLight,
+                        color: AppColors.profileTextColor,
+                        // fontWeight: FontWeight.bold
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
           Container(
-            height: AppSizes.height * 0.05,
+            //height: AppSizes.height * 0.05,
+            //width: AppSizes.width*0.4,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.start,

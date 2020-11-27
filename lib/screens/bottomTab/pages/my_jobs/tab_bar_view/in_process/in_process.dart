@@ -8,6 +8,8 @@ import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/ac
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/in_process/in_process_components.dart';
 import 'package:truckoom_shipper/screens/jobDetails/job_details.dart';
 import 'package:truckoom_shipper/screens/payment/payment.dart';
+import 'package:truckoom_shipper/utilities/toast.dart';
+import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class InProcess extends StatefulWidget {
@@ -47,7 +49,7 @@ class _InProcessState extends State<InProcess> {
                 status: "Job Approved",
                 price: "AED 260",
                 onAlert: (){
-                  _onDescriptionAlert();
+                  ApplicationToast.AlertBoxSuzuki(context: context);
                 },
                 onTap: (){
                   Navigator.push(context, SlideRightRoute(page: JobDetails()));
@@ -61,7 +63,7 @@ class _InProcessState extends State<InProcess> {
               ),
               _inProcessComponents.getJobContainer(
                 context: context,
-                jobDetail: "01",
+                jobDetail: "02",
                 pickUpLocation: "ABC Port:",
                 destinationLocation: "227 Building, UAE:",
                 startDate: "11 Aug,",
@@ -69,7 +71,7 @@ class _InProcessState extends State<InProcess> {
                 status: "Job Approved",
                 price: "AED 260",
                 onAlert: (){
-                  _onDescriptionAlert();
+                  ApplicationToast.AlertBoxSuzuki(context: context);
                 },
                 onTap: (){
                   Navigator.push(context, SlideRightRoute(page: JobDetails()));
@@ -81,7 +83,7 @@ class _InProcessState extends State<InProcess> {
               ),
               _inProcessComponents.getJobContainer(
                 context: context,
-                jobDetail: "01",
+                jobDetail: "03",
                 pickUpLocation: "ABC Port:",
                 destinationLocation: "227 Building, UAE:",
                 startDate: "11 Aug,",
@@ -89,7 +91,7 @@ class _InProcessState extends State<InProcess> {
                 status: "Job Approved",
                 price: "AED 260",
                 onAlert: (){
-                  _onDescriptionAlert();
+                  ApplicationToast.AlertBoxSuzuki(context: context);
                 },
                 onTap: (){
                   Navigator.push(context, SlideRightRoute(page: JobDetails()));
@@ -101,7 +103,7 @@ class _InProcessState extends State<InProcess> {
               ),
               _inProcessComponents.getJobContainer(
                 context: context,
-                jobDetail: "01",
+                jobDetail: "04",
                 pickUpLocation: "ABC Port:",
                 destinationLocation: "227 Building, UAE:",
                 startDate: "11 Aug,",
@@ -109,7 +111,7 @@ class _InProcessState extends State<InProcess> {
                 status: "Job Approved",
                 price: "AED 260",
                 onAlert: (){
-                  _onDescriptionAlert();
+                  ApplicationToast.AlertBoxSuzuki(context: context);
                 },
                 onTap: (){
                   Navigator.push(context, SlideRightRoute(page: JobDetails()));

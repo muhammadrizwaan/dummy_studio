@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:fluttericon/entypo_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
 import 'package:fluttericon/web_symbols_icons.dart';
+import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/businessEditProfile/business_edit_profile_components.dart';
+import 'package:truckoom_shipper/screens/businessProfile/business_profile.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 class BusinessEditProfile extends StatefulWidget {
@@ -41,13 +43,19 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              CommonWidgets.tabsAppBar1(
+              _businessEditProfileComponents.getTabBarCross(
+                  text: 'Edit Profile',
+                  image: Assets.crossIcon,
+                  onPress: (){
+                    Navigator.pop(context);
+                  }),
+              /*CommonWidgets.tabsAppBar1(
                   text: 'Edit Profile',
                   iconName: Icons.close,
                   onPress: (){
                     Navigator.pop(context);
                   }
-              ),
+              ),*/
               Expanded(
                 child: ListView(
                   children: [
@@ -210,7 +218,7 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                           CommonWidgets.getBottomButton(
                               text: "Update",
                               onPress: () {
-                                // Navigator.push(context, SlideRightRoute(page: OTPAuthentication()));
+                                Navigator.pushReplacement(context, SlideRightRoute(page: BusinessProfile()));
                               }
                           ),
                           SizedBox(height: AppSizes.height * 0.02),

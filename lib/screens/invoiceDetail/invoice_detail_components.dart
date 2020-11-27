@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class InvoiceDetailComponents{
   Widget getLogoContainer(){
@@ -11,9 +12,14 @@ class InvoiceDetailComponents{
       child: Container(
         child: Column(
           children: [
-            SizedBox(height: AppSizes.height * 0.02),
-            Image(
-              image: AssetImage(Assets.invoiceLogo),
+            //SizedBox(height: AppSizes.height * 0.02),
+            Container(
+              height: AppSizes.height*0.12,
+              width: AppSizes.width*0.25,
+              child: Image(
+                image: AssetImage(Assets.invoiceLogo),
+                fit: BoxFit.cover,
+              ),
             ),
             SizedBox(height: AppSizes.height * 0.02),
             Text('Preimer Transports',
@@ -52,6 +58,7 @@ class InvoiceDetailComponents{
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
+                padding: EdgeInsets.only(top: 6),
                 height: AppSizes.height * 0.1,
                 child: Image(image: AssetImage(Assets.locationCircleIcon),
                   fit: BoxFit.cover,
@@ -131,26 +138,29 @@ class InvoiceDetailComponents{
           Divider(height: 10,),
           SizedBox(height: AppSizes.height * 0.02),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('ID:',
-                style: TextStyle(
+              Row(
+                children: [
+                  Text('ID:',
+                    style: TextStyle(
+                        fontFamily: Assets.poppinsRegular,
+                        fontSize: 13,
+                        color: AppColors.colorBlack.withOpacity(0.4),
+                        fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 04,
+                  ),
+                  Text("5431443675434214", style: TextStyle(
                     fontFamily: Assets.poppinsRegular,
                     fontSize: 13,
-                    color: AppColors.colorBlack,
+                    color: AppColors.colorBlack.withOpacity(0.4,),
                     // fontWeight: FontWeight.bold
-                ),
-              ),
-              SizedBox(
-                width: 04,
-              ),
-              Text("5431443675434214", style: TextStyle(
-                fontFamily: Assets.poppinsRegular,
-                fontSize: 13,
-                color: AppColors.colorBlack.withOpacity(0.4,),
-                // fontWeight: FontWeight.bold
-              ),),
-              SizedBox(
-                width: 80,
+                  ),),
+                  //SizedBox(width: 80,),
+                ],
               ),
               Text('Today: 5:15 pm',
                 style: TextStyle(
@@ -300,6 +310,51 @@ class InvoiceDetailComponents{
           fontSize: 12,
           fontFamily: Assets.poppinsLight,
         ),
+      ),
+    );
+  }
+
+  Widget getInvoiceButtonsContainer(
+      {@required String share,
+        @required String download,
+        @required Function onShare,
+        @required Function onDownload
+      }) {
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          GestureDetector(
+            onTap: () => onDownload(),
+            child: Container(
+              height: AppSizes.height*0.065,
+              width: AppSizes.width*0.4,
+              decoration: BoxDecoration(
+                color: AppColors.yellow,
+                borderRadius: BorderRadius.circular(05,),
+              ),
+              alignment: Alignment.center,
+              child: TextView.getLabelText04(download, color: Colors.white),
+            ),
+          ),
+          // SizedBox(
+          //   width: 20,
+          // ),
+          GestureDetector(
+            onTap: ()=> onShare(),
+            child: Container(
+              height: AppSizes.height*0.06,
+              width: AppSizes.width*0.42,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(05),
+                  border: Border.all(color: AppColors.yellow,)
+              ),
+              alignment: Alignment.center,
+              child: TextView.getLabelText04(share, color: AppColors.yellow.withOpacity(0.8,)),
+            ),
+          ),
+        ],
       ),
     );
   }

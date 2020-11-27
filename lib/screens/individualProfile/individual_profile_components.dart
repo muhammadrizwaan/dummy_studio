@@ -13,7 +13,7 @@ class IndividualProfileComponents{
     return Container(
       child: CircleAvatar(
         backgroundImage: AssetImage(profileImg),
-        radius: 50.0,
+        radius: 75.0,
         backgroundColor: AppColors.white,
       ),
     );
@@ -27,6 +27,7 @@ class IndividualProfileComponents{
       })
   {
     return Container(
+      //height: AppSizes.height*0.2,
       decoration: BoxDecoration(
         color:Colors.white,
         boxShadow: [
@@ -43,6 +44,7 @@ class IndividualProfileComponents{
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
+            height: AppSizes.height*0.05,
             padding: EdgeInsets.all(AppSizes.width * 0.02),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,6 +68,7 @@ class IndividualProfileComponents{
           ),
           Divider(height: 10,),
           Container(
+            height: AppSizes.height*0.05,
             padding: EdgeInsets.all(AppSizes.width * 0.02),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -91,6 +94,7 @@ class IndividualProfileComponents{
           ),
           Divider(height: 10,),
           Container(
+            height: AppSizes.height*0.05,
             padding: EdgeInsets.all(AppSizes.width * 0.02),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

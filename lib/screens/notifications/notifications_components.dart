@@ -121,11 +121,14 @@ class NotificationsComponents {
             children: [
               GestureDetector(
                   onTap: () => onTap(),
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    size: 20,
+                  child: Container(
+                    height: AppSizes.height*0.04,
+                    width: AppSizes.width*0.04,
+                    child: Image.asset(
+                      'assets/png/back_arrow_otp.png',
+                    ),
                   )),
-              SizedBox(width: AppSizes.width * 0.02),
+              SizedBox(width: AppSizes.width * 0.05),
               TextView.getAppBarText(heading, color: AppColors.colorBlack)
             ],
           ),

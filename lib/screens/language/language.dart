@@ -80,24 +80,24 @@ class _LanguageState extends State<Language> {
                                         value: _value,
                                         items: [
                                           DropdownMenuItem(
-                                            child: TextView.getLightText04(
+                                            child: TextView.getLightTextLanguage(
                                               "Select",
                                               color: AppColors.colorBlack,
                                             ),
                                             value: 1,
                                           ),
                                           DropdownMenuItem(
-                                            child: TextView.getLightText04(
+                                            child: TextView.getLightTextLanguage(
                                               "English",
                                               color: AppColors.colorBlack,
                                             ),
                                             value: 2,
                                           ),
                                           DropdownMenuItem(
-                                              child: TextView.getLightText04("اردو", color: AppColors.colorBlack),
+                                              child: TextView.getLightTextLanguage("Urdu", color: AppColors.colorBlack),
                                               value: 3),
                                           DropdownMenuItem(
-                                              child: TextView.getLightText04( "عربی", color: AppColors.colorBlack,),
+                                              child: TextView.getLightTextLanguage( "Arabic", color: AppColors.colorBlack,),
                                               value: 4),
                                         ],
                                         onChanged: (value) {

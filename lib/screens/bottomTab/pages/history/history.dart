@@ -4,6 +4,7 @@ import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/history/history_components.dart';
+import 'package:truckoom_shipper/utilities/toast.dart';
 
 import '../../../../animations/slide_right.dart';
 import '../../../../res/assets.dart';
@@ -70,7 +71,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         status: "Completed",
                         startTime: "11:00pm",
                         endTime: "11:00pm",
-                        onTap: () {},
+                        onTap: () {
+                          ApplicationToast.AlertBoxSuzuki(context: context);
+                        },
                         onInvoice: () {
                           Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
                         },
@@ -79,7 +82,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         height: AppSizes.height * 0.02,
                       ),
                       _historyComponents.getTransectionsContainer(
-                        jobDetail: "01",
+                        jobDetail: "02",
                         pickUpLocation: "ABC Port:",
                         destinationLocation: "227 Building, UAE:",
                         startDate: "11 Aug,",
@@ -88,7 +91,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         status: "Completed",
                         startTime: "11:00pm",
                         endTime: "11:00pm",
-                        onTap: () {},
+                        onTap: () {
+                          ApplicationToast.AlertBoxSuzuki(context: context);
+                        },
                         onInvoice: () {
                           Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
                         },
@@ -97,7 +102,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         height: AppSizes.height * 0.02,
                       ),
                       _historyComponents.getTransectionsContainer(
-                        jobDetail: "01",
+                        jobDetail: "03",
                         pickUpLocation: "ABC Port:",
                         destinationLocation: "227 Building, UAE:",
                         startDate: "11 Aug,",
@@ -106,7 +111,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         status: "Completed",
                         startTime: "11:00pm",
                         endTime: "11:00pm",
-                        onTap: () {},
+                        onTap: () {
+                          ApplicationToast.AlertBoxSuzuki(context: context);
+                        },
                         onInvoice: () {
                           Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
                         },
@@ -115,7 +122,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         height: AppSizes.height * 0.02,
                       ),
                       _historyComponents.getTransectionsContainer(
-                        jobDetail: "01",
+                        jobDetail: "04",
                         pickUpLocation: "ABC Port:",
                         destinationLocation: "227 Building, UAE:",
                         startDate: "11 Aug,",
@@ -124,7 +131,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         status: "Completed",
                         startTime: "11:00pm",
                         endTime: "11:00pm",
-                        onTap: () {},
+                        onTap: () {
+                          ApplicationToast.AlertBoxSuzuki(context: context);
+                        },
                         onInvoice: () {
                           Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
                         },

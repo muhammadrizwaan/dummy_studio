@@ -7,6 +7,8 @@ import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/accepted/accepted_components.dart';
 import 'package:truckoom_shipper/screens/jobDetails/job_details.dart';
 import 'package:truckoom_shipper/screens/payment/payment.dart';
+import 'package:truckoom_shipper/utilities/toast.dart';
+import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class Accepted extends StatefulWidget {
@@ -45,7 +47,7 @@ class _AcceptedState extends State<Accepted> {
                 status: "Accepted",
                 price: "AED 260",
                 onAlert: (){
-                  _onDescriptionAlert();
+                  ApplicationToast.AlertBoxSuzuki(context: context);
                 },
                 onTap: (){
                   Navigator.push(context, SlideRightRoute(page: JobDetails()));
@@ -58,7 +60,7 @@ class _AcceptedState extends State<Accepted> {
                 height: AppSizes.height * 0.02,
               ),
               _acceptedComponents.getJobContainer(
-                jobDetail: "01",
+                jobDetail: "02",
                 pickUpLocation: "ABC Port:",
                 destinationLocation: "227 Building, UAE:",
                 startDate: "11 Aug,",
@@ -66,7 +68,7 @@ class _AcceptedState extends State<Accepted> {
                 status: "Accepted",
                 price: "AED 260",
                 onAlert: (){
-                  _onDescriptionAlert();
+                  ApplicationToast.AlertBoxSuzuki(context: context);
                 },
                 onTap: (){
                   Navigator.push(context, SlideRightRoute(page: JobDetails()));
@@ -79,7 +81,7 @@ class _AcceptedState extends State<Accepted> {
                 height: AppSizes.height * 0.02,
               ),
               _acceptedComponents.getJobContainer(
-                jobDetail: "01",
+                jobDetail: "03",
                 pickUpLocation: "ABC Port:",
                 destinationLocation: "227 Building, UAE:",
                 startDate: "11 Aug,",
@@ -87,7 +89,7 @@ class _AcceptedState extends State<Accepted> {
                 status: "Accepted",
                 price: "AED 260",
                 onAlert: (){
-                  _onDescriptionAlert();
+                  ApplicationToast.AlertBoxSuzuki(context: context);
                 },
                 onTap: (){
                   Navigator.push(context, SlideRightRoute(page: JobDetails()));
@@ -100,7 +102,7 @@ class _AcceptedState extends State<Accepted> {
                 height: AppSizes.height * 0.02,
               ),
               _acceptedComponents.getJobContainer(
-                jobDetail: "01",
+                jobDetail: "04",
                 pickUpLocation: "ABC Port:",
                 destinationLocation: "227 Building, UAE:",
                 startDate: "11 Aug,",
@@ -108,7 +110,7 @@ class _AcceptedState extends State<Accepted> {
                 status: "Accepted",
                 price: "AED 260",
                 onAlert: (){
-                  _onDescriptionAlert();
+                  ApplicationToast.AlertBoxSuzuki(context: context);
                 },
                 onTap: (){
                   Navigator.push(context, SlideRightRoute(page: JobDetails()));

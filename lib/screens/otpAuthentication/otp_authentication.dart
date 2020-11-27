@@ -71,28 +71,26 @@ class _OTPAuthenticationState extends State<OTPAuthentication> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            height: 40,
-                          ),
+                          SizedBox(height: AppSizes.height*0.03,),
                           CommonWidgets.getHeadingText(text: 'OTP Authentication'),
-                          SizedBox(height: 30,),
+                          SizedBox(height: AppSizes.height*0.02,),
                           _otpAuthenticationComponents.getOTPLableText(text: "Enter the 4-digit code sent to you at"),
-                          SizedBox(height: 20,),
+                          SizedBox(height: AppSizes.height*0.035,),
                           CommonWidgets.getSubHeadingText(text: "Enter Verification Code"),
-                          SizedBox(height: 10,),
+                          SizedBox(height: AppSizes.height*0.008,),
                           CommonWidgets.getTextField(
                               isPassword: true,
                               leftIcon: Entypo.mobile,
                               textEditingController: otp_code,
                               hintText: "Verification Code"
                           ),
-                          SizedBox(height: 30,),
+                          SizedBox(height: AppSizes.height*0.035,),
                           _otpAuthenticationComponents.getRichText(
                               text: "I didn’t receive code. ",
                               clickableText: 'Resend Code',
                               onTap: () {}
                           ),
-                          SizedBox(height: 15,),
+                          SizedBox(height: AppSizes.height*0.02,),
                           CommonWidgets.getBottomButton(
                               text: "Submit",
                               onPress: () {

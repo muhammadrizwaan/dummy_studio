@@ -56,14 +56,24 @@ class _BusinessSignupState extends State<BusinessSignup> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              CommonWidgets.getAppBar(
+              CommonWidgets.getAppBarCross(
+                text: "Already have an account? ",
+                iconName: 'cross_icon.png',
+                clickableText: "Login",
+                onPress: () {
+                  Navigator.pop(context);
+                },
+                onTap: () {
+                  Navigator.push(context, SlideRightRoute(page: Login()));
+                },),
+              /*CommonWidgets.getAppBar(
                   iconName: 'cross_icon.png',
                   text: "Already have an account? ",
                   clickableText: "Login",
                   onTap: (){Navigator.push(context, SlideRightRoute(page: Login()));},
                   onPress: () {
                     Navigator.pop(context);
-                  }),
+                  }),*/
               Expanded(
                 child: ListView(
                   children: [
@@ -75,7 +85,7 @@ class _BusinessSignupState extends State<BusinessSignup> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              CommonWidgets.getHeadingText(text: 'Sign up'),
+                              CommonWidgets.getHeadingText(text: 'Signup'),
                               _businessSignupComponents.getBusinessSignupStep()
                             ],
                           ),
@@ -87,7 +97,7 @@ class _BusinessSignupState extends State<BusinessSignup> {
                               isPassword: false,
                               leftIcon: Entypo.user,
                               textEditingController: name,
-                              hintText: "Name"
+                              hintText: "Enter Name"
                           ),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "Email"),
@@ -96,7 +106,7 @@ class _BusinessSignupState extends State<BusinessSignup> {
                               isPassword: false,
                               leftIcon: Icons.mail,
                               textEditingController: email,
-                              hintText: "Email"
+                              hintText: "Enter Email"
                           ),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "Password"),
@@ -105,7 +115,7 @@ class _BusinessSignupState extends State<BusinessSignup> {
                               isPassword: true,
                               leftIcon: Entypo.lock,
                               textEditingController: password,
-                              hintText: "Password"
+                              hintText: "Enter Password"
                           ),
 
                           SizedBox(height: AppSizes.height * 0.02),
@@ -246,7 +256,7 @@ class _BusinessSignupState extends State<BusinessSignup> {
                     ),
                     children: <TextSpan>[
                       TextSpan(
-                          text: 'Term and Conditions',
+                          text: 'Terms and Conditions',
                           style: TextStyle(
                               color: Colors.amber,
                               fontSize: 12,

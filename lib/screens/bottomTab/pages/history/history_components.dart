@@ -223,6 +223,7 @@ class HistoryComponents {
                       fontSize: 12,
                       fontFamily: Assets.poppinsMedium,
                       color: Colors.black,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(

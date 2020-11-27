@@ -50,7 +50,7 @@ class _IndividualProfileState extends State<IndividualProfile> {
                   heading: Strings.profile,
                   onTap: (){Navigator.pop(context);},
                   onBellTap: (){
-                    Navigator.push(context, SlideRightRoute(page: IndividualEditProfile()));
+                    Navigator.pushReplacement(context, SlideRightRoute(page: IndividualEditProfile()));
                     // widget.tag == Strings.indiviual
                     //     ? Navigator.push(context, SlideRightRoute(page: IndividualEditProfile()))
                     //     : Navigator.push(

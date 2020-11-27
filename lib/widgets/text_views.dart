@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:truckoom_shipper/res/colors.dart';
 
 import '../res/assets.dart';
 import '../res/sizes.dart';
@@ -14,11 +15,29 @@ class TextView {
       style: TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.w300,
-        fontFamily: Assets.poppinsMedium,
+        fontFamily: Assets.poppinsLight,
+        color: AppColors.colorBlack.withOpacity(0.7),
+        //color: Color.fromRGBO(28, 40, 38, 1),
+      ),
+    );
+  }
+  static Text getLightTextLanguage(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 3,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w300,
+        fontFamily: Assets.poppinsLight,
+        //color: AppColors.colorBlack.withOpacity(0.7),
         color: Color.fromRGBO(28, 40, 38, 1),
       ),
     );
   }
+
 
   static Text getHeadingText04(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
     return Text(
@@ -158,7 +177,7 @@ class TextView {
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
-        fontSize: 22,
+        fontSize: 20,
         fontWeight: FontWeight.w500,
         fontFamily: Assets.poppinsMedium,
         color: color,
@@ -183,4 +202,21 @@ class TextView {
     );
   }
 
+  static Text getPopUpText(final text,
+      {@required final color, final TextAlign textAlign = TextAlign.center}) {
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 10,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        decoration: TextDecoration.none,
+        fontSize: 14,
+        fontFamily: Assets.poppinsLight,
+        // fontWeight: FontWeight.bold,
+        color: color,
+      ),
+    );
+  }
 }

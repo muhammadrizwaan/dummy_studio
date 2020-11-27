@@ -53,7 +53,7 @@ class _BankState extends State<Bank> {
                                 isPassword: false,
                                 leftIcon: Entypo.user,
                                 // textEditingController: name,
-                                hintText: "Account Holder Name"
+                                hintText: "Mathew due"
                             ),
                             SizedBox(height: AppSizes.height * 0.02),
                             CommonWidgets.getSubHeadingText(text: "Card Number"),
@@ -62,7 +62,7 @@ class _BankState extends State<Bank> {
                                 isPassword: false,
                                 leftIcon: MdiIcons.dialpad,
                                 // textEditingController: name,
-                                hintText: "Card Number"
+                                hintText: "0123-0123-0123-0123"
                             ),
                             SizedBox(height: AppSizes.height * 0.02),
                             CommonWidgets.getSubHeadingText(text: "CVC Code"),
@@ -71,7 +71,7 @@ class _BankState extends State<Bank> {
                                 isPassword: false,
                                 leftIcon: MdiIcons.dialpad,
                                 // textEditingController: name,
-                                hintText: "CVC Code"
+                                hintText: "012"
                             ),
                             SizedBox(height: AppSizes.height * 0.02),
                             CommonWidgets.getSubHeadingText(text: "Expiry Date"),
@@ -80,7 +80,7 @@ class _BankState extends State<Bank> {
                                 isPassword: false,
                                 leftIcon: MdiIcons.dialpad,
                                 // textEditingController: name,
-                                hintText: "Expiry Date"
+                                hintText: "01/2020"
                             ),
                             SizedBox(height: AppSizes.height * 0.04),
                             CommonWidgets.getBottomButton(
@@ -127,7 +127,7 @@ class _BankState extends State<Bank> {
                       padding: EdgeInsets.only(
                         top: AppSizes.height * 0.08,
                       ),
-                      height: AppSizes.height * 0.2,
+                      height: AppSizes.height * 0.22,
                       width: AppSizes.width,
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -141,15 +141,19 @@ class _BankState extends State<Bank> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                        Text(
-                        "Payment Successful",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            decoration: TextDecoration.none,
-                            fontSize: 18,
-                            color: AppColors.colorBlack,
-                            fontFamily: Assets.poppinsMedium,),
+                        Container(
+                          padding: EdgeInsets.only(
+                              left: AppSizes.width*0.03, right: AppSizes.width*0.03),
+                          child: Text(
+                          "Your Payment is Successfully Done",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              decoration: TextDecoration.none,
+                              fontSize: 15,
+                              color: AppColors.colorBlack,
+                              fontFamily: Assets.poppinsMedium,),
                       ),
+                        ),
                       SizedBox(
                         height: 20,
                       ),
@@ -160,7 +164,7 @@ class _BankState extends State<Bank> {
                           // hideLoader(context);
                         },
                         child: Text(
-                          "Tap & Continue",
+                          "Tap to Continue",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               decoration: TextDecoration.none,

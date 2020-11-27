@@ -29,6 +29,7 @@ class AppColors{
   static const malachite =Color.fromRGBO(21, 211, 116, 1);
   static const mischka =Color.fromRGBO(172, 175, 184, 1);
   static const lightBlueWhite =Color.fromRGBO(236,239,241, 1);
+  static final dragContainerslider= Color.fromRGBO(242, 242, 242, 1);
 
   static final primaryColor = Color.fromRGBO(48, 191, 191, 1);
   static const secondaryColor = Color.fromRGBO(236, 242, 251, 1);

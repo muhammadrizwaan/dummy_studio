@@ -72,7 +72,7 @@ class _PhoneNumberState extends State<PhoneNumber> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(
-                            height: 40,
+                            height: AppSizes.height*0.03,
                           ),
                           CommonWidgets.getHeadingText(
                               text: 'Enter Phone Number',
@@ -159,7 +159,7 @@ class _PhoneNumberState extends State<PhoneNumber> {
                     ),
                     children: <TextSpan>[
                       TextSpan(
-                          text: 'Term and Conditions',
+                          text: 'Terms and Conditions',
                           style: TextStyle(
                               color: Colors.amber,
                               fontSize: 12,

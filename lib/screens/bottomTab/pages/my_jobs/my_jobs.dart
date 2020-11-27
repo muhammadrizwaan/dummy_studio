@@ -74,19 +74,20 @@ class _MyJobsState extends State<MyJobs> {
                   isScrollable: true,
                   unselectedLabelColor: AppColors.yellow,
                   indicatorSize: TabBarIndicatorSize.label,
+                  labelPadding: EdgeInsets.symmetric(horizontal: 5.0),
                   indicator: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(5),
                     color: AppColors.yellow,
                   ),
                   tabs: [
                     Container(
                       width: AppSizes.width * 0.25,
-                      height: AppSizes.height*0.055,
+                      height: AppSizes.height*0.045,
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: AppColors.yellow,
                         ),
-                        borderRadius: BorderRadius.circular(08),
+                        borderRadius: BorderRadius.circular(05),
                       ),
                       child: Tab(
                         child: Text("Placed",),
@@ -94,12 +95,12 @@ class _MyJobsState extends State<MyJobs> {
                     ),
                     Container(
                       width: AppSizes.width * 0.25,
-                      height: AppSizes.height*0.055,
+                      height: AppSizes.height*0.045,
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: AppColors.yellow,
                         ),
-                        borderRadius: BorderRadius.circular(08),
+                        borderRadius: BorderRadius.circular(05),
                       ),
                       child: Tab(
                         child: Text("Accepted",),
@@ -107,12 +108,12 @@ class _MyJobsState extends State<MyJobs> {
                     ),
                     Container(
                       width: AppSizes.width * 0.25,
-                      height: AppSizes.height*0.055,
+                      height: AppSizes.height*0.045,
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: AppColors.yellow,
                         ),
-                        borderRadius: BorderRadius.circular(08),
+                        borderRadius: BorderRadius.circular(05),
                       ),
                       child: Tab(
                         child: Text("In Process",),
@@ -120,12 +121,12 @@ class _MyJobsState extends State<MyJobs> {
                     ),
                     Container(
                       width: AppSizes.width * 0.25,
-                      height: AppSizes.height*0.055,
+                      height: AppSizes.height*0.045,
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: AppColors.yellow,
                         ),
-                        borderRadius: BorderRadius.circular(08),
+                        borderRadius: BorderRadius.circular(05),
                       ),
                       child: Tab(
                         child: Text("Dispatched",),
@@ -135,7 +136,8 @@ class _MyJobsState extends State<MyJobs> {
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: AppSizes.height*0.015,
+                //height: 10,
               ),
               Expanded(
                 child: TabBarView(

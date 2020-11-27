@@ -223,25 +223,25 @@ class AcceptedComponents{
                 GestureDetector(
                   onTap: () => onClickPay(),
                   child: Container(
-                    height: AppSizes.height*0.055,
+                    height: AppSizes.height*0.05,
                     width: AppSizes.width*0.38,
                     decoration: BoxDecoration(
                       color: AppColors.yellow,
-                      borderRadius: BorderRadius.circular(08,),
+                      borderRadius: BorderRadius.circular(03,),
                     ),
                     alignment: Alignment.center,
-                    child: TextView.getLabelText04("Pay", color: Colors.white.withOpacity(0.8,)),
+                    child: TextView.getLabelText04("Pay", color: Colors.white),
                   ),
                 ),
                 SizedBox(
                   width: 20,
                 ),
                 Container(
-                  height: AppSizes.height*0.055,
+                  height: AppSizes.height*0.05,
                   width: AppSizes.width*0.38,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(08,),
+                    borderRadius: BorderRadius.circular(03,),
                     border: Border.all(color: AppColors.yellow,)
                   ),
                   alignment: Alignment.center,

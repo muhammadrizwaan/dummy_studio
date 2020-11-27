@@ -45,7 +45,7 @@ class _BusinessProfileState extends State<BusinessProfile> {
                   heading: Strings.profile,
                   onTap: (){Navigator.pop(context);},
                   onBellTap: (){
-                    Navigator.push(context, SlideRightRoute(page: BusinessEditProfile()));
+                    Navigator.pushReplacement(context, SlideRightRoute(page: BusinessEditProfile()));
                   }
               ),
               Expanded(
@@ -95,6 +95,28 @@ class _BusinessProfileState extends State<BusinessProfile> {
                               width: 400,
                               height: 200,
                             ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    color: AppColors.yellow
+                                ),
+                                height: 10,
+                                width: 10,
+                              ),
+                              SizedBox(width: 8),
+                              Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    color: AppColors.grey
+                                ),
+                                height: 10,
+                                width: 10,
+                              )
+                            ],
                           )
                         ],
                       ),

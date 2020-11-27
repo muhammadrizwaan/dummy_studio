@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/entypo_icons.dart';
+import 'package:fluttericon/linearicons_free_icons.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
@@ -53,7 +54,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              CommonWidgets.getAppBar(
+              CommonWidgets.getAppBarCross(
                   iconName: 'cross_icon.png',
                   text: "Already have an account? ",
                   clickableText: "Login",
@@ -88,7 +89,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                               isPassword: false,
                               leftIcon: Entypo.user,
                               textEditingController: business_name,
-                              hintText: "Business Name"),
+                              hintText: "Enter Business Name"),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "Contact Number"),
                           SizedBox(height: AppSizes.height * 0.01),
@@ -96,7 +97,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                               isPassword: false,
                               leftIcon: Entypo.mobile,
                               textEditingController: contact_number,
-                              hintText: "Contact Number"),
+                              hintText: "Enter Contact Number"),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "TRN"),
                           SizedBox(height: AppSizes.height * 0.01),
@@ -104,16 +105,21 @@ class _BusinessInformationState extends State<BusinessInformation> {
                               isPassword: true,
                               leftIcon: Entypo.mobile,
                               textEditingController: trn,
-                              hintText: "TRN"),
+                              hintText: "Enter TRN"),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(
                               text: "License Expiry Date"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          _businessInformationComponents.getTextField(
+                          CommonWidgets.getTextField(
+                              isPassword: true,
+                              leftIcon: LineariconsFree.license,
+                              textEditingController: license_date,
+                              hintText: "09/22/2030"),
+                         /* _businessInformationComponents.getTextField(
                               isPassword: true,
                               textEditingController: license_date,
                               hintText: "09/22/2030"
-                          ),
+                          ),*/
                           SizedBox(height: AppSizes.height * 0.03),
                           _businessInformationComponents.getImagePicker(
                               onPress: () {
@@ -123,7 +129,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           _getTermsAndCondition(),
                           SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getBottomButton(
-                              text: "Sign up",
+                              text: "Signup",
                               onPress: () {
                                 _alertDialogueContainer();
                               }),
@@ -182,7 +188,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                     ),
                     children: <TextSpan>[
                       TextSpan(
-                          text: 'Term and Conditions',
+                          text: 'Terms and Conditions',
                           style: TextStyle(
                             color: Colors.amber,
                             fontSize: 12,
@@ -248,9 +254,10 @@ class _BusinessInformationState extends State<BusinessInformation> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 decoration: TextDecoration.none,
-                                fontSize: 18,
+                                fontSize: 20,
                                 color: AppColors.colorBlack,
                                 fontFamily: Assets.poppinsMedium,
+                              //fontWeight: FontWeight.bold,
                             ),
                           ),
                           SizedBox(
@@ -264,7 +271,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                                       (Route<dynamic> route) => false);
                             },
                             child: Text(
-                              "Tap & Continue",
+                              "Tap to Continue",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   decoration: TextDecoration.none,

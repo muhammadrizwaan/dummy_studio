@@ -34,7 +34,7 @@ class ReferralsComponents{
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Icon(Entypo.attach, size: 20,),
+              Icon(Entypo.attach, size: 16,),
               Container(
                 // color: AppColors.yellow,
                 height: AppSizes.height * 0.06,
@@ -50,7 +50,7 @@ class ReferralsComponents{
                     border: InputBorder.none,
                     hintStyle: TextStyle(
                       decoration: TextDecoration.none,
-                      fontSize: 13,
+                      fontSize: 12,
                       color: AppColors.colorBlack,
                       fontFamily: Assets.poppinsLight,
                     ),

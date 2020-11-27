@@ -74,8 +74,8 @@ class _BottomTabState extends State<BottomTab> {
                 icon: GestureDetector(
                   child: Image.asset(
                     Assets.bookLoadIcon,
-                    height: 20,
-                    width: 20,
+                    height: 22,
+                    width: 22,
                     color:
                         _currentIndex == 0 ? AppColors.yellow : AppColors.grey,
                   ),
@@ -83,6 +83,8 @@ class _BottomTabState extends State<BottomTab> {
                 title: Text(
                   "Book Load",
                   style: TextStyle(
+                    fontSize: 10,
+                    fontFamily: Assets.poppinsRegular,
                     color:
                         _currentIndex == 0 ? AppColors.yellow : AppColors.grey,
                   ),
@@ -95,6 +97,8 @@ class _BottomTabState extends State<BottomTab> {
                 title: Text(
                   "My Jobs",
                   style: TextStyle(
+                    fontSize: 10,
+                    fontFamily: Assets.poppinsRegular,
                     color:
                         _currentIndex == 1 ? AppColors.yellow : AppColors.grey,
                   ),
@@ -103,8 +107,8 @@ class _BottomTabState extends State<BottomTab> {
                 icon: GestureDetector(
                   child: Image.asset(
                     "assets/png/icon_history.png",
-                    height: 20,
-                    width: 20,
+                    height: 22,
+                    width: 22,
                     color:
                         _currentIndex == 2 ? AppColors.yellow : AppColors.grey,
                   ),
@@ -112,6 +116,8 @@ class _BottomTabState extends State<BottomTab> {
                 title: Text(
                   "History",
                   style: TextStyle(
+                    fontSize: 10,
+                    fontFamily: Assets.poppinsRegular,
                     color:
                         _currentIndex == 2 ? AppColors.yellow : AppColors.grey,
                   ),
@@ -120,8 +126,8 @@ class _BottomTabState extends State<BottomTab> {
                 icon: GestureDetector(
                   child: Image.asset(
                     Assets.moreIcon,
-                    height: 20,
-                    width: 20,
+                    height: 22,
+                    width: 22,
                     color:
                         _currentIndex == 3 ? AppColors.yellow : AppColors.grey,
                   ),
@@ -129,6 +135,8 @@ class _BottomTabState extends State<BottomTab> {
                 title: Text(
                   "More",
                   style: TextStyle(
+                    fontSize: 10,
+                    fontFamily: Assets.poppinsRegular,
                     color:
                         _currentIndex == 3 ? AppColors.yellow : AppColors.grey,
                   ),

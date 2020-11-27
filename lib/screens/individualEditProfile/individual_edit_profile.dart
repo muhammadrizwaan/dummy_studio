@@ -8,6 +8,7 @@ import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/individualEditProfile/individual_edit_profile_components.dart';
+import 'package:truckoom_shipper/screens/individualProfile/individual_profile.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 class IndividualEditProfile extends StatefulWidget {
@@ -38,13 +39,19 @@ class _IndividualEditProfileState extends State<IndividualEditProfile> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              CommonWidgets.tabsAppBar1(
+              _individualEditProfileComponents.getTabBarCross(
+                  text: 'Edit Profile',
+                  image: Assets.crossIcon,
+                  onPress: (){
+                    Navigator.pop(context);
+                  }),
+              /*CommonWidgets.tabsAppBar1(
                   text: 'Edit Profile',
                   iconName: Icons.close,
                   onPress: (){
                     Navigator.pop(context);
                   }
-              ),
+              ),*/
               Divider(height: 10,),
               Expanded(
                 child: ListView(
@@ -105,7 +112,7 @@ class _IndividualEditProfileState extends State<IndividualEditProfile> {
                           CommonWidgets.getBottomButton(
                               text: "Update",
                               onPress: () {
-                                // Navigator.push(context, SlideRightRoute(page: OTPAuthentication()));
+                                Navigator.pushReplacement(context, SlideRightRoute(page: IndividualProfile()));
                               }
                           ),
                           SizedBox(height: AppSizes.height * 0.02),

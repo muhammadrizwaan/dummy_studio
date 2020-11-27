@@ -52,7 +52,17 @@ class _SignUPState extends State<SignUP> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              CommonWidgets.getAppBar(
+              CommonWidgets.getAppBarCross(
+                  text: "Already have an account? ",
+                  iconName: 'cross_icon.png',
+                  clickableText: "Login",
+                  onPress: () {
+                    Navigator.pop(context);
+                  },
+                  onTap: () {
+                    Navigator.push(context, SlideRightRoute(page: Login()));
+                  },),
+              /*CommonWidgets.getAppBar(
                   iconName: 'back_arrow_otp.png',
                   text: "Already have an account? ",
                   clickableText: "Login",
@@ -61,7 +71,7 @@ class _SignUPState extends State<SignUP> {
                   },
                   onPress: () {
                     Navigator.pop(context);
-                  }),
+                  }),*/
               Expanded(
                 child: ListView(
                   children: [
@@ -70,7 +80,7 @@ class _SignUPState extends State<SignUP> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          CommonWidgets.getHeadingText(text: 'Sign up'),
+                          CommonWidgets.getHeadingText(text: 'Signup'),
                           SizedBox(height: AppSizes.height * 0.04),
                           CommonWidgets.getSubHeadingText(text: "Full Name"),
                           SizedBox(height: AppSizes.height * 0.01),
@@ -109,7 +119,7 @@ class _SignUPState extends State<SignUP> {
                           _getTermsAndCondition(),
                           SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getBottomButton(
-                            text: "Sign up",
+                            text: "Signup",
                             onPress: () {
                               _alertDialogueContainer();
                             },
@@ -170,14 +180,15 @@ class _SignUPState extends State<SignUP> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            "Sign up Successful",
+                            "Signup Successful",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 decoration: TextDecoration.none,
                                 fontSize: 20,
                                 color: AppColors.colorBlack,
                                 fontFamily: Assets.poppinsMedium,
-                                fontWeight: FontWeight.bold),
+                                //fontWeight: FontWeight.bold
+                            ),
                           ),
                           SizedBox(
                             height: 20,
@@ -191,7 +202,7 @@ class _SignUPState extends State<SignUP> {
                                   (Route<dynamic> route) => false);
                             },
                             child: TextView.getContinueText04(
-                              "Tap & Continue",
+                              "Tap to Continue",
                               color: AppColors.yellow,
                             ),
                           ),
@@ -267,11 +278,11 @@ class _SignUPState extends State<SignUP> {
                       wordSpacing: 0.5,
                       color: Colors.black,
                       fontWeight: FontWeight.w400,
-                      fontSize: 13,
+                      fontSize: 12,
                     ),
                     children: <TextSpan>[
                       TextSpan(
-                          text: 'Term and Conditions',
+                          text: 'Terms and Conditions',
                           style: TextStyle(
                             color: Colors.amber,
                             fontSize: 12,

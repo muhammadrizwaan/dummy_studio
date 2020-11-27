@@ -44,7 +44,7 @@ class _LanguageContainerState extends State<LanguageContainer> {
           },
           trailing: Icon(isExpanded ? FontAwesome5.chevron_down : FontAwesome5.chevron_right, size: 20, color: AppColors.colorBlack.withOpacity(0.4), ),
           title: Container(
-            padding: EdgeInsets.only(left: AppSizes.width*0.03),
+            padding: EdgeInsets.only(left: AppSizes.width*0.035),
             child: TextView.getLabelText04("Language", color: AppColors.colorBlack.withOpacity(0.6)),
 
           ),
@@ -76,7 +76,7 @@ class _LanguageContainerState extends State<LanguageContainer> {
                     padding: EdgeInsets.only(left: AppSizes.width*0.08),
                     child: Align(
                         alignment: Alignment.centerLeft,
-                        child: TextView.getLabelText04("اردو", color: AppColors.colorBlack.withOpacity(0.6))),
+                        child: TextView.getLabelText04("Urdu", color: AppColors.colorBlack.withOpacity(0.6))),
                   ),
                   SizedBox(height: 05),
                   Container(
@@ -89,7 +89,7 @@ class _LanguageContainerState extends State<LanguageContainer> {
                     padding: EdgeInsets.only(left: AppSizes.width*0.08),
                     child: Align(
                         alignment: Alignment.centerLeft,
-                        child: TextView.getLabelText04("عربى", color: AppColors.colorBlack.withOpacity(0.6))),
+                        child: TextView.getLabelText04("Arabic", color: AppColors.colorBlack.withOpacity(0.6))),
                   ),
                 ],
               ),

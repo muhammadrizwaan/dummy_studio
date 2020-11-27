@@ -31,6 +31,7 @@ class Assets {
   static const String profileImg = "assets/png/profile.png";
   static const String linkIcon = "assets/png/link_icon.png";
   static const String nameIcon = "assets/png/name_icon.png";
+  static const String iconCoupon = "assets/png/icon_coupon_popup.png";
 
   static const String addProfileImg = "assets/png/add_profile_icon.png";
   static const String editProfileIcon = "assets/png/edit_profile_icon.png";

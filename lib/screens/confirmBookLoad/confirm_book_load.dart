@@ -45,6 +45,9 @@ class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
                       initialCameraPosition: CameraPosition(target: _center, zoom: 5),
                     ),
                     SlidingUpPanel(
+                      isDraggable: true,
+                      minHeight: AppSizes.height*0.40,
+                      maxHeight: AppSizes.height*0.75,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(15),
                           topRight: Radius.circular(15)),
@@ -66,8 +69,8 @@ class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
       decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.only(
-            topRight: Radius.circular(15),
-            topLeft: Radius.circular(15),
+            topRight: Radius.circular(2),
+            topLeft: Radius.circular(2),
           )),
       child: ListView(
         children: [

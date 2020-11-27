@@ -30,7 +30,7 @@ class CommonWidgets {
         onPressed: () => onPress(),
         child: TextView.getBottomButtonText04(
           text,
-          color: AppColors.white.withOpacity(0.7),
+          color: AppColors.white,
         ),
       ),
     );
@@ -100,8 +100,60 @@ class CommonWidgets {
         children: [
           GestureDetector(
               onTap: () => onPress(),
-              child: Image(
-                image: AssetImage('assets/png/$iconName'),
+              child: Container(
+                height: AppSizes.height*0.025,
+                width: AppSizes.width*0.025,
+                child: Image(
+                  image: AssetImage('assets/png/$iconName'),
+                  fit: BoxFit.cover,
+                ),
+              )),
+          RichText(
+            text: TextSpan(
+              text: text,
+              style: TextStyle(
+                color: Colors.black.withOpacity(0.8),
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                fontFamily: Assets.poppinsRegular,
+              ),
+              children: <TextSpan>[
+                TextSpan(
+                  text: clickableText,
+                  style: TextStyle(
+                    color: Colors.amber,
+                    fontSize: 12,
+                    fontFamily: Assets.poppinsRegular,
+                  ),
+                  recognizer: TapGestureRecognizer()..onTap = () => onTap(),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  static Widget getAppBarCross(
+      {@required String text,
+      @required String iconName,
+      @required String clickableText,
+      @required Function onPress,
+      @required Function onTap}) {
+    return Container(
+      margin: EdgeInsets.only(top: 10, bottom: 30),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          GestureDetector(
+              onTap: () => onPress(),
+              child: Container(
+                height: AppSizes.height*0.035,
+                width: AppSizes.width*0.035,
+                child: Image(
+                  image: AssetImage('assets/png/$iconName'),
+                  fit: BoxFit.cover,
+                ),
               )),
           RichText(
             text: TextSpan(
@@ -197,12 +249,15 @@ class CommonWidgets {
         children: [
           GestureDetector(
             onTap: () => onPress(),
-            child: Icon(
-              Icons.arrow_back_ios,
-              size: 20,
+            child: Container(
+              height: AppSizes.height*0.04,
+              width: AppSizes.width*0.04,
+              child: Image.asset(
+                'assets/png/back_arrow_otp.png'
+              ),
             ),
           ),
-          SizedBox(width: 10),
+          SizedBox(width: 15),
           Container(
               width: AppSizes.width * 0.85,
               child: TextView.getAppBarText(
@@ -260,6 +315,7 @@ class CommonWidgets {
           Center(
             child: Container(
               // color: AppColors.yellow,
+              padding: EdgeInsets.only(left: 5),
               width: AppSizes.width * 0.65,
               // height: AppSizes.height * 0.05,
               child: TextField(
@@ -276,14 +332,19 @@ class CommonWidgets {
                   border: InputBorder.none,
                   hintStyle: TextStyle(
                     decoration: TextDecoration.none,
-                    fontSize: 13,
+                    fontSize: 12,
                     fontFamily: Assets.poppinsLight,
                   ),
                 ),
               ),
             ),
           ),
-          Image(image: AssetImage('assets/png/check_circle_fill_pn.png')),
+          Container(
+              height: AppSizes.height * 0.035,
+              width: AppSizes.width * 0.085,
+              child: Image(
+                  image: AssetImage(
+                      'assets/png/check_circle_fill_pn.png'))),
         ],
       ),
     );
@@ -572,4 +633,107 @@ class CommonWidgets {
       ),
     );
   }
+  /*static Widget AlertBoxSuzuki(
+    {@required BuildContext context,}) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Material(
+            color: AppColors.blackTextColor.withOpacity(0.5),
+            child: Center(
+              child: Stack(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(
+                      left: AppSizes.width * 0.12,
+                      right: AppSizes.width * 0.12,
+                      top: AppSizes.width * 0.07,
+                    ),
+                    padding: EdgeInsets.all(AppSizes.height * 0.02),
+                    height: AppSizes.height * 0.23,
+                    width: AppSizes.width,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border:
+                      Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
+                      borderRadius: BorderRadius.circular(
+                        10,
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // SizedBox(height: AppSizes.height* 0.02),
+                        TextView.getAlertDescriptionText(
+                            Strings.description,
+                            color: AppColors.colorBlack.withOpacity(0.5)
+                        ),
+                        SizedBox(width: AppSizes.width * 0.05),
+                        Container(
+                          height: AppSizes.height * 0.15,
+                          padding: EdgeInsets.all(AppSizes.height * 0.01),
+                          margin: EdgeInsets.only(top: AppSizes.height * 0.005),
+                          decoration: BoxDecoration(
+                            color: AppColors.alertContainer,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Opacity(
+                                opacity: 0.6,
+                                child: Icon(
+                                  Icons.message,
+                                  size: 20,
+                                ),
+                              ),
+                              SizedBox(width: AppSizes.width * 0.01),
+                              Container(
+                                width: AppSizes.width * 0.55,
+                                child: TextView.getLabel2Text04(
+                                    "Vivamus eget aliquam dui. Integer eu arcu vel arcu suscipit ultrices quis non mauris. Aenean scelerisque, sem eu dictum commodo,ligula",
+                                    color: AppColors.colorBlack
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(
+                          left: AppSizes.width * 0.81,
+                          top: AppSizes.height * 0.015
+                      ),
+                      height: AppSizes.width * 0.1,
+                      width: AppSizes.width * 0.1,
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        border: Border.all(color: AppColors.yellow),
+                        borderRadius: BorderRadius.circular(
+                          50,
+                        ),
+                      ),
+                      child: Icon(
+                        Icons.clear,
+                        color: AppColors.yellow,
+                        size: 25,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+    );
+  }*/
+
 }
