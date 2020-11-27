@@ -53,9 +53,7 @@ class _DispatchState extends State<Dispatch> {
                 onTap: (){
                   Navigator.push(context, SlideRightRoute(page: JobDetails()));
                 },
-                onClickPay: () {
-                  Navigator.push(context, SlideRightRoute(page: Payment()));
-                },
+
               ),
               SizedBox(
                 height: AppSizes.height * 0.02,
@@ -74,9 +72,7 @@ class _DispatchState extends State<Dispatch> {
                 onTap: (){
                   Navigator.push(context, SlideRightRoute(page: JobDetails()));
                 },
-                onClickPay: () {
-                  Navigator.push(context, SlideRightRoute(page: Payment()));
-                },
+
               ),
               SizedBox(
                 height: AppSizes.height * 0.02,
@@ -95,9 +91,7 @@ class _DispatchState extends State<Dispatch> {
                 onTap: (){
                   Navigator.push(context, SlideRightRoute(page: JobDetails()));
                 },
-                onClickPay: () {
-                  Navigator.push(context, SlideRightRoute(page: Payment()));
-                },
+
               ),
               SizedBox(
                 height: AppSizes.height * 0.02,
@@ -116,9 +110,7 @@ class _DispatchState extends State<Dispatch> {
                 onTap: (){
                   Navigator.push(context, SlideRightRoute(page: JobDetails()));
                 },
-                onClickPay: () {
-                  Navigator.push(context, SlideRightRoute(page: Payment()));
-                },
+
               ),
               SizedBox(
                 height: AppSizes.height * 0.02,

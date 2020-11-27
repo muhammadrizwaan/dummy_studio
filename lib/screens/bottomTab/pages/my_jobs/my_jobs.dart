@@ -4,6 +4,7 @@ import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs_components.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/accepted/accepted.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/cancelled/cancelled.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/dispatch/dispatch.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/in_process/in_process.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/placed/placed.dart';
@@ -40,7 +41,7 @@ class _MyJobsState extends State<MyJobs> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 5,
       child: Container(
           height: AppSizes.height,
           width: AppSizes.width,
@@ -132,6 +133,19 @@ class _MyJobsState extends State<MyJobs> {
                         child: Text("Dispatched",),
                       ),
                     ),
+                    Container(
+                      width: AppSizes.width * 0.25,
+                      height: AppSizes.height*0.045,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: AppColors.yellow,
+                        ),
+                        borderRadius: BorderRadius.circular(05),
+                      ),
+                      child: Tab(
+                        child: Text("Cancelled",),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -146,6 +160,7 @@ class _MyJobsState extends State<MyJobs> {
                     Accepted(),
                     InProcess(),
                     Dispatch(),
+                    Cancelled(),
                   ],
                 ),
               ),

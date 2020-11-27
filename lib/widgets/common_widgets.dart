@@ -257,7 +257,7 @@ class CommonWidgets {
               ),
             ),
           ),
-          SizedBox(width: 15),
+          SizedBox(width: 10),
           Container(
               width: AppSizes.width * 0.85,
               child: TextView.getAppBarText(

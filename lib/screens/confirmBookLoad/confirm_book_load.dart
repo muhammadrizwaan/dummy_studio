@@ -80,7 +80,7 @@ class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
               height: AppSizes.height * 0.008,
               width: AppSizes.width * 0.40,
               decoration: BoxDecoration(
-                color: AppColors.dragContainer,
+                color: AppColors.dragContainerslider,
                 borderRadius: BorderRadius.circular(10),
               ),
             ),

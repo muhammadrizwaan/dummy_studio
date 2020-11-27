@@ -61,6 +61,7 @@ class AppColors{
   static final colorGreyShade= Color.fromRGBO(207,216,220,1);
   static final colorRedLightShade= Color.fromRGBO(255,205,210,1);
   static final colorTealWhiteShade= Color.fromRGBO(224,242,241,1);
+  static final colorDelete= Color.fromRGBO(226,15,58,1);
 
   // App colors
   static final colorBlack= Color.fromRGBO(28, 40, 38, 1);

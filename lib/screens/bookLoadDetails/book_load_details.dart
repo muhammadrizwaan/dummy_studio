@@ -51,9 +51,12 @@ class _BookLoadDetailsState extends State<BookLoadDetails> {
                       initialCameraPosition: CameraPosition(target: _center, zoom: 5),
                     ),
                     SlidingUpPanel(
+                      isDraggable: true,
+                      minHeight: AppSizes.height*0.35,
+                      maxHeight: AppSizes.height*0.65,
                       borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          topRight: Radius.circular(15)),
+                          topLeft: Radius.circular(2),
+                          topRight: Radius.circular(2)),
                       panel: _onSlidingUpPanel(),
                     )
                   ],
@@ -83,7 +86,7 @@ class _BookLoadDetailsState extends State<BookLoadDetails> {
               height: AppSizes.height * 0.008,
               width: AppSizes.width * 0.40,
               decoration: BoxDecoration(
-                color: AppColors.dragContainer,
+                color: AppColors.dragContainerslider,
                 borderRadius: BorderRadius.circular(10),
               ),
             ),

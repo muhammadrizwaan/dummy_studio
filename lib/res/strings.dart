@@ -22,4 +22,5 @@ class Strings {
   static const String jobDetails = "Job Details";
   static const String enterPromo = "Enter Promo Code";
   static const String apply = "Apply";
+  static const String submit = "Submit";
 }

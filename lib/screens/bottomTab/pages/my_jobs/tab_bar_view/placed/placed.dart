@@ -53,7 +53,7 @@ class _PlacedState extends State<Placed> {
 
                 },
                 onTap: () {
-                  Navigator.push(context, SlideRightRoute(page: JobDetails()));
+                  Navigator.push(context, SlideRightRoute(page: JobDetails(tag: 'Placed')));
                 },
               ),
               SizedBox(
@@ -71,7 +71,7 @@ class _PlacedState extends State<Placed> {
                   ApplicationToast.AlertBoxSuzuki(context: context);
                 },
                 onTap: () {
-                  Navigator.push(context, SlideRightRoute(page: JobDetails()));
+                  Navigator.push(context, SlideRightRoute(page: JobDetails(tag: 'Placed')));
                 },
               ),
               SizedBox(
@@ -88,7 +88,9 @@ class _PlacedState extends State<Placed> {
                   onAlert: () {
                     ApplicationToast.AlertBoxSuzuki(context: context);
                   },
-                  onTap: () {}),
+                  onTap: () {
+                    Navigator.push(context, SlideRightRoute(page: JobDetails(tag: 'Placed')));
+                  }),
               SizedBox(
                 height: AppSizes.height * 0.02,
               ),
@@ -104,7 +106,7 @@ class _PlacedState extends State<Placed> {
                   ApplicationToast.AlertBoxSuzuki(context: context);
                 },
                 onTap: () {
-                  Navigator.push(context, SlideRightRoute(page: JobDetails()));
+                  Navigator.push(context, SlideRightRoute(page: JobDetails(tag: 'Placed')));
                 },
               ),
               SizedBox(

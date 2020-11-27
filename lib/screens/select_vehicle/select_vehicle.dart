@@ -4,6 +4,7 @@ import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/addLoad/add_load.dart';
 import 'package:truckoom_shipper/screens/select_vehicle/select_vehicle_components.dart';
+import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
 import '../../animations/slide_right.dart';
@@ -53,7 +54,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
                           Navigator.pop(context);
                         }),
                     SizedBox(
-                      height: AppSizes.height * 0.01,
+                      height: AppSizes.height * 0.02,
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(
@@ -65,7 +66,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
                       ),
                     ),
                     SizedBox(
-                      height: AppSizes.height * 0.02,
+                      height: AppSizes.height * 0.01,
                     ),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 10),
@@ -88,14 +89,15 @@ class _SelectVehicleState extends State<SelectVehicle> {
                       child: Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(right: 10),
-                            child: Opacity(
-                                opacity: 0.7,
-                                child: Icon(
-                                  FontAwesome5.truck,
-                                  size: 18,
-                                  color: AppColors.colorBlack,
-                                )),
+                            padding: const EdgeInsets.only(right: 5),
+                            child: Container(
+                              height: AppSizes.height * 0.06,
+                              width: AppSizes.width * 0.06,
+                              child: Image.asset(
+                                Assets.vehicle,
+                                color: AppColors.colorBlack,
+                              ),
+                            ),
                           ),
                           Expanded(
                             child: DropdownButtonHideUnderline(
@@ -106,8 +108,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
                                     DropdownMenuItem(
                                       child: TextView.getLightText04(
                                         "Select Category",
-                                        color: AppColors.lightGray
-                                            .withOpacity(0.3),
+                                        color: AppColors.lightGray,
                                       ),
                                       value: 1,
                                     ),
@@ -164,7 +165,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
                                   },
                                   isSelect: isSelect,
                                   onAlert: () {
-                                    _onDescriptionAlert();
+                                    ApplicationToast.AlertBoxSuzuki(context: context);
                                   },
                                 ),
                                 SizedBox(
@@ -183,7 +184,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
                                   },
                                   isSelect: false,
                                   onAlert: () {
-                                    _onDescriptionAlert();
+                                    ApplicationToast.AlertBoxSuzuki(context: context);
                                   },
                                 ),
                                 SizedBox(
@@ -201,7 +202,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
                                     //show button
                                   },
                                   onAlert: () {
-                                    _onDescriptionAlert();
+                                    ApplicationToast.AlertBoxSuzuki(context: context);
                                   },
                                   isSelect: false,
                                 ),
@@ -221,7 +222,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
                                   },
                                   isSelect: false,
                                   onAlert: () {
-                                    _onDescriptionAlert();
+                                    ApplicationToast.AlertBoxSuzuki(context: context);
                                   },
                                 ),
                                 SizedBox(
@@ -240,7 +241,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
                                   },
                                   isSelect: false,
                                   onAlert: () {
-                                    _onDescriptionAlert();
+                                    ApplicationToast.AlertBoxSuzuki(context: context);
                                   },
                                 ),
                                 SizedBox(
@@ -259,7 +260,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
                                   },
                                   isSelect: false,
                                   onAlert: () {
-                                    _onDescriptionAlert();
+                                    ApplicationToast.AlertBoxSuzuki(context: context);
                                   },
                                 ),
                                 SizedBox(
@@ -278,7 +279,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
                                   },
                                   isSelect: false,
                                   onAlert: () {
-                                    _onDescriptionAlert();
+                                    ApplicationToast.AlertBoxSuzuki(context: context);
                                   },
                                 ),
                                 SizedBox(
@@ -298,7 +299,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
                                   },
                                   isSelect: false,
                                   onAlert: () {
-                                    _onDescriptionAlert();
+                                    ApplicationToast.AlertBoxSuzuki(context: context);
                                   },
                                 ),
                                 SizedBox(
@@ -334,7 +335,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
                   },
                   child: TextView.getBottomButtonText04(
                     "Next",
-                    color: AppColors.white.withOpacity(0.6),
+                    color: AppColors.white,
                   ),
                 ),
               ): Container(),

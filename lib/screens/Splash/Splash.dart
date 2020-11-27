@@ -42,7 +42,10 @@ class _SplashState extends State<Splash> {
       height: AppSizes.height,
       width: AppSizes.width,
       color: AppColors.white,
-      child: Center(child: Image(image: AssetImage('assets/png/logo_splash.png')))
+      child: Center(
+          child: Container(
+              width: AppSizes.width*0.8,
+              child: Image(image: AssetImage('assets/png/logo_splash.png'))))
     );
   }
 }

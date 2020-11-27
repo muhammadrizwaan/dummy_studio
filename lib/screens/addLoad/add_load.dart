@@ -6,6 +6,7 @@ import 'package:fluttericon/entypo_icons.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
+import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/addLoad/add_load_components.dart';
@@ -113,7 +114,7 @@ class _AddLoadState extends State<AddLoad> {
                             child: Row(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(right: 10),
+                                  padding: const EdgeInsets.only(right: 5),
                                   child:  Icon(Elusive.location, size: 20, color: AppColors.colorBlack.withOpacity(0.8),),
                                 ),
                                 Expanded(
@@ -184,7 +185,7 @@ class _AddLoadState extends State<AddLoad> {
                             child: Row(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(right: 10),
+                                  padding: const EdgeInsets.only(right: 5),
                                   child: Opacity(
                                       opacity: 0.7,
                                       child: Icon(
@@ -245,13 +246,14 @@ class _AddLoadState extends State<AddLoad> {
                             child: Row(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(right: 10),
-                                  child: Opacity(
-                                      opacity: 0.7,
-                                      child: Icon(
-                                        FontAwesome5.truck,
-                                        size: 18,
-                                      )),
+                                  padding: const EdgeInsets.only(right: 5),
+                                  child: Container(
+                                    height: AppSizes.height * 0.06,
+                                    width: AppSizes.width * 0.06,
+                                    child: Image.asset(
+                                      Assets.vehicle
+                                    ),
+                                  ),
                                   // child: Image(image: AssetImage(Assets.vehicle)),
                                 ),
                                 Expanded(
@@ -313,13 +315,14 @@ class _AddLoadState extends State<AddLoad> {
                             child: Row(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(right: 10),
-                                  child: Opacity(
-                                      opacity: 0.7,
-                                      child: Icon(
-                                        FontAwesome5.truck,
-                                        size: 18,
-                                      )),
+                                  padding: const EdgeInsets.only(right: 5),
+                                  child: Container(
+                                    height: AppSizes.height * 0.06,
+                                    width: AppSizes.width * 0.06,
+                                    child: Image.asset(
+                                      Assets.vehicle,
+                                    ),
+                                  ),
                                   // child: Image(image: AssetImage(Assets.vehicle)),
                                 ),
                                 Expanded(
@@ -370,7 +373,7 @@ class _AddLoadState extends State<AddLoad> {
                           SizedBox(height: AppSizes.height * 0.01),
                           _addLoadComponents.getMessageTextField(
                               leftIcon: Icons.message,
-                              hintText: 'Description',
+                              hintText: 'Abal tu ina ki cha na pasi pa indi vidh. La teje pa na si inhussu vich imager into the end. La kun finf in topi un pasi dal kichu na minga.',
                               textEditingController: null),
                           SizedBox(height: AppSizes.height * 0.03),
                           Row(

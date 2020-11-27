@@ -18,6 +18,7 @@ class AcceptedComponents{
         @required String status,
         @required String price,
         @required Function onClickPay,
+        @required Function onClickCancel,
         @required Function onTap,
         @required Function onAlert
       }) {
@@ -236,16 +237,19 @@ class AcceptedComponents{
                 SizedBox(
                   width: 20,
                 ),
-                Container(
-                  height: AppSizes.height*0.05,
-                  width: AppSizes.width*0.38,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(03,),
-                    border: Border.all(color: AppColors.yellow,)
+                GestureDetector(
+                  onTap: () => onClickCancel(),
+                  child: Container(
+                    height: AppSizes.height*0.05,
+                    width: AppSizes.width*0.38,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(03,),
+                      border: Border.all(color: AppColors.yellow,)
+                    ),
+                    alignment: Alignment.center,
+                    child: TextView.getLabelText04("Cancel", color: AppColors.yellow.withOpacity(0.8,)),
                   ),
-                  alignment: Alignment.center,
-                  child: TextView.getLabelText04("Cancel", color: AppColors.yellow.withOpacity(0.8,)),
                 ),
               ],
             ),

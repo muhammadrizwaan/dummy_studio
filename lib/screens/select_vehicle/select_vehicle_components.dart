@@ -51,7 +51,7 @@ class SelectVechileComponents {
                   border: InputBorder.none,
                   hintStyle: TextStyle(
                     decoration: TextDecoration.none,
-                    fontSize: 14,
+                    fontSize: 12,
                     fontFamily: Assets.poppinsLight,
                   ),
                 ),

@@ -21,6 +21,22 @@ class TextView {
       ),
     );
   }
+  static Text getLightText05(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 3,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.bold,
+        fontFamily: Assets.poppinsRegular,
+        color: AppColors.colorBlack.withOpacity(0.7),
+        //color: Color.fromRGBO(28, 40, 38, 1),
+      ),
+    );
+  }
   static Text getLightTextLanguage(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
     return Text(
       text,
@@ -215,6 +231,56 @@ class TextView {
         fontSize: 14,
         fontFamily: Assets.poppinsLight,
         // fontWeight: FontWeight.bold,
+        color: color,
+      ),
+    );
+  }
+  static Text getTabBarAlertText(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 3,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        decoration: TextDecoration.none,
+        fontSize: 14,
+        fontFamily: Assets.poppinsLight,
+        // fontWeight: FontWeight.w500,
+        color: color,
+      ),
+    );
+  }
+
+  static Text getTabBarButtonText(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        decoration: TextDecoration.none,
+        fontSize: 13,
+        fontFamily: Assets.poppinsLight,
+        // fontWeight: FontWeight.w500,
+        color: color,
+      ),
+    );
+  }
+
+  static Text getRatingPopUpHeaderText(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        decoration: TextDecoration.none,
+        fontSize: 18,
+        fontFamily: Assets.poppinsMedium,
+        // fontWeight: FontWeight.w500,
         color: color,
       ),
     );

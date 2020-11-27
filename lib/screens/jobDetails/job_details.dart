@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/entypo_icons.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -41,10 +42,19 @@ class _JobDetailsState extends State<JobDetails> {
       child: Scaffold(
           body: Column(
             children: [
-              CommonWidgets.tabsAppBar2(
+
+              _jobDetailsComponents.gettabsAppBarDelete(
+                  text: Strings.jobDetails,
+                  tag: widget.tag,
+                  onPress: (){Navigator.pop(context);},
+                  clickableText: "Delete",
+                  onTap: () {
+                    _alertDeleteContainer();
+                  }),
+              /*CommonWidgets.tabsAppBar2(
                   text: Strings.jobDetails,
                   onPress: (){Navigator.pop(context);}
-              ),
+              ),*/
               SizedBox(height: AppSizes.height * 0.005),
               Expanded(
                 child: Stack(
@@ -169,5 +179,134 @@ class _JobDetailsState extends State<JobDetails> {
         ],
       ),
     );
+  }
+
+  _alertDeleteContainer() {
+    return {
+      {
+        showDialog(
+          context: context,
+          builder: (_) {
+            return Material(
+              color: AppColors.blackTextColor.withOpacity(0.5),
+              child: Center(
+                child: Stack(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(
+                          left: AppSizes.width * 0.08,
+                          right: AppSizes.width * 0.08),
+                      height: AppSizes.height * 0.25,
+                      width: AppSizes.width,
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                        left: AppSizes.width * 0.1,
+                        right: AppSizes.width * 0.1,
+                        top: AppSizes.width * 0.08,
+                      ),
+                      padding: EdgeInsets.only(
+                        top: AppSizes.height * 0.08,
+                        left: AppSizes.width * 0.08,
+                        right: AppSizes.width * 0.08,
+                      ),
+                      height: AppSizes.height * 0.24,
+                      width: AppSizes.width,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border:
+                        Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
+                        borderRadius: BorderRadius.circular(
+                          10,
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          TextView.getTabBarAlertText(
+                              "Are you sure you want to delete the job?",
+                              color: AppColors.colorBlack,
+                              textAlign: TextAlign.center),
+                          SizedBox(
+                            height: AppSizes.height * 0.02,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  //Navigator.push(context, SlideRightRoute(page: MyLoads(selectedPage: 1)));
+                                  //Navigator.push(context, MaterialPageRoute(builder:(context) => MyLoads(2)));
+                                },
+                                child: Container(
+                                  height: AppSizes.height * 0.05,
+                                  width: AppSizes.width * 0.3,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.yellow,
+                                    borderRadius: BorderRadius.circular(
+                                      04,
+                                    ),
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: TextView.getTabBarButtonText("Yes",
+                                      color: Colors.white),
+                                ),
+                              ),
+                              // SizedBox(
+                              //   width: 20,
+                              // ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Container(
+                                  height: AppSizes.height * 0.05,
+                                  width: AppSizes.width * 0.3,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(
+                                        04,
+                                      ),
+                                      border: Border.all(
+                                        color: AppColors.yellow,
+                                      )),
+                                  alignment: Alignment.center,
+                                  child: TextView.getTabBarButtonText("No",
+                                      color: AppColors.yellow),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: AppSizes.width * 0.425),
+                      height: AppSizes.width * 0.15,
+                      width: AppSizes.width * 0.15,
+                      decoration: BoxDecoration(
+                        color: AppColors.yellow,
+                        border:
+                        Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
+                        borderRadius: BorderRadius.circular(
+                          10,
+                        ),
+                      ),
+                      child: Icon(
+                        Entypo.air,
+                        color: Colors.white,
+                        size: 40,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        )
+      },
+    };
   }
 }

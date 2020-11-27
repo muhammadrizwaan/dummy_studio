@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/entypo_icons.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
@@ -55,6 +56,9 @@ class _AcceptedState extends State<Accepted> {
                 onClickPay: () {
                   Navigator.push(context, SlideRightRoute(page: Payment()));
                 },
+                  onClickCancel: () {
+                  _alertCancelContainer();
+                }
               ),
               SizedBox(
                 height: AppSizes.height * 0.02,
@@ -76,6 +80,9 @@ class _AcceptedState extends State<Accepted> {
                 onClickPay: () {
                   Navigator.push(context, SlideRightRoute(page: Payment()));
                 },
+                  onClickCancel: () {
+                    _alertCancelContainer();
+                  }
               ),
               SizedBox(
                 height: AppSizes.height * 0.02,
@@ -97,6 +104,9 @@ class _AcceptedState extends State<Accepted> {
                 onClickPay: () {
                   Navigator.push(context, SlideRightRoute(page: Payment()));
                 },
+                  onClickCancel: () {
+                    _alertCancelContainer();
+                  }
               ),
               SizedBox(
                 height: AppSizes.height * 0.02,
@@ -118,6 +128,9 @@ class _AcceptedState extends State<Accepted> {
                 onClickPay: () {
                   Navigator.push(context, SlideRightRoute(page: Payment()));
                 },
+                  onClickCancel: () {
+                    _alertCancelContainer();
+                  }
               ),
               SizedBox(
                 height: AppSizes.height * 0.02,
@@ -129,7 +142,7 @@ class _AcceptedState extends State<Accepted> {
     );
   }
 
-  _onDescriptionAlert(){
+  _alertCancelContainer() {
     return {
       {
         showDialog(
@@ -142,12 +155,23 @@ class _AcceptedState extends State<Accepted> {
                   children: [
                     Container(
                       margin: EdgeInsets.only(
-                        left: AppSizes.width * 0.12,
-                        right: AppSizes.width * 0.12,
-                        top: AppSizes.width * 0.07,
+                          left: AppSizes.width * 0.08,
+                          right: AppSizes.width * 0.08),
+                      height: AppSizes.height * 0.25,
+                      width: AppSizes.width,
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                        left: AppSizes.width * 0.1,
+                        right: AppSizes.width * 0.1,
+                        top: AppSizes.width * 0.08,
                       ),
-                      padding: EdgeInsets.all(AppSizes.height * 0.02),
-                      height: AppSizes.height * 0.23,
+                      padding: EdgeInsets.only(
+                        top: AppSizes.height * 0.08,
+                        left: AppSizes.width * 0.08,
+                        right: AppSizes.width * 0.08,
+                      ),
+                      height: AppSizes.height * 0.24,
                       width: AppSizes.width,
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -159,70 +183,82 @@ class _AcceptedState extends State<Accepted> {
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          // SizedBox(height: AppSizes.height* 0.02),
-                          TextView.getAlertDescriptionText(
-                              Strings.description,
-                              color: AppColors.colorBlack
+                          TextView.getTabBarAlertText(
+                              "Are you sure you want to cancel the Load?",
+                              color: AppColors.colorBlack,
+                              textAlign: TextAlign.center),
+                          SizedBox(
+                            height: AppSizes.height * 0.02,
                           ),
-                          SizedBox(width: AppSizes.width * 0.05),
-                          Container(
-                            height: AppSizes.height * 0.15,
-                            padding: EdgeInsets.all(AppSizes.height * 0.01),
-                            margin: EdgeInsets.only(top: AppSizes.height * 0.005),
-                            decoration: BoxDecoration(
-                              color: AppColors.alertContainer,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Opacity(
-                                  opacity: 0.6,
-                                  child: Icon(
-                                    Icons.message,
-                                    size: 20,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  //Navigator.push(context, SlideRightRoute(page: MyLoads(selectedPage: 1)));
+                                  //Navigator.push(context, MaterialPageRoute(builder:(context) => MyLoads(2)));
+                                },
+                                child: Container(
+                                  height: AppSizes.height * 0.05,
+                                  width: AppSizes.width * 0.3,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.yellow,
+                                    borderRadius: BorderRadius.circular(
+                                      04,
+                                    ),
                                   ),
+                                  alignment: Alignment.center,
+                                  child: TextView.getTabBarButtonText("Yes",
+                                      color: Colors.white),
                                 ),
-                                SizedBox(width: AppSizes.width * 0.01),
-                                Container(
-                                  width: AppSizes.width * 0.55,
-                                  child: TextView.getLabel2Text04(
-                                      "Vivamus eget aliquam dui. Integer eu arcu vel arcu suscipit ultrices quis non mauris. Aenean scelerisque, sem eu dictum commodo,ligula",
-                                      color: AppColors.colorBlack
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
+                              ),
+                              // SizedBox(
+                              //   width: 20,
+                              // ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Container(
+                                  height: AppSizes.height * 0.05,
+                                  width: AppSizes.width * 0.3,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(
+                                        04,
+                                      ),
+                                      border: Border.all(
+                                        color: AppColors.yellow,
+                                      )),
+                                  alignment: Alignment.center,
+                                  child: TextView.getTabBarButtonText("No",
+                                      color: AppColors.yellow),
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),
-                    GestureDetector(
-                      onTap: (){
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(
-                            left: AppSizes.width * 0.81,
-                            top: AppSizes.height * 0.015
+                    Container(
+                      margin: EdgeInsets.only(left: AppSizes.width * 0.425),
+                      height: AppSizes.width * 0.15,
+                      width: AppSizes.width * 0.15,
+                      decoration: BoxDecoration(
+                        color: AppColors.yellow,
+                        border:
+                        Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
+                        borderRadius: BorderRadius.circular(
+                          10,
                         ),
-                        height: AppSizes.width * 0.1,
-                        width: AppSizes.width * 0.1,
-                        decoration: BoxDecoration(
-                          color: AppColors.white,
-                          border: Border.all(color: AppColors.yellow),
-                          borderRadius: BorderRadius.circular(
-                            50,
-                          ),
-                        ),
-                        child: Icon(
-                          Icons.clear,
-                          color: AppColors.yellow,
-                          size: 25,
-                        ),
+                      ),
+                      child: Icon(
+                        Entypo.air,
+                        color: Colors.white,
+                        size: 40,
                       ),
                     ),
                   ],
