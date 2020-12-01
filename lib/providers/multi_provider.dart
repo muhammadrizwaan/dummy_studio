@@ -4,6 +4,7 @@ import 'package:truckoom_shipper/screens/addLoad/add_load_provider.dart';
 import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_detail_provider.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab_provider.dart';
 import 'package:truckoom_shipper/screens/businessEditProfile/business_edit_profile_provider.dart';
+import 'package:truckoom_shipper/screens/businessInformation/business_information_provider.dart';
 import 'package:truckoom_shipper/screens/businessProfile/business_profile_provider.dart';
 import 'package:truckoom_shipper/screens/businessSignup/business_signup_provider.dart';
 import 'package:truckoom_shipper/screens/checkUserType/check_user_provider.dart';
@@ -25,6 +26,7 @@ import 'package:truckoom_shipper/screens/payment/payment_provider.dart';
 import 'package:truckoom_shipper/screens/phoneNumber/phone_number_provider.dart';
 import 'package:truckoom_shipper/screens/referrals/referrals_provider.dart';
 import 'package:truckoom_shipper/screens/resetPassword/reset_password_provider.dart';
+import 'package:truckoom_shipper/screens/signup/sign_up_provider.dart';
 import 'package:truckoom_shipper/screens/wallet/wallet_provier.dart';
 
 final multiProviders = [
@@ -138,6 +140,14 @@ final multiProviders = [
   ),
   ChangeNotifierProvider<ConfirmBookLoadProvider>(
     create: (_) => ConfirmBookLoadProvider(),
+    lazy: true,
+  ),
+  ChangeNotifierProvider<SignUpProvider>(
+    create: (_) => SignUpProvider(),
+    lazy: true,
+  ),
+  ChangeNotifierProvider<BusinessInformationProvider>(
+    create: (_) => BusinessInformationProvider(),
     lazy: true,
   ),
 ];

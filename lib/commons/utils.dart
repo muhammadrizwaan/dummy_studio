@@ -28,4 +28,14 @@ class PreferenceUtils {
   static int getInt (String key, [int defValue]) {
     return _prefsInstance.getInt (key) ?? defValue ?? 0;
   }
+
+  static Future <bool> setDouble (String key, double value) async {
+    var prefs = await _instance;
+    return prefs?.setDouble (key, value) ?? Future.value (null);
+  }
+
+  static double getDouble (String key, [double defValue]) {
+    return _prefsInstance.getDouble (key) ?? defValue ?? 0;
+  }
+
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
@@ -246,7 +247,7 @@ class _PaymentState extends State<Payment> {
                             decoration: BoxDecoration(
                               color: AppColors.lightGray,
                               border: Border.all(color: AppColors.lightGray),
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(5),
                             ),
                             child: TextField(
                               style: TextStyle(
@@ -277,7 +278,7 @@ class _PaymentState extends State<Payment> {
                               width: AppSizes.width,
                               height: AppSizes.height * 0.06,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(5),
                                 border: Border.all(
                                   color: AppColors.yellow,
                                 ),
@@ -311,7 +312,7 @@ class _PaymentState extends State<Payment> {
                         ),
                       ),
                       child: Icon(
-                        FontAwesomeIcons.ticketAlt,
+                        FontAwesome5.hammer,
                         color: Colors.white,
                         size: 30,
                       ),

@@ -132,25 +132,26 @@ class InvoiceDetailComponents{
           SizedBox(height: AppSizes.height * 0.02),
           Row(
             children: [
-              Text('ID:',
-                style: TextStyle(
+              Row(
+                children: [
+                  Text('ID:',
+                    style: TextStyle(
+                      fontFamily: Assets.poppinsRegular,
+                      fontSize: 13,
+                      color: AppColors.colorBlack,
+                      // fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  SizedBox(
+                    width: 04,
+                  ),
+                  Text("5431443675434214", style: TextStyle(
                     fontFamily: Assets.poppinsRegular,
                     fontSize: 13,
-                    color: AppColors.colorBlack,
+                    color: AppColors.colorBlack.withOpacity(0.4,),
                     // fontWeight: FontWeight.bold
-                ),
-              ),
-              SizedBox(
-                width: 04,
-              ),
-              Text("5431443675434214", style: TextStyle(
-                fontFamily: Assets.poppinsRegular,
-                fontSize: 13,
-                color: AppColors.colorBlack.withOpacity(0.4,),
-                // fontWeight: FontWeight.bold
-              ),),
-              SizedBox(
-                width: 80,
+                  ),),
+                ],
               ),
               Text('Today: 5:15 pm',
                 style: TextStyle(

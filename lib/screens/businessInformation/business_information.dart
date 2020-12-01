@@ -7,17 +7,18 @@ import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/businessInformation/business_information_components.dart';
+import 'package:truckoom_shipper/screens/businessInformation/business_information_provider.dart';
 import 'package:truckoom_shipper/screens/businessProfile/business_profile.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
-
+import 'package:provider/provider.dart';
 import '../../animations/slide_right.dart';
 import '../bottomTab/bottom_tab.dart';
 
 class BusinessInformation extends StatefulWidget {
-  String tag;
-
-  BusinessInformation({@required this.tag});
+  String tag ;
+  int userId;
+  BusinessInformation({@required this.tag, @required this.userId});
 
   @override
   _BusinessInformationState createState() => _BusinessInformationState();
@@ -25,6 +26,7 @@ class BusinessInformation extends StatefulWidget {
 
 class _BusinessInformationState extends State<BusinessInformation> {
   BusinessInformationComponents _businessInformationComponents;
+  BusinessInformationProvider _businessInformationProvider;
   TextEditingController business_name, contact_number, trn, license_date;
 
   bool onCheck = false;
@@ -33,6 +35,8 @@ class _BusinessInformationState extends State<BusinessInformation> {
   void initState() {
     super.initState();
     _businessInformationComponents = BusinessInformationComponents();
+    _businessInformationProvider =
+        Provider.of<BusinessInformationProvider>(context, listen: false);
     business_name = TextEditingController();
     contact_number = TextEditingController();
     trn = TextEditingController();
@@ -41,6 +45,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<BusinessInformationProvider>(context, listen: true);
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -48,7 +53,9 @@ class _BusinessInformationState extends State<BusinessInformation> {
           height: AppSizes.height,
           width: AppSizes.width,
           color: AppColors.white,
-          padding: EdgeInsets.only(left: AppSizes.width * 0.08, right: AppSizes.width*0.08, top: AppSizes.width*0.08),
+          padding: EdgeInsets.only(left: AppSizes.width * 0.08,
+              right: AppSizes.width * 0.08,
+              top: AppSizes.width * 0.08),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -82,7 +89,8 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           ),
                           // CommonWidgets.getHeading1Text(text: 'Signup'),
                           SizedBox(height: AppSizes.height * 0.04),
-                          CommonWidgets.getSubHeadingText(text: "Business Name"),
+                          CommonWidgets.getSubHeadingText(
+                              text: "Business Name"),
                           SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getTextField(
                               isPassword: false,
@@ -90,7 +98,8 @@ class _BusinessInformationState extends State<BusinessInformation> {
                               textEditingController: business_name,
                               hintText: "Business Name"),
                           SizedBox(height: AppSizes.height * 0.02),
-                          CommonWidgets.getSubHeadingText(text: "Contact Number"),
+                          CommonWidgets.getSubHeadingText(
+                              text: "Contact Number"),
                           SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getTextField(
                               isPassword: false,
@@ -110,22 +119,32 @@ class _BusinessInformationState extends State<BusinessInformation> {
                               text: "License Expiry Date"),
                           SizedBox(height: AppSizes.height * 0.01),
                           _businessInformationComponents.getTextField(
-                              isPassword: true,
+                              isPassword: false,
                               textEditingController: license_date,
                               hintText: "09/22/2030"
                           ),
                           SizedBox(height: AppSizes.height * 0.03),
                           _businessInformationComponents.getImagePicker(
                               onPress: () {
-                            // Navigator.push(context, SlideRightRoute(page: OTPAuthentication()));
-                          }),
+                                // Navigator.push(context, SlideRightRoute(page: OTPAuthentication()));
+                              }),
                           SizedBox(height: AppSizes.height * 0.02),
                           _getTermsAndCondition(),
                           SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getBottomButton(
                               text: "Sign up",
                               onPress: () {
-                                _alertDialogueContainer();
+                                // _businessInformationProvider
+                                //     .getBusinessInformation(context: context,
+                                //     businessName: business_name.text,
+                                //     phoneNumber: contact_number.text,
+                                //     trn: trn.text,
+                                //     licenseExpiryDate: license_date.text,
+                                //     userId: widget.userId,
+                                //     tag: widget.tag,
+                                //     onCheck: onCheck);
+                                _businessInformationProvider.getImage(context: context);
+
                               }),
                           SizedBox(height: AppSizes.height * 0.02),
                         ],
@@ -234,7 +253,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         border:
-                            Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
+                        Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
                         borderRadius: BorderRadius.circular(
                           10,
                         ),
@@ -247,10 +266,10 @@ class _BusinessInformationState extends State<BusinessInformation> {
                             "Signup Successful",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                decoration: TextDecoration.none,
-                                fontSize: 18,
-                                color: AppColors.colorBlack,
-                                fontFamily: Assets.poppinsMedium,
+                              decoration: TextDecoration.none,
+                              fontSize: 18,
+                              color: AppColors.colorBlack,
+                              fontFamily: Assets.poppinsMedium,
                             ),
                           ),
                           SizedBox(
@@ -284,7 +303,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                       decoration: BoxDecoration(
                         color: AppColors.yellow,
                         border:
-                            Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
+                        Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
                         borderRadius: BorderRadius.circular(
                           10,
                         ),

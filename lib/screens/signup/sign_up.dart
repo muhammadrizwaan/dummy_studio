@@ -2,12 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/entypo_icons.dart';
+import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
 import 'package:truckoom_shipper/screens/signup/sign_up_components.dart';
+import 'package:truckoom_shipper/screens/signup/sign_up_provider.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/loader.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
@@ -15,9 +17,9 @@ import 'package:truckoom_shipper/widgets/text_views.dart';
 import '../bottomTab/bottom_tab.dart';
 
 class SignUP extends StatefulWidget {
-  String tag;
+  String tag, cell;
 
-  SignUP({@required this.tag});
+  SignUP({@required this.tag, @required this.cell});
 
   @override
   _SignUPState createState() => _SignUPState();
@@ -25,17 +27,23 @@ class SignUP extends StatefulWidget {
 
 class _SignUPState extends State<SignUP> {
   SignUpComponents _signUpComponents;
-  CustomPopup _loader;
-  TextEditingController name, email, password, confirm_password;
+  SignUpProvider _signUpProvider;
+  TextEditingController _name, _email, _password, _confirm_password;
   bool onCheck = false;
 
   void initState() {
-    _loader = CustomPopup();
+    _signUpProvider = Provider.of<SignUpProvider>(context, listen: false);
+    _name = TextEditingController();
+    _email = TextEditingController();
+    _password = TextEditingController();
+    _confirm_password = TextEditingController();
+    _signUpProvider.init(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<SignUpProvider>(context, listen: true);
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -77,7 +85,7 @@ class _SignUPState extends State<SignUP> {
                           CommonWidgets.getTextField(
                               isPassword: false,
                               leftIcon: Entypo.user,
-                              textEditingController: name,
+                              textEditingController: _name,
                               hintText: "Enter Name"),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "Email"),
@@ -85,7 +93,7 @@ class _SignUPState extends State<SignUP> {
                           CommonWidgets.getTextField(
                             isPassword: false,
                             leftIcon: Icons.email,
-                            textEditingController: email,
+                            textEditingController: _email,
                             hintText: "Enter Email",
                           ),
                           SizedBox(height: AppSizes.height * 0.02),
@@ -94,7 +102,7 @@ class _SignUPState extends State<SignUP> {
                           CommonWidgets.getTextField(
                               isPassword: true,
                               leftIcon: Entypo.lock,
-                              textEditingController: password,
+                              textEditingController: _password,
                               hintText: "Enter Password"),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(
@@ -103,7 +111,7 @@ class _SignUPState extends State<SignUP> {
                           CommonWidgets.getTextField(
                               isPassword: true,
                               leftIcon: Entypo.lock,
-                              textEditingController: confirm_password,
+                              textEditingController: _confirm_password,
                               hintText: "Confirm Password"),
                           SizedBox(height: AppSizes.height * 0.03),
                           _getTermsAndCondition(),
@@ -111,7 +119,18 @@ class _SignUPState extends State<SignUP> {
                           CommonWidgets.getBottomButton(
                             text: "Sign up",
                             onPress: () {
-                              _alertDialogueContainer();
+                              // _signUpProvider.getIndividualSignUp(
+                              //     context, name: _name.text, email, password,
+                              //     confirmPassword);
+                              _signUpProvider.getIndividualSignUp(
+                                  context: context,
+                                  cell: widget.cell,
+                                  name: _name.text,
+                                  email: _email.text,
+                                  password: _password.text,
+                                  confirmPassword: _confirm_password.text,
+                                  onCheck: onCheck);
+                              // _alertDialogueContainer();
                             },
                           ),
                           SizedBox(height: AppSizes.height * 0.02),
@@ -184,7 +203,6 @@ class _SignUPState extends State<SignUP> {
                           ),
                           GestureDetector(
                             onTap: () {
-
                               Navigator.of(context).pushAndRemoveUntil(
                                   SlideRightRoute(
                                       page: BottomTab(tag: widget.tag)),
