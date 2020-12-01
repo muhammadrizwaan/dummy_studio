@@ -21,7 +21,7 @@ class CustomPopup {
             child: Container(
               height: AppSizes.height *0.35,
               width: AppSizes.width *0.35,
-              child: Lottie.asset("assets/json/smooth-e-commerce-icon.json",),
+              child: Lottie.asset(Assets.apiLoading),
             ),
           ),
         );

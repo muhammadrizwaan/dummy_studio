@@ -183,4 +183,21 @@ class TextView {
     );
   }
 
+  static Text getPoppinsMediumF20L3BoldText(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 3,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        decoration: TextDecoration.none,
+        fontSize: 20,
+        fontFamily: Assets.poppinsMedium,
+        color: color,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
 }

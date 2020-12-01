@@ -205,11 +205,7 @@ class CommonWidgets {
           SizedBox(width: 10),
           Container(
               width: AppSizes.width * 0.85,
-              child: TextView.getAppBarText(
-                  text, color:
-              AppColors.colorBlack
-              )
-          )
+              child: TextView.getAppBarText(text, color: AppColors.colorBlack))
         ],
       ),
     );
@@ -233,11 +229,13 @@ class CommonWidgets {
     );
   }
 
-  static Widget getTextField(
-      {@required bool isPassword,
-      @required IconData leftIcon,
-      @required TextEditingController textEditingController,
-      @required String hintText}) {
+  static Widget getTextField({
+    @required bool isPassword,
+    @required IconData leftIcon,
+    @required TextEditingController textEditingController,
+    @required String hintText,
+    // @required bool filledField,
+  }) {
     return Container(
       height: AppSizes.height * 0.07,
       width: AppSizes.width * 0.85,
@@ -283,7 +281,68 @@ class CommonWidgets {
               ),
             ),
           ),
-          Image(image: AssetImage('assets/png/check_circle_fill_pn.png')),
+          Image(image: AssetImage('assets/png/check_circle_fill_pn.png'))
+        ],
+      ),
+    );
+  }
+
+  static Widget getTextField2({
+    @required bool isPassword,
+    @required IconData leftIcon,
+    @required TextEditingController textEditingController,
+    @required String hintText,
+    @required bool filledField,
+  }) {
+    return Container(
+      height: AppSizes.height * 0.07,
+      width: AppSizes.width * 0.85,
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.02),
+      decoration: BoxDecoration(
+        color: AppColors.lightGray,
+        border: Border.all(color: AppColors.lightGray),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Opacity(
+              opacity: 0.7,
+              child: Icon(
+                leftIcon,
+                size: 20,
+              )),
+          Center(
+            child: Container(
+              // color: AppColors.yellow,
+              width: AppSizes.width * 0.65,
+              // height: AppSizes.height * 0.05,
+              child: TextField(
+                style: TextStyle(
+                  decoration: TextDecoration.none,
+                  fontFamily: Assets.poppinsLight,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                ),
+                controller: textEditingController,
+                obscureText: isPassword,
+                decoration: InputDecoration(
+                  hintText: hintText,
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(
+                    decoration: TextDecoration.none,
+                    fontSize: 13,
+                    fontFamily: Assets.poppinsLight,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          filledField ?
+          Image(image: AssetImage('assets/png/check_circle_fill_pn.png'))
+              :
+          Container(),
         ],
       ),
     );
@@ -530,23 +589,19 @@ class CommonWidgets {
           ),
         ]));
   }
+
   static Widget ProfileAppBar(
-      { @required String heading,
-        @required Function onTap,
-        @required Function onBellTap
-      }) {
+      {@required String heading,
+      @required Function onTap,
+      @required Function onBellTap}) {
     return Container(
-      decoration: BoxDecoration(
-          color: AppColors.white,
-          boxShadow: [
-            BoxShadow(
-                color: Colors.grey.withOpacity(0.3),
-                spreadRadius: 1,
-                blurRadius: 1,
-                offset: Offset(0,3)
-            )
-          ]
-      ),
+      decoration: BoxDecoration(color: AppColors.white, boxShadow: [
+        BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 1,
+            blurRadius: 1,
+            offset: Offset(0, 3))
+      ]),
       padding: EdgeInsets.all(AppSizes.width * 0.05),
       margin: EdgeInsets.only(bottom: AppSizes.height * 0.02),
       child: Row(
@@ -565,9 +620,11 @@ class CommonWidgets {
             ],
           ),
           GestureDetector(
-              onTap: ()=> onBellTap(),
-              child: Icon(FontAwesome5.edit, size: 20,)
-          )
+              onTap: () => onBellTap(),
+              child: Icon(
+                FontAwesome5.edit,
+                size: 20,
+              ))
         ],
       ),
     );
