@@ -4,6 +4,8 @@ import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/history/history_components.dart';
+import 'package:truckoom_shipper/screens/notifications/notifications.dart';
+import 'package:truckoom_shipper/screens/wallet/wallet.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
 
 import '../../../../animations/slide_right.dart';
@@ -47,7 +49,12 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     ? FontAwesome5.bell
                     : Linecons.wallet,
                 onPress: () {
-                }),
+                  widget.tag == Strings.indiviual
+                      ? Navigator.push(
+                      context, SlideRightRoute(page: Notifications()))
+                      : Navigator.push(
+                      context, SlideRightRoute(page: Wallet()));
+                },),
             SizedBox(
               height: 20,
             ),

@@ -136,7 +136,7 @@ class NotificationsComponents {
             onTap: ()=> onBellTap(),
             child: Icon(
               FontAwesome5.bell,
-              size: 20,
+              size: 25,
               color: AppColors.yellow,
             ),
           )
