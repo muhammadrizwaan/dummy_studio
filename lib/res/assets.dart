@@ -53,7 +53,15 @@ class Assets {
   static const String card_number = "assets/png/icon_card_number.png";
   static const String joint = "assets/png/icon_loc@3x.png";
   static const String location = "assets/png/location_icon.png";
-
+  static const String couponIcon = "assets/png/coupon_icon.png";
+  static const String informationIcon = "assets/png/information_icon.png";
+  static const String truckIcon = "assets/png/truck_icon.png";
+  static const String truckMainIcon = "assets/png/truck_MainIcon.png";
+  static const String licenseIcon = "assets/png/license_icon.png";
+  static const String radioActiveIcon = "assets/png/radio_active_icon.png";
+  static const String radioUnactiveIcon = "assets/png/radio_unactive_icon.png";
+  static const String cardIcon = "assets/png/card_icon.png";
+  static const String apiLoading = "assets/json/truckoom_loader.json";
 
 
 
@@ -63,5 +71,8 @@ class Assets {
   static const String poppinsLight = "Poppins-Light";
   static const String poppinsMedium = "Poppins-Medium";
   static const String poppinsBold = "Poppins-Bold";
+  static const String poppinsSemiBold = "Poppins-SemiBold";
   static const String robotoBold = "Roboto-Bold";
+
+  // static const String turretBold = "TurretRoad-ExtraBold";
 }

@@ -11,7 +11,7 @@ class ForgotPasswordComponent {
         text,
         style: TextStyle(
           decoration: TextDecoration.none,
-          color: AppColors.colorBlack,
+          color: AppColors.emailLableColor,
           fontSize: 14,
           fontFamily: Assets.poppinsLight,
         ),

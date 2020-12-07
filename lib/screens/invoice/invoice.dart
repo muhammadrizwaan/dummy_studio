@@ -34,7 +34,6 @@ class _InvoiceState extends State<Invoice> {
               children: [
                 CommonWidgets.tabsAppBar2(
                     text: "Invoice",
-                    iconName: Assets.backArrow,
                     onPress: (){
                       Navigator.pop(context);
                     }

@@ -1,36 +1,49 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/entypo_icons.dart';
+import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
-import 'package:truckoom_shipper/screens/bank/bank_screen.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
-import 'package:truckoom_shipper/screens/maps/maps_screen.dart';
-import 'package:truckoom_shipper/screens/payment/payment.dart';
 import 'package:truckoom_shipper/screens/signup/sign_up_components.dart';
+import 'package:truckoom_shipper/screens/signup/sign_up_provider.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/loader.dart';
+import 'package:truckoom_shipper/widgets/text_views.dart';
+
+import '../bottomTab/bottom_tab.dart';
 
 class SignUP extends StatefulWidget {
+  String tag, cell;
+
+  SignUP({@required this.tag, @required this.cell});
+
   @override
   _SignUPState createState() => _SignUPState();
 }
 
 class _SignUPState extends State<SignUP> {
   SignUpComponents _signUpComponents;
-  Loader _loader;
-  TextEditingController name, email, password, confirm_password;
+  SignUpProvider _signUpProvider;
+  TextEditingController _name, _email, _password, _confirm_password;
   bool onCheck = false;
 
   void initState() {
-    _loader = Loader();
+    _signUpProvider = Provider.of<SignUpProvider>(context, listen: false);
+    _name = TextEditingController();
+    _email = TextEditingController();
+    _password = TextEditingController();
+    _confirm_password = TextEditingController();
+    _signUpProvider.init(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<SignUpProvider>(context, listen: true);
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -38,7 +51,11 @@ class _SignUPState extends State<SignUP> {
           height: AppSizes.height,
           width: AppSizes.width,
           color: AppColors.white,
-          padding: EdgeInsets.all(AppSizes.width * 0.05),
+          padding: EdgeInsets.only(
+            left: AppSizes.width * 0.08,
+            right: AppSizes.width * 0.08,
+            top: AppSizes.width * 0.08,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -61,107 +78,62 @@ class _SignUPState extends State<SignUP> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          CommonWidgets.getHeading1Text(text: 'Signup'),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          CommonWidgets.getLableText(text: "Full Name"),
-                          SizedBox(
-                            height: 10,
-                          ),
+                          CommonWidgets.getHeadingText(text: 'Sign up'),
+                          SizedBox(height: AppSizes.height * 0.04),
+                          CommonWidgets.getSubHeadingText(text: "Full Name"),
+                          SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getTextField(
                               isPassword: false,
-                              leftIcon: 'name_icon.png',
-                              textEditingController: name,
+                              leftIcon: Entypo.user,
+                              textEditingController: _name,
                               hintText: "Enter Name"),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          CommonWidgets.getLableText(text: "Email"),
-                          SizedBox(
-                            height: 10,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.02),
+                          CommonWidgets.getSubHeadingText(text: "Email"),
+                          SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getTextField(
-                              isPassword: false,
-                              leftIcon: 'email_icon.png',
-                              textEditingController: email,
-                              hintText: "Enter Email"),
-                          SizedBox(
-                            height: 30,
+                            isPassword: false,
+                            leftIcon: Icons.email,
+                            textEditingController: _email,
+                            hintText: "Enter Email",
                           ),
-                          CommonWidgets.getLableText(text: "Password"),
-                          SizedBox(
-                            height: 10,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.02),
+                          CommonWidgets.getSubHeadingText(text: "Password"),
+                          SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getTextField(
                               isPassword: true,
-                              leftIcon: 'password_icon.png',
-                              textEditingController: password,
+                              leftIcon: Entypo.lock,
+                              textEditingController: _password,
                               hintText: "Enter Password"),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          CommonWidgets.getLableText(text: "Confirm Password"),
-                          SizedBox(
-                            height: 10,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.02),
+                          CommonWidgets.getSubHeadingText(
+                              text: "Confirm Password"),
+                          SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getTextField(
                               isPassword: true,
-                              leftIcon: 'password_icon.png',
-                              textEditingController: confirm_password,
+                              leftIcon: Entypo.lock,
+                              textEditingController: _confirm_password,
                               hintText: "Confirm Password"),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Table(
-                            columnWidths: {0: FlexColumnWidth(0.15)},
-                            children: [
-                              TableRow(children: [
-                                Container(
-                                  alignment: Alignment.topLeft,
-                                  child: Checkbox(
-                                    checkColor: AppColors.white,
-                                    activeColor: AppColors.yellow,
-                                    value: onCheck,
-                                    onChanged: (bool value) {
-                                      setState(() {
-                                        onCheck = value;
-                                      });
-                                    },
-                                  ),
-                                ),
-                                RichText(
-                                  text: TextSpan(
-                                      text:
-                                          'By creating an account you agree to our ',
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 12),
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                            text: 'Term and Conditions',
-                                            style: TextStyle(
-                                                color: Colors.amber,
-                                                fontSize: 12,
-                                                fontFamily:
-                                                    Assets.poppinsRegular),
-                                            recognizer: TapGestureRecognizer()
-                                              ..onTap = () {
-                                                // navigate to desired screen
-                                              })
-                                      ]),
-                                )
-                              ])
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.03),
+                          _getTermsAndCondition(),
+                          SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getBottomButton(
-                              text: "SIGNUP",
-                              onPress: () {
-                                Navigator.push(context, SlideRightRoute(page: Maps()));
-                                //_alertDialogueContainer();
-                              })
+                            text: "Sign up",
+                            onPress: () {
+                              // _signUpProvider.getIndividualSignUp(
+                              //     context, name: _name.text, email, password,
+                              //     confirmPassword);
+                              _signUpProvider.getIndividualSignUp(
+                                  context: context,
+                                  cell: widget.cell,
+                                  name: _name.text,
+                                  email: _email.text,
+                                  password: _password.text,
+                                  confirmPassword: _confirm_password.text,
+                                  onCheck: onCheck);
+                              // _alertDialogueContainer();
+                            },
+                          ),
+                          SizedBox(height: AppSizes.height * 0.02),
                         ],
                       ),
                     )
@@ -174,24 +146,6 @@ class _SignUPState extends State<SignUP> {
       ),
     );
   }
- _clickContainer(){
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: GestureDetector(
-        onTap: (){
-          Navigator.of(context).pop();
-        },
-        child: Container(
-          margin: EdgeInsets.only(top: AppSizes.height*0.06),
-          child: Text(
-            "Click and Continue",
-            style: TextStyle(
-                color: AppColors.yellow,fontSize: 12
-            ),),
-        ),
-      ),
-    );
- }
 
   _alertDialogueContainer() {
     return {
@@ -220,12 +174,12 @@ class _SignUPState extends State<SignUP> {
                       padding: EdgeInsets.only(
                         top: AppSizes.height * 0.08,
                       ),
-                      height: AppSizes.height * 0.23,
+                      height: AppSizes.height * 0.2,
                       width: AppSizes.width,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         border:
-                        Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
+                            Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
                         borderRadius: BorderRadius.circular(
                           10,
                         ),
@@ -235,52 +189,43 @@ class _SignUPState extends State<SignUP> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            "You Sign up successfully",
+                            "Sign up Successful",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              decoration: TextDecoration.none,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Text(
-                            "Done",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              decoration: TextDecoration.none,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                            ),
+                                decoration: TextDecoration.none,
+                                fontSize: 20,
+                                color: AppColors.colorBlack,
+                                fontFamily: Assets.poppinsMedium,
+                                fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             height: 20,
                           ),
                           GestureDetector(
                             onTap: () {
-                              hideLoader(context);
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  SlideRightRoute(
+                                      page: BottomTab(tag: widget.tag)),
+                                  (Route<dynamic> route) => false);
                             },
-                            child: Text(
-                              "Click & Continue",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                decoration: TextDecoration.none,
-                                fontSize: 16,
-                                color: AppColors.yellow,
-                                fontWeight: FontWeight.w300,
-                              ),
+                            child: TextView.getContinueText04(
+                              "Tap & Continue",
+                              color: AppColors.yellow,
                             ),
                           ),
                         ],
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: AppSizes.width * 0.45),
+                      margin: EdgeInsets.only(
+                        left: AppSizes.width * 0.425,
+                      ),
                       height: AppSizes.width * 0.15,
                       width: AppSizes.width * 0.15,
                       decoration: BoxDecoration(
                         color: AppColors.yellow,
                         border:
-                        Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
+                            Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
                         borderRadius: BorderRadius.circular(
                           10,
                         ),
@@ -301,7 +246,66 @@ class _SignUPState extends State<SignUP> {
     };
   }
 
-  hideLoader(BuildContext context) {
-    Navigator.of(context).pop();
+  _getTermsAndCondition() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Container(
+              margin: EdgeInsets.only(bottom: 25),
+              height: AppSizes.height * 0.04,
+              width: AppSizes.width * 0.07,
+              child: Checkbox(
+                checkColor: AppColors.white,
+                activeColor: AppColors.yellow,
+                value: onCheck,
+                onChanged: (bool value) {
+                  setState(() {
+                    onCheck = value;
+                  });
+                },
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Row(
+          children: [
+            Container(
+              height: AppSizes.height * 0.07,
+              width: AppSizes.width * 0.69,
+              padding: EdgeInsets.only(top: 2),
+              child: RichText(
+                text: TextSpan(
+                    text: 'By creating an account you agree to our ',
+                    style: TextStyle(
+                      wordSpacing: 0.5,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 13,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: 'Term and Conditions',
+                          style: TextStyle(
+                            color: Colors.amber,
+                            fontSize: 12,
+                            fontFamily: Assets.poppinsMedium,
+                            // fontWeight: FontWeight.bold
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              // navigate to desired screen
+                            })
+                    ]),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
   }
 }

@@ -76,6 +76,8 @@ class AppColors{
   static final addVehicleBorderColor= Color.fromRGBO(193, 191, 191, 1);
   static final alertContainer= Color.fromRGBO(244, 245, 247, 1);
   static final dragContainer= Color.fromRGBO(195, 205, 214, 1);
+  static final dateColor= Color.fromRGBO(151, 151, 151, 1);
+  static const shadowColor = Color.fromRGBO(0, 0, 0, 0.07);
 
 
   //Hex color code
@@ -97,4 +99,6 @@ class AppColors{
   static const transparentColor = Color.fromRGBO(255, 255, 255, 0);
   static const darkGreyBlueTextColor = Color.fromRGBO(38, 47, 86, 1);
   static const lightGreyBlueTextColor = Color.fromRGBO(124, 132, 148, 1);
+  static const emailLableColor = Color.fromRGBO(193, 199, 208, 1);
+  static const roundTripColor = Color.fromRGBO(29, 29, 29, 1);
 }

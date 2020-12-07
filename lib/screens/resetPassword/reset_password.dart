@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/entypo_icons.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
@@ -55,24 +56,24 @@ class _ResetPasswordState extends State<ResetPassword> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(height: AppSizes.height * 0.06,),
-                          CommonWidgets.getHeading1Text(text: 'Reset Password'),
+                          CommonWidgets.getHeadingText(text: 'Reset Password'),
                           SizedBox(height: AppSizes.height * 0.02,),
                           _resetPasswordComponents.getOTPLableText(text: "Please Enter your Password"),
                           SizedBox(height: AppSizes.height * 0.05,),
-                          CommonWidgets.getLableText(text: "Password"),
+                          CommonWidgets.getSubHeadingText(text: "Password"),
                           SizedBox(height: AppSizes.height * 0.01,),
                           CommonWidgets.getTextField(
                               isPassword: true,
-                              leftIcon: 'icon_phone_pn.png',
+                              leftIcon: Entypo.mobile,
                               textEditingController: password,
                               hintText: "Enter Password"
                           ),
                           SizedBox(height: AppSizes.height * 0.02,),
-                          CommonWidgets.getLableText(text: "Confirm Password"),
+                          CommonWidgets.getSubHeadingText(text: "Confirm Password"),
                           SizedBox(height: AppSizes.height * 0.01,),
                           CommonWidgets.getTextField(
                               isPassword: true,
-                              leftIcon: 'icon_phone_pn.png',
+                              leftIcon: Entypo.mobile,
                               textEditingController: confirm_Password,
                               hintText: "Confirm Password"
                           ),

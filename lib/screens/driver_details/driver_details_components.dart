@@ -28,9 +28,16 @@ class DriverDetailComponents {
   {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border.all(color: AppColors.borderColor),
-        borderRadius: BorderRadius.circular(10),
+          color: AppColors.white,
+          // border: Border.all(color: AppColors.borderColor),
+          borderRadius: BorderRadius.circular(5),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey[500].withOpacity(0.3),
+                spreadRadius: 1,
+                blurRadius: 1,
+                offset: Offset(0, 0))
+          ]
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -158,9 +165,16 @@ class DriverDetailComponents {
       padding: EdgeInsets.all(AppSizes.width * 0.02),
       width: AppSizes.width,
       decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border.all(color: AppColors.borderColor),
-        borderRadius: BorderRadius.circular(10),
+          color: AppColors.white,
+          // border: Border.all(color: AppColors.borderColor),
+          borderRadius: BorderRadius.circular(5),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey[500].withOpacity(0.3),
+                spreadRadius: 1,
+                blurRadius: 1,
+                offset: Offset(0, 0))
+          ]
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -173,10 +187,6 @@ class DriverDetailComponents {
                 // foregroundColor: AppColors.white,
                 backgroundColor: AppColors.yellow,
               ),
-              // Image(image: AssetImage('$leftIcon'),
-              //   width: 50,
-              //   height: 50,
-              // ) ,
               SizedBox(width: AppSizes.width * 0.03,),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -194,7 +204,7 @@ class DriverDetailComponents {
                     style: TextStyle(
                       fontSize:10,
                       fontFamily: Assets.poppinsLight,
-                      color: AppColors.colorBlack,
+                      color: AppColors.profileTextColor,
                       // fontWeight: FontWeight.bold
                     ),
                   ),
@@ -212,7 +222,7 @@ class DriverDetailComponents {
                   style: TextStyle(
                     fontSize:10,
                     fontFamily: Assets.poppinsLight,
-                    color: AppColors.colorBlack,
+                    color: AppColors.profileTextColor,
                     // fontWeight: FontWeight.bold
                   ),
                 ),
@@ -227,7 +237,7 @@ class DriverDetailComponents {
                       style: TextStyle(
                         fontSize:10,
                         fontFamily: Assets.poppinsLight,
-                        color: AppColors.colorBlack,
+                        color: AppColors.profileTextColor,
                         // fontWeight: FontWeight.bold
                       ),
                     )

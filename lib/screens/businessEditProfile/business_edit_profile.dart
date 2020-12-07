@@ -3,6 +3,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/entypo_icons.dart';
+import 'package:fluttericon/linecons_icons.dart';
+import 'package:fluttericon/web_symbols_icons.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
@@ -40,17 +43,16 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
             children: [
               CommonWidgets.tabsAppBar1(
                   text: 'Edit Profile',
-                  iconName: Assets.crossIcon,
+                  iconName: Icons.close,
                   onPress: (){
                     Navigator.pop(context);
                   }
               ),
-              Divider(height: 10,),
               Expanded(
                 child: ListView(
                   children: [
                     Container(
-                      padding: EdgeInsets.all(AppSizes.width * 0.05),
+                      padding: EdgeInsets.only(left: AppSizes.width * 0.08, right: AppSizes.width*0.08, top: AppSizes.width*0.08),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -61,100 +63,128 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                               onPress: (){}
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
-                          CommonWidgets.getLableText(
+                          CommonWidgets.getSubHeadingText(
                               text: 'Full Name'
                           ),
                           SizedBox(height: AppSizes.height * 0.01,),
                           CommonWidgets.getTextField(
                               isPassword: false,
-                              leftIcon: 'name_icon.png',
+                              leftIcon: Entypo.user,
                               textEditingController: name,
                               hintText: 'Matthew'
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
-                          CommonWidgets.getLableText(
+                          CommonWidgets.getSubHeadingText(
                               text: 'Email'
                           ),
                           SizedBox(height: AppSizes.height * 0.01,),
                           CommonWidgets.getTextField(
                               isPassword: false,
-                              leftIcon: 'email_icon.png',
+                              leftIcon: Icons.mail,
                               textEditingController: email,
                               hintText: 'MatthewLawson@mail.com'
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
-                          CommonWidgets.getLableText(
+                          CommonWidgets.getSubHeadingText(
                               text: 'Business Name'
                           ),
                           SizedBox(height: AppSizes.height * 0.01,),
                           CommonWidgets.getTextField(
                               isPassword: false,
-                              leftIcon: 'name_icon.png',
+                              leftIcon: Entypo.user,
                               textEditingController: business_name,
                               hintText: 'Augue vestibulum'
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
-                          CommonWidgets.getLableText(
+                          CommonWidgets.getSubHeadingText(
                               text: 'Contact Number'
                           ),
                           SizedBox(height: AppSizes.height * 0.01,),
                           CommonWidgets.getTextField(
                               isPassword: false,
-                              leftIcon: 'icon_phone_pn.png',
+                              leftIcon: Entypo.mobile,
                               textEditingController: phone_number,
                               hintText: '(430)214-7475'
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
-                          CommonWidgets.getLableText(
+                          CommonWidgets.getSubHeadingText(
                               text: 'TRN'
                           ),
                           SizedBox(height: AppSizes.height * 0.01,),
                           CommonWidgets.getTextField(
                               isPassword: false,
-                              leftIcon: 'icon_phone_pn.png',
+                              leftIcon: Entypo.mobile,
                               textEditingController: trn,
                               hintText: '430(845785)'
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
-                          CommonWidgets.getLableText(
+                          CommonWidgets.getSubHeadingText(
                               text: 'Country'
                           ),
                           SizedBox(height: AppSizes.height * 0.01,),
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 10),
-                            height: AppSizes.height * 0.06,
+                            height: AppSizes.height * 0.07,
                             width: AppSizes.width,
                             decoration: BoxDecoration(
                               color: AppColors.lightGray,
                               border: Border.all(color: AppColors.lightGray),
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(5),
                             ),
                             child: Row(
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(right: 10),
-                                  child: Image(image: AssetImage('assets/png/location_icon.png')),
+                                  child:Icon(Linecons.location, size: 20,)
                                 ) ,
                                 Expanded(
                                   child: DropdownButtonHideUnderline(
                                     child: DropdownButton(
-
+                                        icon: Icon(Icons.keyboard_arrow_down),
                                         value: _value,
                                         items: [
                                           DropdownMenuItem(
-                                            child: Text("Netherlands"),
+                                            child: Text("Netherlands",
+                                              style: TextStyle(
+                                                  decoration: TextDecoration.none,
+                                                  fontFamily: Assets.poppinsLight,
+                                                  fontSize: 12,
+                                                  color: AppColors.colorBlack
+                                              ),
+                                            ),
                                             value: 1,
                                           ),
                                           DropdownMenuItem(
-                                            child: Text("New Zealand"),
+                                            child: Text("New Zealand",
+                                              style: TextStyle(
+                                                  decoration: TextDecoration.none,
+                                                  fontFamily: Assets.poppinsLight,
+                                                  fontSize: 12,
+                                                  color: AppColors.colorBlack
+                                              ),
+                                            ),
                                             value: 2,
                                           ),
                                           DropdownMenuItem(
-                                              child: Text("Nepal"),
+                                              child: Text("Nepal",
+                                                style: TextStyle(
+                                                    decoration: TextDecoration.none,
+                                                    fontFamily: Assets.poppinsLight,
+                                                    fontSize: 12,
+                                                    color: AppColors.colorBlack
+                                                ),
+                                              ),
                                               value: 3
                                           ),
                                           DropdownMenuItem(
-                                              child: Text("Malaysia"),
+                                              child: Text("Malaysia",
+                                                style: TextStyle(
+                                                    decoration: TextDecoration.none,
+                                                    fontFamily: Assets.poppinsLight,
+                                                    fontSize: 12,
+                                                    color: AppColors.colorBlack
+                                                ),
+                                              ),
                                               value: 4
                                           )
                                         ],
@@ -178,11 +208,12 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
                           CommonWidgets.getBottomButton(
-                              text: "Submit",
+                              text: "Update",
                               onPress: () {
                                 // Navigator.push(context, SlideRightRoute(page: OTPAuthentication()));
                               }
                           ),
+                          SizedBox(height: AppSizes.height * 0.02),
                         ],
                       ),
                     )

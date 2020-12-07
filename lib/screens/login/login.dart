@@ -1,15 +1,22 @@
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/entypo_icons.dart';
+import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
+import 'package:truckoom_shipper/commons/get_token.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
+import 'package:truckoom_shipper/screens/checkUserType/check_user.dart';
 import 'package:truckoom_shipper/screens/forgotPassword/forgot_password.dart';
 import 'package:truckoom_shipper/screens/login/login_components.dart';
-import 'package:truckoom_shipper/screens/phoneNumber/phone_number.dart';
+import 'package:truckoom_shipper/screens/login/login_provider.dart';
+import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
+
+import '../../res/sizes.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -18,17 +25,35 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   LoginComponents _loginComponents;
+  LoginProvider _loginProvider;
   TextEditingController email, password;
 
   @override
   void initState() {
     _loginComponents = LoginComponents();
+    _loginProvider = Provider.of<LoginProvider>(context, listen: false);
+    _loginProvider.init(context);
     email = TextEditingController();
     password = TextEditingController();
+    // email.addListener(() {
+    //   if (email.text.length > 0) {
+    //     setState(() {
+    //       filled = true;
+    //     });
+    //   }
+    // });
+    // phone_number.addListener(() {
+    //   if (phone_number.text.length > 0) {
+    //     setState(() {
+    //       filled = true;
+    //     });
+    //   }
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<LoginProvider>(context, listen: true);
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -36,7 +61,10 @@ class _LoginState extends State<Login> {
           height: AppSizes.height,
           width: AppSizes.width,
           color: AppColors.white,
-          padding: EdgeInsets.all(AppSizes.width * 0.05),
+          padding: EdgeInsets.only(
+              left: AppSizes.width * 0.08,
+              right: AppSizes.width * 0.08,
+              top: AppSizes.width * 0.08),
           child: Stack(
             children: [
               Column(
@@ -47,7 +75,10 @@ class _LoginState extends State<Login> {
                       iconName: 'back_arrow_otp.png',
                       text: "Forgot ",
                       clickableText: "Password",
-                      onTap: (){Navigator.push(context, SlideRightRoute(page: ForgotPassowrd()));},
+                      onTap: () {
+                        Navigator.push(
+                            context, SlideRightRoute(page: ForgotPassowrd()));
+                      },
                       onPress: () {
                         Navigator.pop(context);
                       }),
@@ -59,32 +90,58 @@ class _LoginState extends State<Login> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              SizedBox(height: AppSizes.height * 0.06,),
-                              CommonWidgets.getHeading1Text(text: 'Login Now'),
-                              SizedBox(height: AppSizes.height * 0.04,),
-                              CommonWidgets.getLableText(text: "Email/Phone Number"),
-                              SizedBox(height: AppSizes.height * 0.01,),
+                              SizedBox(
+                                height: AppSizes.height * 0.06,
+                              ),
+                              CommonWidgets.getHeadingText(text: 'Login Now'),
+                              SizedBox(
+                                height: AppSizes.height * 0.04,
+                              ),
+                              CommonWidgets.getSubHeadingText(
+                                  text: "Email/Phone Number"),
+                              SizedBox(
+                                height: AppSizes.height * 0.01,
+                              ),
                               CommonWidgets.getTextField(
                                   isPassword: false,
-                                  leftIcon: 'name_icon.png',
+                                  leftIcon: Entypo.user,
                                   textEditingController: email,
-                                  hintText: "Enter Email"
+                                  hintText: "Email/Phone Number"),
+                              SizedBox(
+                                height: AppSizes.height * 0.02,
                               ),
-                              SizedBox(height: AppSizes.height * 0.03,),
-                              CommonWidgets.getLableText(text: "Password"),
-                              SizedBox(height: AppSizes.height * 0.01,),
+                              CommonWidgets.getSubHeadingText(text: "Password"),
+                              SizedBox(
+                                height: AppSizes.height * 0.01,
+                              ),
                               CommonWidgets.getTextField(
                                   isPassword: true,
-                                  leftIcon: 'password_icon.png',
+                                  leftIcon: Entypo.lock,
                                   textEditingController: password,
-                                  hintText: "Enter Password"
+                                  hintText: "Enter Password"),
+                              SizedBox(
+                                height: AppSizes.height * 0.08,
                               ),
-                              SizedBox(height: AppSizes.height * 0.04,),
                               CommonWidgets.getBottomButton(
                                   text: "Login",
                                   onPress: () {
-                                    Navigator.push(context, SlideRightRoute(page: BottomTab()));
-                                  }
+                                    _loginProvider.getLogin(
+                                        context: context,
+                                        email: email.text,
+                                        password: password.text);
+                                  }),
+                              Container(
+                                margin: EdgeInsets.only(
+                                  top: AppSizes.height * 0.25,
+                                ),
+                                alignment: Alignment.center,
+                                child: _loginComponents.getBottomRichText(
+                                    text: "Don't have an account? ",
+                                    clickableText: 'SIGN UP',
+                                    onTap: () {
+                                      Navigator.push(context,
+                                          SlideRightRoute(page: CheckUser()));
+                                    }),
                               ),
                             ],
                           ),
@@ -94,23 +151,11 @@ class _LoginState extends State<Login> {
                   )
                 ],
               ),
-              Positioned(
-                bottom: 0,
-                child: Container(
-                  margin: EdgeInsets.only(left: MediaQuery.of(context).size.width/4, bottom: MediaQuery.of(context).size.height*0.02,),
-                  child: _loginComponents.getBottomRichText(
-                      text: "Don't have an account? ",
-                      clickableText: 'SIGN UP',
-                      onTap: () {
-                        Navigator.push(context, SlideRightRoute(page: PhoneNumber()));
-                      }
-                  ),
-                )
-              ),
             ],
           ),
         ),
       ),
     );
   }
+
 }

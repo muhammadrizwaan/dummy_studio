@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/entypo_icons.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
@@ -39,7 +40,7 @@ class _IndividualEditProfileState extends State<IndividualEditProfile> {
             children: [
               CommonWidgets.tabsAppBar1(
                   text: 'Edit Profile',
-                  iconName: Assets.crossIcon,
+                  iconName: Icons.close,
                   onPress: (){
                     Navigator.pop(context);
                   }
@@ -49,7 +50,7 @@ class _IndividualEditProfileState extends State<IndividualEditProfile> {
                 child: ListView(
                   children: [
                     Container(
-                      padding: EdgeInsets.all(AppSizes.width * 0.05),
+                      padding: EdgeInsets.only(left: AppSizes.width * 0.08, right: AppSizes.width*0.08, top: AppSizes.width*0.08),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -62,51 +63,52 @@ class _IndividualEditProfileState extends State<IndividualEditProfile> {
                             )
                           ),
                           SizedBox(height: AppSizes.height * 0.05,),
-                          CommonWidgets.getLableText(text: "Full Name"),
+                          CommonWidgets.getSubHeadingText(text: "Full Name"),
                           SizedBox(height: 10,),
                           CommonWidgets.getTextField(
                               isPassword: false,
-                              leftIcon: 'name_icon.png',
+                              leftIcon: Entypo.user,
                               textEditingController: name,
                               hintText: "Enter Name"
                           ),
 
                           SizedBox(height: 30,),
-                          CommonWidgets.getLableText(text: "Email"),
+                          CommonWidgets.getSubHeadingText(text: "Email"),
                           SizedBox(height: 10,),
                           CommonWidgets.getTextField(
                               isPassword: false,
-                              leftIcon: 'email_icon.png',
+                              leftIcon: Icons.mail,
                               textEditingController: email,
                               hintText: "Enter Email"
                           ),
 
                           SizedBox(height: 30,),
-                          CommonWidgets.getLableText(text: "Password"),
+                          CommonWidgets.getSubHeadingText(text: "Password"),
                           SizedBox(height: 10,),
                           CommonWidgets.getTextField(
                               isPassword: true,
-                              leftIcon: 'password_icon.png',
+                              leftIcon: Entypo.lock,
                               textEditingController: password,
                               hintText: "Enter Password"
                           ),
 
                           SizedBox(height: 30,),
-                          CommonWidgets.getLableText(text: "Confirm Password"),
+                          CommonWidgets.getSubHeadingText(text: "Confirm Password"),
                           SizedBox(height: 10,),
                           CommonWidgets.getTextField(
                               isPassword: true,
-                              leftIcon: 'password_icon.png',
+                              leftIcon: Entypo.lock,
                               textEditingController: confirm_password,
                               hintText: "Confirm Password"
                           ),
                           SizedBox(height: 30,),
                           CommonWidgets.getBottomButton(
-                              text: "Submit",
+                              text: "Update",
                               onPress: () {
                                 // Navigator.push(context, SlideRightRoute(page: OTPAuthentication()));
                               }
                           ),
+                          SizedBox(height: AppSizes.height * 0.02),
                         ],
                       ),
                     )

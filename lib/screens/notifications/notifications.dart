@@ -2,9 +2,11 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/notifications/notifications_components.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
@@ -31,28 +33,17 @@ class _NotificationsState extends State<Notifications> {
           height: AppSizes.height,
           width: AppSizes.width,
           color: AppColors.white,
-          // padding: EdgeInsets.all(AppSizes.width * 0.05),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CommonWidgets.tabsAppBar2(
-                      text: 'Notifications',
-                      iconName: Assets.backArrow,
-                      onPress: (){
-                        Navigator.pop(context);
-                      }
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 30),
-                    child: Image(image: AssetImage(Assets.bellIconPressed),),
-                  )
-                ],
+              _notificationsComponents.NotificationAppBar(
+                  heading: Strings.notification,
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                  onBellTap: (){}
               ),
-              Divider(height: 10,),
               Expanded(
                 child: ListView(
                   children: [
@@ -137,4 +128,5 @@ class _NotificationsState extends State<Notifications> {
       ),
     );
   }
+
 }

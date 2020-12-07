@@ -35,8 +35,16 @@ class InvoiceDetailComponents{
       margin: EdgeInsets.only(top: 20),
       padding: EdgeInsets.all(AppSizes.width * 0.05),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: AppColors.borderColor)
+          color: AppColors.white,
+          // border: Border.all(color: AppColors.borderColor),
+          borderRadius: BorderRadius.circular(5),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey[500].withOpacity(0.3),
+                spreadRadius: 1,
+                blurRadius: 1,
+                offset: Offset(0, 0))
+          ]
       ),
       child: Column(
         children: [
@@ -66,11 +74,11 @@ class InvoiceDetailComponents{
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('To - Anguilla',
+                          Text('From - Anguilla',
                             style: TextStyle(
                                 fontFamily: Assets.poppinsRegular,
                                 fontSize: 12,
-                                color: AppColors.colorBlack,
+                                color: AppColors.colorBlack.withOpacity(0.4),
                                 // fontWeight: FontWeight.bold
                             ),
                           ),
@@ -95,11 +103,11 @@ class InvoiceDetailComponents{
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('From - Australia',
+                          Text('To - Australia',
                             style: TextStyle(
                               fontFamily: Assets.poppinsRegular,
                               fontSize: 12,
-                              color: AppColors.colorBlack,
+                              color: AppColors.colorBlack.withOpacity(0.4),
                               // fontWeight: FontWeight.bold
                             ),
                           ),
@@ -123,21 +131,33 @@ class InvoiceDetailComponents{
           Divider(height: 10,),
           SizedBox(height: AppSizes.height * 0.02),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('ID: 5431443675434214',
-                style: TextStyle(
+              Row(
+                children: [
+                  Text('ID:',
+                    style: TextStyle(
+                      fontFamily: Assets.poppinsRegular,
+                      fontSize: 13,
+                      color: AppColors.colorBlack,
+                      // fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  SizedBox(
+                    width: 04,
+                  ),
+                  Text("5431443675434214", style: TextStyle(
                     fontFamily: Assets.poppinsRegular,
-                    fontSize: 10,
-                    color: AppColors.colorBlack,
+                    fontSize: 13,
+                    color: AppColors.colorBlack.withOpacity(0.4,),
                     // fontWeight: FontWeight.bold
-                ),
+                  ),),
+                ],
               ),
               Text('Today: 5:15 pm',
                 style: TextStyle(
                   fontFamily: Assets.poppinsRegular,
-                  fontSize: 10,
-                  color: AppColors.colorBlack,
+                  fontSize: 12,
+                  color: AppColors.colorBlack.withOpacity(0.4),
                   // fontWeight: FontWeight.bold
                 ),
               ),
@@ -200,7 +220,7 @@ class InvoiceDetailComponents{
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('TOTAL PRICE:',
+              Text('Total Price:',
                 style: TextStyle(
                   fontFamily: Assets.poppinsLight,
                   fontSize: 12,

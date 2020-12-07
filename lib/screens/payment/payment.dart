@@ -1,14 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/screens/bank/bank_screen.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
+import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class Payment extends StatefulWidget {
+  String tag;
+  Payment({@required this.tag});
+
   @override
   _PaymentState createState() => _PaymentState();
 }
@@ -18,89 +24,173 @@ class _PaymentState extends State<Payment> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         body: Container(
             height: AppSizes.height,
             width: AppSizes.width,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Stack(
               children: [
-                CommonWidgets.tabsAppBar2(
-                    text: "Payment Method",
-                    iconName: Assets.backArrow,
-                    onPress: () {
-                      Navigator.pop(context);
-                    }),
-                Expanded(
-                  child: ListView(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(AppSizes.width * 0.05),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 30,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CommonWidgets.tabsAppBar2(
+                        text: "Payment Method",
+                        onPress: () {
+                          Navigator.pop(context);
+                        },
+                    ),
+                    CommonWidgets.getWalletPriceBox(
+                        walletPrice: "258,000.00"
+                    ),
+                    Expanded(
+                      child: ListView(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(AppSizes.width * 0.05),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                SizedBox(height: AppSizes.height * 0.02),
+                                CommonWidgets.getPayField(
+                                    isPassword: false,
+                                    leftIcon: Assets.radioActiveIcon,
+                                    // textEditingController: email,
+                                    hintText: "Credit Card"),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                CommonWidgets.getPayField(
+                                    isPassword: false,
+                                    leftIcon: Assets.radioUnactiveIcon,
+                                    // textEditingController: email,
+                                    hintText: "Credit"),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                CommonWidgets.getPayField(
+                                    isPassword: false,
+                                    leftIcon: Assets.radioUnactiveIcon,
+                                    // textEditingController: email,
+                                    hintText: "Bank Transfer"),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                CommonWidgets.getPayField(
+                                    isPassword: false,
+                                    leftIcon: Assets.radioUnactiveIcon,
+                                    // textEditingController: email,
+                                    hintText: "Cash"),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                Container(
+                                  height: AppSizes.height*0.20,
+                                  width: AppSizes.width,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.lightGray,
+                                    border: Border.all(color: AppColors.lightGray),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: AppSizes.height*0.06,
+                                        width: AppSizes.width,
+                                        padding: EdgeInsets.only(top: AppSizes.width*0.05, left: AppSizes.width*0.03,),
+                                        child: TextView.getLabelHeadingText04("Load Summary", color: AppColors.black),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.only(left: AppSizes.width*0.03, right: AppSizes.width*0.03),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            TextView.getLabelText04("Amount", color: AppColors.black.withOpacity(0.6)),
+                                            TextView.getLabelText04("AED 500", color: AppColors.black.withOpacity(0.6)),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.only(left: AppSizes.width*0.03, right: AppSizes.width*0.03, top: AppSizes.width*0.02),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            TextView.getLabelText04("Discount", color: AppColors.black.withOpacity(0.6),),
+                                            TextView.getLabelText04("AED 250", color: AppColors.black.withOpacity(0.6)),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.only(left: AppSizes.width*0.03, right: AppSizes.width*0.03, top: AppSizes.width*0.02),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            TextView.getLabelHeadingText04("Total Amount", color: AppColors.black),
+                                            TextView.getLabelHeadingText04("AED 250", color: AppColors.black),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(left: AppSizes.width*0.03, right: AppSizes.width*0.03, top: AppSizes.width*0.03,),
+                                  child: RichText(
+                                    text: TextSpan(
+                                        text: 'Note:  ',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontFamily: Assets.poppinsRegular,
+                                          color: AppColors.yellow,
+                                        ),
+                                        children: <TextSpan>[
+                                          TextSpan(text: 'Payment is due in advance for approved jobs unless agreed upon otherwise',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily: Assets.poppinsRegular,
+                                                color: AppColors.colorBlack.withOpacity(0.4),
+                                              ),
+                                              recognizer: TapGestureRecognizer()
+                                                ..onTap = () {
+                                                  // open desired screen
+                                                }
+                                          ),
+                                        ]
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 50,
+                                ),
+                              ],
                             ),
-                            CommonWidgets.getLableText(text: "Payment Method"),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            CommonWidgets.getPayField(
-                                isPassword: false,
-                                leftIcon: 'name_icon.png',
-                                // textEditingController: email,
-                                hintText: "Mathew due"),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            CommonWidgets.getLableText(text: "Card Number"),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            CommonWidgets.getPayField(
-                                isPassword: false,
-                                leftIcon: 'icon_card_number.png',
-                                // textEditingController: email,
-                                hintText: "0123-0123-0123"),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            CommonWidgets.getLableText(text: "CVC Code"),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            CommonWidgets.getPayField(
-                                isPassword: false,
-                                leftIcon: 'icon_card_number.png',
-                                // textEditingController: email,
-                                hintText: "012"),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            CommonWidgets.getLableText(text: "Expiry Date"),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            CommonWidgets.getPayField(
-                                isPassword: false,
-                                leftIcon: 'icon_card_number.png',
-                                // textEditingController: email,
-                                hintText: "01/2020"),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            CommonWidgets.getBottomButton(
-                                text: "SIGNUP",
-                                onPress: () {
-                                  _alertDialogueContainer();
-                                })
-                          ],
-                        ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                Positioned(
+                    bottom: 0,
+                    child: Container(
+                      // margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
+                      child: CommonWidgets.applyCouponContainer(
+                          text: 'Submit',
+                          onPress: (){
+                            Navigator.push(context, SlideRightRoute(page: Bank()));
+                          },
+                          onCouponPress: (){
+                            _alertDialogueContainer();
+                          }
                       )
-                    ],
-                  ),
-                )
+                    )
+                ),
               ],
             )),
       ),
@@ -157,9 +247,15 @@ class _PaymentState extends State<Payment> {
                             decoration: BoxDecoration(
                               color: AppColors.lightGray,
                               border: Border.all(color: AppColors.lightGray),
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(5),
                             ),
                             child: TextField(
+                              style: TextStyle(
+                                  decoration: TextDecoration.none,
+                                  fontFamily: Assets.poppinsLight,
+                                  fontSize: 12,
+                                  color: AppColors.colorBlack
+                              ),
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: "Enter Promo Code",
@@ -182,7 +278,7 @@ class _PaymentState extends State<Payment> {
                               width: AppSizes.width,
                               height: AppSizes.height * 0.06,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(5),
                                 border: Border.all(
                                   color: AppColors.yellow,
                                 ),
@@ -193,7 +289,6 @@ class _PaymentState extends State<Payment> {
                                   "Apply",
                                   style: TextStyle(
                                     decoration: TextDecoration.none,
-                                    fontSize: 15,
                                     color: AppColors.white,
                                     fontFamily: Assets.poppinsLight,
                                   ),
@@ -217,7 +312,7 @@ class _PaymentState extends State<Payment> {
                         ),
                       ),
                       child: Icon(
-                        FontAwesomeIcons.ticketAlt,
+                        FontAwesome5.hammer,
                         color: Colors.white,
                         size: 30,
                       ),
