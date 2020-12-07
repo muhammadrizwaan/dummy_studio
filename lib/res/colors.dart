@@ -29,6 +29,7 @@ class AppColors{
   static const malachite =Color.fromRGBO(21, 211, 116, 1);
   static const mischka =Color.fromRGBO(172, 175, 184, 1);
   static const lightBlueWhite =Color.fromRGBO(236,239,241, 1);
+  static final dragContainerslider= Color.fromRGBO(242, 242, 242, 1);
 
   static final primaryColor = Color.fromRGBO(48, 191, 191, 1);
   static const secondaryColor = Color.fromRGBO(236, 242, 251, 1);
@@ -60,10 +61,28 @@ class AppColors{
   static final colorGreyShade= Color.fromRGBO(207,216,220,1);
   static final colorRedLightShade= Color.fromRGBO(255,205,210,1);
   static final colorTealWhiteShade= Color.fromRGBO(224,242,241,1);
+  static final colorDelete= Color.fromRGBO(226,15,58,1);
+
+  // App colors
+  static final colorBlack= Color.fromRGBO(28, 40, 38, 1);
+  static final lightGray= Color.fromRGBO(244, 245, 247, 1);
+  static final yellow= Color.fromRGBO(255, 182, 39, 1);
+  static final grey= Color.fromRGBO(194, 194, 194, 1);
+  static final borderColor= Color.fromRGBO(0, 0, 0, 0.16);
+  static final locationText= Color.fromRGBO(112, 112, 112, 1);
+  static final status= Color.fromRGBO(0, 0, 0, 1);
+  static final redColor= Color.fromRGBO(212, 14, 14, 1);
+  static final emailTextColor= Color.fromRGBO(81, 92, 111, 1);
+  static final profileTextColor= Color.fromRGBO(141, 147, 146, 1);
+  static final lightGrayBackgroundColor= Color.fromRGBO(212, 212, 212, 1);
+  static final addVehicleBorderColor= Color.fromRGBO(193, 191, 191, 1);
+  static final alertContainer= Color.fromRGBO(244, 245, 247, 1);
+  static final dragContainer= Color.fromRGBO(195, 205, 214, 1);
+  static final dateColor= Color.fromRGBO(151, 151, 151, 1);
+  static const shadowColor = Color.fromRGBO(0, 0, 0, 0.07);
 
 
   //Hex color code
-
   static final blueLight = "#2196F3";
   static final purpleLight = "#3F51B5";
   static final colorRedLight = "#d32f2f";
@@ -82,4 +101,6 @@ class AppColors{
   static const transparentColor = Color.fromRGBO(255, 255, 255, 0);
   static const darkGreyBlueTextColor = Color.fromRGBO(38, 47, 86, 1);
   static const lightGreyBlueTextColor = Color.fromRGBO(124, 132, 148, 1);
+  static const emailLableColor = Color.fromRGBO(193, 199, 208, 1);
+  static const roundTripColor = Color.fromRGBO(29, 29, 29, 1);
 }
