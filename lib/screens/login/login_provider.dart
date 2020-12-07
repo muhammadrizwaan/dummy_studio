@@ -86,6 +86,7 @@ class LoginProvider extends ChangeNotifier {
             await PreferenceUtils.setString(Strings.refreshToken, commonResponse.result.token.refreshToken);
             await PreferenceUtils.setString(Strings.email, commonResponse.result.user.email);
             await PreferenceUtils.setString(Strings.password, commonResponse.result.user.password);
+            await PreferenceUtils.setInt(Strings.userId, commonResponse.result.user.userId);
             ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
             currentTime = await (((ms / 1000) / 60).round()).toDouble();
             await PreferenceUtils.setDouble(Strings.tokenTime, currentTime);

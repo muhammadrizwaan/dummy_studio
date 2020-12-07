@@ -3,6 +3,7 @@ import 'package:truckoom_shipper/screens/Splash/splash_provider.dart';
 import 'package:truckoom_shipper/screens/addLoad/add_load_provider.dart';
 import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_detail_provider.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab_provider.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/placed/placed_provider.dart';
 import 'package:truckoom_shipper/screens/businessEditProfile/business_edit_profile_provider.dart';
 import 'package:truckoom_shipper/screens/businessInformation/business_information_provider.dart';
 import 'package:truckoom_shipper/screens/businessProfile/business_profile_provider.dart';
@@ -148,6 +149,10 @@ final multiProviders = [
   ),
   ChangeNotifierProvider<BusinessInformationProvider>(
     create: (_) => BusinessInformationProvider(),
+    lazy: true,
+  ),
+  ChangeNotifierProvider<PlacedProvider>(
+    create: (_) => PlacedProvider(),
     lazy: true,
   ),
 ];
