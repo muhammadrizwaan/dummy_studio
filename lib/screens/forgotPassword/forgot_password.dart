@@ -1,11 +1,11 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/forgotPassword/forgot_password_components.dart';
+import 'package:truckoom_shipper/screens/forgotPassword/forgot_password_provider.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
 import 'package:truckoom_shipper/screens/resetPassword/reset_password.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
@@ -18,14 +18,19 @@ class ForgotPassowrd extends StatefulWidget {
 class _ForgotPassowrdState extends State<ForgotPassowrd> {
   ForgotPasswordComponent _forgotPasswordComponent;
   TextEditingController email;
+  ForgotPasswordProvider _forgotPasswordProvider;
 
   @override
   void initState() {
     _forgotPasswordComponent = ForgotPasswordComponent();
     email = TextEditingController();
+    _forgotPasswordProvider =
+        Provider.of<ForgotPasswordProvider>(context, listen: false);
   }
+
   @override
   Widget build(BuildContext context) {
+    Provider.of<ForgotPasswordProvider>(context, listen: true);
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -73,14 +78,16 @@ class _ForgotPassowrdState extends State<ForgotPassowrd> {
                               textEditingController: email,
                               hintText: "jerry.ellis@mail.com"
                           ),
-                          SizedBox(height: AppSizes.height * 0.06,),
                           CommonWidgets.getBottomButton(
                               text: "Submit",
                               onPress: () {
-                                Navigator.push(context, SlideRightRoute(page: Login()));
-                              }
-                          ),
-                          SizedBox(height: AppSizes.height * 0.01,)
+                                _forgotPasswordProvider.getForgotPassword(
+                                    context: context, email: email.text);
+                                // Navigator.push(context, SlideRightRoute(page: Login()));
+                              }),
+                          SizedBox(
+                            height: AppSizes.height * 0.01,
+                          )
                         ],
                       ),
                     )

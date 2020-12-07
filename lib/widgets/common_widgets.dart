@@ -591,6 +591,7 @@ class CommonWidgets {
           ),
         ]));
   }
+
   static Widget ProfileAppBar(
       { @required String heading,
         @required Function onTap,
@@ -626,9 +627,11 @@ class CommonWidgets {
             ],
           ),
           GestureDetector(
-              onTap: ()=> onBellTap(),
-              child: Icon(FontAwesome5.edit, size: 20,)
-          )
+              onTap: () => onBellTap(),
+              child: Icon(
+                FontAwesome5.edit,
+                size: 20,
+              ))
         ],
       ),
     );

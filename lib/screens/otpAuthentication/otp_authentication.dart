@@ -1,25 +1,26 @@
-
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/entypo_icons.dart';
+import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/businessSignup/business_signup.dart';
+import 'package:truckoom_shipper/screens/otpAuthentication/otp_authentication_provider.dart';
 import 'package:truckoom_shipper/screens/signup/sign_up.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 import 'otp_authentication_components.dart';
 
 class OTPAuthentication extends StatefulWidget {
-  String tag;
+  String tag, otp, cell;
 
-  OTPAuthentication({@required this.tag});
+  OTPAuthentication(
+      {@required this.tag, @required this.otp, @required this.cell});
+
   @override
   _OTPAuthenticationState createState() => _OTPAuthenticationState();
 }
@@ -27,18 +28,21 @@ class OTPAuthentication extends StatefulWidget {
 class _OTPAuthenticationState extends State<OTPAuthentication> {
   OTPAuthenticationComponents _otpAuthenticationComponents;
   TextEditingController otp_code;
+  OTPAthenticationProvider _otpAthenticationProvider;
   bool onCheck = false;
 
   @override
   void initState() {
     _otpAuthenticationComponents = OTPAuthenticationComponents();
+    _otpAthenticationProvider =
+        Provider.of<OTPAthenticationProvider>(context, listen: false);
     otp_code = TextEditingController();
   }
 
   @override
   Widget build(BuildContext context) {
     AppSizes.initializeSize(context);
-
+    Provider.of<OTPAthenticationProvider>(context, listen: true);
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -59,7 +63,7 @@ class _OTPAuthenticationState extends State<OTPAuthentication> {
                   iconName: 'back_arrow_otp.png',
                   text: "",
                   clickableText: "",
-                  onTap: (){},
+                  onTap: () {},
                   onPress: () {
                     Navigator.pop(context);
                   }),
@@ -94,14 +98,14 @@ class _OTPAuthenticationState extends State<OTPAuthentication> {
                           CommonWidgets.getBottomButton(
                               text: "Submit",
                               onPress: () {
-                                if(widget.tag == Strings.indiviual){
-                                  Navigator.push(context, SlideRightRoute(page: SignUP(tag: widget.tag,)));
-                                }
-                                else if(widget.tag == Strings.business){
-                                  Navigator.push(context, SlideRightRoute(page: BusinessSignup(tag: widget.tag,)));
-                                }
-                              }
-                          ),
+                                _otpAthenticationProvider.getOTP(
+                                    context: context,
+                                    tag: widget.tag,
+                                    otp: widget.otp,
+                                    cell: widget.cell,
+                                    otp_code: otp_code.text
+                                );
+                              }),
                         ],
                       ),
                     )

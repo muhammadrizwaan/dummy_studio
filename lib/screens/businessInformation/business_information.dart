@@ -8,17 +8,19 @@ import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/businessInformation/business_information_components.dart';
+import 'package:truckoom_shipper/screens/businessInformation/business_information_provider.dart';
 import 'package:truckoom_shipper/screens/businessProfile/business_profile.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
-
+import 'package:provider/provider.dart';
 import '../../animations/slide_right.dart';
 import '../bottomTab/bottom_tab.dart';
 
 class BusinessInformation extends StatefulWidget {
   String tag;
+  int userId;
 
-  BusinessInformation({@required this.tag});
+  BusinessInformation({@required this.tag, @required this.userId});
 
   @override
   _BusinessInformationState createState() => _BusinessInformationState();
@@ -26,22 +28,28 @@ class BusinessInformation extends StatefulWidget {
 
 class _BusinessInformationState extends State<BusinessInformation> {
   BusinessInformationComponents _businessInformationComponents;
+  BusinessInformationProvider _businessInformationProvider;
   TextEditingController business_name, contact_number, trn, license_date;
 
   bool onCheck = false;
+  DateTime pickedDate;
 
   @override
   void initState() {
     super.initState();
     _businessInformationComponents = BusinessInformationComponents();
+    _businessInformationProvider =
+        Provider.of<BusinessInformationProvider>(context, listen: false);
     business_name = TextEditingController();
     contact_number = TextEditingController();
     trn = TextEditingController();
     license_date = TextEditingController();
+    pickedDate = DateTime.now();
   }
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<BusinessInformationProvider>(context, listen: true);
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -49,7 +57,10 @@ class _BusinessInformationState extends State<BusinessInformation> {
           height: AppSizes.height,
           width: AppSizes.width,
           color: AppColors.white,
-          padding: EdgeInsets.only(left: AppSizes.width * 0.08, right: AppSizes.width*0.08, top: AppSizes.width*0.08),
+          padding: EdgeInsets.only(
+              left: AppSizes.width * 0.08,
+              right: AppSizes.width * 0.08,
+              top: AppSizes.width * 0.08),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -83,7 +94,8 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           ),
                           // CommonWidgets.getHeading1Text(text: 'Signup'),
                           SizedBox(height: AppSizes.height * 0.04),
-                          CommonWidgets.getSubHeadingText(text: "Business Name"),
+                          CommonWidgets.getSubHeadingText(
+                              text: "Business Name"),
                           SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getTextField(
                               isPassword: false,
@@ -91,7 +103,8 @@ class _BusinessInformationState extends State<BusinessInformation> {
                               textEditingController: business_name,
                               hintText: "Enter Business Name"),
                           SizedBox(height: AppSizes.height * 0.02),
-                          CommonWidgets.getSubHeadingText(text: "Contact Number"),
+                          CommonWidgets.getSubHeadingText(
+                              text: "Contact Number"),
                           SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getTextField(
                               isPassword: false,
@@ -120,6 +133,12 @@ class _BusinessInformationState extends State<BusinessInformation> {
                               textEditingController: license_date,
                               hintText: "09/22/2030"
                           ),*/
+                          _businessInformationComponents.getDateField(
+                              onDate: () {
+                                _showDate();
+                              },
+                              date:
+                                  "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}"),
                           SizedBox(height: AppSizes.height * 0.03),
                           _businessInformationComponents.getImagePicker(
                               onPress: () {
@@ -131,7 +150,18 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           CommonWidgets.getBottomButton(
                               text: "Signup",
                               onPress: () {
-                                _alertDialogueContainer();
+                                // _showDate();
+                                _businessInformationProvider
+                                    .getBusinessInformation(context: context,
+                                    businessName: business_name.text,
+                                    phoneNumber: contact_number.text,
+                                    trn: trn.text,
+                                    licenseExpiryDate: license_date.text,
+                                    userId: widget.userId,
+                                    tag: widget.tag,
+                                    onCheck: onCheck);
+                                // _businessInformationProvider.getImage(
+                                //     context: context);
                               }),
                           SizedBox(height: AppSizes.height * 0.02),
                         ],
@@ -308,8 +338,31 @@ class _BusinessInformationState extends State<BusinessInformation> {
             );
           },
         )
+  _showDate() async {
+    DateTime date = await showDatePicker(
+      context: context,
+      initialDate: pickedDate,
+      firstDate: DateTime(DateTime.now().year - 10),
+      lastDate: DateTime(DateTime.now().year + 10),
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeData(
+            cursorColor: Colors.grey,
+            dialogBackgroundColor: Colors.white,
+            colorScheme: ColorScheme.light(primary: AppColors.yellow),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+            highlightColor: Colors.grey[400],
+            textSelectionColor: Colors.grey,
+          ),
+          child: child,
+        );
       },
-    };
+    );
+    if(date != null){
+      setState(() {
+        pickedDate = date;
+      });
+    }
   }
 
   hideLoader(BuildContext context) {

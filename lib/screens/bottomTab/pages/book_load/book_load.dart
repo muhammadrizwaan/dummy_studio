@@ -6,6 +6,7 @@ import 'package:fluttericon/linecons_icons.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:truckoom_shipper/commons/get_token.dart';
 import 'package:truckoom_shipper/screens/adding_drop_off/adding_drop_off.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/book_load/book_load_components.dart';
 import 'package:truckoom_shipper/screens/confirmBookLoad/confirm_book_load.dart';

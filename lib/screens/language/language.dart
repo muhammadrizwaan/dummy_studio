@@ -4,6 +4,8 @@ import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/res/strings.dart';
+import 'package:truckoom_shipper/screens/businessInformation/business_information.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
 import 'package:truckoom_shipper/screens/phoneNumber/phone_number.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
@@ -119,6 +121,7 @@ class _LanguageState extends State<Language> {
                           CommonWidgets.getBottomButton(
                               text: "Next",
                               onPress: () {
+                                // Navigator.push(context, SlideRightRoute(page: BusinessInformation(tag: Strings.business, userId: 33, )));
                                 Navigator.push(
                                     context, SlideRightRoute(page: Login()));
                               }),

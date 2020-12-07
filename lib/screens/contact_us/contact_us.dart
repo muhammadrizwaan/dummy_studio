@@ -6,9 +6,10 @@ import 'package:fluttericon/entypo_icons.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/contact_us/contact_us_components.dart';
+import 'package:truckoom_shipper/screens/contact_us/contact_us_provider.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
-
+import 'package:provider/provider.dart';
 import '../../res/colors.dart';
 import '../../res/colors.dart';
 import '../../res/colors.dart';
@@ -25,14 +26,21 @@ class ContactUs extends StatefulWidget {
 
 class _ContactUsState extends State<ContactUs> {
   ContactUsComponents _contactUsComponents;
+  TextEditingController email, message;
+  ContactUsProvider _contactUsProvider;
 
   @override
   void initState() {
     super.initState();
     _contactUsComponents = ContactUsComponents();
+    email = TextEditingController();
+    message = TextEditingController();
+    _contactUsProvider = Provider.of<ContactUsProvider>(context, listen: false);
+    _contactUsProvider.init(context: context);
   }
   @override
   Widget build(BuildContext context) {
+    Provider.of<ContactUsProvider>(context, listen: false);
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -60,7 +68,7 @@ class _ContactUsState extends State<ContactUs> {
                     child: _contactUsComponents.getNameTextField(
                         leftIcon: Entypo.user,
                         hintText: 'Mathew Lawson',
-                        textEditingController: null
+                        textEditingController: email
                     ),
                   ),
                   SizedBox(height: AppSizes.height * 0.01,),
@@ -75,7 +83,7 @@ class _ContactUsState extends State<ContactUs> {
                     child: _contactUsComponents.getMessageTextField(
                         leftIcon: Icons.message,
                         hintText: 'Ameris sed tu vig ga ine pu na sa. Le ba si diga ti na ishi ga su. Ini ta pi na kisi sat ly vei in the pie.',
-                        textEditingController: null
+                        textEditingController: message
                     ),
                   ),
                   SizedBox(height: AppSizes.height * 0.05,),
@@ -94,8 +102,10 @@ class _ContactUsState extends State<ContactUs> {
                             color: AppColors.yellow,
                           ),
                           child: FlatButton(
-                            onPressed: (){},
-                            child: TextView.getBottomButtonText04("Send", color: Colors.white),
+                            onPressed: (){
+                              _contactUsProvider.getContactUs(context: context, email: email.text, message: email.text);
+                            },
+                            child: TextView.getBottomButtonText04("Send", color: Colors.white.withOpacity(0.6),),
                           ),
                         ),
                         Container(

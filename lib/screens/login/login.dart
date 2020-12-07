@@ -1,14 +1,13 @@
 
-
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/entypo_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
+import 'package:truckoom_shipper/commons/get_token.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
 import 'package:truckoom_shipper/screens/checkUserType/check_user.dart';
 import 'package:truckoom_shipper/screens/forgotPassword/forgot_password.dart';
@@ -18,9 +17,6 @@ import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 import '../../res/sizes.dart';
-import '../../res/strings.dart';
-import '../bottomTab/bottom_tab.dart';
-import 'package:truckoom_shipper/utilities/utilities.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -32,6 +28,8 @@ class _LoginState extends State<Login> {
   LoginProvider _loginProvider;
   TextEditingController email, password;
 
+  GetToken getToken = GetToken();
+
   @override
   void initState() {
     _loginComponents = LoginComponents();
@@ -39,6 +37,20 @@ class _LoginState extends State<Login> {
     _loginProvider.init(context);
     email = TextEditingController();
     password = TextEditingController();
+    // email.addListener(() {
+    //   if (email.text.length > 0) {
+    //     setState(() {
+    //       filled = true;
+    //     });
+    //   }
+    // });
+    // phone_number.addListener(() {
+    //   if (phone_number.text.length > 0) {
+    //     setState(() {
+    //       filled = true;
+    //     });
+    //   }
+    // });
   }
 
   @override
@@ -51,7 +63,10 @@ class _LoginState extends State<Login> {
           height: AppSizes.height,
           width: AppSizes.width,
           color: AppColors.white,
-          padding: EdgeInsets.only(left: AppSizes.width * 0.08, right: AppSizes.width*0.08, top: AppSizes.width*0.08),
+          padding: EdgeInsets.only(
+              left: AppSizes.width * 0.08,
+              right: AppSizes.width * 0.08,
+              top: AppSizes.width * 0.08),
           child: Stack(
             children: [
               Column(
@@ -62,7 +77,10 @@ class _LoginState extends State<Login> {
                       iconName: 'back_arrow_otp.png',
                       text: "Forgot ",
                       clickableText: "Password",
-                      onTap: (){Navigator.push(context, SlideRightRoute(page: ForgotPassowrd()));},
+                      onTap: () {
+                        Navigator.push(
+                            context, SlideRightRoute(page: ForgotPassowrd()));
+                      },
                       onPress: () {
                         Navigator.pop(context);
                       }),
@@ -74,52 +92,59 @@ class _LoginState extends State<Login> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              SizedBox(height: AppSizes.height * 0.06,),
+                              SizedBox(
+                                height: AppSizes.height * 0.06,
+                              ),
                               CommonWidgets.getHeadingText(text: 'Login Now'),
-                              SizedBox(height: AppSizes.height * 0.04,),
-                              CommonWidgets.getSubHeadingText(text: "Email/Phone Number"),
-                              SizedBox(height: AppSizes.height * 0.01,),
+                              SizedBox(
+                                height: AppSizes.height * 0.04,
+                              ),
+                              CommonWidgets.getSubHeadingText(
+                                  text: "Email/Phone Number"),
+                              SizedBox(
+                                height: AppSizes.height * 0.01,
+                              ),
                               CommonWidgets.getTextField(
                                   isPassword: false,
                                   leftIcon: Entypo.user,
                                   textEditingController: email,
-                                  hintText: "Email/Phone Number"
+                                  hintText: "Email/Phone Number"),
+                              SizedBox(
+                                height: AppSizes.height * 0.02,
                               ),
-                              SizedBox(height: AppSizes.height * 0.02,),
                               CommonWidgets.getSubHeadingText(text: "Password"),
-                              SizedBox(height: AppSizes.height * 0.01,),
+                              SizedBox(
+                                height: AppSizes.height * 0.01,
+                              ),
                               CommonWidgets.getTextField(
                                   isPassword: true,
                                   leftIcon: Entypo.lock,
                                   textEditingController: password,
-                                  hintText: "Enter Password"
+                                  hintText: "Enter Password"),
+                              SizedBox(
+                                height: AppSizes.height * 0.08,
                               ),
-                              SizedBox(height: AppSizes.height * 0.08,),
                               CommonWidgets.getBottomButton(
                                   text: "Login",
                                   onPress: () {
-                                    _loginProvider.getLogin(context: context, email: email.text, password: password.text);
-//                                    if(email.text.isNotEmpty && email.text.validateEmail()){
-//                                      if(password.text.isNotEmpty){
-//
-//                                      }else{
-//                                        ApplicationToast.getErrorToast(durationTime: 3, heading: "Error", subHeading: "Password is empty");
-//                                      }
-//                                    }else{
-//                                      ApplicationToast.getErrorToast(durationTime: 3, heading: "Error", subHeading: "Email is empty or email is not in proper form");
-//                                    }
-                                  }
-                              ),
+                                    // testToken();
+                                    _loginProvider.getLogin(
+                                        context: context,
+                                        email: email.text,
+                                        password: password.text);
+                                  }),
                               Container(
-                                margin: EdgeInsets.only(top: AppSizes.height*0.25,),
+                                margin: EdgeInsets.only(
+                                  top: AppSizes.height * 0.25,
+                                ),
                                 alignment: Alignment.center,
                                 child: _loginComponents.getBottomRichText(
                                     text: "Don't have an account? ",
                                     clickableText: 'SIGN UP',
                                     onTap: () {
-                                      Navigator.push(context, SlideRightRoute(page: CheckUser()));
-                                    }
-                                ),
+                                      Navigator.push(context,
+                                          SlideRightRoute(page: CheckUser()));
+                                    }),
                               ),
                             ],
                           ),
@@ -135,4 +160,11 @@ class _LoginState extends State<Login> {
       ),
     );
   }
+
+  testToken() async{
+    String value = await getToken.onToken();
+    print('token is : ');
+    print(value);
+  }
+
 }
