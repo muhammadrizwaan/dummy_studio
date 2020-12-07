@@ -100,54 +100,54 @@ class ContactUsProvider extends ChangeNotifier {
     }
   }
 
-  Future<String> onToken() async {
-      String refreshToken = "";
-      token = await PreferenceUtils.getString(Strings.token);
-      double previousTime = await PreferenceUtils.getDouble(Strings.tokenTime);
-
-      double ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
-      double currentTime = await (((ms / 1000) / 60).round()).toDouble();
-      double time = currentTime - previousTime;
-
-      if (time > 15.0) {
-        refreshToken = await PreferenceUtils.getString(Strings.refreshToken);
-        print('hello');
-        print(refreshToken);
-
-        try {
-          var formData = Map<String, dynamic>();
-          formData['grant_type'] = "refresh_token";
-          formData['refresh_token'] = refreshToken;
-          dio.options.contentType = Headers.formUrlEncodedContentType;
-          Response response = await dio.post(
-            tokenApi,
-            data: formData,
-            options: Options(
-              contentType: Headers.formUrlEncodedContentType,
-            ),
-          );
-         if (response.statusCode == 200) {
-            tokenResponse = TokenResponse.fromJson(response.data);
-            String tokenRes = tokenResponse.accessToken;
-            print('refresh token');
-            token = "Bearer $tokenRes";
-            await PreferenceUtils.setString(
-                Strings.token, token);
-            await PreferenceUtils.setString(
-                Strings.refreshToken, tokenResponse.refreshToken);
-            ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
-            currentTime = await (((ms / 1000) / 60).round()).toDouble();
-            await PreferenceUtils.setDouble(Strings.tokenTime, currentTime);
-            print(token);
-          }
-         else{
-           ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: "Unauthorized user");
-         }
-        } catch (e) {
-          print(e.toString());
-        }
-      }
-
-      return token;
-  }
+  // Future<String> onToken() async {
+  //     String refreshToken = "";
+  //     token = await PreferenceUtils.getString(Strings.token);
+  //     double previousTime = await PreferenceUtils.getDouble(Strings.tokenTime);
+  //
+  //     double ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
+  //     double currentTime = await (((ms / 1000) / 60).round()).toDouble();
+  //     double time = currentTime - previousTime;
+  //
+  //     if (time > 15.0) {
+  //       refreshToken = await PreferenceUtils.getString(Strings.refreshToken);
+  //       print('hello');
+  //       print(refreshToken);
+  //
+  //       try {
+  //         var formData = Map<String, dynamic>();
+  //         formData['grant_type'] = "refresh_token";
+  //         formData['refresh_token'] = refreshToken;
+  //         dio.options.contentType = Headers.formUrlEncodedContentType;
+  //         Response response = await dio.post(
+  //           tokenApi,
+  //           data: formData,
+  //           options: Options(
+  //             contentType: Headers.formUrlEncodedContentType,
+  //           ),
+  //         );
+  //        if (response.statusCode == 200) {
+  //           tokenResponse = TokenResponse.fromJson(response.data);
+  //           String tokenRes = tokenResponse.accessToken;
+  //           print('refresh token');
+  //           token = "Bearer $tokenRes";
+  //           await PreferenceUtils.setString(
+  //               Strings.token, token);
+  //           await PreferenceUtils.setString(
+  //               Strings.refreshToken, tokenResponse.refreshToken);
+  //           ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
+  //           currentTime = await (((ms / 1000) / 60).round()).toDouble();
+  //           await PreferenceUtils.setDouble(Strings.tokenTime, currentTime);
+  //           print(token);
+  //         }
+  //        else{
+  //          ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: "Unauthorized user");
+  //        }
+  //       } catch (e) {
+  //         print(e.toString());
+  //       }
+  //     }
+  //
+  //     return token;
+  // }
 }

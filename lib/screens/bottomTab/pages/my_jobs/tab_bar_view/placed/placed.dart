@@ -1,13 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/placed/placed_components.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/placed/placed_provider.dart';
 import 'package:truckoom_shipper/screens/jobDetails/job_details.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
+import 'package:truckoom_shipper/widgets/loader.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
 import '../../../../bottom_tab.dart';
@@ -19,85 +23,42 @@ class Placed extends StatefulWidget {
 
 class _PlacedState extends State<Placed> {
   PlacedComponents _placedComponents;
+  PlacedProvider _placedProvider;
+  CustomPopup _loader = CustomPopup();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _placedComponents = PlacedComponents();
+    _placedProvider = Provider.of<PlacedProvider>(context, listen: false);
+    _placedProvider.init(context: context);
+    _placedProvider.getPlacedLoad(context: context);
   }
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<PlacedProvider>(context, listen: true);
     return Container(
       margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
       color: Colors.white,
-      child: ListView(
-        children: [
-          Column(
+      child: _placedProvider.getIsDataFetched()?
+      ListView.builder(
+        itemCount: _placedProvider.tabbarResponse.result.length,
+          itemBuilder: (context, index){
+          return Column(
             children: [
               SizedBox(
                 height: AppSizes.height * 0.02,
               ),
               _placedComponents.getJobContainer(
-                jobDetail: "01",
-                pickUpLocation: "ABC Port:",
-                destinationLocation: "227 Building, UAE:",
+                jobDetail: _placedProvider.tabbarResponse.result[index].loadId.toString(),
+                pickUpLocation: _placedProvider.tabbarResponse.result[index].pickupLocation,
+                destinationLocation: _placedProvider.tabbarResponse.result[index].dropoffLocation,
                 startDate: "11 Aug,",
                 time: '12:00am',
-                status: "Active",
-                price: "AED 260",
-                onAlert: () {
-                  _onDescriptionAlert();
-                },
-                onTap: () {
-                  Navigator.push(context, SlideRightRoute(page: JobDetails()));
-                },
-              ),
-              SizedBox(
-                height: AppSizes.height * 0.02,
-              ),
-              _placedComponents.getJobContainer(
-                jobDetail: "01",
-                pickUpLocation: "ABC Port:",
-                destinationLocation: "227 Building, UAE:",
-                startDate: "11 Aug,",
-                time: '12:00am',
-                status: "Active",
-                price: "AED 260",
-                onAlert: () {
-                  _onDescriptionAlert();
-                },
-                onTap: () {
-                  Navigator.push(context, SlideRightRoute(page: JobDetails()));
-                },
-              ),
-              SizedBox(
-                height: AppSizes.height * 0.02,
-              ),
-              _placedComponents.getJobContainer(
-                  jobDetail: "01",
-                  pickUpLocation: "ABC Port:",
-                  destinationLocation: "227 Building, UAE:",
-                  startDate: "11 Aug,",
-                  time: '12:00am',
-                  status: "Active",
-                  price: "AED 260",
-                  onAlert: () {
-                    _onDescriptionAlert();
-                  },
-                  onTap: () {}),
-              SizedBox(
-                height: AppSizes.height * 0.02,
-              ),
-              _placedComponents.getJobContainer(
-                jobDetail: "01",
-                pickUpLocation: "ABC Port:",
-                destinationLocation: "227 Building, UAE:",
-                startDate: "11 Aug,",
-                time: '12:00am',
-                status: "Active",
-                price: "AED 260",
+                status: _placedProvider.tabbarResponse.result[index].status,
+                price: "AED ${_placedProvider.tabbarResponse.result[index].shipperCost.round()}",
                 onAlert: () {
                   _onDescriptionAlert();
                 },
@@ -109,8 +70,19 @@ class _PlacedState extends State<Placed> {
                 height: AppSizes.height * 0.02,
               ),
             ],
-          ),
-        ],
+          );
+          }
+      ):
+      Expanded(
+        child: ListView(
+          children: [
+            Container(
+              height: AppSizes.height * 0.15,
+              width: AppSizes.width * 0.15,
+              child: Lottie.asset(Assets.apiLoading),
+            ),
+          ],
+        ),
       ),
     );
   }
