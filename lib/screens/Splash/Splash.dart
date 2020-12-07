@@ -25,7 +25,7 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-     onDelay();
+     // onDelay();
      _provider = Provider.of<SplashProvider>(context, listen:false);
      _provider.init(context: context);
   }

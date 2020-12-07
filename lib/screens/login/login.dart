@@ -28,6 +28,8 @@ class _LoginState extends State<Login> {
   LoginProvider _loginProvider;
   TextEditingController email, password;
 
+  GetToken getToken = GetToken();
+
   @override
   void initState() {
     _loginComponents = LoginComponents();
@@ -125,6 +127,7 @@ class _LoginState extends State<Login> {
                               CommonWidgets.getBottomButton(
                                   text: "Login",
                                   onPress: () {
+                                    // testToken();
                                     _loginProvider.getLogin(
                                         context: context,
                                         email: email.text,
@@ -156,6 +159,12 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  testToken() async{
+    String value = await getToken.onToken();
+    print('token is : ');
+    print(value);
   }
 
 }

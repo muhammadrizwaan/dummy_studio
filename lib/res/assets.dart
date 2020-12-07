@@ -61,7 +61,7 @@ class Assets {
   static const String radioActiveIcon = "assets/png/radio_active_icon.png";
   static const String radioUnactiveIcon = "assets/png/radio_unactive_icon.png";
   static const String cardIcon = "assets/png/card_icon.png";
-  static const String apiLoading = "assets/json/truckoom_loader.json";
+  static const String apiLoading = "assets/json/loader1.json";
 
 
 

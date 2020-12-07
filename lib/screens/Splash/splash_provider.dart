@@ -2,8 +2,11 @@
 import 'dart:io' as io;
 import 'package:device_info/device_info.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/res/strings.dart';
+import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
+import 'package:truckoom_shipper/screens/language/language.dart';
 
 class SplashProvider extends ChangeNotifier{
 
@@ -15,6 +18,7 @@ class SplashProvider extends ChangeNotifier{
     PreferenceUtils.init();
     this.context = context;
     getDeviceInfo();
+    navigateToNextScreen();
   }
   Future getDeviceInfo() async {
     if (io.Platform.isIOS) {
@@ -23,6 +27,16 @@ class SplashProvider extends ChangeNotifier{
     } else {
       AndroidDeviceInfo deviceInfo = await devicInfo.androidInfo;
       await PreferenceUtils.setString(Strings.deviceId, deviceInfo.androidId);
+    }
+  }
+  void navigateToNextScreen() async {
+    await Future.delayed(Duration(
+      seconds: 4,
+    ));
+    if(PreferenceUtils.getString(Strings.email).isNotEmpty && PreferenceUtils.getString(Strings.password).isNotEmpty){
+      Navigator.pushReplacement(context, SlideRightRoute(page: BottomTab()));
+    }else{
+      Navigator.pushReplacement(context, SlideRightRoute(page: Language()));
     }
   }
 }

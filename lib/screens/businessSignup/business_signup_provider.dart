@@ -5,6 +5,7 @@ import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
 import 'package:truckoom_shipper/models/api_models/cities_response.dart';
 import 'package:truckoom_shipper/models/api_models/common_response.dart';
+import 'package:truckoom_shipper/models/otherModels/cities_model.dart';
 import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/network/network_helper.dart';
 import 'package:truckoom_shipper/network/network_helper_impl.dart';
@@ -19,12 +20,12 @@ class BusinessSignupProvider extends ChangeNotifier {
   BuildContext context;
   String devicedId;
   var connectivity;
+
   NetworkHelper _networkHelper = NetworkHelperImpl();
   CommonResponse commonResponse = CommonResponse.empty();
   CitiesResponse citiesResponse = CitiesResponse.empty();
   GenericDecodeEncode genericDecodeEncode = GenericDecodeEncode();
   CustomPopup _loader = CustomPopup();
-
   int id;
 
   init({@required BuildContext context}) async {
@@ -158,13 +159,12 @@ class BusinessSignupProvider extends ChangeNotifier {
             _loader.hideLoader(context);
             print("Success");
             print(citiesResponse.result.length);
-
           }
           else {
             _loader.hideLoader(context);
             ApplicationToast.getErrorToast(durationTime: 3,
                 heading: Strings.error,
-                subHeading: commonResponse.message);
+                subHeading: citiesResponse.message);
           }
         }
         else {

@@ -5,6 +5,9 @@ class Strings {
 
 
   static const String token = "token";
+  static const String email = "Email";
+  static const String userId = "UserId";
+  static const String password = "Password";
   static const String tokenTime = "TokenTime";
   static const String refreshToken = "RefreshToken";
   static const String indiviual = "indiviual";
@@ -26,6 +29,8 @@ class Strings {
   static const String jobDetails = "Job Details";
   static const String deviceId = "device_id";
   static const String tapAndContinue = "Tap to Continue";
+
+
 
 
   // Error Toast Text
