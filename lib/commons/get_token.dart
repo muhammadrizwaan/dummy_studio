@@ -24,7 +24,7 @@ class GetToken{
 });
 
   Future<String> onToken() async {
-    String refreshToken = "";
+
     token = await PreferenceUtils.getString(Strings.token);
     double previousTime = await PreferenceUtils.getDouble(Strings.tokenTime);
 
@@ -73,7 +73,6 @@ class GetToken{
         print(e.toString());
       }
     }
-
     return token;
   }
 }

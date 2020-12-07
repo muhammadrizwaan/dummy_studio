@@ -54,12 +54,13 @@ class Result {
   int get cityId => _cityId;
   String get description => _description;
 
-  Result({
-      int cityId, 
-      String description}){
-    _cityId = cityId;
-    _description = description;
-}
+//   Result({
+//       int cityId,
+//       String description}){
+//     _cityId = cityId;
+//     _description = description;
+// }
+  Result.empty();
 
   Result.fromJson(dynamic json) {
     _cityId = json["CityId"];

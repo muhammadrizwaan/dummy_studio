@@ -7,9 +7,5 @@ class CitiesModel{
   int id;
   String name;
 
-  CitiesModel({@required this.id, @required this.name,});
+  CitiesModel(this.id, this.name);
 }
-
-List<CitiesModel> citiesModel= [
-
-];

@@ -44,6 +44,7 @@ dependencies:
   connectivity: ^2.0.2
   image_picker: ^0.6.7+14
   multipart_request: ^0.3.1
+  circulardropdownmenu: ^1.0.1
 
 
 

@@ -1,6 +1,7 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:truckoom_shipper/commons/get_token.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
 import 'package:truckoom_shipper/models/api_models/contact_us_response.dart';
@@ -24,6 +25,7 @@ class ContactUsProvider extends ChangeNotifier {
   GenericDecodeEncode genericDecodeEncode = GenericDecodeEncode();
   CustomPopup _loader = CustomPopup();
   Dio dio = Dio();
+  GetToken getToken = GetToken();
 
   init({@required BuildContext context}) async {
     context = this.context;
@@ -36,9 +38,8 @@ class ContactUsProvider extends ChangeNotifier {
     @required String message}) async {
     try {
       connectivity = await Connectivity().checkConnectivity();
-      token = await onToken();
-      print('token is :');
-      print(token);
+      // token = await onToken();
+      token = await getToken.onToken();
       if (connectivity == ConnectivityResult.none) {
         ApplicationToast.getErrorToast(
             durationTime: 3,
