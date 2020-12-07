@@ -349,6 +349,67 @@ class CommonWidgets {
       ),
     );
   }
+  static Widget getTextField2({
+    @required bool isPassword,
+    @required IconData leftIcon,
+    @required TextEditingController textEditingController,
+    @required String hintText,
+    @required bool filledField,
+  }) {
+    return Container(
+      height: AppSizes.height * 0.07,
+      width: AppSizes.width * 0.85,
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.02),
+      decoration: BoxDecoration(
+        color: AppColors.lightGray,
+        border: Border.all(color: AppColors.lightGray),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Opacity(
+              opacity: 0.7,
+              child: Icon(
+                leftIcon,
+                size: 20,
+              )),
+          Center(
+            child: Container(
+              // color: AppColors.yellow,
+              width: AppSizes.width * 0.65,
+              // height: AppSizes.height * 0.05,
+              child: TextField(
+                style: TextStyle(
+                  decoration: TextDecoration.none,
+                  fontFamily: Assets.poppinsLight,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                ),
+                controller: textEditingController,
+                obscureText: isPassword,
+                decoration: InputDecoration(
+                  hintText: hintText,
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(
+                    decoration: TextDecoration.none,
+                    fontSize: 13,
+                    fontFamily: Assets.poppinsLight,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          filledField ?
+          Image(image: AssetImage('assets/png/check_circle_fill_pn.png'))
+              :
+          Container(),
+        ],
+      ),
+    );
+  }
+
 
   static Widget getAlertDialouge(
       {@required BuildContext context,

@@ -128,7 +128,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                               leftIcon: LineariconsFree.license,
                               textEditingController: license_date,
                               hintText: "09/22/2030"),
-                         /* _businessInformationComponents.getTextField(
+                          /* _businessInformationComponents.getTextField(
                               isPassword: true,
                               textEditingController: license_date,
                               hintText: "09/22/2030"
@@ -152,14 +152,15 @@ class _BusinessInformationState extends State<BusinessInformation> {
                               onPress: () {
                                 // _showDate();
                                 _businessInformationProvider
-                                    .getBusinessInformation(context: context,
-                                    businessName: business_name.text,
-                                    phoneNumber: contact_number.text,
-                                    trn: trn.text,
-                                    licenseExpiryDate: license_date.text,
-                                    userId: widget.userId,
-                                    tag: widget.tag,
-                                    onCheck: onCheck);
+                                    .getBusinessInformation(
+                                        context: context,
+                                        businessName: business_name.text,
+                                        phoneNumber: contact_number.text,
+                                        trn: trn.text,
+                                        licenseExpiryDate: license_date.text,
+                                        userId: widget.userId,
+                                        tag: widget.tag,
+                                        onCheck: onCheck);
                                 // _businessInformationProvider.getImage(
                                 //     context: context);
                               }),
@@ -283,10 +284,10 @@ class _BusinessInformationState extends State<BusinessInformation> {
                             "Signup Successful",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                decoration: TextDecoration.none,
-                                fontSize: 20,
-                                color: AppColors.colorBlack,
-                                fontFamily: Assets.poppinsMedium,
+                              decoration: TextDecoration.none,
+                              fontSize: 20,
+                              color: AppColors.colorBlack,
+                              fontFamily: Assets.poppinsMedium,
                               //fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -298,7 +299,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                               Navigator.of(context).pushAndRemoveUntil(
                                   SlideRightRoute(
                                       page: BottomTab(tag: widget.tag)),
-                                      (Route<dynamic> route) => false);
+                                  (Route<dynamic> route) => false);
                             },
                             child: Text(
                               "Tap to Continue",
@@ -337,7 +338,11 @@ class _BusinessInformationState extends State<BusinessInformation> {
               ),
             );
           },
-        )
+        ),
+      }
+    };
+  }
+
   _showDate() async {
     DateTime date = await showDatePicker(
       context: context,
@@ -358,7 +363,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
         );
       },
     );
-    if(date != null){
+    if (date != null) {
       setState(() {
         pickedDate = date;
       });

@@ -187,8 +187,6 @@ class _BusinessSignupState extends State<BusinessSignup> {
                               leftIcon: Icons.mail,
                               textEditingController: email,
                               hintText: "Email"),
-                              hintText: "Enter Email"
-                          ),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "Password"),
                           SizedBox(height: AppSizes.height * 0.01),
