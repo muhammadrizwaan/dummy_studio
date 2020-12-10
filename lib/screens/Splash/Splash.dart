@@ -5,6 +5,7 @@ import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/Splash/splash_provider.dart';
+import 'package:truckoom_shipper/screens/businessInformation/business_information.dart';
 import 'package:truckoom_shipper/screens/language/language.dart';
 
 class Splash extends StatefulWidget {
@@ -18,14 +19,14 @@ class _SplashState extends State<Splash> {
 
   void onDelay() async{
     await Future.delayed(Duration(seconds: 3), (){
-      Navigator.pushReplacement(context, SlideRightRoute(page: Language()));
+      Navigator.pushReplacement(context, SlideRightRoute(page: BusinessInformation()));
     });
   }
 
   @override
   void initState() {
     super.initState();
-     // onDelay();
+      //onDelay();
      _provider = Provider.of<SplashProvider>(context, listen:false);
      _provider.init(context: context);
   }

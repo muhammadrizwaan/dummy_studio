@@ -234,6 +234,7 @@ class _BusinessSignupState extends State<BusinessSignup> {
                                   confirmPassword: confirm_Password.text,
                                   city: _getBrandId(),
                                   onCheck: onCheck,
+
                                 );
                                 // _businessSignupProvider.getCities(context: context);
 
