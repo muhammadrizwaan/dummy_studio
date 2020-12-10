@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
@@ -24,6 +25,7 @@ class BusinessInformationProvider extends ChangeNotifier {
   String deviceId;
   double ms;
   double currentTime;
+  var connectivityResult;
   NetworkHelper _networkHelper = NetworkHelperImpl();
   CommonResponse commonResponse = CommonResponse.empty();
   GenericDecodeEncode genericDecodeEncode = GenericDecodeEncode();
@@ -53,14 +55,21 @@ class BusinessInformationProvider extends ChangeNotifier {
     @required String businessName,
     @required String phoneNumber,
     @required String trn,
-    @required String licenseExpiryDate,
+    @required DateTime licenseExpiryDate,
     @required int userId,
     @required String tag,
     @required bool onCheck,
   }) async {
     try {
+
       deviceId = await PreferenceUtils.getString(Strings.deviceId);
-      if (businessName.isEmpty || businessName.length < 2) {
+      if (connectivityResult == ConnectivityResult.none) {
+        ApplicationToast.getErrorToast(
+            durationTime: 3,
+            heading: Strings.error,
+            subHeading: Strings.internetConnectionError);
+      }
+      else if (businessName.isEmpty || businessName.length < 2) {
         ApplicationToast.getErrorToast(
             durationTime: 3,
             heading: Strings.error,
@@ -96,7 +105,7 @@ class BusinessInformationProvider extends ChangeNotifier {
           "CompanyName": businessName,
           "ContactNumber": phoneNumber,
           "TRN": trn,
-          "LicenseExpiryDate": licenseExpiryDate,
+          "LicenseExpiryDate": licenseExpiryDate.toString(),
           "UserId": userId
         });
         if (response.statusCode == 200) {

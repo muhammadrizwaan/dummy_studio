@@ -16,6 +16,7 @@ class PlacedComponents{
         @required String startDate,
         @required String time,
         @required String status,
+        @required String vehicleType,
         @required String price,
         @required Function onTap,
         @required Function onAlert,
@@ -196,7 +197,7 @@ class PlacedComponents{
                 Row(
                   children: [
                     Text(
-                      'Suzuki',
+                      vehicleType,
                       style: TextStyle(
                           fontSize: 12,
                           fontFamily: Assets.poppinsMedium,

@@ -7,7 +7,7 @@ import '../../../../res/colors.dart';
 import '../../../../res/sizes.dart';
 
 class HistoryComponents {
-  Widget getTransectionsContainer({
+  Widget getHistoryContainer({
     @required String jobDetail,
     @required String pickUpLocation,
     @required String destinationLocation,
@@ -15,6 +15,7 @@ class HistoryComponents {
     @required String endDate,
     @required String price,
     @required String status,
+    @required String vehicleType,
     @required String startTime,
     @required String endTime,
     @required Function onInvoice,
@@ -55,11 +56,10 @@ class HistoryComponents {
                   Text(
                     jobDetail,
                     style: TextStyle(
-                      fontSize: 12,
-                      fontFamily: Assets.poppinsRegular,
-                      color: AppColors.colorBlack,
-                      // fontWeight: FontWeight.bold
-                    ),
+                        fontSize: 12,
+                        fontFamily: Assets.poppinsRegular,
+                        color: AppColors.colorBlack,
+                        fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -149,7 +149,7 @@ class HistoryComponents {
                     Row(
                       children: [
                         Text(
-                          startDate,
+                          endDate,
                           style: TextStyle(
                             fontSize: 12,
                             fontFamily: Assets.poppinsRegular,
@@ -218,7 +218,7 @@ class HistoryComponents {
               Row(
                 children: [
                   Text(
-                    'Suzuki',
+                    vehicleType,
                     style: TextStyle(
                       fontSize: 12,
                       fontFamily: Assets.poppinsMedium,

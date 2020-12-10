@@ -1,9 +1,8 @@
-import 'package:dio/dio.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
-import 'package:truckoom_shipper/commons/get_token.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
 import 'package:truckoom_shipper/models/api_models/common_response.dart';
@@ -24,14 +23,11 @@ class LoginProvider extends ChangeNotifier {
   BuildContext context;
 
   NetworkHelper _networkHelper = NetworkHelperImpl();
-
-  // LoginResponse loginResponse = LoginResponse.empty();
   CommonResponse commonResponse = CommonResponse.empty();
   GenericDecodeEncode genericDecodeEncode = GenericDecodeEncode();
   TokenResponse tokenResponse = TokenResponse.empty();
 
   CustomPopup _loader = CustomPopup();
-  Dio dio = Dio();
   String deviceId, tempToken;
   double ms;
   double currentTime;

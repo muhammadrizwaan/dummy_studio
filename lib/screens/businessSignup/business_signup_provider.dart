@@ -5,7 +5,7 @@ import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
 import 'package:truckoom_shipper/models/api_models/cities_response.dart';
 import 'package:truckoom_shipper/models/api_models/common_response.dart';
-import 'package:truckoom_shipper/models/otherModels/cities_model.dart';
+
 import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/network/network_helper.dart';
 import 'package:truckoom_shipper/network/network_helper_impl.dart';
@@ -20,19 +20,21 @@ class BusinessSignupProvider extends ChangeNotifier {
   BuildContext context;
   String devicedId;
   var connectivity;
-
+  bool isDataFetched;
   NetworkHelper _networkHelper = NetworkHelperImpl();
-  CommonResponse commonResponse = CommonResponse.empty();
-  CitiesResponse citiesResponse = CitiesResponse.empty();
-  GenericDecodeEncode genericDecodeEncode = GenericDecodeEncode();
+  CommonResponse _commonResponse = CommonResponse.empty();
+  CitiesResponse _citiesResponse = CitiesResponse.empty();
+  GenericDecodeEncode _genericDecodeEncode = GenericDecodeEncode();
   CustomPopup _loader = CustomPopup();
+  List<String> description = List<String>();
   int id;
 
   init({@required BuildContext context}) async {
     this.context = context;
     devicedId = "";
     connectivity = "";
-    getCities(context: context);
+    isDataFetched = false;
+    await getCities(context: context);
   }
 
   Future getBusinessSignup({
@@ -79,7 +81,7 @@ class BusinessSignupProvider extends ChangeNotifier {
             heading: Strings.error,
             subHeading: Strings.passwordMatchErrorText);
       }
-      else if (city.bitLength < 1) {
+      else if (city == null) {
         ApplicationToast.getErrorToast(durationTime: 3,
             heading: Strings.error,
             subHeading: Strings.cityErrorText);
@@ -106,11 +108,10 @@ class BusinessSignupProvider extends ChangeNotifier {
             }
         );
         if (response.statusCode == 200) {
-          commonResponse = CommonResponse.fromJson(
-              genericDecodeEncode.decodeJson(response.body));
-          if (commonResponse.code == 1) {
-            id = commonResponse.result.user.userId;
-            print(id);
+          _commonResponse = CommonResponse.fromJson(
+              _genericDecodeEncode.decodeJson(response.body));
+          if (_commonResponse.code == 1) {
+            id = _commonResponse.result.user.userId;
             _loader.hideLoader(context);
             Navigator.push(context, SlideRightRoute(
                 page: BusinessInformation(tag: tag, userId: id,)));
@@ -119,7 +120,7 @@ class BusinessSignupProvider extends ChangeNotifier {
             _loader.hideLoader(context);
             ApplicationToast.getErrorToast(durationTime: 3,
                 heading: Strings.error,
-                subHeading: commonResponse.message);
+                subHeading: _commonResponse.message);
           }
         }
         else {
@@ -148,37 +149,38 @@ class BusinessSignupProvider extends ChangeNotifier {
             subHeading: Strings.internetConnectionError);
       }
       else {
-        _loader.showLoader(context: context);
        http.Response response = await _networkHelper.get(
          citiesApi,
        );
         if (response.statusCode == 200) {
-          citiesResponse = CitiesResponse.fromJson(
-              genericDecodeEncode.decodeJson(response.body));
-          if (citiesResponse.code == 1) {
-            _loader.hideLoader(context);
-            print("Success");
-            print(citiesResponse.result.length);
+          _citiesResponse = CitiesResponse.fromJson(
+              _genericDecodeEncode.decodeJson(response.body));
+          if (_citiesResponse.code == 1) {
+            for(int i = 0; i < _citiesResponse.result.length; i++){
+              description.add(_citiesResponse.result[i].description);
+            }
+            isDataFetched = true;
+            notifyListeners();
           }
           else {
-            _loader.hideLoader(context);
             ApplicationToast.getErrorToast(durationTime: 3,
                 heading: Strings.error,
-                subHeading: citiesResponse.message);
+                subHeading: _citiesResponse.message);
           }
         }
         else {
-          _loader.hideLoader(context);
           ApplicationToast.getErrorToast(durationTime: 3,
               heading: Strings.error,
               subHeading: Strings.somethingWentWrong);
         }
-
       }
     }
     catch(error){
     print(error.toString());
-
     }
   }
+  CitiesResponse getCitiesList(){
+    return this._citiesResponse;
+  }
+  
 }
