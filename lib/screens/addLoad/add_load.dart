@@ -1,15 +1,15 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttericon/elusive_icons.dart';
 import 'package:fluttericon/entypo_icons.dart';
-import 'package:fluttericon/font_awesome5_icons.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/addLoad/add_load_components.dart';
+import 'package:truckoom_shipper/screens/addLoad/add_load_provider.dart';
 import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_details.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
@@ -25,21 +25,32 @@ class AddLoad extends StatefulWidget {
 
 class _AddLoadState extends State<AddLoad> {
   AddLoadComponents _addLoadComponents;
+  AddLoadProvider _addLoadProvider;
+  TextEditingController receiver_name, receiver_phone, weight, num_of_vehicle, description;
   bool switchState = false;
-  int _dateTime = 1;
-  int _goodType = 1;
   int _weight = 1;
   int _noOfVehicle = 1;
+  String _selectedValue;
+  DateTime pickedDate;
 
   @override
   void initState() {
     super.initState();
     print(widget.tag);
+    receiver_name = TextEditingController();
+    receiver_phone = TextEditingController();
+    weight = TextEditingController();
+    num_of_vehicle = TextEditingController();
+    description = TextEditingController();
+    pickedDate = DateTime.now();
     _addLoadComponents = AddLoadComponents();
+    _addLoadProvider = Provider.of<AddLoadProvider>(context, listen: false);
+    _addLoadProvider.init(context: context);
   }
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<AddLoadProvider>(context, listen: true);
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -48,7 +59,7 @@ class _AddLoadState extends State<AddLoad> {
           height: AppSizes.height,
           width: AppSizes.width,
           color: AppColors.white,
-          child: Column(
+          child: _addLoadProvider.isDataFetched? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -102,58 +113,13 @@ class _AddLoadState extends State<AddLoad> {
                           CommonWidgets.getSubHeadingText(
                               text: "Pickup Date and Time"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
-                            height: AppSizes.height * 0.07,
-                            width: AppSizes.width,
-                            decoration: BoxDecoration(
-                              color: AppColors.lightGray,
-                              border: Border.all(color: AppColors.lightGray),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 5),
-                                  child:  Icon(Elusive.location, size: 20, color: AppColors.colorBlack.withOpacity(0.8),),
-                                ),
-                                Expanded(
-                                  child: DropdownButtonHideUnderline(
-                                    child: DropdownButton(
-                                        icon: Icon(Icons.keyboard_arrow_down),
-                                        value: _dateTime,
-                                        items: [
-                                          DropdownMenuItem(
-                                            child: TextView.getLightText04(
-                                              "Select",
-                                              color: AppColors.colorBlack,
-                                            ),
-                                            value: 1,
-                                          ),
-                                          DropdownMenuItem(
-                                            child: TextView.getLightText04(
-                                              "New Zealand",
-                                              color: AppColors.colorBlack,
-                                            ),
-                                            value: 2,
-                                          ),
-                                          DropdownMenuItem(
-                                              child: TextView.getLightText04(
-                                                "Nepal",
-                                                color: AppColors.colorBlack,
-                                              ),
-                                              value: 3),
-                                        ],
-                                        onChanged: (value) {
-                                          setState(() {
-                                            _dateTime = value;
-                                          });
-                                        }),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+
+                          _addLoadComponents.getDateField(
+                              onDate: () {
+                                _showDate();
+                              },
+                              date:
+                              "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}"),
                           SizedBox(height: AppSizes.height * 0.02,),
                           CommonWidgets.getSubHeadingText(
                               text: "Receiver Name"),
@@ -161,7 +127,7 @@ class _AddLoadState extends State<AddLoad> {
                           _addLoadComponents.getNameTextField(
                               leftIcon: Entypo.user,
                               hintText: 'Receiver Name',
-                              textEditingController: null),
+                              textEditingController: receiver_name),
                           SizedBox(height: AppSizes.height * 0.02,),
                           CommonWidgets.getSubHeadingText(
                               text: "Receiver Phone"),
@@ -169,7 +135,7 @@ class _AddLoadState extends State<AddLoad> {
                           _addLoadComponents.getNameTextField(
                               leftIcon: Entypo.mobile,
                               hintText: '(333)465-2835',
-                              textEditingController: null),
+                              textEditingController: receiver_phone),
                           SizedBox(height: AppSizes.height * 0.02,),
                           CommonWidgets.getSubHeadingText(text: "Good type"),
                           SizedBox(height: AppSizes.height * 0.01),
@@ -186,46 +152,42 @@ class _AddLoadState extends State<AddLoad> {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(right: 5),
-                                  child: Opacity(
-                                      opacity: 0.7,
-                                      child: Icon(
-                                        MdiIcons.dialpad,
-                                        size: 20,
-                                      )),
-                                  // child: Image(image: AssetImage(Assets.goodsType)),
+                                  child: Container(
+                                    height: AppSizes.height * 0.06,
+                                    width: AppSizes.width * 0.06,
+                                    child: Image.asset(
+                                        Assets.vehicle
+                                    ),
+                                  ),
+                                  // child: Image(image: AssetImage(Assets.vehicle)),
                                 ),
                                 Expanded(
                                   child: DropdownButtonHideUnderline(
-                                    child: DropdownButton(
-                                        icon: Icon(Icons.keyboard_arrow_down),
-                                        value: _goodType,
-                                        items: [
-                                          DropdownMenuItem(
-                                            child: TextView.getLightText04(
-                                              "Cargo",
-                                              color: AppColors.colorBlack,
-                                            ),
-                                            value: 1,
-                                          ),
-                                          DropdownMenuItem(
-                                            child: TextView.getLightText04(
-                                              "Bulldozers",
-                                              color: AppColors.colorBlack,
-                                            ),
-                                            value: 2,
-                                          ),
-                                          DropdownMenuItem(
+                                    child: DropdownButton<String>(
+                                      icon: Icon(Icons.keyboard_arrow_down),
+                                      isExpanded: true,
+                                      value: _selectedValue,
+                                      hint: TextView.getLightText04(
+                                        "Select GoodType",
+                                        color: AppColors.colorBlack,
+                                      ),
+                                      items: _addLoadProvider.description
+                                          .map<DropdownMenuItem<String>>(
+                                              (String value) {
+                                            return DropdownMenuItem<String>(
+                                              value: value,
                                               child: TextView.getLightText04(
-                                                "Mini Excavators",
+                                                value,
                                                 color: AppColors.colorBlack,
                                               ),
-                                              value: 3),
-                                        ],
-                                        onChanged: (value) {
-                                          setState(() {
-                                            _goodType = value;
-                                          });
-                                        }),
+                                            );
+                                          }).toList(),
+                                      onChanged: (String value) {
+                                        setState(() {
+                                          _selectedValue = value;
+                                        });
+                                      },
+                                    ),
                                   ),
                                 ),
                               ],
@@ -234,147 +196,25 @@ class _AddLoadState extends State<AddLoad> {
                           SizedBox(height: AppSizes.height * 0.02,),
                           CommonWidgets.getSubHeadingText(text: "Weight"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
-                            height: AppSizes.height * 0.07,
-                            width: AppSizes.width,
-                            decoration: BoxDecoration(
-                              color: AppColors.lightGray,
-                              border: Border.all(color: AppColors.lightGray),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 5),
-                                  child: Container(
-                                    height: AppSizes.height * 0.06,
-                                    width: AppSizes.width * 0.06,
-                                    child: Image.asset(
-                                      Assets.vehicle
-                                    ),
-                                  ),
-                                  // child: Image(image: AssetImage(Assets.vehicle)),
-                                ),
-                                Expanded(
-                                  child: DropdownButtonHideUnderline(
-                                    child: DropdownButton(
-                                        icon: Icon(Icons.keyboard_arrow_down),
-                                        value: _weight,
-                                        items: [
-                                          DropdownMenuItem(
-                                            child: TextView.getLightText04(
-                                              "40 Ton",
-                                              color: AppColors.colorBlack,
-                                            ),
-                                            value: 1,
-                                          ),
-                                          DropdownMenuItem(
-                                            child: TextView.getLightText04(
-                                              "45 Ton",
-                                              color: AppColors.colorBlack,
-                                            ),
-                                            value: 2,
-                                          ),
-                                          DropdownMenuItem(
-                                              child: TextView.getLightText04(
-                                                "50 Ton",
-                                                color: AppColors.colorBlack,
-                                              ),
-                                              value: 3),
-                                          DropdownMenuItem(
-                                              child: TextView.getLightText04(
-                                                "55 Ton",
-                                                color: AppColors.colorBlack,
-                                              ),
-                                              value: 4)
-                                        ],
-                                        onChanged: (value) {
-                                          setState(() {
-                                            _weight = value;
-                                          });
-                                        }),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          _addLoadComponents.getTextField(
+                              leftIcon: Assets.vehicle,
+                              hintText: 'Enter Weight',
+                              textEditingController: weight),
                           SizedBox(height: AppSizes.height * 0.02,),
                           CommonWidgets.getSubHeadingText(
                               text: "No. of Vehicle"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
-                            height: AppSizes.height * 0.07,
-                            width: AppSizes.width,
-                            decoration: BoxDecoration(
-                              color: AppColors.lightGray,
-                              border: Border.all(color: AppColors.lightGray),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 5),
-                                  child: Container(
-                                    height: AppSizes.height * 0.06,
-                                    width: AppSizes.width * 0.06,
-                                    child: Image.asset(
-                                      Assets.vehicle,
-                                    ),
-                                  ),
-                                  // child: Image(image: AssetImage(Assets.vehicle)),
-                                ),
-                                Expanded(
-                                  child: DropdownButtonHideUnderline(
-                                    child: DropdownButton(
-                                        icon: Icon(Icons.keyboard_arrow_down),
-                                        value: _noOfVehicle,
-                                        items: [
-                                          DropdownMenuItem(
-                                            child: TextView.getLightText04(
-                                              "20",
-                                              color: AppColors.colorBlack,
-                                            ),
-                                            value: 1,
-                                          ),
-                                          DropdownMenuItem(
-                                            child: TextView.getLightText04(
-                                              "25",
-                                              color: AppColors.colorBlack,
-                                            ),
-                                            value: 2,
-                                          ),
-                                          DropdownMenuItem(
-                                              child: TextView.getLightText04(
-                                                "30",
-                                                color: AppColors.colorBlack,
-                                              ),
-                                              value: 3),
-                                          DropdownMenuItem(
-                                              child: TextView.getLightText04(
-                                                "35",
-                                                color: AppColors.colorBlack,
-                                              ),
-                                              value: 4)
-                                        ],
-                                        onChanged: (value) {
-                                          setState(() {
-                                            _noOfVehicle = value;
-                                          });
-                                        }),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          _addLoadComponents.getTextField(
+                              leftIcon: Assets.vehicle,
+                              hintText: 'Enter No. of Vehicle',
+                              textEditingController: num_of_vehicle),
                           SizedBox(height: AppSizes.height * 0.02,),
                           CommonWidgets.getSubHeadingText(text: "Description"),
                           SizedBox(height: AppSizes.height * 0.01),
                           _addLoadComponents.getMessageTextField(
                               leftIcon: Icons.message,
-                              hintText: 'Abal tu ina ki cha na pasi pa indi vidh. La teje pa na si inhussu vich imager into the end. La kun finf in topi un pasi dal kichu na minga.',
-                              textEditingController: null),
+                              hintText: 'Enter Description',
+                              textEditingController: description),
                           SizedBox(height: AppSizes.height * 0.03),
                           Row(
                             children: [
@@ -424,9 +264,52 @@ class _AddLoadState extends State<AddLoad> {
                 ),
               )
             ],
+          ):Center(
+            child: Container(
+              height: AppSizes.height * 0.15,
+              child: Lottie.asset(Assets.apiLoading, fit: BoxFit.cover),
+            ),
           ),
         ),
       ),
     );
+  }
+
+  int _getGoodTypeId() {
+    int tempGoodTypeId = 0;
+    for (int i = 0; i < _addLoadProvider.getGoodType().result.length; i++) {
+      if (_selectedValue == _addLoadProvider.getGoodType().result[i].description) {
+        tempGoodTypeId = _addLoadProvider.getGoodType().result[i].goodTypeId;
+        break;
+      }
+    }
+    return tempGoodTypeId;
+  }
+
+  _showDate() async {
+    DateTime date = await showDatePicker(
+      context: context,
+      initialDate: pickedDate,
+      firstDate: DateTime(DateTime.now().year - 10),
+      lastDate: DateTime(DateTime.now().year + 10),
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeData(
+            cursorColor: Colors.grey,
+            dialogBackgroundColor: Colors.white,
+            colorScheme: ColorScheme.light(primary: AppColors.yellow),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+            highlightColor: Colors.grey[400],
+            textSelectionColor: Colors.grey,
+          ),
+          child: child,
+        );
+      },
+    );
+    if (date != null) {
+      setState(() {
+        pickedDate = date;
+      });
+    }
   }
 }

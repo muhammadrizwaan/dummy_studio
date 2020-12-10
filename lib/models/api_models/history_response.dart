@@ -1,8 +1,8 @@
 /// Message : "Operation performed Succesfully"
 /// Code : 1
-/// Result : [{"LoadId":10020,"LoadName":"Sensitive Good","PickupLocation":"Peco Road","DropoffLocation":"Creative Bugs","LoadStatusId":1,"Status":"Placed","VehicleTypeId":3,"VehicleTypeName":"Low Bed","VehicleTypeDescription":"Low Bed","ShipperCost":15032.080000000002,"TransporterCost":null,"PickupDate":"10, Oct","PickupTime":"12:00AM","IsActive":true,"CreatedBy":2058,"TransporterName":null,"AssignedDriverId":0,"AssignedTranporterId":0,"AssignedVehicleId":0},{"LoadId":10021,"LoadName":"Sensitive Good","PickupLocation":"DHA phase 4","DropoffLocation":"Gulberg","LoadStatusId":1,"Status":"Placed","VehicleTypeId":3,"VehicleTypeName":"Low Bed","VehicleTypeDescription":"Low Bed","ShipperCost":15032.080000000002,"TransporterCost":null,"PickupDate":"10, Oct","PickupTime":"12:00AM","IsActive":true,"CreatedBy":2058,"TransporterName":null,"AssignedDriverId":0,"AssignedTranporterId":0,"AssignedVehicleId":0}]
+/// Result : [{"LoadId":10020,"LoadName":"Sensitive Good","PickupLocation":"Peco Road","DropoffLocation":"Creative Bugs","LoadStatusId":11,"Status":"Delivered","VehicleTypeId":3,"VehicleTypeName":"Low Bed","VehicleTypeDescription":"Low Bed","ShipperCost":15032.080000000002,"TransporterCost":25053.47,"PickupDate":"10, Oct","PickupTime":"12:00AM","IsActive":true,"CreatedBy":2053,"TransporterName":"Kohli Transporter","AssignedDriverId":2057,"AssignedTranporterId":2055,"AssignedVehicleId":1024}]
 
-class TabbarResponse {
+class HistoryResponse {
   String _message;
   int _code;
   List<Result> _result;
@@ -11,7 +11,7 @@ class TabbarResponse {
   int get code => _code;
   List<Result> get result => _result;
 
-//   TabbarResponse({
+//   HistoryResponse({
 //       String message,
 //       int code,
 //       List<Result> result}){
@@ -19,9 +19,9 @@ class TabbarResponse {
 //     _code = code;
 //     _result = result;
 // }
-  TabbarResponse.empty();
+  HistoryResponse.empty();
 
-  TabbarResponse.fromJson(dynamic json) {
+  HistoryResponse.fromJson(dynamic json) {
     _message = json["Message"];
     _code = json["Code"];
     if (json["Result"] != null) {
@@ -48,21 +48,21 @@ class TabbarResponse {
 /// LoadName : "Sensitive Good"
 /// PickupLocation : "Peco Road"
 /// DropoffLocation : "Creative Bugs"
-/// LoadStatusId : 1
-/// Status : "Placed"
+/// LoadStatusId : 11
+/// Status : "Delivered"
 /// VehicleTypeId : 3
 /// VehicleTypeName : "Low Bed"
 /// VehicleTypeDescription : "Low Bed"
 /// ShipperCost : 15032.080000000002
-/// TransporterCost : null
+/// TransporterCost : 25053.47
 /// PickupDate : "10, Oct"
 /// PickupTime : "12:00AM"
 /// IsActive : true
-/// CreatedBy : 2058
-/// TransporterName : null
-/// AssignedDriverId : 0
-/// AssignedTranporterId : 0
-/// AssignedVehicleId : 0
+/// CreatedBy : 2053
+/// TransporterName : "Kohli Transporter"
+/// AssignedDriverId : 2057
+/// AssignedTranporterId : 2055
+/// AssignedVehicleId : 1024
 
 class Result {
   int _loadId;
@@ -75,12 +75,12 @@ class Result {
   String _vehicleTypeName;
   String _vehicleTypeDescription;
   double _shipperCost;
-  dynamic _transporterCost;
+  double _transporterCost;
   String _pickupDate;
   String _pickupTime;
   bool _isActive;
   int _createdBy;
-  dynamic _transporterName;
+  String _transporterName;
   int _assignedDriverId;
   int _assignedTranporterId;
   int _assignedVehicleId;
@@ -95,12 +95,12 @@ class Result {
   String get vehicleTypeName => _vehicleTypeName;
   String get vehicleTypeDescription => _vehicleTypeDescription;
   double get shipperCost => _shipperCost;
-  dynamic get transporterCost => _transporterCost;
+  double get transporterCost => _transporterCost;
   String get pickupDate => _pickupDate;
   String get pickupTime => _pickupTime;
   bool get isActive => _isActive;
   int get createdBy => _createdBy;
-  dynamic get transporterName => _transporterName;
+  String get transporterName => _transporterName;
   int get assignedDriverId => _assignedDriverId;
   int get assignedTranporterId => _assignedTranporterId;
   int get assignedVehicleId => _assignedVehicleId;
@@ -116,12 +116,12 @@ class Result {
       String vehicleTypeName, 
       String vehicleTypeDescription, 
       double shipperCost, 
-      dynamic transporterCost, 
+      double transporterCost, 
       String pickupDate, 
       String pickupTime, 
       bool isActive, 
       int createdBy, 
-      dynamic transporterName, 
+      String transporterName, 
       int assignedDriverId, 
       int assignedTranporterId, 
       int assignedVehicleId}){

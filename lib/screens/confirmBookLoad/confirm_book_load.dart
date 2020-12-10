@@ -13,8 +13,9 @@ import 'package:truckoom_shipper/screens/select_vehicle/select_vehicle.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 class ConfirmBookLoad extends StatefulWidget {
-  String tag;
-  ConfirmBookLoad({@required this.tag});
+  String tag, PickupLatitude, PickupLongitude, DropoffLatitude, DropoffLongitude, PickupLocation, DropoffLocation;
+  ConfirmBookLoad({@required this.tag, @required this.PickupLatitude, @required this.PickupLongitude, @required this.DropoffLatitude, @required this.DropoffLongitude, @required this.PickupLocation, @required this.DropoffLocation,});
+
   @override
   _ConfirmBookLoadState createState() => _ConfirmBookLoadState();
 }

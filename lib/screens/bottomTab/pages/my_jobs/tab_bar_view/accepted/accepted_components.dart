@@ -16,6 +16,7 @@ class AcceptedComponents{
         @required String startDate,
         @required String time,
         @required String status,
+        @required String vehicleType,
         @required String price,
         @required Function onClickPay,
         @required Function onClickCancel,
@@ -198,7 +199,7 @@ class AcceptedComponents{
                 Row(
                   children: [
                     Text(
-                      'Suzuki',
+                      vehicleType,
                       style: TextStyle(
                           fontSize: 12,
                           fontFamily: Assets.poppinsMedium,
@@ -220,6 +221,7 @@ class AcceptedComponents{
               height: AppSizes.height * 0.01,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GestureDetector(
                   onTap: () => onClickPay(),
@@ -233,9 +235,6 @@ class AcceptedComponents{
                     alignment: Alignment.center,
                     child: TextView.getLabelText04("Pay", color: Colors.white),
                   ),
-                ),
-                SizedBox(
-                  width: 20,
                 ),
                 GestureDetector(
                   onTap: () => onClickCancel(),

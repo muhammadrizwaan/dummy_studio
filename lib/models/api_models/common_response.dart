@@ -390,7 +390,7 @@ class Ratings {
 /// LicenseBackPath : "/Files/Licenses/3.jpeg"
 /// EmiratesId : null
 
-class DriverDetails {
+class DriverDetails1 {
   int _driverDetailId;
   int _driverId;
   String _licenseFrontPath;
@@ -415,6 +415,52 @@ class DriverDetails {
     _licenseBackPath = licenseBackPath;
     _emiratesId = emiratesId;
 }
+
+  DriverDetails1.fromJson(dynamic json) {
+    _driverDetailId = json["DriverDetailId"];
+    _driverId = json["DriverId"];
+    _licenseFrontPath = json["LicenseFrontPath"];
+    _licenseBackPath = json["LicenseBackPath"];
+    _emiratesId = json["EmiratesId"];
+  }
+
+  Map<String, dynamic> toJson() {
+    var map = <String, dynamic>{};
+    map["DriverDetailId"] = _driverDetailId;
+    map["DriverId"] = _driverId;
+    map["LicenseFrontPath"] = _licenseFrontPath;
+    map["LicenseBackPath"] = _licenseBackPath;
+    map["EmiratesId"] = _emiratesId;
+    return map;
+  }
+
+}
+
+class DriverDetails {
+  int _driverDetailId;
+  int _driverId;
+  String _licenseFrontPath;
+  String _licenseBackPath;
+  dynamic _emiratesId;
+
+  int get driverDetailId => _driverDetailId;
+  int get driverId => _driverId;
+  String get licenseFrontPath => _licenseFrontPath;
+  String get licenseBackPath => _licenseBackPath;
+  dynamic get emiratesId => _emiratesId;
+
+  DriverDetails({
+    int driverDetailId,
+    int driverId,
+    String licenseFrontPath,
+    String licenseBackPath,
+    dynamic emiratesId}){
+    _driverDetailId = driverDetailId;
+    _driverId = driverId;
+    _licenseFrontPath = licenseFrontPath;
+    _licenseBackPath = licenseBackPath;
+    _emiratesId = emiratesId;
+  }
 
   DriverDetails.fromJson(dynamic json) {
     _driverDetailId = json["DriverDetailId"];

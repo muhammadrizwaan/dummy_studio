@@ -2,15 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
+import 'package:lottie/lottie.dart';
 import 'package:truckoom_shipper/commons/get_token.dart';
+import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/history/history_components.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/history/history_provider.dart';
 import 'package:truckoom_shipper/screens/notifications/notifications.dart';
 import 'package:truckoom_shipper/screens/wallet/wallet.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
-
 import '../../../../animations/slide_right.dart';
-import '../../../../res/assets.dart';
+import 'package:provider/provider.dart';
 import '../../../../res/colors.dart';
 import '../../../../res/sizes.dart';
 import '../../../../widgets/common_widgets.dart';
@@ -27,17 +29,21 @@ class HistoryScreen extends StatefulWidget {
 class _HistoryScreenState extends State<HistoryScreen> {
 
   HistoryComponents _historyComponents;
+  HistoryProvider _historyProvider;
   String price;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _historyProvider = Provider.of<HistoryProvider>(context, listen: false);
+    _historyProvider.init(context: context);
     price = "";
     _historyComponents = HistoryComponents();
   }
   @override
   Widget build(BuildContext context) {
+    Provider.of<HistoryProvider>(context, listen: true);
     return Container(
         height: AppSizes.height,
         width: AppSizes.width,
@@ -60,98 +66,48 @@ class _HistoryScreenState extends State<HistoryScreen> {
               height: 20,
             ),
             Expanded(
-              child: ListView(
-                children: [
-                  Container(
-                    margin: EdgeInsets.symmetric(
-                        horizontal: AppSizes.width * 0.05),
-                    child: Column(children: [
-                      SizedBox(
-                        height: AppSizes.height * 0.02,
-                      ),
-                      _historyComponents.getTransectionsContainer(
-                        jobDetail: "01",
-                        pickUpLocation: "ABC Port:",
-                        destinationLocation: "227 Building, UAE:",
-                        startDate: "11 Aug,",
-                        endDate: "12 Aug,",
-                        price: "AED 260",
-                        status: "Completed",
-                        startTime: "11:00pm",
-                        endTime: "11:00pm",
-                        onTap: () {
-                          ApplicationToast.AlertBoxSuzuki(context: context);
-                        },
-                        onInvoice: () {
-                          Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
-                        },
-                      ),
-                      SizedBox(
-                        height: AppSizes.height * 0.02,
-                      ),
-                      _historyComponents.getTransectionsContainer(
-                        jobDetail: "02",
-                        pickUpLocation: "ABC Port:",
-                        destinationLocation: "227 Building, UAE:",
-                        startDate: "11 Aug,",
-                        endDate: "12 Aug,",
-                        price: "AED 260",
-                        status: "Completed",
-                        startTime: "11:00pm",
-                        endTime: "11:00pm",
-                        onTap: () {
-                          ApplicationToast.AlertBoxSuzuki(context: context);
-                        },
-                        onInvoice: () {
-                          Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
-                        },
-                      ),
-                      SizedBox(
-                        height: AppSizes.height * 0.02,
-                      ),
-                      _historyComponents.getTransectionsContainer(
-                        jobDetail: "03",
-                        pickUpLocation: "ABC Port:",
-                        destinationLocation: "227 Building, UAE:",
-                        startDate: "11 Aug,",
-                        endDate: "12 Aug,",
-                        price: "AED 260",
-                        status: "Completed",
-                        startTime: "11:00pm",
-                        endTime: "11:00pm",
-                        onTap: () {
-                          ApplicationToast.AlertBoxSuzuki(context: context);
-                        },
-                        onInvoice: () {
-                          Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
-                        },
-                      ),
-                      SizedBox(
-                        height: AppSizes.height * 0.02,
-                      ),
-                      _historyComponents.getTransectionsContainer(
-                        jobDetail: "04",
-                        pickUpLocation: "ABC Port:",
-                        destinationLocation: "227 Building, UAE:",
-                        startDate: "11 Aug,",
-                        endDate: "12 Aug,",
-                        price: "AED 260",
-                        status: "Completed",
-                        startTime: "11:00pm",
-                        endTime: "11:00pm",
-                        onTap: () {
-                          ApplicationToast.AlertBoxSuzuki(context: context);
-                        },
-                        onInvoice: () {
-                          Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
-                        },
-                      ),
-                      SizedBox(
-                        height: AppSizes.height * 0.02,
-                      ),
-                    ]),
-                  )
-                ],
+              child: _historyProvider.isDataFetched?
+                  ListView.builder(
+                    itemCount: _historyProvider.historyResponse.result.length,
+                      itemBuilder: (context, index){
+                    return Container(
+                      margin: EdgeInsets.symmetric(
+                          horizontal: AppSizes.width * 0.05),
+                      child: Column(children: [
+                        SizedBox(
+                          height: AppSizes.height * 0.02,
+                        ),
+                        _historyComponents.getHistoryContainer(
+                          jobDetail: _historyProvider.historyResponse.result[index].loadId.toString(),
+                          pickUpLocation: _historyProvider.historyResponse.result[index].pickupLocation,
+                          destinationLocation: _historyProvider.historyResponse.result[index].dropoffLocation,
+                          startDate: _historyProvider.historyResponse.result[index].pickupDate,
+                          endDate: _historyProvider.historyResponse.result[index].pickupDate,
+                          price: "${Strings.aed} ${_historyProvider.historyResponse.result[index].shipperCost.round()}",
+                          status: _historyProvider.historyResponse.result[index].status,
+                          vehicleType: _historyProvider.historyResponse.result[index].vehicleTypeName,
+                          startTime: _historyProvider.historyResponse.result[index].pickupTime,
+                          endTime: _historyProvider.historyResponse.result[index].pickupTime,
+                          onTap: () {
+                            ApplicationToast.onDescriptionAlert(context: context, description: _historyProvider.historyResponse.result[index].vehicleTypeDescription);
+                          },
+                          onInvoice: () {
+                            Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
+                          },
+                        ),
+                        SizedBox(
+                          height: AppSizes.height * 0.02,
+                        ),
+                      ]),
+                    );
+                  }
+              ):
+              Center(
+                child: Container(
+                  height: AppSizes.height * 0.15,
+                  // width: AppSizes.width,
+                  child: Lottie.asset(Assets.apiLoading, fit: BoxFit.cover),
+                ),
               ),
             )
           ],

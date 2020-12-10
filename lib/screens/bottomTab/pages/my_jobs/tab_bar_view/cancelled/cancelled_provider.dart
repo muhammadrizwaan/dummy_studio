@@ -12,8 +12,7 @@ import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/loader.dart';
 import 'package:http/http.dart' as http;
-
-class DispatchedProvider extends ChangeNotifier{
+class CancelledProvider extends ChangeNotifier{
   BuildContext context;
 
   GenericDecodeEncode genericDecodeEncode = GenericDecodeEncode();
@@ -28,13 +27,13 @@ class DispatchedProvider extends ChangeNotifier{
   String token;
   init({@required BuildContext context}) async{
     this.context = context;
-    statusId = 9;
-    await getDispatchLoad(context: context);
+    statusId = 6;
+    await getCancelledLoad(context: context);
     connectivityResult = "";
     token = "";
   }
 
-  Future getDispatchLoad({@required BuildContext context}) async{
+  Future getCancelledLoad({@required BuildContext context}) async{
     try{
       token = await getToken.onToken();
       connectivityResult = await Connectivity().checkConnectivity();
@@ -54,7 +53,6 @@ class DispatchedProvider extends ChangeNotifier{
         );
         if(response.statusCode == 200){
           tabbarResponse = TabbarResponse.fromJson(genericDecodeEncode.decodeJson(response.body));
-          print('success 1');
           if(tabbarResponse.code == 1){
             isDataFetched = true;
             notifyListeners();
@@ -62,12 +60,10 @@ class DispatchedProvider extends ChangeNotifier{
           else{
             ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: tabbarResponse.message);
           }
-
         }
         else{
           ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: Strings.somethingWentWrong);
         }
-
       }
     }
     catch(error){

@@ -1,9 +1,11 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/linearicons_free_icons.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class AddLoadComponents {
   Widget getLocationContainer(){
@@ -194,6 +196,61 @@ class AddLoadComponents {
     );
   }
 
+  Widget getTextField(
+      { @required String leftIcon, @required String hintText, @required TextEditingController textEditingController,}) {
+    return Container(
+      height: AppSizes.height * 0.07,
+      width: AppSizes.width,
+      padding: EdgeInsets.only(left: 10),
+      decoration: BoxDecoration(
+        color: AppColors.lightGray,
+        // border: Border.all(color: AppColors.borderColor),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 5),
+            child: Container(
+              height: AppSizes.height * 0.06,
+              width: AppSizes.width * 0.06,
+              child: Image.asset(
+                  leftIcon,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.only(left: 5),
+              // color: AppColors.yellow,
+              child: TextField(
+                style: TextStyle(
+                  decoration: TextDecoration.none,
+                  fontFamily: Assets.poppinsLight,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                ),
+                controller: textEditingController,
+                // readOnly: true,
+                decoration: InputDecoration(
+                  hintText: hintText,
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(
+                    decoration: TextDecoration.none,
+                    fontSize: 12,
+                    color: AppColors.colorBlack,
+                    fontFamily: Assets.poppinsLight,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget getMessageTextField(
       { @required IconData leftIcon, @required String hintText, @required TextEditingController textEditingController,}) {
     return Container(
@@ -250,6 +307,45 @@ class AddLoadComponents {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget getDateField({@required String date, @required Function onDate}) {
+    return GestureDetector(
+      onTap: () => onDate(),
+      child: Container(
+        height: AppSizes.height * 0.07,
+        width: AppSizes.width,
+        padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.02),
+        decoration: BoxDecoration(
+          color: AppColors.lightGray,
+          border: Border.all(color: AppColors.lightGray),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Opacity(
+              opacity: 0.6,
+              child: Icon(
+                LineariconsFree.license,
+                size: 20,
+              ),
+            ),
+            Expanded(
+              child: Center(
+                child: Container(
+                  padding: EdgeInsets.only(left: 5),
+                  width: AppSizes.width,
+                  child:
+                  TextView.getLabel2Text04(date, color: AppColors.colorBlack),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

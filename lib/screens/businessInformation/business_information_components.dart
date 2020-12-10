@@ -80,7 +80,7 @@ class BusinessInformationComponents {
       onTap: () => onDate(),
       child: Container(
         height: AppSizes.height * 0.07,
-        width: AppSizes.width * 0.85,
+        width: AppSizes.width,
         padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.02),
         decoration: BoxDecoration(
           color: AppColors.lightGray,
@@ -100,32 +100,17 @@ class BusinessInformationComponents {
             ),
             Center(
               child: Container(
-                // color: AppColors.yellow,
+                padding: EdgeInsets.only(left: 5),
                 width: AppSizes.width * 0.65,
-                child: TextView.getLabel2Text04(date, color: AppColors.colorBlack)
-                // height: AppSizes.height * 0.05,
-                // child: TextField(
-                //   style: TextStyle(
-                //     decoration: TextDecoration.none,
-                //     fontFamily: Assets.poppinsLight,
-                //     fontSize: 12,
-                //     color: AppColors.colorBlack,
-                //   ),
-                //   controller: textEditingController,
-                //   obscureText: isPassword,
-                //   decoration: InputDecoration(
-                //     hintText: hintText,
-                //     border: InputBorder.none,
-                //     hintStyle: TextStyle(
-                //       decoration: TextDecoration.none,
-                //       fontSize: 13,
-                //       fontFamily: Assets.poppinsLight,
-                //     ),
-                //   ),
-                // ),
+                child:
+                    TextView.getLabel2Text04(date, color: AppColors.colorBlack),
               ),
             ),
-            Image(image: AssetImage('assets/png/check_circle_fill_pn.png')),
+            Container(
+                height: AppSizes.height * 0.035,
+                width: AppSizes.width * 0.085,
+                child: Image(
+                    image: AssetImage('assets/png/check_circle_fill_pn.png')),),
           ],
         ),
       ),

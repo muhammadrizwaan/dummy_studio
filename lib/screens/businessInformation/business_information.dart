@@ -29,7 +29,7 @@ class BusinessInformation extends StatefulWidget {
 class _BusinessInformationState extends State<BusinessInformation> {
   BusinessInformationComponents _businessInformationComponents;
   BusinessInformationProvider _businessInformationProvider;
-  TextEditingController business_name, contact_number, trn, license_date;
+  TextEditingController business_name, contact_number, trn;
 
   bool onCheck = false;
   DateTime pickedDate;
@@ -43,7 +43,6 @@ class _BusinessInformationState extends State<BusinessInformation> {
     business_name = TextEditingController();
     contact_number = TextEditingController();
     trn = TextEditingController();
-    license_date = TextEditingController();
     pickedDate = DateTime.now();
   }
 
@@ -123,16 +122,6 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           CommonWidgets.getSubHeadingText(
                               text: "License Expiry Date"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          CommonWidgets.getTextField(
-                              isPassword: true,
-                              leftIcon: LineariconsFree.license,
-                              textEditingController: license_date,
-                              hintText: "09/22/2030"),
-                          /* _businessInformationComponents.getTextField(
-                              isPassword: true,
-                              textEditingController: license_date,
-                              hintText: "09/22/2030"
-                          ),*/
                           _businessInformationComponents.getDateField(
                               onDate: () {
                                 _showDate();
@@ -157,7 +146,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                                         businessName: business_name.text,
                                         phoneNumber: contact_number.text,
                                         trn: trn.text,
-                                        licenseExpiryDate: license_date.text,
+                                        licenseExpiryDate: pickedDate,
                                         userId: widget.userId,
                                         tag: widget.tag,
                                         onCheck: onCheck);
@@ -239,110 +228,6 @@ class _BusinessInformationState extends State<BusinessInformation> {
     );
   }
 
-  _alertDialogueContainer() {
-    return {
-      {
-        showDialog(
-          context: context,
-          builder: (_) {
-            return Material(
-              color: AppColors.blackTextColor.withOpacity(0.5),
-              child: Center(
-                child: Stack(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(
-                          left: AppSizes.width * 0.08,
-                          right: AppSizes.width * 0.08),
-                      height: AppSizes.height * 0.25,
-                      width: AppSizes.width,
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(
-                        left: AppSizes.width * 0.12,
-                        right: AppSizes.width * 0.12,
-                        top: AppSizes.width * 0.07,
-                      ),
-                      padding: EdgeInsets.only(
-                        top: AppSizes.height * 0.08,
-                      ),
-                      height: AppSizes.height * 0.2,
-                      width: AppSizes.width,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border:
-                            Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Signup Successful",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              decoration: TextDecoration.none,
-                              fontSize: 20,
-                              color: AppColors.colorBlack,
-                              fontFamily: Assets.poppinsMedium,
-                              //fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  SlideRightRoute(
-                                      page: BottomTab(tag: widget.tag)),
-                                  (Route<dynamic> route) => false);
-                            },
-                            child: Text(
-                              "Tap to Continue",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  decoration: TextDecoration.none,
-                                  fontSize: 12,
-                                  color: AppColors.yellow,
-                                  fontFamily: Assets.poppinsRegular,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: AppSizes.width * 0.425),
-                      height: AppSizes.width * 0.15,
-                      width: AppSizes.width * 0.15,
-                      decoration: BoxDecoration(
-                        color: AppColors.yellow,
-                        border:
-                            Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
-                      ),
-                      child: Icon(
-                        Icons.check,
-                        color: Colors.white,
-                        size: 40,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        ),
-      }
-    };
-  }
-
   _showDate() async {
     DateTime date = await showDatePicker(
       context: context,
@@ -370,7 +255,4 @@ class _BusinessInformationState extends State<BusinessInformation> {
     }
   }
 
-  hideLoader(BuildContext context) {
-    Navigator.push(context, SlideRightRoute(page: BusinessProfile()));
-  }
 }

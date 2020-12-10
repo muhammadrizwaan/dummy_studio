@@ -78,7 +78,7 @@ class _OTPAuthenticationState extends State<OTPAuthentication> {
                           SizedBox(height: AppSizes.height*0.03,),
                           CommonWidgets.getHeadingText(text: 'OTP Authentication'),
                           SizedBox(height: AppSizes.height*0.02,),
-                          _otpAuthenticationComponents.getOTPLableText(text: "Enter the 4-digit code sent to you at"),
+                          _otpAuthenticationComponents.getOTPLableText(text: "Enter the 6-digit code sent to you at"),
                           SizedBox(height: AppSizes.height*0.035,),
                           CommonWidgets.getSubHeadingText(text: "Enter Verification Code"),
                           SizedBox(height: AppSizes.height*0.008,),

@@ -14,6 +14,10 @@ class Strings {
   static const String business = "business";
   static const String signupSuccessful = "Sign up Successful";
   static const String loginSuccessful = "Login Successful";
+  static const String aed = "AED";
+  static const String yes = "Yes";
+  static const String no = "No";
+  static const String cancelLoadAlertText = "Are you sure you want to cancel the Load?";
 
   static const String roundTrip = "Round Trip";
   static const String pickupDateAndTime = "Pickup date and time";
@@ -32,8 +36,6 @@ class Strings {
   static const String submit = "Submit";
   static const String deviceId = "device_id";
   static const String tapAndContinue = "Tap to Continue";
-
-
 
 
   // Error Toast Text
@@ -55,4 +57,6 @@ class Strings {
   static const String internetConnectionError = "Internet connection error";
   static const String passwordUpdatedText = "Please check your email";
   static const String messageErrorText = "Please enter message";
+  static const String weightErrorText = "Please enter weight";
+  static const String noOfVehicleErrorText = "Please enter number of vehicle";
 }

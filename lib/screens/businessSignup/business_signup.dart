@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttericon/elusive_icons.dart';
 import 'package:fluttericon/entypo_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
@@ -39,80 +40,19 @@ class _BusinessSignupState extends State<BusinessSignup> {
   BusinessSignupComponents _businessSignupComponents;
   TextEditingController name, email, password, confirm_Password;
   BusinessSignupProvider _businessSignupProvider;
-  NetworkHelper _networkHelper = NetworkHelperImpl();
-  CitiesResponse citiesResponse = CitiesResponse.empty();
-  GenericDecodeEncode genericDecodeEncode = GenericDecodeEncode();
   bool onCheck = false;
-  String _value;
-  var connectivity;
-  List<Result> _getResponse;
-  List<String> description;
-  List<String> tempId;
+  String _selectedValue;
+
 
   @override
   void initState() {
     _businessSignupComponents = BusinessSignupComponents();
-    _businessSignupProvider =
-        Provider.of<BusinessSignupProvider>(context, listen: false);
+    _businessSignupProvider = Provider.of<BusinessSignupProvider>(context, listen: false);
     _businessSignupProvider.init(context: context);
     name = TextEditingController();
     email = TextEditingController();
     password = TextEditingController();
     confirm_Password = TextEditingController();
-    _getResponse = List<Result>();
-    description = List<String>();
-    tempId = List<String>();
-    connectivity = "";
-    _value = "";
-    _callCitiesAPI();
-  }
-
-  Future _callCitiesAPI() async {
-    try {
-      connectivity = await Connectivity().checkConnectivity();
-      if (connectivity == ConnectivityResult.none) {
-        ApplicationToast.getErrorToast(
-            durationTime: 3,
-            heading: Strings.error,
-            subHeading: Strings.internetConnectionError);
-      } else {
-        // _loader.showLoader(context: context);
-        http.Response response = await _networkHelper.get(
-          citiesApi,
-        );
-        if (response.statusCode == 200) {
-          citiesResponse = CitiesResponse.fromJson(
-              genericDecodeEncode.decodeJson(response.body));
-          if (citiesResponse.code == 1) {
-            // _loader.hideLoader(context);
-            print("Success");
-            print(citiesResponse.result.length);
-            List<Result> temp = citiesResponse.result;
-            for (int i = 0; i < temp.length; i++) {
-              description.add(temp[i].description);
-              tempId.add(temp[i].cityId.toString());
-            }
-            setState(() {
-              _getResponse = temp;
-            });
-          } else {
-            // _loader.hideLoader(context);
-            ApplicationToast.getErrorToast(
-                durationTime: 3,
-                heading: Strings.error,
-                subHeading: citiesResponse.message);
-          }
-        } else {
-          // _loader.hideLoader(context);
-          ApplicationToast.getErrorToast(
-              durationTime: 3,
-              heading: Strings.error,
-              subHeading: Strings.somethingWentWrong);
-        }
-      }
-    } catch (error) {
-      print(error.toString());
-    }
   }
 
   @override
@@ -130,7 +70,7 @@ class _BusinessSignupState extends State<BusinessSignup> {
           height: AppSizes.height,
           width: AppSizes.width,
           color: AppColors.white,
-          child: Column(
+          child: _businessSignupProvider.isDataFetched? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -144,16 +84,6 @@ class _BusinessSignupState extends State<BusinessSignup> {
                 onTap: () {
                   Navigator.push(context, SlideRightRoute(page: Login()));
                 },),
-              /*CommonWidgets.getAppBar(
-                  iconName: 'cross_icon.png',
-                  text: "Already have an account? ",
-                  clickableText: "Login",
-                  onTap: () {
-                    Navigator.push(context, SlideRightRoute(page: Login()));
-                  },
-                  onPress: () {
-                    Navigator.pop(context);
-                  }),*/
               Expanded(
                 child: ListView(
                   children: [
@@ -210,13 +140,58 @@ class _BusinessSignupState extends State<BusinessSignup> {
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "City"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          // Container(
-                          //   padding: EdgeInsets.symmetric(horizontal: 10),
-                          //   height: AppSizes.height * 0.06,
-                          //   width: AppSizes.width,
-                          //   child: _getDropDown(),
-                          // ),
-                          _getDropDown2(),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          height: AppSizes.height * 0.07,
+                          width: AppSizes.width * 0.85,
+                          decoration: BoxDecoration(
+                            color: AppColors.lightGray,
+                            border: Border.all(color: AppColors.lightGray),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: Icon(
+                                  Elusive.location,
+                                  size: 20,
+                                  color:
+                                  AppColors.colorBlack.withOpacity(0.8),
+                                ),
+                              ),
+                              Expanded(
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton<String>(
+                                    icon: Icon(Icons.keyboard_arrow_down),
+                                    isExpanded: true,
+                                    value: _selectedValue,
+                                    hint: TextView.getLightText04(
+                                      "Select City",
+                                      color: AppColors.colorBlack,
+                                    ),
+                                    items: _businessSignupProvider.description
+                                        .map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: TextView.getLightText04(
+                                              value,
+                                              color: AppColors.colorBlack,
+                                            ),
+                                          );
+                                        }).toList(),
+                                    onChanged: (String value) {
+                                      setState(() {
+                                        _selectedValue = value;
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
 
                           SizedBox(height: AppSizes.height * 0.02),
                           _getTermsAndCondition(),
@@ -232,12 +207,9 @@ class _BusinessSignupState extends State<BusinessSignup> {
                                   email: email.text,
                                   password: password.text,
                                   confirmPassword: confirm_Password.text,
-                                  city: _getBrandId(),
+                                  city: getCityId(),
                                   onCheck: onCheck,
                                 );
-                                // _businessSignupProvider.getCities(context: context);
-
-                                // Navigator.push(context, SlideRightRoute(page: BusinessInformation(tag: widget.tag,)));
                               }),
                           SizedBox(height: AppSizes.height * 0.02),
                         ],
@@ -247,6 +219,12 @@ class _BusinessSignupState extends State<BusinessSignup> {
                 ),
               )
             ],
+          ):
+          Center(
+            child: Container(
+              height: AppSizes.height * 0.15,
+              child: Lottie.asset(Assets.apiLoading, fit: BoxFit.cover),
+            ),
           ),
         ),
       ),
@@ -315,229 +293,14 @@ class _BusinessSignupState extends State<BusinessSignup> {
     );
   }
 
-  int _getBrandId() {
-    int tempBrandId = 0;
-    for (int i = 0; i < citiesResponse.result.length; i++) {
-      if (_value == citiesResponse.result[i].description) {
-        tempBrandId = citiesResponse.result[i].cityId;
+  int getCityId() {
+    int tempCityId = 0;
+    for (int i = 0; i < _businessSignupProvider.getCitiesList().result.length; i++) {
+      if (_selectedValue == _businessSignupProvider.getCitiesList().result[i].description) {
+        tempCityId = _businessSignupProvider.getCitiesList().result[i].cityId;
         break;
       }
     }
-    return tempBrandId;
-  }
-
-  _getDropDown2() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10),
-      height: AppSizes.height * 0.06,
-      width: AppSizes.width,
-      decoration: BoxDecoration(
-        color: AppColors.lightGray,
-        border: Border.all(color: AppColors.lightGray),
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: Icon(
-              Elusive.location,
-              size: 20,
-              color:
-              AppColors.colorBlack.withOpacity(0.8),
-            ),
-          ),
-          Expanded(
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton(
-                isExpanded: true,
-                icon: Icon(Icons.keyboard_arrow_down),
-                value: _value,
-                hint: Text('Select City'),
-                // items: _businessSignupProvider.citiesList?.map((item){
-                //   return new DropdownMenuItem(
-                //       child:new Text(item['Description']),
-                //     value: item['CityId'].toString(),
-                //   );
-                // })?.toList()??[],
-                items: [
-                  DropdownMenuItem(
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _value = "Abu Dhabi";
-                        });
-                      },
-                      child: Text('Abu Dhabi'),
-                    ),
-                    value: 'Abu Dhabi',
-                  ),
-                  DropdownMenuItem(
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _value = "Dubai";
-                        });
-                      },
-                      child: Text('Dubai'),
-                    ),
-                    value: 'Dubai',
-                  ),
-                  DropdownMenuItem(
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _value = "Ajman";
-                        });
-                      },
-                      child: Text('Ajman'),
-                    ),
-                    value: 'Ajman',
-                  ),
-                  DropdownMenuItem(
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _value = "Fujairah";
-                        });
-                      },
-                      child: Text('Fujairah'),
-                    ),
-                    value: 'Fujairah',
-                  ),
-                  DropdownMenuItem(
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _value = "Ras al Khaimah";
-                        });
-                      },
-                      child: Text('Ras al Khaimah'),
-                    ),
-                    value: 'Ras al Khaimah',
-                  ),
-                  DropdownMenuItem(
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _value = "Sharjah";
-                        });
-                      },
-                      child: Text('Sharjah'),
-                    ),
-                    value: 'Sharjah',
-                  ),
-                  DropdownMenuItem(
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _value = "Umm al Quwain";
-                        });
-                      },
-                      child: Text('Umm al Quwain'),
-                    ),
-                    value: 'Umm al Quwain',
-                  ),
-                ],
-                onChanged: (value) {
-                  setState(() {
-                    _value = value;
-                  });
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-  _getDropDown(){
-    return CircularDropDownMenu(
-      dropDownMenuItem: [
-        DropdownMenuItem(
-          child: GestureDetector(
-            onTap: () {
-              setState(() {
-                _value = "Abu Dhabi";
-              });
-            },
-            child: Text('Abu Dhabi'),
-          ),
-          value: 'Abu Dhabi',
-        ),
-        DropdownMenuItem(
-          child: GestureDetector(
-            onTap: () {
-              setState(() {
-                _value = "Dubai";
-              });
-            },
-            child: Text('Dubai'),
-          ),
-          value: 'Dubai',
-        ),
-        DropdownMenuItem(
-          child: GestureDetector(
-            onTap: () {
-              setState(() {
-                _value = "Ajman";
-              });
-            },
-            child: Text('Ajman'),
-          ),
-          value: 'Ajman',
-        ),
-        DropdownMenuItem(
-          child: GestureDetector(
-            onTap: () {
-              setState(() {
-                _value = "Fujairah";
-              });
-            },
-            child: Text('Fujairah'),
-          ),
-          value: 'Fujairah',
-        ),
-        DropdownMenuItem(
-          child: GestureDetector(
-            onTap: () {
-              setState(() {
-                _value = "Ras al Khaimah";
-              });
-            },
-            child: Text('Ras al Khaimah'),
-          ),
-          value: 'Ras al Khaimah',
-        ),
-        DropdownMenuItem(
-          child: GestureDetector(
-            onTap: () {
-              setState(() {
-                _value = "Sharjah";
-              });
-            },
-            child: Text('Sharjah'),
-          ),
-          value: 'Sharjah',
-        ),
-        DropdownMenuItem(
-          child: GestureDetector(
-            onTap: () {
-              setState(() {
-                _value = "Umm al Quwain";
-              });
-            },
-            child: Text('Umm al Quwain'),
-          ),
-          value: 'Umm al Quwain',
-        ),
-      ],
-      onChanged: (value) {
-        setState(() {
-          _value = value;
-        });
-      },
-      hintText: _value,
-    );
+    return tempCityId;
   }
 }

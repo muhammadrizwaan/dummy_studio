@@ -16,6 +16,7 @@ class CancelledComponents{
         @required String startDate,
         @required String time,
         @required String status,
+        @required String vehicleType,
         @required String price,
         @required Function onTap,
         @required Function onAlert,
@@ -160,7 +161,7 @@ class CancelledComponents{
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Status:',
+                  vehicleType,
                   style: TextStyle(
                     fontSize: 12,
                     fontFamily: Assets.poppinsRegular,

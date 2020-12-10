@@ -3,6 +3,12 @@ import 'package:truckoom_shipper/screens/Splash/splash_provider.dart';
 import 'package:truckoom_shipper/screens/addLoad/add_load_provider.dart';
 import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_detail_provider.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab_provider.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/history/history_provider.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/accepted/accepted_provider.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/cancelled/cancelled.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/cancelled/cancelled_provider.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/dispatch/dispatch_provider.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/in_process/in_process_provider.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/placed/placed_provider.dart';
 import 'package:truckoom_shipper/screens/businessEditProfile/business_edit_profile_provider.dart';
 import 'package:truckoom_shipper/screens/businessInformation/business_information_provider.dart';
@@ -27,6 +33,7 @@ import 'package:truckoom_shipper/screens/payment/payment_provider.dart';
 import 'package:truckoom_shipper/screens/phoneNumber/phone_number_provider.dart';
 import 'package:truckoom_shipper/screens/referrals/referrals_provider.dart';
 import 'package:truckoom_shipper/screens/resetPassword/reset_password_provider.dart';
+import 'package:truckoom_shipper/screens/select_vehicle/select_vehicle_provider.dart';
 import 'package:truckoom_shipper/screens/signup/sign_up_provider.dart';
 import 'package:truckoom_shipper/screens/wallet/wallet_provier.dart';
 
@@ -153,6 +160,30 @@ final multiProviders = [
   ),
   ChangeNotifierProvider<PlacedProvider>(
     create: (_) => PlacedProvider(),
+    lazy: true,
+  ),
+  ChangeNotifierProvider<AcceptedProvider>(
+    create: (_) => AcceptedProvider(),
+    lazy: true,
+  ),
+  ChangeNotifierProvider<InProcessProvider>(
+    create: (_) => InProcessProvider(),
+    lazy: true,
+  ),
+  ChangeNotifierProvider<DispatchedProvider>(
+    create: (_) => DispatchedProvider(),
+    lazy: true,
+  ),
+  ChangeNotifierProvider<CancelledProvider>(
+    create: (_) => CancelledProvider(),
+    lazy: true,
+  ),
+  ChangeNotifierProvider<HistoryProvider>(
+    create: (_) => HistoryProvider(),
+    lazy: true,
+  ),
+  ChangeNotifierProvider<SelectVehicleProvider>(
+    create: (_) => SelectVehicleProvider(),
     lazy: true,
   ),
 ];
