@@ -12,8 +12,14 @@ const String citiesApi = "$baseUrl/api/Cities";
 const String forgotPassword = "$baseUrl/api/Accounts/ForgotPassword?email=";
 
 const String saveQuery = "$baseUrl/api/Queries/SaveQuery";
-
 const String getLoadApi = "$baseUrl/api/Loads/MyLoads?userId={userId}&statusId={statusId}";
-// const String getLoadApi = "$baseUrl/api/Loads/MyLoads?userId=2059&statusId=1";
+const String getHistoryApi = "$baseUrl/api/Loads/MyLoadHistory?userId={userId}";
+const String getGoodTypeApi = "$baseUrl/api/GoodTypes";
+const String getVehicleTypeApi = "$baseUrl/api/Vehicle/GetVehicleTypes";
+const String deleteLoadApi = "$baseUrl/api/Loads/DeleteLoad?loadId={loadId}";
+const String getLoadDetailApi = "$baseUrl/api/Loads/GetLoadDetailsByLoadId?loadId={loadId}";
+const String saveLoadApi = "$baseUrl/api/Loads/SaveLoad";
+const String estimatedLoadPrice = "$baseUrl/api/Loads/EstimatedLoadPrice";
+
 
 

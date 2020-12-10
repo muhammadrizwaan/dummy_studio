@@ -32,7 +32,8 @@ class _PhoneNumberState extends State<PhoneNumber> {
 
   @override
   void initState() {
-    _phoneNumberProvider = Provider.of<PhoneNumberProvider>(context, listen: false);
+    _phoneNumberProvider =
+        Provider.of<PhoneNumberProvider>(context, listen: false);
     _phoneNumberComponents = PhoneNumberComponents();
     phone_number = TextEditingController();
     phone_number.addListener(() {
@@ -82,7 +83,7 @@ class _PhoneNumberState extends State<PhoneNumber> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(
-                            height: AppSizes.height*0.03,
+                            height: AppSizes.height * 0.03,
                           ),
                           CommonWidgets.getHeadingText(
                             text: 'Enter Phone Number',
@@ -94,12 +95,17 @@ class _PhoneNumberState extends State<PhoneNumber> {
                           SizedBox(
                             height: 10,
                           ),
-                          CommonWidgets.getTextField2(
-                            isPassword: false,
-                            leftIcon: Entypo.mobile,
-                            textEditingController: phone_number,
-                            hintText: "Phone Number",
-                            filledField: filled
+                          // CommonWidgets.getTextField(
+                          //   isPassword: false,
+                          //   leftIcon: Entypo.mobile,
+                          //   textEditingController: phone_number,
+                          //   hintText: "Phone Number",
+                          //   filledField: filled
+                          // ),
+                          CommonWidgets.getTextField(isPassword: false,
+                              leftIcon: Entypo.mobile,
+                              textEditingController: phone_number,
+                              hintText: "Phone Number",
                           ),
                           SizedBox(height: AppSizes.height * 0.03),
                           _getTermsAndCondition(),

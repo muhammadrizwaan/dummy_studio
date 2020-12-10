@@ -164,16 +164,6 @@ class _BookLoadDetailsState extends State<BookLoadDetails> {
             ],
           ),
 
-          // Container(
-          //   child: ListView.builder(
-          //     itemCount: getAllImages.length,
-          //       itemBuilder: (context, index){
-          //       return _bookLoadDetailComponents.getLoadImages(
-          //           images: getAllImages[index].imagePath
-          //       );
-          //       }
-          //   ),
-          // ),
           SizedBox(height: AppSizes.height * 0.03),
           CommonWidgets.getBottomButton(
               text: "Submit",

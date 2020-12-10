@@ -16,6 +16,7 @@ class DispatchComponents{
         @required String startDate,
         @required String time,
         @required String status,
+        @required String vehicleType,
         @required String price,
         @required Function onClickPay,
         @required Function onTap,
@@ -197,7 +198,7 @@ class DispatchComponents{
                 Row(
                   children: [
                     Text(
-                      'Suzuki',
+                      vehicleType,
                       style: TextStyle(
                           fontSize: 12,
                           fontFamily: Assets.poppinsMedium,

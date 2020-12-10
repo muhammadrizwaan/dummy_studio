@@ -46,6 +46,13 @@ class _BookLoadState extends State<BookLoad> {
   bool pickUpLocation, dropOffLoction;
   int count;
 
+  String pickup_latitude = "31.5387449";
+  String pickup_longitude = "74.3336802";
+  String dropoff_latitude = "31.5387449";
+  String dropoff_longitude = "31.5387449";
+  String pickup_location = "DHA phase 4";
+  String dropoff_location = "Gulberg";
+
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
     location.onLocationChanged.listen((currentLocation) {
@@ -253,7 +260,7 @@ class _BookLoadState extends State<BookLoad> {
                                 count = 0;
                                 pickUpLocation = false;
                                 dropOffLoction = false;
-                                Navigator.push(context, SlideRightRoute(page: ConfirmBookLoad()));
+                                Navigator.push(context, SlideRightRoute(page: ConfirmBookLoad(PickupLatitude: pickup_latitude, PickupLongitude : pickup_longitude, DropoffLatitude : dropoff_latitude, DropoffLongitude : dropoff_longitude, PickupLocation : pickup_location, DropoffLocation : dropoff_location)));
                               }
                               count++;
                             },

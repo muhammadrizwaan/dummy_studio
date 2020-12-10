@@ -17,6 +17,7 @@ class InProcessComponents {
       @required String startDate,
       @required String time,
       @required String status,
+      @required String vehicleType,
       @required String price,
       @required Function onTap,
       @required Function onAlert,
@@ -197,7 +198,7 @@ class InProcessComponents {
                 Row(
                   children: [
                     Text(
-                      'Suzuki',
+                      vehicleType,
                       style: TextStyle(
                           fontSize: 12,
                           fontFamily: Assets.poppinsMedium,

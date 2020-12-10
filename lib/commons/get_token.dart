@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/models/api_models/token_response.dart';
 import 'package:truckoom_shipper/network/api_urls.dart';
@@ -31,8 +30,11 @@ class GetToken{
     double ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
     double currentTime = await (((ms / 1000) / 60).round()).toDouble();
     double time = currentTime - previousTime;
+    print('time is ');
+    print(time);
 
-    if (time > 15.0) {
+
+    if (time > 10.0) {
       refreshToken = await PreferenceUtils.getString(Strings.refreshToken);
       print('hello');
       print(refreshToken);
@@ -55,12 +57,11 @@ class GetToken{
         if (response.statusCode == 200) {
           tokenResponse = TokenResponse.fromJson(response.data);
           String tokenRes = tokenResponse.accessToken;
+
           print('refresh token');
           token = "Bearer $tokenRes";
-          await PreferenceUtils.setString(
-              Strings.token, token);
-          await PreferenceUtils.setString(
-              Strings.refreshToken, tokenResponse.refreshToken);
+          await PreferenceUtils.setString(Strings.token, token);
+          await PreferenceUtils.setString(Strings.refreshToken, tokenResponse.refreshToken);
           ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
           currentTime = await (((ms / 1000) / 60).round()).toDouble();
           await PreferenceUtils.setDouble(Strings.tokenTime, currentTime);

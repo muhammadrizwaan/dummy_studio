@@ -3,7 +3,6 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
-import 'package:truckoom_shipper/models/api_models/phone_number_response.dart';
 import 'package:truckoom_shipper/models/api_models/tabbar_response.dart';
 import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/network/network_helper.dart';
@@ -21,7 +20,7 @@ class PlacedProvider extends ChangeNotifier{
   TabbarResponse tabbarResponse = TabbarResponse.empty();
   CustomPopup _loader = CustomPopup();
   GetToken getToken = GetToken();
-  bool _isDataFetched = false;
+  bool isDataFetched = false;
 
   var connectivityResult;
   int userId, statusId;
@@ -29,9 +28,9 @@ class PlacedProvider extends ChangeNotifier{
   init({@required BuildContext context}) async{
     this.context = context;
     connectivityResult = "";
-    // userId ="";
-    token = "";
     statusId = 1;
+    await getPlacedLoad(context: context);
+    token = "";
   }
 
   Future getPlacedLoad({@required BuildContext context}) async{
@@ -43,7 +42,6 @@ class PlacedProvider extends ChangeNotifier{
         ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: Strings.internetConnectionError);
       }
       else{
-        // _loader.showLoader(context: context);
         String tempUrl = getLoadApi.replaceAll("{userId}", '$userId');
         String url = tempUrl.replaceAll("{statusId}", '$statusId');
         http.Response response = await _networkHelper.get(
@@ -55,25 +53,17 @@ class PlacedProvider extends ChangeNotifier{
         );
         if(response.statusCode == 200){
           tabbarResponse = TabbarResponse.fromJson(genericDecodeEncode.decodeJson(response.body));
-          print('success 1');
           if(tabbarResponse.code == 1){
-            _isDataFetched = true;
-            print('success');
-            print(tabbarResponse.result[1].loadId);
-            // _loader.hideLoader(context);
+            isDataFetched = true;
             notifyListeners();
           }
           else{
-            // _loader.hideLoader(context);
             ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: tabbarResponse.message);
           }
-
         }
         else{
-          // _loader.hideLoader(context);
           ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: Strings.somethingWentWrong);
         }
-
       }
     }
     catch(error){
@@ -81,7 +71,4 @@ class PlacedProvider extends ChangeNotifier{
     }
   }
 
-  getIsDataFetched(){
-    return this._isDataFetched;
-  }
 }
