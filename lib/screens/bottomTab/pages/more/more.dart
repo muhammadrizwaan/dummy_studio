@@ -30,7 +30,7 @@ class More extends StatefulWidget {
 
 class _MoreState extends State<More> {
   MoreComponents _moreComponents;
-
+  
   @override
   void initState() {
     // TODO: implement initState
@@ -55,8 +55,8 @@ class _MoreState extends State<More> {
                 children: [
                   _moreComponents.getProfileContainer(
                     ProfileImg: Assets.profileImg,
-                    name: 'Matthew',
-                    email: 'Matthew@gmail.com',
+                    name: PreferenceUtils.getString(Strings.fullName),
+                    email: PreferenceUtils.getString(Strings.email),
                     onPress: () {
                       if(widget.tag == Strings.indiviual){
                         Navigator.push(context, SlideRightRoute(page: IndividualProfile()));

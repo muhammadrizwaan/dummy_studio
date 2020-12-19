@@ -28,12 +28,15 @@ class BusinessSignupProvider extends ChangeNotifier {
   CustomPopup _loader = CustomPopup();
   List<String> description = List<String>();
   int id;
+  double ms;
+  double currentTime;
 
   init({@required BuildContext context}) async {
     this.context = context;
     devicedId = "";
     connectivity = "";
     isDataFetched = false;
+    description = [];
     await getCities(context: context);
   }
 
@@ -81,7 +84,7 @@ class BusinessSignupProvider extends ChangeNotifier {
             heading: Strings.error,
             subHeading: Strings.passwordMatchErrorText);
       }
-      else if (city == null) {
+      else if (city < 1) {
         ApplicationToast.getErrorToast(durationTime: 3,
             heading: Strings.error,
             subHeading: Strings.cityErrorText);
@@ -112,6 +115,17 @@ class BusinessSignupProvider extends ChangeNotifier {
               _genericDecodeEncode.decodeJson(response.body));
           if (_commonResponse.code == 1) {
             id = _commonResponse.result.user.userId;
+            String res = _commonResponse.result.token.accessToken;
+            String data = "Bearer $res";
+            await PreferenceUtils.setString(Strings.token, data);
+            await PreferenceUtils.setString(Strings.refreshToken, _commonResponse.result.token.refreshToken);
+            await PreferenceUtils.setString(Strings.email, _commonResponse.result.user.email);
+            await PreferenceUtils.setString(Strings.password, _commonResponse.result.user.password);
+            await PreferenceUtils.setInt(Strings.userId, _commonResponse.result.user.userId);
+            await PreferenceUtils.setString(Strings.userType, Strings.business);
+            ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
+            currentTime = await (((ms / 1000) / 60).round()).toDouble();
+            await PreferenceUtils.setDouble(Strings.tokenTime, currentTime);
             _loader.hideLoader(context);
             Navigator.push(context, SlideRightRoute(
                 page: BusinessInformation(tag: tag, userId: id,)));

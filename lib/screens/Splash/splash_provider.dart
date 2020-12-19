@@ -14,10 +14,13 @@ class SplashProvider extends ChangeNotifier{
 
   BuildContext context;
 
+  String userType;
+
   init({@required BuildContext context}){
     PreferenceUtils.init();
     this.context = context;
     getDeviceInfo();
+    userType = "";
     navigateToNextScreen();
   }
   Future getDeviceInfo() async {
@@ -33,8 +36,9 @@ class SplashProvider extends ChangeNotifier{
     await Future.delayed(Duration(
       seconds: 4,
     ));
+    userType = await PreferenceUtils.getString(Strings.userType);
     if(PreferenceUtils.getString(Strings.email).isNotEmpty && PreferenceUtils.getString(Strings.password).isNotEmpty){
-      Navigator.pushReplacement(context, SlideRightRoute(page: BottomTab()));
+      Navigator.pushReplacement(context, SlideRightRoute(page: BottomTab(tag: userType)));
     }else{
       Navigator.pushReplacement(context, SlideRightRoute(page: Language()));
     }

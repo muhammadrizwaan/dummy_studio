@@ -103,9 +103,9 @@ class _BookLoadState extends State<BookLoad> {
                   onTap: () {
                     widget.tag == Strings.indiviual
                         ? Navigator.push(
-                        context, SlideRightRoute(page: Notifications()))
+                            context, SlideRightRoute(page: Notifications()))
                         : Navigator.push(
-                        context, SlideRightRoute(page: Wallet()));
+                            context, SlideRightRoute(page: Wallet()));
                   },
                   child: widget.tag == Strings.indiviual
                       ? Icon(
@@ -127,9 +127,7 @@ class _BookLoadState extends State<BookLoad> {
         ),
         body: Stack(
           children: [
-            CommonWidgets.tabsAppBar2(
-                text: 'Book a Load',
-                onPress: () {}),
+            CommonWidgets.tabsAppBar2(text: 'Book a Load', onPress: () {}),
             SizedBox(height: AppSizes.height * 0.04),
             GoogleMap(
               initialCameraPosition: CameraPosition(
@@ -143,11 +141,15 @@ class _BookLoadState extends State<BookLoad> {
             ),
             SlidingUpPanel(
               isDraggable: true,
-              minHeight: AppSizes.height*0.30,
-              maxHeight: AppSizes.height*0.75,
+              minHeight: AppSizes.height * 0.30,
+              maxHeight: AppSizes.height * 0.75,
               borderRadius: BorderRadius.only(
-                topRight: Radius.circular(15,),
-                topLeft: Radius.circular(15,),
+                topRight: Radius.circular(
+                  15,
+                ),
+                topLeft: Radius.circular(
+                  15,
+                ),
               ),
               panel: Center(
                 child: _bottomNavigationContainer(),
@@ -226,11 +228,17 @@ class _BookLoadState extends State<BookLoad> {
                                   border: pickUpLocation
                                       ? Border.all(color: AppColors.yellow)
                                       : Border.all(
-                                          color: AppColors.yellow.withOpacity(0)),
+                                          color:
+                                              AppColors.yellow.withOpacity(0)),
                                   borderRadius: BorderRadius.circular(10)),
                               child: Row(
                                 children: [
-                                  Icon(Elusive.location, size: 20, color: AppColors.colorBlack.withOpacity(0.8),),
+                                  Icon(
+                                    Elusive.location,
+                                    size: 20,
+                                    color:
+                                        AppColors.colorBlack.withOpacity(0.8),
+                                  ),
                                   SizedBox(
                                     width: 10,
                                   ),
@@ -260,7 +268,18 @@ class _BookLoadState extends State<BookLoad> {
                                 count = 0;
                                 pickUpLocation = false;
                                 dropOffLoction = false;
-                                Navigator.push(context, SlideRightRoute(page: ConfirmBookLoad(PickupLatitude: pickup_latitude, PickupLongitude : pickup_longitude, DropoffLatitude : dropoff_latitude, DropoffLongitude : dropoff_longitude, PickupLocation : pickup_location, DropoffLocation : dropoff_location)));
+                                Navigator.push(
+                                    context,
+                                    SlideRightRoute(
+                                        page: ConfirmBookLoad(
+                                      tag: widget.tag,
+                                      PickupLatitude: pickup_latitude,
+                                      PickupLongitude: pickup_longitude,
+                                      DropoffLatitude: dropoff_latitude,
+                                      DropoffLongitude: dropoff_longitude,
+                                      PickupLocation: pickup_location,
+                                      DropoffLocation: dropoff_location,
+                                    )));
                               }
                               count++;
                             },
@@ -277,11 +296,17 @@ class _BookLoadState extends State<BookLoad> {
                                   border: dropOffLoction
                                       ? Border.all(color: AppColors.yellow)
                                       : Border.all(
-                                          color: AppColors.yellow.withOpacity(0)),
+                                          color:
+                                              AppColors.yellow.withOpacity(0)),
                                   borderRadius: BorderRadius.circular(10)),
                               child: Row(
                                 children: [
-                                  Icon(Elusive.location, size: 20, color: AppColors.colorBlack.withOpacity(0.8),),
+                                  Icon(
+                                    Elusive.location,
+                                    size: 20,
+                                    color:
+                                        AppColors.colorBlack.withOpacity(0.8),
+                                  ),
                                   SizedBox(
                                     width: 10,
                                   ),
@@ -339,7 +364,11 @@ class _BookLoadState extends State<BookLoad> {
                             borderRadius: BorderRadius.circular(8)),
                         child: Row(
                           children: [
-                            Icon(Elusive.location, size: 20, color: AppColors.colorBlack.withOpacity(0.8),),
+                            Icon(
+                              Elusive.location,
+                              size: 20,
+                              color: AppColors.colorBlack.withOpacity(0.8),
+                            ),
                           ],
                         ),
                       ),
@@ -380,7 +409,11 @@ class _BookLoadState extends State<BookLoad> {
                             borderRadius: BorderRadius.circular(8)),
                         child: Row(
                           children: [
-                            Icon(Elusive.location, size: 20, color: AppColors.colorBlack.withOpacity(0.8),),
+                            Icon(
+                              Elusive.location,
+                              size: 20,
+                              color: AppColors.colorBlack.withOpacity(0.8),
+                            ),
                           ],
                         ),
                       ),
@@ -420,7 +453,11 @@ class _BookLoadState extends State<BookLoad> {
                             borderRadius: BorderRadius.circular(8)),
                         child: Row(
                           children: [
-                            Icon(Elusive.location, size: 20, color: AppColors.colorBlack.withOpacity(0.8),),
+                            Icon(
+                              Elusive.location,
+                              size: 20,
+                              color: AppColors.colorBlack.withOpacity(0.8),
+                            ),
                           ],
                         ),
                       ),
@@ -460,7 +497,11 @@ class _BookLoadState extends State<BookLoad> {
                             borderRadius: BorderRadius.circular(8)),
                         child: Row(
                           children: [
-                            Icon(Elusive.location, size: 20, color: AppColors.colorBlack.withOpacity(0.8),),
+                            Icon(
+                              Elusive.location,
+                              size: 20,
+                              color: AppColors.colorBlack.withOpacity(0.8),
+                            ),
                           ],
                         ),
                       ),
@@ -500,7 +541,11 @@ class _BookLoadState extends State<BookLoad> {
                             borderRadius: BorderRadius.circular(8)),
                         child: Row(
                           children: [
-                            Icon(Elusive.location, size: 20, color: AppColors.colorBlack.withOpacity(0.8),),
+                            Icon(
+                              Elusive.location,
+                              size: 20,
+                              color: AppColors.colorBlack.withOpacity(0.8),
+                            ),
                           ],
                         ),
                       ),

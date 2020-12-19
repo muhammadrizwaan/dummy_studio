@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
+import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
@@ -72,9 +73,9 @@ class _BusinessProfileState extends State<BusinessProfile> {
                           ),
                           _businessProfileComponents
                               .getBusinessProfileContainer(
-                                  name: 'Mathew Lawson',
-                                  email: 'MathewLawson@gmail.com',
-                                  password: '********',
+                                  name: PreferenceUtils.getString(Strings.fullName),
+                                  email: PreferenceUtils.getString(Strings.email),
+                                  password: PreferenceUtils.getString(Strings.password),
                                   country: 'Costa Rica'),
                           SizedBox(
                             height: AppSizes.height * 0.02,
@@ -86,9 +87,9 @@ class _BusinessProfileState extends State<BusinessProfile> {
                           ),
                           _businessProfileComponents
                               .getBusinessInfoProfileContainer(
-                                  businessName: 'Cargo Company',
-                                  phoneNumber: '(351)205-2551',
-                                  trn: '847-84584-8'),
+                                  businessName: PreferenceUtils.getString(Strings.companyNameKey),
+                                  phoneNumber: PreferenceUtils.getString(Strings.companyPhoneKey),
+                                  trn: PreferenceUtils.getString(Strings.companyTrnKey)),
                           Center(
                             child: Image(
                               image: AssetImage(Assets.licenceImg),

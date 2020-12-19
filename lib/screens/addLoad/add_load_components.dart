@@ -8,7 +8,7 @@ import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class AddLoadComponents {
-  Widget getLocationContainer(){
+  Widget getLocationContainer({@required String pickupLocation, @required String dropOffLocation}){
     return Container(
       // margin: EdgeInsets.only(top: 20),
       // padding: EdgeInsets.all(AppSizes.width * 0.05),
@@ -53,7 +53,7 @@ class AddLoadComponents {
                             ),
                           ),
                           SizedBox(height: AppSizes.height * 0.002),
-                          Text('1 Ash Park, Pembroke Dock, SA7254, Drury Lane, Oldham, OL9 7PH',
+                          Text(pickupLocation,
                             style: TextStyle(
                               fontFamily: Assets.poppinsLight,
                               fontSize: 12,
@@ -84,7 +84,7 @@ class AddLoadComponents {
                             ),
                           ),
                           SizedBox(height: AppSizes.height * 0.002),
-                          Text('1 Ash Park, Pembroke Dock, SA6478, Drury Lane, Dubai, OL9 7PH',
+                          Text(dropOffLocation,
                             style: TextStyle(
                               fontFamily: Assets.poppinsLight,
                               fontSize: 12,

@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -13,8 +11,23 @@ import 'package:truckoom_shipper/screens/select_vehicle/select_vehicle.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 class ConfirmBookLoad extends StatefulWidget {
-  String tag, PickupLatitude, PickupLongitude, DropoffLatitude, DropoffLongitude, PickupLocation, DropoffLocation;
-  ConfirmBookLoad({@required this.tag, @required this.PickupLatitude, @required this.PickupLongitude, @required this.DropoffLatitude, @required this.DropoffLongitude, @required this.PickupLocation, @required this.DropoffLocation,});
+  String tag,
+      PickupLatitude,
+      PickupLongitude,
+      DropoffLatitude,
+      DropoffLongitude,
+      PickupLocation,
+      DropoffLocation;
+
+  ConfirmBookLoad({
+    @required this.tag,
+    @required this.PickupLatitude,
+    @required this.PickupLongitude,
+    @required this.DropoffLatitude,
+    @required this.DropoffLongitude,
+    @required this.PickupLocation,
+    @required this.DropoffLocation,
+  });
 
   @override
   _ConfirmBookLoadState createState() => _ConfirmBookLoadState();
@@ -23,43 +36,46 @@ class ConfirmBookLoad extends StatefulWidget {
 class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
   ConfirmBookLoadComponents _confirmBookLoadComponents;
   LatLng _center = LatLng(30.3753, 69.3451);
+
   @override
   void initState() {
     super.initState();
     _confirmBookLoadComponents = ConfirmBookLoadComponents();
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
           body: Column(
-            children: [
-              CommonWidgets.tabsAppBar2(
-                  text: Strings.bookLoad,
-                  onPress: (){Navigator.pop(context);}
-              ),
-              SizedBox(height: AppSizes.height * 0.005),
-              Expanded(
-                child: Stack(
-                  children: [
-                    GoogleMap(
-                      initialCameraPosition: CameraPosition(target: _center, zoom: 5),
-                    ),
-                    SlidingUpPanel(
-                      isDraggable: true,
-                      minHeight: AppSizes.height*0.40,
-                      maxHeight: AppSizes.height*0.75,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          topRight: Radius.circular(15)),
-                      panel: _onSlidingUpPanel(),
-                    )
-                  ],
+        children: [
+          CommonWidgets.tabsAppBar2(
+              text: Strings.bookLoad,
+              onPress: () {
+                Navigator.pop(context);
+              }),
+          SizedBox(height: AppSizes.height * 0.005),
+          Expanded(
+            child: Stack(
+              children: [
+                GoogleMap(
+                  initialCameraPosition:
+                      CameraPosition(target: _center, zoom: 5),
                 ),
-              )
-            ],
+                SlidingUpPanel(
+                  isDraggable: true,
+                  minHeight: AppSizes.height * 0.40,
+                  maxHeight: AppSizes.height * 0.75,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15)),
+                  panel: _onSlidingUpPanel(),
+                )
+              ],
+            ),
           )
-      ),
+        ],
+      )),
     );
   }
 
@@ -86,13 +102,25 @@ class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
               ),
             ),
           ),
-          _confirmBookLoadComponents.getLocationContainer(),
+          _confirmBookLoadComponents.getLocationContainer(
+              pickupLocation: widget.PickupLocation,
+              dropOffLocation: widget.DropoffLocation),
           SizedBox(height: AppSizes.height * 0.03),
           CommonWidgets.getBottomButton(
               text: "Confirm",
               onPress: () {
-                Navigator.push(context,
-                    SlideRightRoute(page: SelectVehicle(tag: widget.tag)));
+                Navigator.push(
+                    context,
+                    SlideRightRoute(
+                        page: SelectVehicle(
+                      tag: widget.tag,
+                      PickupLatitude: widget.PickupLatitude,
+                      PickupLongitude: widget.PickupLongitude,
+                      DropoffLatitude: widget.DropoffLatitude,
+                      DropoffLongitude: widget.DropoffLongitude,
+                      PickupLocation: widget.PickupLocation,
+                      DropoffLocation: widget.DropoffLocation,
+                    )));
               })
         ],
       ),

@@ -6,7 +6,7 @@ import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 
 class BookLoadDetailComponents {
-  Widget getLocationContainer(){
+  Widget getLocationContainer({@required String pickupLocation, @required String dropOffLocation}){
     return Container(
       margin: EdgeInsets.only(top: AppSizes.height * 0.05),
       color:Colors.white,
@@ -47,7 +47,7 @@ class BookLoadDetailComponents {
                             ),
                           ),
                           SizedBox(height: AppSizes.height * 0.002),
-                          Text('1 Ash Park, Pembroke Dock, SA7254, Drury Lane, Oldham, OL9 7PH',
+                          Text(pickupLocation,
                             style: TextStyle(
                               fontFamily: Assets.poppinsLight,
                               fontSize: 12,
@@ -78,7 +78,7 @@ class BookLoadDetailComponents {
                             ),
                           ),
                           SizedBox(height: AppSizes.height * 0.002),
-                          Text('1 Ash Park, Pembroke Dock, SA6478, Drury Lane, Dubai, OL9 7PH',
+                          Text(dropOffLocation,
                             style: TextStyle(
                               fontFamily: Assets.poppinsLight,
                               fontSize: 12,
@@ -98,7 +98,7 @@ class BookLoadDetailComponents {
       ),
     );
   }
-  Widget getExpectedRate(){
+  Widget getExpectedRate({@required double rate}){
     return Container(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,7 +123,7 @@ class BookLoadDetailComponents {
                   ),
                 ),
                 SizedBox(height: AppSizes.height * 0.001),
-                Text('AED 10,000',
+                Text('AED $rate',
                   style: TextStyle(
                       fontFamily: Assets.poppinsLight,
                       fontSize: 12,

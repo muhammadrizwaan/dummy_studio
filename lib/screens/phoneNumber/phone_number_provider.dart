@@ -67,12 +67,14 @@ class PhoneNumberProvider extends ChangeNotifier {
             otpCode = phoneNumberResponse.result.value;
             print("otpCode:");
             print(otpCode);
-            Navigator.push(
-              context,
-              SlideRightRoute(
-                  page: OTPAuthentication(
-                      tag: tag, otp: otpCode, cell: phoneNumber)),
-            );
+            ApplicationToast.getLoginSignupToast(context: context, text: "OTP code is: $otpCode", onNavigate: (){
+              Navigator.push(context, SlideRightRoute(page: OTPAuthentication(
+                  tag: tag, otp: otpCode, cell: phoneNumber)),
+              );
+            });
+            // Navigator.push(context, SlideRightRoute(page: OTPAuthentication(
+            //           tag: tag, otp: otpCode, cell: phoneNumber)),
+            // );
           } else {
             _loader.hideLoader(context);
             ApplicationToast.getErrorToast(

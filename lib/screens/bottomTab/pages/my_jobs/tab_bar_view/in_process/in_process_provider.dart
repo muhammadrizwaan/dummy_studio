@@ -26,7 +26,7 @@ class InProcessProvider extends ChangeNotifier{
   String token;
   init({@required BuildContext context}) async{
     this.context = context;
-    statusId = 1;
+    statusId = 12;
     await getInProcessLoad(context: context);
     connectivityResult = "";
     token = "";

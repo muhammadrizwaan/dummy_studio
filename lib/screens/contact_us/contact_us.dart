@@ -26,14 +26,14 @@ class ContactUs extends StatefulWidget {
 
 class _ContactUsState extends State<ContactUs> {
   ContactUsComponents _contactUsComponents;
-  TextEditingController email, message;
+  TextEditingController name, message;
   ContactUsProvider _contactUsProvider;
 
   @override
   void initState() {
     super.initState();
     _contactUsComponents = ContactUsComponents();
-    email = TextEditingController();
+    name = TextEditingController();
     message = TextEditingController();
     _contactUsProvider = Provider.of<ContactUsProvider>(context, listen: false);
     _contactUsProvider.init(context: context);
@@ -67,8 +67,8 @@ class _ContactUsState extends State<ContactUs> {
                     padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05, ),
                     child: _contactUsComponents.getNameTextField(
                         leftIcon: Entypo.user,
-                        hintText: 'Mathew Lawson',
-                        textEditingController: email
+                        hintText: 'Enter Name',
+                        textEditingController: name
                     ),
                   ),
                   SizedBox(height: AppSizes.height * 0.01,),
@@ -82,7 +82,7 @@ class _ContactUsState extends State<ContactUs> {
                     padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05, ),
                     child: _contactUsComponents.getMessageTextField(
                         leftIcon: Icons.message,
-                        hintText: 'Ameris sed tu vig ga ine pu na sa. Le ba si diga ti na ishi ga su. Ini ta pi na kisi sat ly vei in the pie.',
+                        hintText: 'Enter Message',
                         textEditingController: message
                     ),
                   ),
@@ -103,7 +103,7 @@ class _ContactUsState extends State<ContactUs> {
                           ),
                           child: FlatButton(
                             onPressed: (){
-                              _contactUsProvider.getContactUs(context: context, email: email.text, message: email.text);
+                              _contactUsProvider.getContactUs(context: context, name: name.text, message: name.text);
                             },
                             child: TextView.getBottomButtonText04("Send", color: Colors.white.withOpacity(0.6),),
                           ),
