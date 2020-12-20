@@ -21,7 +21,7 @@ class InProcessComponents {
       @required String price,
       @required Function onTap,
       @required Function onAlert,
-      @required Function onClickPay}) {
+      @required Function onDriverDetail}) {
     return GestureDetector(
       onTap: ()=> onTap(),
       child: Container(
@@ -234,10 +234,7 @@ class InProcessComponents {
                 color: AppColors.yellow,
               ),
               child: FlatButton(
-                onPressed: () {
-                  Navigator.push(
-                      context, SlideRightRoute(page: DriverDetailScreen()));
-                },
+                onPressed: () => onDriverDetail(),
                 child: TextView.getLabelText04(
                   "See Driver Detail",
                   color: AppColors.white.withOpacity(0.95),

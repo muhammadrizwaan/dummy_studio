@@ -4,9 +4,11 @@ class Strings {
   static const String data = "DATA ANALYTICS";
 
 
+
   static const String token = "token";
   static const String email = "Email";
   static const String userId = "UserId";
+  static const String fullName = "FullName";
   static const String password = "Password";
   static const String tokenTime = "TokenTime";
   static const String refreshToken = "RefreshToken";
@@ -18,9 +20,12 @@ class Strings {
   static const String yes = "Yes";
   static const String no = "No";
   static const String cancelLoadAlertText = "Are you sure you want to cancel the Load?";
+  static const String deleteLoadAlertText = "Are you sure you want to delete the job?";
 
   static const String roundTrip = "Round Trip";
   static const String pickupDateAndTime = "Pickup date and time";
+  static const String pickupLocation = "Pickup Location";
+  static const String dropoffLocation = "Dropoff Location";
   static const String receiverName = "Receiver Name";
   static const String receiverPhone = "Receiver Phone";
   static const String goodType = "Good Type";
@@ -36,6 +41,13 @@ class Strings {
   static const String submit = "Submit";
   static const String deviceId = "device_id";
   static const String tapAndContinue = "Tap to Continue";
+
+  static const String companyNameKey = "CompanyNameKey";
+  static const String companyPhoneKey = "CompanyPhoneKey";
+  static const String companyTrnKey = "CompanyTrnKey";
+  static const String profileImageKey = "ProfileImageKey";
+  static const String companyIdKey = "ProfileImageKey";
+  static const String userType = "tag";
 
 
   // Error Toast Text
@@ -59,4 +71,5 @@ class Strings {
   static const String messageErrorText = "Please enter message";
   static const String weightErrorText = "Please enter weight";
   static const String noOfVehicleErrorText = "Please enter number of vehicle";
+  static const String goodTypeErrorText = "Please select GoodType";
 }

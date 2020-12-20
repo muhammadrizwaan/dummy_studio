@@ -14,11 +14,11 @@ import 'package:http/http.dart' as http;
 
 class HistoryProvider extends ChangeNotifier{
   BuildContext context;
-  GenericDecodeEncode genericDecodeEncode = GenericDecodeEncode();
+  GenericDecodeEncode _genericDecodeEncode = GenericDecodeEncode();
   NetworkHelper _networkHelper = NetworkHelperImpl();
   HistoryResponse historyResponse = HistoryResponse.empty();
   CustomPopup _loader = CustomPopup();
-  GetToken getToken = GetToken();
+  GetToken _getToken = GetToken();
   bool isDataFetched = false;
 
   var connectivityResult;
@@ -33,7 +33,7 @@ class HistoryProvider extends ChangeNotifier{
 
   Future getPlacedLoad({@required BuildContext context}) async{
     try{
-      token = await getToken.onToken();
+      token = await _getToken.onToken();
       connectivityResult = await Connectivity().checkConnectivity();
       userId = await PreferenceUtils.getInt(Strings.userId);
       if(connectivityResult == ConnectivityResult.none){
@@ -49,7 +49,7 @@ class HistoryProvider extends ChangeNotifier{
             }
         );
         if(response.statusCode == 200){
-          historyResponse = HistoryResponse.fromJson(genericDecodeEncode.decodeJson(response.body));
+          historyResponse = HistoryResponse.fromJson(_genericDecodeEncode.decodeJson(response.body));
           if(historyResponse.code == 1){
             isDataFetched = true;
             notifyListeners();

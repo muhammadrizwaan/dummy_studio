@@ -111,6 +111,9 @@ class SignUpProvider extends ChangeNotifier {
             await PreferenceUtils.setString(Strings.refreshToken, commonResponse.result.token.refreshToken);
             await PreferenceUtils.setString(Strings.email, commonResponse.result.user.email);
             await PreferenceUtils.setString(Strings.password, commonResponse.result.user.password);
+            await PreferenceUtils.setString(Strings.fullName, commonResponse.result.user.fullName);
+            await PreferenceUtils.setInt(Strings.userId, commonResponse.result.user.userId);
+            await PreferenceUtils.setString(Strings.userType, Strings.indiviual);
             ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
             currentTime = await (((ms / 1000) / 60).round()).toDouble();
             await PreferenceUtils.setDouble(Strings.tokenTime, currentTime);

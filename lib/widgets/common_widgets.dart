@@ -36,6 +36,23 @@ class CommonWidgets {
     );
   }
 
+  static Widget onNullData({@required String text}){
+    return Container(
+      // margin: EdgeInsets.only(top: 10, bottom: 25),
+      child: Center(
+        child: Text(
+          text,
+          style: TextStyle(
+            decoration: TextDecoration.none,
+            color: AppColors.profileTextColor,
+            fontSize: 12,
+            fontFamily: Assets.poppinsLight,
+          ),
+        ),
+      ),
+    );
+  }
+
   static Widget applyCouponContainer({
     @required String text,
     @required Function onPress,

@@ -17,9 +17,14 @@ const String getHistoryApi = "$baseUrl/api/Loads/MyLoadHistory?userId={userId}";
 const String getGoodTypeApi = "$baseUrl/api/GoodTypes";
 const String getVehicleTypeApi = "$baseUrl/api/Vehicle/GetVehicleTypes";
 const String deleteLoadApi = "$baseUrl/api/Loads/DeleteLoad?loadId={loadId}";
-const String getLoadDetailApi = "$baseUrl/api/Loads/GetLoadDetailsByLoadId?loadId={loadId}";
+const String estimatedLoadPriceApi = "$baseUrl/api/Loads/EstimatedLoadPrice";
+const String getUpdateUserInformationApi = "$baseUrl/api/Accounts/UpdateUserInformation";
+// pending
 const String saveLoadApi = "$baseUrl/api/Loads/SaveLoad";
-const String estimatedLoadPrice = "$baseUrl/api/Loads/EstimatedLoadPrice";
-
+const String getLoadDetailApi = "$baseUrl/api/Loads/GetLoadDetailsByLoadId?loadId={loadId}";
+const String getDriverDetailApi = "$baseUrl/api//Users/GetDriverDetails?driverId={driverId}";
+const String getInvoiceDetailApi = "$baseUrl/api/Transactions/GetInvoiceDetails?transactionId={Id}";
+const String uploadProfilePictureApi = "$baseUrl/api/Accounts/UploadProfilePicture";
+const String cancellLoadApi = "$baseUrl/api/Loads/RejectedByShipper";
 
 

@@ -75,7 +75,7 @@ class _DispatchState extends State<Dispatch> {
                       },
                       onTap: () {
                         Navigator.push(
-                            context, SlideRightRoute(page: JobDetails()));
+                            context, SlideRightRoute(page: JobDetails(status:"Dispatch", loadId: _dispatchedProvider.tabbarResponse.result[index].loadId)));
                       },
                     ),
                     SizedBox(

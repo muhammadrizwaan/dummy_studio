@@ -11,9 +11,7 @@ import 'package:truckoom_shipper/screens/login/login.dart';
 import 'package:truckoom_shipper/screens/signup/sign_up_components.dart';
 import 'package:truckoom_shipper/screens/signup/sign_up_provider.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
-import 'package:truckoom_shipper/widgets/loader.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
-
 import '../bottomTab/bottom_tab.dart';
 
 class SignUP extends StatefulWidget {

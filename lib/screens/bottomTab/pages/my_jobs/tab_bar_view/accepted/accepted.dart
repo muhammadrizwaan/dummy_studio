@@ -63,7 +63,7 @@ class _AcceptedState extends State<Accepted> {
                         },
                         onTap: () {
                           Navigator.push(
-                              context, SlideRightRoute(page: JobDetails()));
+                              context, SlideRightRoute(page: JobDetails(status:"Accepted", loadId: _acceptedProvider.tabbarResponse.result[index].loadId)));
                         },
                         onClickPay: () {
                           // _acceptedProvider.TestTokenApi();
@@ -71,10 +71,12 @@ class _AcceptedState extends State<Accepted> {
                               context, SlideRightRoute(page: Payment()));
                         },
                         onClickCancel: () {
-                          ApplicationToast.onCancellLoadAlert(context: context, onCancellLoad: (){
-                            _acceptedProvider.onDeleteLoad(context: context, loadId: _acceptedProvider.tabbarResponse.result[index].loadId);
+                          ApplicationToast.onLoadAlert(context: context, onCancellLoad: (){
+                            _acceptedProvider.onCancellLoad(context: context, loadId: _acceptedProvider.tabbarResponse.result[index].loadId);
                             Navigator.pop(context);
-                          });
+                          },
+                            text: Strings.cancelLoadAlertText,
+                          );
                         }),
                     SizedBox(
                       height: AppSizes.height * 0.02,

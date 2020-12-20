@@ -60,7 +60,7 @@ class _PlacedState extends State<Placed> {
                   ApplicationToast.onDescriptionAlert(context: context, description: _placedProvider.tabbarResponse.result[index].vehicleTypeDescription);
                 },
                 onTap: () {
-                  Navigator.push(context, SlideRightRoute(page: JobDetails()));
+                  Navigator.push(context, SlideRightRoute(page: JobDetails(status:"Placed", loadId: _placedProvider.tabbarResponse.result[index].loadId)));
                 },
               ),
               SizedBox(

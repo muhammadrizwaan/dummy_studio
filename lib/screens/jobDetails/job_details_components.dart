@@ -1,18 +1,17 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
-class JobDetailsComponents{
-  Widget getLocationContainer(){
+class JobDetailsComponents {
+  Widget getLocationContainer({@required String pickupLocation, @required String dropOffLocation}) {
     return Container(
-      margin: EdgeInsets.only(top: AppSizes.height * 0.05),
-      color:Colors.white,
+      // margin: EdgeInsets.only(top: AppSizes.height * 0.05),
+      color: Colors.white,
       child: Column(
         children: [
           Row(
@@ -20,7 +19,8 @@ class JobDetailsComponents{
             children: [
               Container(
                 height: AppSizes.height * 0.12,
-                child: Image(image: AssetImage(Assets.userLocation),
+                child: Image(
+                  image: AssetImage(Assets.userLocation),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -41,7 +41,8 @@ class JobDetailsComponents{
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Pickup Location',
+                          Text(
+                            'Pickup Location',
                             style: TextStyle(
                               fontFamily: Assets.poppinsRegular,
                               fontSize: 12,
@@ -50,7 +51,8 @@ class JobDetailsComponents{
                             ),
                           ),
                           SizedBox(height: AppSizes.height * 0.002),
-                          Text('1 Ash Park, Pembroke Dock, SA7254, Drury Lane, Oldham, OL9 7PH',
+                          Text(
+                            pickupLocation,
                             style: TextStyle(
                               fontFamily: Assets.poppinsLight,
                               fontSize: 12,
@@ -72,7 +74,8 @@ class JobDetailsComponents{
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Dropoff Location',
+                          Text(
+                            'Dropoff Location',
                             style: TextStyle(
                               fontFamily: Assets.poppinsRegular,
                               fontSize: 12,
@@ -81,7 +84,8 @@ class JobDetailsComponents{
                             ),
                           ),
                           SizedBox(height: AppSizes.height * 0.002),
-                          Text('1 Ash Park, Pembroke Dock, SA6478, Drury Lane, Dubai, OL9 7PH',
+                          Text(
+                            dropOffLocation,
                             style: TextStyle(
                               fontFamily: Assets.poppinsLight,
                               fontSize: 12,
@@ -101,7 +105,8 @@ class JobDetailsComponents{
       ),
     );
   }
-  Widget getExpectedRate(){
+
+  Widget getExpectedRate() {
     return Container(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,29 +114,31 @@ class JobDetailsComponents{
           Container(
               width: 20,
               height: 20,
-              child: Image(image: AssetImage(Assets.percentageIcon),
+              child: Image(
+                image: AssetImage(Assets.percentageIcon),
                 fit: BoxFit.cover,
-              )
+              )),
+          SizedBox(
+            width: AppSizes.width * 0.03,
           ),
-          SizedBox(width: AppSizes.width * 0.03,),
           Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Rate',
+                Text(
+                  'Rate',
                   style: TextStyle(
                       fontFamily: Assets.poppinsRegular,
                       fontSize: 12,
-                      color: AppColors.colorBlack
-                  ),
+                      color: AppColors.colorBlack),
                 ),
                 SizedBox(height: AppSizes.height * 0.001),
-                Text('AED 10,000',
+                Text(
+                  'AED 10,000',
                   style: TextStyle(
                       fontFamily: Assets.poppinsLight,
                       fontSize: 12,
-                      color: AppColors.colorBlack
-                  ),
+                      color: AppColors.colorBlack),
                 )
               ],
             ),
@@ -140,21 +147,58 @@ class JobDetailsComponents{
       ),
     );
   }
-  Widget getLoadImages({@required String images}){
+
+  Widget getLoadImages({@required String images}) {
     return Container(
       height: AppSizes.height * 0.08,
       width: AppSizes.width * 0.008,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5)
-      ),
-      child: Image(image: AssetImage(images),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
+      child: Image(
+        image: AssetImage(images),
         fit: BoxFit.contain,
       ),
     );
   }
 
-  Widget gettabsAppBarDelete(
-      {@required String text, @required Function onPress,@required String clickableText, @required Function onTap,@required String tag,}) {
+  Widget getImagesList({@required int length, @required String imagePath}){
+    return length > 0? Container(
+      height: AppSizes.height * 0.1,
+      child: Expanded(
+        child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: 12,
+            itemBuilder: (context, index){
+              return Row(
+                children: [
+                  SizedBox(width: AppSizes.width * 0.01,),
+                  Container(
+                    height: AppSizes.height * 0.1,
+                    width: AppSizes.width * 0.2,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: AppColors.yellow,
+                    ),
+                    child: Image(
+                      image: AssetImage(Assets.vehicle_img),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  SizedBox(width: AppSizes.width * 0.01,),
+                ],
+              );
+            }),
+      ),
+    ):
+        CommonWidgets.onNullData(text: 'No Images');
+  }
+
+  Widget gettabsAppBarDelete({
+    @required String text,
+    @required Function onPress,
+    @required String clickableText,
+    @required Function onTap,
+    @required String tag,
+  }) {
     return Container(
       padding: EdgeInsets.only(
         left: AppSizes.width * 0.05,
@@ -181,31 +225,23 @@ class JobDetailsComponents{
               GestureDetector(
                 onTap: () => onPress(),
                 child: Container(
-                  height: AppSizes.height*0.04,
-                  width: AppSizes.width*0.04,
-                  child: Image.asset(
-                      'assets/png/back_arrow_otp.png'
-                  ),
+                  height: AppSizes.height * 0.04,
+                  width: AppSizes.width * 0.04,
+                  child: Image.asset('assets/png/back_arrow_otp.png'),
                 ),
               ),
               SizedBox(width: 15),
-              TextView.getAppBarText(
-                  text, color:
-              AppColors.colorBlack
-              ),
+              TextView.getAppBarText(text, color: AppColors.colorBlack),
             ],
           ),
           GestureDetector(
             onTap: () => onTap(),
-            child: Text(
-              tag == "Placed"?
-                "Delete": "",
-              style: TextStyle(
-                color: AppColors.colorDelete,
-                fontFamily: Assets.poppinsRegular,
-                fontSize: 14,
-              )
-            ),
+            child: Text(tag == "Placed" ? "Delete" : "",
+                style: TextStyle(
+                  color: AppColors.colorDelete,
+                  fontFamily: Assets.poppinsRegular,
+                  fontSize: 14,
+                )),
           ),
           /*RichText(
             text: TextSpan(
@@ -218,7 +254,6 @@ class JobDetailsComponents{
               recognizer: TapGestureRecognizer()..onTap = () => onTap(),
             ),
           ),*/
-
         ],
       ),
     );

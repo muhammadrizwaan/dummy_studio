@@ -23,6 +23,7 @@ import 'package:truckoom_shipper/screens/businessSignup/business_signup_provider
 import 'package:truckoom_shipper/screens/login/login.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
+import 'package:truckoom_shipper/widgets/loader.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 import 'package:http/http.dart' as http;
 import 'package:truckoom_shipper/network/api_urls.dart';
@@ -40,6 +41,7 @@ class _BusinessSignupState extends State<BusinessSignup> {
   BusinessSignupComponents _businessSignupComponents;
   TextEditingController name, email, password, confirm_Password;
   BusinessSignupProvider _businessSignupProvider;
+  CustomPopup _loader = CustomPopup();
   bool onCheck = false;
   String _selectedValue;
 
@@ -229,6 +231,7 @@ class _BusinessSignupState extends State<BusinessSignup> {
         ),
       ),
     );
+
   }
 
   _getTermsAndCondition() {

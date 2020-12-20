@@ -83,6 +83,13 @@ class LoginProvider extends ChangeNotifier {
             await PreferenceUtils.setString(Strings.email, commonResponse.result.user.email);
             await PreferenceUtils.setString(Strings.password, commonResponse.result.user.password);
             await PreferenceUtils.setInt(Strings.userId, commonResponse.result.user.userId);
+            await PreferenceUtils.setString(Strings.fullName, commonResponse.result.user.fullName);
+            // await PreferenceUtils.setString(Strings.companyNameKey, commonResponse.result.user.companyInformations[0].companyName);
+            // await PreferenceUtils.setString(Strings.companyPhoneKey, commonResponse.result.user.companyInformations[0].contactNumber);
+            // await PreferenceUtils.setString(Strings.companyTrnKey, commonResponse.result.user.companyInformations[0].trn);
+            await PreferenceUtils.setString(Strings.userType, commonResponse.result.user.isBusinessAccount? Strings.business: Strings.indiviual);
+            // await PreferenceUtils.setString(Strings.profileImageKey, commonResponse.result.use);
+
             ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
             currentTime = await (((ms / 1000) / 60).round()).toDouble();
             await PreferenceUtils.setDouble(Strings.tokenTime, currentTime);
@@ -92,10 +99,10 @@ class LoginProvider extends ChangeNotifier {
               text: Strings.loginSuccessful,
               onNavigate: () {
                 commonResponse.result.user.isBusinessAccount
-                    ? Navigator.pushAndRemoveUntil(
+                    ? {Navigator.pushAndRemoveUntil(
                         context,
                         SlideRightRoute(page: BottomTab(tag: Strings.business)),
-                        ModalRoute.withName(Routes.login))
+                        ModalRoute.withName(Routes.login))}
                     : Navigator.pushAndRemoveUntil(
                         context,
                         SlideRightRoute(page: BottomTab(tag: Strings.indiviual)),

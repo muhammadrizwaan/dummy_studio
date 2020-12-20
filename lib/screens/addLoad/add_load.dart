@@ -15,9 +15,25 @@ import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class AddLoad extends StatefulWidget {
-  String tag;
+  String tag,
+      PickupLatitude,
+      PickupLongitude,
+      DropoffLatitude,
+      DropoffLongitude,
+      PickupLocation,
+      DropoffLocation;
+  int VehicleTypeId, VehicleCategoryId;
 
-  AddLoad({@required this.tag});
+  AddLoad(
+      {@required this.tag,
+      @required this.PickupLatitude,
+      @required this.PickupLongitude,
+      @required this.DropoffLatitude,
+      @required this.DropoffLongitude,
+      @required this.PickupLocation,
+      @required this.DropoffLocation,
+      @required this.VehicleCategoryId,
+      @required this.VehicleTypeId});
 
   @override
   _AddLoadState createState() => _AddLoadState();
@@ -26,8 +42,12 @@ class AddLoad extends StatefulWidget {
 class _AddLoadState extends State<AddLoad> {
   AddLoadComponents _addLoadComponents;
   AddLoadProvider _addLoadProvider;
-  TextEditingController receiver_name, receiver_phone, weight, num_of_vehicle, description;
-  bool switchState = false;
+  TextEditingController receiver_name,
+      receiver_phone,
+      weight,
+      num_of_vehicle,
+      description;
+  bool isRounded = false;
   int _weight = 1;
   int _noOfVehicle = 1;
   String _selectedValue;
@@ -36,7 +56,6 @@ class _AddLoadState extends State<AddLoad> {
   @override
   void initState() {
     super.initState();
-    print(widget.tag);
     receiver_name = TextEditingController();
     receiver_phone = TextEditingController();
     weight = TextEditingController();
@@ -59,217 +78,266 @@ class _AddLoadState extends State<AddLoad> {
           height: AppSizes.height,
           width: AppSizes.width,
           color: AppColors.white,
-          child: _addLoadProvider.isDataFetched? Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              CommonWidgets.tabsAppBar2(
-                  text: 'Add Book a Load Details',
-                  onPress: () {
-                    Navigator.pop(context);
-                  }),
-              Expanded(
-                child: ListView(
+          child: _addLoadProvider.isDataFetched
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Container(
-                      padding: EdgeInsets.all(AppSizes.width * 0.05),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
+                    CommonWidgets.tabsAppBar2(
+                        text: 'Add Book a Load Details',
+                        onPress: () {
+                          Navigator.pop(context);
+                        }),
+                    Expanded(
+                      child: ListView(
                         children: [
-                          _addLoadComponents.getLocationContainer(),
-                          SizedBox(height: AppSizes.height * 0.01),
-                          _addLoadComponents.getExpectedRate(),
-                          SizedBox(
-                            height: AppSizes.height * 0.02,
-                          ),
-                          TextView.getRoundTripText04("Round Trip",
-                              color: AppColors.roundTripColor),
-                          SizedBox(height: AppSizes.height * 0.01),
                           Container(
-                            child: Row(
+                            padding: EdgeInsets.all(AppSizes.width * 0.05),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
+                                _addLoadComponents.getLocationContainer(
+                                    pickupLocation: widget.PickupLocation,
+                                    dropOffLocation: widget.DropoffLocation),
+                                SizedBox(height: AppSizes.height * 0.01),
+                                _addLoadComponents.getExpectedRate(),
+                                SizedBox(
+                                  height: AppSizes.height * 0.02,
+                                ),
+                                TextView.getRoundTripText04("Round Trip",
+                                    color: AppColors.roundTripColor),
+                                SizedBox(height: AppSizes.height * 0.01),
                                 Container(
-                                  child: Wrap(
+                                  child: Row(
                                     children: [
-                                      CupertinoSwitch(
-                                        value: switchState,
-                                        onChanged: (bool value) {
-                                          setState(() {
-                                            switchState = value;
-                                          });
-                                        },
+                                      Container(
+                                        child: Wrap(
+                                          children: [
+                                            CupertinoSwitch(
+                                              value: isRounded,
+                                              onChanged: (bool value) {
+                                                setState(() {
+                                                  isRounded = value;
+                                                });
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(width: AppSizes.width * 0.02),
+                                      TextView.getLabel2Text04(
+                                          "Enable Round Trip",
+                                          color: AppColors.roundTripColor),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: AppSizes.height * 0.02,
+                                ),
+                                CommonWidgets.getSubHeadingText(
+                                    text: "Pickup Date and Time"),
+                                SizedBox(height: AppSizes.height * 0.01),
+                                _addLoadComponents.getDateField(
+                                    onDate: () {
+                                      _showDate();
+                                    },
+                                    date:
+                                        "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}"),
+                                SizedBox(
+                                  height: AppSizes.height * 0.02,
+                                ),
+                                CommonWidgets.getSubHeadingText(
+                                    text: "Receiver Name"),
+                                SizedBox(height: AppSizes.height * 0.01),
+                                _addLoadComponents.getNameTextField(
+                                    leftIcon: Entypo.user,
+                                    hintText: 'Enter Receiver Name',
+                                    textEditingController: receiver_name),
+                                SizedBox(
+                                  height: AppSizes.height * 0.02,
+                                ),
+                                CommonWidgets.getSubHeadingText(
+                                    text: "Receiver Phone"),
+                                SizedBox(height: AppSizes.height * 0.01),
+                                _addLoadComponents.getNameTextField(
+                                    leftIcon: Entypo.mobile,
+                                    hintText: 'Enter Receiver Phone',
+                                    textEditingController: receiver_phone),
+                                SizedBox(
+                                  height: AppSizes.height * 0.02,
+                                ),
+                                CommonWidgets.getSubHeadingText(
+                                    text: "Good type"),
+                                SizedBox(height: AppSizes.height * 0.01),
+                                Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  height: AppSizes.height * 0.07,
+                                  width: AppSizes.width,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.lightGray,
+                                    border:
+                                        Border.all(color: AppColors.lightGray),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 5),
+                                        child: Container(
+                                          height: AppSizes.height * 0.06,
+                                          width: AppSizes.width * 0.06,
+                                          child: Image.asset(Assets.vehicle),
+                                        ),
+                                        // child: Image(image: AssetImage(Assets.vehicle)),
+                                      ),
+                                      Expanded(
+                                        child: DropdownButtonHideUnderline(
+                                          child: DropdownButton<String>(
+                                            icon:
+                                                Icon(Icons.keyboard_arrow_down),
+                                            isExpanded: true,
+                                            value: _selectedValue,
+                                            hint: TextView.getLightText04(
+                                              "Select GoodType",
+                                              color: AppColors.colorBlack,
+                                            ),
+                                            items: _addLoadProvider.description
+                                                .map<DropdownMenuItem<String>>(
+                                                    (String value) {
+                                              return DropdownMenuItem<String>(
+                                                value: value,
+                                                child: TextView.getLightText04(
+                                                  value,
+                                                  color: AppColors.colorBlack,
+                                                ),
+                                              );
+                                            }).toList(),
+                                            onChanged: (String value) {
+                                              setState(() {
+                                                _selectedValue = value;
+                                              });
+                                            },
+                                          ),
+                                        ),
                                       ),
                                     ],
                                   ),
                                 ),
-                                SizedBox(width: AppSizes.width * 0.02),
-                                TextView.getLabel2Text04("Enable Round Trip",
-                                    color: AppColors.roundTripColor),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: AppSizes.height * 0.02,),
-                          CommonWidgets.getSubHeadingText(
-                              text: "Pickup Date and Time"),
-                          SizedBox(height: AppSizes.height * 0.01),
-
-                          _addLoadComponents.getDateField(
-                              onDate: () {
-                                _showDate();
-                              },
-                              date:
-                              "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}"),
-                          SizedBox(height: AppSizes.height * 0.02,),
-                          CommonWidgets.getSubHeadingText(
-                              text: "Receiver Name"),
-                          SizedBox(height: AppSizes.height * 0.01),
-                          _addLoadComponents.getNameTextField(
-                              leftIcon: Entypo.user,
-                              hintText: 'Receiver Name',
-                              textEditingController: receiver_name),
-                          SizedBox(height: AppSizes.height * 0.02,),
-                          CommonWidgets.getSubHeadingText(
-                              text: "Receiver Phone"),
-                          SizedBox(height: AppSizes.height * 0.01),
-                          _addLoadComponents.getNameTextField(
-                              leftIcon: Entypo.mobile,
-                              hintText: '(333)465-2835',
-                              textEditingController: receiver_phone),
-                          SizedBox(height: AppSizes.height * 0.02,),
-                          CommonWidgets.getSubHeadingText(text: "Good type"),
-                          SizedBox(height: AppSizes.height * 0.01),
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
-                            height: AppSizes.height * 0.07,
-                            width: AppSizes.width,
-                            decoration: BoxDecoration(
-                              color: AppColors.lightGray,
-                              border: Border.all(color: AppColors.lightGray),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 5),
-                                  child: Container(
-                                    height: AppSizes.height * 0.06,
-                                    width: AppSizes.width * 0.06,
-                                    child: Image.asset(
-                                        Assets.vehicle
-                                    ),
-                                  ),
-                                  // child: Image(image: AssetImage(Assets.vehicle)),
+                                SizedBox(
+                                  height: AppSizes.height * 0.02,
                                 ),
-                                Expanded(
-                                  child: DropdownButtonHideUnderline(
-                                    child: DropdownButton<String>(
-                                      icon: Icon(Icons.keyboard_arrow_down),
-                                      isExpanded: true,
-                                      value: _selectedValue,
-                                      hint: TextView.getLightText04(
-                                        "Select GoodType",
-                                        color: AppColors.colorBlack,
-                                      ),
-                                      items: _addLoadProvider.description
-                                          .map<DropdownMenuItem<String>>(
-                                              (String value) {
-                                            return DropdownMenuItem<String>(
-                                              value: value,
-                                              child: TextView.getLightText04(
-                                                value,
-                                                color: AppColors.colorBlack,
+                                CommonWidgets.getSubHeadingText(text: "Weight"),
+                                SizedBox(height: AppSizes.height * 0.01),
+                                _addLoadComponents.getTextField(
+                                    leftIcon: Assets.vehicle,
+                                    hintText: 'Enter Weight',
+                                    textEditingController: weight),
+                                SizedBox(
+                                  height: AppSizes.height * 0.02,
+                                ),
+                                CommonWidgets.getSubHeadingText(
+                                    text: "No. of Vehicle"),
+                                SizedBox(height: AppSizes.height * 0.01),
+                                _addLoadComponents.getTextField(
+                                    leftIcon: Assets.vehicle,
+                                    hintText: 'Enter No. of Vehicle',
+                                    textEditingController: num_of_vehicle),
+                                SizedBox(
+                                  height: AppSizes.height * 0.02,
+                                ),
+                                CommonWidgets.getSubHeadingText(
+                                    text: "Description"),
+                                SizedBox(height: AppSizes.height * 0.01),
+                                _addLoadComponents.getMessageTextField(
+                                    leftIcon: Icons.message,
+                                    hintText: 'Enter Description',
+                                    textEditingController: description),
+                                SizedBox(height: AppSizes.height * 0.03),
+                                Row(
+                                  children: [
+                                    SizedBox(width: AppSizes.width * 0.03),
+                                    Column(
+                                      children: [
+                                        GestureDetector(
+                                          onTap: (){
+                                            _addLoadProvider.getImage();
+                                          },
+                                          child: DottedBorder(
+                                            color:
+                                                AppColors.addVehicleBorderColor,
+                                            // dashPattern: [6, 3, 2, 3],
+                                            strokeWidth: 1,
+                                            borderType: BorderType.RRect,
+                                            radius: Radius.circular(5),
+                                            // padding: EdgeInsets.all(16),
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(5)),
+                                              child: Container(
+                                                width: AppSizes.width * 0.25,
+                                                height: AppSizes.height * 0.12,
+                                                decoration: BoxDecoration(
+                                                  color: AppColors.lightGray,
+                                                  // border: Border.all(color: AppColors.addVehicleBorderColor),
+                                                  // borderRadius: BorderRadius.circular(10),
+                                                ),
+                                                child: Icon(Icons.add_circle),
+                                                // child: Image(image: AssetImage(Assets.addProfileImg),)
                                               ),
-                                            );
-                                          }).toList(),
-                                      onChanged: (String value) {
-                                        setState(() {
-                                          _selectedValue = value;
-                                        });
-                                      },
-                                    ),
-                                  ),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                            height: AppSizes.height * 0.02),
+                                        CommonWidgets.getSubHeadingText(
+                                            text: "Upload Images"),
+                                      ],
+                                    )
+                                  ],
                                 ),
+                                SizedBox(
+                                  height: AppSizes.height * 0.02,
+                                ),
+                                CommonWidgets.getBottomButton(
+                                    text: "Next",
+                                    onPress: () {
+                                      _addLoadProvider.onEstimatedRate(
+                                          context: context,
+                                          pickupDateTime: pickedDate,
+                                          name: receiver_name.text,
+                                          phone: receiver_phone.text,
+                                          goodTypeId: _getGoodTypeId(),
+                                          weight: weight.text,
+                                          numOfVehicle: num_of_vehicle.text,
+                                          description: description.text,
+                                          isRoundTrip: isRounded,
+                                          pickupLatitude: widget.PickupLatitude,
+                                          pickupLongitude: widget.PickupLongitude,
+                                          dropoffLatitude: widget.DropoffLatitude,
+                                          dropoffLongitude: widget.DropoffLongitude,
+                                          pickupLocation: widget.PickupLocation,
+                                          dropoffLocation: widget.DropoffLocation,
+                                        vehicleCategoryId: widget.VehicleCategoryId,
+                                        vehicleTypeId: widget.VehicleTypeId
+                                      );
+                                      // Navigator.push(context, SlideRightRoute(page: BookLoadDetails()));
+                                    }),
                               ],
                             ),
-                          ),
-                          SizedBox(height: AppSizes.height * 0.02,),
-                          CommonWidgets.getSubHeadingText(text: "Weight"),
-                          SizedBox(height: AppSizes.height * 0.01),
-                          _addLoadComponents.getTextField(
-                              leftIcon: Assets.vehicle,
-                              hintText: 'Enter Weight',
-                              textEditingController: weight),
-                          SizedBox(height: AppSizes.height * 0.02,),
-                          CommonWidgets.getSubHeadingText(
-                              text: "No. of Vehicle"),
-                          SizedBox(height: AppSizes.height * 0.01),
-                          _addLoadComponents.getTextField(
-                              leftIcon: Assets.vehicle,
-                              hintText: 'Enter No. of Vehicle',
-                              textEditingController: num_of_vehicle),
-                          SizedBox(height: AppSizes.height * 0.02,),
-                          CommonWidgets.getSubHeadingText(text: "Description"),
-                          SizedBox(height: AppSizes.height * 0.01),
-                          _addLoadComponents.getMessageTextField(
-                              leftIcon: Icons.message,
-                              hintText: 'Enter Description',
-                              textEditingController: description),
-                          SizedBox(height: AppSizes.height * 0.03),
-                          Row(
-                            children: [
-                              SizedBox(width: AppSizes.width * 0.03),
-                              Column(
-                                children: [
-                                  DottedBorder(
-                                    color: AppColors.addVehicleBorderColor,
-                                    // dashPattern: [6, 3, 2, 3],
-                                    strokeWidth: 1,
-                                    borderType: BorderType.RRect,
-                                    radius: Radius.circular(5),
-                                    // padding: EdgeInsets.all(16),
-                                    child: ClipRRect(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(5)),
-                                      child: Container(
-                                        width: AppSizes.width * 0.25,
-                                        height: AppSizes.height * 0.12,
-                                        decoration: BoxDecoration(
-                                          color: AppColors.lightGray,
-                                          // border: Border.all(color: AppColors.addVehicleBorderColor),
-                                          // borderRadius: BorderRadius.circular(10),
-                                        ),
-                                        child: Icon(Icons.add_circle),
-                                        // child: Image(image: AssetImage(Assets.addProfileImg),)
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: AppSizes.height * 0.02),
-                                  CommonWidgets.getSubHeadingText(
-                                      text: "Upload Images"),
-                                ],
-                              )
-                            ],
-                          ),
-                          SizedBox(height: AppSizes.height * 0.02,),
-                          CommonWidgets.getBottomButton(
-                              text: "Next",
-                              onPress: () {
-                                Navigator.push(context, SlideRightRoute(page: BookLoadDetails()));
-                              }),
+                          )
                         ],
                       ),
                     )
                   ],
+                )
+              : Center(
+                  child: Container(
+                    height: AppSizes.height * 0.15,
+                    child: Lottie.asset(Assets.apiLoading, fit: BoxFit.cover),
+                  ),
                 ),
-              )
-            ],
-          ):Center(
-            child: Container(
-              height: AppSizes.height * 0.15,
-              child: Lottie.asset(Assets.apiLoading, fit: BoxFit.cover),
-            ),
-          ),
         ),
       ),
     );
@@ -278,7 +346,8 @@ class _AddLoadState extends State<AddLoad> {
   int _getGoodTypeId() {
     int tempGoodTypeId = 0;
     for (int i = 0; i < _addLoadProvider.getGoodType().result.length; i++) {
-      if (_selectedValue == _addLoadProvider.getGoodType().result[i].description) {
+      if (_selectedValue ==
+          _addLoadProvider.getGoodType().result[i].description) {
         tempGoodTypeId = _addLoadProvider.getGoodType().result[i].goodTypeId;
         break;
       }

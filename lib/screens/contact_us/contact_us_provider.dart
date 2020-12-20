@@ -18,7 +18,7 @@ import 'package:http/http.dart' as http;
 class ContactUsProvider extends ChangeNotifier {
   BuildContext context;
   var connectivity;
-  String token;
+  String token, email;
   ContactUsResponse contactUsResponse = ContactUsResponse.empty();
   TokenResponse tokenResponse = TokenResponse.empty();
   NetworkHelper _networkHelper = NetworkHelperImpl();
@@ -31,24 +31,25 @@ class ContactUsProvider extends ChangeNotifier {
     context = this.context;
     connectivity = "";
     token = "";
+    email = "";
   }
 
   Future getContactUs({@required BuildContext context,
-    @required String email,
+    @required String name,
     @required String message}) async {
     try {
+      email = await PreferenceUtils.getString(Strings.email);
       connectivity = await Connectivity().checkConnectivity();
-      token = await getToken.onToken();
       if (connectivity == ConnectivityResult.none) {
         ApplicationToast.getErrorToast(
             durationTime: 3,
             heading: Strings.error,
             subHeading: Strings.internetConnectionError);
-      } else if (email.validateEmail() == false) {
+      } else if (name.isEmpty) {
         ApplicationToast.getErrorToast(
             durationTime: 3,
             heading: Strings.error,
-            subHeading: Strings.emailErrorText);
+            subHeading: Strings.nameErrorText);
       } else if (message.isEmpty) {
         ApplicationToast.getErrorToast(
             durationTime: 3,
@@ -56,11 +57,12 @@ class ContactUsProvider extends ChangeNotifier {
             subHeading: Strings.messageErrorText);
       } else {
         _loader.showLoader(context: context);
+        token = await getToken.onToken();
         http.Response response = await _networkHelper.post(saveQuery, headers: {
           'Content-Type': 'application/json',
           'Authorization': token
         }, body: {
-          "Subject": "System not working properly",
+          "Subject": name,
           "Email": email,
           "Message": message
         });
