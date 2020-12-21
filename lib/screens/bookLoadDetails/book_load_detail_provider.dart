@@ -3,7 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
-import 'package:truckoom_shipper/commons/utils.dart';
+import 'package:truckoom_shipper/commons/get_token.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
 import 'package:truckoom_shipper/models/api_models/save_load_response.dart';
 import 'package:truckoom_shipper/network/api_urls.dart';
@@ -15,6 +16,7 @@ import 'package:truckoom_shipper/screens/bottomTab/bottom_tab_provider.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/loader.dart';
 
+
 class BookLoadDetailProvider extends ChangeNotifier {
   BuildContext context;
   var connectivityResult;
@@ -24,6 +26,7 @@ class BookLoadDetailProvider extends ChangeNotifier {
   SaveLoadResponse _saveLoadResponse = SaveLoadResponse.empty();
   CustomPopup _loader = CustomPopup();
   GenericDecodeEncode _genericDecodeEncode = GenericDecodeEncode();
+  GetToken getToken = GetToken();
   BottomTabProvider _bottomTabProvider;
 
   init({@required BuildContext context}) async {
@@ -50,11 +53,10 @@ class BookLoadDetailProvider extends ChangeNotifier {
       @required String noOfVehicles,
       @required String description,
       @required bool isRoundTrip,
-      @required String tag}) async {
+      }) async {
     try {
-      // Provider.of<BottomTabProvider>(context, listen: true);
-      userId = await PreferenceUtils.getInt(Strings.userId);
-      token = await PreferenceUtils.getString(Strings.token);
+      token = await getToken.onToken();
+      userId = await Constants.getUserId();
       connectivityResult = Connectivity().checkConnectivity();
       if (connectivityResult == ConnectivityResult.none) {
         ApplicationToast.getErrorToast(
@@ -98,7 +100,6 @@ class BookLoadDetailProvider extends ChangeNotifier {
                 context,
                 SlideRightRoute(
                     page: BottomTab(
-                  tag: tag,
                 )));
           } else {
             _loader.hideLoader(context);

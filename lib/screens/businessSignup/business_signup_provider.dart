@@ -2,6 +2,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
 import 'package:truckoom_shipper/models/api_models/cities_response.dart';
 import 'package:truckoom_shipper/models/api_models/common_response.dart';
@@ -49,7 +50,6 @@ class BusinessSignupProvider extends ChangeNotifier {
     @required String confirmPassword,
     @required int city,
     @required bool onCheck,
-    @required String tag,
   }) async {
     try {
       devicedId = await PreferenceUtils.getString(Strings.deviceId);
@@ -114,21 +114,20 @@ class BusinessSignupProvider extends ChangeNotifier {
           _commonResponse = CommonResponse.fromJson(
               _genericDecodeEncode.decodeJson(response.body));
           if (_commonResponse.code == 1) {
-            id = _commonResponse.result.user.userId;
-            String res = _commonResponse.result.token.accessToken;
-            String data = "Bearer $res";
-            await PreferenceUtils.setString(Strings.token, data);
-            await PreferenceUtils.setString(Strings.refreshToken, _commonResponse.result.token.refreshToken);
-            await PreferenceUtils.setString(Strings.email, _commonResponse.result.user.email);
-            await PreferenceUtils.setString(Strings.password, _commonResponse.result.user.password);
-            await PreferenceUtils.setInt(Strings.userId, _commonResponse.result.user.userId);
-            await PreferenceUtils.setString(Strings.userType, Strings.business);
+            await Constants.setToken(_commonResponse.result.token.accessToken);
+            await Constants.setUserEmail(_commonResponse.result.user.email);
+            await Constants.setPassword(_commonResponse.result.user.password);
+            await Constants.setUserId(_commonResponse.result.user.userId);
+            await Constants.setUserName(_commonResponse.result.user.fullName);
+            await Constants.setUserPhone(_commonResponse.result.user.phone);
+            await Constants.setUser(Strings.business);
+
             ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
             currentTime = await (((ms / 1000) / 60).round()).toDouble();
             await PreferenceUtils.setDouble(Strings.tokenTime, currentTime);
             _loader.hideLoader(context);
             Navigator.push(context, SlideRightRoute(
-                page: BusinessInformation(tag: tag, userId: id,)));
+                page: BusinessInformation(userId: _commonResponse.result.user.userId,)));
           }
           else {
             _loader.hideLoader(context);

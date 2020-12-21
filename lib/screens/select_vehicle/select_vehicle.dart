@@ -17,7 +17,7 @@ import '../../res/sizes.dart';
 import '../../widgets/common_widgets.dart';
 
 class SelectVehicle extends StatefulWidget {
-  String tag,
+  String
       PickupLatitude,
       PickupLongitude,
       DropoffLatitude,
@@ -26,7 +26,6 @@ class SelectVehicle extends StatefulWidget {
       DropoffLocation;
 
   SelectVehicle({
-    @required this.tag,
     @required this.PickupLatitude,
     @required this.PickupLongitude,
     @required this.DropoffLatitude,
@@ -47,17 +46,20 @@ class _SelectVehicleState extends State<SelectVehicle> {
   TextEditingController search;
   bool isSelect;
   String _selectedValue;
+  int id, vehicleCategoryId;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _selectVehicleProvider = Provider.of<SelectVehicleProvider>(context, listen: false);
+    _selectVehicleProvider.init(context: context);
     _selectVehicleComponents = SelectVechileComponents();
     search = TextEditingController();
+    id = 0;
+    vehicleCategoryId = 0;
     isSelect = false;
-    _selectVehicleProvider =
-        Provider.of<SelectVehicleProvider>(context, listen: false);
-    _selectVehicleProvider.init(context: context);
+
   }
 
   @override
@@ -132,7 +134,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
                                     isExpanded: true,
                                     value: _selectedValue,
                                     hint: TextView.getLightText04(
-                                      "Select GoodType",
+                                      "Select Vehicle Type",
                                       color: AppColors.colorBlack,
                                     ),
                                     items: _selectVehicleProvider.description
@@ -150,6 +152,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
                                       setState(() {
                                         _selectedValue = value;
                                       });
+                                      _selectVehicleProvider.onGetVehicleById(context: context, vehicleId: _getVehicleTypeId());
                                     },
                                   ),
                                 ),
@@ -158,182 +161,55 @@ class _SelectVehicleState extends State<SelectVehicle> {
                           ),
                         ),
                         SizedBox(height: AppSizes.height * 0.02),
-                        Expanded(
-                          child: ListView(
-                            children: [
-                              Container(
-                                child: Column(
-                                  children: [
-                                    SizedBox(
-                                      height: AppSizes.height * 0.01,
-                                    ),
-                                    _selectVehicleComponents.getVehicleDetail(
-                                      leftIcon: Assets.vehicle_img,
-                                      vehicleType: 'Toyota Prius',
-                                      vehicleDetail: '22 Ton',
-                                      Category: 'Cargo',
-                                      onLoadDetail: () {
-                                        setState(() {
-                                          isSelect = !isSelect;
-                                        });
-                                        //show button
-                                      },
-                                      isSelect: isSelect,
-                                      onAlert: () {
-                                        ApplicationToast.onDescriptionAlert(
-                                            context: context);
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: AppSizes.height * 0.01,
-                                    ),
-                                    _selectVehicleComponents.getVehicleDetail(
-                                      leftIcon: Assets.vehicle_img,
-                                      vehicleType: 'Toyota Prius',
-                                      vehicleDetail: '22 Ton',
-                                      Category: 'Cargo',
-                                      onLoadDetail: () {
-                                        setState(() {
-                                          isSelect = !isSelect;
-                                        });
-                                        //show button
-                                      },
-                                      isSelect: false,
-                                      onAlert: () {
-                                        ApplicationToast.onDescriptionAlert(
-                                            context: context);
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: AppSizes.height * 0.01,
-                                    ),
-                                    _selectVehicleComponents.getVehicleDetail(
-                                      leftIcon: Assets.vehicle_img,
-                                      vehicleType: 'Toyota Prius',
-                                      vehicleDetail: '22 Ton',
-                                      Category: 'Cargo',
-                                      onLoadDetail: () {
-                                        setState(() {
-                                          isSelect = !isSelect;
-                                        });
-                                        //show button
-                                      },
-                                      onAlert: () {
-                                        ApplicationToast.onDescriptionAlert(
-                                            context: context);
-                                      },
-                                      isSelect: false,
-                                    ),
-                                    SizedBox(
-                                      height: AppSizes.height * 0.01,
-                                    ),
-                                    _selectVehicleComponents.getVehicleDetail(
-                                      leftIcon: Assets.vehicle_img,
-                                      vehicleType: 'Toyota Prius',
-                                      vehicleDetail: '22 Ton',
-                                      Category: 'Cargo',
-                                      onLoadDetail: () {
-                                        setState(() {
-                                          isSelect = !isSelect;
-                                        });
-                                        //show button
-                                      },
-                                      isSelect: false,
-                                      onAlert: () {
-                                        ApplicationToast.onDescriptionAlert(
-                                            context: context);
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: AppSizes.height * 0.01,
-                                    ),
-                                    _selectVehicleComponents.getVehicleDetail(
-                                      leftIcon: Assets.vehicle_img,
-                                      vehicleType: 'Toyota Prius',
-                                      vehicleDetail: '22 Ton',
-                                      Category: 'Cargo',
-                                      onLoadDetail: () {
-                                        setState(() {
-                                          isSelect = !isSelect;
-                                        });
-                                        //show button
-                                      },
-                                      isSelect: false,
-                                      onAlert: () {
-                                        ApplicationToast.onDescriptionAlert(
-                                            context: context);
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: AppSizes.height * 0.01,
-                                    ),
-                                    _selectVehicleComponents.getVehicleDetail(
-                                      leftIcon: Assets.vehicle_img,
-                                      vehicleType: 'Toyota Prius',
-                                      vehicleDetail: '22 Ton',
-                                      Category: 'Cargo',
-                                      onLoadDetail: () {
-                                        setState(() {
-                                          isSelect = !isSelect;
-                                        });
-                                        //show button
-                                      },
-                                      isSelect: false,
-                                      onAlert: () {
-                                        ApplicationToast.onDescriptionAlert(
-                                            context: context);
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: AppSizes.height * 0.01,
-                                    ),
-                                    _selectVehicleComponents.getVehicleDetail(
-                                      leftIcon: Assets.vehicle_img,
-                                      vehicleType: 'Toyota Prius',
-                                      vehicleDetail: '22 Ton',
-                                      Category: 'Cargo',
-                                      onLoadDetail: () {
-                                        setState(() {
-                                          isSelect = !isSelect;
-                                        });
-                                        //show button
-                                      },
-                                      isSelect: false,
-                                      onAlert: () {
-                                        ApplicationToast.onDescriptionAlert(
-                                            context: context);
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: AppSizes.height * 0.01,
-                                    ),
-                                    _selectVehicleComponents.getVehicleDetail(
-                                      leftIcon: Assets.vehicle_img,
-                                      vehicleType: 'Toyota Prius',
-                                      vehicleDetail: '22 Ton',
-                                      Category: 'Cargo',
-                                      onLoadDetail: () {
-                                        setState(() {
-                                          isSelect = !isSelect;
-                                        });
+                        _selectVehicleProvider.isVehicleFetched? Expanded(
+                          child: ListView.builder(
+                            itemCount: _selectVehicleProvider.vehicleByVehicleIdResponse.result.length,
+                              itemBuilder: (context, index){
+                            return Container(
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: AppSizes.height * 0.01,
+                                  ),
+                                  _selectVehicleComponents.getVehicleDetail(
+                                    leftIcon: _selectVehicleProvider.vehicleByVehicleIdResponse.result[index].vehicleImage,
+                                    vehicleType: _selectVehicleProvider.vehicleByVehicleIdResponse.result[index].vehicleName,
+                                    vehicleDetail: _selectVehicleProvider.vehicleByVehicleIdResponse.result[index].vehicleCategory,
+                                    Category: _selectVehicleProvider.vehicleByVehicleIdResponse.result[index].vehicleType,
+                                    onLoadDetail: () {
+                                      setState(() {
+                                        isSelect = true;
+                                        id = _selectVehicleProvider.vehicleByVehicleIdResponse.result[index].vehicleId;
+                                        vehicleCategoryId = _selectVehicleProvider.vehicleByVehicleIdResponse.result[index].vehicleCategoryId;
+                                      });
+                                      //show button
+                                    },
+                                    isSelect: id == _selectVehicleProvider.vehicleByVehicleIdResponse.result[index].vehicleId? true:false,
+                                    onAlert: () {
+                                      ApplicationToast.onDescriptionAlert(
+                                          context: context,
+                                          description: _selectVehicleProvider.vehicleByVehicleIdResponse.result[index].vehicleDescription,
+                                      );
+                                      // ApplicationToast.onDescriptionAlert(
+                                      //     context: context);
+                                    },
+                                  ),
+                                  SizedBox(
+                                    height: AppSizes.height * 0.01,
+                                  ),
 
-                                        //show button
-                                      },
-                                      isSelect: false,
-                                      onAlert: () {
-                                        ApplicationToast.onDescriptionAlert(
-                                            context: context);
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: AppSizes.height * 0.01,
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
+                                ],
+                              ),
+                            );
+                          })
+                        ):
+                        Center(
+                          child: Container(
+                            height: AppSizes.height * 0.15,
+                            // width: AppSizes.width,
+                            // child: Lottie.asset(Assets.apiLoading, fit: BoxFit.cover),
                           ),
-                        )
+                        ),
                       ],
                     ))
                 : Center(
@@ -344,8 +220,9 @@ class _SelectVehicleState extends State<SelectVehicle> {
                   ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: isSelect
-                  ? Container(
+              child:
+              isSelect?
+              Container(
                       height: AppSizes.height * 0.07,
                       margin: EdgeInsets.only(
                           bottom: AppSizes.width * 0.03,
@@ -364,7 +241,6 @@ class _SelectVehicleState extends State<SelectVehicle> {
                               context,
                               SlideRightRoute(
                                   page: AddLoad(
-                                      tag: widget.tag,
                                       PickupLatitude: widget.PickupLatitude,
                                       PickupLongitude: widget.PickupLongitude,
                                       DropoffLatitude: widget.DropoffLatitude,
@@ -372,7 +248,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
                                       PickupLocation: widget.PickupLocation,
                                       DropoffLocation: widget.DropoffLocation,
                                       VehicleTypeId: _getVehicleTypeId(),
-                                      VehicleCategoryId: 2)));
+                                      VehicleCategoryId: vehicleCategoryId)));
                         },
                         child: TextView.getBottomButtonText04(
                           "Next",

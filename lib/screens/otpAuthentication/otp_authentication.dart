@@ -82,11 +82,11 @@ class _OTPAuthenticationState extends State<OTPAuthentication> {
                           SizedBox(height: AppSizes.height*0.035,),
                           CommonWidgets.getSubHeadingText(text: "Enter Verification Code"),
                           SizedBox(height: AppSizes.height*0.008,),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getPhoneNumberField(
                               isPassword: true,
                               leftIcon: Entypo.mobile,
                               textEditingController: otp_code,
-                              hintText: "Verification Code"
+                              hintText: "Enter Verification Code"
                           ),
                           SizedBox(height: AppSizes.height*0.035,),
                           _otpAuthenticationComponents.getRichText(

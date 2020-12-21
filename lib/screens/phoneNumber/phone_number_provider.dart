@@ -71,10 +71,9 @@ class PhoneNumberProvider extends ChangeNotifier {
               Navigator.push(context, SlideRightRoute(page: OTPAuthentication(
                   tag: tag, otp: otpCode, cell: phoneNumber)),
               );
-            });
-            // Navigator.push(context, SlideRightRoute(page: OTPAuthentication(
-            //           tag: tag, otp: otpCode, cell: phoneNumber)),
-            // );
+            },
+            );
+
           } else {
             _loader.hideLoader(context);
             ApplicationToast.getErrorToast(

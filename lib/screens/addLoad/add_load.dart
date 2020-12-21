@@ -15,7 +15,7 @@ import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class AddLoad extends StatefulWidget {
-  String tag,
+  String
       PickupLatitude,
       PickupLongitude,
       DropoffLatitude,
@@ -25,7 +25,7 @@ class AddLoad extends StatefulWidget {
   int VehicleTypeId, VehicleCategoryId;
 
   AddLoad(
-      {@required this.tag,
+      {
       @required this.PickupLatitude,
       @required this.PickupLongitude,
       @required this.DropoffLatitude,
@@ -160,7 +160,7 @@ class _AddLoadState extends State<AddLoad> {
                                 CommonWidgets.getSubHeadingText(
                                     text: "Receiver Phone"),
                                 SizedBox(height: AppSizes.height * 0.01),
-                                _addLoadComponents.getNameTextField(
+                                _addLoadComponents.getPhoneField(
                                     leftIcon: Entypo.mobile,
                                     hintText: 'Enter Receiver Phone',
                                     textEditingController: receiver_phone),
@@ -230,7 +230,7 @@ class _AddLoadState extends State<AddLoad> {
                                 ),
                                 CommonWidgets.getSubHeadingText(text: "Weight"),
                                 SizedBox(height: AppSizes.height * 0.01),
-                                _addLoadComponents.getTextField(
+                                _addLoadComponents.getNumberField(
                                     leftIcon: Assets.vehicle,
                                     hintText: 'Enter Weight',
                                     textEditingController: weight),
@@ -240,7 +240,7 @@ class _AddLoadState extends State<AddLoad> {
                                 CommonWidgets.getSubHeadingText(
                                     text: "No. of Vehicle"),
                                 SizedBox(height: AppSizes.height * 0.01),
-                                _addLoadComponents.getTextField(
+                                _addLoadComponents.getNumberField(
                                     leftIcon: Assets.vehicle,
                                     hintText: 'Enter No. of Vehicle',
                                     textEditingController: num_of_vehicle),

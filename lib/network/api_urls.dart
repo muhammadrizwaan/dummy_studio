@@ -26,5 +26,6 @@ const String getDriverDetailApi = "$baseUrl/api//Users/GetDriverDetails?driverId
 const String getInvoiceDetailApi = "$baseUrl/api/Transactions/GetInvoiceDetails?transactionId={Id}";
 const String uploadProfilePictureApi = "$baseUrl/api/Accounts/UploadProfilePicture";
 const String cancellLoadApi = "$baseUrl/api/Loads/RejectedByShipper";
+const String getVehicleByVehicleId = "$baseUrl/api/Vehicle/GetVehiclesByVehicleTypeId?id={vehicleId}";
 
 

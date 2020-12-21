@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
 import 'package:truckoom_shipper/models/api_models/common_response.dart';
 import 'package:truckoom_shipper/models/api_models/token_response.dart';
@@ -76,19 +77,20 @@ class LoginProvider extends ChangeNotifier {
           commonResponse = CommonResponse.fromJson(
               genericDecodeEncode.decodeJson(response.body));
           if (commonResponse.code == 1) {
-            String res = commonResponse.result.token.accessToken;
-            String data = "Bearer $res";
-            await PreferenceUtils.setString(Strings.token, data);
-            await PreferenceUtils.setString(Strings.refreshToken, commonResponse.result.token.refreshToken);
-            await PreferenceUtils.setString(Strings.email, commonResponse.result.user.email);
-            await PreferenceUtils.setString(Strings.password, commonResponse.result.user.password);
-            await PreferenceUtils.setInt(Strings.userId, commonResponse.result.user.userId);
-            await PreferenceUtils.setString(Strings.fullName, commonResponse.result.user.fullName);
-            // await PreferenceUtils.setString(Strings.companyNameKey, commonResponse.result.user.companyInformations[0].companyName);
-            // await PreferenceUtils.setString(Strings.companyPhoneKey, commonResponse.result.user.companyInformations[0].contactNumber);
-            // await PreferenceUtils.setString(Strings.companyTrnKey, commonResponse.result.user.companyInformations[0].trn);
-            await PreferenceUtils.setString(Strings.userType, commonResponse.result.user.isBusinessAccount? Strings.business: Strings.indiviual);
-            // await PreferenceUtils.setString(Strings.profileImageKey, commonResponse.result.use);
+
+            await Constants.setToken(commonResponse.result.token.accessToken);
+            await Constants.setUserEmail(commonResponse.result.user.email);
+            await Constants.setPassword(commonResponse.result.user.password);
+            await Constants.setUserId(commonResponse.result.user.userId);
+            await Constants.setUserName(commonResponse.result.user.fullName);
+            await Constants.setUserPhone(commonResponse.result.user.phone);
+            await Constants.setUser(commonResponse.result.user.isBusinessAccount? Strings.business: Strings.indiviual);
+            if(commonResponse.result.user.companyInformations.isNotEmpty){
+              await Constants.setCommpanyName(commonResponse.result.user.companyInformations[0].companyName);
+              await Constants.setCommpanyPhone(commonResponse.result.user.companyInformations[0].contactNumber);
+              await Constants.setCommpanyTrn(commonResponse.result.user.companyInformations[0].trn);
+              await Constants.setLicenseExpiryDate(commonResponse.result.user.companyInformations[0].licenseExpiryDate);
+            }
 
             ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
             currentTime = await (((ms / 1000) / 60).round()).toDouble();
@@ -98,15 +100,7 @@ class LoginProvider extends ChangeNotifier {
               context: context,
               text: Strings.loginSuccessful,
               onNavigate: () {
-                commonResponse.result.user.isBusinessAccount
-                    ? {Navigator.pushAndRemoveUntil(
-                        context,
-                        SlideRightRoute(page: BottomTab(tag: Strings.business)),
-                        ModalRoute.withName(Routes.login))}
-                    : Navigator.pushAndRemoveUntil(
-                        context,
-                        SlideRightRoute(page: BottomTab(tag: Strings.indiviual)),
-                        ModalRoute.withName(Routes.login));
+                Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: BottomTab()), ModalRoute.withName(Routes.login));
               },
             );
           } else {

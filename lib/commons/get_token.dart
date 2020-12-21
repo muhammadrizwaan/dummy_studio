@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/models/api_models/token_response.dart';
 import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/res/strings.dart';
@@ -27,7 +28,8 @@ class GetToken{
 
   Future<String> onToken() async {
 
-    token = await PreferenceUtils.getString(Strings.token);
+    token = await Constants.getToken();
+
     double previousTime = await PreferenceUtils.getDouble(Strings.tokenTime);
 
     double ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
@@ -35,10 +37,9 @@ class GetToken{
     double time = currentTime - previousTime;
     print('time is ');
     print(time);
-
-
+    print(token);
+    print('time is ');
     if (time > 10.0) {
-      // refreshToken = await PreferenceUtils.getString(Strings.refreshToken);
       email = await PreferenceUtils.getString(Strings.email);
       password = await PreferenceUtils.getString(Strings.password);
 
@@ -59,12 +60,8 @@ class GetToken{
         );
         if (response.statusCode == 200) {
           tokenResponse = TokenResponse.fromJson(response.data);
-          String tokenRes = tokenResponse.accessToken;
 
-          print('refresh token');
-          token = "Bearer $tokenRes";
-          await PreferenceUtils.setString(Strings.token, token);
-          await PreferenceUtils.setString(Strings.refreshToken, tokenResponse.refreshToken);
+          await Constants.setToken(tokenResponse.accessToken);
           ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
           currentTime = await (((ms / 1000) / 60).round()).toDouble();
           await PreferenceUtils.setDouble(Strings.tokenTime, currentTime);

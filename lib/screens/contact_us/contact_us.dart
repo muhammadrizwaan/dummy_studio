@@ -103,7 +103,7 @@ class _ContactUsState extends State<ContactUs> {
                           ),
                           child: FlatButton(
                             onPressed: (){
-                              _contactUsProvider.getContactUs(context: context, name: name.text, message: name.text);
+                              _contactUsProvider.getContactUs(context: context, name: name.text, message: message.text);
                             },
                             child: TextView.getBottomButtonText04("Send", color: Colors.white.withOpacity(0.6),),
                           ),

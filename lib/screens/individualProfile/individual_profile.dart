@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
@@ -61,13 +62,13 @@ class _IndividualProfileState extends State<IndividualProfile> {
                         children: [
                           SizedBox(height: AppSizes.height * 0.01,),
                           _individualProfileComponents.getProfileImage(
-                              profileImg: Assets.profileImg
+                              profileImg: Constants.getUserImage()
                           ),
                           SizedBox(height: AppSizes.height * 0.05,),
                           _individualProfileComponents.getIndividualProfileContainer(
-                              name: PreferenceUtils.getString(Strings.fullName),
-                              email: PreferenceUtils.getString(Strings.email),
-                              password: PreferenceUtils.getString(Strings.password),
+                              name: Constants.getUserName(),
+                              email: Constants.getUserEmail(),
+                              password: Constants.getPassword(),
                           )
                         ],
                       ),

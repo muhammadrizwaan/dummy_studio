@@ -108,7 +108,7 @@ class _LoginState extends State<Login> {
                                   isPassword: false,
                                   leftIcon: Entypo.user,
                                   textEditingController: email,
-                                  hintText: "Email/Phone Number"),
+                                  hintText: "Enter Email/Phone Number"),
                               SizedBox(
                                 height: AppSizes.height * 0.02,
                               ),
