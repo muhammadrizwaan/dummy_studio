@@ -16,9 +16,9 @@ import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 
 class AcceptedProvider extends ChangeNotifier {
-  BuildContext context;
-
   GenericDecodeEncode genericDecodeEncode = GenericDecodeEncode();
+
+  BuildContext context;
   NetworkHelper _networkHelper = NetworkHelperImpl();
   TabbarResponse tabbarResponse = TabbarResponse.empty();
   CustomPopup _loader = CustomPopup();

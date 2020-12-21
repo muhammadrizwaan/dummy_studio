@@ -20,10 +20,10 @@ class BusinessSignupProvider extends ChangeNotifier {
   BuildContext context;
   String devicedId;
   var connectivity;
-  bool isDataFetched;
+  bool  isDataFetched;
   NetworkHelper _networkHelper = NetworkHelperImpl();
   CommonResponse _commonResponse = CommonResponse.empty();
-  CitiesResponse _citiesResponse = CitiesResponse.empty();
+  CitiesResponse  _citiesResponse = CitiesResponse.empty();
   GenericDecodeEncode _genericDecodeEncode = GenericDecodeEncode();
   CustomPopup _loader = CustomPopup();
   List<String> description = List<String>();
