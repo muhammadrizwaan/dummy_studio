@@ -58,7 +58,7 @@ class _CancelledState extends State<Cancelled> {
                       },
                       onTap: () {
                         Navigator.push(
-                            context, SlideRightRoute(page: JobDetails()));
+                            context, SlideRightRoute(page: JobDetails(status:"InProcess", loadId: _cancelledProvider.tabbarResponse.result[index].loadId)));
                       },
                     ),
                     SizedBox(

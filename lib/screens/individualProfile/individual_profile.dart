@@ -1,19 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttericon/font_awesome5_icons.dart';
-import 'package:fluttericon/font_awesome_icons.dart';
-import 'package:fluttericon/linecons_icons.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
+import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/res/assets.dart';
-import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
-import 'package:truckoom_shipper/screens/businessEditProfile/business_edit_profile.dart';
 import 'package:truckoom_shipper/screens/individualEditProfile/individual_edit_profile.dart';
 import 'package:truckoom_shipper/screens/individualProfile/individual_profile_components.dart';
-import 'package:truckoom_shipper/screens/notifications/notifications.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
-import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class IndividualProfile extends StatefulWidget {
   String tag;
@@ -41,7 +35,6 @@ class _IndividualProfileState extends State<IndividualProfile> {
         body: Container(
           height: AppSizes.height,
           width: AppSizes.width,
-          // padding: EdgeInsets.all(AppSizes.width * 0.05),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -72,9 +65,9 @@ class _IndividualProfileState extends State<IndividualProfile> {
                           ),
                           SizedBox(height: AppSizes.height * 0.05,),
                           _individualProfileComponents.getIndividualProfileContainer(
-                              name: 'Mathew Lawson',
-                              email: 'MathewLawson@gmail.com',
-                              password: '********'
+                              name: PreferenceUtils.getString(Strings.fullName),
+                              email: PreferenceUtils.getString(Strings.email),
+                              password: PreferenceUtils.getString(Strings.password),
                           )
                         ],
                       ),

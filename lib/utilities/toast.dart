@@ -233,8 +233,8 @@ class ApplicationToast {
     };
   }
 
-  static onCancellLoadAlert(
-      {@required BuildContext context, @required Function onCancellLoad}) {
+  static onLoadAlert(
+      {@required BuildContext context, @required Function onCancellLoad, @required String text}) {
     return {
       {
         showDialog(
@@ -278,7 +278,7 @@ class ApplicationToast {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           TextView.getTabBarAlertText(
-                              Strings.cancelLoadAlertText,
+                              text,
                               color: AppColors.colorBlack,
                               textAlign: TextAlign.center),
                           SizedBox(
@@ -303,9 +303,6 @@ class ApplicationToast {
                                       color: Colors.white),
                                 ),
                               ),
-                              // SizedBox(
-                              //   width: 20,
-                              // ),
                               GestureDetector(
                                 onTap: () {
                                   Navigator.pop(context);

@@ -28,6 +28,7 @@ class SelectVehicleProvider extends ChangeNotifier{
   init({@required BuildContext context}) async{
     isDataFetched = false;
     token = "";
+    description =[];
     await _getGoodTypesApi();
     this.context = context;
   }

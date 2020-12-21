@@ -1,34 +1,38 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
-class InvoiceDetailComponents{
-  Widget getLogoContainer(){
+class InvoiceDetailComponents {
+  Widget getLogoContainer(
+      {@required String invoiceLogo, @required String name}) {
     return Center(
       child: Container(
         child: Column(
           children: [
             //SizedBox(height: AppSizes.height * 0.02),
             Container(
-              height: AppSizes.height*0.12,
-              width: AppSizes.width*0.25,
+              height: AppSizes.height * 0.12,
+              width: AppSizes.width * 0.25,
               child: Image(
-                image: AssetImage(Assets.invoiceLogo),
+                image: invoiceLogo == ""
+                    ? AssetImage(Assets.invoiceLogo)
+                    : NetworkImage('$baseUrl' + '$invoiceLogo'),
                 fit: BoxFit.cover,
               ),
             ),
             SizedBox(height: AppSizes.height * 0.02),
-            Text('Preimer Transports',
+            Text(
+              name,
               style: TextStyle(
-                fontFamily: Assets.poppinsRegular,
-                fontSize: 18,
-                color: AppColors.colorBlack,
-                fontWeight: FontWeight.bold
-              ),
+                  fontFamily: Assets.poppinsRegular,
+                  fontSize: 18,
+                  color: AppColors.colorBlack,
+                  fontWeight: FontWeight.bold),
             )
           ],
         ),
@@ -36,7 +40,12 @@ class InvoiceDetailComponents{
     );
   }
 
-  Widget getLocationContainer(){
+  Widget getLocationContainer(
+      {@required String pickupLocation,
+      @required String dropOffLocation,
+      @required String Id,
+        @required String dateTime
+      }) {
     return Container(
       margin: EdgeInsets.only(top: 20),
       padding: EdgeInsets.all(AppSizes.width * 0.05),
@@ -50,8 +59,7 @@ class InvoiceDetailComponents{
                 spreadRadius: 1,
                 blurRadius: 1,
                 offset: Offset(0, 0))
-          ]
-      ),
+          ]),
       child: Column(
         children: [
           Row(
@@ -60,7 +68,8 @@ class InvoiceDetailComponents{
               Container(
                 padding: EdgeInsets.only(top: 6),
                 height: AppSizes.height * 0.1,
-                child: Image(image: AssetImage(Assets.locationCircleIcon),
+                child: Image(
+                  image: AssetImage(Assets.locationCircleIcon),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -75,27 +84,28 @@ class InvoiceDetailComponents{
                       height: AppSizes.height * 0.085,
                       width: AppSizes.width * 0.7,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          // border: Border.fromBorderSide()
+                        borderRadius: BorderRadius.circular(10),
+                        // border: Border.fromBorderSide()
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('From - Anguilla',
+                          Text(
+                            Strings.pickupLocation,
                             style: TextStyle(
-                                fontFamily: Assets.poppinsRegular,
-                                fontSize: 12,
-                                color: AppColors.colorBlack.withOpacity(0.4),
-                                // fontWeight: FontWeight.bold
+                              fontFamily: Assets.poppinsRegular,
+                              fontSize: 12,
+                              color: AppColors.colorBlack.withOpacity(0.4),
+                              // fontWeight: FontWeight.bold
                             ),
                           ),
-                          Text('Bonarka City Center',
+                          Text(
+                            pickupLocation,
                             style: TextStyle(
                                 fontFamily: Assets.poppinsBold,
                                 fontSize: 14,
                                 color: AppColors.colorBlack,
-                                fontWeight: FontWeight.bold
-                            ),
+                                fontWeight: FontWeight.bold),
                           )
                         ],
                       ),
@@ -110,7 +120,8 @@ class InvoiceDetailComponents{
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('To - Australia',
+                          Text(
+                            Strings.dropoffLocation,
                             style: TextStyle(
                               fontFamily: Assets.poppinsRegular,
                               fontSize: 12,
@@ -118,51 +129,59 @@ class InvoiceDetailComponents{
                               // fontWeight: FontWeight.bold
                             ),
                           ),
-                          Text('My Home',
+                          Text(
+                            dropOffLocation,
                             style: TextStyle(
                                 fontFamily: Assets.poppinsBold,
                                 fontSize: 14,
                                 color: AppColors.colorBlack,
-                                fontWeight: FontWeight.bold
-                            ),
+                                fontWeight: FontWeight.bold),
                           )
                         ],
                       ),
                     ),
-
                   ],
                 ),
               )
             ],
           ),
-          Divider(height: 10,),
+          Divider(
+            height: 10,
+          ),
           SizedBox(height: AppSizes.height * 0.02),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
-                  Text('ID:',
+                  Text(
+                    'ID:',
                     style: TextStyle(
-                        fontFamily: Assets.poppinsRegular,
-                        fontSize: 13,
-                        color: AppColors.colorBlack.withOpacity(0.4),
-                        fontWeight: FontWeight.bold,
+                      fontFamily: Assets.poppinsRegular,
+                      fontSize: 13,
+                      color: AppColors.colorBlack.withOpacity(0.4),
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(
                     width: 04,
                   ),
-                  Text("5431443675434214", style: TextStyle(
-                    fontFamily: Assets.poppinsRegular,
-                    fontSize: 13,
-                    color: AppColors.colorBlack.withOpacity(0.4,),
-                    // fontWeight: FontWeight.bold
-                  ),),
+                  Text(
+                    Id,
+                    style: TextStyle(
+                      fontFamily: Assets.poppinsRegular,
+                      fontSize: 13,
+                      color: AppColors.colorBlack.withOpacity(
+                        0.4,
+                      ),
+                      // fontWeight: FontWeight.bold
+                    ),
+                  ),
                   //SizedBox(width: 80,),
                 ],
               ),
-              Text('Today: 5:15 pm',
+              Text(
+                dateTime,
                 style: TextStyle(
                   fontFamily: Assets.poppinsRegular,
                   fontSize: 12,
@@ -177,7 +196,45 @@ class InvoiceDetailComponents{
     );
   }
 
-  Widget getTotalContainer (){
+  Widget getStatus({@required String status, @required String dateTime}){
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: AppSizes.height * 0.02),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                status,
+                style: TextStyle(
+                  fontFamily: Assets.poppinsLight,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                  // fontWeight: FontWeight.bold
+                ),
+              ),
+              Text(
+                dateTime,
+                style: TextStyle(
+                  fontFamily: Assets.poppinsLight,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                  // fontWeight: FontWeight.bold
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget getTotalContainer({
+    @required BuildContext context,
+    @required String jobName,
+    @required String weight,
+    @required String total,
+  }) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: AppSizes.height * 0.03),
       child: Column(
@@ -185,7 +242,8 @@ class InvoiceDetailComponents{
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Job Name',
+              Text(
+                'Job ID',
                 style: TextStyle(
                   fontFamily: Assets.poppinsLight,
                   fontSize: 12,
@@ -193,29 +251,8 @@ class InvoiceDetailComponents{
                   // fontWeight: FontWeight.bold
                 ),
               ),
-              Text('1100KG Container',
-                style: TextStyle(
-                  fontFamily: Assets.poppinsLight,
-                  fontSize: 12,
-                  color: AppColors.colorBlack,
-                  // fontWeight: FontWeight.bold
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: AppSizes.height * 0.02),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Weight',
-                style: TextStyle(
-                  fontFamily: Assets.poppinsLight,
-                  fontSize: 12,
-                  color: AppColors.colorBlack,
-                  // fontWeight: FontWeight.bold
-                ),
-              ),
-              Text('246KG',
+              Text(
+                jobName,
                 style: TextStyle(
                   fontFamily: Assets.poppinsLight,
                   fontSize: 12,
@@ -229,7 +266,32 @@ class InvoiceDetailComponents{
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Total Price:',
+              Text(
+                'Weight',
+                style: TextStyle(
+                  fontFamily: Assets.poppinsLight,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                  // fontWeight: FontWeight.bold
+                ),
+              ),
+              Text(
+                weight,
+                style: TextStyle(
+                  fontFamily: Assets.poppinsLight,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                  // fontWeight: FontWeight.bold
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: AppSizes.height * 0.02),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Total Price:',
                 style: TextStyle(
                   fontFamily: Assets.poppinsLight,
                   fontSize: 12,
@@ -239,21 +301,21 @@ class InvoiceDetailComponents{
               ),
               Row(
                 children: [
-                  Text('AED ',
+                  Text(
+                    'AED ',
                     style: TextStyle(
-                      fontFamily: Assets.poppinsMedium,
-                      fontSize: 12,
-                      color: AppColors.yellow,
-                      fontWeight: FontWeight.bold
-                    ),
+                        fontFamily: Assets.poppinsMedium,
+                        fontSize: 12,
+                        color: AppColors.yellow,
+                        fontWeight: FontWeight.bold),
                   ),
-                  Text('24,000',
+                  Text(
+                    total,
                     style: TextStyle(
-                      fontFamily: Assets.poppinsMedium,
-                      fontSize: 12,
-                      color: AppColors.colorBlack,
-                      fontWeight: FontWeight.bold
-                    ),
+                        fontFamily: Assets.poppinsMedium,
+                        fontSize: 12,
+                        color: AppColors.colorBlack,
+                        fontWeight: FontWeight.bold),
                   ),
                 ],
               )
@@ -264,18 +326,18 @@ class InvoiceDetailComponents{
     );
   }
 
-  Widget getInvoiceLable(@required String lable_name){
-    return Text(lable_name,
+  Widget getInvoiceLable(@required String lable_name) {
+    return Text(
+      lable_name,
       style: TextStyle(
           fontFamily: Assets.poppinsMedium,
           fontSize: 16,
           color: AppColors.colorBlack,
-          fontWeight: FontWeight.bold
-      ),
+          fontWeight: FontWeight.bold),
     );
   }
 
-  Widget getSignatureBox(){
+  Widget getSignatureBox({@required String eSignature}) {
     return Container(
       margin: EdgeInsets.only(top: 20, bottom: 20),
       height: AppSizes.height * 0.18,
@@ -285,12 +347,13 @@ class InvoiceDetailComponents{
         borderRadius: BorderRadius.circular(10),
       ),
       child: Image(
-        image: AssetImage(Assets.signature),
+        image: NetworkImage(eSignature),
+        // image: AssetImage(Assets.signature),
       ),
     );
   }
 
-  Widget getReviewContainer(){
+  Widget getReviewContainer() {
     return Container(
       margin: EdgeInsets.only(top: 10, bottom: 20),
       child: Image(
@@ -299,9 +362,9 @@ class InvoiceDetailComponents{
     );
   }
 
-  Widget getRemarks({@required String text}){
+  Widget getRemarks({@required String text}) {
     return Container(
-      margin: EdgeInsets.only(top: 10, bottom: 20),
+      margin: EdgeInsets.only(top: 10, bottom: 25),
       child: Text(
         text,
         style: TextStyle(
@@ -316,10 +379,9 @@ class InvoiceDetailComponents{
 
   Widget getInvoiceButtonsContainer(
       {@required String share,
-        @required String download,
-        @required Function onShare,
-        @required Function onDownload
-      }) {
+      @required String download,
+      @required Function onShare,
+      @required Function onDownload}) {
     return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -327,11 +389,13 @@ class InvoiceDetailComponents{
           GestureDetector(
             onTap: () => onDownload(),
             child: Container(
-              height: AppSizes.height*0.065,
-              width: AppSizes.width*0.4,
+              height: AppSizes.height * 0.065,
+              width: AppSizes.width * 0.4,
               decoration: BoxDecoration(
                 color: AppColors.yellow,
-                borderRadius: BorderRadius.circular(05,),
+                borderRadius: BorderRadius.circular(
+                  05,
+                ),
               ),
               alignment: Alignment.center,
               child: TextView.getLabelText04(download, color: Colors.white),
@@ -341,23 +405,25 @@ class InvoiceDetailComponents{
           //   width: 20,
           // ),
           GestureDetector(
-            onTap: ()=> onShare(),
+            onTap: () => onShare(),
             child: Container(
-              height: AppSizes.height*0.06,
-              width: AppSizes.width*0.42,
+              height: AppSizes.height * 0.06,
+              width: AppSizes.width * 0.42,
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(05),
-                  border: Border.all(color: AppColors.yellow,)
-              ),
+                  border: Border.all(
+                    color: AppColors.yellow,
+                  )),
               alignment: Alignment.center,
-              child: TextView.getLabelText04(share, color: AppColors.yellow.withOpacity(0.8,)),
+              child: TextView.getLabelText04(share,
+                  color: AppColors.yellow.withOpacity(
+                    0.8,
+                  )),
             ),
           ),
         ],
       ),
     );
   }
-
-
 }

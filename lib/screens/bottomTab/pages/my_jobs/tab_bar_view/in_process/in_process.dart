@@ -4,15 +4,13 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
-import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/in_process/in_process_components.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/in_process/in_process_provider.dart';
+import 'package:truckoom_shipper/screens/driver_details/driver_details.dart';
 import 'package:truckoom_shipper/screens/jobDetails/job_details.dart';
-import 'package:truckoom_shipper/screens/payment/payment.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
-import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class InProcess extends StatefulWidget {
   @override
@@ -61,10 +59,10 @@ class _InProcessState extends State<InProcess> {
                     ApplicationToast.onDescriptionAlert(context: context, description: _inProcessProvider.tabbarResponse.result[index].vehicleTypeDescription);
                   },
                   onTap: (){
-                    Navigator.push(context, SlideRightRoute(page: JobDetails()));
+                    Navigator.push(context, SlideRightRoute(page: JobDetails(status:"InProcess", loadId: _inProcessProvider.tabbarResponse.result[index].loadId)));
                   },
-                  onClickPay: () {
-                    Navigator.push(context, SlideRightRoute(page: Payment()));
+                  onDriverDetail: () {
+                    Navigator.push(context, SlideRightRoute(page: DriverDetailScreen(driverId:_inProcessProvider.tabbarResponse.result[index].assignedDriverId)));
                   },
                 ),
                 SizedBox(

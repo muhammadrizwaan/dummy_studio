@@ -92,7 +92,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                             ApplicationToast.onDescriptionAlert(context: context, description: _historyProvider.historyResponse.result[index].vehicleTypeDescription);
                           },
                           onInvoice: () {
-                            Navigator.push(context, SlideRightRoute(page: InvoiceDetail()));
+                            Navigator.push(context, SlideRightRoute(page: InvoiceDetail(Id:_historyProvider.historyResponse.result[index].loadId)));
                           },
                         ),
                         SizedBox(

@@ -11,6 +11,7 @@ class GetToken{
   String token;
   String refreshToken;
   double previousTime;
+  String email, password;
 
   Dio dio = Dio();
   TokenResponse tokenResponse = TokenResponse.empty();
@@ -20,6 +21,8 @@ class GetToken{
     this.connectivity = "",
     this.token = "",
     this.refreshToken = "",
+    this.email = "",
+    this.password = ""
 });
 
   Future<String> onToken() async {
@@ -35,17 +38,17 @@ class GetToken{
 
 
     if (time > 10.0) {
-      refreshToken = await PreferenceUtils.getString(Strings.refreshToken);
-      print('hello');
-      print(refreshToken);
+      // refreshToken = await PreferenceUtils.getString(Strings.refreshToken);
+      email = await PreferenceUtils.getString(Strings.email);
+      password = await PreferenceUtils.getString(Strings.password);
 
       try {
         var formData = Map<String, dynamic>();
-        // formData['username'] = email;
-        // formData['password'] = password;
-        // formData['grant_type'] = "password";
-        formData['grant_type'] = "refresh_token";
-        formData['refresh_token'] = refreshToken;
+        formData['username'] = email;
+        formData['password'] = password;
+        formData['grant_type'] = "password";
+        // formData['grant_type'] = "refresh_token";
+        // formData['refresh_token'] = refreshToken;
         dio.options.contentType = Headers.formUrlEncodedContentType;
         Response response = await dio.post(
           tokenApi,

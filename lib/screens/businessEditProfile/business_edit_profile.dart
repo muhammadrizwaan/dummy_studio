@@ -7,9 +7,11 @@ import 'package:fluttericon/entypo_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
 import 'package:fluttericon/web_symbols_icons.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
+import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/businessEditProfile/business_edit_profile_components.dart';
 import 'package:truckoom_shipper/screens/businessProfile/business_profile.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
@@ -28,6 +30,11 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
   void initState() {
     super.initState();
     _businessEditProfileComponents = BusinessEditProfileComponents();
+    name = TextEditingController(text: PreferenceUtils.getString(Strings.fullName));
+    email = TextEditingController(text: PreferenceUtils.getString(Strings.email));
+    business_name = TextEditingController(text: PreferenceUtils.getString(Strings.companyNameKey));
+    phone_number = TextEditingController(text: PreferenceUtils.getString(Strings.companyPhoneKey));
+    trn = TextEditingController(text: PreferenceUtils.getString(Strings.companyTrnKey));
   }
   @override
   Widget build(BuildContext context) {

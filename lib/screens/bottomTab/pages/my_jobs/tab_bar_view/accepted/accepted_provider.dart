@@ -34,51 +34,12 @@ class AcceptedProvider extends ChangeNotifier {
 
   init({@required BuildContext context}) async {
     this.context = context;
-    statusId = 5;
+    statusId = 3;
     await getAcceptedLoad(context: context);
     connectivityResult = "";
     token = "";
     refreshToken = "";
   }
-
-  // Future TestTokenApi() async{
-  //   try {
-  //     refreshToken = await PreferenceUtils.getString(Strings.refreshToken);
-  //     var formData = Map<String, dynamic>();
-  //     // formData['username'] = email;
-  //     // formData['password'] = password;
-  //     // formData['grant_type'] = "password";
-  //     formData['grant_type'] = "refresh_token";
-  //     formData['refresh_token'] = refreshToken;
-  //     dio.options.contentType = Headers.formUrlEncodedContentType;
-  //     Response response = await dio.post(
-  //       tokenApi,
-  //       data: formData,
-  //       options: Options(
-  //         contentType: Headers.formUrlEncodedContentType,
-  //       ),
-  //     );
-  //     if (response.statusCode == 200) {
-  //       tokenResponse = TokenResponse.fromJson(response.data);
-  //       String tokenRes = tokenResponse.accessToken;
-  //
-  //       print('refresh token');
-  //       token = "Bearer $tokenRes";
-  //       await PreferenceUtils.setString(Strings.token, token);
-  //       await PreferenceUtils.setString(Strings.refreshToken, tokenResponse.refreshToken);
-  //       // await PreferenceUtils.setString(Strings.refreshToken, tokenResponse.refreshToken);
-  //       // ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
-  //       // currentTime = await (((ms / 1000) / 60).round()).toDouble();
-  //       // await PreferenceUtils.setDouble(Strings.tokenTime, currentTime);
-  //       print(token);
-  //     }
-  //     else{
-  //       ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: "Unauthorized user");
-  //     }
-  //   } catch (e) {
-  //     print(e.toString());
-  //   }
-  // }
 
   Future getAcceptedLoad({@required BuildContext context}) async {
     try {
@@ -122,7 +83,7 @@ class AcceptedProvider extends ChangeNotifier {
     }
   }
 
-  Future onDeleteLoad(
+  Future onCancellLoad(
       {@required BuildContext context, @required int loadId}) async {
     try {
       token = await getToken.onToken();
@@ -135,11 +96,16 @@ class AcceptedProvider extends ChangeNotifier {
       } else {
         isDataFetched = false;
         notifyListeners();
-        String tempUrl = deleteLoadApi.replaceAll("{loadId}", '$loadId');
-        http.Response response = await _networkHelper.post(tempUrl, headers: {
+        userId = await PreferenceUtils.getInt(Strings.userId);
+        http.Response response = await _networkHelper.post(cancellLoadApi, headers: {
           'Content-Type': 'application/json',
           'Authorization': token
-        });
+        },
+          body: {
+            "LoadId": loadId,
+            "UserId": userId
+          }
+        );
         if (response.statusCode == 200) {
           await getAcceptedLoad(context: context);
           print('deleted');

@@ -6,6 +6,7 @@ import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
 import 'package:truckoom_shipper/models/api_models/common_response.dart';
+import 'package:truckoom_shipper/models/api_models/company_information_response.dart';
 import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/network/network_helper.dart';
 import 'package:truckoom_shipper/network/network_helper_impl.dart';
@@ -27,7 +28,7 @@ class BusinessInformationProvider extends ChangeNotifier {
   double currentTime;
   var connectivityResult;
   NetworkHelper _networkHelper = NetworkHelperImpl();
-  CommonResponse commonResponse = CommonResponse.empty();
+  CompanyInformationResponse _companyInformationResponse = CompanyInformationResponse.empty();
   GenericDecodeEncode genericDecodeEncode = GenericDecodeEncode();
   CustomPopup _loader = CustomPopup();
 
@@ -85,11 +86,6 @@ class BusinessInformationProvider extends ChangeNotifier {
             durationTime: 3,
             heading: Strings.error,
             subHeading: Strings.trnErrorText);
-      } else if (phoneNumber.validatePhoneNumber() == false) {
-        ApplicationToast.getErrorToast(
-            durationTime: 3,
-            heading: Strings.error,
-            subHeading: Strings.phoneNumberErrorText);
       } else if (onCheck == false) {
         ApplicationToast.getErrorToast(
           durationTime: 3,
@@ -109,18 +105,15 @@ class BusinessInformationProvider extends ChangeNotifier {
           "UserId": userId
         });
         if (response.statusCode == 200) {
-          commonResponse = CommonResponse.fromJson(
+          _companyInformationResponse = CompanyInformationResponse.fromJson(
               genericDecodeEncode.decodeJson(response.body));
-          if (commonResponse.code == 1) {
-            String res = commonResponse.result.token.accessToken;
-            String data = "Bearer $res";
-            await PreferenceUtils.setString(Strings.token, data);
-            await PreferenceUtils.setString(Strings.refreshToken, commonResponse.result.token.refreshToken);
-            await PreferenceUtils.setString(Strings.email, commonResponse.result.user.email);
-            await PreferenceUtils.setString(Strings.password, commonResponse.result.user.password);
-            ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
-            currentTime = await (((ms / 1000) / 60).round()).toDouble();
-            await PreferenceUtils.setDouble(Strings.tokenTime, currentTime);
+          if (_companyInformationResponse.code == 1) {
+            print('test 1');
+            await PreferenceUtils.setString(Strings.companyNameKey, _companyInformationResponse.result.companyInformations[0].companyName);
+            await PreferenceUtils.setString(Strings.companyPhoneKey, _companyInformationResponse.result.companyInformations[0].contactNumber);
+            await PreferenceUtils.setString(Strings.companyTrnKey, _companyInformationResponse.result.companyInformations[0].trn);
+            await PreferenceUtils.setInt(Strings.companyIdKey, _companyInformationResponse.result.companyInformations[0].companyId);
+            print('test 2');
             _loader.hideLoader(context);
             ApplicationToast.getLoginSignupToast(
               context: context,
@@ -138,7 +131,7 @@ class BusinessInformationProvider extends ChangeNotifier {
             ApplicationToast.getErrorToast(
                 durationTime: 3,
                 heading: Strings.error,
-                subHeading: commonResponse.message);
+                subHeading: _companyInformationResponse.message);
           }
         } else {
           _loader.hideLoader(context);
