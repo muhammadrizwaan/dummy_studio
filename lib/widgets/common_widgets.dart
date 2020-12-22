@@ -309,7 +309,8 @@ class CommonWidgets {
       {@required bool isPassword,
       @required IconData leftIcon,
       @required TextEditingController textEditingController,
-      @required String hintText}) {
+      @required String hintText,
+      }) {
     return Container(
       height: AppSizes.height * 0.07,
       width: AppSizes.width * 0.85,
@@ -336,6 +337,69 @@ class CommonWidgets {
               width: AppSizes.width * 0.65,
               // height: AppSizes.height * 0.05,
               child: TextField(
+                style: TextStyle(
+                  decoration: TextDecoration.none,
+                  fontFamily: Assets.poppinsLight,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                ),
+                controller: textEditingController,
+                obscureText: isPassword,
+                decoration: InputDecoration(
+                  hintText: hintText,
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(
+                    decoration: TextDecoration.none,
+                    fontSize: 12,
+                    fontFamily: Assets.poppinsLight,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Container(
+              height: AppSizes.height * 0.035,
+              width: AppSizes.width * 0.085,
+              child: Image(
+                  image: AssetImage(
+                      'assets/png/check_circle_fill_pn.png'))),
+        ],
+      ),
+    );
+  }
+
+  static Widget getPhoneNumberField(
+      {@required bool isPassword,
+        @required IconData leftIcon,
+        @required TextEditingController textEditingController,
+        @required String hintText}) {
+    return Container(
+      height: AppSizes.height * 0.07,
+      width: AppSizes.width * 0.85,
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.02),
+      decoration: BoxDecoration(
+        color: AppColors.lightGray,
+        border: Border.all(color: AppColors.lightGray),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Opacity(
+              opacity: 0.7,
+              child: Icon(
+                leftIcon,
+                size: 20,
+              )),
+          Center(
+            child: Container(
+              // color: AppColors.yellow,
+              padding: EdgeInsets.only(left: 5),
+              width: AppSizes.width * 0.65,
+              // height: AppSizes.height * 0.05,
+              child: TextField(
+                keyboardType: TextInputType.number,
                 style: TextStyle(
                   decoration: TextDecoration.none,
                   fontFamily: Assets.poppinsLight,

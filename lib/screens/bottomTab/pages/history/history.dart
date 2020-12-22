@@ -4,6 +4,8 @@ import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
 import 'package:lottie/lottie.dart';
 import 'package:truckoom_shipper/commons/get_token.dart';
+import 'package:truckoom_shipper/commons/utils.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/history/history_components.dart';
@@ -19,9 +21,6 @@ import '../../../../widgets/common_widgets.dart';
 import '../../../invoiceDetail/invoice_detail.dart';
 
 class HistoryScreen extends StatefulWidget {
-  String tag;
-
-  HistoryScreen({@required this.tag});
   @override
   _HistoryScreenState createState() => _HistoryScreenState();
 }
@@ -31,7 +30,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
   HistoryComponents _historyComponents;
   HistoryProvider _historyProvider;
   String price;
-
   @override
   void initState() {
     // TODO: implement initState
@@ -52,11 +50,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
           children: [
             CommonWidgets.tabsAppBar1(
                 text: "History",
-                iconName: widget.tag == Strings.indiviual
+                iconName: Constants.getUser() == Strings.indiviual
                     ? FontAwesome5.bell
                     : Linecons.wallet,
                 onPress: () {
-                  widget.tag == Strings.indiviual
+                  Constants.getUser() == Strings.indiviual
                       ? Navigator.push(
                       context, SlideRightRoute(page: Notifications()))
                       : Navigator.push(

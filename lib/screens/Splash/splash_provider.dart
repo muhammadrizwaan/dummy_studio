@@ -4,6 +4,7 @@ import 'package:device_info/device_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
 import 'package:truckoom_shipper/screens/language/language.dart';
@@ -36,9 +37,8 @@ class SplashProvider extends ChangeNotifier{
     await Future.delayed(Duration(
       seconds: 4,
     ));
-    userType = await PreferenceUtils.getString(Strings.userType);
-    if(PreferenceUtils.getString(Strings.email).isNotEmpty && PreferenceUtils.getString(Strings.password).isNotEmpty){
-      Navigator.pushReplacement(context, SlideRightRoute(page: BottomTab(tag: userType)));
+    if(Constants.getUserEmail().isNotEmpty && Constants.getPassword().isNotEmpty){
+      Navigator.pushReplacement(context, SlideRightRoute(page: BottomTab()));
     }else{
       Navigator.pushReplacement(context, SlideRightRoute(page: Language()));
     }

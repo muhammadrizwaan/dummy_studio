@@ -17,10 +17,9 @@ import '../../animations/slide_right.dart';
 import '../bottomTab/bottom_tab.dart';
 
 class BusinessInformation extends StatefulWidget {
-  String tag;
   int userId;
 
-  BusinessInformation({@required this.tag, @required this.userId});
+  BusinessInformation({@required this.userId});
 
   @override
   _BusinessInformationState createState() => _BusinessInformationState();
@@ -105,7 +104,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           CommonWidgets.getSubHeadingText(
                               text: "Contact Number"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getPhoneNumberField(
                               isPassword: false,
                               leftIcon: Entypo.mobile,
                               textEditingController: contact_number,
@@ -148,7 +147,6 @@ class _BusinessInformationState extends State<BusinessInformation> {
                                         trn: trn.text,
                                         licenseExpiryDate: pickedDate,
                                         userId: widget.userId,
-                                        tag: widget.tag,
                                         onCheck: onCheck);
                                 // _businessInformationProvider.getImage(
                                 //     context: context);

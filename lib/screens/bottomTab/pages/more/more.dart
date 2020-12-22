@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/more/more_components.dart';
 import 'package:truckoom_shipper/screens/businessProfile/business_profile.dart';
 import 'package:truckoom_shipper/screens/language/language.dart';
@@ -54,14 +55,14 @@ class _MoreState extends State<More> {
               child: ListView(
                 children: [
                   _moreComponents.getProfileContainer(
-                    ProfileImg: Assets.profileImg,
-                    name: PreferenceUtils.getString(Strings.fullName),
-                    email: PreferenceUtils.getString(Strings.email),
+                    profileImg: Constants.getUserImage(),
+                    name: Constants.getUserName(),
+                    email: Constants.getUserEmail(),
                     onPress: () {
-                      if(widget.tag == Strings.indiviual){
+                      if(Constants.getUser() == Strings.indiviual){
                         Navigator.push(context, SlideRightRoute(page: IndividualProfile()));
                       }
-                      else if(widget.tag == Strings.business){
+                      else if(Constants.getUser() == Strings.business){
                         Navigator.push(context, SlideRightRoute(page: BusinessProfile()));
                       }
                     },
@@ -87,13 +88,6 @@ class _MoreState extends State<More> {
                   Divider(
                     height: 10,
                   ),
-                  // _moreComponents.getSOSbutton(
-                  //   text: 'Language',
-                  //   onPress: () {
-                  //     // Navigator.pop(
-                  //     //     context, SlideRightRoute(page: DriverDetails()));
-                  //   },
-                  // ),
                   LanguageContainer(),
                   Divider(
                     height: 10,

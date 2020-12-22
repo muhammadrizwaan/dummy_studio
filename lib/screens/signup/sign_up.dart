@@ -15,9 +15,9 @@ import 'package:truckoom_shipper/widgets/text_views.dart';
 import '../bottomTab/bottom_tab.dart';
 
 class SignUP extends StatefulWidget {
-  String tag, cell;
+  String cell;
 
-  SignUP({@required this.tag, @required this.cell});
+  SignUP({ @required this.cell});
 
   @override
   _SignUPState createState() => _SignUPState();
@@ -214,7 +214,7 @@ class _SignUPState extends State<SignUP> {
                             onTap: () {
                               Navigator.of(context).pushAndRemoveUntil(
                                   SlideRightRoute(
-                                      page: BottomTab(tag: widget.tag)),
+                                      page: BottomTab()),
                                   (Route<dynamic> route) => false);
                             },
                             child: TextView.getContinueText04(

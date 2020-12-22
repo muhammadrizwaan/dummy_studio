@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
 import 'package:truckoom_shipper/models/api_models/edit_profile_response.dart';
 import 'package:truckoom_shipper/models/api_models/individual_update_profile_response.dart';
@@ -50,14 +51,14 @@ class IndividualEditProfileProvider extends ChangeNotifier {
   }
 
   Future onEditImage({@required BuildContext context}) async {
-    int userId = await PreferenceUtils.getInt(Strings.userId);
+    int userId = await Constants.getUserId();
     final image = await picker.getImage(source: ImageSource.gallery);
     if (image != null) {
       userImage = File(image.path);
       imagePath = userImage.path.split("/").last;
 
       try {
-        token = await PreferenceUtils.getString(Strings.token);
+        token = await _getToken.onToken();
         FormData formData = FormData.fromMap({
           "Attachment": await MultipartFile.fromFile(
             userImage.path,
@@ -81,7 +82,7 @@ class IndividualEditProfileProvider extends ChangeNotifier {
           if (editProfileResponse.code == 1) {
             print('image uploaded');
             print(editProfileResponse.result.profilePicture);
-            await PreferenceUtils.setString(Strings.profileImageKey,
+            await PreferenceUtils.setString(Strings.userImageKey,
                 editProfileResponse.result.profilePicture);
             isImagePicked = true;
             notifyListeners();
@@ -114,7 +115,7 @@ class IndividualEditProfileProvider extends ChangeNotifier {
     @required String confirmPassword,
   }) async {
     try {
-      int userId = await PreferenceUtils.getInt(Strings.userId);
+      int userId = await Constants.getUserId();
       deviceId = await PreferenceUtils.getString(Strings.deviceId);
       connectivity = await (Connectivity().checkConnectivity());
       if (connectivity == ConnectivityResult.none) {
@@ -165,12 +166,9 @@ class IndividualEditProfileProvider extends ChangeNotifier {
               IndividualUpdateProfileResponse.fromJson(
                   genericDecodeEncode.decodeJson(response.body));
           if (individualUpdateProfileResponse.code == 1) {
-            await PreferenceUtils.setString(
-                Strings.email, individualUpdateProfileResponse.result.email);
-            await PreferenceUtils.setString(Strings.password,
-                individualUpdateProfileResponse.result.password);
-            await PreferenceUtils.setString(Strings.fullName,
-                individualUpdateProfileResponse.result.fullName);
+            await Constants.setUserEmail(individualUpdateProfileResponse.result.email);
+            await Constants.setPassword(individualUpdateProfileResponse.result.password);
+            await Constants.setUserName(individualUpdateProfileResponse.result.fullName);
             _loader.hideLoader(context);
             print('Updated user');
             Navigator.pushReplacement(

@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
+import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
@@ -12,7 +13,7 @@ class IndividualProfileComponents{
   Widget getProfileImage({@required String profileImg}){
     return Container(
       child: CircleAvatar(
-        backgroundImage: AssetImage(profileImg),
+        backgroundImage:profileImg != ""? NetworkImage(baseUrl+profileImg): AssetImage(Assets.profileImg),
         radius: 75.0,
         backgroundColor: AppColors.white,
       ),

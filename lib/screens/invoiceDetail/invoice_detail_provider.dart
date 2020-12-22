@@ -28,8 +28,8 @@ class InvoiceDetailProvider extends ChangeNotifier{
   init({@required BuildContext context, @required int Id}) async{
     this.context = context;
     connectivityResult = "";
-    await getDriverDetail(context: context, Id: Id);
     token = "";
+    await getDriverDetail(context: context, Id: Id);
   }
 
   Future getDriverDetail({@required BuildContext context, @required int Id}) async{

@@ -1,37 +1,26 @@
-import 'package:circulardropdownmenu/circulardropdownmenu.dart';
-import 'package:connectivity/connectivity.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/elusive_icons.dart';
 import 'package:fluttericon/entypo_icons.dart';
-import 'package:fluttericon/linecons_icons.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
-import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
-import 'package:truckoom_shipper/models/api_models/cities_response.dart';
-import 'package:truckoom_shipper/network/network_helper.dart';
-import 'package:truckoom_shipper/network/network_helper_impl.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
-import 'package:truckoom_shipper/res/strings.dart';
-import 'package:truckoom_shipper/screens/businessInformation/business_information.dart';
 import 'package:truckoom_shipper/screens/businessSignup/business_signup_components.dart';
 import 'package:truckoom_shipper/screens/businessSignup/business_signup_provider.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
-import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/loader.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
-import 'package:http/http.dart' as http;
-import 'package:truckoom_shipper/network/api_urls.dart';
 
 class BusinessSignup extends StatefulWidget {
-  String tag, cell;
+  String cell;
 
-  BusinessSignup({@required this.tag, @required this.cell});
+  BusinessSignup({@required this.cell});
 
   @override
   _BusinessSignupState createState() => _BusinessSignupState();
@@ -109,7 +98,7 @@ class _BusinessSignupState extends State<BusinessSignup> {
                               isPassword: false,
                               leftIcon: Entypo.user,
                               textEditingController: name,
-                              hintText: "Enter Name"
+                              hintText: "Enter Full Name"
                           ),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "Email"),
@@ -118,7 +107,7 @@ class _BusinessSignupState extends State<BusinessSignup> {
                               isPassword: false,
                               leftIcon: Icons.mail,
                               textEditingController: email,
-                              hintText: "Email"),
+                              hintText: "Enter Email"),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "Password"),
                           SizedBox(height: AppSizes.height * 0.01),
@@ -204,7 +193,6 @@ class _BusinessSignupState extends State<BusinessSignup> {
                                 _businessSignupProvider.getBusinessSignup(
                                   context: context,
                                   cell: widget.cell,
-                                  tag: widget.tag,
                                   name: name.text,
                                   email: email.text,
                                   password: password.text,

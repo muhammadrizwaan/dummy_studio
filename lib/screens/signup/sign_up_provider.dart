@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
 import 'package:truckoom_shipper/models/api_models/common_response.dart';
 import 'package:truckoom_shipper/network/api_urls.dart';
@@ -105,15 +106,15 @@ class SignUpProvider extends ChangeNotifier {
         if(response.statusCode == 200){
           commonResponse = CommonResponse.fromJson(genericDecodeEncode.decodeJson(response.body));
           if(commonResponse.code == 1){
-            String res = commonResponse.result.token.accessToken;
-            String data = "Bearer $res";
-            await PreferenceUtils.setString(Strings.token, data);
-            await PreferenceUtils.setString(Strings.refreshToken, commonResponse.result.token.refreshToken);
-            await PreferenceUtils.setString(Strings.email, commonResponse.result.user.email);
-            await PreferenceUtils.setString(Strings.password, commonResponse.result.user.password);
-            await PreferenceUtils.setString(Strings.fullName, commonResponse.result.user.fullName);
-            await PreferenceUtils.setInt(Strings.userId, commonResponse.result.user.userId);
-            await PreferenceUtils.setString(Strings.userType, Strings.indiviual);
+
+            await Constants.setToken(commonResponse.result.token.accessToken);
+            await Constants.setUserEmail(commonResponse.result.user.email);
+            await Constants.setPassword(commonResponse.result.user.password);
+            await Constants.setUserId(commonResponse.result.user.userId);
+            await Constants.setUserName(commonResponse.result.user.fullName);
+            await Constants.setUserPhone(commonResponse.result.user.phone);
+            await Constants.setUser(Strings.indiviual);
+
             ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
             currentTime = await (((ms / 1000) / 60).round()).toDouble();
             await PreferenceUtils.setDouble(Strings.tokenTime, currentTime);
@@ -122,7 +123,7 @@ class SignUpProvider extends ChangeNotifier {
               context: context,
               text: Strings.signupSuccessful,
               onNavigate: () {
-                Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: BottomTab(tag: Strings.indiviual)), ModalRoute.withName(Routes.signup));
+                Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: BottomTab()), ModalRoute.withName(Routes.signup));
               },
             );
           }

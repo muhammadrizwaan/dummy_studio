@@ -1,20 +1,22 @@
 
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/entypo_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
-import 'package:fluttericon/web_symbols_icons.dart';
-import 'package:truckoom_shipper/animations/slide_right.dart';
+import 'package:html/parser.dart';
+import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
-import 'package:truckoom_shipper/screens/businessEditProfile/business_edit_profile_components.dart';
-import 'package:truckoom_shipper/screens/businessProfile/business_profile.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
+import 'package:truckoom_shipper/widgets/text_views.dart';
+import 'business_edit_profile_components.dart';
+import 'business_edit_profile_provider.dart';
 
 class BusinessEditProfile extends StatefulWidget {
   @override
@@ -23,21 +25,31 @@ class BusinessEditProfile extends StatefulWidget {
 
 class _BusinessEditProfileState extends State<BusinessEditProfile> {
   BusinessEditProfileComponents _businessEditProfileComponents;
-  TextEditingController name, email, business_name, phone_number, trn;
-  int _value = 1;
+  BusinessEditProfileProvider _businessEditProfileProvider;
+  String _selectedValue;
+  DateTime pickedDate;
+  TextEditingController _name, _email, _password, _confirmPassword, _businessName, _businessPhone, _trn;
 
   @override
   void initState() {
     super.initState();
     _businessEditProfileComponents = BusinessEditProfileComponents();
-    name = TextEditingController(text: PreferenceUtils.getString(Strings.fullName));
-    email = TextEditingController(text: PreferenceUtils.getString(Strings.email));
-    business_name = TextEditingController(text: PreferenceUtils.getString(Strings.companyNameKey));
-    phone_number = TextEditingController(text: PreferenceUtils.getString(Strings.companyPhoneKey));
-    trn = TextEditingController(text: PreferenceUtils.getString(Strings.companyTrnKey));
+    _name = TextEditingController(text: Constants.getUserName());
+    _email = TextEditingController(text: Constants.getUserEmail());
+    _password = TextEditingController(text: Constants.getPassword());
+    _confirmPassword = TextEditingController(text: Constants.getPassword());
+    _businessName = TextEditingController(text: Constants.getCommpanyName());
+    _businessPhone = TextEditingController(text: Constants.getCommpanyPhone());
+    _trn = TextEditingController(text: Constants.getCommpanyTrn());
+    pickedDate = DateTime.now();
+    print(pickedDate);
+    _businessEditProfileProvider = Provider.of<BusinessEditProfileProvider>(context, listen: false);
+    _businessEditProfileProvider.init(context);
   }
+
   @override
   Widget build(BuildContext context) {
+    Provider.of<BusinessEditProfileProvider>(context, listen: true);
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -46,36 +58,34 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
           width: AppSizes.width,
           color: AppColors.white,
           // padding: EdgeInsets.all(AppSizes.width * 0.05),
-          child: Column(
+          child: _businessEditProfileProvider.isDataFetched ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               _businessEditProfileComponents.getTabBarCross(
                   text: 'Edit Profile',
                   image: Assets.crossIcon,
-                  onPress: (){
+                  onPress: () {
                     Navigator.pop(context);
                   }),
-              /*CommonWidgets.tabsAppBar1(
-                  text: 'Edit Profile',
-                  iconName: Icons.close,
-                  onPress: (){
-                    Navigator.pop(context);
-                  }
-              ),*/
               Expanded(
                 child: ListView(
                   children: [
                     Container(
-                      padding: EdgeInsets.only(left: AppSizes.width * 0.08, right: AppSizes.width*0.08, top: AppSizes.width*0.08),
+                      padding: EdgeInsets.only(left: AppSizes.width * 0.08,
+                          right: AppSizes.width * 0.08,
+                          top: AppSizes.width * 0.08),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(height: AppSizes.height * 0.01,),
                           _businessEditProfileComponents.getProfileImage(
-                              profileImg: Assets.profileImg,
-                              onPress: (){}
+                              profileImg: Constants.getUserImage(),
+                              onPress: () {
+                                _businessEditProfileProvider.onEditImage(
+                                    context: context);
+                              }
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
                           CommonWidgets.getSubHeadingText(
@@ -85,7 +95,7 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                           CommonWidgets.getTextField(
                               isPassword: false,
                               leftIcon: Entypo.user,
-                              textEditingController: name,
+                              textEditingController: _name,
                               hintText: 'Matthew'
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
@@ -93,13 +103,37 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                               text: 'Email'
                           ),
                           SizedBox(height: AppSizes.height * 0.01,),
-                          CommonWidgets.getTextField(
+                          _businessEditProfileComponents.getTextField(
                               isPassword: false,
                               leftIcon: Icons.mail,
-                              textEditingController: email,
+                              textEditingController: _email,
                               hintText: 'MatthewLawson@mail.com'
                           ),
+
                           SizedBox(height: AppSizes.height * 0.03,),
+                          CommonWidgets.getSubHeadingText(text: "Password"),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          CommonWidgets.getTextField(
+                              isPassword: true,
+                              leftIcon: Entypo.lock,
+                              textEditingController: _password,
+                              hintText: "Enter Password"),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          CommonWidgets.getSubHeadingText(
+                              text: "Confirm Password"),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          CommonWidgets.getTextField(
+                              isPassword: true,
+                              leftIcon: Entypo.lock,
+                              textEditingController: _confirmPassword,
+                              hintText: "Confirm Password"),
+
                           CommonWidgets.getSubHeadingText(
                               text: 'Business Name'
                           ),
@@ -107,9 +141,20 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                           CommonWidgets.getTextField(
                               isPassword: false,
                               leftIcon: Entypo.user,
-                              textEditingController: business_name,
+                              textEditingController: _businessName,
                               hintText: 'Augue vestibulum'
                           ),
+                          SizedBox(height: AppSizes.height * 0.03,),
+                          CommonWidgets.getSubHeadingText(
+                              text: "License Expiry Date"),
+                          SizedBox(height: AppSizes.height * 0.01),
+                          _businessEditProfileComponents.getDateField(
+                              onDate: () {
+                                _showDate();
+                              },
+                              date:
+                              "${pickedDate.day}/${pickedDate
+                                  .month}/${pickedDate.year}"),
                           SizedBox(height: AppSizes.height * 0.03,),
                           CommonWidgets.getSubHeadingText(
                               text: 'Contact Number'
@@ -118,7 +163,7 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                           CommonWidgets.getTextField(
                               isPassword: false,
                               leftIcon: Entypo.mobile,
-                              textEditingController: phone_number,
+                              textEditingController: _businessPhone,
                               hintText: '(430)214-7475'
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
@@ -126,15 +171,15 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                               text: 'TRN'
                           ),
                           SizedBox(height: AppSizes.height * 0.01,),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getPhoneNumberField(
                               isPassword: false,
                               leftIcon: Entypo.mobile,
-                              textEditingController: trn,
+                              textEditingController: _trn,
                               hintText: '430(845785)'
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
                           CommonWidgets.getSubHeadingText(
-                              text: 'Country'
+                              text: 'City'
                           ),
                           SizedBox(height: AppSizes.height * 0.01,),
                           Container(
@@ -149,65 +194,36 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                             child: Row(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(right: 10),
-                                  child:Icon(Linecons.location, size: 20,)
-                                ) ,
+                                    padding: const EdgeInsets.only(right: 10),
+                                    child: Icon(Linecons.location, size: 20,)
+                                ),
                                 Expanded(
                                   child: DropdownButtonHideUnderline(
-                                    child: DropdownButton(
-                                        icon: Icon(Icons.keyboard_arrow_down),
-                                        value: _value,
-                                        items: [
-                                          DropdownMenuItem(
-                                            child: Text("Netherlands",
-                                              style: TextStyle(
-                                                  decoration: TextDecoration.none,
-                                                  fontFamily: Assets.poppinsLight,
-                                                  fontSize: 12,
-                                                  color: AppColors.colorBlack
+                                    child: DropdownButton<String>(
+                                      icon: Icon(Icons.keyboard_arrow_down),
+                                      isExpanded: true,
+                                      value: _selectedValue,
+                                      hint: TextView.getLightText04(
+                                        "Select City",
+                                        color: AppColors.colorBlack,
+                                      ),
+                                      items: _businessEditProfileProvider
+                                          .description
+                                          .map<DropdownMenuItem<String>>(
+                                              (String value) {
+                                            return DropdownMenuItem<String>(
+                                              value: value,
+                                              child: TextView.getLightText04(
+                                                value,
+                                                color: AppColors.colorBlack,
                                               ),
-                                            ),
-                                            value: 1,
-                                          ),
-                                          DropdownMenuItem(
-                                            child: Text("New Zealand",
-                                              style: TextStyle(
-                                                  decoration: TextDecoration.none,
-                                                  fontFamily: Assets.poppinsLight,
-                                                  fontSize: 12,
-                                                  color: AppColors.colorBlack
-                                              ),
-                                            ),
-                                            value: 2,
-                                          ),
-                                          DropdownMenuItem(
-                                              child: Text("Nepal",
-                                                style: TextStyle(
-                                                    decoration: TextDecoration.none,
-                                                    fontFamily: Assets.poppinsLight,
-                                                    fontSize: 12,
-                                                    color: AppColors.colorBlack
-                                                ),
-                                              ),
-                                              value: 3
-                                          ),
-                                          DropdownMenuItem(
-                                              child: Text("Malaysia",
-                                                style: TextStyle(
-                                                    decoration: TextDecoration.none,
-                                                    fontFamily: Assets.poppinsLight,
-                                                    fontSize: 12,
-                                                    color: AppColors.colorBlack
-                                                ),
-                                              ),
-                                              value: 4
-                                          )
-                                        ],
-                                        onChanged: (value) {
-                                          setState(() {
-                                            _value = value;
-                                          });
-                                        }
+                                            );
+                                          }).toList(),
+                                      onChanged: (String value) {
+                                        setState(() {
+                                          _selectedValue = value;
+                                        });
+                                      },
                                     ),
                                   ),
                                 ),
@@ -225,7 +241,16 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                           CommonWidgets.getBottomButton(
                               text: "Update",
                               onPress: () {
-                                Navigator.pushReplacement(context, SlideRightRoute(page: BusinessProfile()));
+                                _businessEditProfileProvider
+                                    .businessUpdateProfile(context: context,
+                                    name: _name.text,
+                                    password: _password.text,
+                                    confirmPassword: _confirmPassword.text,
+                                    businessName: _businessName.text,
+                                    businessPhone: _businessPhone.text,
+                                    trn: _trn.text,
+                                    city: getCityId(),
+                                    licenseExpiryDate: pickedDate.toString());
                               }
                           ),
                           SizedBox(height: AppSizes.height * 0.02),
@@ -236,9 +261,53 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                 ),
               )
             ],
+          ) :
+          Center(
+            child: Container(
+              height: AppSizes.height * 0.15,
+              child: Lottie.asset(Assets.apiLoading, fit: BoxFit.cover),
+            ),
           ),
         ),
       ),
     );
+  }
+
+  int getCityId() {
+    int tempCityId = 0;
+    for (int i = 0; i < _businessEditProfileProvider.getCitiesList().result.length; i++) {
+      if (_selectedValue == _businessEditProfileProvider.getCitiesList().result[i].description) {
+        tempCityId = _businessEditProfileProvider.getCitiesList().result[i].cityId;
+        break;
+      }
+    }
+    return tempCityId;
+  }
+
+  _showDate() async {
+    DateTime date = await showDatePicker(
+      context: context,
+      initialDate: pickedDate,
+      firstDate: DateTime(DateTime.now().year - 10),
+      lastDate: DateTime(DateTime.now().year + 10),
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeData(
+            cursorColor: Colors.grey,
+            dialogBackgroundColor: Colors.white,
+            colorScheme: ColorScheme.light(primary: AppColors.yellow),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+            highlightColor: Colors.grey[400],
+            textSelectionColor: Colors.grey,
+          ),
+          child: child,
+        );
+      },
+    );
+    if (date != null) {
+      setState(() {
+        pickedDate = date;
+      });
+    }
   }
 }

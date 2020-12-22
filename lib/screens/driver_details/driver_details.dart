@@ -77,7 +77,7 @@ class _DriverDetailScreenState extends State<DriverDetailScreen> {
                           _driverDetailComponents.getBoxContainer(
                               name: _driverDetailProvider.driverDetailResponse.result.fullName,
                               email: _driverDetailProvider.driverDetailResponse.result.email,
-                              phone_number: _driverDetailProvider.driverDetailResponse.result.phoneNumber,
+                              phone_number: _driverDetailProvider.driverDetailResponse.result.phoneNumber !=null?_driverDetailProvider.driverDetailResponse.result.phoneNumber:"",
                               License_number: _driverDetailProvider.driverDetailResponse.result.licenseNumber
                           ),
                           SizedBox(height: AppSizes.height * 0.02,),
@@ -85,7 +85,7 @@ class _DriverDetailScreenState extends State<DriverDetailScreen> {
                               lableText: 'Reviews'
                           ),
                           SizedBox(height: AppSizes.height * 0.01,),
-                          Expanded(
+                          _driverDetailProvider.driverDetailResponse.result.ratings.isNotEmpty? Expanded(
                             child: ListView.builder(
                               itemCount: _driverDetailProvider.driverDetailResponse.result.ratings.length,
                                 itemBuilder: (context, index){
@@ -105,7 +105,8 @@ class _DriverDetailScreenState extends State<DriverDetailScreen> {
                                   ],
                                 );
                             }),
-                          ),
+                          ):
+                          CommonWidgets.onNullData(text: "No Reviews"),
                         ],
                       ),
                     )

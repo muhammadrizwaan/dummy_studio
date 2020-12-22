@@ -6,32 +6,20 @@ import 'package:fluttericon/linecons_icons.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'package:truckoom_shipper/commons/get_token.dart';
-import 'package:truckoom_shipper/screens/adding_drop_off/adding_drop_off.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/book_load/book_load_components.dart';
 import 'package:truckoom_shipper/screens/confirmBookLoad/confirm_book_load.dart';
-import 'package:truckoom_shipper/screens/jobDetails/job_details.dart';
 import 'package:truckoom_shipper/screens/notifications/notifications.dart';
-import 'package:truckoom_shipper/screens/select_vehicle/select_vehicle.dart';
-import 'package:truckoom_shipper/screens/select_vehicle/select_vehicle_components.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
-
 import '../../../../animations/slide_right.dart';
-import '../../../../animations/slide_right.dart';
-import '../../../../animations/slide_right.dart';
-import '../../../../res/assets.dart';
 import '../../../../res/assets.dart';
 import '../../../../res/colors.dart';
-import '../../../../res/sizes.dart';
 import '../../../../res/sizes.dart';
 import '../../../../res/strings.dart';
 import '../../../../widgets/common_widgets.dart';
 import '../../../wallet/wallet.dart';
 
 class BookLoad extends StatefulWidget {
-  String tag;
-
-  BookLoad({@required this.tag});
 
   @override
   _BookLoadState createState() => _BookLoadState();
@@ -101,13 +89,13 @@ class _BookLoadState extends State<BookLoad> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    widget.tag == Strings.indiviual
+                    Constants.getUser() == Strings.indiviual
                         ? Navigator.push(
                             context, SlideRightRoute(page: Notifications()))
                         : Navigator.push(
                             context, SlideRightRoute(page: Wallet()));
                   },
-                  child: widget.tag == Strings.indiviual
+                  child: Constants.getUser() == Strings.indiviual
                       ? Icon(
                           FontAwesome5.bell,
                           size: 25,
@@ -272,7 +260,6 @@ class _BookLoadState extends State<BookLoad> {
                                     context,
                                     SlideRightRoute(
                                         page: ConfirmBookLoad(
-                                      tag: widget.tag,
                                       PickupLatitude: pickup_latitude,
                                       PickupLongitude: pickup_longitude,
                                       DropoffLatitude: dropoff_latitude,

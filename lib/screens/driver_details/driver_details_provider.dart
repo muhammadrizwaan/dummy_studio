@@ -23,13 +23,12 @@ class DriverDetailProvider extends ChangeNotifier{
   bool isDataFetched = false;
 
   var connectivityResult;
-  int userId;
   String token;
   init({@required BuildContext context, @required int driverId}) async{
     this.context = context;
     connectivityResult = "";
-    await getDriverDetail(context: context, driverId: driverId);
     token = "";
+    await getDriverDetail(context: context, driverId: driverId);
   }
 
   Future getDriverDetail({@required BuildContext context, @required int driverId}) async{

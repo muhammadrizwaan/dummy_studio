@@ -195,6 +195,57 @@ class AddLoadComponents {
       ),
     );
   }
+  Widget getPhoneField(
+      { @required IconData leftIcon, @required String hintText, @required TextEditingController textEditingController,}) {
+    return Container(
+      height: AppSizes.height * 0.07,
+      width: AppSizes.width,
+      padding: EdgeInsets.only(left: 10),
+      decoration: BoxDecoration(
+        color: AppColors.lightGray,
+        // border: Border.all(color: AppColors.borderColor),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Opacity(
+              opacity: 0.7,
+              child: Icon(
+                leftIcon,
+                size: 20,
+              )),
+          // Image(image: AssetImage('$leftIcon')) ,
+          Container(
+            margin: EdgeInsets.only(left: 5),
+            width: AppSizes.width * 0.8,
+            // color: AppColors.yellow,
+            child: TextField(
+              style: TextStyle(
+                decoration: TextDecoration.none,
+                fontFamily: Assets.poppinsLight,
+                fontSize: 12,
+                color: AppColors.colorBlack,
+              ),
+              keyboardType: TextInputType.number,
+              controller: textEditingController,
+              // readOnly: true,
+              decoration: InputDecoration(
+                hintText: hintText,
+                border: InputBorder.none,
+                hintStyle: TextStyle(
+                  decoration: TextDecoration.none,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                  fontFamily: Assets.poppinsLight,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   Widget getTextField(
       { @required String leftIcon, @required String hintText, @required TextEditingController textEditingController,}) {
@@ -231,6 +282,61 @@ class AddLoadComponents {
                   fontSize: 12,
                   color: AppColors.colorBlack,
                 ),
+                controller: textEditingController,
+                // readOnly: true,
+                decoration: InputDecoration(
+                  hintText: hintText,
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(
+                    decoration: TextDecoration.none,
+                    fontSize: 12,
+                    color: AppColors.colorBlack,
+                    fontFamily: Assets.poppinsLight,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  Widget getNumberField(
+      { @required String leftIcon, @required String hintText, @required TextEditingController textEditingController,}) {
+    return Container(
+      height: AppSizes.height * 0.07,
+      width: AppSizes.width,
+      padding: EdgeInsets.only(left: 10),
+      decoration: BoxDecoration(
+        color: AppColors.lightGray,
+        // border: Border.all(color: AppColors.borderColor),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 5),
+            child: Container(
+              height: AppSizes.height * 0.06,
+              width: AppSizes.width * 0.06,
+              child: Image.asset(
+                leftIcon,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.only(left: 5),
+              // color: AppColors.yellow,
+              child: TextField(
+                style: TextStyle(
+                  decoration: TextDecoration.none,
+                  fontFamily: Assets.poppinsLight,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                ),
+                keyboardType: TextInputType.number,
                 controller: textEditingController,
                 // readOnly: true,
                 decoration: InputDecoration(

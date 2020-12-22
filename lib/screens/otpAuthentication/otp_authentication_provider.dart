@@ -25,10 +25,10 @@ class OTPAthenticationProvider extends ChangeNotifier {
     try {
       if (otp == otp_code) {
         if (tag == Strings.indiviual) {
-          Navigator.push(context, SlideRightRoute(page: SignUP(tag: tag, cell: cell)));
+          Navigator.push(context, SlideRightRoute(page: SignUP(cell: cell)));
         } else if (tag == Strings.business) {
           Navigator.push(context,
-              SlideRightRoute(page: BusinessSignup(tag: tag, cell: cell)));
+              SlideRightRoute(page: BusinessSignup(cell: cell)));
         }
       } else {
         ApplicationToast.getErrorToast(

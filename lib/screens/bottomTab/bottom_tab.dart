@@ -13,9 +13,6 @@ import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs.dart';
 
 
 class BottomTab extends StatefulWidget {
-  String tag;
-
-  BottomTab({@required this.tag});
 
   @override
   _BottomTabState createState() => _BottomTabState();
@@ -28,7 +25,6 @@ class _BottomTabState extends State<BottomTab> {
   // int _currentIndex = 0;
   int _value = 1;
 
-  String myTag;
   List<Widget> pages = [
     BookLoad(),
     MyJobs(),
@@ -41,18 +37,17 @@ class _BottomTabState extends State<BottomTab> {
     _bottomTabComponents = BottomTabComponents();
     _bottomTabProvider = Provider.of<BottomTabProvider>(context, listen: false);
     search = TextEditingController();
-    myTag = widget.tag;
   }
 
   _currentPage(){
     if(_bottomTabProvider.currentIndex == 0){
-      return BookLoad(tag: widget.tag);
+      return BookLoad();
     }if(_bottomTabProvider.currentIndex == 1){
-      return MyJobs(tag: widget.tag);
+      return MyJobs();
     }if(_bottomTabProvider.currentIndex == 2){
-      return HistoryScreen(tag: widget.tag);
+      return HistoryScreen();
     }if(_bottomTabProvider.currentIndex == 3){
-      return More(tag: widget.tag);
+      return More();
     }
   }
 
