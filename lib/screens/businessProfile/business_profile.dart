@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
@@ -62,7 +63,7 @@ class _BusinessProfileState extends State<BusinessProfile> {
                             height: AppSizes.height * 0.01,
                           ),
                           _businessProfileComponents.getProfileImage(
-                              profileImg: Assets.profileImg),
+                              profileImg: Constants.getUserImage()),
                           SizedBox(
                             height: AppSizes.height * 0.05,
                           ),
@@ -73,9 +74,9 @@ class _BusinessProfileState extends State<BusinessProfile> {
                           ),
                           _businessProfileComponents
                               .getBusinessProfileContainer(
-                                  name: PreferenceUtils.getString(Strings.fullName),
-                                  email: PreferenceUtils.getString(Strings.email),
-                                  password: PreferenceUtils.getString(Strings.password),
+                                  name: Constants.getUserName(),
+                                  email: Constants.getUserEmail(),
+                                  password: Constants.getPassword(),
                                   country: 'Costa Rica'),
                           SizedBox(
                             height: AppSizes.height * 0.02,
@@ -87,9 +88,11 @@ class _BusinessProfileState extends State<BusinessProfile> {
                           ),
                           _businessProfileComponents
                               .getBusinessInfoProfileContainer(
-                                  businessName: PreferenceUtils.getString(Strings.companyNameKey),
-                                  phoneNumber: PreferenceUtils.getString(Strings.companyPhoneKey),
-                                  trn: PreferenceUtils.getString(Strings.companyTrnKey)),
+                                  businessName: Constants.getCommpanyName(),
+                                  phoneNumber: Constants.getCommpanyPhone(),
+                                  trn: Constants.getCommpanyTrn(),
+                                  licenseExpiryDate: Constants.getLicenseExpiryDate().split('T').first
+                          ),
                           Center(
                             child: Image(
                               image: AssetImage(Assets.licenceImg),

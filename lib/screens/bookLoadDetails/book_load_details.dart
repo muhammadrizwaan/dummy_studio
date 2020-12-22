@@ -228,7 +228,6 @@ class _BookLoadDetailsState extends State<BookLoadDetails> {
                     description: widget.description,
                     isRoundTrip: widget.isRoundTrip,
                 );
-                // Navigator.push(context, SlideRightRoute(page: BottomTab(tag: Strings.indiviual)));
               }),
           SizedBox(height: AppSizes.height * 0.02),
         ],

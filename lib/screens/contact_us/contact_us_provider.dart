@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:truckoom_shipper/commons/get_token.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
 import 'package:truckoom_shipper/models/api_models/contact_us_response.dart';
 import 'package:truckoom_shipper/models/api_models/token_response.dart';
@@ -38,7 +39,7 @@ class ContactUsProvider extends ChangeNotifier {
     @required String name,
     @required String message}) async {
     try {
-      email = await PreferenceUtils.getString(Strings.email);
+      email = await Constants.getUserEmail();
       connectivity = await Connectivity().checkConnectivity();
       if (connectivity == ConnectivityResult.none) {
         ApplicationToast.getErrorToast(

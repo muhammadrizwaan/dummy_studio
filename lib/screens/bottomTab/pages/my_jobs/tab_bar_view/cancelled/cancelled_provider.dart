@@ -3,6 +3,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:truckoom_shipper/commons/get_token.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
 import 'package:truckoom_shipper/models/api_models/tabbar_response.dart';
 import 'package:truckoom_shipper/network/api_urls.dart';
@@ -37,7 +38,7 @@ class CancelledProvider extends ChangeNotifier{
     try{
       token = await getToken.onToken();
       connectivityResult = await Connectivity().checkConnectivity();
-      userId = await PreferenceUtils.getInt(Strings.userId);
+      userId = await Constants.getUserId();
       if(connectivityResult == ConnectivityResult.none){
         ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: Strings.internetConnectionError);
       }

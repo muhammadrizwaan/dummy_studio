@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
@@ -11,7 +12,7 @@ class BusinessProfileComponents{
     return Container(
       child: Center(
         child: CircleAvatar(
-          backgroundImage: AssetImage(profileImg),
+          backgroundImage: profileImg != ""? NetworkImage(baseUrl+profileImg): AssetImage(Assets.profileImg),
           radius: 50.0,
           backgroundColor: AppColors.white,
         ),
@@ -123,7 +124,7 @@ class BusinessProfileComponents{
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Country',
+                Text('City',
                   style: TextStyle(
                     fontSize:12,
                     fontFamily: Assets.poppinsLight,
@@ -163,6 +164,7 @@ class BusinessProfileComponents{
         @required String businessName,
         @required String phoneNumber,
         @required String trn,
+        @required String licenseExpiryDate
       })
   {
     return Container(
@@ -245,6 +247,31 @@ class BusinessProfileComponents{
                   ),
                 ),
                 Text(trn,
+                  style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsLight,
+                    color: AppColors.profileTextColor,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Divider(height: 10,),
+          Container(
+            padding: EdgeInsets.all(AppSizes.width * 0.02),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('License Expiry Date',
+                  style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsLight,
+                    color: AppColors.profileTextColor,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
+                Text(licenseExpiryDate,
                   style: TextStyle(
                     fontSize:12,
                     fontFamily: Assets.poppinsLight,

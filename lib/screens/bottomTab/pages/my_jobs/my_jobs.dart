@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs_components.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/accepted/accepted.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/cancelled/cancelled.dart';
@@ -17,9 +18,6 @@ import '../../../../widgets/common_widgets.dart';
 import '../../../wallet/wallet.dart';
 
 class MyJobs extends StatefulWidget {
-  String tag;
-
-  MyJobs({@required this.tag});
 
   @override
   _MyJobsState createState() => _MyJobsState();
@@ -51,11 +49,11 @@ class _MyJobsState extends State<MyJobs> {
             children: [
               CommonWidgets.tabsAppBar1(
                 text: "My Jobs",
-                iconName: widget.tag == Strings.indiviual
+                iconName: Constants.getUser() == Strings.indiviual
                     ? FontAwesome5.bell
                     : Linecons.wallet,
                 onPress: () {
-                  widget.tag == Strings.indiviual
+                  Constants.getUser() == Strings.indiviual
                       ? Navigator.push(
                           context, SlideRightRoute(page: Notifications()))
                       : Navigator.push(

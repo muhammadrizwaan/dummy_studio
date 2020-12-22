@@ -2,7 +2,7 @@ import 'package:truckoom_shipper/models/api_models/common_response.dart';
 
 /// Message : "Operation performed Succesfully"
 /// Code : 1
-/// Result : {"UserId":2053,"Username":"asad","Email":"shipperindividual@jinnbyte.com","Password":"1234212","Phone":"123456789","Address":"","Location":"","Latitude":0.0,"Longitude":0.0,"UserTypeId":2,"UserStatusId":1,"FullName":"asad","ProfilePicture":"/Files/UserImages/Screenshot 2020-12-10 at 13.22.57.png","CityId":null,"DeviceId":"string","EmiratesId":0,"IsBusinessAccount":false,"IsActive":true,"IsAvailable":false,"CreatedOn":"2020-12-04T17:56:33.51","CreatedBy":0,"UpdatedOn":"2020-12-17T07:26:32.27","UpdatedBy":2053,"CompanyInformations":[],"UserDocuments":[],"DriverDetails":[],"DriverDetails1":[],"Ratings":[]}
+/// Result : {"UserId":2175,"Username":"JohnDoe","Email":"kohlishi5peper25@jinnbyte.com","Password":"123567","Phone":"29993383232","Address":"","Location":"","Latitude":0.0,"Longitude":0.0,"UserTypeId":2,"UserStatusId":1,"FullName":"John Doe","ProfilePicture":"/Files/UserImages/image_picker8052788032120262329.jpg","CityId":1,"DeviceId":"JohnDoe","EmiratesId":0,"IsBusinessAccount":true,"IsActive":true,"IsAvailable":false,"CreatedOn":"2020-12-18T11:12:23.04","CreatedBy":0,"UpdatedOn":"2020-12-20T05:36:56.222327-06:00","UpdatedBy":2175,"CompanyInformations":[{"CompanyId":3098,"CompanyName":"Creative Bugs","ContactNumber":"92949938","TRN":"2222","CompanyLandline":"","LicenseExpiryDate":"2021-12-07T00:00:00","CompanyAddress":"","UserId":2175}],"UserDocuments":[],"DriverDetails":[],"DriverDetails1":[],"Ratings":[]}
 
 class EditProfileResponse {
   String _message;
@@ -12,15 +12,6 @@ class EditProfileResponse {
   String get message => _message;
   int get code => _code;
   Result get result => _result;
-
-//   EditProfileResponse({
-//       String message,
-//       int code,
-//       Result result}){
-//     _message = message;
-//     _code = code;
-//     _result = result;
-// }
 
   EditProfileResponse.empty();
 
@@ -42,30 +33,30 @@ class EditProfileResponse {
 
 }
 
-/// UserId : 2053
-/// Username : "asad"
-/// Email : "shipperindividual@jinnbyte.com"
-/// Password : "1234212"
-/// Phone : "123456789"
+/// UserId : 2175
+/// Username : "JohnDoe"
+/// Email : "kohlishi5peper25@jinnbyte.com"
+/// Password : "123567"
+/// Phone : "29993383232"
 /// Address : ""
 /// Location : ""
 /// Latitude : 0.0
 /// Longitude : 0.0
 /// UserTypeId : 2
 /// UserStatusId : 1
-/// FullName : "asad"
-/// ProfilePicture : "/Files/UserImages/Screenshot 2020-12-10 at 13.22.57.png"
-/// CityId : null
-/// DeviceId : "string"
+/// FullName : "John Doe"
+/// ProfilePicture : "/Files/UserImages/image_picker8052788032120262329.jpg"
+/// CityId : 1
+/// DeviceId : "JohnDoe"
 /// EmiratesId : 0
-/// IsBusinessAccount : false
+/// IsBusinessAccount : true
 /// IsActive : true
 /// IsAvailable : false
-/// CreatedOn : "2020-12-04T17:56:33.51"
+/// CreatedOn : "2020-12-18T11:12:23.04"
 /// CreatedBy : 0
-/// UpdatedOn : "2020-12-17T07:26:32.27"
-/// UpdatedBy : 2053
-/// CompanyInformations : []
+/// UpdatedOn : "2020-12-20T05:36:56.222327-06:00"
+/// UpdatedBy : 2175
+/// CompanyInformations : [{"CompanyId":3098,"CompanyName":"Creative Bugs","ContactNumber":"92949938","TRN":"2222","CompanyLandline":"","LicenseExpiryDate":"2021-12-07T00:00:00","CompanyAddress":"","UserId":2175}]
 /// UserDocuments : []
 /// DriverDetails : []
 /// DriverDetails1 : []
@@ -85,7 +76,7 @@ class Result {
   int _userStatusId;
   String _fullName;
   String _profilePicture;
-  dynamic _cityId;
+  int _cityId;
   String _deviceId;
   int _emiratesId;
   bool _isBusinessAccount;
@@ -95,7 +86,7 @@ class Result {
   int _createdBy;
   String _updatedOn;
   int _updatedBy;
-  List<dynamic> _companyInformations;
+  List<CompanyInformations> _companyInformations;
   List<dynamic> _userDocuments;
   List<dynamic> _driverDetails;
   List<dynamic> _driverDetails1;
@@ -114,7 +105,7 @@ class Result {
   int get userStatusId => _userStatusId;
   String get fullName => _fullName;
   String get profilePicture => _profilePicture;
-  dynamic get cityId => _cityId;
+  int get cityId => _cityId;
   String get deviceId => _deviceId;
   int get emiratesId => _emiratesId;
   bool get isBusinessAccount => _isBusinessAccount;
@@ -124,7 +115,7 @@ class Result {
   int get createdBy => _createdBy;
   String get updatedOn => _updatedOn;
   int get updatedBy => _updatedBy;
-  List<dynamic> get companyInformations => _companyInformations;
+  List<CompanyInformations> get companyInformations => _companyInformations;
   List<dynamic> get userDocuments => _userDocuments;
   List<dynamic> get driverDetails => _driverDetails;
   List<dynamic> get driverDetails1 => _driverDetails1;
@@ -144,7 +135,7 @@ class Result {
       int userStatusId, 
       String fullName, 
       String profilePicture, 
-      dynamic cityId, 
+      int cityId, 
       String deviceId, 
       int emiratesId, 
       bool isBusinessAccount, 
@@ -154,7 +145,7 @@ class Result {
       int createdBy, 
       String updatedOn, 
       int updatedBy, 
-      List<dynamic> companyInformations, 
+      List<CompanyInformations> companyInformations, 
       List<dynamic> userDocuments, 
       List<dynamic> driverDetails, 
       List<dynamic> driverDetails1, 
@@ -285,6 +276,79 @@ class Result {
     if (_ratings != null) {
       map["Ratings"] = _ratings.map((v) => v.toJson()).toList();
     }
+    return map;
+  }
+
+}
+
+/// CompanyId : 3098
+/// CompanyName : "Creative Bugs"
+/// ContactNumber : "92949938"
+/// TRN : "2222"
+/// CompanyLandline : ""
+/// LicenseExpiryDate : "2021-12-07T00:00:00"
+/// CompanyAddress : ""
+/// UserId : 2175
+
+class CompanyInformations {
+  int _companyId;
+  String _companyName;
+  String _contactNumber;
+  String _trn;
+  String _companyLandline;
+  String _licenseExpiryDate;
+  String _companyAddress;
+  int _userId;
+
+  int get companyId => _companyId;
+  String get companyName => _companyName;
+  String get contactNumber => _contactNumber;
+  String get trn => _trn;
+  String get companyLandline => _companyLandline;
+  String get licenseExpiryDate => _licenseExpiryDate;
+  String get companyAddress => _companyAddress;
+  int get userId => _userId;
+
+  CompanyInformations({
+      int companyId, 
+      String companyName, 
+      String contactNumber, 
+      String trn, 
+      String companyLandline, 
+      String licenseExpiryDate, 
+      String companyAddress, 
+      int userId}){
+    _companyId = companyId;
+    _companyName = companyName;
+    _contactNumber = contactNumber;
+    _trn = trn;
+    _companyLandline = companyLandline;
+    _licenseExpiryDate = licenseExpiryDate;
+    _companyAddress = companyAddress;
+    _userId = userId;
+}
+
+  CompanyInformations.fromJson(dynamic json) {
+    _companyId = json["CompanyId"];
+    _companyName = json["CompanyName"];
+    _contactNumber = json["ContactNumber"];
+    _trn = json["TRN"];
+    _companyLandline = json["CompanyLandline"];
+    _licenseExpiryDate = json["LicenseExpiryDate"];
+    _companyAddress = json["CompanyAddress"];
+    _userId = json["UserId"];
+  }
+
+  Map<String, dynamic> toJson() {
+    var map = <String, dynamic>{};
+    map["CompanyId"] = _companyId;
+    map["CompanyName"] = _companyName;
+    map["ContactNumber"] = _contactNumber;
+    map["TRN"] = _trn;
+    map["CompanyLandline"] = _companyLandline;
+    map["LicenseExpiryDate"] = _licenseExpiryDate;
+    map["CompanyAddress"] = _companyAddress;
+    map["UserId"] = _userId;
     return map;
   }
 

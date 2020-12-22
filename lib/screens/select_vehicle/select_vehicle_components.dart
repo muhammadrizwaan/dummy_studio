@@ -72,30 +72,40 @@ class SelectVechileComponents {
     @required Function onAlert,
     @required Function onLoadDetail,
   }) {
-    return Container(
-      // height: AppSizes.height * 0.05,
-      margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
-      padding: EdgeInsets.all(AppSizes.width * 0.03),
-      width: AppSizes.width,
-      decoration: BoxDecoration(
-          color: isSelect ? AppColors.lightGray : Colors.white,
-          // border: Border.all(color: AppColors.borderColor),
-          borderRadius: BorderRadius.circular(5),
-          boxShadow: [
-            BoxShadow(
-                color: Colors.grey[500].withOpacity(0.3),
-                spreadRadius: 1,
-                blurRadius: 1,
-                offset: Offset(0, 0))
-          ]),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          GestureDetector(
-            onTap: () => onLoadDetail(),
-            child: Row(
+    return GestureDetector(
+      onTap: () => onLoadDetail(),
+      child: Container(
+        // height: AppSizes.height * 0.05,
+        margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
+        padding: EdgeInsets.all(AppSizes.width * 0.03),
+        width: AppSizes.width,
+        decoration: BoxDecoration(
+            color: isSelect ? AppColors.lightGray : Colors.white,
+            // border: Border.all(color: AppColors.borderColor),
+            borderRadius: BorderRadius.circular(5),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey[500].withOpacity(0.3),
+                  spreadRadius: 1,
+                  blurRadius: 1,
+                  offset: Offset(0, 0))
+            ]),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
               children: [
-                Image(image: AssetImage(leftIcon)),
+                Container(
+                  height: AppSizes.height * 0.07,
+                    width: AppSizes.width * 0.16,
+                    decoration: BoxDecoration(
+                      color: AppColors.yellow,
+                      borderRadius: BorderRadius.circular(5)
+                    ),
+                    child: Image(image: leftIcon != ""? NetworkImage(leftIcon): AssetImage(Assets.vehicle_img),
+                    fit: BoxFit.fill,
+                    ),
+                ),
                 SizedBox(
                   width: AppSizes.width * 0.02,
                 ),
@@ -139,12 +149,12 @@ class SelectVechileComponents {
                 )
               ],
             ),
-          ),
-          GestureDetector(
-            onTap: () => onAlert(),
-            child: Icon(Octicons.info, size: 20, color: AppColors.colorBlack.withOpacity(0.70),),
-          ),
-        ],
+            GestureDetector(
+              onTap: () => onAlert(),
+              child: Icon(Octicons.info, size: 20, color: AppColors.colorBlack.withOpacity(0.70),),
+            ),
+          ],
+        ),
       ),
     );
   }

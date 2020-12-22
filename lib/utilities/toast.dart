@@ -190,11 +190,6 @@ class ApplicationToast {
                           ),
                           GestureDetector(
                             onTap: () => onNavigate(),
-                            // Navigator.of(context).pushAndRemoveUntil(
-                            //     SlideRightRoute(
-                            //         page: BottomTab(tag: widget.tag)),
-                            //         (Route<dynamic> route) => false);
-                            // },
                             child: TextView.getContinueText04(
                               Strings.tapAndContinue,
                               color: AppColors.yellow,

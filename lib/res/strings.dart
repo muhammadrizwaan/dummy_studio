@@ -8,6 +8,7 @@ class Strings {
   static const String token = "token";
   static const String email = "Email";
   static const String userId = "UserId";
+  static const String userPhone = "userPhone";
   static const String fullName = "FullName";
   static const String password = "Password";
   static const String tokenTime = "TokenTime";
@@ -42,12 +43,22 @@ class Strings {
   static const String deviceId = "device_id";
   static const String tapAndContinue = "Tap to Continue";
 
+
+  // PreferenceUtils Keys
   static const String companyNameKey = "CompanyNameKey";
   static const String companyPhoneKey = "CompanyPhoneKey";
   static const String companyTrnKey = "CompanyTrnKey";
-  static const String profileImageKey = "ProfileImageKey";
-  static const String companyIdKey = "ProfileImageKey";
-  static const String userType = "tag";
+  static const String userImageKey = "UserImageKey";
+  static const String userNameKey = "UserNameKey";
+  static const String userEmailKey = "UserEmailKey";
+  static const String userPhoneKey = "UserPhoneKey";
+  static const String passwordKey = "PasswordKey";
+  static const String userIdKey = "UserIdKey";
+  static const String userTypeKey = "UserTypeKey";
+  static const String tokenKey = "TokenKey";
+  static const String licenseExpiryDateKey = "LicenseExpiryDateKey";
+  static const String cityNameKey = "CityNameKey";
+  static const String licenseImagesKey = "LicenseImagesKey";
 
 
   // Error Toast Text
@@ -60,6 +71,7 @@ class Strings {
   static const String checkBoxErrorText = "Please check the Term and Conditions";
   static const String somethingWentWrong = "Something went wrong";
   static const String nameErrorText = "Please enter valid Name";
+  static const String businessNameErrorText = "Please enter the Business Name";
   static const String authorizationErrorText = "Authorization has been denied for this request";
   static const String emailErrorText = "Email is empty or email is not in proper form";
   static const String passwordErrorText = "Password is empty or must be at least 6 characters";

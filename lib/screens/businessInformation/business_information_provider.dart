@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
 import 'package:truckoom_shipper/models/api_models/common_response.dart';
 import 'package:truckoom_shipper/models/api_models/company_information_response.dart';
@@ -58,7 +59,6 @@ class BusinessInformationProvider extends ChangeNotifier {
     @required String trn,
     @required DateTime licenseExpiryDate,
     @required int userId,
-    @required String tag,
     @required bool onCheck,
   }) async {
     try {
@@ -108,21 +108,18 @@ class BusinessInformationProvider extends ChangeNotifier {
           _companyInformationResponse = CompanyInformationResponse.fromJson(
               genericDecodeEncode.decodeJson(response.body));
           if (_companyInformationResponse.code == 1) {
-            print('test 1');
-            await PreferenceUtils.setString(Strings.companyNameKey, _companyInformationResponse.result.companyInformations[0].companyName);
-            await PreferenceUtils.setString(Strings.companyPhoneKey, _companyInformationResponse.result.companyInformations[0].contactNumber);
-            await PreferenceUtils.setString(Strings.companyTrnKey, _companyInformationResponse.result.companyInformations[0].trn);
-            await PreferenceUtils.setInt(Strings.companyIdKey, _companyInformationResponse.result.companyInformations[0].companyId);
-            print('test 2');
+            await Constants.setCommpanyName(_companyInformationResponse.result.companyInformations[0].companyName);
+            await Constants.setCommpanyPhone(_companyInformationResponse.result.companyInformations[0].contactNumber);
+            await Constants.setCommpanyTrn(_companyInformationResponse.result.companyInformations[0].trn);
+            await Constants.setLicenseExpiryDate(_companyInformationResponse.result.companyInformations[0].licenseExpiryDate);
             _loader.hideLoader(context);
             ApplicationToast.getLoginSignupToast(
               context: context,
               text: Strings.signupSuccessful,
               onNavigate: () {
-                // Navigator.push(context, SlideRightRoute(page: BottomTab(tag: Strings.business,)));
                 Navigator.pushAndRemoveUntil(
                     context,
-                    SlideRightRoute(page: BottomTab(tag: Strings.business)),
+                    SlideRightRoute(page: BottomTab()),
                     ModalRoute.withName(Routes.businessInformation));
               },
             );

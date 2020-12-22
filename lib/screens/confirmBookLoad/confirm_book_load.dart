@@ -11,7 +11,7 @@ import 'package:truckoom_shipper/screens/select_vehicle/select_vehicle.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 class ConfirmBookLoad extends StatefulWidget {
-  String tag,
+  String
       PickupLatitude,
       PickupLongitude,
       DropoffLatitude,
@@ -20,7 +20,6 @@ class ConfirmBookLoad extends StatefulWidget {
       DropoffLocation;
 
   ConfirmBookLoad({
-    @required this.tag,
     @required this.PickupLatitude,
     @required this.PickupLongitude,
     @required this.DropoffLatitude,
@@ -89,7 +88,7 @@ class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
             topRight: Radius.circular(2),
             topLeft: Radius.circular(2),
           )),
-      child: ListView(
+      child: Column(
         children: [
           Align(
             alignment: Alignment.center,
@@ -102,26 +101,31 @@ class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
               ),
             ),
           ),
-          _confirmBookLoadComponents.getLocationContainer(
-              pickupLocation: widget.PickupLocation,
-              dropOffLocation: widget.DropoffLocation),
-          SizedBox(height: AppSizes.height * 0.03),
-          CommonWidgets.getBottomButton(
-              text: "Confirm",
-              onPress: () {
-                Navigator.push(
-                    context,
-                    SlideRightRoute(
-                        page: SelectVehicle(
-                      tag: widget.tag,
-                      PickupLatitude: widget.PickupLatitude,
-                      PickupLongitude: widget.PickupLongitude,
-                      DropoffLatitude: widget.DropoffLatitude,
-                      DropoffLongitude: widget.DropoffLongitude,
-                      PickupLocation: widget.PickupLocation,
-                      DropoffLocation: widget.DropoffLocation,
-                    )));
-              })
+          Expanded(
+            child: ListView(
+              children: [
+                _confirmBookLoadComponents.getLocationContainer(
+                    pickupLocation: widget.PickupLocation,
+                    dropOffLocation: widget.DropoffLocation),
+                SizedBox(height: AppSizes.height * 0.03),
+                CommonWidgets.getBottomButton(
+                    text: "Confirm",
+                    onPress: () {
+                      Navigator.push(
+                          context,
+                          SlideRightRoute(
+                              page: SelectVehicle(
+                            PickupLatitude: widget.PickupLatitude,
+                            PickupLongitude: widget.PickupLongitude,
+                            DropoffLatitude: widget.DropoffLatitude,
+                            DropoffLongitude: widget.DropoffLongitude,
+                            PickupLocation: widget.PickupLocation,
+                            DropoffLocation: widget.DropoffLocation,
+                          )));
+                    })
+              ],
+            ),
+          ),
         ],
       ),
     );

@@ -102,10 +102,10 @@ class _PhoneNumberState extends State<PhoneNumber> {
                           //   hintText: "Phone Number",
                           //   filledField: filled
                           // ),
-                          CommonWidgets.getTextField(isPassword: false,
+                          CommonWidgets.getPhoneNumberField(isPassword: false,
                               leftIcon: Entypo.mobile,
                               textEditingController: phone_number,
-                              hintText: "Phone Number",
+                              hintText: "Enter Phone Number",
                           ),
                           SizedBox(height: AppSizes.height * 0.03),
                           _getTermsAndCondition(),
