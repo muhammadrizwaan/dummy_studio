@@ -104,7 +104,7 @@ class _JobDetailsState extends State<JobDetails> {
             topRight: Radius.circular(2),
             topLeft: Radius.circular(2),
           )),
-      child: Column(
+      child: ListView(
         children: [
           Align(
             alignment: Alignment.center,
