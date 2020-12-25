@@ -1,6 +1,6 @@
 /// Message : "Operation performed Succesfully"
 /// Code : 1
-/// Result : [{"LoadId":10020,"LoadName":"Sensitive Good","PickupLocation":"Peco Road","DropoffLocation":"Creative Bugs","LoadStatusId":1,"Status":"Placed","VehicleTypeId":3,"VehicleTypeName":"Low Bed","VehicleTypeDescription":"Low Bed","ShipperCost":15032.080000000002,"TransporterCost":null,"PickupDate":"10, Oct","PickupTime":"12:00AM","IsActive":true,"CreatedBy":2058,"TransporterName":null,"AssignedDriverId":0,"AssignedTranporterId":0,"AssignedVehicleId":0},{"LoadId":10021,"LoadName":"Sensitive Good","PickupLocation":"DHA phase 4","DropoffLocation":"Gulberg","LoadStatusId":1,"Status":"Placed","VehicleTypeId":3,"VehicleTypeName":"Low Bed","VehicleTypeDescription":"Low Bed","ShipperCost":15032.080000000002,"TransporterCost":null,"PickupDate":"10, Oct","PickupTime":"12:00AM","IsActive":true,"CreatedBy":2058,"TransporterName":null,"AssignedDriverId":0,"AssignedTranporterId":0,"AssignedVehicleId":0}]
+/// Result : [{"LoadId":10147,"LoadName":"Sensitive Good","PickupLocation":"Peco Road","DropoffLocation":"Creative Bugs","LoadStatusId":1,"Status":"Placed","VehicleTypeId":3,"VehicleTypeName":"Low Bed","VehicleTypeDescription":"Low Bed","ShipperCost":15032.08,"TransporterCost":0.0,"PickupDateTime":"Oct 10 2020 12:00AM","DropoffDateTime":"","IsActive":true,"CreatedBy":2307,"TransporterName":"","AssignedDriverId":0,"AssignedTransporterId":0,"AssignedVehicleId":0}]
 
 class TabbarResponse {
   String _message;
@@ -11,14 +11,6 @@ class TabbarResponse {
   int get code => _code;
   List<Result> get result => _result;
 
-//   TabbarResponse({
-//       String message,
-//       int code,
-//       List<Result> result}){
-//     _message = message;
-//     _code = code;
-//     _result = result;
-// }
   TabbarResponse.empty();
 
   TabbarResponse.fromJson(dynamic json) {
@@ -44,7 +36,7 @@ class TabbarResponse {
 
 }
 
-/// LoadId : 10020
+/// LoadId : 10147
 /// LoadName : "Sensitive Good"
 /// PickupLocation : "Peco Road"
 /// DropoffLocation : "Creative Bugs"
@@ -53,15 +45,15 @@ class TabbarResponse {
 /// VehicleTypeId : 3
 /// VehicleTypeName : "Low Bed"
 /// VehicleTypeDescription : "Low Bed"
-/// ShipperCost : 15032.080000000002
-/// TransporterCost : null
-/// PickupDate : "10, Oct"
-/// PickupTime : "12:00AM"
+/// ShipperCost : 15032.08
+/// TransporterCost : 0.0
+/// PickupDateTime : "Oct 10 2020 12:00AM"
+/// DropoffDateTime : ""
 /// IsActive : true
-/// CreatedBy : 2058
-/// TransporterName : null
+/// CreatedBy : 2307
+/// TransporterName : ""
 /// AssignedDriverId : 0
-/// AssignedTranporterId : 0
+/// AssignedTransporterId : 0
 /// AssignedVehicleId : 0
 
 class Result {
@@ -75,14 +67,14 @@ class Result {
   String _vehicleTypeName;
   String _vehicleTypeDescription;
   double _shipperCost;
-  dynamic _transporterCost;
-  String _pickupDate;
-  String _pickupTime;
+  double _transporterCost;
+  String _pickupDateTime;
+  String _dropoffDateTime;
   bool _isActive;
   int _createdBy;
-  dynamic _transporterName;
+  String _transporterName;
   int _assignedDriverId;
-  int _assignedTranporterId;
+  int _assignedTransporterId;
   int _assignedVehicleId;
 
   int get loadId => _loadId;
@@ -95,14 +87,14 @@ class Result {
   String get vehicleTypeName => _vehicleTypeName;
   String get vehicleTypeDescription => _vehicleTypeDescription;
   double get shipperCost => _shipperCost;
-  dynamic get transporterCost => _transporterCost;
-  String get pickupDate => _pickupDate;
-  String get pickupTime => _pickupTime;
+  double get transporterCost => _transporterCost;
+  String get pickupDateTime => _pickupDateTime;
+  String get dropoffDateTime => _dropoffDateTime;
   bool get isActive => _isActive;
   int get createdBy => _createdBy;
-  dynamic get transporterName => _transporterName;
+  String get transporterName => _transporterName;
   int get assignedDriverId => _assignedDriverId;
-  int get assignedTranporterId => _assignedTranporterId;
+  int get assignedTransporterId => _assignedTransporterId;
   int get assignedVehicleId => _assignedVehicleId;
 
   Result({
@@ -116,14 +108,14 @@ class Result {
       String vehicleTypeName, 
       String vehicleTypeDescription, 
       double shipperCost, 
-      dynamic transporterCost, 
-      String pickupDate, 
-      String pickupTime, 
+      double transporterCost, 
+      String pickupDateTime, 
+      String dropoffDateTime, 
       bool isActive, 
       int createdBy, 
-      dynamic transporterName, 
+      String transporterName, 
       int assignedDriverId, 
-      int assignedTranporterId, 
+      int assignedTransporterId, 
       int assignedVehicleId}){
     _loadId = loadId;
     _loadName = loadName;
@@ -136,13 +128,13 @@ class Result {
     _vehicleTypeDescription = vehicleTypeDescription;
     _shipperCost = shipperCost;
     _transporterCost = transporterCost;
-    _pickupDate = pickupDate;
-    _pickupTime = pickupTime;
+    _pickupDateTime = pickupDateTime;
+    _dropoffDateTime = dropoffDateTime;
     _isActive = isActive;
     _createdBy = createdBy;
     _transporterName = transporterName;
     _assignedDriverId = assignedDriverId;
-    _assignedTranporterId = assignedTranporterId;
+    _assignedTransporterId = assignedTransporterId;
     _assignedVehicleId = assignedVehicleId;
 }
 
@@ -158,13 +150,13 @@ class Result {
     _vehicleTypeDescription = json["VehicleTypeDescription"];
     _shipperCost = json["ShipperCost"];
     _transporterCost = json["TransporterCost"];
-    _pickupDate = json["PickupDate"];
-    _pickupTime = json["PickupTime"];
+    _pickupDateTime = json["PickupDateTime"];
+    _dropoffDateTime = json["DropoffDateTime"];
     _isActive = json["IsActive"];
     _createdBy = json["CreatedBy"];
     _transporterName = json["TransporterName"];
     _assignedDriverId = json["AssignedDriverId"];
-    _assignedTranporterId = json["AssignedTranporterId"];
+    _assignedTransporterId = json["AssignedTransporterId"];
     _assignedVehicleId = json["AssignedVehicleId"];
   }
 
@@ -181,13 +173,13 @@ class Result {
     map["VehicleTypeDescription"] = _vehicleTypeDescription;
     map["ShipperCost"] = _shipperCost;
     map["TransporterCost"] = _transporterCost;
-    map["PickupDate"] = _pickupDate;
-    map["PickupTime"] = _pickupTime;
+    map["PickupDateTime"] = _pickupDateTime;
+    map["DropoffDateTime"] = _dropoffDateTime;
     map["IsActive"] = _isActive;
     map["CreatedBy"] = _createdBy;
     map["TransporterName"] = _transporterName;
     map["AssignedDriverId"] = _assignedDriverId;
-    map["AssignedTranporterId"] = _assignedTranporterId;
+    map["AssignedTransporterId"] = _assignedTransporterId;
     map["AssignedVehicleId"] = _assignedVehicleId;
     return map;
   }

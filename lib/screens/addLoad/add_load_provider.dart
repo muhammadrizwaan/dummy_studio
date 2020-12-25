@@ -201,7 +201,4 @@ class AddLoadProvider extends ChangeNotifier {
       print(error.toString());
     }
   }
-  Future getImage() async {
-
-  }
 }

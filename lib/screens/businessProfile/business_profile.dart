@@ -77,7 +77,7 @@ class _BusinessProfileState extends State<BusinessProfile> {
                                   name: Constants.getUserName(),
                                   email: Constants.getUserEmail(),
                                   password: Constants.getPassword(),
-                                  country: 'Costa Rica'),
+                                  country: Constants.getCityName()),
                           SizedBox(
                             height: AppSizes.height * 0.02,
                           ),
@@ -91,8 +91,9 @@ class _BusinessProfileState extends State<BusinessProfile> {
                                   businessName: Constants.getCommpanyName(),
                                   phoneNumber: Constants.getCommpanyPhone(),
                                   trn: Constants.getCommpanyTrn(),
-                                  licenseExpiryDate: Constants.getLicenseExpiryDate().split('T').first
+                                  licenseExpiryDate: "${DateTime.parse(Constants.getLicenseExpiryDate()).day.toString()}-${DateTime.parse(Constants.getLicenseExpiryDate()).month.toString()}-${DateTime.parse(Constants.getLicenseExpiryDate()).year.toString()}"
                           ),
+                          // Constants.getLicenseExpiryDate().split('T').first
                           Center(
                             child: Image(
                               image: AssetImage(Assets.licenceImg),

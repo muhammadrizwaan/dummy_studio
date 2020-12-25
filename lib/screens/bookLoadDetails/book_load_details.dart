@@ -93,8 +93,8 @@ class _BookLoadDetailsState extends State<BookLoadDetails> {
                     ),
                     SlidingUpPanel(
                       isDraggable: true,
-                      minHeight: AppSizes.height * 0.35,
-                      maxHeight: AppSizes.height * 0.65,
+                      minHeight: AppSizes.height * 0.4,
+                      maxHeight: AppSizes.height  * 0.75,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(2),
                           topRight: Radius.circular(2)),
@@ -111,14 +111,14 @@ class _BookLoadDetailsState extends State<BookLoadDetails> {
   _onSlidingUpPanel() {
     return Container(
       height: AppSizes.height * 0.5,
-      padding: EdgeInsets.only(top: 20, left: 15, right: 15),
+      padding: EdgeInsets.only(top: 20,),
       decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.only(
             topRight: Radius.circular(15),
             topLeft: Radius.circular(15),
           )),
-      child: ListView(
+      child: Column(
         children: [
           Align(
             alignment: Alignment.center,
@@ -131,105 +131,122 @@ class _BookLoadDetailsState extends State<BookLoadDetails> {
               ),
             ),
           ),
-          _bookLoadDetailComponents.getLocationContainer(
-              pickupLocation: widget.pickupLocation,
-              dropOffLocation: widget.dropoffLocation),
           SizedBox(height: AppSizes.height * 0.01),
-          _bookLoadDetailComponents.getExpectedRate(rate: widget.Rate),
-          SizedBox(height: AppSizes.height * 0.02),
-          TextView.getLabelText04(Strings.roundTrip,
-              color: AppColors.colorBlack),
-          SizedBox(height: AppSizes.height * 0.001),
-          TextView.getLabel2Text04(
-              widget.isRoundTrip ? "Yes" : "No", color: AppColors.colorBlack),
-          SizedBox(height: AppSizes.height * 0.02),
-          TextView.getLabelText04(Strings.pickupDateAndTime,
-              color: AppColors.colorBlack),
-          SizedBox(height: AppSizes.height * 0.001),
-          TextView.getLabel2Text04(widget.pickUpDate.toString(),
-              color: AppColors.colorBlack),
-          // TextView.getLabel2Text04("11 Aug, 12:00am",
-          //     color: AppColors.colorBlack),
-          SizedBox(height: AppSizes.height * 0.02),
-          TextView.getLabelText04(Strings.receiverName,
-              color: AppColors.colorBlack),
-          SizedBox(height: AppSizes.height * 0.001),
-          TextView.getLabel2Text04(widget.name, color: AppColors.colorBlack),
-          SizedBox(height: AppSizes.height * 0.02),
-          TextView.getLabelText04(Strings.receiverPhone,
-              color: AppColors.colorBlack),
-          SizedBox(height: AppSizes.height * 0.001),
-          TextView.getLabel2Text04(widget.phone,
-              color: AppColors.colorBlack),
-          SizedBox(height: AppSizes.height * 0.02),
-          TextView.getLabelText04(Strings.goodType,
-              color: AppColors.colorBlack),
-          SizedBox(height: AppSizes.height * 0.001),
-          TextView.getLabel2Text04("Cargo", color: AppColors.colorBlack),
-          SizedBox(height: AppSizes.height * 0.02),
-          TextView.getLabelText04(Strings.weight, color: AppColors.colorBlack),
-          SizedBox(height: AppSizes.height * 0.001),
-          TextView.getLabel2Text04(widget.weight, color: AppColors.colorBlack),
-          SizedBox(height: AppSizes.height * 0.02),
-          TextView.getLabelText04(
-              "No of Vehicle",
-              color: AppColors.colorBlack
+          Expanded(
+            child: ListView(
+              children: [
+                CommonWidgets.getWalletPriceBox(
+                    walletPrice: widget.Rate.toString()
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 15, right: 15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _bookLoadDetailComponents.getLocationContainer(
+                          pickupLocation: widget.pickupLocation,
+                          dropOffLocation: widget.dropoffLocation),
+                      SizedBox(height: AppSizes.height * 0.01),
+                      // _bookLoadDetailComponents.getExpectedRate(rate: widget.Rate),
+                      TextView.getLabelText04(Strings.roundTrip,
+                          color: AppColors.colorBlack),
+                      SizedBox(height: AppSizes.height * 0.001),
+                      TextView.getLabel2Text04(
+                          widget.isRoundTrip ? "Yes" : "No", color: AppColors.colorBlack),
+                      SizedBox(height: AppSizes.height * 0.02),
+                      TextView.getLabelText04(Strings.pickupDateAndTime,
+                          color: AppColors.colorBlack),
+                      SizedBox(height: AppSizes.height * 0.001),
+                      TextView.getLabel2Text04(widget.pickUpDate.toString(),
+                          color: AppColors.colorBlack),
+                      // TextView.getLabel2Text04("11 Aug, 12:00am",
+                      //     color: AppColors.colorBlack),
+                      SizedBox(height: AppSizes.height * 0.02),
+                      TextView.getLabelText04(Strings.receiverName,
+                          color: AppColors.colorBlack),
+                      SizedBox(height: AppSizes.height * 0.001),
+                      TextView.getLabel2Text04(widget.name, color: AppColors.colorBlack),
+                      SizedBox(height: AppSizes.height * 0.02),
+                      TextView.getLabelText04(Strings.receiverPhone,
+                          color: AppColors.colorBlack),
+                      SizedBox(height: AppSizes.height * 0.001),
+                      TextView.getLabel2Text04(widget.phone,
+                          color: AppColors.colorBlack),
+                      SizedBox(height: AppSizes.height * 0.02),
+                      TextView.getLabelText04(Strings.goodType,
+                          color: AppColors.colorBlack),
+                      SizedBox(height: AppSizes.height * 0.001),
+                      TextView.getLabel2Text04("Cargo", color: AppColors.colorBlack),
+                      SizedBox(height: AppSizes.height * 0.02),
+                      TextView.getLabelText04(Strings.weight, color: AppColors.colorBlack),
+                      SizedBox(height: AppSizes.height * 0.001),
+                      TextView.getLabel2Text04(widget.weight, color: AppColors.colorBlack),
+                      SizedBox(height: AppSizes.height * 0.02),
+                      TextView.getLabelText04(
+                          "No of Vehicle",
+                          color: AppColors.colorBlack
+                      ),
+                      SizedBox(height: AppSizes.height * 0.001),
+                      TextView.getLabel2Text04(
+                          widget.numOfVehicle, color: AppColors.colorBlack),
+                      SizedBox(height: AppSizes.height * 0.02),
+                      TextView.getLabelText04(Strings.description,
+                          color: AppColors.colorBlack),
+                      SizedBox(height: AppSizes.height * 0.001),
+                      TextView.getDescriptionText(
+                          widget.description,
+                          color: AppColors.colorBlack),
+                      SizedBox(height: AppSizes.height * 0.02),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Expanded(
+                              child: _bookLoadDetailComponents.getLoadImages(
+                                  images: Assets.vehicle_img)),
+                          Expanded(
+                              child: _bookLoadDetailComponents.getLoadImages(
+                                  images: Assets.vehicle_img)),
+                          Expanded(
+                              child: _bookLoadDetailComponents.getLoadImages(
+                                  images: Assets.vehicle_img)),
+                          Expanded(
+                              child: _bookLoadDetailComponents.getLoadImages(
+                                  images: Assets.vehicle_img)),
+                          Expanded(
+                              child: _bookLoadDetailComponents.getLoadImages(
+                                  images: Assets.vehicle_img)),
+                        ],
+                      ),
+                      SizedBox(height: AppSizes.height * 0.03),
+                      CommonWidgets.getBottomButton(
+                          text: "Submit",
+                          onPress: () {
+                            _bookLoadDetailProvider.onSaveLoad(context: context,
+                              pickupLocation: widget.pickupLocation,
+                              pickupLatitude: widget.pickupLatitude,
+                              pickupLongitude: widget.pickupLongitude,
+                              dropoffLocation: widget.dropoffLocation,
+                              dropoffLatitude: widget.dropoffLatitude,
+                              dropoffLongitude: widget.dropoffLongitude,
+                              vehicleTypeId: widget.vehicleTypeId,
+                              vehicleCategoryId: widget.vehicleCategoryId,
+                              pickupDateTime: widget.pickUpDate,
+                              receiverName: widget.name,
+                              receiverPhone: widget.phone,
+                              goodTypeId: widget.goodTypeId,
+                              weight: widget.weight,
+                              noOfVehicles: widget.numOfVehicle,
+                              description: widget.description,
+                              isRoundTrip: widget.isRoundTrip,
+                            );
+                          }),
+                      SizedBox(height: AppSizes.height * 0.02)
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
-          SizedBox(height: AppSizes.height * 0.001),
-          TextView.getLabel2Text04(
-              widget.numOfVehicle, color: AppColors.colorBlack),
-          SizedBox(height: AppSizes.height * 0.02),
-          TextView.getLabelText04(Strings.description,
-              color: AppColors.colorBlack),
-          SizedBox(height: AppSizes.height * 0.001),
-          TextView.getDescriptionText(
-              widget.description,
-              color: AppColors.colorBlack),
-          SizedBox(height: AppSizes.height * 0.02),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Expanded(
-                  child: _bookLoadDetailComponents.getLoadImages(
-                      images: Assets.vehicle_img)),
-              Expanded(
-                  child: _bookLoadDetailComponents.getLoadImages(
-                      images: Assets.vehicle_img)),
-              Expanded(
-                  child: _bookLoadDetailComponents.getLoadImages(
-                      images: Assets.vehicle_img)),
-              Expanded(
-                  child: _bookLoadDetailComponents.getLoadImages(
-                      images: Assets.vehicle_img)),
-              Expanded(
-                  child: _bookLoadDetailComponents.getLoadImages(
-                      images: Assets.vehicle_img)),
-            ],
-          ),
-          SizedBox(height: AppSizes.height * 0.03),
-          CommonWidgets.getBottomButton(
-              text: "Submit",
-              onPress: () {
-                _bookLoadDetailProvider.onSaveLoad(context: context,
-                    pickupLocation: widget.pickupLocation,
-                    pickupLatitude: widget.pickupLatitude,
-                    pickupLongitude: widget.pickupLongitude,
-                    dropoffLocation: widget.dropoffLocation,
-                    dropoffLatitude: widget.dropoffLatitude,
-                    dropoffLongitude: widget.dropoffLongitude,
-                    vehicleTypeId: widget.vehicleTypeId,
-                    vehicleCategoryId: widget.vehicleCategoryId,
-                    pickupDateTime: widget.pickUpDate,
-                    receiverName: widget.name,
-                    receiverPhone: widget.phone,
-                    goodTypeId: widget.goodTypeId,
-                    weight: widget.weight,
-                    noOfVehicles: widget.numOfVehicle,
-                    description: widget.description,
-                    isRoundTrip: widget.isRoundTrip,
-                );
-              }),
-          SizedBox(height: AppSizes.height * 0.02),
         ],
       ),
     );

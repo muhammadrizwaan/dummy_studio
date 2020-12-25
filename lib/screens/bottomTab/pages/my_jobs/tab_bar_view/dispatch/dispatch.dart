@@ -40,8 +40,9 @@ class _DispatchState extends State<Dispatch> {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
       color: Colors.white,
-      child: _dispatchedProvider.isDataFetched
-          ? ListView.builder(
+      child: _dispatchedProvider.isDataFetched ?
+          _dispatchedProvider.tabbarResponse.result.length > 0 ?
+          ListView.builder(
               itemCount: _dispatchedProvider.tabbarResponse.result.length,
               itemBuilder: (context, index) {
                 return Column(
@@ -58,9 +59,8 @@ class _DispatchState extends State<Dispatch> {
                       destinationLocation: _dispatchedProvider
                           .tabbarResponse.result[index].dropoffLocation,
                       startDate: _dispatchedProvider
-                          .tabbarResponse.result[index].pickupDate,
-                      time: _dispatchedProvider
-                          .tabbarResponse.result[index].pickupTime,
+                          .tabbarResponse.result[index].pickupDateTime,
+                      time: "",
                       status: _dispatchedProvider
                           .tabbarResponse.result[index].status,
                       vehicleType: _dispatchedProvider
@@ -83,7 +83,14 @@ class _DispatchState extends State<Dispatch> {
                     ),
                   ],
                 );
-              })
+              }):
+          Center(
+            child: Container(
+                height: AppSizes.height * 0.15,
+                // width: AppSizes.width,
+                child: CommonWidgets.onNullData(text: "No Delivered Loads")
+            ),
+          )
           : Center(
               child: Container(
                 height: AppSizes.height * 0.15,

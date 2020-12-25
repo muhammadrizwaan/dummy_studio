@@ -25,14 +25,13 @@ class DispatchedProvider extends ChangeNotifier{
   bool isDataFetched = false;
 
   var connectivityResult;
-  int userId, statusId;
+  int userId;
   String token;
   init({@required BuildContext context}) async{
     this.context = context;
-    statusId = 9;
-    await getDispatchLoad(context: context);
     connectivityResult = "";
     token = "";
+    await getDispatchLoad(context: context);
   }
 
   Future getDispatchLoad({@required BuildContext context}) async{
@@ -44,10 +43,9 @@ class DispatchedProvider extends ChangeNotifier{
         ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: Strings.internetConnectionError);
       }
       else{
-        String tempUrl = getLoadApi.replaceAll("{userId}", '$userId');
-        String url = tempUrl.replaceAll("{statusId}", '$statusId');
+        String tempUrl = getDeliveredLoadApi.replaceAll("{userId}", '$userId');
         http.Response response = await _networkHelper.get(
-            url,
+            tempUrl,
             headers: {
               'Content-Type': 'application/json',
               'Authorization': token

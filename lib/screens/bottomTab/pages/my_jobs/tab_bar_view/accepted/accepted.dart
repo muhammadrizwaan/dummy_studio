@@ -40,8 +40,9 @@ class _AcceptedState extends State<Accepted> {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
       color: Colors.white,
-      child: _acceptedProvider.isDataFetched
-          ? ListView.builder(
+      child: _acceptedProvider.isDataFetched ? 
+          _acceptedProvider.tabbarResponse.result.length >0?
+            ListView.builder(
               itemCount: _acceptedProvider.tabbarResponse.result.length,
               itemBuilder: (context, index) {
                 return Column(
@@ -53,8 +54,8 @@ class _AcceptedState extends State<Accepted> {
                         jobDetail: _acceptedProvider.tabbarResponse.result[index].loadId.toString(),
                         pickUpLocation: _acceptedProvider.tabbarResponse.result[index].pickupLocation,
                         destinationLocation: _acceptedProvider.tabbarResponse.result[index].dropoffLocation,
-                        startDate: _acceptedProvider.tabbarResponse.result[index].pickupDate,
-                        time: _acceptedProvider.tabbarResponse.result[index].pickupTime,
+                        startDate: _acceptedProvider.tabbarResponse.result[index].pickupDateTime,
+                        time: "",
                         status: _acceptedProvider.tabbarResponse.result[index].status,
                         vehicleType: _acceptedProvider.tabbarResponse.result[index].vehicleTypeName,
                         price: "${Strings.aed} ${_acceptedProvider.tabbarResponse.result[index].shipperCost.round()}",
@@ -83,8 +84,16 @@ class _AcceptedState extends State<Accepted> {
                     ),
                   ],
                 );
-              })
-          : Center(
+              }):
+          Center(
+                  child: Container(
+                      height: AppSizes.height * 0.15,
+                      // width: AppSizes.width,
+                      child:
+                          CommonWidgets.onNullData(text: "No Accepted Loads")),
+                )
+          : 
+          Center(
         child: Container(
           height: AppSizes.height * 0.15,
           // width: AppSizes.width,

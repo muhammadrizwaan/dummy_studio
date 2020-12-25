@@ -10,7 +10,7 @@ import 'package:truckoom_shipper/widgets/text_views.dart';
 class JobDetailsComponents {
   Widget getLocationContainer({@required String pickupLocation, @required String dropOffLocation}) {
     return Container(
-      // margin: EdgeInsets.only(top: AppSizes.height * 0.05),
+      margin: EdgeInsets.only(top: AppSizes.height * 0.02, left: AppSizes.width * 0.04),
       color: Colors.white,
       child: Column(
         children: [
@@ -18,17 +18,77 @@ class JobDetailsComponents {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: AppSizes.height * 0.12,
-                child: Image(
-                  image: AssetImage(Assets.userLocation),
-                  fit: BoxFit.cover,
+                height: AppSizes.height * 0.099,
+                padding: EdgeInsets.only(top: AppSizes.height * 0.0045),
+                child: Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.yellow
+                        ),
+                      ),
+                      Container(
+                        width: 4,
+                        height: 4,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            color: AppColors.grey
+                        ),
+                      ),
+                      Container(
+                        width: 4,
+                        height: 4,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            color: AppColors.grey
+                        ),
+                      ),
+                      Container(
+                        width: 4,
+                        height: 4,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            color: AppColors.grey
+                        ),
+                      ),
+                      Container(
+                        width: 4,
+                        height: 4,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            color: AppColors.grey
+                        ),
+                      ),
+                      Container(
+                        width: 4,
+                        height: 4,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            color: AppColors.grey
+                        ),
+                      ),
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            color: AppColors.yellow
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
               SizedBox(width: AppSizes.width * 0.03),
               Container(
                 // height: AppSizes.height * 0.14,
                 child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   // crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
@@ -53,6 +113,7 @@ class JobDetailsComponents {
                           SizedBox(height: AppSizes.height * 0.002),
                           Text(
                             pickupLocation,
+                            maxLines: 2,
                             style: TextStyle(
                               fontFamily: Assets.poppinsLight,
                               fontSize: 12,
@@ -63,9 +124,9 @@ class JobDetailsComponents {
                         ],
                       ),
                     ),
-                    SizedBox(height: AppSizes.height * 0.01),
+                    // SizedBox(height: AppSizes.height * 0.01),
                     Container(
-                      // height: AppSizes.height * 0.08,
+                      height: AppSizes.height * 0.082,
                       width: AppSizes.width * 0.7,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -86,6 +147,7 @@ class JobDetailsComponents {
                           SizedBox(height: AppSizes.height * 0.002),
                           Text(
                             dropOffLocation,
+                            maxLines: 2,
                             style: TextStyle(
                               fontFamily: Assets.poppinsLight,
                               fontSize: 12,
@@ -243,17 +305,6 @@ class JobDetailsComponents {
                   fontSize: 14,
                 )),
           ),
-          /*RichText(
-            text: TextSpan(
-              text: clickableText,
-              style: TextStyle(
-                color: Colors.amber,
-                fontSize: 12,
-                fontFamily: Assets.poppinsRegular,
-              ),
-              recognizer: TapGestureRecognizer()..onTap = () => onTap(),
-            ),
-          ),*/
         ],
       ),
     );

@@ -7,7 +7,7 @@ import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
 import 'package:truckoom_shipper/models/api_models/common_response.dart';
-import 'package:truckoom_shipper/models/api_models/company_information_response.dart';
+import 'package:truckoom_shipper/models/api_models/edit_profile_response.dart';
 import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/network/network_helper.dart';
 import 'package:truckoom_shipper/network/network_helper_impl.dart';
@@ -29,7 +29,7 @@ class BusinessInformationProvider extends ChangeNotifier {
   double currentTime;
   var connectivityResult;
   NetworkHelper _networkHelper = NetworkHelperImpl();
-  CompanyInformationResponse _companyInformationResponse = CompanyInformationResponse.empty();
+  EditProfileResponse _editProfileResponse = EditProfileResponse.empty();
   GenericDecodeEncode genericDecodeEncode = GenericDecodeEncode();
   CustomPopup _loader = CustomPopup();
 
@@ -105,13 +105,13 @@ class BusinessInformationProvider extends ChangeNotifier {
           "UserId": userId
         });
         if (response.statusCode == 200) {
-          _companyInformationResponse = CompanyInformationResponse.fromJson(
+          _editProfileResponse = EditProfileResponse.fromJson(
               genericDecodeEncode.decodeJson(response.body));
-          if (_companyInformationResponse.code == 1) {
-            await Constants.setCommpanyName(_companyInformationResponse.result.companyInformations[0].companyName);
-            await Constants.setCommpanyPhone(_companyInformationResponse.result.companyInformations[0].contactNumber);
-            await Constants.setCommpanyTrn(_companyInformationResponse.result.companyInformations[0].trn);
-            await Constants.setLicenseExpiryDate(_companyInformationResponse.result.companyInformations[0].licenseExpiryDate);
+          if (_editProfileResponse.code == 1) {
+            Constants.setCommpanyName(_editProfileResponse.result.companyInformation[0].companyName);
+            Constants.setCommpanyPhone(_editProfileResponse.result.companyInformation[0].contactNumber);
+            Constants.setCommpanyTrn(_editProfileResponse.result.companyInformation[0].trn);
+            Constants.setLicenseExpiryDate(_editProfileResponse.result.companyInformation[0].licenseExpiryDate);
             _loader.hideLoader(context);
             ApplicationToast.getLoginSignupToast(
               context: context,
@@ -128,7 +128,7 @@ class BusinessInformationProvider extends ChangeNotifier {
             ApplicationToast.getErrorToast(
                 durationTime: 3,
                 heading: Strings.error,
-                subHeading: _companyInformationResponse.message);
+                subHeading: _editProfileResponse.message);
           }
         } else {
           _loader.hideLoader(context);

@@ -121,9 +121,7 @@ class _LoginState extends State<Login> {
                                   leftIcon: Entypo.lock,
                                   textEditingController: password,
                                   hintText: "Enter Password"),
-                              SizedBox(
-                                height: AppSizes.height * 0.08,
-                              ),
+                              SizedBox(height: AppSizes.height * 0.08),
                               CommonWidgets.getBottomButton(
                                   text: "Login",
                                   onPress: () {

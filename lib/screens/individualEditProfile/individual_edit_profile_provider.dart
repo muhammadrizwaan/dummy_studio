@@ -9,7 +9,6 @@ import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
 import 'package:truckoom_shipper/models/api_models/edit_profile_response.dart';
-import 'package:truckoom_shipper/models/api_models/individual_update_profile_response.dart';
 import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/network/network_helper.dart';
 import 'package:truckoom_shipper/network/network_helper_impl.dart';
@@ -25,9 +24,8 @@ import 'package:flutter/material.dart';
 class IndividualEditProfileProvider extends ChangeNotifier {
   BuildContext context;
   NetworkHelper _networkHelper = NetworkHelperImpl();
-  IndividualUpdateProfileResponse individualUpdateProfileResponse =
-      IndividualUpdateProfileResponse.empty();
   EditProfileResponse editProfileResponse = EditProfileResponse.empty();
+
   GenericDecodeEncode genericDecodeEncode = GenericDecodeEncode();
   CustomPopup _loader = CustomPopup();
   GetToken _getToken = GetToken();
@@ -80,10 +78,7 @@ class IndividualEditProfileProvider extends ChangeNotifier {
         if (_response.statusCode == 200) {
           editProfileResponse = EditProfileResponse.fromJson(_response.data);
           if (editProfileResponse.code == 1) {
-            print('image uploaded');
-            print(editProfileResponse.result.profilePicture);
-            await PreferenceUtils.setString(Strings.userImageKey,
-                editProfileResponse.result.profilePicture);
+            Constants.setUserImage(editProfileResponse.result.profilePicture);
             isImagePicked = true;
             notifyListeners();
           } else {
@@ -162,13 +157,13 @@ class IndividualEditProfileProvider extends ChangeNotifier {
           },
         );
         if (response.statusCode == 200) {
-          individualUpdateProfileResponse =
-              IndividualUpdateProfileResponse.fromJson(
+          editProfileResponse =
+              EditProfileResponse.fromJson(
                   genericDecodeEncode.decodeJson(response.body));
-          if (individualUpdateProfileResponse.code == 1) {
-            await Constants.setUserEmail(individualUpdateProfileResponse.result.email);
-            await Constants.setPassword(individualUpdateProfileResponse.result.password);
-            await Constants.setUserName(individualUpdateProfileResponse.result.fullName);
+          if (editProfileResponse.code == 1) {
+            await Constants.setUserEmail(editProfileResponse.result.email);
+            await Constants.setPassword(editProfileResponse.result.password);
+            await Constants.setUserName(editProfileResponse.result.fullName);
             _loader.hideLoader(context);
             print('Updated user');
             Navigator.pushReplacement(
@@ -178,7 +173,7 @@ class IndividualEditProfileProvider extends ChangeNotifier {
             ApplicationToast.getErrorToast(
                 durationTime: 3,
                 heading: Strings.error,
-                subHeading: individualUpdateProfileResponse.message);
+                subHeading: editProfileResponse.message);
           }
         } else {
           _loader.hideLoader(context);

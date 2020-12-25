@@ -78,23 +78,32 @@ class LoginProvider extends ChangeNotifier {
               genericDecodeEncode.decodeJson(response.body));
           if (commonResponse.code == 1) {
 
-            await Constants.setToken(commonResponse.result.token.accessToken);
+            Constants.setToken(commonResponse.result.token.accessToken);
+            print('set token');
+            await print(Constants.getToken());
+            print('set2 token');
+            print(commonResponse.result.token.accessToken);
             await Constants.setUserEmail(commonResponse.result.user.email);
-            await Constants.setPassword(commonResponse.result.user.password);
-            await Constants.setUserId(commonResponse.result.user.userId);
-            await Constants.setUserName(commonResponse.result.user.fullName);
-            await Constants.setUserPhone(commonResponse.result.user.phone);
-            await Constants.setUser(commonResponse.result.user.isBusinessAccount? Strings.business: Strings.indiviual);
-            if(commonResponse.result.user.companyInformations.isNotEmpty){
-              await Constants.setCommpanyName(commonResponse.result.user.companyInformations[0].companyName);
-              await Constants.setCommpanyPhone(commonResponse.result.user.companyInformations[0].contactNumber);
-              await Constants.setCommpanyTrn(commonResponse.result.user.companyInformations[0].trn);
-              await Constants.setLicenseExpiryDate(commonResponse.result.user.companyInformations[0].licenseExpiryDate);
-            }
+            Constants.setPassword(commonResponse.result.user.password);
+            Constants.setUserId(commonResponse.result.user.userId);
+            Constants.setUserName(commonResponse.result.user.fullName);
+            Constants.setUserImage(commonResponse.result.user.profilePicture);
 
+            Constants.setUserPhone(commonResponse.result.user.phone != null? commonResponse.result.user.phone:"");
+            Constants.setUser(commonResponse.result.user.isBusinessAccount? Strings.business: Strings.indiviual);
+            if(commonResponse.result.user.isBusinessAccount) {
+              Constants.setCityName(commonResponse.result.user.cityName);
+              Constants.setCityId(commonResponse.result.user.cityId != null? commonResponse.result.user.cityId:0);
+              if (commonResponse.result.user.companyInformation.length > 0) {
+                Constants.setCommpanyName(commonResponse.result.user.companyInformation[0].companyName);
+                Constants.setCommpanyPhone(commonResponse.result.user.companyInformation[0].contactNumber);
+                Constants.setCommpanyTrn(commonResponse.result.user.companyInformation[0].trn);
+                Constants.setLicenseExpiryDate(commonResponse.result.user.companyInformation[0].licenseExpiryDate);
+              }
+            }
             ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
             currentTime = await (((ms / 1000) / 60).round()).toDouble();
-            await PreferenceUtils.setDouble(Strings.tokenTime, currentTime);
+            PreferenceUtils.setDouble(Strings.tokenTime, currentTime);
             _loader.hideLoader(context);
             ApplicationToast.getLoginSignupToast(
               context: context,

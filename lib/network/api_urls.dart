@@ -19,13 +19,18 @@ const String getVehicleTypeApi = "$baseUrl/api/Vehicle/GetVehicleTypes";
 const String deleteLoadApi = "$baseUrl/api/Loads/DeleteLoad?loadId={loadId}";
 const String estimatedLoadPriceApi = "$baseUrl/api/Loads/EstimatedLoadPrice";
 const String getUpdateUserInformationApi = "$baseUrl/api/Accounts/UpdateUserInformation";
-// pending
+
 const String saveLoadApi = "$baseUrl/api/Loads/SaveLoad";
 const String getLoadDetailApi = "$baseUrl/api/Loads/GetLoadDetailsByLoadId?loadId={loadId}";
 const String getDriverDetailApi = "$baseUrl/api//Users/GetDriverDetails?driverId={driverId}";
 const String getInvoiceDetailApi = "$baseUrl/api/Transactions/GetInvoiceDetails?transactionId={Id}";
 const String uploadProfilePictureApi = "$baseUrl/api/Accounts/UploadProfilePicture";
 const String cancellLoadApi = "$baseUrl/api/Loads/RejectedByShipper";
-const String getVehicleByVehicleId = "$baseUrl/api/Vehicle/GetVehiclesByVehicleTypeId?id={vehicleId}";
+const String getVehicleByVehicleId = "$baseUrl/api/Vehicle/GetVehicleCategoriesByVehicleTypeId?id={vehicleId}";
 
-
+// Load status Apis
+const String getPlacedLoadApi = "$baseUrl/api/Loads/GetMyPlacedLoadsShipper?userId={userId}";
+const String getAcceptedLoadApi = "$baseUrl/api/Loads/GetMyAcceptedLoadsShipper?userId={userId}";
+const String getInProcessLoadApi = "$baseUrl/api/Loads/GetMyInProcessLoadsShipper?userId={userId}";
+const String getDeliveredLoadApi = "$baseUrl/api/Loads/GetDeliveredLoads?userId={userId}";
+const String getCancelledLoadApi = "$baseUrl/api/Loads/GetMyCancelledLoadsShipper?userId={userId}";

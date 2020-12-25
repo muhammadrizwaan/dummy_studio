@@ -1,8 +1,8 @@
 /// Message : "Operation performed Succesfully"
 /// Code : 1
-/// Result : {"UserId":2299,"Username":"JohnDoe","Email":"Abdullah.shipper2@gmail.com","Password":"123567","Phone":"25365896522","Address":"","Location":"","Latitude":0.0,"Longitude":0.0,"UserTypeId":2,"UserStatusId":1,"FullName":"John Doe","ProfilePicture":"","CityId":5,"CityName":"Ras al Khaimah","DeviceId":"JohnDoe","EmiratesId":0,"IsBusinessAccount":true,"IsAvailable":false,"CompanyInformation":[{"CompanyId":3145,"CompanyName":"Creative Bugs","ContactNumber":"22233","TRN":"2222","CompanyLandline":"","LicenseExpiryDate":"2021-12-07","CompanyAddress":"","UserId":2299}],"UserDocuments":[{"UserDocumentId":1192,"UserId":2299,"DocumentTypeId":1,"FilePath":"/Files/Licenses/Screenshot 2020-12-24 at 19.48.39.png"},{"UserDocumentId":1193,"UserId":2299,"DocumentTypeId":2,"FilePath":"/Files/Licenses/Screenshot 2020-12-24 at 19.48.46.png"}]}
+/// Result : {"user":{"UserId":2281,"Username":"business2","Email":"b1@jinnbyte.com","Password":"qqqqqq1!","Phone":"03452525159","Address":"","Location":"","Latitude":0.0,"Longitude":0.0,"UserTypeId":2,"UserStatusId":1,"FullName":"business2","ProfilePicture":"/Files/UserImages/image_picker7580087138277318782.jpg","CityId":2,"CityName":"Dubai","DeviceId":"string","EmiratesId":0,"IsBusinessAccount":true,"IsAvailable":false,"CompanyInformation":[{"CompanyId":3139,"CompanyName":"jinnbyte2","ContactNumber":"03452525352","TRN":"2545258","CompanyLandline":"","LicenseExpiryDate":"2020-12-23","CompanyAddress":"","UserId":2281}],"UserDocuments":[{"UserDocumentId":1168,"UserId":2281,"DocumentTypeId":1,"FilePath":"/Files/Licenses/Screenshot 2020-10-07 at 22.11.40.png"},{"UserDocumentId":1169,"UserId":2281,"DocumentTypeId":2,"FilePath":"/Files/Licenses/Screenshot 2020-10-07 at 22.11.46.png"}]},"token":{"access_token":"XnGq-Vzw0_3OEWQL5cP6SWHvbEY_5Zu2e_R2XmmLNoW7y_jvLG4dqsZlNHNJkbnpsollCDv9hM-6Zi09BBRYptB5L-Qza3z5ZC_Av-zORLmDIakhCv_0zM_RRxr873SCbIhhJk9tZYK4381CUDf09CcbgpwD-qNquJVe95N4nkSj-lQFcUMF7vu3FRxLITR2Cwh05fRJ4C1v7Q33zi7b9tvjuJ6a38qeOHNNtU6IfIWhMeztDt7KTKOYd5A_RV-E","token_type":"bearer","expires_in":899,"refresh_token":"b8c9bc9e-2385-4d8d-805c-ee6cd09fe6ea"}}
 
-class EditProfileResponse {
+class CommonResponse {
   String _message;
   int _code;
   Result _result;
@@ -11,9 +11,18 @@ class EditProfileResponse {
   int get code => _code;
   Result get result => _result;
 
-  EditProfileResponse.empty();
+//   CommonResponse({
+//       String message,
+//       int code,
+//       Result result}){
+//     _message = message;
+//     _code = code;
+//     _result = result;
+// }
 
-  EditProfileResponse.fromJson(dynamic json) {
+  CommonResponse.empty();
+
+  CommonResponse.fromJson(dynamic json) {
     _message = json["Message"];
     _code = json["Code"];
     _result = json["Result"] != null ? Result.fromJson(json["Result"]) : null;
@@ -31,29 +40,109 @@ class EditProfileResponse {
 
 }
 
-/// UserId : 2299
-/// Username : "JohnDoe"
-/// Email : "Abdullah.shipper2@gmail.com"
-/// Password : "123567"
-/// Phone : "25365896522"
+/// user : {"UserId":2281,"Username":"business2","Email":"b1@jinnbyte.com","Password":"qqqqqq1!","Phone":"03452525159","Address":"","Location":"","Latitude":0.0,"Longitude":0.0,"UserTypeId":2,"UserStatusId":1,"FullName":"business2","ProfilePicture":"/Files/UserImages/image_picker7580087138277318782.jpg","CityId":2,"CityName":"Dubai","DeviceId":"string","EmiratesId":0,"IsBusinessAccount":true,"IsAvailable":false,"CompanyInformation":[{"CompanyId":3139,"CompanyName":"jinnbyte2","ContactNumber":"03452525352","TRN":"2545258","CompanyLandline":"","LicenseExpiryDate":"2020-12-23","CompanyAddress":"","UserId":2281}],"UserDocuments":[{"UserDocumentId":1168,"UserId":2281,"DocumentTypeId":1,"FilePath":"/Files/Licenses/Screenshot 2020-10-07 at 22.11.40.png"},{"UserDocumentId":1169,"UserId":2281,"DocumentTypeId":2,"FilePath":"/Files/Licenses/Screenshot 2020-10-07 at 22.11.46.png"}]}
+/// token : {"access_token":"XnGq-Vzw0_3OEWQL5cP6SWHvbEY_5Zu2e_R2XmmLNoW7y_jvLG4dqsZlNHNJkbnpsollCDv9hM-6Zi09BBRYptB5L-Qza3z5ZC_Av-zORLmDIakhCv_0zM_RRxr873SCbIhhJk9tZYK4381CUDf09CcbgpwD-qNquJVe95N4nkSj-lQFcUMF7vu3FRxLITR2Cwh05fRJ4C1v7Q33zi7b9tvjuJ6a38qeOHNNtU6IfIWhMeztDt7KTKOYd5A_RV-E","token_type":"bearer","expires_in":899,"refresh_token":"b8c9bc9e-2385-4d8d-805c-ee6cd09fe6ea"}
+
+class Result {
+  User _user;
+  Token _token;
+
+  User get user => _user;
+  Token get token => _token;
+
+  Result({
+      User user, 
+      Token token}){
+    _user = user;
+    _token = token;
+}
+
+  Result.fromJson(dynamic json) {
+    _user = json["user"] != null ? User.fromJson(json["user"]) : null;
+    _token = json["token"] != null ? Token.fromJson(json["token"]) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    var map = <String, dynamic>{};
+    if (_user != null) {
+      map["user"] = _user.toJson();
+    }
+    if (_token != null) {
+      map["token"] = _token.toJson();
+    }
+    return map;
+  }
+
+}
+
+/// access_token : "XnGq-Vzw0_3OEWQL5cP6SWHvbEY_5Zu2e_R2XmmLNoW7y_jvLG4dqsZlNHNJkbnpsollCDv9hM-6Zi09BBRYptB5L-Qza3z5ZC_Av-zORLmDIakhCv_0zM_RRxr873SCbIhhJk9tZYK4381CUDf09CcbgpwD-qNquJVe95N4nkSj-lQFcUMF7vu3FRxLITR2Cwh05fRJ4C1v7Q33zi7b9tvjuJ6a38qeOHNNtU6IfIWhMeztDt7KTKOYd5A_RV-E"
+/// token_type : "bearer"
+/// expires_in : 899
+/// refresh_token : "b8c9bc9e-2385-4d8d-805c-ee6cd09fe6ea"
+
+class Token {
+  String _accessToken;
+  String _tokenType;
+  int _expiresIn;
+  String _refreshToken;
+
+  String get accessToken => _accessToken;
+  String get tokenType => _tokenType;
+  int get expiresIn => _expiresIn;
+  String get refreshToken => _refreshToken;
+
+  Token({
+      String accessToken, 
+      String tokenType, 
+      int expiresIn, 
+      String refreshToken}){
+    _accessToken = accessToken;
+    _tokenType = tokenType;
+    _expiresIn = expiresIn;
+    _refreshToken = refreshToken;
+}
+
+  Token.fromJson(dynamic json) {
+    _accessToken = json["access_token"];
+    _tokenType = json["token_type"];
+    _expiresIn = json["expires_in"];
+    _refreshToken = json["refresh_token"];
+  }
+
+  Map<String, dynamic> toJson() {
+    var map = <String, dynamic>{};
+    map["access_token"] = _accessToken;
+    map["token_type"] = _tokenType;
+    map["expires_in"] = _expiresIn;
+    map["refresh_token"] = _refreshToken;
+    return map;
+  }
+
+}
+
+/// UserId : 2281
+/// Username : "business2"
+/// Email : "b1@jinnbyte.com"
+/// Password : "qqqqqq1!"
+/// Phone : "03452525159"
 /// Address : ""
 /// Location : ""
 /// Latitude : 0.0
 /// Longitude : 0.0
 /// UserTypeId : 2
 /// UserStatusId : 1
-/// FullName : "John Doe"
-/// ProfilePicture : ""
-/// CityId : 5
-/// CityName : "Ras al Khaimah"
-/// DeviceId : "JohnDoe"
+/// FullName : "business2"
+/// ProfilePicture : "/Files/UserImages/image_picker7580087138277318782.jpg"
+/// CityId : 2
+/// CityName : "Dubai"
+/// DeviceId : "string"
 /// EmiratesId : 0
 /// IsBusinessAccount : true
 /// IsAvailable : false
-/// CompanyInformation : [{"CompanyId":3145,"CompanyName":"Creative Bugs","ContactNumber":"22233","TRN":"2222","CompanyLandline":"","LicenseExpiryDate":"2021-12-07","CompanyAddress":"","UserId":2299}]
-/// UserDocuments : [{"UserDocumentId":1192,"UserId":2299,"DocumentTypeId":1,"FilePath":"/Files/Licenses/Screenshot 2020-12-24 at 19.48.39.png"},{"UserDocumentId":1193,"UserId":2299,"DocumentTypeId":2,"FilePath":"/Files/Licenses/Screenshot 2020-12-24 at 19.48.46.png"}]
+/// CompanyInformation : [{"CompanyId":3139,"CompanyName":"jinnbyte2","ContactNumber":"03452525352","TRN":"2545258","CompanyLandline":"","LicenseExpiryDate":"2020-12-23","CompanyAddress":"","UserId":2281}]
+/// UserDocuments : [{"UserDocumentId":1168,"UserId":2281,"DocumentTypeId":1,"FilePath":"/Files/Licenses/Screenshot 2020-10-07 at 22.11.40.png"},{"UserDocumentId":1169,"UserId":2281,"DocumentTypeId":2,"FilePath":"/Files/Licenses/Screenshot 2020-10-07 at 22.11.46.png"}]
 
-class Result {
+class User {
   int _userId;
   String _username;
   String _email;
@@ -98,7 +187,7 @@ class Result {
   List<CompanyInformation> get companyInformation => _companyInformation;
   List<UserDocuments> get userDocuments => _userDocuments;
 
-  Result({
+  User({
       int userId, 
       String username, 
       String email, 
@@ -143,7 +232,7 @@ class Result {
     _userDocuments = userDocuments;
 }
 
-  Result.fromJson(dynamic json) {
+  User.fromJson(dynamic json) {
     _userId = json["UserId"];
     _username = json["Username"];
     _email = json["Email"];
@@ -209,10 +298,10 @@ class Result {
 
 }
 
-/// UserDocumentId : 1192
-/// UserId : 2299
+/// UserDocumentId : 1168
+/// UserId : 2281
 /// DocumentTypeId : 1
-/// FilePath : "/Files/Licenses/Screenshot 2020-12-24 at 19.48.39.png"
+/// FilePath : "/Files/Licenses/Screenshot 2020-10-07 at 22.11.40.png"
 
 class UserDocuments {
   int _userDocumentId;
@@ -254,14 +343,14 @@ class UserDocuments {
 
 }
 
-/// CompanyId : 3145
-/// CompanyName : "Creative Bugs"
-/// ContactNumber : "22233"
-/// TRN : "2222"
+/// CompanyId : 3139
+/// CompanyName : "jinnbyte2"
+/// ContactNumber : "03452525352"
+/// TRN : "2545258"
 /// CompanyLandline : ""
-/// LicenseExpiryDate : "2021-12-07"
+/// LicenseExpiryDate : "2020-12-23"
 /// CompanyAddress : ""
-/// UserId : 2299
+/// UserId : 2281
 
 class CompanyInformation {
   int _companyId;

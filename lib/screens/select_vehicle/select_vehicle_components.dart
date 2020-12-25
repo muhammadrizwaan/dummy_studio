@@ -123,28 +123,37 @@ class SelectVechileComponents {
                     SizedBox(
                       height: AppSizes.height * 0.01,
                     ),
-                    Row(
-                      children: [
-                        Text(
-                          'Capacity: $vehicleDetail | ',
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontFamily: Assets.poppinsRegular,
-                            color: AppColors.colorBlack,
-                            // fontWeight: FontWeight.bold
-                          ),
-                        ),
-                        Text(
-                          'Category: $Category',
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontFamily: Assets.poppinsRegular,
-                            color: AppColors.colorBlack,
-                            // fontWeight: FontWeight.bold
-                          ),
-                        ),
-                      ],
+                    Text(
+                      'Vehicle Type: $vehicleDetail',
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontFamily: Assets.poppinsRegular,
+                        color: AppColors.colorBlack,
+                        // fontWeight: FontWeight.bold
+                      ),
                     ),
+                    // Row(
+                    //   children: [
+                    //     Text(
+                    //       'Vehicle Type: $vehicleDetail | ',
+                    //       style: TextStyle(
+                    //         fontSize: 11,
+                    //         fontFamily: Assets.poppinsRegular,
+                    //         color: AppColors.colorBlack,
+                    //         // fontWeight: FontWeight.bold
+                    //       ),
+                    //     ),
+                    //     Text(
+                    //       'Category: $Category',
+                    //       style: TextStyle(
+                    //         fontSize: 11,
+                    //         fontFamily: Assets.poppinsRegular,
+                    //         color: AppColors.colorBlack,
+                    //         // fontWeight: FontWeight.bold
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 )
               ],

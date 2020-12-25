@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/entypo_icons.dart';
 import 'package:lottie/lottie.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
@@ -12,6 +13,7 @@ import 'package:truckoom_shipper/screens/addLoad/add_load_components.dart';
 import 'package:truckoom_shipper/screens/addLoad/add_load_provider.dart';
 import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_details.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
+import 'package:truckoom_shipper/widgets/loader.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class AddLoad extends StatefulWidget {
@@ -23,6 +25,7 @@ class AddLoad extends StatefulWidget {
       PickupLocation,
       DropoffLocation;
   int VehicleTypeId, VehicleCategoryId;
+  double Rate;
 
   AddLoad(
       {
@@ -33,13 +36,17 @@ class AddLoad extends StatefulWidget {
       @required this.PickupLocation,
       @required this.DropoffLocation,
       @required this.VehicleCategoryId,
-      @required this.VehicleTypeId});
+      @required this.VehicleTypeId,
+        @required this.Rate
+      });
 
   @override
   _AddLoadState createState() => _AddLoadState();
 }
 
 class _AddLoadState extends State<AddLoad> {
+  List<Asset> images = List<Asset>();
+  String _error = 'No Error Dectected';
   AddLoadComponents _addLoadComponents;
   AddLoadProvider _addLoadProvider;
   TextEditingController receiver_name,
@@ -56,6 +63,7 @@ class _AddLoadState extends State<AddLoad> {
   @override
   void initState() {
     super.initState();
+    // _estimateRate();
     receiver_name = TextEditingController();
     receiver_phone = TextEditingController();
     weight = TextEditingController();
@@ -91,19 +99,18 @@ class _AddLoadState extends State<AddLoad> {
                     Expanded(
                       child: ListView(
                         children: [
+                          CommonWidgets.getWalletPriceBox(
+                              walletPrice: widget.Rate.toString(),
+                          ),
                           Container(
-                            padding: EdgeInsets.all(AppSizes.width * 0.05),
+                            padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 _addLoadComponents.getLocationContainer(
                                     pickupLocation: widget.PickupLocation,
-                                    dropOffLocation: widget.DropoffLocation),
-                                SizedBox(height: AppSizes.height * 0.01),
-                                _addLoadComponents.getExpectedRate(),
-                                SizedBox(
-                                  height: AppSizes.height * 0.02,
+                                    dropOffLocation: widget.DropoffLocation
                                 ),
                                 TextView.getRoundTripText04("Round Trip",
                                     color: AppColors.roundTripColor),
@@ -115,6 +122,7 @@ class _AddLoadState extends State<AddLoad> {
                                         child: Wrap(
                                           children: [
                                             CupertinoSwitch(
+                                              activeColor: AppColors.yellow,
                                               value: isRounded,
                                               onChanged: (bool value) {
                                                 setState(() {
@@ -188,7 +196,7 @@ class _AddLoadState extends State<AddLoad> {
                                         child: Container(
                                           height: AppSizes.height * 0.06,
                                           width: AppSizes.width * 0.06,
-                                          child: Image.asset(Assets.vehicle),
+                                          child: Image.asset(Assets.loadIcon),
                                         ),
                                         // child: Image(image: AssetImage(Assets.vehicle)),
                                       ),
@@ -231,7 +239,7 @@ class _AddLoadState extends State<AddLoad> {
                                 CommonWidgets.getSubHeadingText(text: "Weight"),
                                 SizedBox(height: AppSizes.height * 0.01),
                                 _addLoadComponents.getNumberField(
-                                    leftIcon: Assets.vehicle,
+                                    leftIcon: Assets.weightIcon,
                                     hintText: 'Enter Weight',
                                     textEditingController: weight),
                                 SizedBox(
@@ -262,7 +270,7 @@ class _AddLoadState extends State<AddLoad> {
                                       children: [
                                         GestureDetector(
                                           onTap: (){
-                                            _addLoadProvider.getImage();
+                                            // loadAssets();
                                           },
                                           child: DottedBorder(
                                             color:
@@ -297,9 +305,44 @@ class _AddLoadState extends State<AddLoad> {
                                     )
                                   ],
                                 ),
+                                // images.isNotEmpty?Container(
+                                //   height: AppSizes.height * 0.1,
+                                //   child: Expanded(
+                                //     child: ListView.builder(
+                                //         scrollDirection: Axis.horizontal,
+                                //         itemCount: images.length,
+                                //         itemBuilder: (context, index){
+                                //           Asset asset = images[index];
+                                //           return Row(
+                                //             children: [
+                                //               SizedBox(width: AppSizes.width * 0.01,),
+                                //               Container(
+                                //                 height: AppSizes.height * 0.1,
+                                //                 width: AppSizes.width * 0.2,
+                                //                 decoration: BoxDecoration(
+                                //                   borderRadius: BorderRadius.circular(5),
+                                //                 ),
+                                //                 child: AssetThumb(
+                                //                   asset: asset,
+                                //                   width: 300,
+                                //                   height: 300,
+                                //                 ),
+                                //                 // child: Image(
+                                //                 //   image: AssetImage(asset),
+                                //                 //   fit: BoxFit.cover,
+                                //                 // ),
+                                //               ),
+                                //               SizedBox(width: AppSizes.width * 0.01,),
+                                //             ],
+                                //           );
+                                //         }),
+                                //   ),
+                                // ):
+                                    Container(),
+                                // CommonWidgets.onNullData(text: "No Images"),
+
                                 SizedBox(
-                                  height: AppSizes.height * 0.02,
-                                ),
+                                  height: AppSizes.height * 0.02),
                                 CommonWidgets.getBottomButton(
                                     text: "Next",
                                     onPress: () {
@@ -380,5 +423,55 @@ class _AddLoadState extends State<AddLoad> {
         pickedDate = date;
       });
     }
+  }
+
+
+  Future<void> loadAssets() async {
+    List<Asset> resultList = List<Asset>();
+    String error = 'No Error Dectected';
+
+    try {
+      resultList = await MultiImagePicker.pickImages(
+        maxImages: 300,
+        enableCamera: true,
+        selectedAssets: images,
+        cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
+        materialOptions: MaterialOptions(
+          actionBarColor: "#abcdef",
+          actionBarTitle: "Example App",
+          allViewTitle: "All Photos",
+          useDetailsView: false,
+          selectCircleStrokeColor: "#000000",
+        ),
+      );
+    } on Exception catch (e) {
+      error = e.toString();
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      images = resultList;
+      _error = error;
+    });
+  }
+
+  String _estimateRate(){
+    double rate = widget.Rate;
+    int totalVehicles = int.parse(num_of_vehicle.text);
+    double tolalRate = rate;
+    if(isRounded && num_of_vehicle.text.isNotEmpty){
+      tolalRate = rate * totalVehicles * 1.5;
+    }
+    else if(isRounded == false && num_of_vehicle.text.isNotEmpty){
+      tolalRate = rate * totalVehicles;
+    }
+    else if(isRounded == true && num_of_vehicle.text.isEmpty){
+      tolalRate = rate * 15;
+    }
+    return tolalRate.toString();
   }
 }

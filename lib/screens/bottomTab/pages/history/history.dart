@@ -34,10 +34,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _historyProvider = Provider.of<HistoryProvider>(context, listen: false);
-    _historyProvider.init(context: context);
     price = "";
     _historyComponents = HistoryComponents();
+    _historyProvider = Provider.of<HistoryProvider>(context, listen: false);
+    _historyProvider.init(context: context);
+
   }
   @override
   Widget build(BuildContext context) {
@@ -65,6 +66,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
             ),
             Expanded(
               child: _historyProvider.isDataFetched?
+                  _historyProvider.historyResponse.result.length > 0?
                   ListView.builder(
                     itemCount: _historyProvider.historyResponse.result.length,
                       itemBuilder: (context, index){
@@ -100,6 +102,14 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     );
                   }
               ):
+                  Center(
+                    child: Container(
+                      height: AppSizes.height * 0.15,
+                      // width: AppSizes.width,
+                      child: CommonWidgets.onNullData(text: "No History")
+                    ),
+                  )
+                      :
               Center(
                 child: Container(
                   height: AppSizes.height * 0.15,

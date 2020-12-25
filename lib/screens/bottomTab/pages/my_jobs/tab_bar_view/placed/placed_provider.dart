@@ -24,14 +24,13 @@ class PlacedProvider extends ChangeNotifier{
   bool isDataFetched = false;
 
   var connectivityResult;
-  int userId, statusId;
+  int userId;
   String token;
   init({@required BuildContext context}) async{
     this.context = context;
     connectivityResult = "";
-    statusId = 1;
-    await getPlacedLoad(context: context);
     token = "";
+    await getPlacedLoad(context: context);
   }
 
   Future getPlacedLoad({@required BuildContext context}) async{
@@ -43,10 +42,9 @@ class PlacedProvider extends ChangeNotifier{
         ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: Strings.internetConnectionError);
       }
       else{
-        String tempUrl = getLoadApi.replaceAll("{userId}", '$userId');
-        String url = tempUrl.replaceAll("{statusId}", '$statusId');
+        String tempUrl = getPlacedLoadApi.replaceAll("{userId}", '$userId');
         http.Response response = await _networkHelper.get(
-          url,
+            tempUrl,
           headers: {
             'Content-Type': 'application/json',
             'Authorization': token

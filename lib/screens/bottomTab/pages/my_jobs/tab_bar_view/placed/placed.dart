@@ -10,6 +10,7 @@ import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/pl
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/placed/placed_provider.dart';
 import 'package:truckoom_shipper/screens/jobDetails/job_details.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
+import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/loader.dart';
 
 
@@ -39,6 +40,7 @@ class _PlacedState extends State<Placed> {
       margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
       color: Colors.white,
       child: _placedProvider.isDataFetched?
+          _placedProvider.tabbarResponse.result.length > 0?
       ListView.builder(
         itemCount: _placedProvider.tabbarResponse.result.length,
           itemBuilder: (context, index){
@@ -51,8 +53,8 @@ class _PlacedState extends State<Placed> {
                 jobDetail: _placedProvider.tabbarResponse.result[index].loadId.toString(),
                 pickUpLocation: _placedProvider.tabbarResponse.result[index].pickupLocation,
                 destinationLocation: _placedProvider.tabbarResponse.result[index].dropoffLocation,
-                startDate: _placedProvider.tabbarResponse.result[index].pickupDate,
-                time: _placedProvider.tabbarResponse.result[index].pickupTime,
+                startDate: _placedProvider.tabbarResponse.result[index].pickupDateTime,
+                time: "",
                 status: _placedProvider.tabbarResponse.result[index].status,
                 vehicleType: _placedProvider.tabbarResponse.result[index].vehicleTypeName,
                 price: "${Strings.aed} ${_placedProvider.tabbarResponse.result[index].shipperCost.round()}",
@@ -69,7 +71,14 @@ class _PlacedState extends State<Placed> {
             ],
           );
           }
-      ):
+      ):Center(
+            child: Container(
+                height: AppSizes.height * 0.15,
+                // width: AppSizes.width,
+                child: CommonWidgets.onNullData(text: "No Placed Loads")
+            ),
+          )
+              :
       Center(
         child: Container(
           height: AppSizes.height * 0.15,
