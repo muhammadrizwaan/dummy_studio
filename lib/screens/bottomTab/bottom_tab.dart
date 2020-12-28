@@ -36,6 +36,7 @@ class _BottomTabState extends State<BottomTab> {
   void initState() {
     _bottomTabComponents = BottomTabComponents();
     _bottomTabProvider = Provider.of<BottomTabProvider>(context, listen: false);
+    _bottomTabProvider.init(context: context);
     search = TextEditingController();
   }
 

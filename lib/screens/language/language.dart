@@ -83,24 +83,17 @@ class _LanguageState extends State<Language> {
                                         items: [
                                           DropdownMenuItem(
                                             child: TextView.getLightTextLanguage(
-                                              "Select",
+                                              "English",
                                               color: AppColors.colorBlack,
                                             ),
                                             value: 1,
                                           ),
                                           DropdownMenuItem(
-                                            child: TextView.getLightTextLanguage(
-                                              "English",
-                                              color: AppColors.colorBlack,
-                                            ),
-                                            value: 2,
-                                          ),
-                                          DropdownMenuItem(
                                               child: TextView.getLightTextLanguage("Urdu", color: AppColors.colorBlack),
-                                              value: 3),
+                                              value: 2),
                                           DropdownMenuItem(
                                               child: TextView.getLightTextLanguage( "Arabic", color: AppColors.colorBlack,),
-                                              value: 4),
+                                              value: 3),
                                         ],
                                         onChanged: (value) {
                                           setState(() {
@@ -112,12 +105,7 @@ class _LanguageState extends State<Language> {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: 50,
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.08),
                           CommonWidgets.getBottomButton(
                               text: "Next",
                               onPress: () {

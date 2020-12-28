@@ -70,83 +70,122 @@ class _BookLoadState extends State<BookLoad> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: true,
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Container(
-            width: AppSizes.width,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Book a Load',
-                  style: TextStyle(
-                    color: AppColors.black,
-                    fontFamily: Assets.poppinsMedium,
-                    fontSize: 22,
-                    fontWeight: FontWeight.w400,
-                  ),
+          body: Column(
+            children: [
+              CommonWidgets.tabsAppBar1(
+                text: "Book a Load",
+                iconName: Constants.getUser() == Strings.indiviual
+                    ? FontAwesome5.bell
+                    : Linecons.wallet,
+                onPress: () {
+                  Constants.getUser() == Strings.indiviual
+                      ? Navigator.push(
+                      context, SlideRightRoute(page: Notifications()))
+                      : Navigator.push(
+                      context, SlideRightRoute(page: Wallet()));
+                },),
+              SizedBox(height: AppSizes.height * 0.005),
+              Expanded(
+                child: Stack(
+                  children: [
+                    GoogleMap(
+                      initialCameraPosition:
+                      CameraPosition(target: _center, zoom: 5),
+                    ),
+                    SlidingUpPanel(
+                      isDraggable: true,
+                      minHeight: AppSizes.height * 0.4,
+                      maxHeight: AppSizes.height * 0.75,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15)),
+                      panel: _bottomNavigationContainer(),
+                    )
+                  ],
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Constants.getUser() == Strings.indiviual
-                        ? Navigator.push(
-                            context, SlideRightRoute(page: Notifications()))
-                        : Navigator.push(
-                            context, SlideRightRoute(page: Wallet()));
-                  },
-                  child: Constants.getUser() == Strings.indiviual
-                      ? Icon(
-                          FontAwesome5.bell,
-                          size: 25,
-                          color: AppColors.colorBlack.withOpacity(0.6),
-                        )
-                      : Icon(
-                          Linecons.wallet,
-                          size: 20,
-                          color: AppColors.colorBlack.withOpacity(0.6),
-                        ),
-                ),
-              ],
-            ),
-          ),
-          backgroundColor: AppColors.white,
-          // iconTheme: IconThemeData(color: Color.fromRGBO(49, 49, 49, 1)),
-        ),
-        body: Stack(
-          children: [
-            CommonWidgets.tabsAppBar2(text: 'Book a Load', onPress: () {}),
-            SizedBox(height: AppSizes.height * 0.04),
-            GoogleMap(
-              initialCameraPosition: CameraPosition(
-                target: _center,
-                zoom: 5,
-              ),
-              mapType: MapType.terrain,
-              trafficEnabled: true,
-              onMapCreated: _onMapCreated,
-              myLocationEnabled: true,
-            ),
-            SlidingUpPanel(
-              isDraggable: true,
-              minHeight: AppSizes.height * 0.30,
-              maxHeight: AppSizes.height * 0.75,
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(
-                  15,
-                ),
-                topLeft: Radius.circular(
-                  15,
-                ),
-              ),
-              panel: Center(
-                child: _bottomNavigationContainer(),
-              ),
-            ),
-          ],
-        ),
-      ),
+              )
+            ],
+          )),
     );
+    // return SafeArea(
+    //   child: Scaffold(
+    //     resizeToAvoidBottomInset: true,
+    //     appBar: AppBar(
+    //       automaticallyImplyLeading: false,
+    //       title: Container(
+    //         width: AppSizes.width,
+    //         child: Row(
+    //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //           children: [
+    //             Text(
+    //               'Book a Load',
+    //               style: TextStyle(
+    //                 color: AppColors.black,
+    //                 fontFamily: Assets.poppinsMedium,
+    //                 fontSize: 22,
+    //                 fontWeight: FontWeight.w400,
+    //               ),
+    //             ),
+    //             GestureDetector(
+    //               onTap: () {
+    //                 Constants.getUser() == Strings.indiviual
+    //                     ? Navigator.push(
+    //                         context, SlideRightRoute(page: Notifications()))
+    //                     : Navigator.push(
+    //                         context, SlideRightRoute(page: Wallet()));
+    //               },
+    //               child: Constants.getUser() == Strings.indiviual
+    //                   ? Icon(
+    //                       FontAwesome5.bell,
+    //                       size: 25,
+    //                       color: AppColors.colorBlack.withOpacity(0.6),
+    //                     )
+    //                   : Icon(
+    //                       Linecons.wallet,
+    //                       size: 20,
+    //                       color: AppColors.colorBlack.withOpacity(0.6),
+    //                     ),
+    //             ),
+    //           ],
+    //         ),
+    //       ),
+    //       backgroundColor: AppColors.white,
+    //       // iconTheme: IconThemeData(color: Color.fromRGBO(49, 49, 49, 1)),
+    //     ),
+    //     body: Stack(
+    //       children: [
+    //         // CommonWidgets.tabsAppBar2(text: 'Book a Load', onPress: () {}),
+    //         SizedBox(height: AppSizes.height * 0.04),
+    //         GoogleMap(
+    //           initialCameraPosition: CameraPosition(
+    //             target: _center,
+    //             zoom: 5,
+    //           ),
+    //           mapType: MapType.terrain,
+    //           trafficEnabled: true,
+    //           onMapCreated: _onMapCreated,
+    //           myLocationEnabled: true,
+    //         ),
+    //         SlidingUpPanel(
+    //           isDraggable: true,
+    //           minHeight: AppSizes.height * 0.30,
+    //           maxHeight: AppSizes.height * 0.75,
+    //           borderRadius: BorderRadius.only(
+    //             topRight: Radius.circular(
+    //               15,
+    //             ),
+    //             topLeft: Radius.circular(
+    //               15,
+    //             ),
+    //           ),
+    //           panel: Center(
+    //             child: _bottomNavigationContainer(),
+    //           ),
+    //         ),
+    //       ],
+    //     ),
+    //   ),
+    // );
   }
 
   _bottomNavigationContainer() {
@@ -184,8 +223,8 @@ class _BookLoadState extends State<BookLoad> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
-                        margin: EdgeInsets.only(top: AppSizes.height * 0.03),
-                        height: AppSizes.height * 0.11,
+                        margin: EdgeInsets.only(top: AppSizes.height * 0.014),
+                        height: AppSizes.height * 0.112,
                         child: Row(
                           children: [
                             Image.asset(Assets.joint),
@@ -327,8 +366,8 @@ class _BookLoadState extends State<BookLoad> {
                   padding: const EdgeInsets.only(left: 20),
                   child: _bookLoadComponents.getLocationPickupText(
                     text: dropOffLoction
-                        ? "Drop off Location"
-                        : "Pickup Location",
+                        ? "Recent Locations"
+                        : "Recent Locations",
                   ),
                 ),
                 Container(

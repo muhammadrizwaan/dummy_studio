@@ -78,7 +78,7 @@ class _ForgotPassowrdState extends State<ForgotPassowrd> {
                               textEditingController: email,
                               hintText: "Enter Email"
                           ),
-                          SizedBox(height: AppSizes.height * 0.03,),
+                          SizedBox(height: AppSizes.height * 0.08),
                           CommonWidgets.getBottomButton(
                               text: "Submit",
                               onPress: () {

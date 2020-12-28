@@ -9,6 +9,7 @@ import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/cancelled/cancelled_provider.dart';
 import 'package:truckoom_shipper/screens/jobDetails/job_details.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
+import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'cancelled_components.dart';
 
 class Cancelled extends StatefulWidget {
@@ -35,8 +36,9 @@ class _CancelledState extends State<Cancelled> {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
       color: Colors.white,
-      child: _cancelledProvider.isDataFetched
-          ? ListView.builder(
+      child: _cancelledProvider.isDataFetched ?
+          _cancelledProvider.tabbarResponse.result.length > 0?
+          ListView.builder(
               itemCount: _cancelledProvider.tabbarResponse.result.length,
               itemBuilder: (context, index) {
                 return Column(
@@ -48,8 +50,8 @@ class _CancelledState extends State<Cancelled> {
                       jobDetail: _cancelledProvider.tabbarResponse.result[index].loadId.toString(),
                       pickUpLocation: _cancelledProvider.tabbarResponse.result[index].pickupLocation,
                       destinationLocation: _cancelledProvider.tabbarResponse.result[index].dropoffLocation,
-                      startDate: _cancelledProvider.tabbarResponse.result[index].pickupDate,
-                      time: _cancelledProvider.tabbarResponse.result[index].pickupTime,
+                      startDate: _cancelledProvider.tabbarResponse.result[index].pickupDateTime,
+                      time: "",
                       status: _cancelledProvider.tabbarResponse.result[index].status,
                       vehicleType: _cancelledProvider.tabbarResponse.result[index].vehicleTypeName,
                       price: "${Strings.aed} ${_cancelledProvider.tabbarResponse.result[index].shipperCost.round()}",
@@ -66,7 +68,14 @@ class _CancelledState extends State<Cancelled> {
                     ),
                   ],
                 );
-              })
+              }):
+          Center(
+            child: Container(
+                height: AppSizes.height * 0.15,
+                // width: AppSizes.width,
+                child: CommonWidgets.onNullData(text: "No Cancelled Loads")
+            ),
+          )
           : Center(
               child: Container(
                 height: AppSizes.height * 0.15,

@@ -109,8 +109,8 @@ class _MoreState extends State<More> {
   }
 
   onLogout() async{
-    await PreferenceUtils.setString(Strings.email, "");
-    await PreferenceUtils.setString(Strings.password, "");
+    Constants.setUserEmail("");
+    Constants.setPassword("");
     Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: Language()), (route) => false);
   }
 

@@ -114,13 +114,15 @@ class BusinessSignupProvider extends ChangeNotifier {
           _commonResponse = CommonResponse.fromJson(
               _genericDecodeEncode.decodeJson(response.body));
           if (_commonResponse.code == 1) {
-            await Constants.setToken(_commonResponse.result.token.accessToken);
-            await Constants.setUserEmail(_commonResponse.result.user.email);
-            await Constants.setPassword(_commonResponse.result.user.password);
-            await Constants.setUserId(_commonResponse.result.user.userId);
-            await Constants.setUserName(_commonResponse.result.user.fullName);
-            await Constants.setUserPhone(_commonResponse.result.user.phone);
-            await Constants.setUser(Strings.business);
+            Constants.setToken(_commonResponse.result.token.accessToken);
+            Constants.setUserEmail(_commonResponse.result.user.email);
+            Constants.setPassword(_commonResponse.result.user.password);
+            Constants.setUserId(_commonResponse.result.user.userId);
+            Constants.setUserName(_commonResponse.result.user.fullName);
+            Constants.setUserPhone(_commonResponse.result.user.phone);
+            Constants.setUserImage(_commonResponse.result.user.profilePicture);
+            Constants.setCityName(_commonResponse.result.user.cityName);
+            Constants.setUser(Strings.business);
 
             ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
             currentTime = await (((ms / 1000) / 60).round()).toDouble();

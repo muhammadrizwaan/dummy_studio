@@ -58,6 +58,7 @@ class Strings {
   static const String tokenKey = "TokenKey";
   static const String licenseExpiryDateKey = "LicenseExpiryDateKey";
   static const String cityNameKey = "CityNameKey";
+  static const String cityIdKey = "CityIdKey";
   static const String licenseImagesKey = "LicenseImagesKey";
 
 

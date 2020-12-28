@@ -2,19 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/entypo_icons.dart';
-import 'package:fluttericon/linearicons_free_icons.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/businessInformation/business_information_components.dart';
 import 'package:truckoom_shipper/screens/businessInformation/business_information_provider.dart';
-import 'package:truckoom_shipper/screens/businessProfile/business_profile.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:provider/provider.dart';
 import '../../animations/slide_right.dart';
-import '../bottomTab/bottom_tab.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 
 class BusinessInformation extends StatefulWidget {
   int userId;
@@ -29,6 +27,8 @@ class _BusinessInformationState extends State<BusinessInformation> {
   BusinessInformationComponents _businessInformationComponents;
   BusinessInformationProvider _businessInformationProvider;
   TextEditingController business_name, contact_number, trn;
+  List<Asset> images = List<Asset>();
+  String _error = 'No Error Dectected';
 
   bool onCheck = false;
   DateTime pickedDate;
@@ -43,6 +43,20 @@ class _BusinessInformationState extends State<BusinessInformation> {
     contact_number = TextEditingController();
     trn = TextEditingController();
     pickedDate = DateTime.now();
+  }
+
+  Widget buildGridView() {
+    return GridView.count(
+      crossAxisCount: 3,
+      children: List.generate(images.length, (index) {
+        Asset asset = images[index];
+        return AssetThumb(
+          asset: asset,
+          width: 300,
+          height: 300,
+        );
+      }),
+    );
   }
 
   @override
@@ -112,8 +126,8 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "TRN"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          CommonWidgets.getTextField(
-                              isPassword: true,
+                          CommonWidgets.getPhoneNumberField(
+                              isPassword: false,
                               leftIcon: Entypo.mobile,
                               textEditingController: trn,
                               hintText: "Enter TRN"),
@@ -130,6 +144,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           SizedBox(height: AppSizes.height * 0.03),
                           _businessInformationComponents.getImagePicker(
                               onPress: () {
+                                loadAssets();
                             // Navigator.push(context, SlideRightRoute(page: OTPAuthentication()));
                           }),
                           SizedBox(height: AppSizes.height * 0.02),
@@ -251,6 +266,40 @@ class _BusinessInformationState extends State<BusinessInformation> {
         pickedDate = date;
       });
     }
+  }
+
+
+  Future<void> loadAssets() async {
+    List<Asset> resultList = List<Asset>();
+    String error = 'No Error Dectected';
+
+    try {
+      resultList = await MultiImagePicker.pickImages(
+        maxImages: 300,
+        enableCamera: true,
+        selectedAssets: images,
+        cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
+        materialOptions: MaterialOptions(
+          actionBarColor: "#abcdef",
+          actionBarTitle: "Example App",
+          allViewTitle: "All Photos",
+          useDetailsView: false,
+          selectCircleStrokeColor: "#000000",
+        ),
+      );
+    } on Exception catch (e) {
+      error = e.toString();
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      images = resultList;
+      _error = error;
+    });
   }
 
 }

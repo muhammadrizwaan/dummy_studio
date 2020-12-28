@@ -43,6 +43,8 @@ class Assets {
   static const String phoneNumber = "assets/png/icon_phone_pn.png";
   static const String vehicle = "assets/png/vehicle.png";
   static const String goodsType = "assets/png/goods_type.png";
+  static const String loadIcon = "assets/png/load.png";
+  static const String weightIcon = "assets/png/weight.png";
 
   static const String locationCircleIcon = "assets/png/location_circle_icon.png";
   static const String ratingReviewIcon = "assets/png/rating_review_icon.png";

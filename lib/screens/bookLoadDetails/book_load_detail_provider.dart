@@ -11,6 +11,7 @@ import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/network/network_helper.dart';
 import 'package:truckoom_shipper/network/network_helper_impl.dart';
 import 'package:truckoom_shipper/res/strings.dart';
+import 'package:truckoom_shipper/routes/routes.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab_provider.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
@@ -95,12 +96,8 @@ class BookLoadDetailProvider extends ChangeNotifier {
           if (_saveLoadResponse.code == 1) {
             _loader.hideLoader(context);
             print('Save Load Success');
-            print(_saveLoadResponse.result.pickupDateTime);
-            Navigator.push(
-                context,
-                SlideRightRoute(
-                    page: BottomTab(
-                )));
+            Navigator.pushReplacement(context, SlideRightRoute(page: BottomTab()));
+            Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: BottomTab()), ModalRoute.withName(Routes.bookLoadDetails));
           } else {
             _loader.hideLoader(context);
             ApplicationToast.getErrorToast(

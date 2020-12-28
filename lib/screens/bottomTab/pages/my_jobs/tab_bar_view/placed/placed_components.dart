@@ -81,37 +81,81 @@ class PlacedComponents{
                 children: [
                   Row(
                     children: [
-                      Image(
-                        image: AssetImage(Assets.df_pk_job),
+                      Container(
+                        height: AppSizes.height * 0.043,
+                        child: Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                width: 6,
+                                height: 6,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: AppColors.yellow
+                                ),
+                              ),
+                              Container(
+                                width: 3,
+                                height: 3,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: AppColors.grey
+                                ),
+                              ),
+                              Container(
+                                width: 3,
+                                height: 3,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: AppColors.grey
+                                ),
+                              ),
+                              Container(
+                                width: 6,
+                                height: 6,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: AppColors.yellow
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
                       ),
                       SizedBox(
                         width: AppSizes.width * 0.01,
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            pickUpLocation,
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontFamily: Assets.poppinsRegular,
-                              color: AppColors.locationText,
-                              // fontWeight: FontWeight.bold
+                      Container(
+                        width: AppSizes.width * 0.4,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              pickUpLocation,
+                              maxLines: 1,
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontFamily: Assets.poppinsRegular,
+                                color: AppColors.locationText,
+                                // fontWeight: FontWeight.bold
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            height: AppSizes.height * 0.01,
-                          ),
-                          Text(
-                            destinationLocation,
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontFamily: Assets.poppinsRegular,
-                              color: AppColors.locationText,
-                              // fontWeight: FontWeight.bold
+                            SizedBox(
+                              height: AppSizes.height * 0.01,
                             ),
-                          ),
-                        ],
+                            Text(
+                              destinationLocation,
+                              maxLines: 1,
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontFamily: Assets.poppinsRegular,
+                                color: AppColors.locationText,
+                                // fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -123,7 +167,7 @@ class PlacedComponents{
                         Row(
                           children: [
                             Text(
-                              startDate,
+                               startDate,
                               style: TextStyle(
                                 fontSize: 12,
                                 fontFamily: Assets.poppinsRegular,
@@ -135,7 +179,7 @@ class PlacedComponents{
                               width: 4,
                             ),
                             Text(
-                              time,
+                              time.split(' ').last,
                               style: TextStyle(
                                 fontSize: 12,
                                 fontFamily: Assets.poppinsRegular,

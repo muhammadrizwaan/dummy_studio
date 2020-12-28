@@ -16,8 +16,8 @@ class BusinessEditProfileComponents{
     return Align(
       alignment: Alignment.center,
       child: Container(
-        height: AppSizes.height * 0.12,
-        width: AppSizes.width * 0.24,
+        // height: AppSizes.height * 0.12,
+        // width: AppSizes.width * 0.24,
         child: CircleAvatar(
           child: Stack(
             children: [

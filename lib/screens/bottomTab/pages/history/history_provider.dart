@@ -28,8 +28,8 @@ class HistoryProvider extends ChangeNotifier{
   init({@required BuildContext context}) async{
     this.context = context;
     connectivityResult = "";
-    await getPlacedLoad(context: context);
     token = "";
+    await getPlacedLoad(context: context);
   }
 
   Future getPlacedLoad({@required BuildContext context}) async{
@@ -41,6 +41,8 @@ class HistoryProvider extends ChangeNotifier{
         ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: Strings.internetConnectionError);
       }
       else{
+        print('token in api is');
+        print(token);
         String tempUrl = getHistoryApi.replaceAll("{userId}", '$userId');
         http.Response response = await _networkHelper.get(
             tempUrl,

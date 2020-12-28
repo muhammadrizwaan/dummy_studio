@@ -4,15 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/entypo_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
-import 'package:html/parser.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
-import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 import 'business_edit_profile_components.dart';
@@ -96,7 +93,7 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                               isPassword: false,
                               leftIcon: Entypo.user,
                               textEditingController: _name,
-                              hintText: 'Matthew'
+                              hintText: 'Enter Full Name'
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
                           CommonWidgets.getSubHeadingText(
@@ -107,7 +104,7 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                               isPassword: false,
                               leftIcon: Icons.mail,
                               textEditingController: _email,
-                              hintText: 'MatthewLawson@mail.com'
+                              hintText: 'Enter Email'
                           ),
 
                           SizedBox(height: AppSizes.height * 0.03,),
@@ -142,7 +139,7 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                               isPassword: false,
                               leftIcon: Entypo.user,
                               textEditingController: _businessName,
-                              hintText: 'Augue vestibulum'
+                              hintText: 'Enter Business Name'
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
                           CommonWidgets.getSubHeadingText(
@@ -160,11 +157,11 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                               text: 'Contact Number'
                           ),
                           SizedBox(height: AppSizes.height * 0.01,),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getPhoneNumberField(
                               isPassword: false,
                               leftIcon: Entypo.mobile,
                               textEditingController: _businessPhone,
-                              hintText: '(430)214-7475'
+                              hintText: 'Enter Contact Number'
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
                           CommonWidgets.getSubHeadingText(
@@ -175,7 +172,7 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                               isPassword: false,
                               leftIcon: Entypo.mobile,
                               textEditingController: _trn,
-                              hintText: '430(845785)'
+                              hintText: 'Enter TRN'
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
                           CommonWidgets.getSubHeadingText(
@@ -204,7 +201,7 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                                       isExpanded: true,
                                       value: _selectedValue,
                                       hint: TextView.getLightText04(
-                                        "Select City",
+                                        Constants.getCityName(),
                                         color: AppColors.colorBlack,
                                       ),
                                       items: _businessEditProfileProvider

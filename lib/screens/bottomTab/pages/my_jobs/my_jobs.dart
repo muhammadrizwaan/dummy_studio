@@ -129,7 +129,7 @@ class _MyJobsState extends State<MyJobs> {
                         borderRadius: BorderRadius.circular(05),
                       ),
                       child: Tab(
-                        child: Text("Dispatched",),
+                        child: Text("Delivered",),
                       ),
                     ),
                     Container(

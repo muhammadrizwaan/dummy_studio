@@ -107,13 +107,13 @@ class SignUpProvider extends ChangeNotifier {
           commonResponse = CommonResponse.fromJson(genericDecodeEncode.decodeJson(response.body));
           if(commonResponse.code == 1){
 
-            await Constants.setToken(commonResponse.result.token.accessToken);
-            await Constants.setUserEmail(commonResponse.result.user.email);
-            await Constants.setPassword(commonResponse.result.user.password);
-            await Constants.setUserId(commonResponse.result.user.userId);
-            await Constants.setUserName(commonResponse.result.user.fullName);
-            await Constants.setUserPhone(commonResponse.result.user.phone);
-            await Constants.setUser(Strings.indiviual);
+            Constants.setToken(commonResponse.result.token.accessToken);
+            Constants.setUserEmail(commonResponse.result.user.email);
+            Constants.setPassword(commonResponse.result.user.password);
+            Constants.setUserId(commonResponse.result.user.userId);
+            Constants.setUserName(commonResponse.result.user.fullName);
+            Constants.setUserPhone(commonResponse.result.user.phone);
+            Constants.setUser(Strings.indiviual);
 
             ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
             currentTime = await (((ms / 1000) / 60).round()).toDouble();
