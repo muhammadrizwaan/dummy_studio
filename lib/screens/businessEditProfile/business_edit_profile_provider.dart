@@ -58,9 +58,11 @@ class BusinessEditProfileProvider extends ChangeNotifier{
     int userId = await Constants.getUserId();
     final image = await picker.getImage(source: ImageSource.gallery);
     if (image != null) {
+      print('image path');
+      print(image.path);
       userImage = File(image.path);
       imagePath = userImage.path.split("/").last;
-
+      print(imagePath);
       try {
         token = await PreferenceUtils.getString(Strings.token);
         FormData formData = FormData.fromMap({
@@ -179,11 +181,6 @@ class BusinessEditProfileProvider extends ChangeNotifier{
             heading: Strings.error,
             subHeading: Strings.trnErrorText);
       }
-      // else if (city < 1) {
-      //   ApplicationToast.getErrorToast(durationTime: 3,
-      //       heading: Strings.error,
-      //       subHeading: Strings.cityErrorText);
-      // }
       else {
         _loader.showLoader(context: context);
         token = await _getToken.onToken();

@@ -43,7 +43,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
 
   SelectVechileComponents _selectVehicleComponents;
   SelectVehicleProvider _selectVehicleProvider;
-  TextEditingController search;
+  TextEditingController _search;
   bool isSelect;
   String _selectedValue;
   int id, vehicleCategoryId;
@@ -53,33 +53,35 @@ class _SelectVehicleState extends State<SelectVehicle> {
   @override
   void initState() {
     super.initState();
-    _selectVehicleProvider =
-        Provider.of<SelectVehicleProvider>(context, listen: false);
-    _selectVehicleProvider.init(context: context);
     _selectVehicleComponents = SelectVechileComponents();
-
-    search = TextEditingController();
+    _search = TextEditingController();
+    _selectVehicleProvider = Provider.of<SelectVehicleProvider>(context, listen: false);
+    _selectVehicleProvider.init(context: context);
     id = 0;
     vehicleCategoryId = 0;
     isSelect = false;
+
+    _search.addListener(() {
+      if(_search.text.isEmpty){
+        // No need to Search
+        _selectVehicleProvider.setFilteredList();
+        setState(() {});
+        return;
+      }
+      _selectVehicleProvider.filteredResult.result.clear();
+      for(final listData in _selectVehicleProvider.getRidesByUserIdResponse().result){
+          if (_selectVehicleProvider.stringContains(listData.vehicleCategory, _search.text)) {
+            _selectVehicleProvider.setData(listData);
+          }
+      }
+    });
+
   }
 
   @override
   void dispose() {
     super.dispose();
-    // _selectVehicleProvider.init(context: context);
-    // _selectVehicleProvider.isDataFetched = false;
-    // _selectVehicleProvider.notifyListeners();
-    //
-    // _selectVehicleProvider.dispose();
-    // _selectVehicleProvider.data = [];
-    // _selectVehicleProvider.notifyListeners();
-    //
-    // setState(() {
-    //   isSelect = false;
-    //   id = 0;
-    // });
-    // print('dispose called');
+    _selectVehicleProvider.setIsDataLoaded(isVehicleFetched: false);
   }
 
   @override
@@ -109,7 +111,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
                           horizontal: AppSizes.width * 0.05),
                       child: _selectVehicleComponents.getTextField(
                         leftIcon: Assets.searchIcon,
-                        textEditingController: search,
+                        textEditingController: _search,
                         hintText: "Search",
                       ),
                     ),
@@ -186,8 +188,9 @@ class _SelectVehicleState extends State<SelectVehicle> {
 
                     SizedBox(height: AppSizes.height * 0.02),
                     Expanded(
-                        child: _selectVehicleProvider.data.length > 0 ? ListView.builder(
-                            itemCount: _selectVehicleProvider.data.length,
+                        child: _selectVehicleProvider.getIsVehicleFetched() ?
+                        ListView.builder(
+                            itemCount: _selectVehicleProvider.getFilteredList().result.length,
                             itemBuilder: (context, index) {
                               return Container(
                                 child: Column(
@@ -196,44 +199,23 @@ class _SelectVehicleState extends State<SelectVehicle> {
                                       height: AppSizes.height * 0.01,
                                     ),
                                     _selectVehicleComponents.getVehicleDetail(
-                                      leftIcon: _selectVehicleProvider
-                                          .vehicleCategoryResponse.result[index]
-                                          .vehicleCategoryImage,
-                                      vehicleType: _selectVehicleProvider
-                                          .vehicleCategoryResponse.result[index]
-                                          .vehicleCategory,
-                                      vehicleDetail: _selectVehicleProvider
-                                          .vehicleCategoryResponse.result[index]
-                                          .vehicleType,
-                                      Category: _selectVehicleProvider
-                                          .vehicleCategoryResponse.result[index]
-                                          .vehicleType,
+                                      leftIcon: _selectVehicleProvider.getFilteredList().result[index].vehicleCategoryImage,
+                                      vehicleType: _selectVehicleProvider.getFilteredList().result[index].vehicleCategory,
+                                      vehicleDetail: _selectVehicleProvider.getFilteredList().result[index].vehicleType,
+                                      Category: _selectVehicleProvider.getFilteredList().result[index].vehicleType,
                                       onLoadDetail: () {
                                         setState(() {
                                           isSelect = true;
-                                          id = _selectVehicleProvider
-                                              .vehicleCategoryResponse
-                                              .result[index].vehicleCategoryId;
-                                          vehicleCategoryId =
-                                              _selectVehicleProvider
-                                                  .vehicleCategoryResponse
-                                                  .result[index]
-                                                  .vehicleCategoryId;
+                                          id = _selectVehicleProvider.getFilteredList().result[index].vehicleCategoryId;
+                                          vehicleCategoryId = _selectVehicleProvider.getFilteredList().result[index].vehicleCategoryId;
                                         });
-                                        //show button
                                       },
-                                      isSelect: id == _selectVehicleProvider
-                                          .vehicleCategoryResponse.result[index]
-                                          .vehicleCategoryId ? true : false,
+                                      isSelect: id == _selectVehicleProvider.getFilteredList().result[index].vehicleCategoryId ? true : false,
                                       onAlert: () {
                                         ApplicationToast.onDescriptionAlert(
                                           context: context,
-                                          description: _selectVehicleProvider
-                                              .vehicleCategoryResponse
-                                              .result[index].vehicleDescription,
+                                          description: _selectVehicleProvider.getFilteredList().result[index].vehicleDescription,
                                         );
-                                        // ApplicationToast.onDescriptionAlert(
-                                        //     context: context);
                                       },
                                     ),
                                     SizedBox(
@@ -313,7 +295,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
   }
 
   onNavigateNest() {
-    _selectVehicleProvider.data = [];
+    // _selectVehicleProvider.data = [];
     _selectVehicleProvider.notifyListeners();
     setState(() {
       isSelect = false;
@@ -328,17 +310,5 @@ class _SelectVehicleState extends State<SelectVehicle> {
         dropoffLocation: widget.DropoffLocation,
         VehicleTypeId: _getVehicleTypeId(),
         vehicleCategoryId: vehicleCategoryId);
-    // Navigator.push(
-    //     context,
-    //     SlideRightRoute(
-    //         page: AddLoad(
-    //             PickupLatitude: widget.PickupLatitude,
-    //             PickupLongitude: widget.PickupLongitude,
-    //             DropoffLatitude: widget.DropoffLatitude,
-    //             DropoffLongitude: widget.DropoffLongitude,
-    //             PickupLocation: widget.PickupLocation,
-    //             DropoffLocation: widget.DropoffLocation,
-    //             VehicleTypeId: _getVehicleTypeId(),
-    //             VehicleCategoryId: vehicleCategoryId)));
   }
 }

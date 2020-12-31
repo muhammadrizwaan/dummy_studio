@@ -12,7 +12,7 @@ import 'package:truckoom_shipper/screens/jobDetails/job_details.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/loader.dart';
-
+import 'package:date_time_format/date_time_format.dart';
 
 class Placed extends StatefulWidget {
   @override
@@ -54,7 +54,7 @@ class _PlacedState extends State<Placed> {
                 pickUpLocation: _placedProvider.tabbarResponse.result[index].pickupLocation,
                 destinationLocation: _placedProvider.tabbarResponse.result[index].dropoffLocation,
                 startDate: _placedProvider.tabbarResponse.result[index].pickupDateTime,
-                time: "",
+                time: _placedProvider.tabbarResponse.result[index].pickupDateTime,
                 status: _placedProvider.tabbarResponse.result[index].status,
                 vehicleType: _placedProvider.tabbarResponse.result[index].vehicleTypeName,
                 price: "${Strings.aed} ${_placedProvider.tabbarResponse.result[index].shipperCost.round()}",
@@ -75,7 +75,7 @@ class _PlacedState extends State<Placed> {
             child: Container(
                 height: AppSizes.height * 0.15,
                 // width: AppSizes.width,
-                child: CommonWidgets.onNullData(text: "No Placed Loads")
+                child: CommonWidgets.onNullData(text: Strings.noAvailableLoads)
             ),
           )
               :

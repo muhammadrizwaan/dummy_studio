@@ -69,35 +69,35 @@ class DriverDetailComponents {
           Divider(
             height: 10,
           ),
-          Container(
-            padding: EdgeInsets.all(AppSizes.width * 0.02),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Email',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontFamily: Assets.poppinsLight,
-                    color: AppColors.profileTextColor,
-                    // fontWeight: FontWeight.bold
-                  ),
-                ),
-                Text(
-                  email,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontFamily: Assets.poppinsLight,
-                    color: AppColors.profileTextColor,
-                    // fontWeight: FontWeight.bold
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Divider(
-            height: 10,
-          ),
+          // Container(
+          //   padding: EdgeInsets.all(AppSizes.width * 0.02),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       Text(
+          //         'Email',
+          //         style: TextStyle(
+          //           fontSize: 12,
+          //           fontFamily: Assets.poppinsLight,
+          //           color: AppColors.profileTextColor,
+          //           // fontWeight: FontWeight.bold
+          //         ),
+          //       ),
+          //       Text(
+          //         email,
+          //         style: TextStyle(
+          //           fontSize: 12,
+          //           fontFamily: Assets.poppinsLight,
+          //           color: AppColors.profileTextColor,
+          //           // fontWeight: FontWeight.bold
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          // Divider(
+          //   height: 10,
+          // ),
           Container(
             padding: EdgeInsets.all(AppSizes.width * 0.02),
             child: Row(
@@ -124,35 +124,35 @@ class DriverDetailComponents {
               ],
             ),
           ),
-          Divider(
-            height: 10,
-          ),
-          Container(
-            padding: EdgeInsets.all(AppSizes.width * 0.02),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'License Number',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontFamily: Assets.poppinsLight,
-                    color: AppColors.profileTextColor,
-                    // fontWeight: FontWeight.bold
-                  ),
-                ),
-                Text(
-                  License_number,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontFamily: Assets.poppinsLight,
-                    color: AppColors.profileTextColor,
-                    // fontWeight: FontWeight.bold
-                  ),
-                ),
-              ],
-            ),
-          ),
+          // Divider(
+          //   height: 10,
+          // ),
+          // Container(
+          //   padding: EdgeInsets.all(AppSizes.width * 0.02),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       Text(
+          //         'License Number',
+          //         style: TextStyle(
+          //           fontSize: 12,
+          //           fontFamily: Assets.poppinsLight,
+          //           color: AppColors.profileTextColor,
+          //           // fontWeight: FontWeight.bold
+          //         ),
+          //       ),
+          //       Text(
+          //         License_number,
+          //         style: TextStyle(
+          //           fontSize: 12,
+          //           fontFamily: Assets.poppinsLight,
+          //           color: AppColors.profileTextColor,
+          //           // fontWeight: FontWeight.bold
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     );

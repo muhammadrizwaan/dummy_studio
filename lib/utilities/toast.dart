@@ -40,6 +40,16 @@ class ApplicationToast {
       iosSubtitle: subHeading,
     );
   }
+  static getWarningToast({@required int durationTime, @required String heading, @required String subHeading}) async{
+    await FlutterToastAlert.showToastAndAlert(
+      toastDuration: durationTime,
+      toastShowIcon: true,
+      type: Type.Warning,
+      androidToast: subHeading,
+      iosTitle: heading,
+      iosSubtitle: subHeading,
+    );
+  }
 
   static Widget onDescriptionAlert(
       {@required BuildContext context, @required String description}) {

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/models/imagesModal.dart';
@@ -31,10 +32,12 @@ class BookLoadDetails extends StatefulWidget {
       numOfVehicle;
   int goodTypeId, vehicleTypeId, vehicleCategoryId;
   bool isRoundTrip;
-  DateTime pickUpDate;
-  double Rate;
+  String pickUpDate;
+  String Rate;
+  List<Asset> images;
 
   BookLoadDetails({@required this.name,
+    @required this.images,
     @required this.phone,
     @required this.weight,
     @required this.description,
@@ -50,7 +53,7 @@ class BookLoadDetails extends StatefulWidget {
     @required this.pickupLocation,
     @required this.dropoffLocation,
     @required this.goodTypeId,
-    @required this.vehicleTypeId});
+    @required this.vehicleTypeId,});
 
   @override
   _BookLoadDetailsState createState() => _BookLoadDetailsState();
@@ -157,7 +160,7 @@ class _BookLoadDetailsState extends State<BookLoadDetails> {
                       TextView.getLabelText04(Strings.pickupDateAndTime,
                           color: AppColors.colorBlack),
                       SizedBox(height: AppSizes.height * 0.001),
-                      TextView.getLabel2Text04(widget.pickUpDate.toString(),
+                      TextView.getLabel2Text04(widget.pickUpDate,
                           color: AppColors.colorBlack),
                       // TextView.getLabel2Text04("11 Aug, 12:00am",
                       //     color: AppColors.colorBlack),
@@ -197,30 +200,39 @@ class _BookLoadDetailsState extends State<BookLoadDetails> {
                           widget.description,
                           color: AppColors.colorBlack),
                       SizedBox(height: AppSizes.height * 0.02),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                              child: _bookLoadDetailComponents.getLoadImages(
-                                  images: Assets.vehicle_img)),
-                          Expanded(
-                              child: _bookLoadDetailComponents.getLoadImages(
-                                  images: Assets.vehicle_img)),
-                          Expanded(
-                              child: _bookLoadDetailComponents.getLoadImages(
-                                  images: Assets.vehicle_img)),
-                          Expanded(
-                              child: _bookLoadDetailComponents.getLoadImages(
-                                  images: Assets.vehicle_img)),
-                          Expanded(
-                              child: _bookLoadDetailComponents.getLoadImages(
-                                  images: Assets.vehicle_img)),
-                        ],
-                      ),
+                      widget.images.isNotEmpty?Container(
+                        height: AppSizes.height * 0.1,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: widget.images.length,
+                            itemBuilder: (context, index){
+                              Asset asset = widget.images[index];
+                              return Row(
+                                children: [
+                                  SizedBox(width: AppSizes.width * 0.01,),
+                                  Container(
+                                    height: AppSizes.height * 0.1,
+                                    width: AppSizes.width * 0.2,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    child: AssetThumb(
+                                      asset: asset,
+                                      width: 300,
+                                      height: 300,
+                                    ),
+                                  ),
+                                  SizedBox(width: AppSizes.width * 0.01,),
+                                ],
+                              );
+                            }),
+                      ):
+                      CommonWidgets.onNullData(text: "No Images"),
                       SizedBox(height: AppSizes.height * 0.03),
                       CommonWidgets.getBottomButton(
                           text: "Submit",
                           onPress: () {
+                            // _bookLoadDetailProvider.uploadmultipleimage(widget.images);
                             _bookLoadDetailProvider.onSaveLoad(context: context,
                               pickupLocation: widget.pickupLocation,
                               pickupLatitude: widget.pickupLatitude,

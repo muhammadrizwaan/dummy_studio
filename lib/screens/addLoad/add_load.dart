@@ -12,6 +12,7 @@ import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/addLoad/add_load_components.dart';
 import 'package:truckoom_shipper/screens/addLoad/add_load_provider.dart';
 import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_details.dart';
+import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/loader.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
@@ -59,21 +60,26 @@ class _AddLoadState extends State<AddLoad> {
   int _noOfVehicle = 1;
   String _selectedValue;
   DateTime pickedDate;
+  TimeOfDay pickedTime;
+  double tolalRate;
 
   @override
   void initState() {
     super.initState();
-    // _estimateRate();
     receiver_name = TextEditingController();
     receiver_phone = TextEditingController();
     weight = TextEditingController();
     num_of_vehicle = TextEditingController();
     description = TextEditingController();
+    num_of_vehicle.addListener(() {_estimateRate();});
     pickedDate = DateTime.now();
+    pickedTime = TimeOfDay.now();
+    tolalRate = widget.Rate;
     _addLoadComponents = AddLoadComponents();
     _addLoadProvider = Provider.of<AddLoadProvider>(context, listen: false);
     _addLoadProvider.init(context: context);
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +106,7 @@ class _AddLoadState extends State<AddLoad> {
                       child: ListView(
                         children: [
                           CommonWidgets.getWalletPriceBox(
-                              walletPrice: widget.Rate.toString(),
+                              walletPrice: tolalRate.toString(),
                           ),
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
@@ -128,6 +134,7 @@ class _AddLoadState extends State<AddLoad> {
                                                 setState(() {
                                                   isRounded = value;
                                                 });
+                                                _estimateRate();
                                               },
                                             ),
                                           ],
@@ -150,11 +157,8 @@ class _AddLoadState extends State<AddLoad> {
                                     onDate: () {
                                       _showDate();
                                     },
-                                    date:
-                                        "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}"),
-                                SizedBox(
-                                  height: AppSizes.height * 0.02,
-                                ),
+                                    date: "${pickedDate.day}/${pickedDate.month}/${pickedDate.year} ${pickedTime.hour}:${pickedTime.minute}"),
+                                SizedBox(height: AppSizes.height * 0.02,),
                                 CommonWidgets.getSubHeadingText(
                                     text: "Receiver Name"),
                                 SizedBox(height: AppSizes.height * 0.01),
@@ -270,7 +274,7 @@ class _AddLoadState extends State<AddLoad> {
                                       children: [
                                         GestureDetector(
                                           onTap: (){
-                                            // loadAssets();
+                                            loadAssets();
                                           },
                                           child: DottedBorder(
                                             color:
@@ -305,39 +309,37 @@ class _AddLoadState extends State<AddLoad> {
                                     )
                                   ],
                                 ),
-                                // images.isNotEmpty?Container(
-                                //   height: AppSizes.height * 0.1,
-                                //   child: Expanded(
-                                //     child: ListView.builder(
-                                //         scrollDirection: Axis.horizontal,
-                                //         itemCount: images.length,
-                                //         itemBuilder: (context, index){
-                                //           Asset asset = images[index];
-                                //           return Row(
-                                //             children: [
-                                //               SizedBox(width: AppSizes.width * 0.01,),
-                                //               Container(
-                                //                 height: AppSizes.height * 0.1,
-                                //                 width: AppSizes.width * 0.2,
-                                //                 decoration: BoxDecoration(
-                                //                   borderRadius: BorderRadius.circular(5),
-                                //                 ),
-                                //                 child: AssetThumb(
-                                //                   asset: asset,
-                                //                   width: 300,
-                                //                   height: 300,
-                                //                 ),
-                                //                 // child: Image(
-                                //                 //   image: AssetImage(asset),
-                                //                 //   fit: BoxFit.cover,
-                                //                 // ),
-                                //               ),
-                                //               SizedBox(width: AppSizes.width * 0.01,),
-                                //             ],
-                                //           );
-                                //         }),
-                                //   ),
-                                // ):
+                                images.isNotEmpty?Container(
+                                  height: AppSizes.height * 0.1,
+                                  child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: images.length,
+                                      itemBuilder: (context, index){
+                                        Asset asset = images[index];
+                                        return Row(
+                                          children: [
+                                            SizedBox(width: AppSizes.width * 0.01,),
+                                            Container(
+                                              height: AppSizes.height * 0.1,
+                                              width: AppSizes.width * 0.2,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(5),
+                                              ),
+                                              child: AssetThumb(
+                                                asset: asset,
+                                                width: 300,
+                                                height: 300,
+                                              ),
+                                              // child: Image(
+                                              //   image: AssetImage(asset),
+                                              //   fit: BoxFit.cover,
+                                              // ),
+                                            ),
+                                            SizedBox(width: AppSizes.width * 0.01,),
+                                          ],
+                                        );
+                                      }),
+                                ):
                                     Container(),
                                 // CommonWidgets.onNullData(text: "No Images"),
 
@@ -346,9 +348,10 @@ class _AddLoadState extends State<AddLoad> {
                                 CommonWidgets.getBottomButton(
                                     text: "Next",
                                     onPress: () {
+                                      // _addLoadProvider.onUploadImages(context: context, ImagesList: images);
                                       _addLoadProvider.onEstimatedRate(
                                           context: context,
-                                          pickupDateTime: pickedDate,
+                                          pickupDateTime: "${pickedDate.month}/${pickedDate.day}/${pickedDate.year} ${pickedTime.hour}:${pickedTime.minute}",
                                           name: receiver_name.text,
                                           phone: receiver_phone.text,
                                           goodTypeId: _getGoodTypeId(),
@@ -363,10 +366,12 @@ class _AddLoadState extends State<AddLoad> {
                                           pickupLocation: widget.PickupLocation,
                                           dropoffLocation: widget.DropoffLocation,
                                         vehicleCategoryId: widget.VehicleCategoryId,
-                                        vehicleTypeId: widget.VehicleTypeId
+                                        vehicleTypeId: widget.VehicleTypeId,
+                                        imagesList: images,
+                                        Rate: tolalRate.toString(),
                                       );
-                                      // Navigator.push(context, SlideRightRoute(page: BookLoadDetails()));
                                     }),
+                                SizedBox(height: AppSizes.height * 0.02)
                               ],
                             ),
                           )
@@ -402,8 +407,9 @@ class _AddLoadState extends State<AddLoad> {
     DateTime date = await showDatePicker(
       context: context,
       initialDate: pickedDate,
-      firstDate: DateTime(DateTime.now().year - 10),
+      firstDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
       lastDate: DateTime(DateTime.now().year + 10),
+
       builder: (BuildContext context, Widget child) {
         return Theme(
           data: ThemeData(
@@ -422,7 +428,48 @@ class _AddLoadState extends State<AddLoad> {
       setState(() {
         pickedDate = date;
       });
+      _showTime();
     }
+    else {
+      ApplicationToast.getWarningToast(
+          durationTime: 3,
+          heading: "Information",
+          subHeading:
+          "No Date has been selected, by default current date is filled above");
+    }
+  }
+
+  _showTime() async {
+    TimeOfDay time = await showTimePicker(
+      context: context,
+      initialTime: pickedTime,
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeData(
+            cursorColor: Colors.grey,
+            dialogBackgroundColor: Colors.white,
+            colorScheme: ColorScheme.light(primary: AppColors.yellow),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+            highlightColor: Colors.grey[400],
+            textSelectionColor: Colors.grey,
+          ),
+          child: child,
+        );
+      },
+    );
+
+    if(time!=null){
+      setState(() {
+        pickedTime = time;
+      });
+    }else{
+      ApplicationToast.getWarningToast(
+          durationTime: 3,
+          heading: "Information",
+          subHeading:
+          "No Time has been selected, by default current time is selected");
+    }
+
   }
 
 
@@ -432,13 +479,13 @@ class _AddLoadState extends State<AddLoad> {
 
     try {
       resultList = await MultiImagePicker.pickImages(
-        maxImages: 300,
+        maxImages: 5,
         enableCamera: true,
         selectedAssets: images,
         cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
         materialOptions: MaterialOptions(
           actionBarColor: "#abcdef",
-          actionBarTitle: "Example App",
+          actionBarTitle: "Truckoom",
           allViewTitle: "All Photos",
           useDetailsView: false,
           selectCircleStrokeColor: "#000000",
@@ -452,26 +499,40 @@ class _AddLoadState extends State<AddLoad> {
     // message was in flight, we want to discard the reply rather than calling
     // setState to update our non-existent appearance.
     if (!mounted) return;
-
     setState(() {
       images = resultList;
       _error = error;
     });
   }
 
-  String _estimateRate(){
+   _estimateRate(){
     double rate = widget.Rate;
-    int totalVehicles = int.parse(num_of_vehicle.text);
-    double tolalRate = rate;
-    if(isRounded && num_of_vehicle.text.isNotEmpty){
-      tolalRate = rate * totalVehicles * 1.5;
+
+    if(isRounded == false && num_of_vehicle.text.isEmpty){
+      setState(() {
+        tolalRate = double.parse(rate.toStringAsFixed(2));
+      });
+    }
+    else if(isRounded && num_of_vehicle.text.isEmpty){
+      double mul = rate * 1.5;
+      setState(() {
+        tolalRate = double.parse(mul.toStringAsFixed(2));
+      });
     }
     else if(isRounded == false && num_of_vehicle.text.isNotEmpty){
-      tolalRate = rate * totalVehicles;
+      int totalVehicles = int.parse(num_of_vehicle.text);
+      double mul = rate * totalVehicles;
+      setState(() {
+        tolalRate = double.parse(mul.toStringAsFixed(2));
+      });
     }
-    else if(isRounded == true && num_of_vehicle.text.isEmpty){
-      tolalRate = rate * 15;
+    else if(isRounded && num_of_vehicle.text.isNotEmpty){
+      double totalVehicles = double.parse(num_of_vehicle.text.toString().trim());
+      double mul = (rate * totalVehicles) * 1.5;
+      setState(() {
+        tolalRate =double.parse(mul.toStringAsFixed(2));
+      });
     }
-    return tolalRate.toString();
   }
 }
+

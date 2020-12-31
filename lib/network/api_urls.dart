@@ -34,3 +34,4 @@ const String getAcceptedLoadApi = "$baseUrl/api/Loads/GetMyAcceptedLoadsShipper?
 const String getInProcessLoadApi = "$baseUrl/api/Loads/GetMyInProcessLoadsShipper?userId={userId}";
 const String getDeliveredLoadApi = "$baseUrl/api/Loads/GetDeliveredLoads?userId={userId}";
 const String getCancelledLoadApi = "$baseUrl/api/Loads/GetMyCancelledLoadsShipper?userId={userId}";
+const String uploadLoadImages = "$baseUrl/api/Loads/UploadDriverLoadImages";

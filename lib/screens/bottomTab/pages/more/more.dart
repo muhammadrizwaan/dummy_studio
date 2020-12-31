@@ -110,7 +110,19 @@ class _MoreState extends State<More> {
 
   onLogout() async{
     Constants.setUserEmail("");
+    Constants.setCityId(0);
+    Constants.setCityName("");
     Constants.setPassword("");
+    Constants.setToken("");
+    Constants.setUser("");
+    Constants.setUserId(0);
+    Constants.setUserImage("");
+    Constants.setUserName("");
+    Constants.setUserPhone("");
+    Constants.setLicenseExpiryDate("");
+    Constants.setCommpanyTrn("");
+    Constants.setCommpanyPhone("");
+    Constants.setCommpanyName("");
     Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: Language()), (route) => false);
   }
 

@@ -24,24 +24,26 @@ class SelectVehicleProvider extends ChangeNotifier{
   String token;
   NetworkHelper _networkHelper = NetworkHelperImpl();
   VehicleTypeResponse _vehicleTypeResponse = VehicleTypeResponse.empty();
-  VehicleCategoryResponse vehicleCategoryResponse = VehicleCategoryResponse.empty();
+  VehicleCategoryResponse _vehicleCategoryResponse = VehicleCategoryResponse.empty();
+  VehicleCategoryResponse filteredResult = VehicleCategoryResponse.empty();
   CustomPopup _laoder = CustomPopup();
   GenericDecodeEncode _genericDecodeEncode = GenericDecodeEncode();
   EstimatedRateResponse _estimatedRateResponse = EstimatedRateResponse.empty();
   GetToken getToken = GetToken();
   List<String> description = List<String>();
-  List<dynamic> data = List<dynamic>();
+  // List<dynamic> data = List<dynamic>();
 
   bool isDataFetched;
-  bool isVehicleFetched = false;
+  bool _isVehicleFetched = false;
 
   init({@required BuildContext context}) async{
-    this.context = context;
     isDataFetched = false;
+    filteredResult =  VehicleCategoryResponse.empty();
     token = "";
-    data = [];
+    // data = [];
     description =[];
     await _getGoodTypesApi();
+    this.context = context;
   }
 
   Future _getGoodTypesApi() async{
@@ -106,11 +108,14 @@ class SelectVehicleProvider extends ChangeNotifier{
             }
         );
         if(response.statusCode == 200){
-          vehicleCategoryResponse = VehicleCategoryResponse.fromJson(_genericDecodeEncode.decodeJson(response.body));
-          if(vehicleCategoryResponse.code == 1){
+          _vehicleCategoryResponse = VehicleCategoryResponse.fromJson(_genericDecodeEncode.decodeJson(response.body));
+          if(_vehicleCategoryResponse.code == 1){
             _laoder.hideLoader(context);
-            data = vehicleCategoryResponse.result;
-            isVehicleFetched = true;
+            // data = _vehicleCategoryResponse.result;
+            for(final data in _vehicleCategoryResponse.result){
+              filteredResult.result.add(data);
+            }
+            _isVehicleFetched = true;
             notifyListeners();
           }
           else{
@@ -214,4 +219,41 @@ class SelectVehicleProvider extends ChangeNotifier{
       print(error.toString());
     }
   }
+
+  setFilteredList(){
+    filteredResult.result.clear();
+    for(final listData in _vehicleCategoryResponse.result){
+      filteredResult.result.add(listData);
+    }
+  }
+  VehicleCategoryResponse getRidesByUserIdResponse(){
+    return this._vehicleCategoryResponse;
+  }
+
+  bool stringContains (String searchIn, String searchFor) {
+    searchIn = searchIn?.toLowerCase ();
+    searchFor = searchFor?.toLowerCase ();
+    if (searchIn.contains (searchFor)) {
+      return true;
+    }
+    return false;
+  }
+
+  setData(listData){
+    filteredResult.result.add(listData);
+    notifyListeners();
+  }
+
+  setIsDataLoaded({bool isVehicleFetched}){
+    this._isVehicleFetched = isVehicleFetched;
+  }
+
+  VehicleCategoryResponse  getFilteredList(){
+    return this.filteredResult;
+  }
+
+  getIsVehicleFetched(){
+    return this._isVehicleFetched;
+  }
+
 }

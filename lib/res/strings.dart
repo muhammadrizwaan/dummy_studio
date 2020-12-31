@@ -62,6 +62,9 @@ class Strings {
   static const String licenseImagesKey = "LicenseImagesKey";
 
 
+  static const String noAvailableLoads = "No Available Loads";
+
+
   // Error Toast Text
   static const String error = "Error";
   static const String success = "Success";
@@ -72,6 +75,7 @@ class Strings {
   static const String checkBoxErrorText = "Please check the Term and Conditions";
   static const String somethingWentWrong = "Something went wrong";
   static const String nameErrorText = "Please enter valid Name";
+  static const String imagesErrorText = "Please upload images";
   static const String businessNameErrorText = "Please enter the Business Name";
   static const String authorizationErrorText = "Authorization has been denied for this request";
   static const String emailErrorText = "Email is empty or email is not in proper form";

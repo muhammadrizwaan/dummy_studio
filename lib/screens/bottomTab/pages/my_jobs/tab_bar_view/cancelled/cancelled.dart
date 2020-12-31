@@ -51,7 +51,7 @@ class _CancelledState extends State<Cancelled> {
                       pickUpLocation: _cancelledProvider.tabbarResponse.result[index].pickupLocation,
                       destinationLocation: _cancelledProvider.tabbarResponse.result[index].dropoffLocation,
                       startDate: _cancelledProvider.tabbarResponse.result[index].pickupDateTime,
-                      time: "",
+                      time: _cancelledProvider.tabbarResponse.result[index].pickupDateTime,
                       status: _cancelledProvider.tabbarResponse.result[index].status,
                       vehicleType: _cancelledProvider.tabbarResponse.result[index].vehicleTypeName,
                       price: "${Strings.aed} ${_cancelledProvider.tabbarResponse.result[index].shipperCost.round()}",
@@ -73,7 +73,7 @@ class _CancelledState extends State<Cancelled> {
             child: Container(
                 height: AppSizes.height * 0.15,
                 // width: AppSizes.width,
-                child: CommonWidgets.onNullData(text: "No Cancelled Loads")
+                child: CommonWidgets.onNullData(text: Strings.noAvailableLoads)
             ),
           )
           : Center(
