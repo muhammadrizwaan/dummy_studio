@@ -5,7 +5,7 @@
 class VehicleCategoryResponse {
   String _message;
   int _code;
-  List<Result> _result;
+  List<Result> _result = List<Result>();
 
   String get message => _message;
   int get code => _code;

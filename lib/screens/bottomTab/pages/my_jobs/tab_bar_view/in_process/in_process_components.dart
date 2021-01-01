@@ -1,3 +1,4 @@
+import 'package:date_time_format/date_time_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/octicons_icons.dart';
@@ -120,44 +121,42 @@ class InProcessComponents {
                     children: [
                       Container(
                         height: AppSizes.height * 0.043,
-                        child: Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                width: 6,
-                                height: 6,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    color: AppColors.yellow
-                                ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              width: 6,
+                              height: 6,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: AppColors.yellow
                               ),
-                              Container(
-                                width: 3,
-                                height: 3,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    color: AppColors.grey
-                                ),
+                            ),
+                            Container(
+                              width: 3,
+                              height: 3,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: AppColors.grey
                               ),
-                              Container(
-                                width: 3,
-                                height: 3,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    color: AppColors.grey
-                                ),
+                            ),
+                            Container(
+                              width: 3,
+                              height: 3,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: AppColors.grey
                               ),
-                              Container(
-                                width: 6,
-                                height: 6,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    color: AppColors.yellow
-                                ),
-                              )
-                            ],
-                          ),
+                            ),
+                            Container(
+                              width: 6,
+                              height: 6,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: AppColors.yellow
+                              ),
+                            )
+                          ],
                         ),
                       ),
                       SizedBox(
@@ -204,7 +203,7 @@ class InProcessComponents {
                         Row(
                           children: [
                             Text(
-                              startDate,
+                              DateTimeFormat.format(DateTime.parse(startDate), format: 'M j, Y'),
                               style: TextStyle(
                                 fontSize: 12,
                                 fontFamily: Assets.poppinsRegular,
@@ -216,7 +215,7 @@ class InProcessComponents {
                               width: 4,
                             ),
                             Text(
-                              time,
+                              DateTimeFormat.format(DateTime.parse(time), format: r'g:i a'),
                               style: TextStyle(
                                 fontSize: 12,
                                 fontFamily: Assets.poppinsRegular,

@@ -55,7 +55,7 @@ class _AcceptedState extends State<Accepted> {
                         pickUpLocation: _acceptedProvider.tabbarResponse.result[index].pickupLocation,
                         destinationLocation: _acceptedProvider.tabbarResponse.result[index].dropoffLocation,
                         startDate: _acceptedProvider.tabbarResponse.result[index].pickupDateTime,
-                        time: "",
+                        time: _acceptedProvider.tabbarResponse.result[index].pickupDateTime,
                         status: _acceptedProvider.tabbarResponse.result[index].status,
                         vehicleType: _acceptedProvider.tabbarResponse.result[index].vehicleTypeName,
                         price: "${Strings.aed} ${_acceptedProvider.tabbarResponse.result[index].shipperCost.round()}",
@@ -90,7 +90,7 @@ class _AcceptedState extends State<Accepted> {
                       height: AppSizes.height * 0.15,
                       // width: AppSizes.width,
                       child:
-                          CommonWidgets.onNullData(text: "No Accepted Loads")),
+                          CommonWidgets.onNullData(text: Strings.noAvailableLoads)),
                 )
           : 
           Center(

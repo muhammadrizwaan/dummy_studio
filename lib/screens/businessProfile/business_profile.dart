@@ -10,6 +10,7 @@ import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/businessEditProfile/business_edit_profile.dart';
 import 'package:truckoom_shipper/screens/businessProfile/business_profile_components.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 
 class BusinessProfile extends StatefulWidget {
   String tag;
@@ -86,14 +87,21 @@ class _BusinessProfileState extends State<BusinessProfile> {
                           SizedBox(
                             height: AppSizes.height * 0.01,
                           ),
-                          _businessProfileComponents
-                              .getBusinessInfoProfileContainer(
+                          _businessProfileComponents.getBusinessInfoProfileContainer(
                                   businessName: Constants.getCommpanyName(),
                                   phoneNumber: Constants.getCommpanyPhone(),
                                   trn: Constants.getCommpanyTrn(),
                                   licenseExpiryDate: "${DateTime.parse(Constants.getLicenseExpiryDate()).day.toString()}-${DateTime.parse(Constants.getLicenseExpiryDate()).month.toString()}-${DateTime.parse(Constants.getLicenseExpiryDate()).year.toString()}"
                           ),
-                          // Constants.getLicenseExpiryDate().split('T').first
+
+                          // Swiper(
+                          //   itemCount: 10,
+                          //   itemBuilder: (BuildContext context, int index){
+                          //     return RoundedBeatifulCard()
+                          //   },
+                          // ),
+
+
                           Center(
                             child: Image(
                               image: AssetImage(Assets.licenceImg),

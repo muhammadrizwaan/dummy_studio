@@ -1,6 +1,6 @@
 /// Message : "Operation performed Succesfully"
 /// Code : 1
-/// Result : {"InvoiceId":10022,"TransporterLogo":"","TransporterName":"Kohli Transporter","PickupLocation":"tyesgjkh","DropOffLocation":"jkhjkhkj","CompletedDate":"Dec  8 2020  5:27AM","Weight":"56","TotalPrice":6728052.25,"LoadStatus":"Delivered","ESignature":"/Files/Loads/100221b907cad177181b12cea64203dcb7623.jpg","Rating":0.0,"Remarks":""}
+/// Result : {"InvoiceId":10164,"TransporterLogo":"/Files/UserImages/Screenshot 2020-10-07 at 22.15.09.png","TransporterName":"babar","PickupLocation":"DHA phase 4","DropOffLocation":"Gulberg","CompletedDate":"Dec 28 2020  4:55AM","Weight":"55","TotalPrice":248439.91,"LoadStatus":[{"LoadStatusId":1,"Status":"Placed","Date":"Dec 28 2020  4:50AM"},{"LoadStatusId":2,"Status":"Assigned By Admin\n","Date":"Dec 28 2020  4:52AM"},{"LoadStatusId":3,"Status":"Accepted By Transporter","Date":"Dec 28 2020  4:52AM"},{"LoadStatusId":5,"Status":"Accepted By Shipper","Date":"Dec 28 2020  4:53AM"},{"LoadStatusId":8,"Status":"Loading","Date":"Dec 28 2020  4:54AM"},{"LoadStatusId":9,"Status":"On The Way","Date":"Dec 28 2020  4:54AM"},{"LoadStatusId":10,"Status":"Unloading","Date":"Dec 28 2020  4:55AM"},{"LoadStatusId":11,"Status":"Delivered","Date":"Dec 28 2020  4:55AM"}],"ESignature":"http://truckoom.jinnbytedev.com/Files/Loads/10164flutter_logo (1).png","Rating":0.0,"Remarks":""}
 
 class InvoiceDetailResponse {
   String _message;
@@ -19,7 +19,6 @@ class InvoiceDetailResponse {
 //     _code = code;
 //     _result = result;
 // }
-
   InvoiceDetailResponse.empty();
 
   InvoiceDetailResponse.fromJson(dynamic json) {
@@ -40,16 +39,16 @@ class InvoiceDetailResponse {
 
 }
 
-/// InvoiceId : 10022
-/// TransporterLogo : ""
-/// TransporterName : "Kohli Transporter"
-/// PickupLocation : "tyesgjkh"
-/// DropOffLocation : "jkhjkhkj"
-/// CompletedDate : "Dec  8 2020  5:27AM"
-/// Weight : "56"
-/// TotalPrice : 6728052.25
-/// LoadStatus : "Delivered"
-/// ESignature : "/Files/Loads/100221b907cad177181b12cea64203dcb7623.jpg"
+/// InvoiceId : 10164
+/// TransporterLogo : "/Files/UserImages/Screenshot 2020-10-07 at 22.15.09.png"
+/// TransporterName : "babar"
+/// PickupLocation : "DHA phase 4"
+/// DropOffLocation : "Gulberg"
+/// CompletedDate : "Dec 28 2020  4:55AM"
+/// Weight : "55"
+/// TotalPrice : 248439.91
+/// LoadStatus : [{"LoadStatusId":1,"Status":"Placed","Date":"Dec 28 2020  4:50AM"},{"LoadStatusId":2,"Status":"Assigned By Admin\n","Date":"Dec 28 2020  4:52AM"},{"LoadStatusId":3,"Status":"Accepted By Transporter","Date":"Dec 28 2020  4:52AM"},{"LoadStatusId":5,"Status":"Accepted By Shipper","Date":"Dec 28 2020  4:53AM"},{"LoadStatusId":8,"Status":"Loading","Date":"Dec 28 2020  4:54AM"},{"LoadStatusId":9,"Status":"On The Way","Date":"Dec 28 2020  4:54AM"},{"LoadStatusId":10,"Status":"Unloading","Date":"Dec 28 2020  4:55AM"},{"LoadStatusId":11,"Status":"Delivered","Date":"Dec 28 2020  4:55AM"}]
+/// ESignature : "http://truckoom.jinnbytedev.com/Files/Loads/10164flutter_logo (1).png"
 /// Rating : 0.0
 /// Remarks : ""
 
@@ -62,7 +61,7 @@ class Result {
   String _completedDate;
   String _weight;
   double _totalPrice;
-  String _loadStatus;
+  List<LoadStatus> _loadStatus;
   String _eSignature;
   double _rating;
   String _remarks;
@@ -75,7 +74,7 @@ class Result {
   String get completedDate => _completedDate;
   String get weight => _weight;
   double get totalPrice => _totalPrice;
-  String get loadStatus => _loadStatus;
+  List<LoadStatus> get loadStatus => _loadStatus;
   String get eSignature => _eSignature;
   double get rating => _rating;
   String get remarks => _remarks;
@@ -89,7 +88,7 @@ class Result {
       String completedDate, 
       String weight, 
       double totalPrice, 
-      String loadStatus, 
+      List<LoadStatus> loadStatus, 
       String eSignature, 
       double rating, 
       String remarks}){
@@ -116,7 +115,12 @@ class Result {
     _completedDate = json["CompletedDate"];
     _weight = json["Weight"];
     _totalPrice = json["TotalPrice"];
-    _loadStatus = json["LoadStatus"];
+    if (json["LoadStatus"] != null) {
+      _loadStatus = [];
+      json["LoadStatus"].forEach((v) {
+        _loadStatus.add(LoadStatus.fromJson(v));
+      });
+    }
     _eSignature = json["ESignature"];
     _rating = json["Rating"];
     _remarks = json["Remarks"];
@@ -132,10 +136,50 @@ class Result {
     map["CompletedDate"] = _completedDate;
     map["Weight"] = _weight;
     map["TotalPrice"] = _totalPrice;
-    map["LoadStatus"] = _loadStatus;
+    if (_loadStatus != null) {
+      map["LoadStatus"] = _loadStatus.map((v) => v.toJson()).toList();
+    }
     map["ESignature"] = _eSignature;
     map["Rating"] = _rating;
     map["Remarks"] = _remarks;
+    return map;
+  }
+
+}
+
+/// LoadStatusId : 1
+/// Status : "Placed"
+/// Date : "Dec 28 2020  4:50AM"
+
+class LoadStatus {
+  int _loadStatusId;
+  String _status;
+  String _date;
+
+  int get loadStatusId => _loadStatusId;
+  String get status => _status;
+  String get date => _date;
+
+  LoadStatus({
+      int loadStatusId, 
+      String status, 
+      String date}){
+    _loadStatusId = loadStatusId;
+    _status = status;
+    _date = date;
+}
+
+  LoadStatus.fromJson(dynamic json) {
+    _loadStatusId = json["LoadStatusId"];
+    _status = json["Status"];
+    _date = json["Date"];
+  }
+
+  Map<String, dynamic> toJson() {
+    var map = <String, dynamic>{};
+    map["LoadStatusId"] = _loadStatusId;
+    map["Status"] = _status;
+    map["Date"] = _date;
     return map;
   }
 

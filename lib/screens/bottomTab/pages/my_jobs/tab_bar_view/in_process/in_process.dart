@@ -53,7 +53,7 @@ class _InProcessState extends State<InProcess> {
                   pickUpLocation: _inProcessProvider.tabbarResponse.result[index].pickupLocation,
                   destinationLocation: _inProcessProvider.tabbarResponse.result[index].dropoffLocation,
                   startDate: _inProcessProvider.tabbarResponse.result[index].pickupDateTime,
-                  time: "",
+                  time:  _inProcessProvider.tabbarResponse.result[index].pickupDateTime,
                   status: _inProcessProvider.tabbarResponse.result[index].status,
                   vehicleType: _inProcessProvider.tabbarResponse.result[index].vehicleTypeName,
                   price: "${Strings.aed} ${_inProcessProvider.tabbarResponse.result[index].shipperCost.round()}",
@@ -77,7 +77,7 @@ class _InProcessState extends State<InProcess> {
             child: Container(
                 height: AppSizes.height * 0.15,
                 // width: AppSizes.width,
-                child: CommonWidgets.onNullData(text: "No Loads in Process")
+                child: CommonWidgets.onNullData(text: Strings.noAvailableLoads)
             ),
           )
               :

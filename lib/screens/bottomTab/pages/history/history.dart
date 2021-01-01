@@ -106,7 +106,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     child: Container(
                       height: AppSizes.height * 0.15,
                       // width: AppSizes.width,
-                      child: CommonWidgets.onNullData(text: "No History")
+                      child: CommonWidgets.onNullData(text: Strings.noAvailableLoads)
                     ),
                   )
                       :

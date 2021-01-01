@@ -18,70 +18,68 @@ class JobDetailsComponents {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: AppSizes.height * 0.099,
+                height: AppSizes.height * 0.0975,
                 padding: EdgeInsets.only(top: AppSizes.height * 0.0045),
-                child: Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: 8,
-                        height: 8,
-                        decoration: BoxDecoration(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: 8,
+                      height: 8,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: AppColors.yellow
+                      ),
+                    ),
+                    Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.grey
+                      ),
+                    ),
+                    Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.grey
+                      ),
+                    ),
+                    Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.grey
+                      ),
+                    ),
+                    Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.grey
+                      ),
+                    ),
+                    Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.grey
+                      ),
+                    ),
+                    Container(
+                      width: 8,
+                      height: 8,
+                      decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
                           color: AppColors.yellow
-                        ),
                       ),
-                      Container(
-                        width: 4,
-                        height: 4,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            color: AppColors.grey
-                        ),
-                      ),
-                      Container(
-                        width: 4,
-                        height: 4,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            color: AppColors.grey
-                        ),
-                      ),
-                      Container(
-                        width: 4,
-                        height: 4,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            color: AppColors.grey
-                        ),
-                      ),
-                      Container(
-                        width: 4,
-                        height: 4,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            color: AppColors.grey
-                        ),
-                      ),
-                      Container(
-                        width: 4,
-                        height: 4,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            color: AppColors.grey
-                        ),
-                      ),
-                      Container(
-                        width: 8,
-                        height: 8,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            color: AppColors.yellow
-                        ),
-                      )
-                    ],
-                  ),
+                    )
+                  ],
                 ),
               ),
               SizedBox(width: AppSizes.width * 0.03),

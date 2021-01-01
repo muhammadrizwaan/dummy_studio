@@ -23,16 +23,18 @@ class InvoiceDetailProvider extends ChangeNotifier{
   bool isDataFetched = false;
 
   var connectivityResult;
+  String loadingDate,onTheWayDate, unLoadingDate, deliveredDate;
   int userId;
   String token;
   init({@required BuildContext context, @required int Id}) async{
     this.context = context;
     connectivityResult = "";
     token = "";
-    await getDriverDetail(context: context, Id: Id);
+    loadingDate = onTheWayDate = unLoadingDate = deliveredDate = "";
+    await getInvoiceDetail(context: context, Id: Id);
   }
 
-  Future getDriverDetail({@required BuildContext context, @required int Id}) async{
+  Future getInvoiceDetail({@required BuildContext context, @required int Id}) async{
     try{
       token = await _getToken.onToken();
       connectivityResult = await Connectivity().checkConnectivity();
@@ -51,6 +53,22 @@ class InvoiceDetailProvider extends ChangeNotifier{
         if(response.statusCode == 200){
           invoiceDetailResponse = InvoiceDetailResponse.fromJson(_genericDecodeEncode.decodeJson(response.body));
           if(invoiceDetailResponse.code == 1){
+            if(invoiceDetailResponse.result.loadStatus.length > 0){
+            for(int i = 0; i < invoiceDetailResponse.result.loadStatus.length; i++){
+              if(invoiceDetailResponse.result.loadStatus[i].loadStatusId == 8){
+                loadingDate = invoiceDetailResponse.result.loadStatus[i].date;
+              }
+              if(invoiceDetailResponse.result.loadStatus[i].loadStatusId == 9){
+                onTheWayDate = invoiceDetailResponse.result.loadStatus[i].date;
+              }
+              if(invoiceDetailResponse.result.loadStatus[i].loadStatusId == 10){
+                unLoadingDate = invoiceDetailResponse.result.loadStatus[i].date;
+              }
+              if(invoiceDetailResponse.result.loadStatus[i].loadStatusId == 11){
+                deliveredDate = invoiceDetailResponse.result.loadStatus[i].date;
+              }
+            }
+            }
             print('Invoice detail api success');
             isDataFetched = true;
             notifyListeners();

@@ -104,18 +104,19 @@ class _InvoiceDetailState extends State<InvoiceDetail> {
                                             .result
                                             .totalPrice
                                             .toString()),
-                                    // _invoiceDetailComponents.getTotalContainer(),
-                                    _invoiceDetailComponents
-                                        .getInvoiceLable("Status"),
+                                    _invoiceDetailComponents.getInvoiceLable("Status"),
                                     _invoiceDetailComponents.getStatus(
-                                        status: _invoiceDetailProvider
-                                            .invoiceDetailResponse
-                                            .result
-                                            .loadStatus,
-                                        dateTime: _invoiceDetailProvider
-                                            .invoiceDetailResponse
-                                            .result
-                                            .completedDate),
+                                        status: "Loading",
+                                        dateTime: _invoiceDetailProvider.loadingDate),
+                                    _invoiceDetailComponents.getStatus(
+                                        status: "On the way",
+                                        dateTime: _invoiceDetailProvider.onTheWayDate),
+                                    _invoiceDetailComponents.getStatus(
+                                        status: "Unloading",
+                                        dateTime: _invoiceDetailProvider.unLoadingDate),
+                                    _invoiceDetailComponents.getStatusBold(
+                                        status: "Delivered",
+                                        dateTime: _invoiceDetailProvider.deliveredDate),
 
                                     _invoiceDetailComponents.getInvoiceLable("E-Signature"),
                                     _invoiceDetailProvider.invoiceDetailResponse.result.eSignature == null ?

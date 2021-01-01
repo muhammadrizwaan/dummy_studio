@@ -1,4 +1,10 @@
+import 'package:path/path.dart';
+import 'package:async/async.dart';
+import 'dart:io';
+import 'package:http/http.dart' as http;
+
 import 'package:connectivity/connectivity.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -36,25 +42,24 @@ class BookLoadDetailProvider extends ChangeNotifier {
     _bottomTabProvider = Provider.of<BottomTabProvider>(context, listen: false);
   }
 
-  Future onSaveLoad(
-      {@required BuildContext context,
-      @required String pickupLocation,
-      @required String pickupLatitude,
-      @required String pickupLongitude,
-      @required String dropoffLocation,
-      @required String dropoffLatitude,
-      @required String dropoffLongitude,
-      @required int vehicleTypeId,
-      @required int vehicleCategoryId,
-      @required DateTime pickupDateTime,
-      @required String receiverName,
-      @required String receiverPhone,
-      @required int goodTypeId,
-      @required String weight,
-      @required String noOfVehicles,
-      @required String description,
-      @required bool isRoundTrip,
-      }) async {
+  Future onSaveLoad({@required BuildContext context,
+    @required String pickupLocation,
+    @required String pickupLatitude,
+    @required String pickupLongitude,
+    @required String dropoffLocation,
+    @required String dropoffLatitude,
+    @required String dropoffLongitude,
+    @required int vehicleTypeId,
+    @required int vehicleCategoryId,
+    @required String pickupDateTime,
+    @required String receiverName,
+    @required String receiverPhone,
+    @required int goodTypeId,
+    @required String weight,
+    @required String noOfVehicles,
+    @required String description,
+    @required bool isRoundTrip,
+  }) async {
     try {
       token = await getToken.onToken();
       userId = await Constants.getUserId();
@@ -67,7 +72,7 @@ class BookLoadDetailProvider extends ChangeNotifier {
       } else {
         _loader.showLoader(context: context);
         http.Response response =
-            await _networkHelper.post(saveLoadApi, headers: {
+        await _networkHelper.post(saveLoadApi, headers: {
           "Content-Type": "application/json",
           'Authorization': token
         }, body: {
@@ -96,8 +101,10 @@ class BookLoadDetailProvider extends ChangeNotifier {
           if (_saveLoadResponse.code == 1) {
             _loader.hideLoader(context);
             print('Save Load Success');
-            Navigator.pushReplacement(context, SlideRightRoute(page: BottomTab()));
-            Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: BottomTab()), ModalRoute.withName(Routes.bookLoadDetails));
+            // Navigator.pushReplacement(context, SlideRightRoute(page: BottomTab()));
+            Navigator.pushAndRemoveUntil(
+                context, SlideRightRoute(page: BottomTab()),
+                ModalRoute.withName(Routes.bookLoadDetails));
           } else {
             _loader.hideLoader(context);
             ApplicationToast.getErrorToast(
@@ -117,4 +124,64 @@ class BookLoadDetailProvider extends ChangeNotifier {
       print(error.toString());
     }
   }
+
+
+  Future uploadmultipleimage(List images) async {
+
+
+    List<MultipartFile> newList = new List<MultipartFile>();
+
+    for (int i = 0; i < images.length; i++) {
+      File imageFile = File(images[i].toString());
+      var stream =
+      new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+      var length = await imageFile.length();
+      var multipartFile = new http.MultipartFile("imagefile", stream, length,
+          filename: basename(imageFile.path));
+      print('multipart File');
+      print(multipartFile);
+      // request.files.add(multipartFile);
+      // newList.add(multipartFile);
+    }
+
+  }
+
+//
+// Future uploadmultipleimage(List images) async {
+//   var uri = Uri.parse("");
+//
+//   http.MultipartRequest request = new http.MultipartRequest('POST', uri);
+//   request.headers[''] = '';
+//
+//   request.fields['user_id'] = '10';
+//   request.fields['post_details'] = 'dfsfdsfsd';
+//   //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
+//
+//   List<MultipartFile> newList = new List<MultipartFile>();
+//
+//   for (int i = 0; i < images.length; i++) {
+//     File imageFile = File(images[i].toString());
+//     var stream =
+//     new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+//     var length = await imageFile.length();
+//     var multipartFile = new http.MultipartFile("imagefile", stream, length,
+//         filename: basename(imageFile.path));
+//     request.files.add(multipartFile);
+//     // newList.add(multipartFile);
+//   }
+//
+//   // request.files.addAll(newList);
+//   var response = await request.send();
+//
+//   if (response.statusCode == 200) {
+//     print("Image Uploaded");
+//   } else {
+//     print("Upload Failed");
+//   }
+//   // response.stream.transform(utf8.decoder).listen((value) {
+//   //   print(value);
+//   // });
+// }
+
+
 }

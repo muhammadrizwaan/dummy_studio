@@ -41,8 +41,8 @@ class GetToken{
     double ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
     double currentTime = await (((ms / 1000) / 60).round()).toDouble();
     double time = currentTime - previousTime;
-    // print('time is ');
-    // print(time);
+    print('time is ');
+    print(time);
 
 
     if (time > 10.0) {
@@ -86,7 +86,8 @@ class GetToken{
     else{
       token = await Constants.getToken();
       print('Token not updated');
-      // return token;
+      print(token);
+
     }
     return token;
 

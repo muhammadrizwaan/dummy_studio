@@ -9,6 +9,7 @@ import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/businessInformation/business_information_components.dart';
 import 'package:truckoom_shipper/screens/businessInformation/business_information_provider.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
+import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:provider/provider.dart';
 import '../../animations/slide_right.dart';
@@ -153,7 +154,6 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           CommonWidgets.getBottomButton(
                               text: "Signup",
                               onPress: () {
-                                // _showDate();
                                 _businessInformationProvider
                                     .getBusinessInformation(
                                         context: context,
@@ -245,7 +245,9 @@ class _BusinessInformationState extends State<BusinessInformation> {
     DateTime date = await showDatePicker(
       context: context,
       initialDate: pickedDate,
-      firstDate: DateTime(DateTime.now().year - 10),
+      // firstDate: DateTime(DateTime.now().year - 10),
+      // lastDate: DateTime(DateTime.now().year + 10),
+      firstDate: DateTime(DateTime.now().day),
       lastDate: DateTime(DateTime.now().year + 10),
       builder: (BuildContext context, Widget child) {
         return Theme(
@@ -263,8 +265,17 @@ class _BusinessInformationState extends State<BusinessInformation> {
     );
     if (date != null) {
       setState(() {
+        print('datetime is');
+        print(date);
         pickedDate = date;
       });
+    }
+    else {
+      ApplicationToast.getWarningToast(
+          durationTime: 3,
+          heading: "Information",
+          subHeading:
+          "No Date has been selected, by default current date is filled above");
     }
   }
 
@@ -275,7 +286,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
 
     try {
       resultList = await MultiImagePicker.pickImages(
-        maxImages: 300,
+        maxImages: 10,
         enableCamera: true,
         selectedAssets: images,
         cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
@@ -295,6 +306,8 @@ class _BusinessInformationState extends State<BusinessInformation> {
     // message was in flight, we want to discard the reply rather than calling
     // setState to update our non-existent appearance.
     if (!mounted) return;
+    print('muliple images');
+    print(resultList[0]);
 
     setState(() {
       images = resultList;

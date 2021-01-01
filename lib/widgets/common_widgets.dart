@@ -44,9 +44,10 @@ class CommonWidgets {
           text,
           style: TextStyle(
             decoration: TextDecoration.none,
-            color: AppColors.profileTextColor,
-            fontSize: 12,
+            color: AppColors.yellow,
+            fontSize: 24,
             fontFamily: Assets.poppinsLight,
+            fontWeight: FontWeight.bold
           ),
         ),
       ),
