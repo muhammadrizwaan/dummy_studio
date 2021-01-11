@@ -3,6 +3,7 @@ import 'package:truckoom_shipper/screens/Splash/splash_provider.dart';
 import 'package:truckoom_shipper/screens/addLoad/add_load_provider.dart';
 import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_detail_provider.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab_provider.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/book_load/book_load_provider.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/history/history_provider.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/accepted/accepted_provider.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/cancelled/cancelled.dart';
@@ -184,6 +185,10 @@ final multiProviders = [
   ),
   ChangeNotifierProvider<SelectVehicleProvider>(
     create: (_) => SelectVehicleProvider(),
+    lazy: true,
+  ),
+  ChangeNotifierProvider<BookLoadProvider>(
+    create: (_) => BookLoadProvider(),
     lazy: true,
   ),
 ];

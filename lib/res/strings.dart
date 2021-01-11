@@ -89,4 +89,6 @@ class Strings {
   static const String weightErrorText = "Please enter weight";
   static const String noOfVehicleErrorText = "Please enter number of vehicle";
   static const String goodTypeErrorText = "Please select GoodType";
+  static const String pickupLocationErrorText = "Please select Pickup Location";
+  static const String dropoffLocationErrorText = "Please select Dropoff Location";
 }

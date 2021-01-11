@@ -56,7 +56,7 @@ class BusinessEditProfileProvider extends ChangeNotifier{
   Future onEditImage({@required BuildContext context}) async {
     print('select');
     int userId = await Constants.getUserId();
-    final image = await picker.getImage(source: ImageSource.gallery);
+    final image = await picker.getImage(source: ImageSource.gallery,);
     if (image != null) {
       print('image path');
       print(image.path);

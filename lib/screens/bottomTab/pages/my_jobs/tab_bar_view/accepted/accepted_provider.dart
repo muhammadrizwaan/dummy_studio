@@ -107,6 +107,8 @@ class AcceptedProvider extends ChangeNotifier {
         );
         if (response.statusCode == 200) {
           await getAcceptedLoad(context: context);
+          // tabbarResponse.result.add(value);
+          // replytile.removeWhere((item) => item.id == '001')
           print('deleted');
           ApplicationToast.getSuccessToast(durationTime: 3, heading: Strings.success, subHeading: "Operation performed Succesfully");
           isDataFetched = true;
