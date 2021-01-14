@@ -58,6 +58,7 @@ dependencies:
   geocoder: ^0.2.1
   flutter_google_places: ^0.2.6
   address_search_field: ^3.0.8
+  flutter_absolute_path: ^1.0.6
 
 
 

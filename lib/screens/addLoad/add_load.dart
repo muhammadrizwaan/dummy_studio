@@ -26,7 +26,7 @@ class AddLoad extends StatefulWidget {
       PickupLocation,
       DropoffLocation;
   int VehicleTypeId, VehicleCategoryId;
-  double Rate;
+  double Rate, multiplier;
 
   AddLoad(
       {
@@ -38,7 +38,8 @@ class AddLoad extends StatefulWidget {
       @required this.DropoffLocation,
       @required this.VehicleCategoryId,
       @required this.VehicleTypeId,
-        @required this.Rate
+        @required this.Rate,
+        @required this.multiplier,
       });
 
   @override
@@ -514,7 +515,10 @@ class _AddLoadState extends State<AddLoad> {
       });
     }
     else if(isRounded && num_of_vehicle.text.isEmpty){
-      double mul = rate * 1.5;
+      print("rate and multipler");
+      print(rate);
+      print(widget.multiplier);
+      double mul = rate * widget.multiplier;
       setState(() {
         tolalRate = double.parse(mul.toStringAsFixed(2));
       });
@@ -527,8 +531,8 @@ class _AddLoadState extends State<AddLoad> {
       });
     }
     else if(isRounded && num_of_vehicle.text.isNotEmpty){
-      double totalVehicles = double.parse(num_of_vehicle.text.toString().trim());
-      double mul = (rate * totalVehicles) * 1.5;
+      int totalVehicles = int.parse(num_of_vehicle.text);
+      double mul = (rate * totalVehicles) * widget.multiplier;
       setState(() {
         tolalRate =double.parse(mul.toStringAsFixed(2));
       });

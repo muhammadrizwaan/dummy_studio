@@ -93,7 +93,21 @@ class TextView {
       text,
       textAlign: textAlign,
       softWrap: true,
-      maxLines: 3,
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        fontSize: 14,
+        fontFamily: Assets.poppinsRegular,
+        color: color,
+      ),
+    );
+  }
+  static Text getLocationTextField(final text, {@required final color,  final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 1,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
         fontSize: 14,

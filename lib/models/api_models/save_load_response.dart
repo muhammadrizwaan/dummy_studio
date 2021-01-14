@@ -1,6 +1,6 @@
 /// Message : "Operation performed Succesfully"
 /// Code : 1
-/// Result : {"Message":"Load saved successfully"}
+/// Result : {"LoadId":10260}
 
 class SaveLoadResponse {
   String _message;
@@ -39,25 +39,25 @@ class SaveLoadResponse {
 
 }
 
-/// Message : "Load saved successfully"
+/// LoadId : 10260
 
 class Result {
-  String _message;
+  int _loadId;
 
-  String get message => _message;
+  int get loadId => _loadId;
 
   Result({
-      String message}){
-    _message = message;
+      int loadId}){
+    _loadId = loadId;
 }
 
   Result.fromJson(dynamic json) {
-    _message = json["Message"];
+    _loadId = json["LoadId"];
   }
 
   Map<String, dynamic> toJson() {
     var map = <String, dynamic>{};
-    map["Message"] = _message;
+    map["LoadId"] = _loadId;
     return map;
   }
 

@@ -82,6 +82,8 @@ class AppColors{
   static const shadowColor = Color.fromRGBO(0, 0, 0, 0.07);
 
 
+  static final yellowColorCode = "#FFB627";
+
   //Hex color code
   static final blueLight = "#2196F3";
   static final purpleLight = "#3F51B5";
@@ -89,6 +91,7 @@ class AppColors{
   static final colorWhite = "#ffebee";
   static final colorGreyLight = "#CFD8DC";
   static final colorGreyWhite = "#ECEFF1";
+
 
 
   //text Colors

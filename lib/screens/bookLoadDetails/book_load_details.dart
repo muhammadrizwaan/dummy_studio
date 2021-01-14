@@ -232,7 +232,6 @@ class _BookLoadDetailsState extends State<BookLoadDetails> {
                       CommonWidgets.getBottomButton(
                           text: "Submit",
                           onPress: () {
-                            // _bookLoadDetailProvider.uploadmultipleimage(widget.images);
                             _bookLoadDetailProvider.onSaveLoad(context: context,
                               pickupLocation: widget.pickupLocation,
                               pickupLatitude: widget.pickupLatitude,
@@ -250,6 +249,7 @@ class _BookLoadDetailsState extends State<BookLoadDetails> {
                               noOfVehicles: widget.numOfVehicle,
                               description: widget.description,
                               isRoundTrip: widget.isRoundTrip,
+                              images: widget.images
                             );
                           }),
                       SizedBox(height: AppSizes.height * 0.02)

@@ -31,7 +31,6 @@ class SelectVehicleProvider extends ChangeNotifier{
   EstimatedRateResponse _estimatedRateResponse = EstimatedRateResponse.empty();
   GetToken getToken = GetToken();
   List<String> description = List<String>();
-  // List<dynamic> data = List<dynamic>();
 
   bool isDataFetched;
   bool _isVehicleFetched = false;
@@ -121,7 +120,6 @@ class SelectVehicleProvider extends ChangeNotifier{
           else{
             ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: _vehicleTypeResponse.message);
           }
-
         }
         else{
           ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: Strings.somethingWentWrong);
@@ -199,6 +197,7 @@ class SelectVehicleProvider extends ChangeNotifier{
                       DropoffLocation: dropoffLocation,
                       VehicleTypeId: VehicleTypeId,
                       VehicleCategoryId: vehicleCategoryId,
+                        multiplier: _estimatedRateResponse.result.multiplier
                     )));
           } else {
             _laoder.hideLoader(context);

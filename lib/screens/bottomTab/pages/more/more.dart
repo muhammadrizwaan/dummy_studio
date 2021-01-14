@@ -123,6 +123,7 @@ class _MoreState extends State<More> {
     Constants.setCommpanyTrn("");
     Constants.setCommpanyPhone("");
     Constants.setCommpanyName("");
+    await Constants.setLicenseImages([]);
     Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: Language()), (route) => false);
   }
 

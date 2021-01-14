@@ -1,7 +1,10 @@
 
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/contsants/constants.dart';
@@ -98,13 +101,18 @@ class LoginProvider extends ChangeNotifier {
                 Constants.setCommpanyName(commonResponse.result.user.companyInformation[0].companyName);
                 Constants.setCommpanyPhone(commonResponse.result.user.companyInformation[0].contactNumber);
                 Constants.setCommpanyTrn(commonResponse.result.user.companyInformation[0].trn);
-                Constants.setLicenseExpiryDate(commonResponse.result.user.companyInformation[0].licenseExpiryDate);
+                Constants.setLicenseExpiryDate('${commonResponse.result.user.companyInformation[0].licenseExpiryDate}');
               }
+              print('images');
+              print(Constants.getLicenseImages().length);
+              print(commonResponse.result.user.userDocuments.length);
+              await Constants.setLicenseImages(commonResponse.result.user.userDocuments);
             }
             ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
             currentTime = await (((ms / 1000) / 60).round()).toDouble();
             PreferenceUtils.setDouble(Strings.tokenTime, currentTime);
             _loader.hideLoader(context);
+
             ApplicationToast.getLoginSignupToast(
               context: context,
               text: Strings.loginSuccessful,
@@ -112,6 +120,8 @@ class LoginProvider extends ChangeNotifier {
                 Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: BottomTab()), ModalRoute.withName(Routes.login));
               },
             );
+
+
           } else {
             _loader.hideLoader(context);
             ApplicationToast.getErrorToast(

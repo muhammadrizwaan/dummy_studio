@@ -87,9 +87,12 @@ class BookLoadComponents{
             SizedBox(
               width: 10,
             ),
-            TextView.getLabelText04(
-              text,
-              color: AppColors.colorBlack
+            Container(
+              width: AppSizes.width * 0.7,
+              child: TextView.getLocationTextField(
+                text,
+                color: AppColors.colorBlack
+              ),
             ),
           ],
         ),

@@ -1,6 +1,7 @@
 
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:flutter_absolute_path/flutter_absolute_path.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:connectivity/connectivity.dart';
@@ -13,6 +14,7 @@ import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
 import 'package:truckoom_shipper/models/api_models/cities_response.dart';
 import 'package:truckoom_shipper/models/api_models/edit_profile_response.dart';
+import 'package:truckoom_shipper/models/api_models/license_images_response.dart';
 import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/network/network_helper.dart';
 import 'package:truckoom_shipper/network/network_helper_impl.dart';
@@ -29,6 +31,7 @@ class BusinessEditProfileProvider extends ChangeNotifier{
   EditProfileResponse _editProfileResponse = EditProfileResponse.empty();
   CitiesResponse _citiesResponse = CitiesResponse.empty();
   GenericDecodeEncode genericDecodeEncode = GenericDecodeEncode();
+  LicenseImagesResponse _licenseImagesResponse = LicenseImagesResponse.empty();
   CustomPopup _loader = CustomPopup();
   GetToken _getToken = GetToken();
   List<String> description = List<String>();
@@ -285,6 +288,66 @@ class BusinessEditProfileProvider extends ChangeNotifier{
       print(error.toString());
     }
   }
+
+  Future onUploadLicenseImages({
+    @required BuildContext context,
+    @required List images,
+  }) async {
+
+    int userId = Constants.getUserId();
+    List<MultipartFile> multipart = List<MultipartFile>();
+    for (int i = 0; i < images.length; i++) {
+      var path = await FlutterAbsolutePath.getAbsolutePath(images[i].identifier);
+      multipart.add(await MultipartFile.fromFile(path, filename: path.split("/").last));
+    }
+
+    try {
+      if(images.isNotEmpty){
+        FormData formData = FormData.fromMap({
+          "Image": multipart,
+          "id": userId,
+        });
+        _loader.showLoader(context: context);
+        Response _response = await _dio.post(
+          uploadLicenseImages,
+          data: formData,
+          options: Options(
+            contentType: "multipart/form-data",
+            // headers: {'Authorization': ""}
+          ),
+        );
+        if (_response.statusCode == 200) {
+          _licenseImagesResponse = LicenseImagesResponse.fromJson(_response.data);
+          if (_licenseImagesResponse.code == 1) {
+
+
+            _loader.hideLoader(context);
+            await Constants.setLicenseImages(_licenseImagesResponse.result);
+            print('License Api success');
+            print(_licenseImagesResponse.result[0].filePath);
+            notifyListeners();
+          } else {
+            _loader.hideLoader(context);
+            ApplicationToast.getErrorToast(
+              durationTime: 3,
+              heading: Strings.error,
+              subHeading: _licenseImagesResponse.message,
+            );
+          }
+        } else {
+          _loader.hideLoader(context);
+          ApplicationToast.getErrorToast(
+              durationTime: 3,
+              heading: Strings.error,
+              subHeading: Strings.somethingWentWrong);
+        }
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+
   CitiesResponse getCitiesList(){
     return this._citiesResponse;
   }

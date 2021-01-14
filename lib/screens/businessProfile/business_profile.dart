@@ -1,9 +1,10 @@
+
+import 'package:date_time_format/date_time_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
-import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/contsants/constants.dart';
-import 'package:truckoom_shipper/res/assets.dart';
+import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
@@ -46,11 +47,13 @@ class _BusinessProfileState extends State<BusinessProfile> {
             children: [
               CommonWidgets.ProfileAppBar(
                   heading: Strings.profile,
-                  onTap: (){Navigator.pop(context);},
-                  onBellTap: (){
-                    Navigator.pushReplacement(context, SlideRightRoute(page: BusinessEditProfile()));
-                  }
-              ),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  onBellTap: () {
+                    Navigator.pushReplacement(
+                        context, SlideRightRoute(page: BusinessEditProfile()));
+                  }),
               Expanded(
                 child: ListView(
                   children: [
@@ -79,58 +82,48 @@ class _BusinessProfileState extends State<BusinessProfile> {
                                   email: Constants.getUserEmail(),
                                   password: Constants.getPassword(),
                                   country: Constants.getCityName()),
-                          SizedBox(
-                            height: AppSizes.height * 0.02,
-                          ),
+                          SizedBox(height: AppSizes.height * 0.02),
                           _businessProfileComponents.getProfileLable(
                               lableText: "Business Information"),
                           SizedBox(
                             height: AppSizes.height * 0.01,
                           ),
-                          _businessProfileComponents.getBusinessInfoProfileContainer(
-                                  businessName: Constants.getCommpanyName(),
-                                  phoneNumber: Constants.getCommpanyPhone(),
-                                  trn: Constants.getCommpanyTrn(),
-                                  licenseExpiryDate: "${DateTime.parse(Constants.getLicenseExpiryDate()).day.toString()}-${DateTime.parse(Constants.getLicenseExpiryDate()).month.toString()}-${DateTime.parse(Constants.getLicenseExpiryDate()).year.toString()}"
+                          _businessProfileComponents
+                              .getBusinessInfoProfileContainer(
+                            businessName: Constants.getCommpanyName(),
+                            phoneNumber: Constants.getCommpanyPhone(),
+                            trn: Constants.getCommpanyTrn(),
+                            licenseExpiryDate:
+                                Constants.getLicenseExpiryDate() == "" ? "":
+                                    DateTimeFormat.format(DateTime.parse(Constants.getLicenseExpiryDate()), format: 'M j, Y'),
                           ),
-
-                          // Swiper(
-                          //   itemCount: 10,
-                          //   itemBuilder: (BuildContext context, int index){
-                          //     return RoundedBeatifulCard()
-                          //   },
-                          // ),
-
-
-                          Center(
-                            child: Image(
-                              image: AssetImage(Assets.licenceImg),
-                              width: 400,
-                              height: 200,
+                          SizedBox(height: AppSizes.height * 0.03),
+                          Constants.getLicenseImages().length > 0 ?
+                          new Swiper(
+                            itemCount: Constants.getLicenseImages().length,
+                            itemBuilder: (BuildContext context, int index,) {
+                              return Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    // color: Colors.amber,
+                                    image: DecorationImage(
+                                        image: NetworkImage("$baseUrl${(Constants.getLicenseImages()[index]["FilePath"])}"),
+                                        fit: BoxFit.cover),
+                                ),
+                              );
+                            },
+                            layout: SwiperLayout.TINDER,
+                            itemWidth: AppSizes.width * 0.8,
+                            itemHeight: AppSizes.height * 0.25,
+                            pagination: new SwiperPagination(
+                                margin: new EdgeInsets.only(top: AppSizes.height * 0.27),
+                                builder: new DotSwiperPaginationBuilder(
+                                  color: AppColors.grey,
+                                  activeColor: AppColors.yellow,
+                                ),
                             ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: AppColors.yellow
-                                ),
-                                height: 10,
-                                width: 10,
-                              ),
-                              SizedBox(width: 8),
-                              Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: AppColors.grey
-                                ),
-                                height: 10,
-                                width: 10,
-                              )
-                            ],
-                          )
+                          ):
+                              CommonWidgets.onNullData(text: "No Images")
                         ],
                       ),
                     )
