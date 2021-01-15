@@ -173,7 +173,7 @@ class _BookLoadState extends State<BookLoad> {
                         Container(
                           height: AppSizes.height * 0.07,
                           margin: EdgeInsets.only(
-                              bottom: AppSizes.width * 0.03,
+                              // bottom: AppSizes.width * 0.03,
                               left: AppSizes.width * 0.05,
                               right: AppSizes.width * 0.05),
                           decoration: BoxDecoration(

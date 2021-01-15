@@ -400,7 +400,7 @@ class CommonWidgets {
               width: AppSizes.width * 0.65,
               // height: AppSizes.height * 0.05,
               child: TextField(
-                keyboardType: TextInputType.number,
+                keyboardType: TextInputType.phone,
                 style: TextStyle(
                   decoration: TextDecoration.none,
                   fontFamily: Assets.poppinsLight,

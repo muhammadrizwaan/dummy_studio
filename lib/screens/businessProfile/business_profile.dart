@@ -99,28 +99,31 @@ class _BusinessProfileState extends State<BusinessProfile> {
                           ),
                           SizedBox(height: AppSizes.height * 0.03),
                           Constants.getLicenseImages().length > 0 ?
-                          new Swiper(
-                            itemCount: Constants.getLicenseImages().length,
-                            itemBuilder: (BuildContext context, int index,) {
-                              return Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
+                          Container(
+                            height: AppSizes.height * 0.25,
+                            child: new Swiper(
+                              itemCount: Constants.getLicenseImages().length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
                                     // color: Colors.amber,
                                     image: DecorationImage(
-                                        image: NetworkImage("$baseUrl${(Constants.getLicenseImages()[index]["FilePath"])}"),
+                                        image: NetworkImage(baseUrl+(Constants.getLicenseImages()[index]["FilePath"])),
                                         fit: BoxFit.cover),
-                                ),
-                              );
-                            },
-                            layout: SwiperLayout.TINDER,
-                            itemWidth: AppSizes.width * 0.8,
-                            itemHeight: AppSizes.height * 0.25,
-                            pagination: new SwiperPagination(
-                                margin: new EdgeInsets.only(top: AppSizes.height * 0.27),
+                                  ),
+                                );
+                              },
+                              layout: SwiperLayout.DEFAULT,
+                              viewportFraction: 0.8,
+                              // itemHeight: AppSizes.height * 0.1,
+                              scale: 0.9,
+                              pagination: new SwiperPagination(
                                 builder: new DotSwiperPaginationBuilder(
                                   color: AppColors.grey,
                                   activeColor: AppColors.yellow,
                                 ),
+                              ),
                             ),
                           ):
                               CommonWidgets.onNullData(text: "No Images")

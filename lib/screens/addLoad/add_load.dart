@@ -482,28 +482,28 @@ class _AddLoadState extends State<AddLoad> {
       resultList = await MultiImagePicker.pickImages(
         maxImages: 5,
         enableCamera: true,
-        selectedAssets: images,
+        selectedAssets: resultList,
         cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
         materialOptions: MaterialOptions(
-          actionBarColor: "#abcdef",
-          actionBarTitle: "Truckoom",
+          actionBarColor: AppColors.yellowColorCode,
+          actionBarTitle: "Gallery",
           allViewTitle: "All Photos",
           useDetailsView: false,
-          selectCircleStrokeColor: "#000000",
+          selectCircleStrokeColor: AppColors.yellowColorCode,
         ),
       );
     } on Exception catch (e) {
       error = e.toString();
     }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-    setState(() {
-      images = resultList;
-      _error = error;
-    });
+    if(!mounted){
+      return;
+    }
+    else if(resultList.isNotEmpty){
+      setState(() {
+        images = resultList;
+        _error = error;
+      });
+    }
   }
 
    _estimateRate(){
@@ -515,9 +515,6 @@ class _AddLoadState extends State<AddLoad> {
       });
     }
     else if(isRounded && num_of_vehicle.text.isEmpty){
-      print("rate and multipler");
-      print(rate);
-      print(widget.multiplier);
       double mul = rate * widget.multiplier;
       setState(() {
         tolalRate = double.parse(mul.toStringAsFixed(2));

@@ -149,31 +149,35 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           }),
                           SizedBox(height: AppSizes.height * 0.02),
                           Constants.getLicenseImages().length > 0 ?
-                          new Swiper(
-                            itemCount: Constants.getLicenseImages().length,
-                            itemBuilder: (BuildContext context, int index,) {
-                              return Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  // color: Colors.amber,
-                                  image: DecorationImage(
-                                      image: NetworkImage("$baseUrl${(Constants.getLicenseImages()[index]["FilePath"])}"),
-                                      fit: BoxFit.cover),
+                          Container(
+                            height: AppSizes.height * 0.25,
+                            child: new Swiper(
+                              itemCount: Constants.getLicenseImages().length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    // color: Colors.amber,
+                                    image: DecorationImage(
+                                        image: NetworkImage(baseUrl+(Constants.getLicenseImages()[index]["FilePath"])),
+                                        fit: BoxFit.cover),
+                                  ),
+                                );
+                              },
+                              layout: SwiperLayout.DEFAULT,
+                              viewportFraction: 0.8,
+                              // itemHeight: AppSizes.height * 0.1,
+                              scale: 0.9,
+                              pagination: new SwiperPagination(
+                                builder: new DotSwiperPaginationBuilder(
+                                  color: AppColors.grey,
+                                  activeColor: AppColors.yellow,
                                 ),
-                              );
-                            },
-                            layout: SwiperLayout.TINDER,
-                            itemWidth: AppSizes.width * 0.8,
-                            itemHeight: AppSizes.height * 0.25,
-                            pagination: new SwiperPagination(
-                              margin: new EdgeInsets.only(top: AppSizes.height * 0.27),
-                              builder: new DotSwiperPaginationBuilder(
-                                color: AppColors.grey,
-                                activeColor: AppColors.yellow,
                               ),
                             ),
                           ):
                           Container(),
+                          SizedBox(height: AppSizes.height * 0.02),
                           _getTermsAndCondition(),
                           SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getBottomButton(
