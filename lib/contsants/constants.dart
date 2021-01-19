@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 
@@ -19,6 +21,7 @@ class Constants{
   static String cityName;
   static int cityId;
   static String user;
+  static List licenseImages;
 
   static int getUserId(){
     userId = PreferenceUtils.getInt(Strings.userIdKey);
@@ -81,6 +84,17 @@ class Constants{
     user = PreferenceUtils.getString(Strings.userTypeKey);
     return user;
   }
+  static List getLicenseImages(){
+    String temp = PreferenceUtils.getString(Strings.licenseImagesKey);
+    if(temp.isNotEmpty){
+      return licenseImages = json.decode(PreferenceUtils.getString(Strings.licenseImagesKey));
+    }
+    else{
+      return licenseImages = [];
+    }
+
+    // return licenseImages;
+  }
 
 
 
@@ -128,6 +142,15 @@ class Constants{
   }
   static setUser(String Type){
     PreferenceUtils.setString(Strings.userTypeKey, Type);
+  }
+  static setLicenseImages(List licenseImages){
+    if(licenseImages.isNotEmpty) {
+      PreferenceUtils.setString(
+          Strings.licenseImagesKey, json.encode(licenseImages));
+    }
+    else{
+      PreferenceUtils.setString(Strings.licenseImagesKey, "");
+    }
   }
 
  }

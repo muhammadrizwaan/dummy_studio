@@ -142,7 +142,7 @@ class _MyJobsState extends State<MyJobs> {
                         borderRadius: BorderRadius.circular(05),
                       ),
                       child: Tab(
-                        child: Text("Cancelled",),
+                        child: Text("Canceled",),
                       ),
                     ),
                   ],

@@ -82,7 +82,7 @@ class _ForgotPassowrdState extends State<ForgotPassowrd> {
                           CommonWidgets.getBottomButton(
                               text: "Submit",
                               onPress: () {
-                                _forgotPasswordProvider.getForgotPassword(
+                                _forgotPasswordProvider.onForgotPassword(
                                     context: context, email: email.text);
                                 // Navigator.push(context, SlideRightRoute(page: Login()));
                               }),

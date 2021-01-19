@@ -1,6 +1,7 @@
 import 'package:path/path.dart';
 import 'package:async/async.dart';
 import 'dart:io';
+import 'package:flutter_absolute_path/flutter_absolute_path.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:connectivity/connectivity.dart';
@@ -12,6 +13,7 @@ import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/get_token.dart';
 import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
+import 'package:truckoom_shipper/models/api_models/load_images_response.dart';
 import 'package:truckoom_shipper/models/api_models/save_load_response.dart';
 import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/network/network_helper.dart';
@@ -31,10 +33,12 @@ class BookLoadDetailProvider extends ChangeNotifier {
   String token;
   NetworkHelper _networkHelper = NetworkHelperImpl();
   SaveLoadResponse _saveLoadResponse = SaveLoadResponse.empty();
+  LoadImagesResponse _loadImagesResponse = LoadImagesResponse.empty();
   CustomPopup _loader = CustomPopup();
   GenericDecodeEncode _genericDecodeEncode = GenericDecodeEncode();
-  GetToken getToken = GetToken();
+  GetToken _getToken = GetToken();
   BottomTabProvider _bottomTabProvider;
+  Dio _dio = Dio();
 
   init({@required BuildContext context}) async {
     this.context = context;
@@ -59,9 +63,10 @@ class BookLoadDetailProvider extends ChangeNotifier {
     @required String noOfVehicles,
     @required String description,
     @required bool isRoundTrip,
+    @ required List images
   }) async {
     try {
-      token = await getToken.onToken();
+      token = await _getToken.onToken();
       userId = await Constants.getUserId();
       connectivityResult = Connectivity().checkConnectivity();
       if (connectivityResult == ConnectivityResult.none) {
@@ -99,12 +104,14 @@ class BookLoadDetailProvider extends ChangeNotifier {
           _saveLoadResponse = SaveLoadResponse.fromJson(
               _genericDecodeEncode.decodeJson(response.body));
           if (_saveLoadResponse.code == 1) {
-            _loader.hideLoader(context);
             print('Save Load Success');
-            // Navigator.pushReplacement(context, SlideRightRoute(page: BottomTab()));
-            Navigator.pushAndRemoveUntil(
-                context, SlideRightRoute(page: BottomTab()),
-                ModalRoute.withName(Routes.bookLoadDetails));
+
+            await onUploadLoadImages(
+                context: context,
+                images: images,
+                loadId: _saveLoadResponse.result.loadId,
+                userId: userId,
+            );
           } else {
             _loader.hideLoader(context);
             ApplicationToast.getErrorToast(
@@ -126,62 +133,60 @@ class BookLoadDetailProvider extends ChangeNotifier {
   }
 
 
-  Future uploadmultipleimage(List images) async {
-
-
-    List<MultipartFile> newList = new List<MultipartFile>();
+  Future onUploadLoadImages({
+    @required BuildContext context,
+    @required List images,
+    @required int loadId,
+    @required int userId,
+  }) async {
+    List<MultipartFile> multipart = List<MultipartFile>();
 
     for (int i = 0; i < images.length; i++) {
-      File imageFile = File(images[i].toString());
-      var stream =
-      new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
-      var length = await imageFile.length();
-      var multipartFile = new http.MultipartFile("imagefile", stream, length,
-          filename: basename(imageFile.path));
-      print('multipart File');
-      print(multipartFile);
-      // request.files.add(multipartFile);
-      // newList.add(multipartFile);
+      var path = await FlutterAbsolutePath.getAbsolutePath(images[i].identifier);
+      multipart.add(await MultipartFile.fromFile(
+          path, filename: path.split("/").last));
     }
 
+      try {
+        token = await _getToken.onToken();
+        FormData formData = FormData.fromMap({
+          "Attachment": multipart,
+          "loadId": loadId,
+          "userId": userId,
+        });
+        Response _response = await _dio.post(
+          uploadLoadImages,
+          data: formData,
+          options: Options(
+              contentType: "multipart/form-data",
+              headers: {'Authorization': token}),
+        );
+        if (_response.statusCode == 200) {
+          _loadImagesResponse = LoadImagesResponse.fromJson(_response.data);
+          if (_loadImagesResponse.code == 1) {
+            _loader.hideLoader(context);
+            print('Images Api success');
+            print(_loadImagesResponse.result[0].filePath);
+            Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: BottomTab()), ModalRoute.withName(Routes.bookLoadDetails));
+          } else {
+            _loader.hideLoader(context);
+            ApplicationToast.getErrorToast(
+              durationTime: 3,
+              heading: Strings.error,
+              subHeading: _loadImagesResponse.message,
+            );
+          }
+        } else {
+          _loader.hideLoader(context);
+          ApplicationToast.getErrorToast(
+              durationTime: 3,
+              heading: Strings.error,
+              subHeading: Strings.somethingWentWrong);
+        }
+      } catch (error) {
+        print(error.toString());
+      }
+    }
   }
 
-//
-// Future uploadmultipleimage(List images) async {
-//   var uri = Uri.parse("");
-//
-//   http.MultipartRequest request = new http.MultipartRequest('POST', uri);
-//   request.headers[''] = '';
-//
-//   request.fields['user_id'] = '10';
-//   request.fields['post_details'] = 'dfsfdsfsd';
-//   //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
-//
-//   List<MultipartFile> newList = new List<MultipartFile>();
-//
-//   for (int i = 0; i < images.length; i++) {
-//     File imageFile = File(images[i].toString());
-//     var stream =
-//     new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
-//     var length = await imageFile.length();
-//     var multipartFile = new http.MultipartFile("imagefile", stream, length,
-//         filename: basename(imageFile.path));
-//     request.files.add(multipartFile);
-//     // newList.add(multipartFile);
-//   }
-//
-//   // request.files.addAll(newList);
-//   var response = await request.send();
-//
-//   if (response.statusCode == 200) {
-//     print("Image Uploaded");
-//   } else {
-//     print("Upload Failed");
-//   }
-//   // response.stream.transform(utf8.decoder).listen((value) {
-//   //   print(value);
-//   // });
-// }
 
-
-}

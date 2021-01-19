@@ -75,7 +75,6 @@ class _SelectVehicleState extends State<SelectVehicle> {
           }
       }
     });
-
   }
 
   @override

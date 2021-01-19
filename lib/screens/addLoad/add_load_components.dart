@@ -296,7 +296,7 @@ class AddLoadComponents {
                 fontSize: 12,
                 color: AppColors.colorBlack,
               ),
-              keyboardType: TextInputType.number,
+              keyboardType: TextInputType.phone,
               controller: textEditingController,
               // readOnly: true,
               decoration: InputDecoration(

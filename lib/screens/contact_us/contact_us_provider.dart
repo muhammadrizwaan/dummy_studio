@@ -39,6 +39,7 @@ class ContactUsProvider extends ChangeNotifier {
     @required String name,
     @required String message}) async {
     try {
+      int userId = await Constants.getUserId();
       email = await Constants.getUserEmail();
       connectivity = await Connectivity().checkConnectivity();
       if (connectivity == ConnectivityResult.none) {
@@ -65,7 +66,8 @@ class ContactUsProvider extends ChangeNotifier {
         }, body: {
           "Subject": name,
           "Email": email,
-          "Message": message
+          "Message": message,
+          "CreatedBy": userId
         });
         if (response.statusCode == 200) {
           contactUsResponse = ContactUsResponse.fromJson(

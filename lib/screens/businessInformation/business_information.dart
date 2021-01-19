@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:fluttericon/entypo_icons.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
+import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
@@ -29,8 +32,6 @@ class _BusinessInformationState extends State<BusinessInformation> {
   BusinessInformationProvider _businessInformationProvider;
   TextEditingController business_name, contact_number, trn;
   List<Asset> images = List<Asset>();
-  String _error = 'No Error Dectected';
-
   bool onCheck = false;
   DateTime pickedDate;
 
@@ -105,7 +106,6 @@ class _BusinessInformationState extends State<BusinessInformation> {
                                   .getBusinessSignupStep()
                             ],
                           ),
-                          // CommonWidgets.getHeading1Text(text: 'Signup'),
                           SizedBox(height: AppSizes.height * 0.04),
                           CommonWidgets.getSubHeadingText(
                               text: "Business Name"),
@@ -146,8 +146,37 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           _businessInformationComponents.getImagePicker(
                               onPress: () {
                                 loadAssets();
-                            // Navigator.push(context, SlideRightRoute(page: OTPAuthentication()));
                           }),
+                          SizedBox(height: AppSizes.height * 0.02),
+                          Constants.getLicenseImages().length > 0 ?
+                          Container(
+                            height: AppSizes.height * 0.25,
+                            child: new Swiper(
+                              itemCount: Constants.getLicenseImages().length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    // color: Colors.amber,
+                                    image: DecorationImage(
+                                        image: NetworkImage(baseUrl+(Constants.getLicenseImages()[index]["FilePath"])),
+                                        fit: BoxFit.cover),
+                                  ),
+                                );
+                              },
+                              layout: SwiperLayout.DEFAULT,
+                              viewportFraction: 0.8,
+                              // itemHeight: AppSizes.height * 0.1,
+                              scale: 0.9,
+                              pagination: new SwiperPagination(
+                                builder: new DotSwiperPaginationBuilder(
+                                  color: AppColors.grey,
+                                  activeColor: AppColors.yellow,
+                                ),
+                              ),
+                            ),
+                          ):
+                          Container(),
                           SizedBox(height: AppSizes.height * 0.02),
                           _getTermsAndCondition(),
                           SizedBox(height: AppSizes.height * 0.01),
@@ -162,9 +191,8 @@ class _BusinessInformationState extends State<BusinessInformation> {
                                         trn: trn.text,
                                         licenseExpiryDate: pickedDate,
                                         userId: widget.userId,
-                                        onCheck: onCheck);
-                                // _businessInformationProvider.getImage(
-                                //     context: context);
+                                        onCheck: onCheck,
+                                );
                               }),
                           SizedBox(height: AppSizes.height * 0.02),
                         ],
@@ -281,38 +309,33 @@ class _BusinessInformationState extends State<BusinessInformation> {
 
 
   Future<void> loadAssets() async {
-    List<Asset> resultList = List<Asset>();
-    String error = 'No Error Dectected';
 
     try {
-      resultList = await MultiImagePicker.pickImages(
-        maxImages: 10,
+      images = [];
+      images = await MultiImagePicker.pickImages(
+        maxImages: 2,
         enableCamera: true,
         selectedAssets: images,
         cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
         materialOptions: MaterialOptions(
-          actionBarColor: "#abcdef",
-          actionBarTitle: "Example App",
+          actionBarColor: AppColors.yellowColorCode,
+          actionBarTitle: "Gallery",
           allViewTitle: "All Photos",
           useDetailsView: false,
-          selectCircleStrokeColor: "#000000",
+          selectCircleStrokeColor: AppColors.yellowColorCode,
         ),
       );
     } on Exception catch (e) {
-      error = e.toString();
+      print(e.toString());
     }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-    print('muliple images');
-    print(resultList[0]);
-
-    setState(() {
-      images = resultList;
-      _error = error;
-    });
+    if(!mounted){
+      // return;
+      images = [];
+    }
+    else {
+      _businessInformationProvider.onUploadLicenseImages(
+          context: context, images: images, userId: widget.userId);
+    }
   }
 
 }

@@ -159,42 +159,6 @@ class DispatchComponents{
                       ),
                     ],
                   ),
-                  // Row(
-                  //   children: [
-                  //     Image(
-                  //       image: AssetImage(Assets.df_pk_job),
-                  //     ),
-                  //     SizedBox(
-                  //       width: AppSizes.width * 0.01,
-                  //     ),
-                  //     Column(
-                  //       crossAxisAlignment: CrossAxisAlignment.start,
-                  //       children: [
-                  //         Text(
-                  //           pickUpLocation,
-                  //           style: TextStyle(
-                  //             fontSize: 12,
-                  //             fontFamily: Assets.poppinsRegular,
-                  //             color: AppColors.locationText,
-                  //             // fontWeight: FontWeight.bold
-                  //           ),
-                  //         ),
-                  //         SizedBox(
-                  //           height: AppSizes.height * 0.01,
-                  //         ),
-                  //         Text(
-                  //           destinationLocation,
-                  //           style: TextStyle(
-                  //             fontSize: 12,
-                  //             fontFamily: Assets.poppinsRegular,
-                  //             color: AppColors.locationText,
-                  //             // fontWeight: FontWeight.bold
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ],
-                  // ),
                   Container(
                     height: AppSizes.height * 0.06,
                     child: Column(

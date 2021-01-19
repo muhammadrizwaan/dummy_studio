@@ -86,7 +86,8 @@ class IndividualEditProfileProvider extends ChangeNotifier {
             ApplicationToast.getErrorToast(
                 durationTime: 3,
                 heading: Strings.error,
-                subHeading: editProfileResponse.message);
+                subHeading: editProfileResponse.message,
+            );
           }
         } else {
           _loader.hideLoader(context);

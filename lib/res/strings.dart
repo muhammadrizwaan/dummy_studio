@@ -71,6 +71,7 @@ class Strings {
   static const String messageSentSuccessfully = "Message sent successfully";
   static const String invalidCode = "Invalid Code";
   static const String trnErrorText = "Please enter valid TRN";
+  static const String licenseImagesErrorText = "Please attach the copy of License";
   static const String phoneNumberErrorText = "Please enter valid Phone Number";
   static const String checkBoxErrorText = "Please check the Term and Conditions";
   static const String somethingWentWrong = "Something went wrong";
@@ -89,4 +90,6 @@ class Strings {
   static const String weightErrorText = "Please enter weight";
   static const String noOfVehicleErrorText = "Please enter number of vehicle";
   static const String goodTypeErrorText = "Please select GoodType";
+  static const String pickupLocationErrorText = "Please select Pickup Location";
+  static const String dropoffLocationErrorText = "Please select Dropoff Location";
 }
