@@ -122,7 +122,8 @@ class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
                             PickupLocation: widget.PickupLocation,
                             DropoffLocation: widget.DropoffLocation,
                           )));
-                    })
+                    }),
+                SizedBox(height: AppSizes.height * 0.02),
               ],
             ),
           ),

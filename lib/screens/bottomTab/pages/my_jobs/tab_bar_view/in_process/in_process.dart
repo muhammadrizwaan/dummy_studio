@@ -11,6 +11,7 @@ import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/in
 import 'package:truckoom_shipper/screens/driver_details/driver_details.dart';
 import 'package:truckoom_shipper/screens/jobDetails/job_details.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
+import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 class InProcess extends StatefulWidget {
   @override
@@ -37,6 +38,7 @@ class _InProcessState extends State<InProcess> {
       margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
       color: Colors.white,
       child: _inProcessProvider.isDataFetched?
+          _inProcessProvider.tabbarResponse.result.length > 0?
           ListView.builder(
             itemCount: _inProcessProvider.tabbarResponse.result.length,
               itemBuilder: (context, index){
@@ -50,8 +52,8 @@ class _InProcessState extends State<InProcess> {
                   jobDetail: _inProcessProvider.tabbarResponse.result[index].loadId.toString(),
                   pickUpLocation: _inProcessProvider.tabbarResponse.result[index].pickupLocation,
                   destinationLocation: _inProcessProvider.tabbarResponse.result[index].dropoffLocation,
-                  startDate: _inProcessProvider.tabbarResponse.result[index].pickupDate,
-                  time: _inProcessProvider.tabbarResponse.result[index].pickupTime,
+                  startDate: _inProcessProvider.tabbarResponse.result[index].pickupDateTime,
+                  time:  _inProcessProvider.tabbarResponse.result[index].pickupDateTime,
                   status: _inProcessProvider.tabbarResponse.result[index].status,
                   vehicleType: _inProcessProvider.tabbarResponse.result[index].vehicleTypeName,
                   price: "${Strings.aed} ${_inProcessProvider.tabbarResponse.result[index].shipperCost.round()}",
@@ -71,6 +73,14 @@ class _InProcessState extends State<InProcess> {
               ],
             );
           }):
+          Center(
+            child: Container(
+                height: AppSizes.height * 0.15,
+                // width: AppSizes.width,
+                child: CommonWidgets.onNullData(text: Strings.noAvailableLoads)
+            ),
+          )
+              :
       Center(
         child: Container(
           height: AppSizes.height * 0.15,

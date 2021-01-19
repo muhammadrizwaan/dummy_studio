@@ -96,6 +96,7 @@ class JobDetailsProvider extends ChangeNotifier{
           _loader.hideLoader(context);
           Navigator.pop(context);
           _placedProvider.getPlacedLoad(context: context);
+          ApplicationToast.getSuccessToast(durationTime: 3, heading: Strings.success, subHeading: "Operation performed Succesfully");
         } else {
           ApplicationToast.getErrorToast(
               durationTime: 3,

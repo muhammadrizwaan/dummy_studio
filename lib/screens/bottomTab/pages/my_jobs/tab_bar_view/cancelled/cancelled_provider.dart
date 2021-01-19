@@ -24,14 +24,13 @@ class CancelledProvider extends ChangeNotifier{
   bool isDataFetched = false;
 
   var connectivityResult;
-  int userId, statusId;
+  int userId;
   String token;
   init({@required BuildContext context}) async{
     this.context = context;
-    statusId = 6;
-    await getCancelledLoad(context: context);
     connectivityResult = "";
     token = "";
+    await getCancelledLoad(context: context);
   }
 
   Future getCancelledLoad({@required BuildContext context}) async{
@@ -43,10 +42,9 @@ class CancelledProvider extends ChangeNotifier{
         ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: Strings.internetConnectionError);
       }
       else{
-        String tempUrl = getLoadApi.replaceAll("{userId}", '$userId');
-        String url = tempUrl.replaceAll("{statusId}", '$statusId');
+        String tempUrl = getCancelledLoadApi.replaceAll("{userId}", '$userId');
         http.Response response = await _networkHelper.get(
-            url,
+            tempUrl,
             headers: {
               'Content-Type': 'application/json',
               'Authorization': token

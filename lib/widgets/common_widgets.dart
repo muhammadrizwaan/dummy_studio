@@ -44,9 +44,10 @@ class CommonWidgets {
           text,
           style: TextStyle(
             decoration: TextDecoration.none,
-            color: AppColors.profileTextColor,
-            fontSize: 12,
+            color: AppColors.yellow,
+            fontSize: 24,
             fontFamily: Assets.poppinsLight,
+            fontWeight: FontWeight.bold
           ),
         ),
       ),
@@ -399,7 +400,7 @@ class CommonWidgets {
               width: AppSizes.width * 0.65,
               // height: AppSizes.height * 0.05,
               child: TextField(
-                keyboardType: TextInputType.number,
+                keyboardType: TextInputType.phone,
                 style: TextStyle(
                   decoration: TextDecoration.none,
                   fontFamily: Assets.poppinsLight,

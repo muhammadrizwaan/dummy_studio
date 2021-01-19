@@ -228,6 +228,37 @@ class InvoiceDetailComponents {
       ),
     );
   }
+  Widget getStatusBold({@required String status, @required String dateTime}){
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: AppSizes.height * 0.02),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                status,
+                style: TextStyle(
+                  fontFamily: Assets.poppinsLight,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                  // fontWeight: FontWeight.bold
+                ),
+              ),
+              Text(
+                dateTime,
+                style: TextStyle(
+                    fontFamily: Assets.poppinsMedium,
+                    fontSize: 12,
+                    color: AppColors.colorBlack,
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
 
   Widget getTotalContainer({
     @required BuildContext context,

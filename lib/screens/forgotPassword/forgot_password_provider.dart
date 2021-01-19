@@ -1,5 +1,4 @@
 import 'package:connectivity/connectivity.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
@@ -22,14 +21,13 @@ class ForgotPasswordProvider extends ChangeNotifier {
   PhoneNumberResponse phoneNumberResponse = PhoneNumberResponse.empty();
   GenericDecodeEncode genericDecodeEncode = GenericDecodeEncode();
   CustomPopup _loader = CustomPopup();
-  Dio dio = Dio();
 
   init(BuildContext context) async {
     this.context = context;
     connectivityResult = "";
   }
 
-  Future getForgotPassword({
+  Future onForgotPassword({
     @required BuildContext context,
     @required String email,
   }) async {

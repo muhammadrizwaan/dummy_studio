@@ -16,16 +16,10 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
   SplashProvider _provider;
 
-  void onDelay() async{
-    await Future.delayed(Duration(seconds: 3), (){
-      Navigator.pushReplacement(context, SlideRightRoute(page: Language()));
-    });
-  }
 
   @override
   void initState() {
     super.initState();
-     // onDelay();
      _provider = Provider.of<SplashProvider>(context, listen:false);
      _provider.init(context: context);
   }

@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 
@@ -17,7 +19,9 @@ class Constants{
   static String token;
   static String licenseExpiryDate;
   static String cityName;
+  static int cityId;
   static String user;
+  static List licenseImages;
 
   static int getUserId(){
     userId = PreferenceUtils.getInt(Strings.userIdKey);
@@ -72,10 +76,24 @@ class Constants{
     cityName = PreferenceUtils.getString(Strings.cityNameKey);
     return cityName;
   }
-
+  static int getCityId(){
+    cityId = PreferenceUtils.getInt(Strings.cityIdKey);
+    return cityId;
+  }
   static String getUser(){
     user = PreferenceUtils.getString(Strings.userTypeKey);
     return user;
+  }
+  static List getLicenseImages(){
+    String temp = PreferenceUtils.getString(Strings.licenseImagesKey);
+    if(temp.isNotEmpty){
+      return licenseImages = json.decode(PreferenceUtils.getString(Strings.licenseImagesKey));
+    }
+    else{
+      return licenseImages = [];
+    }
+
+    // return licenseImages;
   }
 
 
@@ -110,20 +128,29 @@ class Constants{
   static setUserImage(String image){
     PreferenceUtils.setString(Strings.userImageKey, image);
   }
-  static setToken(String token){
-    PreferenceUtils.setString(Strings.tokenKey, "Bearer $token");
+  static setToken(String setToken){
+    PreferenceUtils.setString(Strings.tokenKey, "Bearer $setToken");
   }
-  static String setLicenseExpiryDate(String licenseExpiryDate){
+  static setLicenseExpiryDate(String licenseExpiryDate){
     PreferenceUtils.setString(Strings.licenseExpiryDateKey,licenseExpiryDate);
   }
-  static String setCityName(String cityName){
+  static setCityName(String cityName){
     PreferenceUtils.setString(Strings.cityNameKey, cityName);
-
   }
-
-  static String setUser(String Type){
+  static setCityId(int cityId){
+    PreferenceUtils.setInt(Strings.cityIdKey, cityId);
+  }
+  static setUser(String Type){
     PreferenceUtils.setString(Strings.userTypeKey, Type);
-
+  }
+  static setLicenseImages(List licenseImages){
+    if(licenseImages.isNotEmpty) {
+      PreferenceUtils.setString(
+          Strings.licenseImagesKey, json.encode(licenseImages));
+    }
+    else{
+      PreferenceUtils.setString(Strings.licenseImagesKey, "");
+    }
   }
 
  }

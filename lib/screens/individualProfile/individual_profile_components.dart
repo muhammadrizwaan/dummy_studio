@@ -14,7 +14,7 @@ class IndividualProfileComponents{
     return Container(
       child: CircleAvatar(
         backgroundImage:profileImg != ""? NetworkImage(baseUrl+profileImg): AssetImage(Assets.profileImg),
-        radius: 75.0,
+        radius: 50.0,
         backgroundColor: AppColors.white,
       ),
     );

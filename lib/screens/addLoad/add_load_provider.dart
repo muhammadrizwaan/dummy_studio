@@ -1,11 +1,15 @@
-
-
+import 'dart:io';
+import 'package:dio/dio.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:truckoom_shipper/commons/get_token.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
 import 'package:truckoom_shipper/models/api_models/estimated_rate_response.dart';
 import 'package:truckoom_shipper/models/api_models/good_types_response.dart';
+import 'package:truckoom_shipper/models/api_models/load_detail_response.dart';
+import 'package:truckoom_shipper/models/api_models/load_images_response.dart';
 import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/network/network_helper.dart';
 import 'package:truckoom_shipper/network/network_helper_impl.dart';
@@ -25,11 +29,14 @@ class AddLoadProvider extends ChangeNotifier {
   NetworkHelper _networkHelper = NetworkHelperImpl();
   GoodTypesResponse _goodTypesResponse = GoodTypesResponse.empty();
   EstimatedRateResponse _estimatedRateResponse = EstimatedRateResponse.empty();
-  CustomPopup _laoder = CustomPopup();
+  CustomPopup _loader = CustomPopup();
+  Dio _dio = Dio();
+  LoadImagesResponse loadImagesResponse = LoadImagesResponse.empty();
   GenericDecodeEncode _genericDecodeEncode = GenericDecodeEncode();
   GetToken getToken = GetToken();
   List<String> description = List<String>();
   bool isDataFetched;
+  int userId;
 
   init({@required BuildContext context}) async {
     isDataFetched = false;
@@ -85,26 +92,27 @@ class AddLoadProvider extends ChangeNotifier {
     }
   }
 
-  Future onEstimatedRate({
-    @required BuildContext context,
-    @required DateTime pickupDateTime,
-    @required String name,
-    @required String phone,
-    @required String weight,
-    @required String numOfVehicle,
-    @required String description,
-    @required bool isRoundTrip,
-    @required int goodTypeId,
-    @required int vehicleTypeId,
-    @required String pickupLatitude,
-    @required String pickupLongitude,
-    @required String dropoffLatitude,
-    @required String dropoffLongitude,
-    @required String pickupLocation,
-    @required String dropoffLocation,
-    @required int VehicleTypeId,
-    @required int vehicleCategoryId,
-  }) async {
+  Future onEstimatedRate(
+      {@required BuildContext context,
+      @required String pickupDateTime,
+      @required String name,
+      @required String phone,
+      @required String weight,
+      @required String numOfVehicle,
+      @required String description,
+      @required bool isRoundTrip,
+      @required int goodTypeId,
+      @required int vehicleTypeId,
+      @required String pickupLatitude,
+      @required String pickupLongitude,
+      @required String dropoffLatitude,
+      @required String dropoffLongitude,
+      @required String pickupLocation,
+      @required String dropoffLocation,
+      @required int VehicleTypeId,
+      @required int vehicleCategoryId,
+      @required List imagesList,
+      @required String Rate}) async {
     try {
       token = await getToken.onToken();
       if (connectivityResult == ConnectivityResult.none) {
@@ -137,71 +145,124 @@ class AddLoadProvider extends ChangeNotifier {
             durationTime: 3,
             heading: Strings.error,
             subHeading: Strings.noOfVehicleErrorText);
+      } else if (imagesList.isEmpty) {
+        ApplicationToast.getErrorToast(
+            durationTime: 3,
+            heading: Strings.error,
+            subHeading: Strings.imagesErrorText);
       } else {
-        _laoder.showLoader(context: context);
-        http.Response response =
-            await _networkHelper.post(estimatedLoadPriceApi, headers: {
-          "Content-Type": "application/json",
-          'Authorization': token
-        }, body: {
-          "PickupLocation": pickupLocation,
-          "PickupLatitude": pickupLatitude,
-          "PickupLongitude": pickupLongitude,
-          "DropoffLocation": dropoffLocation,
-          "DropoffLatitude": dropoffLatitude,
-          "DropoffLongitude": dropoffLongitude,
-          "VehicleCount": numOfVehicle,
-          "IsRoundTrip": isRoundTrip,
-          "VehicleCategoryId": goodTypeId
-        });
-        if (response.statusCode == 200) {
-          _estimatedRateResponse = EstimatedRateResponse.fromJson(
-              _genericDecodeEncode.decodeJson(response.body));
-          if (_estimatedRateResponse.code == 1) {
-            _laoder.hideLoader(context);
-            print('Estimated Rate Success');
-            Navigator.push(
-                context,
-                SlideRightRoute(
-                    page: BookLoadDetails(
-                  name: name,
-                  phone: phone,
-                  weight: weight,
-                  numOfVehicle: numOfVehicle,
-                  description: description,
-                  isRoundTrip: isRoundTrip,
-                  pickUpDate: pickupDateTime,
-                  Rate: _estimatedRateResponse.result.totalCost,
-                  pickupLatitude: pickupLatitude,
-                  pickupLongitude: pickupLongitude,
-                  dropoffLatitude: dropoffLatitude,
-                  dropoffLongitude: dropoffLongitude,
-                  pickupLocation: pickupLocation,
-                  dropoffLocation: dropoffLocation,
-                  goodTypeId: goodTypeId,
-                  vehicleTypeId: vehicleTypeId,
-                  vehicleCategoryId: vehicleCategoryId,
-                )));
-          } else {
-            _laoder.hideLoader(context);
-            ApplicationToast.getErrorToast(
-                durationTime: 3,
-                heading: Strings.error,
-                subHeading: _estimatedRateResponse.message);
-          }
-        } else {
-          _laoder.hideLoader(context);
-          ApplicationToast.getErrorToast(
-              durationTime: 3,
-              heading: Strings.error,
-              subHeading: Strings.somethingWentWrong);
-        }
+        // _loader.showLoader(context: context);
+        // http.Response response =
+        //     await _networkHelper.post(estimatedLoadPriceApi, headers: {
+        //   "Content-Type": "application/json",
+        //   'Authorization': token
+        // }, body: {
+        //   "PickupLocation": pickupLocation,
+        //   "PickupLatitude": pickupLatitude,
+        //   "PickupLongitude": pickupLongitude,
+        //   "DropoffLocation": dropoffLocation,
+        //   "DropoffLatitude": dropoffLatitude,
+        //   "DropoffLongitude": dropoffLongitude,
+        //   "VehicleCount": numOfVehicle,
+        //   "IsRoundTrip": isRoundTrip,
+        //   "VehicleCategoryId": goodTypeId
+        // });
+        // if (response.statusCode == 200) {
+        //   _estimatedRateResponse = EstimatedRateResponse.fromJson(
+        //       _genericDecodeEncode.decodeJson(response.body));
+        //   if (_estimatedRateResponse.code == 1) {
+        //     _loader.hideLoader(context);
+        //     print('Estimated Rate Success');
+        Navigator.push(
+            context,
+            SlideRightRoute(
+                page: BookLoadDetails(
+                    name: name,
+                    phone: phone,
+                    weight: weight,
+                    numOfVehicle: numOfVehicle,
+                    description: description,
+                    isRoundTrip: isRoundTrip,
+                    pickUpDate: pickupDateTime,
+                    Rate: Rate,
+                    pickupLatitude: pickupLatitude,
+                    pickupLongitude: pickupLongitude,
+                    dropoffLatitude: dropoffLatitude,
+                    dropoffLongitude: dropoffLongitude,
+                    pickupLocation: pickupLocation,
+                    dropoffLocation: dropoffLocation,
+                    goodTypeId: goodTypeId,
+                    vehicleTypeId: vehicleTypeId,
+                    vehicleCategoryId: vehicleCategoryId,
+                    images: imagesList)));
+        //   } else {
+        //     _loader.hideLoader(context);
+        //     ApplicationToast.getErrorToast(
+        //         durationTime: 3,
+        //         heading: Strings.error,
+        //         subHeading: _estimatedRateResponse.message);
+        //   }
+        // } else {
+        //   _loader.hideLoader(context);
+        //   ApplicationToast.getErrorToast(
+        //       durationTime: 3,
+        //       heading: Strings.error,
+        //       subHeading: Strings.somethingWentWrong);
+        // }
       }
     } catch (error) {
       print(error.toString());
     }
   }
-  Future getImage() async {
 
+  onUploadImages({
+    @required BuildContext context,
+    @required List ImagesList,
+  }) async {
+    try {
+      _loader.showLoader(context: context);
+      userId = Constants.getUserId();
+      FormData formData = FormData.fromMap({
+        "Attachment": await MultipartFile.fromBytes(
+          ImagesList,
+          filename: 'some-file-name.jpg',
+          contentType: MediaType(
+            "image",
+            "jpg",
+          ),
+        ),
+        "userId": userId,
+        "loadId": 10165,
+      });
+      Response _response = await _dio.post(
+        uploadLoadImages,
+        data: formData,
+        options: Options(
+            contentType: "multipart/form-data",
+            headers: {'Authorization': token}),
+      );
+      if (_response.statusCode == 200) {
+        loadImagesResponse = LoadImagesResponse.fromJson(_response.data);
+        if (loadImagesResponse.code == 1) {
+          print('images uploaded');
+          print(loadImagesResponse.result[0].filePath);
+        } else {
+          _loader.hideLoader(context);
+          ApplicationToast.getErrorToast(
+              durationTime: 3,
+              heading: Strings.error,
+              subHeading: loadImagesResponse.message);
+        }
+      } else {
+        _loader.hideLoader(context);
+        ApplicationToast.getErrorToast(
+            durationTime: 3,
+            heading: Strings.error,
+            subHeading: Strings.somethingWentWrong);
+      }
+    } catch (error) {
+      print(error.toString());
+    }
   }
+
 }

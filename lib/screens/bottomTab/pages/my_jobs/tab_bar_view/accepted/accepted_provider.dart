@@ -30,16 +30,15 @@ class AcceptedProvider extends ChangeNotifier {
   Dio dio = Dio();
 
   var connectivityResult;
-  int userId, statusId;
+  int userId;
   String token;
 
   init({@required BuildContext context}) async {
     this.context = context;
-    statusId = 3;
-    await getAcceptedLoad(context: context);
     connectivityResult = "";
     token = "";
     refreshToken = "";
+    await getAcceptedLoad(context: context);
   }
 
   Future getAcceptedLoad({@required BuildContext context}) async {
@@ -53,9 +52,8 @@ class AcceptedProvider extends ChangeNotifier {
             heading: Strings.error,
             subHeading: Strings.internetConnectionError);
       } else {
-        String tempUrl = getLoadApi.replaceAll("{userId}", '$userId');
-        String url = tempUrl.replaceAll("{statusId}", '$statusId');
-        http.Response response = await _networkHelper.get(url, headers: {
+        String tempUrl = getAcceptedLoadApi.replaceAll("{userId}", '$userId');
+        http.Response response = await _networkHelper.get(tempUrl, headers: {
           'Content-Type': 'application/json',
           'Authorization': token
         });
@@ -109,7 +107,10 @@ class AcceptedProvider extends ChangeNotifier {
         );
         if (response.statusCode == 200) {
           await getAcceptedLoad(context: context);
+          // tabbarResponse.result.add(value);
+          // replytile.removeWhere((item) => item.id == '001')
           print('deleted');
+          ApplicationToast.getSuccessToast(durationTime: 3, heading: Strings.success, subHeading: "Operation performed Succesfully");
           isDataFetched = true;
           notifyListeners();
         } else {

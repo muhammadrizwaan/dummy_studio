@@ -2,17 +2,17 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:fluttericon/entypo_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
-import 'package:html/parser.dart';
 import 'package:lottie/lottie.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/contsants/constants.dart';
+import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
-import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 import 'business_edit_profile_components.dart';
@@ -29,7 +29,7 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
   String _selectedValue;
   DateTime pickedDate;
   TextEditingController _name, _email, _password, _confirmPassword, _businessName, _businessPhone, _trn;
-
+  List<Asset> images = List<Asset>();
   @override
   void initState() {
     super.initState();
@@ -96,7 +96,7 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                               isPassword: false,
                               leftIcon: Entypo.user,
                               textEditingController: _name,
-                              hintText: 'Matthew'
+                              hintText: 'Enter Full Name'
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
                           CommonWidgets.getSubHeadingText(
@@ -107,7 +107,7 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                               isPassword: false,
                               leftIcon: Icons.mail,
                               textEditingController: _email,
-                              hintText: 'MatthewLawson@mail.com'
+                              hintText: 'Enter Email'
                           ),
 
                           SizedBox(height: AppSizes.height * 0.03,),
@@ -142,7 +142,7 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                               isPassword: false,
                               leftIcon: Entypo.user,
                               textEditingController: _businessName,
-                              hintText: 'Augue vestibulum'
+                              hintText: 'Enter Business Name'
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
                           CommonWidgets.getSubHeadingText(
@@ -160,11 +160,11 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                               text: 'Contact Number'
                           ),
                           SizedBox(height: AppSizes.height * 0.01,),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getPhoneNumberField(
                               isPassword: false,
                               leftIcon: Entypo.mobile,
                               textEditingController: _businessPhone,
-                              hintText: '(430)214-7475'
+                              hintText: 'Enter Contact Number'
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
                           CommonWidgets.getSubHeadingText(
@@ -175,7 +175,7 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                               isPassword: false,
                               leftIcon: Entypo.mobile,
                               textEditingController: _trn,
-                              hintText: '430(845785)'
+                              hintText: 'Enter TRN'
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
                           CommonWidgets.getSubHeadingText(
@@ -204,7 +204,7 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                                       isExpanded: true,
                                       value: _selectedValue,
                                       hint: TextView.getLightText04(
-                                        "Select City",
+                                        Constants.getCityName(),
                                         color: AppColors.colorBlack,
                                       ),
                                       items: _businessEditProfileProvider
@@ -234,10 +234,41 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                           SizedBox(height: AppSizes.height * 0.03,),
                           _businessEditProfileComponents.getImagePicker(
                               onPress: () {
-                                // Navigator.push(context, SlideRightRoute(page: OTPAuthentication()));
+                                loadAssets();
                               }
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
+                          Constants.getLicenseImages().length > 0 ?
+                          Container(
+                            height: AppSizes.height * 0.25,
+                            child: new Swiper(
+                              itemCount: Constants.getLicenseImages().length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    // color: Colors.amber,
+                                    image: DecorationImage(
+                                        image: NetworkImage(baseUrl+(Constants.getLicenseImages()[index]["FilePath"])),
+                                        fit: BoxFit.cover),
+                                  ),
+                                );
+                              },
+                              layout: SwiperLayout.DEFAULT,
+                              viewportFraction: 0.8,
+                              // itemHeight: AppSizes.height * 0.1,
+                              scale: 0.9,
+                              pagination: new SwiperPagination(
+                                builder: new DotSwiperPaginationBuilder(
+                                  color: AppColors.grey,
+                                  activeColor: AppColors.yellow,
+                                ),
+                              ),
+                            ),
+                          ):
+                          CommonWidgets.onNullData(text: "No Images"),
+                          
+                          SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getBottomButton(
                               text: "Update",
                               onPress: () {
@@ -309,5 +340,35 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
         pickedDate = date;
       });
     }
+  }
+
+  Future<void> loadAssets() async {
+
+    try {
+      images = [];
+      images = await MultiImagePicker.pickImages(
+        maxImages: 2,
+        enableCamera: true,
+        selectedAssets: images,
+        cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
+        materialOptions: MaterialOptions(
+          actionBarColor: AppColors.yellowColorCode,
+          actionBarTitle: "Gallery",
+          allViewTitle: "All Photos",
+          useDetailsView: false,
+          selectCircleStrokeColor: AppColors.yellowColorCode,
+        ),
+      );
+    } on Exception catch (e) {
+      print(e.toString());
+    }
+    // if (!mounted) return;
+    if(!mounted){
+      return;
+    }
+    else{
+      _businessEditProfileProvider.onUploadLicenseImages(context: context, images: images,);
+    }
+
   }
 }

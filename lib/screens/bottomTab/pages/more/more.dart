@@ -109,8 +109,21 @@ class _MoreState extends State<More> {
   }
 
   onLogout() async{
-    await PreferenceUtils.setString(Strings.email, "");
-    await PreferenceUtils.setString(Strings.password, "");
+    Constants.setUserEmail("");
+    Constants.setCityId(0);
+    Constants.setCityName("");
+    Constants.setPassword("");
+    Constants.setToken("");
+    Constants.setUser("");
+    Constants.setUserId(0);
+    Constants.setUserImage("");
+    Constants.setUserName("");
+    Constants.setUserPhone("");
+    Constants.setLicenseExpiryDate("");
+    Constants.setCommpanyTrn("");
+    Constants.setCommpanyPhone("");
+    Constants.setCommpanyName("");
+    await Constants.setLicenseImages([]);
     Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: Language()), (route) => false);
   }
 

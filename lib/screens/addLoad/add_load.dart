@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/entypo_icons.dart';
 import 'package:lottie/lottie.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
@@ -11,7 +12,9 @@ import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/addLoad/add_load_components.dart';
 import 'package:truckoom_shipper/screens/addLoad/add_load_provider.dart';
 import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_details.dart';
+import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
+import 'package:truckoom_shipper/widgets/loader.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class AddLoad extends StatefulWidget {
@@ -23,6 +26,7 @@ class AddLoad extends StatefulWidget {
       PickupLocation,
       DropoffLocation;
   int VehicleTypeId, VehicleCategoryId;
+  double Rate, multiplier;
 
   AddLoad(
       {
@@ -33,13 +37,18 @@ class AddLoad extends StatefulWidget {
       @required this.PickupLocation,
       @required this.DropoffLocation,
       @required this.VehicleCategoryId,
-      @required this.VehicleTypeId});
+      @required this.VehicleTypeId,
+        @required this.Rate,
+        @required this.multiplier,
+      });
 
   @override
   _AddLoadState createState() => _AddLoadState();
 }
 
 class _AddLoadState extends State<AddLoad> {
+  List<Asset> images = List<Asset>();
+  String _error = 'No Error Dectected';
   AddLoadComponents _addLoadComponents;
   AddLoadProvider _addLoadProvider;
   TextEditingController receiver_name,
@@ -52,6 +61,8 @@ class _AddLoadState extends State<AddLoad> {
   int _noOfVehicle = 1;
   String _selectedValue;
   DateTime pickedDate;
+  TimeOfDay pickedTime;
+  double tolalRate;
 
   @override
   void initState() {
@@ -61,11 +72,15 @@ class _AddLoadState extends State<AddLoad> {
     weight = TextEditingController();
     num_of_vehicle = TextEditingController();
     description = TextEditingController();
+    num_of_vehicle.addListener(() {_estimateRate();});
     pickedDate = DateTime.now();
+    pickedTime = TimeOfDay.now();
+    tolalRate = widget.Rate;
     _addLoadComponents = AddLoadComponents();
     _addLoadProvider = Provider.of<AddLoadProvider>(context, listen: false);
     _addLoadProvider.init(context: context);
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -91,19 +106,18 @@ class _AddLoadState extends State<AddLoad> {
                     Expanded(
                       child: ListView(
                         children: [
+                          CommonWidgets.getWalletPriceBox(
+                              walletPrice: tolalRate.toString(),
+                          ),
                           Container(
-                            padding: EdgeInsets.all(AppSizes.width * 0.05),
+                            padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 _addLoadComponents.getLocationContainer(
                                     pickupLocation: widget.PickupLocation,
-                                    dropOffLocation: widget.DropoffLocation),
-                                SizedBox(height: AppSizes.height * 0.01),
-                                _addLoadComponents.getExpectedRate(),
-                                SizedBox(
-                                  height: AppSizes.height * 0.02,
+                                    dropOffLocation: widget.DropoffLocation
                                 ),
                                 TextView.getRoundTripText04("Round Trip",
                                     color: AppColors.roundTripColor),
@@ -115,11 +129,13 @@ class _AddLoadState extends State<AddLoad> {
                                         child: Wrap(
                                           children: [
                                             CupertinoSwitch(
+                                              activeColor: AppColors.yellow,
                                               value: isRounded,
                                               onChanged: (bool value) {
                                                 setState(() {
                                                   isRounded = value;
                                                 });
+                                                _estimateRate();
                                               },
                                             ),
                                           ],
@@ -142,11 +158,8 @@ class _AddLoadState extends State<AddLoad> {
                                     onDate: () {
                                       _showDate();
                                     },
-                                    date:
-                                        "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}"),
-                                SizedBox(
-                                  height: AppSizes.height * 0.02,
-                                ),
+                                    date: "${pickedDate.day}/${pickedDate.month}/${pickedDate.year} ${pickedTime.hour}:${pickedTime.minute}"),
+                                SizedBox(height: AppSizes.height * 0.02,),
                                 CommonWidgets.getSubHeadingText(
                                     text: "Receiver Name"),
                                 SizedBox(height: AppSizes.height * 0.01),
@@ -188,7 +201,7 @@ class _AddLoadState extends State<AddLoad> {
                                         child: Container(
                                           height: AppSizes.height * 0.06,
                                           width: AppSizes.width * 0.06,
-                                          child: Image.asset(Assets.vehicle),
+                                          child: Image.asset(Assets.loadIcon),
                                         ),
                                         // child: Image(image: AssetImage(Assets.vehicle)),
                                       ),
@@ -231,7 +244,7 @@ class _AddLoadState extends State<AddLoad> {
                                 CommonWidgets.getSubHeadingText(text: "Weight"),
                                 SizedBox(height: AppSizes.height * 0.01),
                                 _addLoadComponents.getNumberField(
-                                    leftIcon: Assets.vehicle,
+                                    leftIcon: Assets.weightIcon,
                                     hintText: 'Enter Weight',
                                     textEditingController: weight),
                                 SizedBox(
@@ -262,7 +275,7 @@ class _AddLoadState extends State<AddLoad> {
                                       children: [
                                         GestureDetector(
                                           onTap: (){
-                                            _addLoadProvider.getImage();
+                                            loadAssets();
                                           },
                                           child: DottedBorder(
                                             color:
@@ -297,15 +310,49 @@ class _AddLoadState extends State<AddLoad> {
                                     )
                                   ],
                                 ),
+                                images.isNotEmpty?Container(
+                                  height: AppSizes.height * 0.1,
+                                  child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: images.length,
+                                      itemBuilder: (context, index){
+                                        Asset asset = images[index];
+                                        return Row(
+                                          children: [
+                                            SizedBox(width: AppSizes.width * 0.01,),
+                                            Container(
+                                              height: AppSizes.height * 0.1,
+                                              width: AppSizes.width * 0.2,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(5),
+                                              ),
+                                              child: AssetThumb(
+                                                asset: asset,
+                                                width: 300,
+                                                height: 300,
+                                              ),
+                                              // child: Image(
+                                              //   image: AssetImage(asset),
+                                              //   fit: BoxFit.cover,
+                                              // ),
+                                            ),
+                                            SizedBox(width: AppSizes.width * 0.01,),
+                                          ],
+                                        );
+                                      }),
+                                ):
+                                    Container(),
+                                // CommonWidgets.onNullData(text: "No Images"),
+
                                 SizedBox(
-                                  height: AppSizes.height * 0.02,
-                                ),
+                                  height: AppSizes.height * 0.02),
                                 CommonWidgets.getBottomButton(
                                     text: "Next",
                                     onPress: () {
+                                      // _addLoadProvider.onUploadImages(context: context, ImagesList: images);
                                       _addLoadProvider.onEstimatedRate(
                                           context: context,
-                                          pickupDateTime: pickedDate,
+                                          pickupDateTime: "${pickedDate.month}/${pickedDate.day}/${pickedDate.year} ${pickedTime.hour}:${pickedTime.minute}",
                                           name: receiver_name.text,
                                           phone: receiver_phone.text,
                                           goodTypeId: _getGoodTypeId(),
@@ -320,10 +367,12 @@ class _AddLoadState extends State<AddLoad> {
                                           pickupLocation: widget.PickupLocation,
                                           dropoffLocation: widget.DropoffLocation,
                                         vehicleCategoryId: widget.VehicleCategoryId,
-                                        vehicleTypeId: widget.VehicleTypeId
+                                        vehicleTypeId: widget.VehicleTypeId,
+                                        imagesList: images,
+                                        Rate: tolalRate.toString(),
                                       );
-                                      // Navigator.push(context, SlideRightRoute(page: BookLoadDetails()));
                                     }),
+                                SizedBox(height: AppSizes.height * 0.02)
                               ],
                             ),
                           )
@@ -359,8 +408,9 @@ class _AddLoadState extends State<AddLoad> {
     DateTime date = await showDatePicker(
       context: context,
       initialDate: pickedDate,
-      firstDate: DateTime(DateTime.now().year - 10),
+      firstDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
       lastDate: DateTime(DateTime.now().year + 10),
+
       builder: (BuildContext context, Widget child) {
         return Theme(
           data: ThemeData(
@@ -379,6 +429,111 @@ class _AddLoadState extends State<AddLoad> {
       setState(() {
         pickedDate = date;
       });
+      _showTime();
+    }
+    else {
+      ApplicationToast.getWarningToast(
+          durationTime: 3,
+          heading: "Information",
+          subHeading:
+          "No Date has been selected, by default current date is filled above");
+    }
+  }
+
+  _showTime() async {
+    TimeOfDay time = await showTimePicker(
+      context: context,
+      initialTime: pickedTime,
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeData(
+            cursorColor: Colors.grey,
+            dialogBackgroundColor: Colors.white,
+            colorScheme: ColorScheme.light(primary: AppColors.yellow),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+            highlightColor: Colors.grey[400],
+            textSelectionColor: Colors.grey,
+          ),
+          child: child,
+        );
+      },
+    );
+
+    if(time!=null){
+      setState(() {
+        pickedTime = time;
+      });
+    }else{
+      ApplicationToast.getWarningToast(
+          durationTime: 3,
+          heading: "Information",
+          subHeading:
+          "No Time has been selected, by default current time is selected");
+    }
+
+  }
+
+
+  Future<void> loadAssets() async {
+    List<Asset> resultList = List<Asset>();
+    String error = 'No Error Dectected';
+
+    try {
+      resultList = await MultiImagePicker.pickImages(
+        maxImages: 5,
+        enableCamera: true,
+        selectedAssets: resultList,
+        cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
+        materialOptions: MaterialOptions(
+          actionBarColor: AppColors.yellowColorCode,
+          actionBarTitle: "Gallery",
+          allViewTitle: "All Photos",
+          useDetailsView: false,
+          selectCircleStrokeColor: AppColors.yellowColorCode,
+        ),
+      );
+    } on Exception catch (e) {
+      error = e.toString();
+    }
+    if(!mounted){
+      return;
+    }
+    else if(resultList.isNotEmpty){
+      setState(() {
+        images = resultList;
+        _error = error;
+      });
+    }
+  }
+
+   _estimateRate(){
+    double rate = widget.Rate;
+
+    if(isRounded == false && num_of_vehicle.text.isEmpty){
+      setState(() {
+        tolalRate = double.parse(rate.toStringAsFixed(2));
+      });
+    }
+    else if(isRounded && num_of_vehicle.text.isEmpty){
+      double mul = rate * widget.multiplier;
+      setState(() {
+        tolalRate = double.parse(mul.toStringAsFixed(2));
+      });
+    }
+    else if(isRounded == false && num_of_vehicle.text.isNotEmpty){
+      int totalVehicles = int.parse(num_of_vehicle.text);
+      double mul = rate * totalVehicles;
+      setState(() {
+        tolalRate = double.parse(mul.toStringAsFixed(2));
+      });
+    }
+    else if(isRounded && num_of_vehicle.text.isNotEmpty){
+      int totalVehicles = int.parse(num_of_vehicle.text);
+      double mul = (rate * totalVehicles) * widget.multiplier;
+      setState(() {
+        tolalRate =double.parse(mul.toStringAsFixed(2));
+      });
     }
   }
 }
+

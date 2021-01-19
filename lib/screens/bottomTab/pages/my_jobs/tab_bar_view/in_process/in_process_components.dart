@@ -1,3 +1,4 @@
+import 'package:date_time_format/date_time_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/octicons_icons.dart';
@@ -80,39 +81,117 @@ class InProcessComponents {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  // Row(
+                  //   children: [
+                  //     Image(
+                  //       image: AssetImage(Assets.df_pk_job),
+                  //     ),
+                  //     SizedBox(
+                  //       width: AppSizes.width * 0.01,
+                  //     ),
+                  //     Column(
+                  //       crossAxisAlignment: CrossAxisAlignment.start,
+                  //       children: [
+                  //         Text(
+                  //           pickUpLocation,
+                  //           style: TextStyle(
+                  //             fontSize: 12,
+                  //             fontFamily: Assets.poppinsRegular,
+                  //             color: AppColors.locationText,
+                  //             // fontWeight: FontWeight.bold
+                  //           ),
+                  //         ),
+                  //         SizedBox(
+                  //           height: AppSizes.height * 0.01,
+                  //         ),
+                  //         Text(
+                  //           destinationLocation,
+                  //           style: TextStyle(
+                  //             fontSize: 12,
+                  //             fontFamily: Assets.poppinsRegular,
+                  //             color: AppColors.locationText,
+                  //             // fontWeight: FontWeight.bold
+                  //           ),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ],
+                  // ),
                   Row(
                     children: [
-                      Image(
-                        image: AssetImage(Assets.df_pk_job),
+                      Container(
+                        height: AppSizes.height * 0.043,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              width: 6,
+                              height: 6,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: AppColors.yellow
+                              ),
+                            ),
+                            Container(
+                              width: 3,
+                              height: 3,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: AppColors.grey
+                              ),
+                            ),
+                            Container(
+                              width: 3,
+                              height: 3,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: AppColors.grey
+                              ),
+                            ),
+                            Container(
+                              width: 6,
+                              height: 6,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: AppColors.yellow
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                       SizedBox(
                         width: AppSizes.width * 0.01,
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            pickUpLocation,
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontFamily: Assets.poppinsRegular,
-                              color: AppColors.locationText,
-                              // fontWeight: FontWeight.bold
+                      Container(
+                        width: AppSizes.width * 0.4,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              pickUpLocation,
+                              maxLines: 1,
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontFamily: Assets.poppinsRegular,
+                                color: AppColors.locationText,
+                                // fontWeight: FontWeight.bold
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            height: AppSizes.height * 0.01,
-                          ),
-                          Text(
-                            destinationLocation,
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontFamily: Assets.poppinsRegular,
-                              color: AppColors.locationText,
-                              // fontWeight: FontWeight.bold
+                            SizedBox(
+                              height: AppSizes.height * 0.01,
                             ),
-                          ),
-                        ],
+                            Text(
+                              destinationLocation,
+                              maxLines: 1,
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontFamily: Assets.poppinsRegular,
+                                color: AppColors.locationText,
+                                // fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -124,7 +203,7 @@ class InProcessComponents {
                         Row(
                           children: [
                             Text(
-                              startDate,
+                              DateTimeFormat.format(DateTime.parse(startDate), format: 'M j, Y'),
                               style: TextStyle(
                                 fontSize: 12,
                                 fontFamily: Assets.poppinsRegular,
@@ -136,7 +215,7 @@ class InProcessComponents {
                               width: 4,
                             ),
                             Text(
-                              time,
+                              DateTimeFormat.format(DateTime.parse(time), format: r'g:i a'),
                               style: TextStyle(
                                 fontSize: 12,
                                 fontFamily: Assets.poppinsRegular,

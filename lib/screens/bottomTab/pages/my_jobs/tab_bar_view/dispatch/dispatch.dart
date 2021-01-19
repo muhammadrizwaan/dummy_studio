@@ -30,7 +30,8 @@ class _DispatchState extends State<Dispatch> {
     // TODO: implement initState
     super.initState();
     _dispatchComponents = DispatchComponents();
-    _dispatchedProvider = Provider.of<DispatchedProvider>(context, listen: false);
+    _dispatchedProvider =
+        Provider.of<DispatchedProvider>(context, listen: false);
     _dispatchedProvider.init(context: context);
   }
 
@@ -41,49 +42,54 @@ class _DispatchState extends State<Dispatch> {
       margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
       color: Colors.white,
       child: _dispatchedProvider.isDataFetched
-          ? ListView.builder(
-              itemCount: _dispatchedProvider.tabbarResponse.result.length,
-              itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    SizedBox(
-                      height: AppSizes.height * 0.02,
-                    ),
-                    _dispatchComponents.getJobContainer(
-                      jobDetail: _dispatchedProvider
-                          .tabbarResponse.result[index].loadId
-                          .toString(),
-                      pickUpLocation: _dispatchedProvider
-                          .tabbarResponse.result[index].pickupLocation,
-                      destinationLocation: _dispatchedProvider
-                          .tabbarResponse.result[index].dropoffLocation,
-                      startDate: _dispatchedProvider
-                          .tabbarResponse.result[index].pickupDate,
-                      time: _dispatchedProvider
-                          .tabbarResponse.result[index].pickupTime,
-                      status: _dispatchedProvider
-                          .tabbarResponse.result[index].status,
-                      vehicleType: _dispatchedProvider
-                          .tabbarResponse.result[index].vehicleTypeName,
-                      price:
-                          "${Strings.aed} ${_dispatchedProvider.tabbarResponse.result[index].shipperCost.round()}",
-                      onAlert: () {
-                        ApplicationToast.onDescriptionAlert(
-                            context: context,
-                            description: _dispatchedProvider.tabbarResponse
-                                .result[index].vehicleTypeDescription);
-                      },
-                      onTap: () {
-                        Navigator.push(
-                            context, SlideRightRoute(page: JobDetails(status:"Dispatch", loadId: _dispatchedProvider.tabbarResponse.result[index].loadId)));
-                      },
-                    ),
-                    SizedBox(
-                      height: AppSizes.height * 0.02,
-                    ),
-                  ],
-                );
-              })
+          ? _dispatchedProvider.tabbarResponse.result.length > 0
+              ? ListView.builder(
+                  itemCount: _dispatchedProvider.tabbarResponse.result.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        SizedBox(
+                          height: AppSizes.height * 0.02,
+                        ),
+                        _dispatchComponents.getJobContainer(
+                          jobDetail: _dispatchedProvider.tabbarResponse.result[index].loadId.toString(),
+                          pickUpLocation: _dispatchedProvider.tabbarResponse.result[index].pickupLocation,
+                          destinationLocation: _dispatchedProvider.tabbarResponse.result[index].dropoffLocation,
+                          startDate: _dispatchedProvider.tabbarResponse.result[index].pickupDateTime,
+                          time: _dispatchedProvider.tabbarResponse.result[index].pickupDateTime,
+                          status: _dispatchedProvider.tabbarResponse.result[index].status,
+                          vehicleType: _dispatchedProvider.tabbarResponse.result[index].vehicleTypeName,
+                          price: "${Strings.aed} ${_dispatchedProvider.tabbarResponse.result[index].shipperCost.round()}",
+                          onAlert: () {
+                            ApplicationToast.onDescriptionAlert(
+                                context: context,
+                                description: _dispatchedProvider.tabbarResponse.result[index].vehicleTypeDescription);
+                          },
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                SlideRightRoute(
+                                    page: JobDetails(
+                                        status: "Dispatch",
+                                        loadId: _dispatchedProvider
+                                            .tabbarResponse
+                                            .result[index]
+                                            .loadId)));
+                          },
+                        ),
+                        SizedBox(
+                          height: AppSizes.height * 0.02,
+                        ),
+                      ],
+                    );
+                  })
+              : Center(
+                  child: Container(
+                      height: AppSizes.height * 0.15,
+                      // width: AppSizes.width,
+                      child:
+                          CommonWidgets.onNullData(text: Strings.noAvailableLoads)),
+                )
           : Center(
               child: Container(
                 height: AppSizes.height * 0.15,

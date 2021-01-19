@@ -1,13 +1,16 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:connectivity/connectivity.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter_absolute_path/flutter_absolute_path.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
-import 'package:truckoom_shipper/models/api_models/common_response.dart';
-import 'package:truckoom_shipper/models/api_models/company_information_response.dart';
+import 'package:truckoom_shipper/models/api_models/edit_profile_response.dart';
+import 'package:truckoom_shipper/models/api_models/license_images_response.dart';
 import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/network/network_helper.dart';
 import 'package:truckoom_shipper/network/network_helper_impl.dart';
@@ -18,7 +21,6 @@ import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/loader.dart';
 import 'package:truckoom_shipper/utilities/utilities.dart';
 import 'package:http/http.dart' as http;
-import 'package:multipart_request/multipart_request.dart' as multipart;
 
 class BusinessInformationProvider extends ChangeNotifier {
   BuildContext context;
@@ -27,30 +29,22 @@ class BusinessInformationProvider extends ChangeNotifier {
   String deviceId;
   double ms;
   double currentTime;
+  bool _isImagesUploaded = false;
   var connectivityResult;
   NetworkHelper _networkHelper = NetworkHelperImpl();
-  CompanyInformationResponse _companyInformationResponse = CompanyInformationResponse.empty();
-  GenericDecodeEncode genericDecodeEncode = GenericDecodeEncode();
+  EditProfileResponse _editProfileResponse = EditProfileResponse.empty();
+  LicenseImagesResponse _licenseImagesResponse = LicenseImagesResponse.empty();
+  GenericDecodeEncode _genericDecodeEncode = GenericDecodeEncode();
   CustomPopup _loader = CustomPopup();
+  Dio _dio = Dio();
 
 
   init({@required BuildContext context}) async {
     this.context = context;
     deviceId = "";
+    _isImagesUploaded = false;
   }
 
-  Future getImage({@required BuildContext context}) async{
-    final image = await picker.getImage(source: ImageSource.gallery);
-    if (image != null) {
-      userImage = File(image.path);
-      print(image);
-      print(userImage);
-    }else{
-      print('No image selected');
-    }
-
-    notifyListeners();
-  }
 
   Future getBusinessInformation({
     @required BuildContext context,
@@ -86,7 +80,13 @@ class BusinessInformationProvider extends ChangeNotifier {
             durationTime: 3,
             heading: Strings.error,
             subHeading: Strings.trnErrorText);
-      } else if (onCheck == false) {
+      } else if (Constants.getLicenseImages().length < 1) {
+        ApplicationToast.getErrorToast(
+            durationTime: 3,
+            heading: Strings.error,
+            subHeading: Strings.licenseImagesErrorText);
+      }
+      else if (onCheck == false) {
         ApplicationToast.getErrorToast(
           durationTime: 3,
           heading: Strings.error,
@@ -105,13 +105,13 @@ class BusinessInformationProvider extends ChangeNotifier {
           "UserId": userId
         });
         if (response.statusCode == 200) {
-          _companyInformationResponse = CompanyInformationResponse.fromJson(
-              genericDecodeEncode.decodeJson(response.body));
-          if (_companyInformationResponse.code == 1) {
-            await Constants.setCommpanyName(_companyInformationResponse.result.companyInformations[0].companyName);
-            await Constants.setCommpanyPhone(_companyInformationResponse.result.companyInformations[0].contactNumber);
-            await Constants.setCommpanyTrn(_companyInformationResponse.result.companyInformations[0].trn);
-            await Constants.setLicenseExpiryDate(_companyInformationResponse.result.companyInformations[0].licenseExpiryDate);
+          _editProfileResponse = EditProfileResponse.fromJson(
+              _genericDecodeEncode.decodeJson(response.body));
+          if (_editProfileResponse.code == 1) {
+            Constants.setCommpanyName(_editProfileResponse.result.companyInformation[0].companyName);
+            Constants.setCommpanyPhone(_editProfileResponse.result.companyInformation[0].contactNumber);
+            Constants.setCommpanyTrn(_editProfileResponse.result.companyInformation[0].trn);
+            Constants.setLicenseExpiryDate(_editProfileResponse.result.companyInformation[0].licenseExpiryDate);
             _loader.hideLoader(context);
             ApplicationToast.getLoginSignupToast(
               context: context,
@@ -123,12 +123,13 @@ class BusinessInformationProvider extends ChangeNotifier {
                     ModalRoute.withName(Routes.businessInformation));
               },
             );
+
           } else {
             _loader.hideLoader(context);
             ApplicationToast.getErrorToast(
                 durationTime: 3,
                 heading: Strings.error,
-                subHeading: _companyInformationResponse.message);
+                subHeading: _editProfileResponse.message);
           }
         } else {
           _loader.hideLoader(context);
@@ -143,4 +144,65 @@ class BusinessInformationProvider extends ChangeNotifier {
       print(error.toString());
     }
   }
+
+  Future onUploadLicenseImages({
+    @required BuildContext context,
+    @required List images,
+    @required int userId,
+  }) async {
+
+      List<MultipartFile> multipart = List<MultipartFile>();
+      for (int i = 0; i < images.length; i++) {
+        var path = await FlutterAbsolutePath.getAbsolutePath(images[i].identifier);
+        multipart.add(await MultipartFile.fromFile(path, filename: path.split("/").last));
+        print('hello');
+        print(path);
+      }
+      print('hello');
+
+      try {
+        if(images.isNotEmpty){
+        FormData formData = FormData.fromMap({
+          "Image": multipart,
+          "id": userId,
+        });
+        _loader.showLoader(context: context);
+        Response _response = await _dio.post(
+          uploadLicenseImages,
+          data: formData,
+          options: Options(
+            contentType: "multipart/form-data",
+            // headers: {'Authorization': ""}
+          ),
+        );
+        if (_response.statusCode == 200) {
+          _licenseImagesResponse = LicenseImagesResponse.fromJson(_response.data);
+          if (_licenseImagesResponse.code == 1) {
+            await Constants.setLicenseImages(_licenseImagesResponse.result);
+            _loader.hideLoader(context);
+            print('License Api success');
+            print(_licenseImagesResponse.result[0].filePath);
+            notifyListeners();
+          } else {
+            _loader.hideLoader(context);
+            ApplicationToast.getErrorToast(
+              durationTime: 3,
+              heading: Strings.error,
+              subHeading: _licenseImagesResponse.message,
+            );
+          }
+        } else {
+          _loader.hideLoader(context);
+          ApplicationToast.getErrorToast(
+              durationTime: 3,
+              heading: Strings.error,
+              subHeading: Strings.somethingWentWrong);
+        }
+        }
+      } catch (error) {
+        print(error.toString());
+      }
+
+  }
+
 }

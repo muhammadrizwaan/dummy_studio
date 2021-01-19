@@ -1,15 +1,17 @@
+
+import 'package:date_time_format/date_time_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
-import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/contsants/constants.dart';
-import 'package:truckoom_shipper/res/assets.dart';
+import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/businessEditProfile/business_edit_profile.dart';
 import 'package:truckoom_shipper/screens/businessProfile/business_profile_components.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 
 class BusinessProfile extends StatefulWidget {
   String tag;
@@ -45,11 +47,13 @@ class _BusinessProfileState extends State<BusinessProfile> {
             children: [
               CommonWidgets.ProfileAppBar(
                   heading: Strings.profile,
-                  onTap: (){Navigator.pop(context);},
-                  onBellTap: (){
-                    Navigator.pushReplacement(context, SlideRightRoute(page: BusinessEditProfile()));
-                  }
-              ),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  onBellTap: () {
+                    Navigator.pushReplacement(
+                        context, SlideRightRoute(page: BusinessEditProfile()));
+                  }),
               Expanded(
                 child: ListView(
                   children: [
@@ -77,10 +81,8 @@ class _BusinessProfileState extends State<BusinessProfile> {
                                   name: Constants.getUserName(),
                                   email: Constants.getUserEmail(),
                                   password: Constants.getPassword(),
-                                  country: 'Costa Rica'),
-                          SizedBox(
-                            height: AppSizes.height * 0.02,
-                          ),
+                                  country: Constants.getCityName()),
+                          SizedBox(height: AppSizes.height * 0.02),
                           _businessProfileComponents.getProfileLable(
                               lableText: "Business Information"),
                           SizedBox(
@@ -88,40 +90,43 @@ class _BusinessProfileState extends State<BusinessProfile> {
                           ),
                           _businessProfileComponents
                               .getBusinessInfoProfileContainer(
-                                  businessName: Constants.getCommpanyName(),
-                                  phoneNumber: Constants.getCommpanyPhone(),
-                                  trn: Constants.getCommpanyTrn(),
-                                  licenseExpiryDate: Constants.getLicenseExpiryDate().split('T').first
+                            businessName: Constants.getCommpanyName(),
+                            phoneNumber: Constants.getCommpanyPhone(),
+                            trn: Constants.getCommpanyTrn(),
+                            licenseExpiryDate:
+                                Constants.getLicenseExpiryDate() == "" ? "":
+                                    DateTimeFormat.format(DateTime.parse(Constants.getLicenseExpiryDate()), format: 'M j, Y'),
                           ),
-                          Center(
-                            child: Image(
-                              image: AssetImage(Assets.licenceImg),
-                              width: 400,
-                              height: 200,
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: AppColors.yellow
+                          SizedBox(height: AppSizes.height * 0.03),
+                          Constants.getLicenseImages().length > 0 ?
+                          Container(
+                            height: AppSizes.height * 0.25,
+                            child: new Swiper(
+                              itemCount: Constants.getLicenseImages().length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    // color: Colors.amber,
+                                    image: DecorationImage(
+                                        image: NetworkImage(baseUrl+(Constants.getLicenseImages()[index]["FilePath"])),
+                                        fit: BoxFit.cover),
+                                  ),
+                                );
+                              },
+                              layout: SwiperLayout.DEFAULT,
+                              viewportFraction: 0.8,
+                              // itemHeight: AppSizes.height * 0.1,
+                              scale: 0.9,
+                              pagination: new SwiperPagination(
+                                builder: new DotSwiperPaginationBuilder(
+                                  color: AppColors.grey,
+                                  activeColor: AppColors.yellow,
                                 ),
-                                height: 10,
-                                width: 10,
                               ),
-                              SizedBox(width: 8),
-                              Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: AppColors.grey
-                                ),
-                                height: 10,
-                                width: 10,
-                              )
-                            ],
-                          )
+                            ),
+                          ):
+                              CommonWidgets.onNullData(text: "No Images")
                         ],
                       ),
                     )

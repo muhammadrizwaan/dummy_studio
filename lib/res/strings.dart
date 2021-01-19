@@ -58,7 +58,11 @@ class Strings {
   static const String tokenKey = "TokenKey";
   static const String licenseExpiryDateKey = "LicenseExpiryDateKey";
   static const String cityNameKey = "CityNameKey";
+  static const String cityIdKey = "CityIdKey";
   static const String licenseImagesKey = "LicenseImagesKey";
+
+
+  static const String noAvailableLoads = "No Available Loads";
 
 
   // Error Toast Text
@@ -67,10 +71,12 @@ class Strings {
   static const String messageSentSuccessfully = "Message sent successfully";
   static const String invalidCode = "Invalid Code";
   static const String trnErrorText = "Please enter valid TRN";
+  static const String licenseImagesErrorText = "Please attach the copy of License";
   static const String phoneNumberErrorText = "Please enter valid Phone Number";
   static const String checkBoxErrorText = "Please check the Term and Conditions";
   static const String somethingWentWrong = "Something went wrong";
   static const String nameErrorText = "Please enter valid Name";
+  static const String imagesErrorText = "Please upload images";
   static const String businessNameErrorText = "Please enter the Business Name";
   static const String authorizationErrorText = "Authorization has been denied for this request";
   static const String emailErrorText = "Email is empty or email is not in proper form";
@@ -84,4 +90,6 @@ class Strings {
   static const String weightErrorText = "Please enter weight";
   static const String noOfVehicleErrorText = "Please enter number of vehicle";
   static const String goodTypeErrorText = "Please select GoodType";
+  static const String pickupLocationErrorText = "Please select Pickup Location";
+  static const String dropoffLocationErrorText = "Please select Dropoff Location";
 }

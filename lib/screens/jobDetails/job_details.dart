@@ -70,8 +70,8 @@ class _JobDetailsState extends State<JobDetails> {
                       ),
                       SlidingUpPanel(
                           isDraggable: true,
-                          minHeight: AppSizes.height*0.35,
-                          maxHeight: AppSizes.height*0.65,
+                          minHeight: AppSizes.height*0.4,
+                          maxHeight: AppSizes.height*0.75,
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(2),
                             topRight: Radius.circular(2)),
@@ -117,6 +117,7 @@ class _JobDetailsState extends State<JobDetails> {
               ),
             ),
           ),
+          SizedBox(height: AppSizes.height * 0.01),
           Expanded(
             child: ListView(
               children: [
@@ -133,9 +134,6 @@ class _JobDetailsState extends State<JobDetails> {
                           pickupLocation: _jobDetailsProvider.loadDetailResponse.result.pickupLocation,
                           dropOffLocation: _jobDetailsProvider.loadDetailResponse.result.dropoffLocation
                       ),
-                      SizedBox(height: AppSizes.height * 0.01),
-                      // _jobDetailsComponents.getExpectedRate(),
-                      SizedBox(height: AppSizes.height * 0.02),
                       TextView.getLabelText04(
                           Strings.roundTrip,
                           color: AppColors.colorBlack
