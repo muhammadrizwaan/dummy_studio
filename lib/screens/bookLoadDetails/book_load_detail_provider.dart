@@ -1,6 +1,4 @@
-import 'package:path/path.dart';
-import 'package:async/async.dart';
-import 'dart:io';
+
 import 'package:flutter_absolute_path/flutter_absolute_path.dart';
 import 'package:http/http.dart' as http;
 
@@ -63,9 +61,12 @@ class BookLoadDetailProvider extends ChangeNotifier {
     @required String noOfVehicles,
     @required String description,
     @required bool isRoundTrip,
-    @ required List images
+    @ required List images,
+    @required int distance
   }) async {
     try {
+      print('distance');
+      print(distance);
       token = await _getToken.onToken();
       userId = await Constants.getUserId();
       connectivityResult = Connectivity().checkConnectivity();
@@ -96,8 +97,8 @@ class BookLoadDetailProvider extends ChangeNotifier {
           "GoodTypeId": goodTypeId,
           "Weight": weight,
           "NoOfVehicles": noOfVehicles,
+          "Distance": distance,
           "Description": description,
-          "PromoCodeId": 0,
           "IsRoundTrip": isRoundTrip
         });
         if (response.statusCode == 200) {
@@ -181,7 +182,8 @@ class BookLoadDetailProvider extends ChangeNotifier {
           ApplicationToast.getErrorToast(
               durationTime: 3,
               heading: Strings.error,
-              subHeading: Strings.somethingWentWrong);
+              subHeading: Strings.somethingWentWrong,
+          );
         }
       } catch (error) {
         print(error.toString());

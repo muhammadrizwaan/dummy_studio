@@ -30,7 +30,7 @@ class BookLoadDetails extends StatefulWidget {
       pickupLocation,
       dropoffLocation,
       numOfVehicle;
-  int goodTypeId, vehicleTypeId, vehicleCategoryId;
+  int goodTypeId, vehicleTypeId, vehicleCategoryId, Distance;
   bool isRoundTrip;
   String pickUpDate;
   String Rate;
@@ -53,7 +53,9 @@ class BookLoadDetails extends StatefulWidget {
     @required this.pickupLocation,
     @required this.dropoffLocation,
     @required this.goodTypeId,
-    @required this.vehicleTypeId,});
+    @required this.vehicleTypeId,
+    @required this.Distance
+  });
 
   @override
   _BookLoadDetailsState createState() => _BookLoadDetailsState();
@@ -249,7 +251,8 @@ class _BookLoadDetailsState extends State<BookLoadDetails> {
                               noOfVehicles: widget.numOfVehicle,
                               description: widget.description,
                               isRoundTrip: widget.isRoundTrip,
-                              images: widget.images
+                              images: widget.images,
+                              distance: widget.Distance
                             );
                           }),
                       SizedBox(height: AppSizes.height * 0.02)

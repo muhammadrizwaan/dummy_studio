@@ -76,6 +76,7 @@ class Strings {
   static const String checkBoxErrorText = "Please check the Term and Conditions";
   static const String somethingWentWrong = "Something went wrong";
   static const String nameErrorText = "Please enter valid Name";
+  static const String subjectErrorText = "Please enter Subject";
   static const String imagesErrorText = "Please upload images";
   static const String businessNameErrorText = "Please enter the Business Name";
   static const String authorizationErrorText = "Authorization has been denied for this request";

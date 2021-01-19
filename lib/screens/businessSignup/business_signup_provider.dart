@@ -122,6 +122,7 @@ class BusinessSignupProvider extends ChangeNotifier {
             Constants.setUserPhone(_commonResponse.result.user.phone);
             Constants.setUserImage(_commonResponse.result.user.profilePicture);
             Constants.setCityName(_commonResponse.result.user.cityName);
+            Constants.setCityId(_commonResponse.result.user.cityId);
             Constants.setUser(Strings.business);
 
             ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();

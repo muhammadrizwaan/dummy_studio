@@ -22,8 +22,6 @@ class _BottomTabState extends State<BottomTab> {
   BottomTabComponents _bottomTabComponents;
   BottomTabProvider _bottomTabProvider;
   TextEditingController search;
-  // int _currentIndex = 0;
-  int _value = 1;
 
   List<Widget> pages = [
     BookLoad(),

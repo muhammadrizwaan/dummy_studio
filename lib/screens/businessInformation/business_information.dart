@@ -275,7 +275,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
       initialDate: pickedDate,
       // firstDate: DateTime(DateTime.now().year - 10),
       // lastDate: DateTime(DateTime.now().year + 10),
-      firstDate: DateTime(DateTime.now().day),
+      firstDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
       lastDate: DateTime(DateTime.now().year + 10),
       builder: (BuildContext context, Widget child) {
         return Theme(

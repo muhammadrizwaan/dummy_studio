@@ -1,4 +1,4 @@
-import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:connectivity/connectivity.dart';
@@ -6,9 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:truckoom_shipper/commons/get_token.dart';
 import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
-import 'package:truckoom_shipper/models/api_models/estimated_rate_response.dart';
 import 'package:truckoom_shipper/models/api_models/good_types_response.dart';
-import 'package:truckoom_shipper/models/api_models/load_detail_response.dart';
 import 'package:truckoom_shipper/models/api_models/load_images_response.dart';
 import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/network/network_helper.dart';
@@ -28,7 +26,6 @@ class AddLoadProvider extends ChangeNotifier {
   String token;
   NetworkHelper _networkHelper = NetworkHelperImpl();
   GoodTypesResponse _goodTypesResponse = GoodTypesResponse.empty();
-  EstimatedRateResponse _estimatedRateResponse = EstimatedRateResponse.empty();
   CustomPopup _loader = CustomPopup();
   Dio _dio = Dio();
   LoadImagesResponse loadImagesResponse = LoadImagesResponse.empty();
@@ -112,7 +109,9 @@ class AddLoadProvider extends ChangeNotifier {
       @required int VehicleTypeId,
       @required int vehicleCategoryId,
       @required List imagesList,
-      @required String Rate}) async {
+      @required String Rate,
+      @required int distance,
+      }) async {
     try {
       token = await getToken.onToken();
       if (connectivityResult == ConnectivityResult.none) {
@@ -151,64 +150,32 @@ class AddLoadProvider extends ChangeNotifier {
             heading: Strings.error,
             subHeading: Strings.imagesErrorText);
       } else {
-        // _loader.showLoader(context: context);
-        // http.Response response =
-        //     await _networkHelper.post(estimatedLoadPriceApi, headers: {
-        //   "Content-Type": "application/json",
-        //   'Authorization': token
-        // }, body: {
-        //   "PickupLocation": pickupLocation,
-        //   "PickupLatitude": pickupLatitude,
-        //   "PickupLongitude": pickupLongitude,
-        //   "DropoffLocation": dropoffLocation,
-        //   "DropoffLatitude": dropoffLatitude,
-        //   "DropoffLongitude": dropoffLongitude,
-        //   "VehicleCount": numOfVehicle,
-        //   "IsRoundTrip": isRoundTrip,
-        //   "VehicleCategoryId": goodTypeId
-        // });
-        // if (response.statusCode == 200) {
-        //   _estimatedRateResponse = EstimatedRateResponse.fromJson(
-        //       _genericDecodeEncode.decodeJson(response.body));
-        //   if (_estimatedRateResponse.code == 1) {
-        //     _loader.hideLoader(context);
-        //     print('Estimated Rate Success');
         Navigator.push(
-            context,
-            SlideRightRoute(
-                page: BookLoadDetails(
-                    name: name,
-                    phone: phone,
-                    weight: weight,
-                    numOfVehicle: numOfVehicle,
-                    description: description,
-                    isRoundTrip: isRoundTrip,
-                    pickUpDate: pickupDateTime,
-                    Rate: Rate,
-                    pickupLatitude: pickupLatitude,
-                    pickupLongitude: pickupLongitude,
-                    dropoffLatitude: dropoffLatitude,
-                    dropoffLongitude: dropoffLongitude,
-                    pickupLocation: pickupLocation,
-                    dropoffLocation: dropoffLocation,
-                    goodTypeId: goodTypeId,
-                    vehicleTypeId: vehicleTypeId,
-                    vehicleCategoryId: vehicleCategoryId,
-                    images: imagesList)));
-        //   } else {
-        //     _loader.hideLoader(context);
-        //     ApplicationToast.getErrorToast(
-        //         durationTime: 3,
-        //         heading: Strings.error,
-        //         subHeading: _estimatedRateResponse.message);
-        //   }
-        // } else {
-        //   _loader.hideLoader(context);
-        //   ApplicationToast.getErrorToast(
-        //       durationTime: 3,
-        //       heading: Strings.error,
-        //       subHeading: Strings.somethingWentWrong);
-        // }
+          context,
+          SlideRightRoute(
+            page: BookLoadDetails(
+              name: name,
+              phone: phone,
+              weight: weight,
+              numOfVehicle: numOfVehicle,
+              description: description,
+              isRoundTrip: isRoundTrip,
+              pickUpDate: pickupDateTime,
+              Rate: Rate,
+              pickupLatitude: pickupLatitude,
+              pickupLongitude: pickupLongitude,
+              dropoffLatitude: dropoffLatitude,
+              dropoffLongitude: dropoffLongitude,
+              pickupLocation: pickupLocation,
+              dropoffLocation: dropoffLocation,
+              goodTypeId: goodTypeId,
+              vehicleTypeId: vehicleTypeId,
+              vehicleCategoryId: vehicleCategoryId,
+              images: imagesList,
+              Distance: distance
+            ),
+          ),
+        );
       }
     } catch (error) {
       print(error.toString());
@@ -264,5 +231,4 @@ class AddLoadProvider extends ChangeNotifier {
       print(error.toString());
     }
   }
-
 }
