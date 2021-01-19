@@ -130,7 +130,7 @@ class BusinessEditProfileProvider extends ChangeNotifier{
   }) async {
     try {
       int userId = Constants.getUserId();
-      int cityId = city > 1 ? city : Constants.getCityId();
+      int cityId = city > 0 ? city : await Constants.getCityId();
       deviceId = await PreferenceUtils.getString(Strings.deviceId);
       connectivity = await (Connectivity().checkConnectivity());
       if (connectivity == ConnectivityResult.none) {

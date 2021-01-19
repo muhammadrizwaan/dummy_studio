@@ -25,7 +25,7 @@ class AddLoad extends StatefulWidget {
       DropoffLongitude,
       PickupLocation,
       DropoffLocation;
-  int VehicleTypeId, VehicleCategoryId;
+  int VehicleTypeId, VehicleCategoryId, Distance;
   double Rate, multiplier;
 
   AddLoad(
@@ -40,6 +40,7 @@ class AddLoad extends StatefulWidget {
       @required this.VehicleTypeId,
         @required this.Rate,
         @required this.multiplier,
+        @required this.Distance
       });
 
   @override
@@ -370,6 +371,7 @@ class _AddLoadState extends State<AddLoad> {
                                         vehicleTypeId: widget.VehicleTypeId,
                                         imagesList: images,
                                         Rate: tolalRate.toString(),
+                                        distance: widget.Distance
                                       );
                                     }),
                                 SizedBox(height: AppSizes.height * 0.02)
@@ -409,7 +411,7 @@ class _AddLoadState extends State<AddLoad> {
       context: context,
       initialDate: pickedDate,
       firstDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
-      lastDate: DateTime(DateTime.now().year + 10),
+      lastDate: DateTime(DateTime.now().year + 20),
 
       builder: (BuildContext context, Widget child) {
         return Theme(

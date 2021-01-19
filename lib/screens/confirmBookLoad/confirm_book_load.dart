@@ -11,22 +11,22 @@ import 'package:truckoom_shipper/screens/select_vehicle/select_vehicle.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 class ConfirmBookLoad extends StatefulWidget {
-  String
-      PickupLatitude,
+  String PickupLatitude,
       PickupLongitude,
       DropoffLatitude,
       DropoffLongitude,
       PickupLocation,
       DropoffLocation;
+  int Distance;
 
-  ConfirmBookLoad({
-    @required this.PickupLatitude,
-    @required this.PickupLongitude,
-    @required this.DropoffLatitude,
-    @required this.DropoffLongitude,
-    @required this.PickupLocation,
-    @required this.DropoffLocation,
-  });
+  ConfirmBookLoad(
+      {@required this.PickupLatitude,
+      @required this.PickupLongitude,
+      @required this.DropoffLatitude,
+      @required this.DropoffLongitude,
+      @required this.PickupLocation,
+      @required this.DropoffLocation,
+      @required this.Distance});
 
   @override
   _ConfirmBookLoadState createState() => _ConfirmBookLoadState();
@@ -112,16 +112,19 @@ class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
                     text: "Confirm",
                     onPress: () {
                       Navigator.push(
-                          context,
-                          SlideRightRoute(
-                              page: SelectVehicle(
+                        context,
+                        SlideRightRoute(
+                          page: SelectVehicle(
                             PickupLatitude: widget.PickupLatitude,
                             PickupLongitude: widget.PickupLongitude,
                             DropoffLatitude: widget.DropoffLatitude,
                             DropoffLongitude: widget.DropoffLongitude,
                             PickupLocation: widget.PickupLocation,
                             DropoffLocation: widget.DropoffLocation,
-                          )));
+                            Distance: widget.Distance,
+                          ),
+                        ),
+                      );
                     }),
                 SizedBox(height: AppSizes.height * 0.02),
               ],

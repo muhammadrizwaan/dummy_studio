@@ -4,7 +4,6 @@ import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/get_token.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
 import 'package:truckoom_shipper/models/api_models/estimated_rate_response.dart';
-import 'package:truckoom_shipper/models/api_models/vehicle_by_vehicle_id_response.dart';
 import 'package:truckoom_shipper/models/api_models/vehicle_category_response.dart';
 import 'package:truckoom_shipper/models/api_models/vehicle_type_response.dart';
 import 'package:truckoom_shipper/network/api_urls.dart';
@@ -12,7 +11,6 @@ import 'package:truckoom_shipper/network/network_helper.dart';
 import 'package:truckoom_shipper/network/network_helper_impl.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/addLoad/add_load.dart';
-import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_details.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/loader.dart';
 import 'package:http/http.dart' as http;
@@ -25,7 +23,7 @@ class SelectVehicleProvider extends ChangeNotifier{
   NetworkHelper _networkHelper = NetworkHelperImpl();
   VehicleTypeResponse _vehicleTypeResponse = VehicleTypeResponse.empty();
   VehicleCategoryResponse _vehicleCategoryResponse = VehicleCategoryResponse.empty();
-  VehicleCategoryResponse filteredResult = VehicleCategoryResponse.empty();
+  VehicleTypeResponse filteredResult = VehicleTypeResponse.empty();
   CustomPopup _laoder = CustomPopup();
   GenericDecodeEncode _genericDecodeEncode = GenericDecodeEncode();
   EstimatedRateResponse _estimatedRateResponse = EstimatedRateResponse.empty();
@@ -37,9 +35,8 @@ class SelectVehicleProvider extends ChangeNotifier{
 
   init({@required BuildContext context}) async{
     isDataFetched = false;
-    filteredResult =  VehicleCategoryResponse.empty();
+    filteredResult =  VehicleTypeResponse.empty();
     token = "";
-    // data = [];
     description =[];
     await _getGoodTypesApi();
     this.context = context;
@@ -63,9 +60,7 @@ class SelectVehicleProvider extends ChangeNotifier{
         if(response.statusCode == 200){
           _vehicleTypeResponse = VehicleTypeResponse.fromJson(_genericDecodeEncode.decodeJson(response.body));
           if(_vehicleTypeResponse.code == 1){
-            for(int i = 0; i < _vehicleTypeResponse.result.length; i++){
-              description.add(_vehicleTypeResponse.result[i].description);
-            }
+            _isVehicleFetched = true;
             isDataFetched = true;
             notifyListeners();
           }
@@ -89,7 +84,7 @@ class SelectVehicleProvider extends ChangeNotifier{
   }
 
 
-  Future onGetVehicleById({@required BuildContext context, @required int vehicleId}) async{
+  Future onGetCategory({@required BuildContext context, @required int vehicleId}) async{
     try{
       token = await getToken.onToken();
       connectivityResult = Connectivity().checkConnectivity();
@@ -110,11 +105,8 @@ class SelectVehicleProvider extends ChangeNotifier{
           _vehicleCategoryResponse = VehicleCategoryResponse.fromJson(_genericDecodeEncode.decodeJson(response.body));
           if(_vehicleCategoryResponse.code == 1){
             _laoder.hideLoader(context);
-            // data = _vehicleCategoryResponse.result;
-            for(final data in _vehicleCategoryResponse.result){
-              filteredResult.result.add(data);
-            }
-            _isVehicleFetched = true;
+            _isVehicleFetched = false;
+            print('category api called');
             notifyListeners();
           }
           else{
@@ -141,6 +133,7 @@ class SelectVehicleProvider extends ChangeNotifier{
     @required String dropoffLocation,
     @required int VehicleTypeId,
     @required int vehicleCategoryId,
+    @required int distance,
   }) async {
     try {
       token = await getToken.onToken();
@@ -168,12 +161,13 @@ class SelectVehicleProvider extends ChangeNotifier{
           "Content-Type": "application/json",
           'Authorization': token
         }, body: {
-          "PickupLocation": pickupLocation,
-          "PickupLatitude": pickupLatitude,
-          "PickupLongitude": pickupLongitude,
-          "DropoffLocation": dropoffLocation,
-          "DropoffLatitude": dropoffLatitude,
-          "DropoffLongitude": dropoffLongitude,
+          // "PickupLocation": pickupLocation,
+          // "PickupLatitude": pickupLatitude,
+          // "PickupLongitude": pickupLongitude,
+          // "DropoffLocation": dropoffLocation,
+          // "DropoffLatitude": dropoffLatitude,
+          // "DropoffLongitude": dropoffLongitude,
+          "Distance": distance,
           "VehicleCount": 1,
           "IsRoundTrip": false,
           "VehicleCategoryId": vehicleCategoryId
@@ -188,7 +182,7 @@ class SelectVehicleProvider extends ChangeNotifier{
                 context,
                 SlideRightRoute(
                     page: AddLoad(
-                      Rate: _estimatedRateResponse.result.totalCost,
+                      Rate: _estimatedRateResponse.result.shipperCost,
                       PickupLatitude: pickupLatitude,
                       PickupLongitude: pickupLongitude,
                       DropoffLatitude: dropoffLatitude,
@@ -197,7 +191,8 @@ class SelectVehicleProvider extends ChangeNotifier{
                       DropoffLocation: dropoffLocation,
                       VehicleTypeId: VehicleTypeId,
                       VehicleCategoryId: vehicleCategoryId,
-                        multiplier: _estimatedRateResponse.result.multiplier
+                        multiplier: _estimatedRateResponse.result.roundTripMultiplier,
+                      Distance: distance
                     )));
           } else {
             _laoder.hideLoader(context);
@@ -221,12 +216,12 @@ class SelectVehicleProvider extends ChangeNotifier{
 
   setFilteredList(){
     filteredResult.result.clear();
-    for(final listData in _vehicleCategoryResponse.result){
+    for(final listData in _vehicleTypeResponse.result){
       filteredResult.result.add(listData);
     }
   }
-  VehicleCategoryResponse getRidesByUserIdResponse(){
-    return this._vehicleCategoryResponse;
+  VehicleTypeResponse getRidesByUserIdResponse(){
+    return this._vehicleTypeResponse;
   }
 
   bool stringContains (String searchIn, String searchFor) {
@@ -247,8 +242,11 @@ class SelectVehicleProvider extends ChangeNotifier{
     this._isVehicleFetched = isVehicleFetched;
   }
 
-  VehicleCategoryResponse  getFilteredList(){
+  VehicleTypeResponse  getFilteredList(){
     return this.filteredResult;
+  }
+  VehicleCategoryResponse  getCategoryResponse(){
+    return this._vehicleCategoryResponse;
   }
 
   getIsVehicleFetched(){

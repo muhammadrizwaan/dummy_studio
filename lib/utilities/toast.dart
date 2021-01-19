@@ -51,6 +51,117 @@ class ApplicationToast {
     );
   }
 
+  static Widget onContactUsAlert(
+      {
+        @required BuildContext context,
+        @required Function onPress,
+      }) {
+    showDialog(
+      context: context,
+      builder: (_) {
+        return Material(
+          color: AppColors.blackTextColor.withOpacity(0.5),
+          child: Center(
+            child: Stack(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(
+                      left: AppSizes.width * 0.08,
+                      right: AppSizes.width * 0.08),
+                  height: AppSizes.height * 0.25,
+                  width: AppSizes.width,
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                    left: AppSizes.width * 0.12,
+                    right: AppSizes.width * 0.12,
+                    top: AppSizes.width * 0.07,
+                  ),
+                  padding: EdgeInsets.only(
+                    top: AppSizes.height * 0.08,
+                  ),
+                  height: AppSizes.height * 0.25,
+                  width: AppSizes.width,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border:
+                    Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
+                    borderRadius: BorderRadius.circular(
+                      10,
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(
+                          left: AppSizes.height * 0.01,
+                          right: AppSizes.height * 0.01,
+                        ),
+                        child: TextView.getPopUpText(
+                          'Notification has been sent to truckoom. They will contact soon',
+                          color: AppColors.black,
+                        ),
+                      ),
+                      SizedBox(height: AppSizes.height * 0.03,),
+
+                      GestureDetector(
+                          onTap: () => onPress(),
+                          child: Container(
+                            margin: EdgeInsets.only(left: AppSizes.width * 0.05,
+                                right: AppSizes.width * 0.05),
+                            width: AppSizes.width,
+                            height: AppSizes.height * 0.06,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              border: Border.all(
+                                color: AppColors.yellow,
+                              ),
+                              color: AppColors.yellow,
+                            ),
+                            child: Center(
+                              child: Text(
+                                "OK",
+                                style: TextStyle(
+                                  decoration: TextDecoration.none,
+                                  color: AppColors.white,
+                                  fontFamily: Assets.poppinsLight,
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ),
+                          )
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: AppSizes.width * 0.42),
+                  height: AppSizes.width * 0.15,
+                  width: AppSizes.width * 0.15,
+                  decoration: BoxDecoration(
+                    color: AppColors.yellow,
+                    border:
+                    Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
+                    borderRadius: BorderRadius.circular(
+                      10,
+                    ),
+                  ),
+                  child: Icon(
+                    Entypo.air,
+                    color: Colors.white,
+                    size: 40,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   static Widget onDescriptionAlert(
       {@required BuildContext context, @required String description}) {
     showDialog(

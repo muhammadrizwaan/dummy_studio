@@ -193,6 +193,7 @@ class _BookLoadState extends State<BookLoad> {
                                   dropoff_longitude: dropoff_longitude,
                                   pickup_location: pickup_location,
                                   dropoff_location: dropoff_location,
+                                  distance: 200
                               );
                             },
                             child: TextView.getBottomButtonText04(
