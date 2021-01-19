@@ -19,7 +19,8 @@ class BookLoadProvider extends ChangeNotifier{
     @required String dropoff_latitude,
     @required String dropoff_longitude,
     @required String pickup_location ,
-    @required String dropoff_location
+    @required String dropoff_location,
+    @required int distance
   }) async{
     if(pickup_location.isEmpty || pickup_latitude.isEmpty || pickup_longitude.isEmpty){
       ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: Strings.pickupLocationErrorText);
@@ -38,6 +39,7 @@ class BookLoadProvider extends ChangeNotifier{
                 DropoffLongitude: dropoff_longitude,
                 PickupLocation: pickup_location,
                 DropoffLocation: dropoff_location,
+                Distance: distance
               ),
           ),
       );

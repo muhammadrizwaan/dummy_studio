@@ -1,6 +1,8 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/get_token.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/contsants/constants.dart';
@@ -11,6 +13,8 @@ import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/network/network_helper.dart';
 import 'package:truckoom_shipper/network/network_helper_impl.dart';
 import 'package:truckoom_shipper/res/strings.dart';
+import 'package:truckoom_shipper/routes/routes.dart';
+import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/loader.dart';
 import 'package:truckoom_shipper/utilities/utilities.dart';
@@ -37,7 +41,9 @@ class ContactUsProvider extends ChangeNotifier {
 
   Future getContactUs({@required BuildContext context,
     @required String name,
-    @required String message}) async {
+    @required String message,
+    @required int callbackStatus
+  }) async {
     try {
       int userId = await Constants.getUserId();
       email = await Constants.getUserEmail();
@@ -51,7 +57,7 @@ class ContactUsProvider extends ChangeNotifier {
         ApplicationToast.getErrorToast(
             durationTime: 3,
             heading: Strings.error,
-            subHeading: Strings.nameErrorText);
+            subHeading: Strings.subjectErrorText);
       } else if (message.isEmpty) {
         ApplicationToast.getErrorToast(
             durationTime: 3,
@@ -67,38 +73,44 @@ class ContactUsProvider extends ChangeNotifier {
           "Subject": name,
           "Email": email,
           "Message": message,
-          "CreatedBy": userId
+          "CreatedBy": userId,
+          "IsCallback": callbackStatus
         });
         if (response.statusCode == 200) {
           contactUsResponse = ContactUsResponse.fromJson(
               genericDecodeEncode.decodeJson(response.body));
           if (contactUsResponse.code == 1) {
             _loader.hideLoader(context);
-            ApplicationToast.getSuccessToast(
-                durationTime: 3,
-                heading: Strings.success,
-                subHeading: Strings.messageSentSuccessfully);
-            Navigator.pop(context);
+            ApplicationToast.onContactUsAlert(
+              context: context,
+              onPress: (){
+                Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: BottomTab()), ModalRoute.withName(Routes.contactUs));
+              },
+            );
+
           } else {
             _loader.hideLoader(context);
             ApplicationToast.getErrorToast(
                 durationTime: 3,
                 heading: Strings.error,
-                subHeading: contactUsResponse.message);
+                subHeading: contactUsResponse.message,
+            );
           }
         } else {
           _loader.hideLoader(context);
           ApplicationToast.getErrorToast(
               durationTime: 3,
               heading: Strings.error,
-              subHeading: Strings.somethingWentWrong);
+              subHeading: Strings.somethingWentWrong,
+          );
         }
       }
     } catch (error) {
       ApplicationToast.getErrorToast(
           durationTime: 3,
           heading: Strings.error,
-          subHeading: Strings.somethingWentWrong);
+          subHeading: Strings.somethingWentWrong,
+      );
       _loader.hideLoader(context);
       print(error.toString());
     }

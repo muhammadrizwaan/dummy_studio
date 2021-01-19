@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/octicons_icons.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:truckoom_shipper/widgets/text_views.dart';
 
 import '../../res/assets.dart';
 import '../../res/colors.dart';
@@ -132,28 +133,6 @@ class SelectVechileComponents {
                         // fontWeight: FontWeight.bold
                       ),
                     ),
-                    // Row(
-                    //   children: [
-                    //     Text(
-                    //       'Vehicle Type: $vehicleDetail | ',
-                    //       style: TextStyle(
-                    //         fontSize: 11,
-                    //         fontFamily: Assets.poppinsRegular,
-                    //         color: AppColors.colorBlack,
-                    //         // fontWeight: FontWeight.bold
-                    //       ),
-                    //     ),
-                    //     Text(
-                    //       'Category: $Category',
-                    //       style: TextStyle(
-                    //         fontSize: 11,
-                    //         fontFamily: Assets.poppinsRegular,
-                    //         color: AppColors.colorBlack,
-                    //         // fontWeight: FontWeight.bold
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                   ],
                 )
               ],
@@ -161,6 +140,34 @@ class SelectVechileComponents {
             GestureDetector(
               onTap: () => onAlert(),
               child: Icon(Octicons.info, size: 20, color: AppColors.colorBlack.withOpacity(0.70),),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget getGoodsType({
+    @required BuildContext context,
+    @required Function onPress,
+    @required String text
+  }){
+    return GestureDetector(
+      onTap: () => onPress(),
+      child: Container(
+        // height: AppSizes.height * 0.05,
+        width: AppSizes.width,
+        margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05, vertical: AppSizes.height * 0.01),
+        padding: EdgeInsets.only(left: 10),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.add_location, size: 20, color: AppColors.colorBlack.withOpacity(0.6),),
+            SizedBox(width: AppSizes.width * 0.02),
+            Container(
+              width: AppSizes.width * 0.78,
+              child: TextView.getSearchText(text, color: AppColors.colorBlack)
             ),
           ],
         ),

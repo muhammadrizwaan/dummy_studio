@@ -67,9 +67,7 @@ class _AcceptedState extends State<Accepted> {
                               context, SlideRightRoute(page: JobDetails(status:"Accepted", loadId: _acceptedProvider.tabbarResponse.result[index].loadId)));
                         },
                         onClickPay: () {
-                          // _acceptedProvider.TestTokenApi();
-                          Navigator.push(
-                              context, SlideRightRoute(page: Payment()));
+                          Navigator.push(context, SlideRightRoute(page: Payment(loadId: _acceptedProvider.tabbarResponse.result[index].loadId)));
                         },
                         onClickCancel: () {
                           ApplicationToast.onLoadAlert(context: context, onCancellLoad: (){

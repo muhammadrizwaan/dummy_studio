@@ -203,30 +203,28 @@ class _JobDetailsState extends State<JobDetails> {
 
                       _jobDetailsProvider.loadDetailResponse.result.loadFiles.isNotEmpty?Container(
                         height: AppSizes.height * 0.1,
-                        child: Expanded(
-                          child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: _jobDetailsProvider.loadDetailResponse.result.loadFiles.length,
-                              itemBuilder: (context, index){
-                                return Row(
-                                  children: [
-                                    SizedBox(width: AppSizes.width * 0.01,),
-                                    Container(
-                                      height: AppSizes.height * 0.1,
-                                      width: AppSizes.width * 0.2,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                      child: Image(
-                                        image: NetworkImage(baseUrl+_jobDetailsProvider.loadDetailResponse.result.loadFiles[index].filePath),
-                                        fit: BoxFit.cover,
-                                      ),
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: _jobDetailsProvider.loadDetailResponse.result.loadFiles.length,
+                            itemBuilder: (context, index){
+                              return Row(
+                                children: [
+                                  SizedBox(width: AppSizes.width * 0.01,),
+                                  Container(
+                                    height: AppSizes.height * 0.1,
+                                    width: AppSizes.width * 0.2,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
                                     ),
-                                    SizedBox(width: AppSizes.width * 0.01,),
-                                  ],
-                                );
-                              }),
-                        ),
+                                    child: Image(
+                                      image: NetworkImage(baseUrl+_jobDetailsProvider.loadDetailResponse.result.loadFiles[index].filePath),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  SizedBox(width: AppSizes.width * 0.01,),
+                                ],
+                              );
+                            }),
                       ):
                           CommonWidgets.onNullData(text: "No Images"),
                       SizedBox(height: AppSizes.height * 0.02),

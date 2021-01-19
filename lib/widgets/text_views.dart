@@ -70,6 +70,21 @@ class TextView {
       ),
     );
   }
+  static Text getSearchText(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w300,
+        fontFamily: Assets.poppinsLight,
+          color: color,
+      ),
+    );
+  }
 
 
   static Text getHeadingText04(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){

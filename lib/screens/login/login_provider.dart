@@ -74,7 +74,8 @@ class LoginProvider extends ChangeNotifier {
         }, body: {
           "Email": email,
           "Password": password,
-          "DeviceId": deviceId
+          "DeviceId": deviceId,
+          "UserTypeId": 2
         });
         if (response.statusCode == 200) {
           commonResponse = CommonResponse.fromJson(
@@ -103,9 +104,6 @@ class LoginProvider extends ChangeNotifier {
                 Constants.setCommpanyTrn(commonResponse.result.user.companyInformation[0].trn);
                 Constants.setLicenseExpiryDate('${commonResponse.result.user.companyInformation[0].licenseExpiryDate}');
               }
-              print('images');
-              print(Constants.getLicenseImages().length);
-              print(commonResponse.result.user.userDocuments.length);
               await Constants.setLicenseImages(commonResponse.result.user.userDocuments);
             }
             ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
