@@ -57,7 +57,7 @@ class LoginProvider extends ChangeNotifier {
             durationTime: 3,
             heading: Strings.error,
             subHeading: Strings.internetConnectionError);
-      } else if (email.validateEmail() == false) {
+      } else if (email.validateEmail() == false && email.validatePhoneNumber() == false) {
         ApplicationToast.getErrorToast(
             durationTime: 3,
             heading: Strings.error,

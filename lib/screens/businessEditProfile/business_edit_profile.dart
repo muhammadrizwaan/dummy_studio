@@ -247,7 +247,6 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                                 return Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
-                                    // color: Colors.amber,
                                     image: DecorationImage(
                                         image: NetworkImage(baseUrl+(Constants.getLicenseImages()[index]["FilePath"])),
                                         fit: BoxFit.cover),
@@ -256,7 +255,6 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                               },
                               layout: SwiperLayout.DEFAULT,
                               viewportFraction: 0.8,
-                              // itemHeight: AppSizes.height * 0.1,
                               scale: 0.9,
                               pagination: new SwiperPagination(
                                 builder: new DotSwiperPaginationBuilder(
@@ -369,6 +367,5 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
     else{
       _businessEditProfileProvider.onUploadLicenseImages(context: context, images: images,);
     }
-
   }
 }

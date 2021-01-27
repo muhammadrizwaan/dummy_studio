@@ -331,4 +331,37 @@ class TextView {
       ),
     );
   }
+
+  static Text getWalletTableDataText(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        decoration: TextDecoration.none,
+        fontSize: 9,
+        fontFamily: Assets.poppinsLight,
+        color: color,
+      ),
+    );
+  }
+  static Text getWalletTableDataBoldText(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        decoration: TextDecoration.none,
+        fontSize: 9,
+        fontFamily: Assets.poppinsBold,
+        color: color,
+      ),
+    );
+  }
+
+
 }

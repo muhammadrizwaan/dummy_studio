@@ -1,6 +1,6 @@
 /// Message : "Operation performed Succesfully"
 /// Code : 1
-/// Result : {"LoadId":10024,"LoadName":"Sensitive Good","FullName":"asad","Email":"shipperindividual@jinnbyte.com","Phone":"123456789","Description":"Sensitive Good","PickupLocation":"DHA phase 4","PickupLatitude":31.5387449,"PickupLongitude":74.3336802,"DropoffLocation":"Gulberg","DropoffLatitude":31.4646271,"DropoffLongitude":74.3873937,"LoadStatusId":1,"Status":"Placed","VehicleCategoryId":3,"Vehicle":"40 Ton","ShipperCost":25053.47,"TransporterCost":null,"NoOfVehicles":20,"ReceiverName":"Khan","GoodTypeId":1,"GoodType":"Cargo","PickupDateTime":"Oct 10 2020 12:00AM","IsRoundTrip":false,"IsActive":true,"CreatedBy":2053,"AssignedDriverId":null,"AssignedTransporterId":null,"AssignedVehicleId":null,"LoadFiles":[{"LoadFilesId":2018,"LoadId":10024,"FilePath":"/Files/Loads/3.jpeg"}]}
+/// Result : {"LoadId":10232,"LoadName":"test test","FullName":"Driver","Email":"","Phone":"034512348","Description":"test test","PickupLocation":"Ghantoot test tent - Abu Dhabi - United Arab Emirates","PickupLatitude":24.8953798,"PickupLongitude":54.9330699,"DropoffLocation":"Ghantoot test tent - Abu Dhabi - United Arab Emirates","DropoffLatitude":24.8953798,"DropoffLongitude":54.9330699,"LoadStatusId":11,"Status":"Delivered","VehicleCategoryId":19,"Vehicle":"80 Ton","ShipperCost":55.2,"TransporterCost":82.8,"NoOfVehicles":1,"ReceiverName":"abdullah new reciver","ReceiverPhone":"+676 78 767 8767","GoodTypeId":8,"GoodType":"every thing is goood","PickupDateTime":"Jan  5 2021 12:00AM","IsRoundTrip":false,"IsActive":true,"CreatedBy":2043,"AssignedDriverId":2420,"AssignedTransporterId":2396,"AssignedVehicleId":1067,"LoadFiles":[{"LoadFilesId":2056,"LoadId":10232,"FilePath":"http://truckoom.jinnbytedev.com/Files/Loads/people-fake-260nw-514550071.jpg"},{"LoadFilesId":2057,"LoadId":10232,"FilePath":"http://truckoom.jinnbytedev.com/Files/Loads/unnamed.png"}]}
 
 class LoadDetailResponse {
   String _message;
@@ -11,6 +11,14 @@ class LoadDetailResponse {
   int get code => _code;
   Result get result => _result;
 
+//   LoadDetailResponse({
+//       String message,
+//       int code,
+//       Result result}){
+//     _message = message;
+//     _code = code;
+//     _result = result;
+// }
   LoadDetailResponse.empty();
 
   LoadDetailResponse.fromJson(dynamic json) {
@@ -31,36 +39,37 @@ class LoadDetailResponse {
 
 }
 
-/// LoadId : 10024
-/// LoadName : "Sensitive Good"
-/// FullName : "asad"
-/// Email : "shipperindividual@jinnbyte.com"
-/// Phone : "123456789"
-/// Description : "Sensitive Good"
-/// PickupLocation : "DHA phase 4"
-/// PickupLatitude : 31.5387449
-/// PickupLongitude : 74.3336802
-/// DropoffLocation : "Gulberg"
-/// DropoffLatitude : 31.4646271
-/// DropoffLongitude : 74.3873937
-/// LoadStatusId : 1
-/// Status : "Placed"
-/// VehicleCategoryId : 3
-/// Vehicle : "40 Ton"
-/// ShipperCost : 25053.47
-/// TransporterCost : null
-/// NoOfVehicles : 20
-/// ReceiverName : "Khan"
-/// GoodTypeId : 1
-/// GoodType : "Cargo"
-/// PickupDateTime : "Oct 10 2020 12:00AM"
+/// LoadId : 10232
+/// LoadName : "test test"
+/// FullName : "Driver"
+/// Email : ""
+/// Phone : "034512348"
+/// Description : "test test"
+/// PickupLocation : "Ghantoot test tent - Abu Dhabi - United Arab Emirates"
+/// PickupLatitude : 24.8953798
+/// PickupLongitude : 54.9330699
+/// DropoffLocation : "Ghantoot test tent - Abu Dhabi - United Arab Emirates"
+/// DropoffLatitude : 24.8953798
+/// DropoffLongitude : 54.9330699
+/// LoadStatusId : 11
+/// Status : "Delivered"
+/// VehicleCategoryId : 19
+/// Vehicle : "80 Ton"
+/// ShipperCost : 55.2
+/// TransporterCost : 82.8
+/// NoOfVehicles : 1
+/// ReceiverName : "abdullah new reciver"
+/// ReceiverPhone : "+676 78 767 8767"
+/// GoodTypeId : 8
+/// GoodType : "every thing is goood"
+/// PickupDateTime : "Jan  5 2021 12:00AM"
 /// IsRoundTrip : false
 /// IsActive : true
-/// CreatedBy : 2053
-/// AssignedDriverId : null
-/// AssignedTransporterId : null
-/// AssignedVehicleId : null
-/// LoadFiles : [{"LoadFilesId":2018,"LoadId":10024,"FilePath":"/Files/Loads/3.jpeg"}]
+/// CreatedBy : 2043
+/// AssignedDriverId : 2420
+/// AssignedTransporterId : 2396
+/// AssignedVehicleId : 1067
+/// LoadFiles : [{"LoadFilesId":2056,"LoadId":10232,"FilePath":"http://truckoom.jinnbytedev.com/Files/Loads/people-fake-260nw-514550071.jpg"},{"LoadFilesId":2057,"LoadId":10232,"FilePath":"http://truckoom.jinnbytedev.com/Files/Loads/unnamed.png"}]
 
 class Result {
   int _loadId;
@@ -80,18 +89,19 @@ class Result {
   int _vehicleCategoryId;
   String _vehicle;
   double _shipperCost;
-  dynamic _transporterCost;
+  double _transporterCost;
   int _noOfVehicles;
   String _receiverName;
+  String _receiverPhone;
   int _goodTypeId;
   String _goodType;
   String _pickupDateTime;
   bool _isRoundTrip;
   bool _isActive;
   int _createdBy;
-  dynamic _assignedDriverId;
-  dynamic _assignedTransporterId;
-  dynamic _assignedVehicleId;
+  int _assignedDriverId;
+  int _assignedTransporterId;
+  int _assignedVehicleId;
   List<LoadFiles> _loadFiles;
 
   int get loadId => _loadId;
@@ -111,18 +121,19 @@ class Result {
   int get vehicleCategoryId => _vehicleCategoryId;
   String get vehicle => _vehicle;
   double get shipperCost => _shipperCost;
-  dynamic get transporterCost => _transporterCost;
+  double get transporterCost => _transporterCost;
   int get noOfVehicles => _noOfVehicles;
   String get receiverName => _receiverName;
+  String get receiverPhone => _receiverPhone;
   int get goodTypeId => _goodTypeId;
   String get goodType => _goodType;
   String get pickupDateTime => _pickupDateTime;
   bool get isRoundTrip => _isRoundTrip;
   bool get isActive => _isActive;
   int get createdBy => _createdBy;
-  dynamic get assignedDriverId => _assignedDriverId;
-  dynamic get assignedTransporterId => _assignedTransporterId;
-  dynamic get assignedVehicleId => _assignedVehicleId;
+  int get assignedDriverId => _assignedDriverId;
+  int get assignedTransporterId => _assignedTransporterId;
+  int get assignedVehicleId => _assignedVehicleId;
   List<LoadFiles> get loadFiles => _loadFiles;
 
   Result({
@@ -143,18 +154,19 @@ class Result {
       int vehicleCategoryId, 
       String vehicle, 
       double shipperCost, 
-      dynamic transporterCost, 
+      double transporterCost, 
       int noOfVehicles, 
       String receiverName, 
+      String receiverPhone, 
       int goodTypeId, 
       String goodType, 
       String pickupDateTime, 
       bool isRoundTrip, 
       bool isActive, 
       int createdBy, 
-      dynamic assignedDriverId, 
-      dynamic assignedTransporterId, 
-      dynamic assignedVehicleId, 
+      int assignedDriverId, 
+      int assignedTransporterId, 
+      int assignedVehicleId, 
       List<LoadFiles> loadFiles}){
     _loadId = loadId;
     _loadName = loadName;
@@ -176,6 +188,7 @@ class Result {
     _transporterCost = transporterCost;
     _noOfVehicles = noOfVehicles;
     _receiverName = receiverName;
+    _receiverPhone = receiverPhone;
     _goodTypeId = goodTypeId;
     _goodType = goodType;
     _pickupDateTime = pickupDateTime;
@@ -209,6 +222,7 @@ class Result {
     _transporterCost = json["TransporterCost"];
     _noOfVehicles = json["NoOfVehicles"];
     _receiverName = json["ReceiverName"];
+    _receiverPhone = json["ReceiverPhone"];
     _goodTypeId = json["GoodTypeId"];
     _goodType = json["GoodType"];
     _pickupDateTime = json["PickupDateTime"];
@@ -248,6 +262,7 @@ class Result {
     map["TransporterCost"] = _transporterCost;
     map["NoOfVehicles"] = _noOfVehicles;
     map["ReceiverName"] = _receiverName;
+    map["ReceiverPhone"] = _receiverPhone;
     map["GoodTypeId"] = _goodTypeId;
     map["GoodType"] = _goodType;
     map["PickupDateTime"] = _pickupDateTime;
@@ -265,9 +280,9 @@ class Result {
 
 }
 
-/// LoadFilesId : 2018
-/// LoadId : 10024
-/// FilePath : "/Files/Loads/3.jpeg"
+/// LoadFilesId : 2056
+/// LoadId : 10232
+/// FilePath : "http://truckoom.jinnbytedev.com/Files/Loads/people-fake-260nw-514550071.jpg"
 
 class LoadFiles {
   int _loadFilesId;

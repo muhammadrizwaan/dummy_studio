@@ -163,7 +163,7 @@ class _JobDetailsState extends State<JobDetails> {
                           color: AppColors.colorBlack
                       ),
                       SizedBox(height: AppSizes.height * 0.001),
-                      TextView.getLabel2Text04(_jobDetailsProvider.loadDetailResponse.result.phone, color: AppColors.colorBlack),
+                      TextView.getLabel2Text04(_jobDetailsProvider.loadDetailResponse.result.receiverPhone, color: AppColors.colorBlack),
                       SizedBox(height: AppSizes.height * 0.02),
 
                       TextView.getLabelText04(

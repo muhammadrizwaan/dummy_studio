@@ -36,7 +36,8 @@ import 'package:truckoom_shipper/screens/referrals/referrals_provider.dart';
 import 'package:truckoom_shipper/screens/resetPassword/reset_password_provider.dart';
 import 'package:truckoom_shipper/screens/select_vehicle/select_vehicle_provider.dart';
 import 'package:truckoom_shipper/screens/signup/sign_up_provider.dart';
-import 'package:truckoom_shipper/screens/wallet/wallet_provier.dart';
+import 'package:truckoom_shipper/screens/wallet/wallet_provider.dart';
+
 
 final multiProviders = [
   ChangeNotifierProvider<SplashProvider>(

@@ -71,11 +71,16 @@ class _PaymentState extends State<Payment> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 SizedBox(height: AppSizes.height * 0.02),
-                                CommonWidgets.getPayField(
-                                    isPassword: false,
-                                    leftIcon: Assets.radioActiveIcon,
-                                    // textEditingController: email,
-                                    hintText: "Credit Card"),
+                                GestureDetector(
+                                  onTap: (){
+                                    Navigator.push(context, SlideRightRoute(page: Bank()));
+                                  },
+                                  child: CommonWidgets.getPayField(
+                                      isPassword: false,
+                                      leftIcon: Assets.radioActiveIcon,
+                                      // textEditingController: email,
+                                      hintText: "Credit Card"),
+                                ),
                                 SizedBox(
                                   height: 10,
                                 ),

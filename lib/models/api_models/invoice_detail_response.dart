@@ -1,6 +1,6 @@
 /// Message : "Operation performed Succesfully"
 /// Code : 1
-/// Result : {"InvoiceId":10164,"TransporterLogo":"/Files/UserImages/Screenshot 2020-10-07 at 22.15.09.png","TransporterName":"babar","PickupLocation":"DHA phase 4","DropOffLocation":"Gulberg","CompletedDate":"Dec 28 2020  4:55AM","Weight":"55","TotalPrice":248439.91,"LoadStatus":[{"LoadStatusId":1,"Status":"Placed","Date":"Dec 28 2020  4:50AM"},{"LoadStatusId":2,"Status":"Assigned By Admin\n","Date":"Dec 28 2020  4:52AM"},{"LoadStatusId":3,"Status":"Accepted By Transporter","Date":"Dec 28 2020  4:52AM"},{"LoadStatusId":5,"Status":"Accepted By Shipper","Date":"Dec 28 2020  4:53AM"},{"LoadStatusId":8,"Status":"Loading","Date":"Dec 28 2020  4:54AM"},{"LoadStatusId":9,"Status":"On The Way","Date":"Dec 28 2020  4:54AM"},{"LoadStatusId":10,"Status":"Unloading","Date":"Dec 28 2020  4:55AM"},{"LoadStatusId":11,"Status":"Delivered","Date":"Dec 28 2020  4:55AM"}],"ESignature":"http://truckoom.jinnbytedev.com/Files/Loads/10164flutter_logo (1).png","Rating":0.0,"Remarks":""}
+/// Result : {"InvoiceId":10,"TransporterLogo":"/Files/UserImages/image_picker8590741799748320093.jpg","TransporterName":"Transporter 100","PickupLocation":"MM Alam Rd, Theh Block J Gulberg III, Lahore, Punjab, Pakistan","DropOffLocation":"Ferozepur Road & Kalma Chowk Flyover, Garden Block Garden Town, Lahore, Punjab, Pakistan","CompletedDate":"Jan 22 2021  2:54PM","Weight":"55","ShipperCost":295113.0,"CouponDiscount":0.0,"VatPercentage":0.0,"VatAmount":47218.08,"TotalShipperCost":342331.08,"TransporterCost":177067.8,"LoadStatus":[{"LoadStatusId":1,"Status":"Placed","Date":"Jan 19 2021  8:09AM"},{"LoadStatusId":2,"Status":"Assigned By Admin\n","Date":"Jan 19 2021 12:37PM"},{"LoadStatusId":3,"Status":"Accepted By Transporter","Date":"Jan 19 2021 12:40PM"},{"LoadStatusId":5,"Status":"Accepted By Shipper","Date":"Jan 19 2021  2:04PM"},{"LoadStatusId":8,"Status":"Loading","Date":"Jan 21 2021  1:54AM"},{"LoadStatusId":9,"Status":"On The Way","Date":"Jan 21 2021  1:54AM"},{"LoadStatusId":10,"Status":"Unloading","Date":"Jan 21 2021  1:54AM"},{"LoadStatusId":11,"Status":"Delivered","Date":"Jan 22 2021  2:54PM"}],"ESignature":null,"Rating":0.0,"Remarks":""}
 
 class InvoiceDetailResponse {
   String _message;
@@ -19,6 +19,7 @@ class InvoiceDetailResponse {
 //     _code = code;
 //     _result = result;
 // }
+
   InvoiceDetailResponse.empty();
 
   InvoiceDetailResponse.fromJson(dynamic json) {
@@ -39,16 +40,21 @@ class InvoiceDetailResponse {
 
 }
 
-/// InvoiceId : 10164
-/// TransporterLogo : "/Files/UserImages/Screenshot 2020-10-07 at 22.15.09.png"
-/// TransporterName : "babar"
-/// PickupLocation : "DHA phase 4"
-/// DropOffLocation : "Gulberg"
-/// CompletedDate : "Dec 28 2020  4:55AM"
+/// InvoiceId : 10
+/// TransporterLogo : "/Files/UserImages/image_picker8590741799748320093.jpg"
+/// TransporterName : "Transporter 100"
+/// PickupLocation : "MM Alam Rd, Theh Block J Gulberg III, Lahore, Punjab, Pakistan"
+/// DropOffLocation : "Ferozepur Road & Kalma Chowk Flyover, Garden Block Garden Town, Lahore, Punjab, Pakistan"
+/// CompletedDate : "Jan 22 2021  2:54PM"
 /// Weight : "55"
-/// TotalPrice : 248439.91
-/// LoadStatus : [{"LoadStatusId":1,"Status":"Placed","Date":"Dec 28 2020  4:50AM"},{"LoadStatusId":2,"Status":"Assigned By Admin\n","Date":"Dec 28 2020  4:52AM"},{"LoadStatusId":3,"Status":"Accepted By Transporter","Date":"Dec 28 2020  4:52AM"},{"LoadStatusId":5,"Status":"Accepted By Shipper","Date":"Dec 28 2020  4:53AM"},{"LoadStatusId":8,"Status":"Loading","Date":"Dec 28 2020  4:54AM"},{"LoadStatusId":9,"Status":"On The Way","Date":"Dec 28 2020  4:54AM"},{"LoadStatusId":10,"Status":"Unloading","Date":"Dec 28 2020  4:55AM"},{"LoadStatusId":11,"Status":"Delivered","Date":"Dec 28 2020  4:55AM"}]
-/// ESignature : "http://truckoom.jinnbytedev.com/Files/Loads/10164flutter_logo (1).png"
+/// ShipperCost : 295113.0
+/// CouponDiscount : 0.0
+/// VatPercentage : 0.0
+/// VatAmount : 47218.08
+/// TotalShipperCost : 342331.08
+/// TransporterCost : 177067.8
+/// LoadStatus : [{"LoadStatusId":1,"Status":"Placed","Date":"Jan 19 2021  8:09AM"},{"LoadStatusId":2,"Status":"Assigned By Admin\n","Date":"Jan 19 2021 12:37PM"},{"LoadStatusId":3,"Status":"Accepted By Transporter","Date":"Jan 19 2021 12:40PM"},{"LoadStatusId":5,"Status":"Accepted By Shipper","Date":"Jan 19 2021  2:04PM"},{"LoadStatusId":8,"Status":"Loading","Date":"Jan 21 2021  1:54AM"},{"LoadStatusId":9,"Status":"On The Way","Date":"Jan 21 2021  1:54AM"},{"LoadStatusId":10,"Status":"Unloading","Date":"Jan 21 2021  1:54AM"},{"LoadStatusId":11,"Status":"Delivered","Date":"Jan 22 2021  2:54PM"}]
+/// ESignature : null
 /// Rating : 0.0
 /// Remarks : ""
 
@@ -60,9 +66,14 @@ class Result {
   String _dropOffLocation;
   String _completedDate;
   String _weight;
-  double _totalPrice;
+  double _shipperCost;
+  double _couponDiscount;
+  double _vatPercentage;
+  double _vatAmount;
+  double _totalShipperCost;
+  double _transporterCost;
   List<LoadStatus> _loadStatus;
-  String _eSignature;
+  dynamic _eSignature;
   double _rating;
   String _remarks;
 
@@ -73,9 +84,14 @@ class Result {
   String get dropOffLocation => _dropOffLocation;
   String get completedDate => _completedDate;
   String get weight => _weight;
-  double get totalPrice => _totalPrice;
+  double get shipperCost => _shipperCost;
+  double get couponDiscount => _couponDiscount;
+  double get vatPercentage => _vatPercentage;
+  double get vatAmount => _vatAmount;
+  double get totalShipperCost => _totalShipperCost;
+  double get transporterCost => _transporterCost;
   List<LoadStatus> get loadStatus => _loadStatus;
-  String get eSignature => _eSignature;
+  dynamic get eSignature => _eSignature;
   double get rating => _rating;
   String get remarks => _remarks;
 
@@ -87,9 +103,14 @@ class Result {
       String dropOffLocation, 
       String completedDate, 
       String weight, 
-      double totalPrice, 
+      double shipperCost, 
+      double couponDiscount, 
+      double vatPercentage, 
+      double vatAmount, 
+      double totalShipperCost, 
+      double transporterCost, 
       List<LoadStatus> loadStatus, 
-      String eSignature, 
+      dynamic eSignature, 
       double rating, 
       String remarks}){
     _invoiceId = invoiceId;
@@ -99,7 +120,12 @@ class Result {
     _dropOffLocation = dropOffLocation;
     _completedDate = completedDate;
     _weight = weight;
-    _totalPrice = totalPrice;
+    _shipperCost = shipperCost;
+    _couponDiscount = couponDiscount;
+    _vatPercentage = vatPercentage;
+    _vatAmount = vatAmount;
+    _totalShipperCost = totalShipperCost;
+    _transporterCost = transporterCost;
     _loadStatus = loadStatus;
     _eSignature = eSignature;
     _rating = rating;
@@ -114,7 +140,12 @@ class Result {
     _dropOffLocation = json["DropOffLocation"];
     _completedDate = json["CompletedDate"];
     _weight = json["Weight"];
-    _totalPrice = json["TotalPrice"];
+    _shipperCost = json["ShipperCost"];
+    _couponDiscount = json["CouponDiscount"];
+    _vatPercentage = json["VatPercentage"];
+    _vatAmount = json["VatAmount"];
+    _totalShipperCost = json["TotalShipperCost"];
+    _transporterCost = json["TransporterCost"];
     if (json["LoadStatus"] != null) {
       _loadStatus = [];
       json["LoadStatus"].forEach((v) {
@@ -135,7 +166,12 @@ class Result {
     map["DropOffLocation"] = _dropOffLocation;
     map["CompletedDate"] = _completedDate;
     map["Weight"] = _weight;
-    map["TotalPrice"] = _totalPrice;
+    map["ShipperCost"] = _shipperCost;
+    map["CouponDiscount"] = _couponDiscount;
+    map["VatPercentage"] = _vatPercentage;
+    map["VatAmount"] = _vatAmount;
+    map["TotalShipperCost"] = _totalShipperCost;
+    map["TransporterCost"] = _transporterCost;
     if (_loadStatus != null) {
       map["LoadStatus"] = _loadStatus.map((v) => v.toJson()).toList();
     }
@@ -149,7 +185,7 @@ class Result {
 
 /// LoadStatusId : 1
 /// Status : "Placed"
-/// Date : "Dec 28 2020  4:50AM"
+/// Date : "Jan 19 2021  8:09AM"
 
 class LoadStatus {
   int _loadStatusId;

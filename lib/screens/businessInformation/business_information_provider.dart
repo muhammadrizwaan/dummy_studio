@@ -129,14 +129,16 @@ class BusinessInformationProvider extends ChangeNotifier {
             ApplicationToast.getErrorToast(
                 durationTime: 3,
                 heading: Strings.error,
-                subHeading: _editProfileResponse.message);
+                subHeading: _editProfileResponse.message,
+            );
           }
         } else {
           _loader.hideLoader(context);
           ApplicationToast.getErrorToast(
               durationTime: 3,
               heading: Strings.error,
-              subHeading: Strings.somethingWentWrong);
+              subHeading: Strings.somethingWentWrong,
+          );
         }
       }
     } catch (error) {

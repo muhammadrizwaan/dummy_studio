@@ -47,20 +47,6 @@ class _BusinessInformationState extends State<BusinessInformation> {
     pickedDate = DateTime.now();
   }
 
-  Widget buildGridView() {
-    return GridView.count(
-      crossAxisCount: 3,
-      children: List.generate(images.length, (index) {
-        Asset asset = images[index];
-        return AssetThumb(
-          asset: asset,
-          width: 300,
-          height: 300,
-        );
-      }),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     Provider.of<BusinessInformationProvider>(context, listen: true);
@@ -273,10 +259,8 @@ class _BusinessInformationState extends State<BusinessInformation> {
     DateTime date = await showDatePicker(
       context: context,
       initialDate: pickedDate,
-      // firstDate: DateTime(DateTime.now().year - 10),
-      // lastDate: DateTime(DateTime.now().year + 10),
       firstDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
-      lastDate: DateTime(DateTime.now().year + 10),
+      lastDate: DateTime(DateTime.now().year + 20),
       builder: (BuildContext context, Widget child) {
         return Theme(
           data: ThemeData(
@@ -293,8 +277,6 @@ class _BusinessInformationState extends State<BusinessInformation> {
     );
     if (date != null) {
       setState(() {
-        print('datetime is');
-        print(date);
         pickedDate = date;
       });
     }
