@@ -18,6 +18,9 @@ class InvoiceDetailComponents {
             Container(
               height: AppSizes.height * 0.12,
               width: AppSizes.width * 0.25,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100)
+              ),
               child: Image(
                 image: invoiceLogo == ""
                     ? AssetImage(Assets.invoiceLogo)
@@ -265,6 +268,9 @@ class InvoiceDetailComponents {
     @required String jobName,
     @required String weight,
     @required String total,
+    @required String couponDiscount,
+    @required String vatAmount,
+    @required String shipperCost
   }) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: AppSizes.height * 0.03),
@@ -315,6 +321,117 @@ class InvoiceDetailComponents {
                   // fontWeight: FontWeight.bold
                 ),
               ),
+            ],
+          ),
+          SizedBox(height: AppSizes.height * 0.02),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Cost',
+                style: TextStyle(
+                  fontFamily: Assets.poppinsLight,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                  // fontWeight: FontWeight.bold
+                ),
+              ),
+              Row(
+                children: [
+                  Text(
+                    'AED ',
+                    style: TextStyle(
+                      fontFamily: Assets.poppinsLight,
+                      fontSize: 12,
+                      color: AppColors.yellow,
+                      // fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    shipperCost,
+                    style: TextStyle(
+                      fontFamily: Assets.poppinsLight,
+                      fontSize: 12,
+                      color: AppColors.colorBlack,
+                      // fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+          SizedBox(height: AppSizes.height * 0.02),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Coupon Discount',
+                style: TextStyle(
+                  fontFamily: Assets.poppinsLight,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                  // fontWeight: FontWeight.bold
+                ),
+              ),
+              Row(
+                children: [
+                  Text(
+                    'AED ',
+                    style: TextStyle(
+                      fontFamily: Assets.poppinsLight,
+                      fontSize: 12,
+                      color: AppColors.yellow,
+                      // fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    couponDiscount,
+                    style: TextStyle(
+                      fontFamily: Assets.poppinsLight,
+                      fontSize: 12,
+                      color: AppColors.colorBlack,
+                      // fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+          SizedBox(height: AppSizes.height * 0.02),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Vat Amount',
+                style: TextStyle(
+                  fontFamily: Assets.poppinsLight,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                  // fontWeight: FontWeight.bold
+                ),
+              ),
+              Row(
+                children: [
+                  Text(
+                    'AED ',
+                    style: TextStyle(
+                        fontFamily: Assets.poppinsLight,
+                        fontSize: 12,
+                        color: AppColors.yellow,
+                        // fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    vatAmount,
+                    style: TextStyle(
+                        fontFamily: Assets.poppinsLight,
+                        fontSize: 12,
+                        color: AppColors.colorBlack,
+                        // fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
           SizedBox(height: AppSizes.height * 0.02),

@@ -99,10 +99,13 @@ class _InvoiceDetailState extends State<InvoiceDetail> {
                                             .invoiceDetailResponse
                                             .result
                                             .weight,
+                                        shipperCost: _invoiceDetailProvider.invoiceDetailResponse.result.shipperCost.toString(),
+                                        couponDiscount: _invoiceDetailProvider.invoiceDetailResponse.result.couponDiscount.toString(),
+                                        vatAmount: _invoiceDetailProvider.invoiceDetailResponse.result.vatAmount.toString(),
                                         total: _invoiceDetailProvider
                                             .invoiceDetailResponse
                                             .result
-                                            .totalPrice
+                                            .totalShipperCost
                                             .toString()),
                                     _invoiceDetailComponents.getInvoiceLable("Status"),
                                     _invoiceDetailComponents.getStatus(

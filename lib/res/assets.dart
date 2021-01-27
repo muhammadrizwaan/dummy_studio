@@ -19,6 +19,7 @@ class Assets {
   //
 
   static const String walletIcon = "assets/png/wallet_icon.png";
+  static const String walletIcon2 = "assets/png/wallet2.png";
   static const String bellIconPressed = "assets/png/bell_icon_pressed.png";
   static const String bellIconUnpress = "assets/png/bell_icon_unpress.png";
   static const String backArrow = "assets/png/back_arrow.png";

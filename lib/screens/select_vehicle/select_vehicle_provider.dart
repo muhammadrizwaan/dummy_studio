@@ -60,6 +60,7 @@ class SelectVehicleProvider extends ChangeNotifier{
         if(response.statusCode == 200){
           _vehicleTypeResponse = VehicleTypeResponse.fromJson(_genericDecodeEncode.decodeJson(response.body));
           if(_vehicleTypeResponse.code == 1){
+
             _isVehicleFetched = true;
             isDataFetched = true;
             notifyListeners();
@@ -86,6 +87,9 @@ class SelectVehicleProvider extends ChangeNotifier{
 
   Future onGetCategory({@required BuildContext context, @required int vehicleId}) async{
     try{
+      print('type id');
+      print(vehicleId);
+      _vehicleCategoryResponse = VehicleCategoryResponse.empty();
       token = await getToken.onToken();
       connectivityResult = Connectivity().checkConnectivity();
       if(connectivityResult == ConnectivityResult.none){
@@ -104,6 +108,7 @@ class SelectVehicleProvider extends ChangeNotifier{
         if(response.statusCode == 200){
           _vehicleCategoryResponse = VehicleCategoryResponse.fromJson(_genericDecodeEncode.decodeJson(response.body));
           if(_vehicleCategoryResponse.code == 1){
+            print(_vehicleCategoryResponse.result.length);
             _laoder.hideLoader(context);
             _isVehicleFetched = false;
             print('category api called');

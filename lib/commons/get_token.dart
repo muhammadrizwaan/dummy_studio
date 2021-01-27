@@ -62,7 +62,8 @@ class GetToken{
         }, body: {
           "Email": email,
           "Password": password,
-          "DeviceId": deviceId
+          "DeviceId": deviceId,
+          "UserTypeId": 2
         });
         if (response.statusCode == 200) {
           commonResponse = CommonResponse.fromJson(genericDecodeEncode.decodeJson(response.body));

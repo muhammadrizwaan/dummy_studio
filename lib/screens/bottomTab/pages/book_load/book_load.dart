@@ -147,7 +147,8 @@ class _BookLoadState extends State<BookLoad> {
                   Constants.getUser() == Strings.indiviual
                       ? Navigator.push(
                       context, SlideRightRoute(page: Notifications()))
-                      : Navigator.push(
+                      :
+                  Navigator.push(
                       context, SlideRightRoute(page: Wallet()));
                 },),
               SizedBox(height: AppSizes.height * 0.005),

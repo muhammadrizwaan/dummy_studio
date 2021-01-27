@@ -92,8 +92,6 @@ class Constants{
     else{
       return licenseImages = [];
     }
-
-    // return licenseImages;
   }
 
 

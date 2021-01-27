@@ -80,6 +80,8 @@ class AppColors{
   static final dragContainer= Color.fromRGBO(195, 205, 214, 1);
   static final dateColor= Color.fromRGBO(151, 151, 151, 1);
   static const shadowColor = Color.fromRGBO(0, 0, 0, 0.07);
+  static const maroonColor = Color.fromRGBO(201, 35, 69, 1);
+  static const WalletTableDataColor = Color.fromRGBO(123, 123, 123, 1);
 
 
   static final yellowColorCode = "#FFB627";
