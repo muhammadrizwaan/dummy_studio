@@ -80,7 +80,7 @@ class Strings {
   static const String imagesErrorText = "Please upload images";
   static const String businessNameErrorText = "Please enter the Business Name";
   static const String authorizationErrorText = "Authorization has been denied for this request";
-  static const String emailErrorText = "Email is empty or email is not in proper form";
+  static const String emailErrorText = "Please Enter valid Email/Phone Number";
   static const String passwordErrorText = "Password is empty or must be at least 6 characters";
   static const String passwordMatchErrorText = "Password not match";
   static const String congratulationText = "Congratulation";

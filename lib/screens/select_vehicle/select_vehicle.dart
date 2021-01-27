@@ -34,7 +34,6 @@ class SelectVehicle extends StatefulWidget {
 }
 
 class _SelectVehicleState extends State<SelectVehicle> {
-  int _value = 1;
 
   SelectVechileComponents _selectVehicleComponents;
   SelectVehicleProvider _selectVehicleProvider;
@@ -42,8 +41,6 @@ class _SelectVehicleState extends State<SelectVehicle> {
   bool isSelect;
   String _selectedValue;
   int id, vehicleCategoryId, vehicleTypeId;
-
-  // var _responseList;
 
   @override
   void initState() {
@@ -65,14 +62,17 @@ class _SelectVehicleState extends State<SelectVehicle> {
         setState(() {});
         return;
       }
-      _selectVehicleProvider.filteredResult.result.clear();
-      for (final listData
-          in _selectVehicleProvider.getRidesByUserIdResponse().result) {
-        if (_selectVehicleProvider.stringContains(
-            listData.name, _search.text)) {
-          _selectVehicleProvider.setIsDataLoaded(isVehicleFetched: true);
-          _selectVehicleProvider.setData(listData);
-        }
+      else{
+        _selectVehicleProvider.filteredResult.result.clear();
+        for (final listData in _selectVehicleProvider.getRidesByUserIdResponse().result) {
+
+          if (_selectVehicleProvider.stringContains(
+              listData.name, _search.text)) {
+            _selectVehicleProvider.setIsDataLoaded(isVehicleFetched: true);
+            _selectVehicleProvider.setData(listData);
+          }
+      }
+
       }
     });
   }
@@ -132,20 +132,11 @@ class _SelectVehicleState extends State<SelectVehicle> {
                                           return Container(
                                             child: Column(
                                               children: [
-                                                _selectVehicleComponents
-                                                    .getGoodsType(
+                                                _selectVehicleComponents.getGoodsType(
                                                   context: context,
                                                   onPress: () {
-                                                    FocusManager
-                                                        .instance.primaryFocus
-                                                        .unfocus();
-                                                    _search.text = "";
-                                                    isSelect = false;
-                                                    vehicleTypeId =
-                                                        _selectVehicleProvider
-                                                            .getFilteredList()
-                                                            .result[index]
-                                                            .vehicleTypeId;
+                                                    FocusManager.instance.primaryFocus.unfocus();
+                                                    vehicleTypeId = _selectVehicleProvider.getFilteredList().result[index].vehicleTypeId;
                                                     _selectVehicleProvider.onGetCategory(
                                                         context: context,
                                                         vehicleId:
@@ -153,6 +144,8 @@ class _SelectVehicleState extends State<SelectVehicle> {
                                                                 .getFilteredList()
                                                                 .result[index]
                                                                 .vehicleTypeId);
+                                                    _search.text = "";
+                                                    isSelect = false;
                                                   },
                                                   text: _selectVehicleProvider
                                                       .getFilteredList()

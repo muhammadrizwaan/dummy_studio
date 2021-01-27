@@ -8,6 +8,7 @@ import 'package:truckoom_shipper/screens/bottomTab/pages/more/more_components.da
 import 'package:truckoom_shipper/screens/businessProfile/business_profile.dart';
 import 'package:truckoom_shipper/screens/language/language.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
+import 'package:truckoom_shipper/screens/wallet/wallet.dart';
 import 'package:truckoom_shipper/widgets/language_expandable_container.dart';
 
 import '../../../../animations/slide_right.dart';
@@ -89,6 +90,15 @@ class _MoreState extends State<More> {
                     height: 10,
                   ),
                   LanguageContainer(),
+                  Divider(
+                    height: 10,
+                  ),
+                  _moreComponents.touchableButton(
+                    text: 'Wallet',
+                    onPress: () {
+                      Navigator.push(context, SlideRightRoute(page: Wallet()));
+                    },
+                  ),
                   Divider(
                     height: 10,
                   ),
