@@ -231,7 +231,8 @@ class WalletComponents {
                     style: TextStyle(
                         fontSize: 15,
                         fontFamily: Assets.poppinsRegular,
-                        color: AppColors.black,),
+                        color: AppColors.black,
+                    ),
                   ),
                 ),
                 SizedBox(width: AppSizes.width*0.02),

@@ -53,12 +53,12 @@ class ContactUsProvider extends ChangeNotifier {
             durationTime: 3,
             heading: Strings.error,
             subHeading: Strings.internetConnectionError);
-      } else if (name.isEmpty) {
+      } else if (name.isEmpty && callbackStatus == 0) {
         ApplicationToast.getErrorToast(
             durationTime: 3,
             heading: Strings.error,
             subHeading: Strings.subjectErrorText);
-      } else if (message.isEmpty) {
+      } else if (message.isEmpty && callbackStatus == 0) {
         ApplicationToast.getErrorToast(
             durationTime: 3,
             heading: Strings.error,

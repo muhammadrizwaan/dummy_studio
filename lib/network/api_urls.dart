@@ -36,6 +36,7 @@ const String getAcceptedLoadApi = "$apiBaseUrl/api/Loads/GetMyAcceptedLoadsShipp
 const String getInProcessLoadApi = "$apiBaseUrl/api/Loads/GetMyInProcessLoadsShipper?userId={userId}&pageIndex=0";
 const String getDeliveredLoadApi = "$apiBaseUrl/api/Loads/GetDeliveredLoads?userId={userId}&pageIndex=0";
 const String getCancelledLoadApi = "$apiBaseUrl/api/Loads/GetMyCancelledLoadsShipper?userId={userId}&pageIndex=0";
+const String getLoadCountsApi = "$apiBaseUrl/api/Loads/GetLoadCounts?userId={userId}";
 const String getApplyCouponApi = "$apiBaseUrl/api/ApplyPromoCode?promoCode={CouponCode}&loadId={loadId}";
 const String acceptedByShipperApi = "$apiBaseUrl/api/Loads/AcceptedByShipper";
 
