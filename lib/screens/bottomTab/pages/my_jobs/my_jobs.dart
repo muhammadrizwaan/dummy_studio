@@ -50,15 +50,9 @@ class _MyJobsState extends State<MyJobs> {
             children: [
               CommonWidgets.tabsAppBar1(
                 text: "My Jobs",
-                iconName: Constants.getUser() == Strings.indiviual
-                    ? FontAwesome5.bell
-                    : Linecons.wallet,
+                iconName: FontAwesome5.bell,
                 onPress: () {
-                  Constants.getUser() == Strings.indiviual
-                      ? Navigator.push(
-                          context, SlideRightRoute(page: Notifications()))
-                      : Navigator.push(
-                          context, SlideRightRoute(page: Wallet()));
+                  Navigator.push(context, SlideRightRoute(page: Notifications()));
                 },
               ),
               SizedBox(

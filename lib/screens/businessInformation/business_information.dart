@@ -12,6 +12,7 @@ import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/businessInformation/business_information_components.dart';
 import 'package:truckoom_shipper/screens/businessInformation/business_information_provider.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
+import 'package:truckoom_shipper/screens/phoneNumber/phone_number_provider.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +31,7 @@ class BusinessInformation extends StatefulWidget {
 class _BusinessInformationState extends State<BusinessInformation> {
   BusinessInformationComponents _businessInformationComponents;
   BusinessInformationProvider _businessInformationProvider;
+  PhoneNumberProvider _phoneNumberProvider;
   TextEditingController business_name, contact_number, trn;
   List<Asset> images = List<Asset>();
   bool onCheck = false;
@@ -39,8 +41,10 @@ class _BusinessInformationState extends State<BusinessInformation> {
   void initState() {
     super.initState();
     _businessInformationComponents = BusinessInformationComponents();
-    _businessInformationProvider =
-        Provider.of<BusinessInformationProvider>(context, listen: false);
+    _businessInformationProvider = Provider.of<BusinessInformationProvider>(context, listen: false);
+    _businessInformationProvider.init(context: context);
+    _phoneNumberProvider = Provider.of<PhoneNumberProvider>(context, listen: false);
+    _phoneNumberProvider.init(context);
     business_name = TextEditingController();
     contact_number = TextEditingController();
     trn = TextEditingController();
@@ -244,7 +248,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              // navigate to desired screen
+                              _phoneNumberProvider.getTermsAndConditions(context: context);
                             })
                     ]),
               ),

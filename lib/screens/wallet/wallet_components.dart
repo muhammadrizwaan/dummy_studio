@@ -1,6 +1,4 @@
 
-
-
 import 'package:date_time_format/date_time_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +32,7 @@ class WalletComponents {
               Text(
                 'Total Value',
                 style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 12,
                     fontFamily: Assets.poppinsRegular,
                     color: AppColors.yellow,
                     fontWeight: FontWeight.bold),
@@ -46,8 +44,8 @@ class WalletComponents {
                   Text(
                     'AED',
                     style: TextStyle(
-                      fontSize: 28,
-                      fontFamily: Assets.poppinsRegular,
+                      fontSize: 22,
+                      fontFamily: Assets.poppinsMedium,
                       color: AppColors.colorBlack,
                       // fontWeight: FontWeight.bold
                     ),

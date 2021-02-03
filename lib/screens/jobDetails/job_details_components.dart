@@ -296,7 +296,7 @@ class JobDetailsComponents {
           ),
           GestureDetector(
             onTap: () => onTap(),
-            child: Text(tag == "Placed" ? "Delete" : "",
+            child: Text(tag == "Placed" ? "Cancel" : "",
                 style: TextStyle(
                   color: AppColors.colorDelete,
                   fontFamily: Assets.poppinsRegular,

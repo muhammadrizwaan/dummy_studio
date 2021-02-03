@@ -345,10 +345,12 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
     try {
       images = [];
       images = await MultiImagePicker.pickImages(
+
         maxImages: 2,
         enableCamera: true,
         selectedAssets: images,
-        cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
+
+        cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat", ),
         materialOptions: MaterialOptions(
           actionBarColor: AppColors.yellowColorCode,
           actionBarTitle: "Gallery",

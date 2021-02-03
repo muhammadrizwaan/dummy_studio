@@ -7,12 +7,14 @@ import 'package:fluttericon/entypo_icons.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
+import 'package:truckoom_shipper/models/api_models/phone_number_response.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/businessSignup/business_signup_components.dart';
 import 'package:truckoom_shipper/screens/businessSignup/business_signup_provider.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
+import 'package:truckoom_shipper/screens/phoneNumber/phone_number_provider.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/loader.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
@@ -28,6 +30,7 @@ class BusinessSignup extends StatefulWidget {
 
 class _BusinessSignupState extends State<BusinessSignup> {
   BusinessSignupComponents _businessSignupComponents;
+  PhoneNumberProvider _phoneNumberProvider;
   TextEditingController name, email, password, confirm_Password;
   BusinessSignupProvider _businessSignupProvider;
   CustomPopup _loader = CustomPopup();
@@ -37,9 +40,13 @@ class _BusinessSignupState extends State<BusinessSignup> {
 
   @override
   void initState() {
+
     _businessSignupComponents = BusinessSignupComponents();
     _businessSignupProvider = Provider.of<BusinessSignupProvider>(context, listen: false);
     _businessSignupProvider.init(context: context);
+    _phoneNumberProvider = Provider.of<PhoneNumberProvider>(context, listen: false);
+    _phoneNumberProvider.init(context);
+
     name = TextEditingController();
     email = TextEditingController();
     password = TextEditingController();
@@ -274,7 +281,7 @@ class _BusinessSignupState extends State<BusinessSignup> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              // navigate to desired screen
+                              _phoneNumberProvider.getTermsAndConditions(context: context);
                             })
                     ]),
               ),

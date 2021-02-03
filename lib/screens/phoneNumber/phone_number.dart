@@ -5,11 +5,9 @@ import 'package:fluttericon/entypo_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/screens/checkUserType/check_user.dart';
-import 'package:truckoom_shipper/screens/otpAuthentication/otp_authentication.dart';
 import 'package:truckoom_shipper/screens/phoneNumber/phone_number_components.dart';
 import 'package:truckoom_shipper/screens/phoneNumber/phone_number_provider.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
-
 import '../../res/assets.dart';
 import '../../res/colors.dart';
 import '../../res/sizes.dart';
@@ -184,7 +182,7 @@ class _PhoneNumberState extends State<PhoneNumber> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              // navigate to desired screen
+                              _phoneNumberProvider.getTermsAndConditions(context: context);
                             })
                     ]),
               ),

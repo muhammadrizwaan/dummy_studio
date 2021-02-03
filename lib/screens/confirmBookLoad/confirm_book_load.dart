@@ -46,40 +46,36 @@ class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          body: Column(
-        children: [
-          CommonWidgets.tabsAppBar2(
-              text: Strings.bookLoad,
-              onPress: () {
-                Navigator.pop(context);
-              }),
-          SizedBox(height: AppSizes.height * 0.005),
-          Expanded(
-            child: Stack(
+          body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context,bool innerBoxIsScrolled){
+      return <Widget>[
+        SliverAppBar(
+          expandedHeight: AppSizes.height * 0.5,
+          pinned: true,
+          automaticallyImplyLeading: true,
+          floating: false,
+          toolbarHeight: 0,
+          backgroundColor: AppColors.white,
+          flexibleSpace: FlexibleSpaceBar(
+            background: Column(
               children: [
-                GoogleMap(
-                  initialCameraPosition:
-                      CameraPosition(target: _center, zoom: 5),
+                CommonWidgets.tabsAppBar2(
+                    text: Strings.bookLoad,
+                    onPress: () {
+                      Navigator.pop(context);
+                    }),
+                Expanded(
+                  child: GoogleMap(
+                    initialCameraPosition: CameraPosition(target: _center, zoom: 5),
+                  ),
                 ),
-                SlidingUpPanel(
-                  isDraggable: true,
-                  minHeight: AppSizes.height * 0.40,
-                  maxHeight: AppSizes.height * 0.75,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15)),
-                  panel: _onSlidingUpPanel(),
-                )
               ],
             ),
-          )
-        ],
-      )),
-    );
-  }
-
-  _onSlidingUpPanel() {
-    return Container(
+          ),
+        )
+      ];
+    },
+    body: Container(
       height: AppSizes.height * 0.5,
       padding: EdgeInsets.only(top: 20, left: 15, right: 15),
       decoration: BoxDecoration(
@@ -132,6 +128,8 @@ class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
           ),
         ],
       ),
-    );
+    )
+    )
+    ),);
   }
 }

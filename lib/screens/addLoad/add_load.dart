@@ -90,7 +90,6 @@ class _AddLoadState extends State<AddLoad> {
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         body: Container(
-          // padding: EdgeInsets.all(AppSizes.width * 0.05),
           height: AppSizes.height,
           width: AppSizes.width,
           color: AppColors.white,
