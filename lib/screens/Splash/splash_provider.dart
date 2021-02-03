@@ -17,12 +17,12 @@ class SplashProvider extends ChangeNotifier{
 
   String userType;
 
-  init({@required BuildContext context}){
+  init({@required BuildContext context}) async{
     PreferenceUtils.init();
     this.context = context;
-    getDeviceInfo();
+    await getDeviceInfo();
     userType = "";
-    navigateToNextScreen();
+    await navigateToNextScreen();
   }
   Future getDeviceInfo() async {
     if (io.Platform.isIOS) {

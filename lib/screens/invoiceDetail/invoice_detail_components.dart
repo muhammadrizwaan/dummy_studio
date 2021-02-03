@@ -70,7 +70,7 @@ class InvoiceDetailComponents {
             children: [
               Container(
                 padding: EdgeInsets.only(top: 6),
-                height: AppSizes.height * 0.1,
+                height: AppSizes.height * 0.108,
                 child: Image(
                   image: AssetImage(Assets.locationCircleIcon),
                   fit: BoxFit.cover,
@@ -80,11 +80,9 @@ class InvoiceDetailComponents {
               Container(
                 // height: AppSizes.height * 0.14,
                 child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  // crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      height: AppSizes.height * 0.085,
+                      height: AppSizes.height * 0.09,
                       width: AppSizes.width * 0.7,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -99,11 +97,11 @@ class InvoiceDetailComponents {
                               fontFamily: Assets.poppinsRegular,
                               fontSize: 12,
                               color: AppColors.colorBlack.withOpacity(0.4),
-                              // fontWeight: FontWeight.bold
                             ),
                           ),
                           Text(
                             pickupLocation,
+                            maxLines: 2,
                             style: TextStyle(
                                 fontFamily: Assets.poppinsBold,
                                 fontSize: 14,
@@ -114,7 +112,7 @@ class InvoiceDetailComponents {
                       ),
                     ),
                     Container(
-                      height: AppSizes.height * 0.06,
+                      height: AppSizes.height * 0.09,
                       width: AppSizes.width * 0.7,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -129,11 +127,11 @@ class InvoiceDetailComponents {
                               fontFamily: Assets.poppinsRegular,
                               fontSize: 12,
                               color: AppColors.colorBlack.withOpacity(0.4),
-                              // fontWeight: FontWeight.bold
                             ),
                           ),
                           Text(
                             dropOffLocation,
+                            maxLines: 2,
                             style: TextStyle(
                                 fontFamily: Assets.poppinsBold,
                                 fontSize: 14,

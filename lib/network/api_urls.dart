@@ -14,7 +14,7 @@ const String forgotPassword = "$apiBaseUrl/api/Accounts/ForgotPassword?email=";
 
 const String saveQuery = "$apiBaseUrl/api/Queries/SaveQuery";
 const String getLoadApi = "$apiBaseUrl/api/Loads/MyLoads?userId={userId}&statusId={statusId}";
-const String getHistoryApi = "$apiBaseUrl/api/Loads/MyLoadHistory?userId={userId}";
+const String getHistoryApi = "$apiBaseUrl/api/Loads/MyLoadHistory?userId={userId}&pageIndex=0";
 const String getGoodTypeApi = "$apiBaseUrl/api/GoodTypes";
 const String getVehicleTypeApi = "$apiBaseUrl/api/Vehicle/GetVehicleTypes";
 const String deleteLoadApi = "$apiBaseUrl/api/Loads/DeleteLoad?loadId={loadId}";
@@ -31,13 +31,14 @@ const String getVehicleByVehicleId = "$apiBaseUrl/api/Vehicle/GetVehicleCategori
 const String getWalletApi = "$apiBaseUrl/api/Wallet/GetShipperWallet?userId={userId}";
 
 // Load status Apis
-const String getPlacedLoadApi = "$apiBaseUrl/api/Loads/GetMyPlacedLoadsShipper?userId={userId}";
-const String getAcceptedLoadApi = "$apiBaseUrl/api/Loads/GetMyAcceptedLoadsShipper?userId={userId}";
-const String getInProcessLoadApi = "$apiBaseUrl/api/Loads/GetMyInProcessLoadsShipper?userId={userId}";
-const String getDeliveredLoadApi = "$apiBaseUrl/api/Loads/GetDeliveredLoads?userId={userId}";
-const String getCancelledLoadApi = "$apiBaseUrl/api/Loads/GetMyCancelledLoadsShipper?userId={userId}";
+const String getPlacedLoadApi = "$apiBaseUrl/api/Loads/GetMyPlacedLoadsShipper?userId={userId}&pageIndex=0";
+const String getAcceptedLoadApi = "$apiBaseUrl/api/Loads/GetMyAcceptedLoadsShipper?userId={userId}&pageIndex=0";
+const String getInProcessLoadApi = "$apiBaseUrl/api/Loads/GetMyInProcessLoadsShipper?userId={userId}&pageIndex=0";
+const String getDeliveredLoadApi = "$apiBaseUrl/api/Loads/GetDeliveredLoads?userId={userId}&pageIndex=0";
+const String getCancelledLoadApi = "$apiBaseUrl/api/Loads/GetMyCancelledLoadsShipper?userId={userId}&pageIndex=0";
 const String getApplyCouponApi = "$apiBaseUrl/api/ApplyPromoCode?promoCode={CouponCode}&loadId={loadId}";
 const String acceptedByShipperApi = "$apiBaseUrl/api/Loads/AcceptedByShipper";
 
 const String uploadLoadImages = "$apiBaseUrl/api/Loads/UploadLoadImages";
 const String uploadLicenseImages = "$apiBaseUrl/api/Accounts/UploadUserLicenses";
+const String getTermsApi = "$apiBaseUrl/api/Terms";

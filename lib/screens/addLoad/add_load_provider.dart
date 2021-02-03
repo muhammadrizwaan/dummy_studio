@@ -134,29 +134,33 @@ class AddLoadProvider extends ChangeNotifier {
             durationTime: 3,
             heading: Strings.error,
             subHeading: Strings.goodTypeErrorText);
-      } else if (weight.isEmpty) {
-        ApplicationToast.getErrorToast(
-            durationTime: 3,
-            heading: Strings.error,
-            subHeading: Strings.weightErrorText);
-      } else if (numOfVehicle.isEmpty) {
+      }
+      // else if (weight.isEmpty) {
+      //   ApplicationToast.getErrorToast(
+      //       durationTime: 3,
+      //       heading: Strings.error,
+      //       subHeading: Strings.weightErrorText);
+      // }
+      else if (numOfVehicle.isEmpty) {
         ApplicationToast.getErrorToast(
             durationTime: 3,
             heading: Strings.error,
             subHeading: Strings.noOfVehicleErrorText);
-      } else if (imagesList.isEmpty) {
-        ApplicationToast.getErrorToast(
-            durationTime: 3,
-            heading: Strings.error,
-            subHeading: Strings.imagesErrorText);
-      } else {
+      }
+      // else if (imagesList.isEmpty) {
+      //   ApplicationToast.getErrorToast(
+      //       durationTime: 3,
+      //       heading: Strings.error,
+      //       subHeading: Strings.imagesErrorText);
+      // }
+      else {
         Navigator.push(
           context,
           SlideRightRoute(
             page: BookLoadDetails(
               name: name,
               phone: phone,
-              weight: weight,
+              weight: weight.isEmpty? "0" : weight,
               numOfVehicle: numOfVehicle,
               description: description,
               isRoundTrip: isRoundTrip,

@@ -223,6 +223,7 @@ class BusinessEditProfileProvider extends ChangeNotifier{
               Constants.setCommpanyName(_editProfileResponse.result.companyInformation[0].companyName);
               Constants.setCommpanyPhone(_editProfileResponse.result.companyInformation[0].contactNumber);
               Constants.setCommpanyTrn(_editProfileResponse.result.companyInformation[0].trn);
+              Constants.setLicenseExpiryDate(_editProfileResponse.result.companyInformation[0].licenseExpiryDate);
             }
             _loader.hideLoader(context);
             print('Updated user');
@@ -242,7 +243,6 @@ class BusinessEditProfileProvider extends ChangeNotifier{
               subHeading: Strings.somethingWentWrong);
         }
       }
-      print('api');
     } catch (e) {
       _loader.hideLoader(context);
       print(e.toString());

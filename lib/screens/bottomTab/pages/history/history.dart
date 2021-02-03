@@ -51,15 +51,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
           children: [
             CommonWidgets.tabsAppBar1(
                 text: "History",
-                iconName: Constants.getUser() == Strings.indiviual
-                    ? FontAwesome5.bell
-                    : Linecons.wallet,
+                iconName: FontAwesome5.bell,
                 onPress: () {
-                  Constants.getUser() == Strings.indiviual
-                      ? Navigator.push(
-                      context, SlideRightRoute(page: Notifications()))
-                      : Navigator.push(
-                      context, SlideRightRoute(page: Wallet()));
+                  Navigator.push(context, SlideRightRoute(page: Notifications()));
                 },),
             SizedBox(
               height: 20,
