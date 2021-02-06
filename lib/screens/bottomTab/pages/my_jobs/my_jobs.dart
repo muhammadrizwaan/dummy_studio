@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
-import 'package:fluttericon/linecons_icons.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs_components.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/accepted/accepted.dart';
@@ -17,9 +15,7 @@ import 'package:truckoom_shipper/screens/notifications/notifications.dart';
 import '../../../../animations/slide_right.dart';
 import '../../../../res/colors.dart';
 import '../../../../res/sizes.dart';
-import '../../../../res/strings.dart';
 import '../../../../widgets/common_widgets.dart';
-import '../../../wallet/wallet.dart';
 
 class MyJobs extends StatefulWidget {
 

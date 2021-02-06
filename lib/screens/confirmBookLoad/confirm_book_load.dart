@@ -8,6 +8,7 @@ import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/confirmBookLoad/confirm_book_load_components.dart';
 import 'package:truckoom_shipper/screens/select_vehicle/select_vehicle.dart';
+import 'package:truckoom_shipper/widgets/MapView.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 class ConfirmBookLoad extends StatefulWidget {
@@ -35,11 +36,14 @@ class ConfirmBookLoad extends StatefulWidget {
 class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
   ConfirmBookLoadComponents _confirmBookLoadComponents;
   LatLng _center = LatLng(30.3753, 69.3451);
+  MapView _currMapView;
 
   @override
   void initState() {
     super.initState();
     _confirmBookLoadComponents = ConfirmBookLoadComponents();
+    _currMapView = _getMapView();
+    _currMapView.getDistance();
   }
 
   @override
@@ -65,8 +69,12 @@ class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
                       Navigator.pop(context);
                     }),
                 Expanded(
-                  child: GoogleMap(
-                    initialCameraPosition: CameraPosition(target: _center, zoom: 5),
+                  child:  MapView(
+                    startLat: double.parse(widget.PickupLatitude),
+                    startLong: double.parse(widget.PickupLongitude),
+                    endLat: double.parse(widget.DropoffLatitude),
+                    endLong: double.parse(widget.DropoffLongitude),
+                    apiKey: "AIzaSyDTLiSzdkVV8xrO9an282diUlBFMshCwAI",
                   ),
                 ),
               ],
@@ -131,5 +139,15 @@ class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
     )
     )
     ),);
+  }
+
+  _getMapView() {
+    return MapView(
+      startLat: double.parse(widget.PickupLatitude),
+      startLong: double.parse(widget.PickupLongitude),
+      endLat: double.parse(widget.DropoffLatitude),
+      endLong: double.parse(widget.DropoffLongitude),
+      apiKey: "AIzaSyDTLiSzdkVV8xrO9an282diUlBFMshCwAI",
+    );
   }
 }

@@ -4,9 +4,12 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
+import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
@@ -80,33 +83,63 @@ class _DriverDetailScreenState extends State<DriverDetailScreen> {
                               phone_number: _driverDetailProvider.driverDetailResponse.result.phoneNumber !=null?_driverDetailProvider.driverDetailResponse.result.phoneNumber:"",
                               License_number: _driverDetailProvider.driverDetailResponse.result.licenseNumber
                           ),
-                          SizedBox(height: AppSizes.height * 0.02,),
-                          _driverDetailComponents.getProfileLable(
-                              lableText: 'Reviews'
-                          ),
-                          SizedBox(height: AppSizes.height * 0.01,),
-                          _driverDetailProvider.driverDetailResponse.result.ratings.isNotEmpty? Expanded(
-                            child: ListView.builder(
-                              itemCount: _driverDetailProvider.driverDetailResponse.result.ratings.length,
-                                itemBuilder: (context, index){
-                                return Column(
-                                  children: [
-                                    SizedBox(height: AppSizes.height * 0.01,),
-                                    _driverDetailComponents.getReviewsContainer(
-                                        leftIcon: _driverDetailProvider.driverDetailResponse.result.ratings[index].profilePicture,
-                                        userName: _driverDetailProvider.driverDetailResponse.result.ratings[index].fullName,
-                                        message: _driverDetailProvider.driverDetailResponse.result.ratings[index].review,
-                                        time: '3:41 PM',
-                                        ratings: _driverDetailProvider.driverDetailResponse.result.ratings[index].rating.toString(),
-                                        onPressReview: () {
-                                          _onRatingAlert();
-                                        }
-                                    ),
-                                  ],
+                          SizedBox(height: AppSizes.height * 0.03,),
+                          _driverDetailProvider.driverDetailResponse.result.licenseImages.length > 0 ?
+                          Container(
+                            height: AppSizes.height * 0.25,
+                            child: new Swiper(
+                              itemCount: _driverDetailProvider.driverDetailResponse.result.licenseImages.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    // color: Colors.amber,
+                                    image: DecorationImage(
+                                        image: NetworkImage(baseUrl+_driverDetailProvider.driverDetailResponse.result.licenseImages[index].filePath),
+                                        fit: BoxFit.cover),
+                                  ),
                                 );
-                            }),
+                              },
+                              layout: SwiperLayout.DEFAULT,
+                              viewportFraction: 0.8,
+                              // itemHeight: AppSizes.height * 0.1,
+                              scale: 0.9,
+                              pagination: new SwiperPagination(
+                                builder: new DotSwiperPaginationBuilder(
+                                  color: AppColors.grey,
+                                  activeColor: AppColors.yellow,
+                                ),
+                              ),
+                            ),
                           ):
-                          CommonWidgets.onNullData(text: "No Reviews"),
+                          Container(),
+                          SizedBox(height: AppSizes.height * 0.02),
+                          // _driverDetailComponents.getProfileLable(
+                          //     lableText: 'Reviews'
+                          // ),
+                          // SizedBox(height: AppSizes.height * 0.01,),
+                          // _driverDetailProvider.driverDetailResponse.result.ratings.isNotEmpty? Expanded(
+                          //   child: ListView.builder(
+                          //     itemCount: _driverDetailProvider.driverDetailResponse.result.ratings.length,
+                          //       itemBuilder: (context, index){
+                          //       return Column(
+                          //         children: [
+                          //           SizedBox(height: AppSizes.height * 0.01,),
+                          //           _driverDetailComponents.getReviewsContainer(
+                          //               leftIcon: _driverDetailProvider.driverDetailResponse.result.ratings[index].profilePicture,
+                          //               userName: _driverDetailProvider.driverDetailResponse.result.ratings[index].fullName,
+                          //               message: _driverDetailProvider.driverDetailResponse.result.ratings[index].review,
+                          //               time: '3:41 PM',
+                          //               ratings: _driverDetailProvider.driverDetailResponse.result.ratings[index].rating.toString(),
+                          //               onPressReview: () {
+                          //                 _onRatingAlert();
+                          //               }
+                          //           ),
+                          //         ],
+                          //       );
+                          //   }),
+                          // ):
+                          // CommonWidgets.onNullData(text: "No Reviews"),
                         ],
                       ),
                     )

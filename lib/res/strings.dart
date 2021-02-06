@@ -21,6 +21,7 @@ class Strings {
   static const String yes = "Yes";
   static const String no = "No";
   static const String cancelLoadAlertText = "Are you sure you want to cancel the Load?";
+  static const String paymentAlertText = "Are you sure you want to Pay?";
   static const String deleteLoadAlertText = "Are you sure you want to delete the job?";
 
   static const String roundTrip = "Round Trip";
