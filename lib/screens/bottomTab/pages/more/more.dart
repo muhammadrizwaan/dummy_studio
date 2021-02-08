@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:truckoom_shipper/contsants/constants.dart';
+import 'package:truckoom_shipper/routes/routes.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/more/more_components.dart';
 import 'package:truckoom_shipper/screens/businessProfile/business_profile.dart';
 import 'package:truckoom_shipper/screens/language/language.dart';
@@ -134,7 +135,8 @@ class _MoreState extends State<More> {
     Constants.setCommpanyPhone("");
     Constants.setCommpanyName("");
     await Constants.setLicenseImages([]);
-    Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: Language()), (route) => false);
+    // Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: Language()), (route) => false);
+    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => Language()), ModalRoute.withName(Routes.bottomTab));
   }
 
 

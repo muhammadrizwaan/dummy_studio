@@ -8,6 +8,7 @@ import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_detail_components.dart';
 import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_detail_provider.dart';
+import 'package:truckoom_shipper/widgets/MapView.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 import 'package:provider/provider.dart';
@@ -96,8 +97,12 @@ class _BookLoadDetailsState extends State<BookLoadDetails> {
                                   Navigator.pop(context);
                                 }),
                             Expanded(
-                              child: GoogleMap(
-                                initialCameraPosition: CameraPosition(target: _center, zoom: 5),
+                              child: MapView(
+                                startLat: double.parse(widget.pickupLatitude),
+                                startLong: double.parse(widget.pickupLongitude),
+                                endLat: double.parse(widget.dropoffLatitude),
+                                endLong: double.parse(widget.dropoffLongitude),
+                                apiKey: "AIzaSyDTLiSzdkVV8xrO9an282diUlBFMshCwAI",
                               ),
                             ),
 

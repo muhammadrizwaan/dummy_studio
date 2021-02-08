@@ -65,6 +65,12 @@ class BookLoadDetailProvider extends ChangeNotifier {
     @required int distance
   }) async {
     try {
+      print('data');
+      print(vehicleTypeId);
+      print(vehicleCategoryId);
+      print(goodTypeId);
+
+
       token = await _getToken.onToken();
       userId = await Constants.getUserId();
       connectivityResult = Connectivity().checkConnectivity();

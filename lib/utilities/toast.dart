@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/entypo_icons.dart';
 import 'package:fluttertoastalert/FlutterToastAlert.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
@@ -471,4 +472,128 @@ class ApplicationToast {
       },
     };
   }
+
+  static onPayConfirmationAlert(
+      {@required BuildContext context, @required Function onCancellLoad, @required String text}) {
+    return {
+      {
+        showDialog(
+          context: context,
+          builder: (_) {
+            return Material(
+              color: AppColors.blackTextColor.withOpacity(0.5),
+              child: Center(
+                child: Stack(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(
+                          left: AppSizes.width * 0.08,
+                          right: AppSizes.width * 0.08),
+                      height: AppSizes.height * 0.25,
+                      width: AppSizes.width,
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                        left: AppSizes.width * 0.1,
+                        right: AppSizes.width * 0.1,
+                        top: AppSizes.width * 0.08,
+                      ),
+                      padding: EdgeInsets.only(
+                        top: AppSizes.height * 0.08,
+                        left: AppSizes.width * 0.08,
+                        right: AppSizes.width * 0.08,
+                      ),
+                      height: AppSizes.height * 0.2,
+                      width: AppSizes.width,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border:
+                        Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
+                        borderRadius: BorderRadius.circular(
+                          10,
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          TextView.getTabBarAlertText(
+                              text,
+                              color: AppColors.colorBlack,
+                              textAlign: TextAlign.center),
+                          SizedBox(
+                            height: AppSizes.height * 0.02,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                onTap: () => onCancellLoad(),
+                                child: Container(
+                                  height: AppSizes.height * 0.05,
+                                  width: AppSizes.width * 0.3,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.yellow,
+                                    borderRadius: BorderRadius.circular(
+                                      04,
+                                    ),
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: TextView.getTabBarButtonText(Strings.yes,
+                                      color: Colors.white),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Container(
+                                  height: AppSizes.height * 0.05,
+                                  width: AppSizes.width * 0.3,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(
+                                        04,
+                                      ),
+                                      border: Border.all(
+                                        color: AppColors.yellow,
+                                      )),
+                                  alignment: Alignment.center,
+                                  child: TextView.getTabBarButtonText(Strings.no,
+                                      color: AppColors.yellow),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: AppSizes.width * 0.425),
+                      height: AppSizes.width * 0.15,
+                      width: AppSizes.width * 0.15,
+                      decoration: BoxDecoration(
+                        color: AppColors.yellow,
+                        border:
+                        Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
+                        borderRadius: BorderRadius.circular(
+                          10,
+                        ),
+                      ),
+                      child: Icon(
+                        Icons.payment,
+                        color: Colors.white,
+                        size: 40,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        )
+      },
+    };
+  }
+
 }

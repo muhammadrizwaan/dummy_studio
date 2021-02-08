@@ -22,6 +22,7 @@ class DispatchComponents{
         @required Function onClickPay,
         @required Function onTap,
         @required Function onAlert,
+        @required Function onReviews,
       }) {
     return GestureDetector(
       onTap: ()=> onTap(),
@@ -261,6 +262,24 @@ class DispatchComponents{
             ),
             SizedBox(
               height: AppSizes.height * 0.01,
+            ),
+            Container(
+              width: AppSizes.width,
+              height: AppSizes.height * 0.06,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                border: Border.all(
+                  color: AppColors.yellow,
+                ),
+                color: AppColors.yellow,
+              ),
+              child: FlatButton(
+                onPressed: () => onReviews(),
+                child: TextView.getLabelText04(
+                  "Ratings & Reviews",
+                  color: AppColors.white.withOpacity(0.95),
+                ),
+              ),
             ),
           ],
         ),

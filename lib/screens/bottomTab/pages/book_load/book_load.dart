@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/book_load/book_load_components.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/book_load/book_load_provider.dart';
 import 'package:truckoom_shipper/screens/notifications/notifications.dart';
+import 'package:truckoom_shipper/widgets/MapView.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 import '../../../../animations/slide_right.dart';
 import '../../../../res/colors.dart';
@@ -110,10 +111,10 @@ class _BookLoadState extends State<BookLoad> {
     pickupText = "Select Pickup Location";
     dropoffText = "Select Dropoff Location";
     _bookLoadComponents = BookLoadComponents();
-    pickup_latitude = "";
-    pickup_longitude = "";
-    dropoff_latitude = "";
-    dropoff_longitude = "";
+    pickup_latitude = "24.421555";
+    pickup_longitude = "54.576599";
+    dropoff_latitude = "18.216797";
+    dropoff_longitude = "42.503765";
     pickup_location = "";
     dropoff_location = "";
   }
@@ -145,8 +146,12 @@ class _BookLoadState extends State<BookLoad> {
                                   },),
                                 Expanded(
                                   // height:AppSizes.height * 0.4,
-                                  child: GoogleMap(
-                                    initialCameraPosition: CameraPosition(target: _center, zoom: 5),
+                                  child:  MapView(
+                                    startLat: double.parse(pickup_latitude),
+                                    startLong: double.parse(pickup_longitude),
+                                    endLat: double.parse(dropoff_latitude),
+                                    endLong: double.parse(dropoff_longitude),
+                                    apiKey: "AIzaSyDTLiSzdkVV8xrO9an282diUlBFMshCwAI",
                                   ),
                                 ),
                               ],
@@ -218,8 +223,18 @@ class _BookLoadState extends State<BookLoad> {
                                       children: [
                                         ...List.generate(
                                             5,
-                                                (index) => _bookLoadComponents.getHistroyText(
-                                                context: context, text: "at Khor Fakkan")),
+                                                (index) => Column(
+                                                  children: [
+                                                    _bookLoadComponents.getHistroyText(
+                                                    context: context, text: "at Khor Fakkan"),
+                                                    SizedBox(height: AppSizes.height *0.01),
+                                                    Container(
+                                                      margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
+                                                        height: 1,
+                                                      color: AppColors.grey,
+                                                    )
+                                                  ],
+                                                )),
                                       ],
                                     ),
                                   ],

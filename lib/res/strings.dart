@@ -4,7 +4,6 @@ class Strings {
   static const String data = "DATA ANALYTICS";
 
 
-
   static const String token = "token";
   static const String email = "Email";
   static const String userId = "UserId";
@@ -21,7 +20,8 @@ class Strings {
   static const String yes = "Yes";
   static const String no = "No";
   static const String cancelLoadAlertText = "Are you sure you want to cancel the Load?";
-  static const String deleteLoadAlertText = "Are you sure you want to delete the job?";
+  static const String paymentAlertText = "Are you sure you want to Pay?";
+  static const String deleteLoadAlertText = "Are you sure you want to cancel the job?";
 
   static const String roundTrip = "Round Trip";
   static const String pickupDateAndTime = "Pickup date and time";
@@ -77,6 +77,7 @@ class Strings {
   static const String somethingWentWrong = "Something went wrong";
   static const String nameErrorText = "Please enter valid Name";
   static const String subjectErrorText = "Please enter Subject";
+  static const String ratingErrorText = "Please give Rating";
   static const String imagesErrorText = "Please upload images";
   static const String businessNameErrorText = "Please enter the Business Name";
   static const String authorizationErrorText = "Authorization has been denied for this request";
@@ -88,6 +89,7 @@ class Strings {
   static const String internetConnectionError = "Internet connection error";
   static const String passwordUpdatedText = "Please check your email";
   static const String messageErrorText = "Please enter message";
+  static const String reviewDescriptionErrorText = "Please enter Description";
   static const String weightErrorText = "Please enter weight";
   static const String noOfVehicleErrorText = "Please enter number of vehicle";
   static const String goodTypeErrorText = "Please select GoodType";
