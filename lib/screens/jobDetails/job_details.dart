@@ -71,11 +71,12 @@ class _JobDetailsState extends State<JobDetails> {
                               }),
                           Expanded(
                             child: MapView(
-                              startLat: double.parse( _jobDetailsProvider.loadDetailResponse.result.pickupLatitude.toString()),
-                              startLong: double.parse(_jobDetailsProvider.loadDetailResponse.result.pickupLongitude.toString()),
-                              endLat: double.parse(_jobDetailsProvider.loadDetailResponse.result.dropoffLatitude.toString()),
-                              endLong: double.parse(_jobDetailsProvider.loadDetailResponse.result.dropoffLongitude.toString()),
-                              apiKey: "AIzaSyDTLiSzdkVV8xrO9an282diUlBFMshCwAI",
+                              startLat: _jobDetailsProvider.loadDetailResponse.result.pickupLatitude,
+                              startLong: _jobDetailsProvider.loadDetailResponse.result.pickupLongitude,
+                              endLat: _jobDetailsProvider.loadDetailResponse.result.dropoffLatitude,
+                              endLong: _jobDetailsProvider.loadDetailResponse.result.dropoffLongitude,
+                              apiKey: "IzaSyDHxZ--0FYqNItvE-kf3Sz2jlRtgt0Mp3Q",
+                              directionsApiKey: "AIzaSyDTLiSzdkVV8xrO9an282diUlBFMshCwAI",
                             ),
                               // child: GoogleMap(
                               //   initialCameraPosition: CameraPosition(target: _center, zoom: 5),

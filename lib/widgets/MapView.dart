@@ -7,10 +7,11 @@ import 'dart:math' show cos, sqrt, asin;
 class MapView extends StatefulWidget {
   double startLat,startLong,endLat,endLong;
   var apiKey;
+  var directionsApiKey;
   String _distanceBetweenLocations = "0.0";
   String getDistance() => _distanceBetweenLocations;
 
-  MapView({@required this.startLat,@required this.startLong, @required this.endLat,@required this.endLong, @required this.apiKey});
+  MapView({@required this.startLat,@required this.startLong, @required this.endLat,@required this.endLong, @required this.apiKey,@required this.directionsApiKey});
 
   @override
   _MapViewState createState() => _MapViewState();
@@ -24,7 +25,7 @@ class _MapViewState extends State<MapView> {
 
   // For controlling the view of the Map
   GoogleMapController mapController;
-  final Geolocator _geolocator = Geolocator();
+  // final Geolocator _geolocator = Geolocator();
   // For storing the current position
   Position _currentPosition;
 
@@ -229,7 +230,7 @@ class _MapViewState extends State<MapView> {
     // Generating the list of coordinates to be used for
     // drawing the polylines
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      widget.apiKey, // Google Maps API Key
+      widget.directionsApiKey, // Google Maps API Key
       PointLatLng(start.latitude, start.longitude),
       PointLatLng(destination.latitude, destination.longitude),
       travelMode: TravelMode.transit,
@@ -255,10 +256,10 @@ class _MapViewState extends State<MapView> {
     );
 
     // Adding the polyline to the map
-    setState(() {
+    // setState(() {
       polylines[id] = polyline;
       print("PLOYLINE DRAWN :::::::::::" + polyline.points.toString());
-    });
+    // });
 
     _getDistance();
   }

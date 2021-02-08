@@ -135,8 +135,8 @@ class _MoreState extends State<More> {
     Constants.setCommpanyPhone("");
     Constants.setCommpanyName("");
     await Constants.setLicenseImages([]);
-    // Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: Language()), (route) => false);
-    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => Language()), ModalRoute.withName(Routes.bottomTab));
+    Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: Language()), (route) => false);
+    // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => Language()), ModalRoute.withName(Routes.bottomTab));
   }
 
 

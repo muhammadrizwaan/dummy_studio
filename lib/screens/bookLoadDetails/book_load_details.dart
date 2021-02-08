@@ -102,7 +102,8 @@ class _BookLoadDetailsState extends State<BookLoadDetails> {
                                 startLong: double.parse(widget.pickupLongitude),
                                 endLat: double.parse(widget.dropoffLatitude),
                                 endLong: double.parse(widget.dropoffLongitude),
-                                apiKey: "AIzaSyDTLiSzdkVV8xrO9an282diUlBFMshCwAI",
+                                apiKey: "IzaSyDHxZ--0FYqNItvE-kf3Sz2jlRtgt0Mp3Q",
+                                directionsApiKey: "AIzaSyDTLiSzdkVV8xrO9an282diUlBFMshCwAI",
                               ),
                             ),
 
