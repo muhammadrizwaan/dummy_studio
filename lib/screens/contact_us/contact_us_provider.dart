@@ -17,7 +17,6 @@ import 'package:truckoom_shipper/routes/routes.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/loader.dart';
-import 'package:truckoom_shipper/utilities/utilities.dart';
 import 'package:http/http.dart' as http;
 
 class ContactUsProvider extends ChangeNotifier {

@@ -29,7 +29,7 @@ class _DispatchState extends State<Dispatch> {
   @override
   void initState() {
     super.initState();
-    rating = 3.0;
+    rating = 0.0;
     _dispatchComponents = DispatchComponents();
     _dispatchedProvider = Provider.of<DispatchedProvider>(context, listen: false);
     _dispatchedProvider.init(context: context);
@@ -72,7 +72,10 @@ class _DispatchState extends State<Dispatch> {
                                 SlideRightRoute(page: JobDetails(status: "Dispatch", loadId: _dispatchedProvider.tabbarResponse.result[index].loadId)));
                           },
                           onReviews: (){
-                            _onRatingAlert();
+                            _onRatingAlert(
+                                _dispatchedProvider.tabbarResponse.result[index].assignedDriverId,
+                              _dispatchedProvider.tabbarResponse.result[index].loadId,
+                            );
                           }
                         ),
                         SizedBox(
@@ -98,7 +101,7 @@ class _DispatchState extends State<Dispatch> {
     );
   }
 
-  _onRatingAlert() {
+  _onRatingAlert(int driverId, int loadId,) {
     return {
       {
         showDialog(
@@ -150,8 +153,7 @@ class _DispatchState extends State<Dispatch> {
                                     allowHalfRating: true,
                                     spacing: 2.0,
                                     onRated: (value) {
-                                      print("rating value -> $value");
-                                      // print("rating value dd -> ${value.truncate()}");
+                                      rating = value;
                                     },
                                   ),
                                   SizedBox(height: AppSizes.height * 0.02),
@@ -196,8 +198,18 @@ class _DispatchState extends State<Dispatch> {
                                   SizedBox(height: AppSizes.height * 0.03),
                                   CommonWidgets.getBottomButton(
                                       text: Strings.submit, onPress: () {
+                                        _dispatchedProvider.onRatingAndReviews(
+                                            context: context,
+                                            score: rating,
+                                            driverId: driverId,
+                                            loadId: loadId,
+                                            comment: description.text,
+                                        );
+                                        
                                     hideLoader(context);
-                                    Navigator.pop(context);
+                                    rating = 0.0;
+                                    description.text = "";
+                                    // Navigator.pop(context);
                                     // Navigator.push(context, SlideRightRoute(page: Invoice()));
                                   })
                                 ],
