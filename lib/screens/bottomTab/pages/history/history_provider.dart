@@ -1,7 +1,6 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:truckoom_shipper/commons/get_token.dart';
-import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
 import 'package:truckoom_shipper/models/api_models/history_response.dart';
@@ -21,19 +20,26 @@ class HistoryProvider extends ChangeNotifier{
   CustomPopup _loader = CustomPopup();
   GetToken _getToken = GetToken();
   bool isDataFetched = false;
+  bool isLoading = false;
+  List<dynamic> histroyList = List<dynamic>();
 
   var connectivityResult;
   int userId;
   String token;
-  init({@required BuildContext context}) async{
+  init({@required BuildContext context, int page}) async{
     this.context = context;
     connectivityResult = "";
     token = "";
-    await getPlacedLoad(context: context);
+    isLoading = false;
+    histroyList = [];
+    await getPlacedLoad(context: context, pageNumber: page );
   }
 
-  Future getPlacedLoad({@required BuildContext context}) async{
+  Future getPlacedLoad({@required BuildContext context, @required int pageNumber}) async{
     try{
+      // if(pageNumber > 0 && histroyList.isNotEmpty){
+      //   isLoading = true;
+      // }
       token = await _getToken.onToken();
       connectivityResult = await Connectivity().checkConnectivity();
       userId = await Constants.getUserId();
@@ -45,7 +51,7 @@ class HistoryProvider extends ChangeNotifier{
         print(token);
         String tempUrl = getHistoryApi.replaceAll("{userId}", '$userId');
         http.Response response = await _networkHelper.get(
-            tempUrl,
+            tempUrl+pageNumber.toString(),
             headers: {
               'Content-Type': 'application/json',
               'Authorization': token
@@ -54,6 +60,14 @@ class HistoryProvider extends ChangeNotifier{
         if(response.statusCode == 200){
           historyResponse = HistoryResponse.fromJson(_genericDecodeEncode.decodeJson(response.body));
           if(historyResponse.code == 1){
+            print('success');
+            if(pageNumber == 0 || histroyList.isEmpty){
+              histroyList = historyResponse.result;
+            }
+            else{
+              histroyList.addAll(historyResponse.result);
+              isLoading = false;
+            }
             isDataFetched = true;
             notifyListeners();
           }
@@ -69,6 +83,10 @@ class HistoryProvider extends ChangeNotifier{
     catch(error){
       print(error.toString());
     }
+  }
+
+  setIsLoading(bool loading){
+    return isLoading = loading;
   }
 
 }

@@ -1,4 +1,5 @@
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/providers/multi_provider.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/routes/routes.dart';
+import 'package:truckoom_shipper/utilities/toast.dart';
 
 
 void main() {
@@ -13,9 +15,34 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  final _firebaseMessaging = FirebaseMessaging();
+  configureFcm(){
+    FirebaseMessaging().getToken().then((value) {
+      ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: value);
+      print("The fCM  tokeen is: "+ value);
+    });
+    // _firebaseMessaging.configure(
+    //   onMessage: (Map<String, dynamic> message) async {
+    //     print("onMessage: $message");
+    //     // _showItemDialog(message);
+    //     ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "message received");
+    //   },
+    //   // onBackgroundMessage: myBackgroundMessageHandler,
+    //   onLaunch: (Map<String, dynamic> message) async {
+    //     print("onLaunch: $message");
+    //     // _navigateToItemDetail(message);
+    //     ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "message received");
+    //   },
+    //   onResume: (Map<String, dynamic> message) async {
+    //     print("onResume: $message");
+    //     // _navigateToItemDetail(message);
+    //     ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "message received");
+    //   },
+    // );
+  }
   @override
   Widget build(BuildContext context) {
-
+  configureFcm();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,

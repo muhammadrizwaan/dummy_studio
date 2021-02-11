@@ -43,7 +43,7 @@ class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
     super.initState();
     _confirmBookLoadComponents = ConfirmBookLoadComponents();
     _currMapView = _getMapView();
-    _currMapView.getDistance();
+    // _currMapView.getDistance();
     print('Distance is');
     print(widget.Distance);
   }
