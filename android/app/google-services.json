@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "434512561373",
+    "project_id": "truckoom-a1400",
+    "storage_bucket": "truckoom-a1400.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:434512561373:android:7efee679b7f8aa2a568734",
+        "android_client_info": {
+          "package_name": "com.jinnbyte.truckoom_shipper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "434512561373-tkuug30de6v98pqr7ro83iqehi6qk7qp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCz7f1bZhQbD7lmJRraJVU4rvrC9trEYsQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "434512561373-tkuug30de6v98pqr7ro83iqehi6qk7qp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

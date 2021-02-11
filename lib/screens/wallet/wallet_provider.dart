@@ -55,8 +55,6 @@ class WalletProvider extends ChangeNotifier{
           _walletResponse = WalletResponse.fromJson(_genericDecodeEncode.decodeJson(response.body));
           if(_walletResponse.code == 1){
             print('wallet Api success');
-            print(_walletResponse.result.transactions[0].loadId);
-
             isDataFetched = true;
             // _loader.hideLoader(context);
             notifyListeners();

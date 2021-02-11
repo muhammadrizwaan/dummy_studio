@@ -11,6 +11,7 @@ import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bank/bank_screen.dart';
 import 'package:truckoom_shipper/screens/payment/payment_provider.dart';
+import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
@@ -207,7 +208,12 @@ class _PaymentState extends State<Payment> {
                       child: CommonWidgets.applyCouponContainer(
                           text: 'Submit',
                           onPress: (){
-                            _paymentProvider.onAcceptedByShipper(context: context, loadId: widget.loadId);
+                            ApplicationToast.onPayConfirmationAlert(context: context, onCancellLoad: (){
+                              _paymentProvider.onAcceptedByShipper(context: context, loadId: widget.loadId);
+                              Navigator.pop(context);
+                            },
+                              text: Strings.paymentAlertText,
+                            );
                           },
                           onCouponPress: (){
                             _onPromoCode();

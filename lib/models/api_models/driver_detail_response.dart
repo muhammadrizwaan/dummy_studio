@@ -1,6 +1,6 @@
 /// Message : "Operation performed Succesfully"
 /// Code : 1
-/// Result : {"UserId":2057,"FullName":"Driver C","Email":"","PhoneNumber":"2233422","LicenseNumber":"123-456-789-0","ProfilePicture":"/Files/UserImages/34324003_277740429434236_6306705307154251776_n.jpg","Ratings":[{"RatingId":5,"UserId":2053,"ProfilePicture":"/Files/UserImages/34324003_277740429434236_6306705307154251776_n.jpg","FullName":"Driver C","Review":"High class service, will use for future shipments as well","Rating":5.0,"Date":"Dec 12 2020 12:00AM"},{"RatingId":6,"UserId":2053,"ProfilePicture":"/Files/UserImages/34324003_277740429434236_6306705307154251776_n.jpg","FullName":"Driver C","Review":"High class service, will use for future shipments as well","Rating":5.0,"Date":"Dec 12 2020 12:00AM"},{"RatingId":7,"UserId":2053,"ProfilePicture":"/Files/UserImages/34324003_277740429434236_6306705307154251776_n.jpg","FullName":"Driver C","Review":"High class service, will use for future shipments as well","Rating":5.0,"Date":"Dec 12 2020 12:00AM"},{"RatingId":8,"UserId":2053,"ProfilePicture":"/Files/UserImages/34324003_277740429434236_6306705307154251776_n.jpg","FullName":"Driver C","Review":"High class service, will use for future shipments as well","Rating":5.0,"Date":"Dec 12 2020 12:00AM"}]}
+/// Result : {"UserId":133,"FullName":"T2 driver2","Email":"","PhoneNumber":"+971501211144","LicenseNumber":"5854989","ProfilePicture":"http://apitruckoom.jinnbytedev.com/Files/UserImages/user.png","LicenseImages":[{"DocumentId":271,"FilePath":"http://apitruckoom.jinnbytedev.com/Files/Licenses/Screenshot 2021-02-06 at 14.35.09.png"},{"DocumentId":272,"FilePath":"http://apitruckoom.jinnbytedev.com/Files/Licenses/Screenshot 2021-02-06 at 14.35.04.png"}]}
 
 class DriverDetailResponse {
   String _message;
@@ -40,13 +40,13 @@ class DriverDetailResponse {
 
 }
 
-/// UserId : 2057
-/// FullName : "Driver C"
+/// UserId : 133
+/// FullName : "T2 driver2"
 /// Email : ""
-/// PhoneNumber : "2233422"
-/// LicenseNumber : "123-456-789-0"
-/// ProfilePicture : "/Files/UserImages/34324003_277740429434236_6306705307154251776_n.jpg"
-/// Ratings : [{"RatingId":5,"UserId":2053,"ProfilePicture":"/Files/UserImages/34324003_277740429434236_6306705307154251776_n.jpg","FullName":"Driver C","Review":"High class service, will use for future shipments as well","Rating":5.0,"Date":"Dec 12 2020 12:00AM"},{"RatingId":6,"UserId":2053,"ProfilePicture":"/Files/UserImages/34324003_277740429434236_6306705307154251776_n.jpg","FullName":"Driver C","Review":"High class service, will use for future shipments as well","Rating":5.0,"Date":"Dec 12 2020 12:00AM"},{"RatingId":7,"UserId":2053,"ProfilePicture":"/Files/UserImages/34324003_277740429434236_6306705307154251776_n.jpg","FullName":"Driver C","Review":"High class service, will use for future shipments as well","Rating":5.0,"Date":"Dec 12 2020 12:00AM"},{"RatingId":8,"UserId":2053,"ProfilePicture":"/Files/UserImages/34324003_277740429434236_6306705307154251776_n.jpg","FullName":"Driver C","Review":"High class service, will use for future shipments as well","Rating":5.0,"Date":"Dec 12 2020 12:00AM"}]
+/// PhoneNumber : "+971501211144"
+/// LicenseNumber : "5854989"
+/// ProfilePicture : "http://apitruckoom.jinnbytedev.com/Files/UserImages/user.png"
+/// LicenseImages : [{"DocumentId":271,"FilePath":"http://apitruckoom.jinnbytedev.com/Files/Licenses/Screenshot 2021-02-06 at 14.35.09.png"},{"DocumentId":272,"FilePath":"http://apitruckoom.jinnbytedev.com/Files/Licenses/Screenshot 2021-02-06 at 14.35.04.png"}]
 
 class Result {
   int _userId;
@@ -55,7 +55,7 @@ class Result {
   String _phoneNumber;
   String _licenseNumber;
   String _profilePicture;
-  List<Ratings> _ratings;
+  List<LicenseImages> _licenseImages;
 
   int get userId => _userId;
   String get fullName => _fullName;
@@ -63,7 +63,7 @@ class Result {
   String get phoneNumber => _phoneNumber;
   String get licenseNumber => _licenseNumber;
   String get profilePicture => _profilePicture;
-  List<Ratings> get ratings => _ratings;
+  List<LicenseImages> get licenseImages => _licenseImages;
 
   Result({
       int userId, 
@@ -72,14 +72,14 @@ class Result {
       String phoneNumber, 
       String licenseNumber, 
       String profilePicture, 
-      List<Ratings> ratings}){
+      List<LicenseImages> licenseImages}){
     _userId = userId;
     _fullName = fullName;
     _email = email;
     _phoneNumber = phoneNumber;
     _licenseNumber = licenseNumber;
     _profilePicture = profilePicture;
-    _ratings = ratings;
+    _licenseImages = licenseImages;
 }
 
   Result.fromJson(dynamic json) {
@@ -89,10 +89,10 @@ class Result {
     _phoneNumber = json["PhoneNumber"];
     _licenseNumber = json["LicenseNumber"];
     _profilePicture = json["ProfilePicture"];
-    if (json["Ratings"] != null) {
-      _ratings = [];
-      json["Ratings"].forEach((v) {
-        _ratings.add(Ratings.fromJson(v));
+    if (json["LicenseImages"] != null) {
+      _licenseImages = [];
+      json["LicenseImages"].forEach((v) {
+        _licenseImages.add(LicenseImages.fromJson(v));
       });
     }
   }
@@ -105,75 +105,40 @@ class Result {
     map["PhoneNumber"] = _phoneNumber;
     map["LicenseNumber"] = _licenseNumber;
     map["ProfilePicture"] = _profilePicture;
-    if (_ratings != null) {
-      map["Ratings"] = _ratings.map((v) => v.toJson()).toList();
+    if (_licenseImages != null) {
+      map["LicenseImages"] = _licenseImages.map((v) => v.toJson()).toList();
     }
     return map;
   }
 
 }
 
-/// RatingId : 5
-/// UserId : 2053
-/// ProfilePicture : "/Files/UserImages/34324003_277740429434236_6306705307154251776_n.jpg"
-/// FullName : "Driver C"
-/// Review : "High class service, will use for future shipments as well"
-/// Rating : 5.0
-/// Date : "Dec 12 2020 12:00AM"
+/// DocumentId : 271
+/// FilePath : "http://apitruckoom.jinnbytedev.com/Files/Licenses/Screenshot 2021-02-06 at 14.35.09.png"
 
-class Ratings {
-  int _ratingId;
-  int _userId;
-  String _profilePicture;
-  String _fullName;
-  String _review;
-  double _rating;
-  String _date;
+class LicenseImages {
+  int _documentId;
+  String _filePath;
 
-  int get ratingId => _ratingId;
-  int get userId => _userId;
-  String get profilePicture => _profilePicture;
-  String get fullName => _fullName;
-  String get review => _review;
-  double get rating => _rating;
-  String get date => _date;
+  int get documentId => _documentId;
+  String get filePath => _filePath;
 
-  Ratings({
-      int ratingId, 
-      int userId, 
-      String profilePicture, 
-      String fullName, 
-      String review, 
-      double rating, 
-      String date}){
-    _ratingId = ratingId;
-    _userId = userId;
-    _profilePicture = profilePicture;
-    _fullName = fullName;
-    _review = review;
-    _rating = rating;
-    _date = date;
+  LicenseImages({
+      int documentId, 
+      String filePath}){
+    _documentId = documentId;
+    _filePath = filePath;
 }
 
-  Ratings.fromJson(dynamic json) {
-    _ratingId = json["RatingId"];
-    _userId = json["UserId"];
-    _profilePicture = json["ProfilePicture"];
-    _fullName = json["FullName"];
-    _review = json["Review"];
-    _rating = json["Rating"];
-    _date = json["Date"];
+  LicenseImages.fromJson(dynamic json) {
+    _documentId = json["DocumentId"];
+    _filePath = json["FilePath"];
   }
 
   Map<String, dynamic> toJson() {
     var map = <String, dynamic>{};
-    map["RatingId"] = _ratingId;
-    map["UserId"] = _userId;
-    map["ProfilePicture"] = _profilePicture;
-    map["FullName"] = _fullName;
-    map["Review"] = _review;
-    map["Rating"] = _rating;
-    map["Date"] = _date;
+    map["DocumentId"] = _documentId;
+    map["FilePath"] = _filePath;
     return map;
   }
 

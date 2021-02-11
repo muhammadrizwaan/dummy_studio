@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttericon/elusive_icons.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
@@ -44,10 +45,75 @@ class BookLoadComponents{
 
   Widget getLocationImage(){
     return Container(
-      height: AppSizes.height * 0.14,
-      padding: EdgeInsets.only(top: AppSizes.height * 0.021, bottom: AppSizes.height * 0.03),
-      child: Image.asset(Assets.joint, fit: BoxFit.cover,),
+      height: AppSizes.height * 0.0975,
+      padding: EdgeInsets.only(bottom: AppSizes.height * 0.008),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            width: 8,
+            height: 8,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: AppColors.yellow
+            ),
+          ),
+          Container(
+            width: 4,
+            height: 4,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: AppColors.grey
+            ),
+          ),
+          Container(
+            width: 4,
+            height: 4,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: AppColors.grey
+            ),
+          ),
+          Container(
+            width: 4,
+            height: 4,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: AppColors.grey
+            ),
+          ),
+          Container(
+            width: 4,
+            height: 4,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: AppColors.grey
+            ),
+          ),
+          Container(
+            width: 4,
+            height: 4,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: AppColors.grey
+            ),
+          ),
+          Container(
+            width: 8,
+            height: 8,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: AppColors.yellow
+            ),
+          )
+        ],
+      ),
     );
+    //   Container(
+    //   height: AppSizes.height * 0.14,
+    //   padding: EdgeInsets.only(top: AppSizes.height * 0.021, bottom: AppSizes.height * 0.03),
+    //   child: Image.asset(Assets.joint, fit: BoxFit.cover,),
+    // );
   }
 
   Widget getHorizontalLine(){
@@ -109,7 +175,7 @@ class BookLoadComponents{
       width: AppSizes.width * 0.85,
       margin: EdgeInsets.only(
         top: AppSizes.height * 0.02,
-        left: AppSizes.width * 0.04,
+        // left: AppSizes.width * 0.04,
         right: AppSizes.width * 0.04,
       ),
       decoration: BoxDecoration(
@@ -145,7 +211,8 @@ class BookLoadComponents{
                 color: AppColors.colorBlack,
               ),
             ),
-          )
+          ),
+
         ],
       ),
     );

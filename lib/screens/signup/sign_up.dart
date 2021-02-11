@@ -8,11 +8,11 @@ import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
+import 'package:truckoom_shipper/screens/phoneNumber/phone_number_provider.dart';
 import 'package:truckoom_shipper/screens/signup/sign_up_components.dart';
 import 'package:truckoom_shipper/screens/signup/sign_up_provider.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
-import 'package:truckoom_shipper/widgets/text_views.dart';
-import '../bottomTab/bottom_tab.dart';
+
 
 class SignUP extends StatefulWidget {
   String cell;
@@ -26,16 +26,19 @@ class SignUP extends StatefulWidget {
 class _SignUPState extends State<SignUP> {
   SignUpComponents _signUpComponents;
   SignUpProvider _signUpProvider;
+  PhoneNumberProvider _phoneNumberProvider;
   TextEditingController _name, _email, _password, _confirm_password;
   bool onCheck = false;
 
   void initState() {
     _signUpProvider = Provider.of<SignUpProvider>(context, listen: false);
+    _signUpProvider.init(context);
+    _phoneNumberProvider = Provider.of<PhoneNumberProvider>(context, listen: false);
+    _phoneNumberProvider.init(context);
     _name = TextEditingController();
     _email = TextEditingController();
     _password = TextEditingController();
     _confirm_password = TextEditingController();
-    _signUpProvider.init(context);
     super.initState();
   }
 
@@ -155,105 +158,7 @@ class _SignUPState extends State<SignUP> {
     );
   }
 
-  _alertDialogueContainer() {
-    return {
-      {
-        showDialog(
-          context: context,
-          builder: (_) {
-            return Material(
-              color: AppColors.blackTextColor.withOpacity(0.5),
-              child: Center(
-                child: Stack(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(
-                          left: AppSizes.width * 0.08,
-                          right: AppSizes.width * 0.08),
-                      height: AppSizes.height * 0.25,
-                      width: AppSizes.width,
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(
-                        left: AppSizes.width * 0.12,
-                        right: AppSizes.width * 0.12,
-                        top: AppSizes.width * 0.07,
-                      ),
-                      padding: EdgeInsets.only(
-                        top: AppSizes.height * 0.08,
-                      ),
-                      height: AppSizes.height * 0.2,
-                      width: AppSizes.width,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border:
-                            Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Signup Successful",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                decoration: TextDecoration.none,
-                                fontSize: 20,
-                                color: AppColors.colorBlack,
-                                fontFamily: Assets.poppinsMedium,
-                                //fontWeight: FontWeight.bold
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  SlideRightRoute(
-                                      page: BottomTab()),
-                                  (Route<dynamic> route) => false);
-                            },
-                            child: TextView.getContinueText04(
-                              "Tap to Continue",
-                              color: AppColors.yellow,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(
-                        left: AppSizes.width * 0.425,
-                      ),
-                      height: AppSizes.width * 0.15,
-                      width: AppSizes.width * 0.15,
-                      decoration: BoxDecoration(
-                        color: AppColors.yellow,
-                        border:
-                            Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
-                      ),
-                      child: Icon(
-                        Icons.check,
-                        color: Colors.white,
-                        size: 40,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        )
-      },
-    };
-  }
+
 
   _getTermsAndCondition() {
     return Row(
@@ -307,7 +212,7 @@ class _SignUPState extends State<SignUP> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              // navigate to desired screen
+                              _phoneNumberProvider.getTermsAndConditions(context: context);
                             })
                     ]),
               ),

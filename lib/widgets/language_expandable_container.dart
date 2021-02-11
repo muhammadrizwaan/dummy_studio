@@ -3,7 +3,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
@@ -12,7 +11,7 @@ class LanguageContainer extends StatefulWidget {
   // final FAQ faq;
   // int pageIndex;
 
-  LanguageContainer();
+  // LanguageContainer();
 
   @override
   _LanguageContainerState createState() => _LanguageContainerState();

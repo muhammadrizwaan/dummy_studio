@@ -110,7 +110,7 @@ class _ContactUsState extends State<ContactUs> {
                                   callbackStatus: 0
                               );
                             },
-                            child: TextView.getBottomButtonText04("Send", color: AppColors.white,),
+                            child: TextView.getDescriptionText("Send", color: AppColors.white,),
                           ),
                         ),
                         Container(
@@ -129,7 +129,7 @@ class _ContactUsState extends State<ContactUs> {
                                   callbackStatus: 1
                               );
                             },
-                            child: TextView.getBottomButtonText04("Callback", color: AppColors.yellow),
+                            child: TextView.getDescriptionText("Request Callback", color: AppColors.yellow),
                           ),
                         ),
                       ],

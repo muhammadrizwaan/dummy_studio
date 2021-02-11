@@ -65,8 +65,12 @@ class BookLoadDetailProvider extends ChangeNotifier {
     @required int distance
   }) async {
     try {
-      print('distance');
-      print(distance);
+      print('data');
+      print(vehicleTypeId);
+      print(vehicleCategoryId);
+      print(goodTypeId);
+
+
       token = await _getToken.onToken();
       userId = await Constants.getUserId();
       connectivityResult = Connectivity().checkConnectivity();
@@ -107,12 +111,16 @@ class BookLoadDetailProvider extends ChangeNotifier {
           if (_saveLoadResponse.code == 1) {
             print('Save Load Success');
 
+            if(images.isNotEmpty){
             await onUploadLoadImages(
                 context: context,
                 images: images,
                 loadId: _saveLoadResponse.result.loadId,
                 userId: userId,
-            );
+            );}
+            else{
+              Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: BottomTab()), ModalRoute.withName(Routes.bookLoadDetails));
+            }
           } else {
             _loader.hideLoader(context);
             ApplicationToast.getErrorToast(
@@ -166,8 +174,6 @@ class BookLoadDetailProvider extends ChangeNotifier {
           _loadImagesResponse = LoadImagesResponse.fromJson(_response.data);
           if (_loadImagesResponse.code == 1) {
             _loader.hideLoader(context);
-            print('Images Api success');
-            print(_loadImagesResponse.result[0].filePath);
             Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: BottomTab()), ModalRoute.withName(Routes.bookLoadDetails));
           } else {
             _loader.hideLoader(context);

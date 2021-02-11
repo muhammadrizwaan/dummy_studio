@@ -8,6 +8,7 @@ import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/confirmBookLoad/confirm_book_load_components.dart';
 import 'package:truckoom_shipper/screens/select_vehicle/select_vehicle.dart';
+import 'package:truckoom_shipper/widgets/MapView.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 class ConfirmBookLoad extends StatefulWidget {
@@ -35,51 +36,57 @@ class ConfirmBookLoad extends StatefulWidget {
 class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
   ConfirmBookLoadComponents _confirmBookLoadComponents;
   LatLng _center = LatLng(30.3753, 69.3451);
+  MapView _currMapView;
 
   @override
   void initState() {
     super.initState();
     _confirmBookLoadComponents = ConfirmBookLoadComponents();
+    _currMapView = _getMapView();
+    // _currMapView.getDistance();
+    print('Distance is');
+    print(widget.Distance);
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          body: Column(
-        children: [
-          CommonWidgets.tabsAppBar2(
-              text: Strings.bookLoad,
-              onPress: () {
-                Navigator.pop(context);
-              }),
-          SizedBox(height: AppSizes.height * 0.005),
-          Expanded(
-            child: Stack(
+          body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context,bool innerBoxIsScrolled){
+      return <Widget>[
+        SliverAppBar(
+          expandedHeight: AppSizes.height * 0.5,
+          pinned: true,
+          automaticallyImplyLeading: true,
+          floating: false,
+          toolbarHeight: 0,
+          backgroundColor: AppColors.white,
+          flexibleSpace: FlexibleSpaceBar(
+            background: Column(
               children: [
-                GoogleMap(
-                  initialCameraPosition:
-                      CameraPosition(target: _center, zoom: 5),
+                CommonWidgets.tabsAppBar2(
+                    text: Strings.bookLoad,
+                    onPress: () {
+                      Navigator.pop(context);
+                    }),
+                Expanded(
+                  child:  MapView(
+                    startLat: double.parse(widget.PickupLatitude),
+                    startLong: double.parse(widget.PickupLongitude),
+                    endLat: double.parse(widget.DropoffLatitude),
+                    endLong: double.parse(widget.DropoffLongitude),
+                    apiKey: "IzaSyDHxZ--0FYqNItvE-kf3Sz2jlRtgt0Mp3Q",
+                    directionsApiKey: "AIzaSyDTLiSzdkVV8xrO9an282diUlBFMshCwAI",
+                  ),
                 ),
-                SlidingUpPanel(
-                  isDraggable: true,
-                  minHeight: AppSizes.height * 0.40,
-                  maxHeight: AppSizes.height * 0.75,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15)),
-                  panel: _onSlidingUpPanel(),
-                )
               ],
             ),
-          )
-        ],
-      )),
-    );
-  }
-
-  _onSlidingUpPanel() {
-    return Container(
+          ),
+        )
+      ];
+    },
+    body: Container(
       height: AppSizes.height * 0.5,
       padding: EdgeInsets.only(top: 20, left: 15, right: 15),
       decoration: BoxDecoration(
@@ -132,6 +139,19 @@ class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
           ),
         ],
       ),
+    )
+    )
+    ),);
+  }
+
+  _getMapView() {
+    return MapView(
+      startLat: double.parse(widget.PickupLatitude),
+      startLong: double.parse(widget.PickupLongitude),
+      endLat: double.parse(widget.DropoffLatitude),
+      endLong: double.parse(widget.DropoffLongitude),
+      apiKey: "AIzaSyDTLiSzdkVV8xrO9an282diUlBFMshCwAI",
+      directionsApiKey: "AIzaSyDTLiSzdkVV8xrO9an282diUlBFMshCwAI",
     );
   }
 }

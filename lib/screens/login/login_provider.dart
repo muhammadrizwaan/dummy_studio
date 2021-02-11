@@ -78,14 +78,9 @@ class LoginProvider extends ChangeNotifier {
           "UserTypeId": 2
         });
         if (response.statusCode == 200) {
-          commonResponse = CommonResponse.fromJson(
-              genericDecodeEncode.decodeJson(response.body));
+          commonResponse = CommonResponse.fromJson(genericDecodeEncode.decodeJson(response.body));
           if (commonResponse.code == 1) {
-
             Constants.setToken(commonResponse.result.token.accessToken);
-            print('set token');
-            await print(Constants.getToken());
-            print('set2 token');
             print(commonResponse.result.token.accessToken);
             await Constants.setUserEmail(commonResponse.result.user.email);
             Constants.setPassword(commonResponse.result.user.password);

@@ -1,18 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
-import 'package:fluttericon/linecons_icons.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/contsants/constants.dart';
+import 'package:truckoom_shipper/routes/routes.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/more/more_components.dart';
 import 'package:truckoom_shipper/screens/businessProfile/business_profile.dart';
 import 'package:truckoom_shipper/screens/language/language.dart';
-import 'package:truckoom_shipper/screens/login/login.dart';
 import 'package:truckoom_shipper/screens/wallet/wallet.dart';
+import 'package:truckoom_shipper/widgets/faqs_expandable.dart';
 import 'package:truckoom_shipper/widgets/language_expandable_container.dart';
-
 import '../../../../animations/slide_right.dart';
-import '../../../../res/assets.dart';
 import '../../../../res/colors.dart';
 import '../../../../res/sizes.dart';
 import '../../../../res/strings.dart';
@@ -38,6 +36,8 @@ class _MoreState extends State<More> {
     // TODO: implement initState
     super.initState();
     _moreComponents = MoreComponents();
+    print('device id');
+    print(PreferenceUtils.getString(Strings.deviceId));
   }
 
   @override
@@ -93,6 +93,10 @@ class _MoreState extends State<More> {
                   Divider(
                     height: 10,
                   ),
+                  FAQsExpandable(),
+                  Divider(
+                    height: 10,
+                  ),
                   _moreComponents.touchableButton(
                     text: 'Wallet',
                     onPress: () {
@@ -135,6 +139,7 @@ class _MoreState extends State<More> {
     Constants.setCommpanyName("");
     await Constants.setLicenseImages([]);
     Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: Language()), (route) => false);
+    // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => Language()), ModalRoute.withName(Routes.bottomTab));
   }
 
 
