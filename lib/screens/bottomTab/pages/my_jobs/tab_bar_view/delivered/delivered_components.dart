@@ -9,7 +9,7 @@ import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
-class DispatchComponents{
+class DeliveredComponents{
   Widget getJobContainer(
       {@required String jobDetail,
         @required String pickUpLocation,

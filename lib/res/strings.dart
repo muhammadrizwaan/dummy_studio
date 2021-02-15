@@ -95,4 +95,12 @@ class Strings {
   static const String goodTypeErrorText = "Please select GoodType";
   static const String pickupLocationErrorText = "Please select Pickup Location";
   static const String dropoffLocationErrorText = "Please select Dropoff Location";
+
+
+  // Tabs Strings
+  static const String placedText = "Placed";
+  static const String acceptedText = "Accepted";
+  static const String inProcessText = "InProcess";
+  static const String cancelledText = "Cancelled";
+  static const String deliveredText = "Delivered";
 }

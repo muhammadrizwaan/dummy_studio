@@ -42,10 +42,10 @@ class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
   void initState() {
     super.initState();
     _confirmBookLoadComponents = ConfirmBookLoadComponents();
-    _currMapView = _getMapView();
+    // _currMapView = _getMapView();
     // _currMapView.getDistance();
     print('Distance is');
-    print(widget.Distance);
+    print(double.parse(MapView.distanceBetweenLocations).toInt());
   }
 
   @override
@@ -128,7 +128,7 @@ class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
                             DropoffLongitude: widget.DropoffLongitude,
                             PickupLocation: widget.PickupLocation,
                             DropoffLocation: widget.DropoffLocation,
-                            Distance: widget.Distance,
+                            Distance: double.parse(MapView.distanceBetweenLocations).toInt(),
                           ),
                         ),
                       );

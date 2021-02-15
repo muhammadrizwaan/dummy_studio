@@ -15,12 +15,12 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final _firebaseMessaging = FirebaseMessaging();
-  configureFcm(){
-    FirebaseMessaging().getToken().then((value) {
-      ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: value);
-      print("The fCM  tokeen is: "+ value);
-    });
+  // final _firebaseMessaging = FirebaseMessaging();
+  // configureFcm(){
+  //   FirebaseMessaging().getToken().then((value) {
+  //     ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: value);
+  //     print("The fCM  tokeen is: "+ value);
+  //   });
     // _firebaseMessaging.configure(
     //   onMessage: (Map<String, dynamic> message) async {
     //     print("onMessage: $message");
@@ -39,10 +39,10 @@ class MyApp extends StatelessWidget {
     //     ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "message received");
     //   },
     // );
-  }
+  // }
   @override
   Widget build(BuildContext context) {
-  configureFcm();
+  // configureFcm();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,

@@ -78,9 +78,6 @@ class _JobDetailsState extends State<JobDetails> {
                               apiKey: "IzaSyDHxZ--0FYqNItvE-kf3Sz2jlRtgt0Mp3Q",
                               directionsApiKey: "AIzaSyDTLiSzdkVV8xrO9an282diUlBFMshCwAI",
                             ),
-                              // child: GoogleMap(
-                              //   initialCameraPosition: CameraPosition(target: _center, zoom: 5),
-                              // ),
                             ),
                           ],
                       ),

@@ -4,8 +4,10 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
+import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs_provider.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/in_process/in_process_components.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/in_process/in_process_provider.dart';
 import 'package:truckoom_shipper/screens/driver_details/driver_details.dart';
@@ -21,14 +23,27 @@ class InProcess extends StatefulWidget {
 class _InProcessState extends State<InProcess> {
   InProcessComponents _inProcessComponents;
   InProcessProvider _inProcessProvider;
+  MyJobsProvider _myJobsProvider;
+  ScrollController _scrollController = new ScrollController();
+  int pageNumber = 0;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    pageNumber = 0;
     _inProcessComponents = InProcessComponents();
     _inProcessProvider = Provider.of<InProcessProvider>(context, listen: false);
     _inProcessProvider.init(context: context);
+    _myJobsProvider = Provider.of<MyJobsProvider>(context, listen: false);
+    _scrollController
+      ..addListener(() {
+        if (_scrollController.position.maxScrollExtent == _scrollController.offset) {
+          pageNumber = pageNumber + 1;
+          _inProcessProvider.setIsLoading(true);
+          setState(() {});
+          _inProcessProvider.getInProcessLoad(context: context, pageNumber: pageNumber);
+        }
+      });
   }
 
   @override
@@ -37,57 +52,76 @@ class _InProcessState extends State<InProcess> {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
       color: Colors.white,
-      child: _inProcessProvider.isDataFetched?
-          _inProcessProvider.tabbarResponse.result.length > 0?
-          ListView.builder(
-            itemCount: _inProcessProvider.tabbarResponse.result.length,
-              itemBuilder: (context, index){
-            return Column(
-              children: [
-                SizedBox(
-                  height: AppSizes.height * 0.02,
+      child:
+          Column(
+            children: [
+              Expanded(
+                child: _myJobsProvider.inProcessList.length > 0?
+                RefreshIndicator(
+                  color: AppColors.yellow,
+                  onRefresh: () => onRefresh(),
+                  child: ListView.builder(
+                      controller: _scrollController,
+                      physics: const AlwaysScrollableScrollPhysics(),
+                    itemCount: _myJobsProvider.inProcessList.length,
+                      itemBuilder: (context, index){
+                    return Column(
+                      children: [
+                        SizedBox(
+                          height: AppSizes.height * 0.02,
+                        ),
+                        _inProcessComponents.getJobContainer(
+                          context: context,
+                          jobDetail: _myJobsProvider.inProcessList[index].loadId.toString(),
+                          pickUpLocation: _myJobsProvider.inProcessList[index].pickupLocation,
+                          destinationLocation: _myJobsProvider.inProcessList[index].dropoffLocation,
+                          startDate: _myJobsProvider.inProcessList[index].pickupDateTime,
+                          time:  _myJobsProvider.inProcessList[index].pickupDateTime,
+                          status: _myJobsProvider.inProcessList[index].status,
+                          vehicleType: _myJobsProvider.inProcessList[index].vehicleTypeName,
+                          price: "${Strings.aed} ${_myJobsProvider.inProcessList[index].shipperCost.round()}",
+                          onAlert: (){
+                            ApplicationToast.onDescriptionAlert(context: context, description: _myJobsProvider.inProcessList[index].vehicleTypeDescription);
+                          },
+                          onTap: (){
+                            Navigator.push(context, SlideRightRoute(page: JobDetails(status:"InProcess", loadId: _myJobsProvider.inProcessList[index].loadId)));
+                          },
+                          onDriverDetail: () {
+                            Navigator.push(context, SlideRightRoute(page: DriverDetailScreen(driverId:_myJobsProvider.inProcessList[index].assignedDriverId)));
+                          },
+                        ),
+                        SizedBox(
+                          height: AppSizes.height * 0.02,
+                        ),
+                      ],
+                    );
+                  }),
+                ):
+                Center(
+                  child: Container(
+                      height: AppSizes.height * 0.15,
+                      // width: AppSizes.width,
+                      child: CommonWidgets.onNullData(text: Strings.noAvailableLoads)
+                  ),
                 ),
-                _inProcessComponents.getJobContainer(
-                  context: context,
-                  jobDetail: _inProcessProvider.tabbarResponse.result[index].loadId.toString(),
-                  pickUpLocation: _inProcessProvider.tabbarResponse.result[index].pickupLocation,
-                  destinationLocation: _inProcessProvider.tabbarResponse.result[index].dropoffLocation,
-                  startDate: _inProcessProvider.tabbarResponse.result[index].pickupDateTime,
-                  time:  _inProcessProvider.tabbarResponse.result[index].pickupDateTime,
-                  status: _inProcessProvider.tabbarResponse.result[index].status,
-                  vehicleType: _inProcessProvider.tabbarResponse.result[index].vehicleTypeName,
-                  price: "${Strings.aed} ${_inProcessProvider.tabbarResponse.result[index].shipperCost.round()}",
-                  onAlert: (){
-                    ApplicationToast.onDescriptionAlert(context: context, description: _inProcessProvider.tabbarResponse.result[index].vehicleTypeDescription);
-                  },
-                  onTap: (){
-                    Navigator.push(context, SlideRightRoute(page: JobDetails(status:"InProcess", loadId: _inProcessProvider.tabbarResponse.result[index].loadId)));
-                  },
-                  onDriverDetail: () {
-                    Navigator.push(context, SlideRightRoute(page: DriverDetailScreen(driverId:_inProcessProvider.tabbarResponse.result[index].assignedDriverId)));
-                  },
+              ),
+              _inProcessProvider.isLoading?
+              Container(
+                height:  AppSizes.height * 0.1,
+                color: Colors.transparent,
+                child: Center(
+                  child: new CircularProgressIndicator(
+                    valueColor: new AlwaysStoppedAnimation<Color>(AppColors.yellow),
+                  ),
                 ),
-                SizedBox(
-                  height: AppSizes.height * 0.02,
-                ),
-              ],
-            );
-          }):
-          Center(
-            child: Container(
-                height: AppSizes.height * 0.15,
-                // width: AppSizes.width,
-                child: CommonWidgets.onNullData(text: Strings.noAvailableLoads)
-            ),
+              ):
+              Container(),
+            ],
           )
-              :
-      Center(
-        child: Container(
-          height: AppSizes.height * 0.15,
-          // width: AppSizes.width,
-          child: Lottie.asset(Assets.apiLoading, fit: BoxFit.cover),
-        ),
-      )
     );
+  }
+  Future<Null> onRefresh() async{
+    pageNumber = 0;
+    await _myJobsProvider.getLoads(context: context);
   }
 }

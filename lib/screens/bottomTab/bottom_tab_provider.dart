@@ -1,6 +1,5 @@
 
 import 'package:flutter/cupertino.dart';
-import 'package:truckoom_shipper/contsants/constants.dart';
 
 
 class BottomTabProvider extends ChangeNotifier{

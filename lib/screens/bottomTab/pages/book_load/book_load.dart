@@ -274,7 +274,8 @@ class _BookLoadState extends State<BookLoad> {
                             dropoff_longitude: dropoff_longitude,
                             pickup_location: pickup_location,
                             dropoff_location: dropoff_location,
-                            distance: coordinateDistance(double.parse(pickup_latitude) , double.parse(pickup_longitude), double.parse(dropoff_latitude), double.parse(dropoff_longitude)).round()
+                            distance: double.parse(MapView.distanceBetweenLocations).toInt()
+                            // distance: coordinateDistance(double.parse(pickup_latitude) , double.parse(pickup_longitude), double.parse(dropoff_latitude), double.parse(dropoff_longitude)).round()
                         );
                       },
                       child: TextView.getBottomButtonText04(

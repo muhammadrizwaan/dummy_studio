@@ -2,6 +2,7 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter_absolute_path/flutter_absolute_path.dart';
+import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:connectivity/connectivity.dart';
@@ -296,9 +297,13 @@ class BusinessEditProfileProvider extends ChangeNotifier{
 
     int userId = Constants.getUserId();
     List<MultipartFile> multipart = List<MultipartFile>();
+
     for (int i = 0; i < images.length; i++) {
-      var path = await FlutterAbsolutePath.getAbsolutePath(images[i].identifier);
-      multipart.add(await MultipartFile.fromFile(path, filename: path.split("/").last));
+      final filePath = await FlutterAbsolutePath.getAbsolutePath(images[i].identifier);
+      File tempFile = File(filePath);
+      File compressedFile = await FlutterNativeImage.compressImage(tempFile.path,
+        quality: 5,);
+      multipart.add(await MultipartFile.fromFile(compressedFile.path, filename: compressedFile.path.split("/").last));
     }
 
     try {
@@ -323,8 +328,6 @@ class BusinessEditProfileProvider extends ChangeNotifier{
 
             _loader.hideLoader(context);
             await Constants.setLicenseImages(_licenseImagesResponse.result);
-            print('License Api success');
-            print(_licenseImagesResponse.result[0].filePath);
             notifyListeners();
           } else {
             _loader.hideLoader(context);

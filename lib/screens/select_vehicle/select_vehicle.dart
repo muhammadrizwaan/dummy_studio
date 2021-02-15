@@ -51,6 +51,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
         Provider.of<SelectVehicleProvider>(context, listen: false);
     _selectVehicleProvider.init(context: context);
     id = 0;
+
     vehicleCategoryId = 0;
     vehicleTypeId = 0;
     isSelect = false;

@@ -255,4 +255,25 @@ class MyJobsComponents {
       ),
     );
   }
+
+  Widget getTab({
+    @required String text,
+    @required int count,
+  }){
+    return Container(
+      width: AppSizes.width * 0.4,
+      // width: AppSizes.width * 0.25,
+      height: AppSizes.height * 0.045,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: AppColors.yellow,
+        ),
+        borderRadius: BorderRadius.circular(05),
+      ),
+      child: Tab(
+        child: count == 0? Text(text+' (N/A)'): Text(text+' ($count)'),
+        // child: TextView.getLabel2Text04(Strings.assigned, color: null)
+      ),
+    );
+  }
 }
