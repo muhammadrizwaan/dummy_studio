@@ -14,7 +14,7 @@ const String forgotPassword = "$apiBaseUrl/api/Accounts/ForgotPassword?email=";
 
 const String saveQuery = "$apiBaseUrl/api/Queries/SaveQuery";
 const String getLoadApi = "$apiBaseUrl/api/Loads/MyLoads?userId={userId}&statusId={statusId}";
-const String getHistoryApi = "$apiBaseUrl/api/Loads/MyLoadHistory?userId={userId}&pageIndex=0";
+const String getHistoryApi = "$apiBaseUrl/api/Loads/MyLoadHistory?userId={userId}&pageIndex=";
 const String getGoodTypeApi = "$apiBaseUrl/api/GoodTypes";
 const String getVehicleTypeApi = "$apiBaseUrl/api/Vehicle/GetVehicleTypes";
 const String deleteLoadApi = "$apiBaseUrl/api/Loads/DeleteLoad?loadId={loadId}";

@@ -4,13 +4,18 @@ import 'package:geolocator/geolocator.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'dart:math' show cos, sqrt, asin;
 
+import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/utilities/toast.dart';
+
 class MapView extends StatefulWidget {
   double startLat,startLong,endLat,endLong;
   var apiKey;
+  var directionsApiKey;
   String _distanceBetweenLocations = "0.0";
-  String getDistance() => _distanceBetweenLocations;
+  // String getDistance() => _distanceBetweenLocations;
+  // String getTotalDistance() => _MapViewState
 
-  MapView({@required this.startLat,@required this.startLong, @required this.endLat,@required this.endLong, @required this.apiKey});
+  MapView({@required this.startLat,@required this.startLong, @required this.endLat,@required this.endLong, @required this.apiKey,@required this.directionsApiKey});
 
   @override
   _MapViewState createState() => _MapViewState();
@@ -24,9 +29,10 @@ class _MapViewState extends State<MapView> {
 
   // For controlling the view of the Map
   GoogleMapController mapController;
-  final Geolocator _geolocator = Geolocator();
+  // final Geolocator _geolocator = Geolocator();
   // For storing the current position
   Position _currentPosition;
+  bool isFullScreen = false;
 
   Set<Marker> markers = {};
 // Object for PolylinePoints
@@ -229,11 +235,9 @@ class _MapViewState extends State<MapView> {
     // Generating the list of coordinates to be used for
     // drawing the polylines
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      widget.apiKey, // Google Maps API Key
+      widget.directionsApiKey, // Google Maps API Key
       PointLatLng(start.latitude, start.longitude),
       PointLatLng(destination.latitude, destination.longitude),
-      travelMode: TravelMode.transit,
-      optimizeWaypoints: true
     );
 
     // Adding the coordinates to the list
@@ -260,12 +264,12 @@ class _MapViewState extends State<MapView> {
       print("PLOYLINE DRAWN :::::::::::" + polyline.points.toString());
     });
 
-    _getDistance();
+    getDistance();
   }
   ///////////////////////////////////////////////////////////////////////
   //                    Calculating the distance now
   ///////////////////////////////////////////////////////////////////////
-  _getDistance() {
+  String getDistance() {
     if(polylineCoordinates.length == 0){
       double distanceInMeters = Geolocator.distanceBetween(
         widget.startLat,
@@ -285,6 +289,8 @@ class _MapViewState extends State<MapView> {
     }
 
     widget._distanceBetweenLocations = _placeDistance.toStringAsFixed(2);
+    ApplicationToast.onPayConfirmationAlert(context: context, onCancellLoad: null, text: "The distance is " + widget._distanceBetweenLocations);
+    return _placeDistance.toStringAsFixed(2);
   }
   double _coordinateDistance(lat1, lon1, lat2, lon2) {
     var p = 0.017453292519943295;

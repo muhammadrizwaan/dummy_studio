@@ -43,7 +43,9 @@ class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
     super.initState();
     _confirmBookLoadComponents = ConfirmBookLoadComponents();
     _currMapView = _getMapView();
-    _currMapView.getDistance();
+    // _currMapView.getDistance();
+    print('Distance is');
+    print(widget.Distance);
   }
 
   @override
@@ -74,7 +76,8 @@ class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
                     startLong: double.parse(widget.PickupLongitude),
                     endLat: double.parse(widget.DropoffLatitude),
                     endLong: double.parse(widget.DropoffLongitude),
-                    apiKey: "AIzaSyDTLiSzdkVV8xrO9an282diUlBFMshCwAI",
+                    apiKey: "IzaSyDHxZ--0FYqNItvE-kf3Sz2jlRtgt0Mp3Q",
+                    directionsApiKey: "AIzaSyDTLiSzdkVV8xrO9an282diUlBFMshCwAI",
                   ),
                 ),
               ],
@@ -148,6 +151,7 @@ class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
       endLat: double.parse(widget.DropoffLatitude),
       endLong: double.parse(widget.DropoffLongitude),
       apiKey: "AIzaSyDTLiSzdkVV8xrO9an282diUlBFMshCwAI",
+      directionsApiKey: "AIzaSyDTLiSzdkVV8xrO9an282diUlBFMshCwAI",
     );
   }
 }
