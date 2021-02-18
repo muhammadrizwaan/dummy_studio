@@ -271,7 +271,7 @@ class MyJobsComponents {
         borderRadius: BorderRadius.circular(05),
       ),
       child: Tab(
-        child: count == 0? Text(text+' (N/A)'): Text(text+' ($count)'),
+        child: Text(text+' ($count)'),
         // child: TextView.getLabel2Text04(Strings.assigned, color: null)
       ),
     );

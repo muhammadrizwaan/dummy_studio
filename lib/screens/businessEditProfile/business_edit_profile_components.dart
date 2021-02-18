@@ -101,15 +101,16 @@ class BusinessEditProfileComponents{
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            text,
-            style: TextStyle(
-              fontFamily: Assets.poppinsMedium,
-              fontSize: 22,
-              color: AppColors.colorBlack,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          TextView.getAppBarText(text, color: AppColors.colorBlack),
+          // Text(
+          //   text,
+          //   style: TextStyle(
+          //     fontFamily: Assets.poppinsMedium,
+          //     fontSize: 22,
+          //     color: AppColors.colorBlack,
+          //     fontWeight: FontWeight.bold,
+          //   ),
+          // ),
           GestureDetector(
             onTap: () => onPress(),
             child: Container(

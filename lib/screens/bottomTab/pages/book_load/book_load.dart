@@ -117,6 +117,10 @@ class _BookLoadState extends State<BookLoad> {
     pickup_longitude = "54.576599";
     dropoff_latitude = "18.216797";
     dropoff_longitude = "42.503765";
+    // pickup_latitude = "";
+    // pickup_longitude = "";
+    // dropoff_latitude = "";
+    // dropoff_longitude = "";
     pickup_location = "";
     dropoff_location = "";
   }
@@ -131,7 +135,7 @@ class _BookLoadState extends State<BookLoad> {
                   headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled){
                     return <Widget>[
                       SliverAppBar(
-                        expandedHeight: AppSizes.height * 0.5,
+                        expandedHeight: AppSizes.height * 0.6,
                         pinned: true,
                         automaticallyImplyLeading: true,
                         floating: false,
@@ -252,35 +256,39 @@ class _BookLoadState extends State<BookLoad> {
                   alignment: Alignment.bottomCenter,
                   child:
                   Container(
-                    height: AppSizes.height * 0.07,
-                    margin: EdgeInsets.only(
-                      // bottom: AppSizes.width * 0.03,
-                        left: AppSizes.width * 0.05,
-                        right: AppSizes.width * 0.05),
-                    decoration: BoxDecoration(
-                      color: AppColors.yellow,
-                      borderRadius: BorderRadius.circular(
-                        08,
+                    // height: AppSizes.height * 0.07,
+                    color: AppColors.white,
+                    child: Container(
+                      height: AppSizes.height * 0.07,
+                      margin: EdgeInsets.only(
+                        bottom: AppSizes.width * 0.03,
+                          left: AppSizes.width * 0.05,
+                          right: AppSizes.width * 0.05),
+                      decoration: BoxDecoration(
+                        color: AppColors.yellow,
+                        borderRadius: BorderRadius.circular(
+                          08,
+                        ),
                       ),
-                    ),
-                    width: AppSizes.width,
-                    child: FlatButton(
-                      onPressed: () {
-                        _bookLoadProvider.onNavigateNext(
-                            context: context,
-                            pickup_latitude: pickup_latitude,
-                            pickup_longitude: pickup_longitude,
-                            dropoff_latitude: dropoff_latitude,
-                            dropoff_longitude: dropoff_longitude,
-                            pickup_location: pickup_location,
-                            dropoff_location: dropoff_location,
-                            distance: double.parse(MapView.distanceBetweenLocations).toInt()
-                            // distance: coordinateDistance(double.parse(pickup_latitude) , double.parse(pickup_longitude), double.parse(dropoff_latitude), double.parse(dropoff_longitude)).round()
-                        );
-                      },
-                      child: TextView.getBottomButtonText04(
-                        "Next",
-                        color: AppColors.white,
+                      width: AppSizes.width,
+                      child: FlatButton(
+                        onPressed: () {
+                          _bookLoadProvider.onNavigateNext(
+                              context: context,
+                              pickup_latitude: pickup_latitude,
+                              pickup_longitude: pickup_longitude,
+                              dropoff_latitude: dropoff_latitude,
+                              dropoff_longitude: dropoff_longitude,
+                              pickup_location: pickup_location,
+                              dropoff_location: dropoff_location,
+                              distance: double.parse(MapView.distanceBetweenLocations).toInt()
+                              // distance: coordinateDistance(double.parse(pickup_latitude) , double.parse(pickup_longitude), double.parse(dropoff_latitude), double.parse(dropoff_longitude)).round()
+                          );
+                        },
+                        child: TextView.getBottomButtonText04(
+                          "Next",
+                          color: AppColors.white,
+                        ),
                       ),
                     ),
                   )

@@ -173,13 +173,13 @@ class BusinessEditProfileProvider extends ChangeNotifier{
           subHeading: Strings.businessNameErrorText,
         );
       }
-      else if (businessPhone.validatePhoneNumber() == false) {
+      else if (businessPhone.validatePhoneNumber() == false && businessPhone.validateLandLineNumber() == false) {
         ApplicationToast.getErrorToast(
             durationTime: 3,
             heading: Strings.error,
             subHeading: Strings.phoneNumberErrorText);
       }
-      else if (trn.isEmpty) {
+      else if (trn.validateTRN() == false) {
         ApplicationToast.getErrorToast(
             durationTime: 3,
             heading: Strings.error,
@@ -227,7 +227,6 @@ class BusinessEditProfileProvider extends ChangeNotifier{
               Constants.setLicenseExpiryDate(_editProfileResponse.result.companyInformation[0].licenseExpiryDate);
             }
             _loader.hideLoader(context);
-            print('Updated user');
             Navigator.pushReplacement(context, SlideRightRoute(page: BusinessProfile()));
           } else {
             _loader.hideLoader(context);
@@ -302,7 +301,7 @@ class BusinessEditProfileProvider extends ChangeNotifier{
       final filePath = await FlutterAbsolutePath.getAbsolutePath(images[i].identifier);
       File tempFile = File(filePath);
       File compressedFile = await FlutterNativeImage.compressImage(tempFile.path,
-        quality: 5,);
+        quality: 5);
       multipart.add(await MultipartFile.fromFile(compressedFile.path, filename: compressedFile.path.split("/").last));
     }
 

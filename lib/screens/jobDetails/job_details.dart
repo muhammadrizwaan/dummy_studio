@@ -49,7 +49,7 @@ class _JobDetailsState extends State<JobDetails> {
               headerSliverBuilder: (BuildContext context,bool innerBoxIsScrolled){
                 return <Widget>[
                   SliverAppBar(
-                    expandedHeight: AppSizes.height * 0.5,
+                    expandedHeight: AppSizes.height * 0.62,
                     pinned: true,
                     automaticallyImplyLeading: true,
                     floating: false,
@@ -69,6 +69,7 @@ class _JobDetailsState extends State<JobDetails> {
                                   Navigator.pop(context);
                                 }, text: Strings.deleteLoadAlertText);
                               }),
+                          SizedBox(height: AppSizes.height * 0.005),
                           Expanded(
                             child: MapView(
                               startLat: _jobDetailsProvider.loadDetailResponse.result.pickupLatitude,
@@ -88,6 +89,7 @@ class _JobDetailsState extends State<JobDetails> {
               body: Container(
                 // height: AppSizes.height,
               width: AppSizes.width,
+                color: AppColors.white,
                 child: Column(
                   children: [
                     SizedBox(height: AppSizes.height * 0.01),

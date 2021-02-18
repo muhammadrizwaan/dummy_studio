@@ -71,12 +71,12 @@ class BusinessInformationProvider extends ChangeNotifier {
             heading: Strings.error,
             subHeading: Strings.nameErrorText);
       }
-      else if (phoneNumber.validatePhoneNumber() == false) {
+      else if (phoneNumber.validatePhoneNumber() == false && phoneNumber.validateLandLineNumber() == false) {
         ApplicationToast.getErrorToast(
             durationTime: 3,
             heading: Strings.error,
             subHeading: Strings.phoneNumberErrorText);
-      } else if (trn.isEmpty) {
+      } else if (trn.validateTRN() == false) {
         ApplicationToast.getErrorToast(
             durationTime: 3,
             heading: Strings.error,

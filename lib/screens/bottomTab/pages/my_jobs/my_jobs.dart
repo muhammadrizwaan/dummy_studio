@@ -102,27 +102,22 @@ class _MyJobsState extends State<MyJobs> {
                     _jobsComponents.getTab(
                         text: Strings.placedText,
                         count: _myJobsProvider.placedCount
-                      // count: 0
                     ),
                     _jobsComponents.getTab(
                         text: Strings.acceptedText,
                         count: _myJobsProvider.acceptedCount
-                      // count: 0
                     ),
                     _jobsComponents.getTab(
                         text: Strings.inProcessText,
                         count: _myJobsProvider.inProcessCount
-                      // count: 0
                     ),
                     _jobsComponents.getTab(
                         text: Strings.deliveredText,
                         count: _myJobsProvider.deliveredCount
-                      // count: 0
                     ),
                     _jobsComponents.getTab(
                         text: Strings.cancelledText,
                         count: _myJobsProvider.cancelledCount
-                      // count: 0
                     )
                   ],
                 ),

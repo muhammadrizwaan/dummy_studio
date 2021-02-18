@@ -5,6 +5,7 @@ import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class IndividualEditProfileComponents{
   Widget getProfileImage({@required String profileImg, @required Function onPress}){
@@ -125,15 +126,16 @@ class IndividualEditProfileComponents{
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            text,
-            style: TextStyle(
-              fontFamily: Assets.poppinsMedium,
-              fontSize: 22,
-              color: AppColors.colorBlack,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          TextView.getAppBarText(text, color: AppColors.colorBlack),
+          // Text(
+          //   text,
+          //   style: TextStyle(
+          //     fontFamily: Assets.poppinsMedium,
+          //     fontSize: 22,
+          //     color: AppColors.colorBlack,
+          //     fontWeight: FontWeight.bold,
+          //   ),
+          // ),
           GestureDetector(
             onTap: () => onPress(),
             child: Container(

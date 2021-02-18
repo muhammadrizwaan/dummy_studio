@@ -81,7 +81,7 @@ class _BookLoadDetailsState extends State<BookLoadDetails> {
                 headerSliverBuilder: (BuildContext context,bool innerBoxIsScrolled){
                   return <Widget>[
                     SliverAppBar(
-                      expandedHeight: AppSizes.height * 0.5,
+                      expandedHeight: AppSizes.height * 0.52,
                       pinned: true,
                       automaticallyImplyLeading: true,
                       floating: false,
@@ -105,7 +105,6 @@ class _BookLoadDetailsState extends State<BookLoadDetails> {
                                 directionsApiKey: "AIzaSyDTLiSzdkVV8xrO9an282diUlBFMshCwAI",
                               ),
                             ),
-
                           ],
                         ),
                       ),
@@ -120,7 +119,8 @@ class _BookLoadDetailsState extends State<BookLoadDetails> {
                       borderRadius: BorderRadius.only(
                         topRight: Radius.circular(15),
                         topLeft: Radius.circular(15),
-                      )),
+                      ),
+                  ),
                   child: Column(
                     children: [
                       Align(

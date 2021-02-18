@@ -25,6 +25,8 @@ class IndividualProfileComponents{
         @required String name,
         @required String email,
         @required String password,
+        @required String phone,
+        @required String city
       })
   {
     return Container(
@@ -138,6 +140,58 @@ class IndividualProfileComponents{
                 //     ),
                 //   ),
                 // )
+              ],
+            ),
+          ),
+          Divider(height: 10,),
+          Container(
+            height: AppSizes.height*0.05,
+            padding: EdgeInsets.all(AppSizes.width * 0.02),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Phone Number',
+                  style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsLight,
+                    color: AppColors.profileTextColor,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
+                Text(phone,
+                  style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsLight,
+                    color: AppColors.profileTextColor,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Divider(height: 10,),
+          Container(
+            height: AppSizes.height*0.05,
+            padding: EdgeInsets.all(AppSizes.width * 0.02),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('City',
+                  style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsLight,
+                    color: AppColors.profileTextColor,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
+                Text(city,
+                  style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsLight,
+                    color: AppColors.profileTextColor,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
               ],
             ),
           ),

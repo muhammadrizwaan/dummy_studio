@@ -212,7 +212,8 @@ class _SignUPState extends State<SignUP> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              _phoneNumberProvider.getTermsAndConditions(context: context);
+                              CommonWidgets.launchURL();
+                              // _phoneNumberProvider.getTermsAndConditions(context: context);
                             })
                     ]),
               ),

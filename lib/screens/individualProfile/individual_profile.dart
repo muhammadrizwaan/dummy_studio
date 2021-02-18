@@ -69,6 +69,8 @@ class _IndividualProfileState extends State<IndividualProfile> {
                               name: Constants.getUserName(),
                               email: Constants.getUserEmail(),
                               password: Constants.getPassword(),
+                            phone: Constants.getUserPhone(),
+                            city: Constants.getCityName()
                           )
                         ],
                       ),

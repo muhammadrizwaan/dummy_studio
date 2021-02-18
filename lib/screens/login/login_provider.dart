@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
@@ -17,6 +18,7 @@ import 'package:truckoom_shipper/network/network_helper_impl.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/routes/routes.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
+import 'package:truckoom_shipper/screens/bottomTab/bottom_tab_provider.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/loader.dart';
 import 'package:http/http.dart' as http;
@@ -29,6 +31,7 @@ class LoginProvider extends ChangeNotifier {
   NetworkHelper _networkHelper = NetworkHelperImpl();
   CommonResponse commonResponse = CommonResponse.empty();
   GenericDecodeEncode genericDecodeEncode = GenericDecodeEncode();
+  BottomTabProvider _bottomTabProvider;
   TokenResponse tokenResponse = TokenResponse.empty();
 
   CustomPopup _loader = CustomPopup();
@@ -38,6 +41,7 @@ class LoginProvider extends ChangeNotifier {
   var connectivityResult;
 
   init(BuildContext context) async {
+    _bottomTabProvider = Provider.of(context, listen: false);
     tempToken = deviceId = "";
     connectivityResult = "";
     this.context = context;
@@ -113,8 +117,6 @@ class LoginProvider extends ChangeNotifier {
                 Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: BottomTab()), ModalRoute.withName(Routes.login));
               },
             );
-
-
           } else {
             _loader.hideLoader(context);
             ApplicationToast.getErrorToast(

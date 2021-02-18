@@ -9,6 +9,7 @@ import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/addLoad/add_load_components.dart';
 import 'package:truckoom_shipper/screens/addLoad/add_load_provider.dart';
 import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_details.dart';
@@ -175,11 +176,10 @@ class _AddLoadState extends State<AddLoad> {
                                 SizedBox(height: AppSizes.height * 0.01),
                                 _addLoadComponents.getPhoneField(
                                     leftIcon: Entypo.mobile,
-                                    hintText: 'Enter Receiver Phone',
-                                    textEditingController: receiver_phone),
-                                SizedBox(
-                                  height: AppSizes.height * 0.02,
+                                    textEditingController: receiver_phone,
+                                    hintText: Strings.phonePlaceholderText
                                 ),
+                                SizedBox(height: AppSizes.height * 0.02),
                                 CommonWidgets.getSubHeadingText(
                                     text: "Good type"),
                                 SizedBox(height: AppSizes.height * 0.01),
