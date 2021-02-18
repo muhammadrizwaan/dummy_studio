@@ -272,13 +272,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.6"
-  flutter_image_compress:
+  flutter_native_image:
     dependency: "direct main"
     description:
-      name: flutter_image_compress
+      name: flutter_native_image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.7.0"
+    version: "0.0.5+3"
   flutter_page_indicator:
     dependency: transitive
     description:

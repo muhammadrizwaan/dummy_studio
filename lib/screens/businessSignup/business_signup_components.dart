@@ -3,12 +3,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 
 class BusinessSignupComponents {
   Widget getBusinessSignupStep(){
     return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Text('Step ',
           style: TextStyle(
@@ -17,7 +19,7 @@ class BusinessSignupComponents {
             color: AppColors.grey,
           ),
         ),
-        Text('01',
+        Text('1 of 2',
           style: TextStyle(
             fontSize: 15,
             fontFamily: Assets.poppinsRegular,

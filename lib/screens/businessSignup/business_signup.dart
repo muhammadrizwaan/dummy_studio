@@ -90,13 +90,8 @@ class _BusinessSignupState extends State<BusinessSignup> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              CommonWidgets.getHeadingText(text: 'Signup'),
-                              _businessSignupComponents.getBusinessSignupStep()
-                            ],
-                          ),
+                          CommonWidgets.getHeadingText(text: 'Signup'),
+                          _businessSignupComponents.getBusinessSignupStep(),
                           // CommonWidgets.getHeading1Text(text: 'Signup'),
                           SizedBox(height: AppSizes.height * 0.04),
                           CommonWidgets.getSubHeadingText(text: "Full Name"),
@@ -281,7 +276,8 @@ class _BusinessSignupState extends State<BusinessSignup> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              _phoneNumberProvider.getTermsAndConditions(context: context);
+                              // _phoneNumberProvider.getTermsAndConditions(context: context);
+                              CommonWidgets.launchURL();
                             })
                     ]),
               ),

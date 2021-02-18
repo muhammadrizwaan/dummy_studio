@@ -1,47 +1,42 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/commons/get_token.dart';
-import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
-import 'package:truckoom_shipper/models/api_models/tabbar_response.dart';
-import 'package:truckoom_shipper/models/api_models/token_response.dart';
+import 'package:truckoom_shipper/models/api_models/loads_response.dart';
 import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/network/network_helper.dart';
 import 'package:truckoom_shipper/network/network_helper_impl.dart';
 import 'package:truckoom_shipper/res/strings.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs_provider.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
-import 'package:truckoom_shipper/widgets/loader.dart';
 import 'package:http/http.dart' as http;
-
-import 'package:dio/dio.dart';
+import 'package:truckoom_shipper/widgets/loader.dart';
 
 class AcceptedProvider extends ChangeNotifier {
-  GenericDecodeEncode genericDecodeEncode = GenericDecodeEncode();
-
   BuildContext context;
+
+  MyJobsProvider _myJobsProvider;
+  GenericDecodeEncode genericDecodeEncode = GenericDecodeEncode();
   NetworkHelper _networkHelper = NetworkHelperImpl();
-  TabbarResponse tabbarResponse = TabbarResponse.empty();
+  LoadsResponse _loadsResponse = LoadsResponse.empty();
   CustomPopup _loader = CustomPopup();
   GetToken getToken = GetToken();
-  bool isDataFetched = false;
-  String refreshToken;
-  TokenResponse tokenResponse = TokenResponse.empty();
-  Dio dio = Dio();
-
   var connectivityResult;
   int userId;
   String token;
+  bool isLoading = false;
 
   init({@required BuildContext context}) async {
     this.context = context;
+    _myJobsProvider = Provider.of<MyJobsProvider>(context, listen: false);
     connectivityResult = "";
+    isLoading = false;
     token = "";
-    refreshToken = "";
-    await getAcceptedLoad(context: context);
   }
 
-  Future getAcceptedLoad({@required BuildContext context}) async {
+  Future getAcceptedLoad({@required BuildContext context, @required int pageNumber}) async {
     try {
       token = await getToken.onToken();
       connectivityResult = await Connectivity().checkConnectivity();
@@ -53,22 +48,24 @@ class AcceptedProvider extends ChangeNotifier {
             subHeading: Strings.internetConnectionError);
       } else {
         String tempUrl = getAcceptedLoadApi.replaceAll("{userId}", '$userId');
-        http.Response response = await _networkHelper.get(tempUrl, headers: {
+        http.Response response = await _networkHelper.get(
+            tempUrl+pageNumber.toString(),
+            headers: {
           'Content-Type': 'application/json',
           'Authorization': token
         });
         if (response.statusCode == 200) {
-          tabbarResponse = TabbarResponse.fromJson(
+          _loadsResponse = LoadsResponse.fromJson(
               genericDecodeEncode.decodeJson(response.body));
-          print('success 1');
-          if (tabbarResponse.code == 1) {
-            isDataFetched = true;
+          if (_loadsResponse.code == 1) {
+            _myJobsProvider.acceptedList.addAll(_loadsResponse.result.accepted);
+            isLoading = false;
             notifyListeners();
           } else {
             ApplicationToast.getErrorToast(
                 durationTime: 3,
                 heading: Strings.error,
-                subHeading: tabbarResponse.message);
+                subHeading: _loadsResponse.message);
           }
         } else {
           ApplicationToast.getErrorToast(
@@ -93,8 +90,7 @@ class AcceptedProvider extends ChangeNotifier {
             heading: Strings.error,
             subHeading: Strings.internetConnectionError);
       } else {
-        isDataFetched = false;
-        notifyListeners();
+        _loader.showLoader(context: context);
         userId = await Constants.getUserId();
         http.Response response = await _networkHelper.post(cancellLoadApi, headers: {
           'Content-Type': 'application/json',
@@ -106,13 +102,22 @@ class AcceptedProvider extends ChangeNotifier {
           }
         );
         if (response.statusCode == 200) {
-          await getAcceptedLoad(context: context);
-          // tabbarResponse.result.add(value);
-          // replytile.removeWhere((item) => item.id == '001')
-          print('deleted');
-          ApplicationToast.getSuccessToast(durationTime: 3, heading: Strings.success, subHeading: "Operation performed Succesfully");
-          isDataFetched = true;
-          notifyListeners();
+          _loadsResponse = LoadsResponse.fromJson(genericDecodeEncode.decodeJson(response.body));
+          if(_loadsResponse.code == 1){
+            _myJobsProvider.placedList = _loadsResponse.result.placed;
+            _myJobsProvider.acceptedList = _loadsResponse.result.accepted;
+            _myJobsProvider.inProcessList = _loadsResponse.result.inProcess;
+            _myJobsProvider.cancelledList = _loadsResponse.result.cancelled;
+            _myJobsProvider.deliveredList = _loadsResponse.result.delivered;
+            _myJobsProvider.placedCount =_loadsResponse.result.counts.placed;
+            _myJobsProvider.acceptedCount =_loadsResponse.result.counts.accepted;
+            _myJobsProvider.inProcessCount =_loadsResponse.result.counts.inProcess;
+            _myJobsProvider.cancelledCount =_loadsResponse.result.counts.cancelled;
+            _myJobsProvider.deliveredCount =_loadsResponse.result.counts.delivered;
+            _loader.hideLoader(context);
+            notifyListeners();
+            ApplicationToast.getSuccessToast(durationTime: 3, heading: Strings.success, subHeading: _loadsResponse.message);
+          }
         } else {
           ApplicationToast.getErrorToast(
               durationTime: 3,
@@ -123,5 +128,9 @@ class AcceptedProvider extends ChangeNotifier {
     } catch (error) {
       print(error.toString());
     }
+  }
+
+  setIsLoading(bool loading){
+    return isLoading = loading;
   }
 }

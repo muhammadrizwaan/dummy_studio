@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_absolute_path/flutter_absolute_path.dart';
+import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
@@ -70,12 +71,12 @@ class BusinessInformationProvider extends ChangeNotifier {
             heading: Strings.error,
             subHeading: Strings.nameErrorText);
       }
-      else if (phoneNumber.validatePhoneNumber() == false) {
+      else if (phoneNumber.validatePhoneNumber() == false && phoneNumber.validateLandLineNumber() == false) {
         ApplicationToast.getErrorToast(
             durationTime: 3,
             heading: Strings.error,
             subHeading: Strings.phoneNumberErrorText);
-      } else if (trn.isEmpty) {
+      } else if (trn.validateTRN() == false) {
         ApplicationToast.getErrorToast(
             durationTime: 3,
             heading: Strings.error,
@@ -155,12 +156,12 @@ class BusinessInformationProvider extends ChangeNotifier {
 
       List<MultipartFile> multipart = List<MultipartFile>();
       for (int i = 0; i < images.length; i++) {
-        var path = await FlutterAbsolutePath.getAbsolutePath(images[i].identifier);
-        multipart.add(await MultipartFile.fromFile(path, filename: path.split("/").last));
-        print('hello');
-        print(path);
+        final filePath = await FlutterAbsolutePath.getAbsolutePath(images[i].identifier);
+        File tempFile = File(filePath);
+        File compressedFile = await FlutterNativeImage.compressImage(tempFile.path,
+          quality: 5,);
+        multipart.add(await MultipartFile.fromFile(compressedFile.path, filename: compressedFile.path.split("/").last));
       }
-      print('hello');
 
       try {
         if(images.isNotEmpty){

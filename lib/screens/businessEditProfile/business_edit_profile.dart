@@ -13,6 +13,7 @@ import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 import 'business_edit_profile_components.dart';
@@ -133,7 +134,7 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                               leftIcon: Entypo.lock,
                               textEditingController: _confirmPassword,
                               hintText: "Confirm Password"),
-
+                          SizedBox(height: AppSizes.height * 0.03,),
                           CommonWidgets.getSubHeadingText(
                               text: 'Business Name'
                           ),
@@ -164,14 +165,14 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                               isPassword: false,
                               leftIcon: Entypo.mobile,
                               textEditingController: _businessPhone,
-                              hintText: 'Enter Contact Number'
+                              hintText: Strings.phonePlaceholderText
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
                           CommonWidgets.getSubHeadingText(
                               text: 'TRN'
                           ),
                           SizedBox(height: AppSizes.height * 0.01,),
-                          CommonWidgets.getPhoneNumberField(
+                          CommonWidgets.getTRNField(
                               isPassword: false,
                               leftIcon: Entypo.mobile,
                               textEditingController: _trn,

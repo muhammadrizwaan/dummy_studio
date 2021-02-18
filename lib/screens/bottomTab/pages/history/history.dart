@@ -140,9 +140,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
         ));
   }
 
-  // Future<Null> onRefresh() async{
-  //   await Future.delayed(Duration(seconds: 3));
-  // }
 
   Future<Null> onRefresh() async{
     pageNumber = 0;

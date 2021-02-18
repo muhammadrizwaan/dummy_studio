@@ -125,7 +125,8 @@ class _IndividualEditProfileState extends State<IndividualEditProfile> {
                               isPassword: true,
                               leftIcon: Entypo.lock,
                               textEditingController: _confirm_password,
-                              hintText: "Confirm Password"),
+                              hintText: "Confirm Password",
+                          ),
                           SizedBox(
                             height: 30,
                           ),

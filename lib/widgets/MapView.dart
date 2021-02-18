@@ -3,15 +3,13 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'dart:math' show cos, sqrt, asin;
-
-import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
 
 class MapView extends StatefulWidget {
   double startLat,startLong,endLat,endLong;
   var apiKey;
   var directionsApiKey;
-  String _distanceBetweenLocations = "0.0";
+  static String distanceBetweenLocations = "0.0";
   // String getDistance() => _distanceBetweenLocations;
   // String getTotalDistance() => _MapViewState
 
@@ -110,8 +108,7 @@ class _MapViewState extends State<MapView> {
               markers: markers != null ? Set<Marker>.from(markers) : null,
               zoomControlsEnabled: false,
               polylines: Set<Polyline>.of(polylines.values),
-              onMapCreated: (GoogleMapController controller) {
-                mapController = controller;
+              onMapCreated: (GoogleMapController controller) {mapController = controller;
               },
             ),
 
@@ -277,7 +274,7 @@ class _MapViewState extends State<MapView> {
         widget.endLat,
         widget.endLong,
       );
-      widget._distanceBetweenLocations = (distanceInMeters / 1000).toStringAsFixed(2);
+      MapView.distanceBetweenLocations = (distanceInMeters / 1000).toStringAsFixed(2);
     }
     for (int i = 0; i < polylineCoordinates.length - 1; i++) {
       _placeDistance += _coordinateDistance(
@@ -288,8 +285,8 @@ class _MapViewState extends State<MapView> {
       );
     }
 
-    widget._distanceBetweenLocations = _placeDistance.toStringAsFixed(2);
-    ApplicationToast.onPayConfirmationAlert(context: context, onCancellLoad: null, text: "The distance is " + widget._distanceBetweenLocations);
+    MapView.distanceBetweenLocations = _placeDistance.toStringAsFixed(2);
+    // ApplicationToast.onPayConfirmationAlert(context: context, onCancellLoad: null, text: "The distance is " + MapView.distanceBetweenLocations);
     return _placeDistance.toStringAsFixed(2);
   }
   double _coordinateDistance(lat1, lon1, lat2, lon2) {

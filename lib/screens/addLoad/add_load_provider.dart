@@ -124,7 +124,7 @@ class AddLoadProvider extends ChangeNotifier {
             durationTime: 3,
             heading: Strings.error,
             subHeading: Strings.nameErrorText);
-      } else if (phone.validatePhoneNumber() == false) {
+      } else if (phone.validatePhoneNumber() == false && phone.validateLandLineNumber() == false) {
         ApplicationToast.getErrorToast(
             durationTime: 3,
             heading: Strings.error,
