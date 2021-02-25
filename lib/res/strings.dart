@@ -24,6 +24,8 @@ class Strings {
   static const String paymentAlertText = "Are you sure you want to Pay?";
   static const String deleteLoadAlertText = "Are you sure you want to cancel the job?";
   static const String phonePlaceholderText = "+971501234567";
+  static const String invoiceDownload = "Invoice Downloaded Successfully";
+
 
   static const String roundTrip = "Round Trip";
   static const String pickupDateAndTime = "Pickup date and time";

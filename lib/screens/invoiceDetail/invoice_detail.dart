@@ -173,8 +173,21 @@ class _InvoiceDetailState extends State<InvoiceDetail> {
                             _invoiceDetailComponents.getInvoiceButtonsContainer(
                                 share: "Share",
                                 download: "Download",
-                                onShare: () {},
-                                onDownload: () {}),
+                                onShare: () {
+                                  _invoiceDetailProvider.getInvoiceDownload(
+                                      context: context,
+                                      Id: widget.Id,
+                                      differentiate: 1
+                                  );
+                                },
+                                onDownload: () {
+                                  _invoiceDetailProvider.getInvoiceDownload(
+                                      context: context,
+                                      Id: widget.Id,
+                                      differentiate: 0
+                                  );
+                                },
+                            ),
                       ),
                     )
                   ],

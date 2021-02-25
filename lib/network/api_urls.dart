@@ -50,3 +50,5 @@ const String saveRatingApi = "$apiBaseUrl/api/Rating/SaveRating";
 
 
 const String termsAndConditionLink = "http://truckoom.jinnbytedev.com/";
+const String getInvoiceDownloadApi = "$apiBaseUrl/api/Transactions/DownloadInvoice?loadId=";
+
