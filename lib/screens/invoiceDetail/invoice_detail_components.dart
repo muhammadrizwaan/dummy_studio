@@ -14,21 +14,20 @@ class InvoiceDetailComponents {
       child: Container(
         child: Column(
           children: [
-            //SizedBox(height: AppSizes.height * 0.02),
-            Container(
-              height: AppSizes.height * 0.12,
-              width: AppSizes.width * 0.25,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100)
-              ),
-              child: Image(
-                image: invoiceLogo == ""
-                    ? AssetImage(Assets.invoiceLogo)
-                    : NetworkImage('$baseUrl' + '$invoiceLogo'),
-                fit: BoxFit.cover,
-              ),
-            ),
-            SizedBox(height: AppSizes.height * 0.02),
+            // Container(
+            //   height: AppSizes.height * 0.12,
+            //   width: AppSizes.width * 0.25,
+            //   decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.circular(100)
+            //   ),
+            //   child: Image(
+            //     image: invoiceLogo == ""
+            //         ? AssetImage(Assets.invoiceLogo)
+            //         : NetworkImage('$baseUrl' + '$invoiceLogo'),
+            //     fit: BoxFit.cover,
+            //   ),
+            // ),
+            // SizedBox(height: AppSizes.height * 0.02),
             Text(
               name,
               style: TextStyle(

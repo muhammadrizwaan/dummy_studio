@@ -6,6 +6,8 @@ import 'package:truckoom_shipper/commons/get_token.dart';
 import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
 import 'package:truckoom_shipper/models/api_models/coupon_code_response.dart';
+import 'package:truckoom_shipper/models/api_models/load_cost_response.dart';
+import 'package:truckoom_shipper/models/api_models/loads_response.dart';
 import 'package:truckoom_shipper/models/api_models/status_update_response.dart';
 import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/network/network_helper.dart';
@@ -27,6 +29,8 @@ class PaymentProvider extends ChangeNotifier {
   NetworkHelper _networkHelper = NetworkHelperImpl();
   CouponCodeResponse _couponCodeResponse = CouponCodeResponse.empty();
   StatusUpdateResponse _statusUpdateResponse = StatusUpdateResponse.empty();
+  LoadCostResponse _loadCostResponse = LoadCostResponse.empty();
+  LoadsResponse _loadsResponse = LoadsResponse.empty();
   CustomPopup _loader = CustomPopup();
   GetToken getToken = GetToken();
   bool isDataFetched = false;
@@ -36,13 +40,55 @@ class PaymentProvider extends ChangeNotifier {
   double shiperCost;
   String token;
 
-  init({@required BuildContext context,}) async {
+  init({@required BuildContext context, @required int LoadId}) async {
     this.context = context;
     connectivityResult = "";
     token = "";
     couponId = 0;
     shiperCost = 0;
+    await getLoadCost(context: context, loadId: LoadId);
 
+  }
+
+  Future getLoadCost({@required BuildContext context, @required int loadId}) async{
+    try{
+      token = await getToken.onToken();
+      connectivityResult = await Connectivity().checkConnectivity();
+      if(connectivityResult == ConnectivityResult.none){
+        ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: Strings.internetConnectionError);
+      }
+      else{
+        http.Response response = await _networkHelper.get(
+            getLoadCostApi+loadId.toString(),
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': token
+            }
+        );
+        if(response.statusCode == 200){
+          _loadCostResponse = LoadCostResponse.fromJson(_genericDecodeEncode.decodeJson(response.body));
+          if(_loadCostResponse.code == 1){
+            print('Cost success');
+
+            isDataFetched = true;
+            notifyListeners();
+          }
+          else{
+            ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: _loadCostResponse.message);
+          }
+        }
+        else{
+          ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: Strings.somethingWentWrong);
+        }
+      }
+    }
+    catch(error){
+      print(error.toString());
+    }
+  }
+
+  LoadCostResponse getLoadCostData(){
+    return _loadCostResponse;
   }
 
   Future getApplyCoupon(
@@ -69,7 +115,7 @@ class PaymentProvider extends ChangeNotifier {
           _couponCodeResponse = CouponCodeResponse.fromJson(_genericDecodeEncode.decodeJson(response.body));
           if (_couponCodeResponse.code == 1) {
             couponId = _couponCodeResponse.result.couponId;
-            shiperCost = _couponCodeResponse.result.newShipperCost;
+            shiperCost = _couponCodeResponse.result.newFinalCost;
             print('Promo code api called');
             _loader.hideLoader(context);
             ApplicationToast.getSuccessToast(durationTime: 3, heading: Strings.success, subHeading: "Operation performed Succesfully");
@@ -117,21 +163,31 @@ class PaymentProvider extends ChangeNotifier {
           acceptedByShipperApi,
           headers: {'Content-Type': 'application/json', 'Authorization': token},
           body: {
-            "LoadStatus": {
-              "LoadId": loadId,
-              "UserId": userId,
-              "CouponId": couponId,
-              "NewShipperCost": shiperCost
-            },
-            "Payment": {
-              "Status": "200",
-              "Response": "Ok"
-            }
+            "LoadId": loadId,
+            "UserId": userId,
+            "CouponId": couponId, // send as zero if no coupon applied, / get coupon id from apply coupon response
+            "PaymentMethodId": 2,
+            "AmountPaid": shiperCost.toString(), // send as zero if no coupon was applied / get new shipper cost from apply coupon response
+            "TransactionNumber": "a6a8t82138762138gas2",
+            "Status": "200",
+            "Response": "Captured"
           }
+          // {
+          //   "LoadStatus": {
+          //     "LoadId": loadId,
+          //     "UserId": userId,
+          //     "CouponId": couponId,
+          //     "NewShipperCost": shiperCost
+          //   },
+          //   "Payment": {
+          //     "Status": "200",
+          //     "Response": "Ok"
+          //   }
+          // }
         );
         if (response.statusCode == 200) {
-          _statusUpdateResponse = StatusUpdateResponse.fromJson(_genericDecodeEncode.decodeJson(response.body));
-          if(_statusUpdateResponse.code == 1){
+          _loadsResponse = LoadsResponse.fromJson(_genericDecodeEncode.decodeJson(response.body));
+          if(_loadsResponse.code == 1){
             print('Accepted load');
             notifyListeners();
             _loader.hideLoader(context);
@@ -141,7 +197,7 @@ class PaymentProvider extends ChangeNotifier {
             ApplicationToast.getErrorToast(
                 durationTime: 3,
                 heading: Strings.error,
-                subHeading: _statusUpdateResponse.message,
+                subHeading: _loadsResponse.message,
             );
           }
         } else {

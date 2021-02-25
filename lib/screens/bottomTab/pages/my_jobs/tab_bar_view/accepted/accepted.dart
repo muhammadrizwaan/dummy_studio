@@ -76,6 +76,7 @@ class _AcceptedState extends State<Accepted> {
                                 time: _myJobsProvider.acceptedList[index].pickupDateTime,
                                 status: _myJobsProvider.acceptedList[index].status,
                                 vehicleType: _myJobsProvider.acceptedList[index].vehicleTypeName,
+                                vehicleCategory: _myJobsProvider.acceptedList[index].vehicleCategoryName,
                                 price: "${Strings.aed} ${_myJobsProvider.acceptedList[index].shipperCost.round()}",
                                 onAlert: () {
                                   ApplicationToast.onDescriptionAlert(context: context, description: _myJobsProvider.acceptedList[index].vehicleTypeDescription);

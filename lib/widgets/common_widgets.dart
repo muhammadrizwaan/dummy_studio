@@ -69,8 +69,8 @@ class CommonWidgets {
           GestureDetector(
             onTap: () => onCouponPress(),
             child: Container(
-              height: AppSizes.height * 0.05,
-              width: AppSizes.width * 0.1,
+              height: AppSizes.height * 0.06,
+              width: AppSizes.width * 0.13,
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(15)),
               child: Image(
@@ -81,7 +81,7 @@ class CommonWidgets {
           ),
           SizedBox(width: AppSizes.width * 0.02),
           Container(
-            width: AppSizes.width * 0.76,
+            width: AppSizes.width * 0.75,
             height: AppSizes.height * 0.06,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
@@ -208,6 +208,7 @@ class CommonWidgets {
       @required IconData iconName,
       @required Function onPress}) {
     return Container(
+      width:  AppSizes.width,
       padding: EdgeInsets.all(AppSizes.width * 0.05),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -249,6 +250,7 @@ class CommonWidgets {
   static Widget tabsAppBar2(
       {@required String text, @required Function onPress}) {
     return Container(
+      width: AppSizes.width,
       padding: EdgeInsets.only(
         left: AppSizes.width * 0.05,
         top: AppSizes.width * 0.05,
@@ -852,6 +854,88 @@ class CommonWidgets {
     } else {
       throw 'Could not launch $termsAndConditionLink';
     }
+  }
+
+  static Widget getLoadDetailCommonText({
+    @required IconData icon,
+    @required String text,
+    @required String lable
+  }){
+    return Row(
+      children: [
+        Container(
+          height: AppSizes.height * 0.05,
+          width: AppSizes.width * 0.1,
+          decoration: BoxDecoration(
+              color: AppColors.lightGray,
+              borderRadius: BorderRadius.circular(5)
+          ),
+          child: Opacity(
+              opacity: 0.7,
+              child: Icon(
+                icon,
+                size: 20,
+              )),
+        ),
+        SizedBox(width: AppSizes.width * 0.02),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextView.getLabelText04(
+                lable,
+                color: AppColors.colorBlack
+            ),
+            SizedBox(height: AppSizes.height * 0.001),
+            TextView.getLabel2Text04(
+              text,
+              color: AppColors.colorBlack,
+            ),
+          ],
+        )
+      ],
+    );
+  }
+
+  static Widget getLoadDetailLableWithImage({
+    @required String image,
+    @required String text,
+    @required String lable
+  }){
+    return Row(
+      children: [
+        Container(
+          height: AppSizes.height * 0.05,
+          width: AppSizes.width * 0.1,
+          decoration: BoxDecoration(
+              color: AppColors.lightGray,
+              borderRadius: BorderRadius.circular(5)
+          ),
+          child: Container(
+            margin: EdgeInsets.all(AppSizes.width * 0.02),
+            height: AppSizes.height * 0.001,
+            width: AppSizes.width * 0.001,
+            child: Image.asset(image),
+          ),
+        ),
+        SizedBox(width: AppSizes.width * 0.02),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextView.getLabelText04(
+                lable,
+                color: AppColors.colorBlack
+            ),
+            SizedBox(height: AppSizes.height * 0.001),
+            TextView.getLabel2Text04(
+              text,
+              color: AppColors.colorBlack,
+            ),
+          ],
+        )
+      ],
+    );
   }
 
 }

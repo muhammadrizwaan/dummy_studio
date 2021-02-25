@@ -14,32 +14,50 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  // final _firebaseMessaging = FirebaseMessaging();
-  // configureFcm(){
-  //   FirebaseMessaging().getToken().then((value) {
-  //     ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: value);
-  //     print("The fCM  tokeen is: "+ value);
-  //   });
-    // _firebaseMessaging.configure(
-    //   onMessage: (Map<String, dynamic> message) async {
-    //     print("onMessage: $message");
-    //     // _showItemDialog(message);
-    //     ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "message received");
-    //   },
-    //   // onBackgroundMessage: myBackgroundMessageHandler,
-    //   onLaunch: (Map<String, dynamic> message) async {
-    //     print("onLaunch: $message");
-    //     // _navigateToItemDetail(message);
-    //     ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "message received");
-    //   },
-    //   onResume: (Map<String, dynamic> message) async {
-    //     print("onResume: $message");
-    //     // _navigateToItemDetail(message);
-    //     ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "message received");
-    //   },
-    // );
-  // }
+class MyApp extends StatefulWidget {
+  dynamic restartApp({BuildContext context}){
+    final _MyAppState state = context.findAncestorStateOfType<State<MyApp>>();
+    state.restartApp();
+  }
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Key key = UniqueKey();
+  final _firebaseMessaging = FirebaseMessaging();
+
+  configureFcm(){
+    FirebaseMessaging().getToken().then((value) {
+      ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: value);
+      print("The fCM  tokeen is: "+ value);
+    });
+    _firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        print("onMessage: $message");
+        // _showItemDialog(message);
+        ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "message received");
+      },
+      // onBackgroundMessage: myBackgroundMessageHandler,
+      onLaunch: (Map<String, dynamic> message) async {
+        print("onLaunch: $message");
+        // _navigateToItemDetail(message);
+        ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "message received");
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print("onResume: $message");
+        // _navigateToItemDetail(message);
+        ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "message received");
+      },
+    );
+  }
+
+  void restartApp(){
+    setState(() {
+      key = UniqueKey();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
   // configureFcm();
@@ -50,6 +68,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: multiProviders,
       child: MaterialApp(
+        key: key,
         title: 'Truckoom',
         theme: ThemeData(
             primarySwatch: Colors.blue,

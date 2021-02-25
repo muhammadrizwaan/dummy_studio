@@ -19,6 +19,7 @@ class Strings {
   static const String aed = "AED";
   static const String yes = "Yes";
   static const String no = "No";
+  static const String logOutPopupText = "Are you sure you want to Sign Out";
   static const String cancelLoadAlertText = "Are you sure you want to cancel the Load?";
   static const String paymentAlertText = "Are you sure you want to Pay?";
   static const String deleteLoadAlertText = "Are you sure you want to cancel the job?";

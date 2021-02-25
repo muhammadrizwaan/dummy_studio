@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
@@ -10,6 +11,7 @@ import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bank/bank_screen.dart';
+import 'package:truckoom_shipper/screens/payment/payment_component.dart';
 import 'package:truckoom_shipper/screens/payment/payment_provider.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
@@ -25,7 +27,7 @@ class Payment extends StatefulWidget {
 
 class _PaymentState extends State<Payment> {
   PaymentProvider _paymentProvider;
-
+  PaymentComponents _paymentComponents;
   TextEditingController _promoCode;
 
 
@@ -33,7 +35,8 @@ class _PaymentState extends State<Payment> {
   void initState() {
     super.initState();
     _paymentProvider = Provider.of<PaymentProvider>(context, listen: false);
-    _paymentProvider.init(context: context);
+    _paymentProvider.init(context: context, LoadId: widget.loadId);
+    _paymentComponents = PaymentComponents();
     _promoCode = TextEditingController();
   }
 
@@ -48,7 +51,9 @@ class _PaymentState extends State<Payment> {
         body: Container(
             height: AppSizes.height,
             width: AppSizes.width,
-            child: Stack(
+            color: AppColors.white,
+            child: _paymentProvider.isDataFetched?
+            Stack(
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,80 +95,89 @@ class _PaymentState extends State<Payment> {
                                     leftIcon: Assets.radioUnactiveIcon,
                                     // textEditingController: email,
                                     hintText: "Credit"),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                CommonWidgets.getPayField(
-                                    isPassword: false,
-                                    leftIcon: Assets.radioUnactiveIcon,
-                                    // textEditingController: email,
-                                    hintText: "Bank Transfer"),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                CommonWidgets.getPayField(
-                                    isPassword: false,
-                                    leftIcon: Assets.radioUnactiveIcon,
-                                    // textEditingController: email,
-                                    hintText: "Cash"),
+                                // SizedBox(
+                                //   height: 10,
+                                // ),
+                                // CommonWidgets.getPayField(
+                                //     isPassword: false,
+                                //     leftIcon: Assets.radioUnactiveIcon,
+                                //     // textEditingController: email,
+                                //     hintText: "Bank Transfer"),
+                                // SizedBox(
+                                //   height: 10,
+                                // ),
+                                // CommonWidgets.getPayField(
+                                //     isPassword: false,
+                                //     leftIcon: Assets.radioUnactiveIcon,
+                                //     // textEditingController: email,
+                                //     hintText: "Cash"),
                                 SizedBox(
                                   height: 30,
                                 ),
-                                Container(
-                                  height: AppSizes.height*0.20,
-                                  width: AppSizes.width,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.lightGray,
-                                    border: Border.all(color: AppColors.lightGray),
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        height: AppSizes.height*0.06,
-                                        width: AppSizes.width,
-                                        padding: EdgeInsets.only(top: AppSizes.width*0.05, left: AppSizes.width*0.03,),
-                                        child: TextView.getLabelHeadingText04("Load Summary", color: AppColors.black),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(left: AppSizes.width*0.03, right: AppSizes.width*0.03),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            TextView.getLabelText04("Amount", color: AppColors.black.withOpacity(0.6)),
-                                            TextView.getLabelText04("AED 500", color: AppColors.black.withOpacity(0.6)),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(left: AppSizes.width*0.03, right: AppSizes.width*0.03, top: AppSizes.width*0.02),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            TextView.getLabelText04("Discount", color: AppColors.black.withOpacity(0.6),),
-                                            TextView.getLabelText04("AED 250", color: AppColors.black.withOpacity(0.6)),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(left: AppSizes.width*0.03, right: AppSizes.width*0.03, top: AppSizes.width*0.02),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            TextView.getLabelHeadingText04("Total Amount", color: AppColors.black),
-                                            TextView.getLabelHeadingText04("AED 250", color: AppColors.black),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                _paymentComponents.getTotalContainer(
+                                    context: context,
+                                    jobName: _paymentProvider.getLoadCostData().result.loadId.toString(),
+                                    total: _paymentProvider.getLoadCostData().result.finalCost.toString(),
+                                    couponDiscount: _paymentProvider.getLoadCostData().result.couponDiscount.toString(),
+                                    vatAmount: _paymentProvider.getLoadCostData().result.valueAddedTax.toString(),
+                                    shipperCost: _paymentProvider.getLoadCostData().result.shipperCost.toString(),
                                 ),
+
+                                // Container(
+                                //   height: AppSizes.height*0.20,
+                                //   width: AppSizes.width,
+                                //   decoration: BoxDecoration(
+                                //     color: AppColors.lightGray,
+                                //     border: Border.all(color: AppColors.lightGray),
+                                //     borderRadius: BorderRadius.circular(5),
+                                //   ),
+                                //   child: Column(
+                                //     children: [
+                                //       Container(
+                                //         height: AppSizes.height*0.06,
+                                //         width: AppSizes.width,
+                                //         padding: EdgeInsets.only(top: AppSizes.width*0.05, left: AppSizes.width*0.03,),
+                                //         child: TextView.getLabelHeadingText04("Load Summary", color: AppColors.black),
+                                //       ),
+                                //       SizedBox(
+                                //         height: 10,
+                                //       ),
+                                //       Container(
+                                //         padding: EdgeInsets.only(left: AppSizes.width*0.03, right: AppSizes.width*0.03),
+                                //         child: Row(
+                                //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                //           crossAxisAlignment: CrossAxisAlignment.start,
+                                //           children: [
+                                //             TextView.getLabelText04("Amount", color: AppColors.black.withOpacity(0.6)),
+                                //             TextView.getLabelText04("AED 500", color: AppColors.black.withOpacity(0.6)),
+                                //           ],
+                                //         ),
+                                //       ),
+                                //       Container(
+                                //         padding: EdgeInsets.only(left: AppSizes.width*0.03, right: AppSizes.width*0.03, top: AppSizes.width*0.02),
+                                //         child: Row(
+                                //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                //           crossAxisAlignment: CrossAxisAlignment.start,
+                                //           children: [
+                                //             TextView.getLabelText04("Discount", color: AppColors.black.withOpacity(0.6),),
+                                //             TextView.getLabelText04("AED 250", color: AppColors.black.withOpacity(0.6)),
+                                //           ],
+                                //         ),
+                                //       ),
+                                //       Container(
+                                //         padding: EdgeInsets.only(left: AppSizes.width*0.03, right: AppSizes.width*0.03, top: AppSizes.width*0.02),
+                                //         child: Row(
+                                //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                //           crossAxisAlignment: CrossAxisAlignment.start,
+                                //           children: [
+                                //             TextView.getLabelHeadingText04("Total Amount", color: AppColors.black),
+                                //             TextView.getLabelHeadingText04("AED 250", color: AppColors.black),
+                                //           ],
+                                //         ),
+                                //       ),
+                                //     ],
+                                //   ),
+                                // ),
                                 Container(
                                   padding: EdgeInsets.only(left: AppSizes.width*0.03, right: AppSizes.width*0.03, top: AppSizes.width*0.03,),
                                   child: RichText(
@@ -222,7 +236,13 @@ class _PaymentState extends State<Payment> {
                     )
                 ),
               ],
-            )),
+            ) : Center(
+              child: Container(
+                height: AppSizes.height * 0.15,
+                child: Lottie.asset(Assets.apiLoading, fit: BoxFit.cover),
+              ),
+            ),
+        ),
       ),
     );
   }

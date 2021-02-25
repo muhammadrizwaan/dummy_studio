@@ -16,6 +16,7 @@ class HistoryComponents {
     @required String price,
     @required String status,
     @required String vehicleType,
+    @required String vehicleCategory,
     @required String startTime,
     @required String endTime,
     @required Function onInvoice,
@@ -275,6 +276,32 @@ class HistoryComponents {
                     fontFamily: Assets.poppinsMedium,
                     color: AppColors.yellow,
                     fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: AppSizes.height * 0.01,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+            Text(
+            'Vehicle Category:',
+            style: TextStyle(
+              fontSize: 12,
+              fontFamily: Assets.poppinsRegular,
+              color: AppColors.locationText,
+              // fontWeight: FontWeight.bold
+            ),
+            ),
+              Text(
+                vehicleCategory,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontFamily: Assets.poppinsMedium,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),

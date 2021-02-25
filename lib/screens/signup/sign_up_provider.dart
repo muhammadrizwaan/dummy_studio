@@ -5,6 +5,7 @@ import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
+import 'package:truckoom_shipper/models/api_models/cities_response.dart';
 import 'package:truckoom_shipper/models/api_models/common_response.dart';
 import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/network/network_helper.dart';
@@ -23,16 +24,64 @@ class SignUpProvider extends ChangeNotifier {
   NetworkHelper _networkHelper = NetworkHelperImpl();
   CommonResponse commonResponse = CommonResponse.empty();
   GenericDecodeEncode genericDecodeEncode = GenericDecodeEncode();
+  CitiesResponse citiesResponse = CitiesResponse.empty();
   CustomPopup _loader = CustomPopup();
+  List<dynamic> cityList = List<dynamic>();
   String deviceId, tempToken;
   double ms;
+  bool isDataFetched = false;
   double currentTime;
   var connectivity;
 
   init(BuildContext context) async {
     this.context = context;
+    isDataFetched = false;
     deviceId = "";
     connectivity = "";
+    // await getCities(context: context);
+  }
+
+  Future getCities({@required BuildContext context}) async {
+    try {
+      connectivity = await Connectivity().checkConnectivity();
+      if (connectivity == ConnectivityResult.none) {
+        ApplicationToast.getErrorToast(durationTime: 3,
+            heading: Strings.error,
+            subHeading: Strings.internetConnectionError);
+      }
+      else {
+        http.Response response = await _networkHelper.get(
+          citiesApi,
+        );
+        if (response.statusCode == 200) {
+          citiesResponse = CitiesResponse.fromJson(
+              genericDecodeEncode.decodeJson(response.body));
+          if (citiesResponse.code == 1) {
+            for(int i = 0; i < citiesResponse.result.length - 1; i++){
+              cityList.add(citiesResponse.result[i].cityId);
+            }
+            isDataFetched = true;
+            notifyListeners();
+          }
+          else {
+            ApplicationToast.getErrorToast(durationTime: 3,
+                heading: Strings.error,
+                subHeading: citiesResponse.message);
+          }
+        }
+        else {
+          ApplicationToast.getErrorToast(durationTime: 3,
+              heading: Strings.error,
+              subHeading: Strings.somethingWentWrong);
+        }
+      }
+    }
+    catch(error){
+      print(error.toString());
+    }
+  }
+  CitiesResponse getCitiesList(){
+    return this.citiesResponse;
   }
 
   Future getIndividualSignUp({

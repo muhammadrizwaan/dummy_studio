@@ -12,6 +12,7 @@ import 'package:truckoom_shipper/screens/phoneNumber/phone_number_provider.dart'
 import 'package:truckoom_shipper/screens/signup/sign_up_components.dart';
 import 'package:truckoom_shipper/screens/signup/sign_up_provider.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
+import 'package:truckoom_shipper/widgets/text_views.dart';
 
 
 class SignUP extends StatefulWidget {
@@ -29,6 +30,7 @@ class _SignUPState extends State<SignUP> {
   PhoneNumberProvider _phoneNumberProvider;
   TextEditingController _name, _email, _password, _confirm_password;
   bool onCheck = false;
+  int _cityId;
 
   void initState() {
     _signUpProvider = Provider.of<SignUpProvider>(context, listen: false);
@@ -124,6 +126,59 @@ class _SignUPState extends State<SignUP> {
                               leftIcon: Entypo.lock,
                               textEditingController: _confirm_password,
                               hintText: "Confirm Password"),
+                          // CommonWidgets.getSubHeadingText(
+                          //     text: "City"),
+                          // SizedBox(height: AppSizes.height * 0.01),
+                          // SizedBox(height: AppSizes.height * 0.02),
+                          // Container(
+                          //   padding: EdgeInsets.symmetric(horizontal: 10),
+                          //   height: AppSizes.height * 0.07,
+                          //   width: AppSizes.width * 0.85,
+                          //   decoration: BoxDecoration(
+                          //     color: AppColors.lightGray,
+                          //     border: Border.all(color: AppColors.lightGray),
+                          //     borderRadius: BorderRadius.circular(5),
+                          //   ),
+                          //   child: Row(
+                          //     children: [
+                          //       Container(
+                          //           height: AppSizes.height * 0.06,
+                          //           width: AppSizes.width * 0.06,
+                          //           child: Image.asset(Assets.vehicle)),
+                          //       SizedBox(width: AppSizes.width*0.03),
+                          //       Expanded(
+                          //         child: DropdownButtonHideUnderline(
+                          //           child: DropdownButton<dynamic>(
+                          //             icon: Icon(Icons.keyboard_arrow_down),
+                          //             isExpanded: true,
+                          //             value: _cityId,
+                          //             hint: TextView.getLightText04(
+                          //               "Select city",
+                          //               color: AppColors.colorBlack,
+                          //             ),
+                          //             items: _signUpProvider.cityList
+                          //                 .map((item) =>
+                          //                 DropdownMenuItem(
+                          //                   value: item.cityId,
+                          //                   child: TextView.getLightText04(
+                          //                     item.description,
+                          //                     color: AppColors.colorBlack,
+                          //                   ),
+                          //                 )
+                          //             ).toList(),
+                          //             onChanged: (value) {
+                          //               print("value is");
+                          //               print(value);
+                          //               setState (() {
+                          //                 _cityId = value;
+                          //               });
+                          //             },
+                          //           ),
+                          //         ),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
                           SizedBox(height: AppSizes.height * 0.03),
                           _getTermsAndCondition(),
                           SizedBox(height: AppSizes.height * 0.01),

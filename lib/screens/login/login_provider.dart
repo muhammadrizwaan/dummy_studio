@@ -85,7 +85,6 @@ class LoginProvider extends ChangeNotifier {
           commonResponse = CommonResponse.fromJson(genericDecodeEncode.decodeJson(response.body));
           if (commonResponse.code == 1) {
             Constants.setToken(commonResponse.result.token.accessToken);
-            print(commonResponse.result.token.accessToken);
             await Constants.setUserEmail(commonResponse.result.user.email);
             Constants.setPassword(commonResponse.result.user.password);
             Constants.setUserId(commonResponse.result.user.userId);
@@ -114,6 +113,7 @@ class LoginProvider extends ChangeNotifier {
               context: context,
               text: Strings.loginSuccessful,
               onNavigate: () {
+                _bottomTabProvider.setCurrentIndex(1);
                 Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: BottomTab()), ModalRoute.withName(Routes.login));
               },
             );

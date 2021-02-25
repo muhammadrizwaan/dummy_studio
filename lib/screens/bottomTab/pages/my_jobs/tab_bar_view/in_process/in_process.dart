@@ -79,6 +79,7 @@ class _InProcessState extends State<InProcess> {
                           time:  _myJobsProvider.inProcessList[index].pickupDateTime,
                           status: _myJobsProvider.inProcessList[index].status,
                           vehicleType: _myJobsProvider.inProcessList[index].vehicleTypeName,
+                          vehicleCategory: _myJobsProvider.inProcessList[index].vehicleCategoryName,
                           price: "${Strings.aed} ${_myJobsProvider.inProcessList[index].shipperCost.round()}",
                           onAlert: (){
                             ApplicationToast.onDescriptionAlert(context: context, description: _myJobsProvider.inProcessList[index].vehicleTypeDescription);

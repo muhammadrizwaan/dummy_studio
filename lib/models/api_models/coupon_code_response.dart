@@ -1,6 +1,6 @@
 /// Message : "Operation performed Succesfully"
 /// Code : 1
-/// Result : {"CouponId":1,"ShipperCost":93940.0,"NewShipperCost":93740.0}
+/// Result : {"CouponId":22,"ShipperCost":19320.0,"NewShipperCost":19310.0,"NewFinalCost":20275.5}
 
 class CouponCodeResponse {
   String _message;
@@ -40,32 +40,38 @@ class CouponCodeResponse {
 
 }
 
-/// CouponId : 1
-/// ShipperCost : 93940.0
-/// NewShipperCost : 93740.0
+/// CouponId : 22
+/// ShipperCost : 19320.0
+/// NewShipperCost : 19310.0
+/// NewFinalCost : 20275.5
 
 class Result {
   int _couponId;
   double _shipperCost;
   double _newShipperCost;
+  double _newFinalCost;
 
   int get couponId => _couponId;
   double get shipperCost => _shipperCost;
   double get newShipperCost => _newShipperCost;
+  double get newFinalCost => _newFinalCost;
 
   Result({
       int couponId, 
       double shipperCost, 
-      double newShipperCost}){
+      double newShipperCost, 
+      double newFinalCost}){
     _couponId = couponId;
     _shipperCost = shipperCost;
     _newShipperCost = newShipperCost;
+    _newFinalCost = newFinalCost;
 }
 
   Result.fromJson(dynamic json) {
     _couponId = json["CouponId"];
     _shipperCost = json["ShipperCost"];
     _newShipperCost = json["NewShipperCost"];
+    _newFinalCost = json["NewFinalCost"];
   }
 
   Map<String, dynamic> toJson() {
@@ -73,6 +79,7 @@ class Result {
     map["CouponId"] = _couponId;
     map["ShipperCost"] = _shipperCost;
     map["NewShipperCost"] = _newShipperCost;
+    map["NewFinalCost"] = _newFinalCost;
     return map;
   }
 
