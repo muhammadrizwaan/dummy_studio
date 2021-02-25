@@ -18,6 +18,7 @@ class AcceptedComponents{
         @required String time,
         @required String status,
         @required String vehicleType,
+        @required String vehicleCategory,
         @required String price,
         @required Function onClickPay,
         @required Function onClickCancel,
@@ -256,6 +257,31 @@ class AcceptedComponents{
                       fontSize: 12,
                       fontFamily: Assets.poppinsMedium,
                       color: AppColors.yellow,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: AppSizes.height * 0.01,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Vehicle Category:',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontFamily: Assets.poppinsRegular,
+                    color: AppColors.locationText,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
+                Text(
+                  vehicleCategory,
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontFamily: Assets.poppinsMedium,
+                      color: AppColors.colorBlack,
                       fontWeight: FontWeight.bold),
                 ),
               ],

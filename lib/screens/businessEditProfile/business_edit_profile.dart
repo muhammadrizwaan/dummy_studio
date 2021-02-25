@@ -200,31 +200,34 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                                 ),
                                 Expanded(
                                   child: DropdownButtonHideUnderline(
-                                    child: DropdownButton<String>(
-                                      icon: Icon(Icons.keyboard_arrow_down),
-                                      isExpanded: true,
-                                      value: _selectedValue,
-                                      hint: TextView.getLightText04(
-                                        Constants.getCityName(),
-                                        color: AppColors.colorBlack,
+                                    child: ButtonTheme(
+                                      alignedDropdown: true,
+                                      child: DropdownButton<String>(
+                                        icon: Icon(Icons.keyboard_arrow_down),
+                                        isExpanded: true,
+                                        value: _selectedValue,
+                                        hint: TextView.getLightText04(
+                                          Constants.getCityName(),
+                                          color: AppColors.colorBlack,
+                                        ),
+                                        items: _businessEditProfileProvider
+                                            .description
+                                            .map<DropdownMenuItem<String>>(
+                                                (String value) {
+                                              return DropdownMenuItem<String>(
+                                                value: value,
+                                                child: TextView.getLightText04(
+                                                  value,
+                                                  color: AppColors.colorBlack,
+                                                ),
+                                              );
+                                            }).toList(),
+                                        onChanged: (String value) {
+                                          setState(() {
+                                            _selectedValue = value;
+                                          });
+                                        },
                                       ),
-                                      items: _businessEditProfileProvider
-                                          .description
-                                          .map<DropdownMenuItem<String>>(
-                                              (String value) {
-                                            return DropdownMenuItem<String>(
-                                              value: value,
-                                              child: TextView.getLightText04(
-                                                value,
-                                                color: AppColors.colorBlack,
-                                              ),
-                                            );
-                                          }).toList(),
-                                      onChanged: (String value) {
-                                        setState(() {
-                                          _selectedValue = value;
-                                        });
-                                      },
                                     ),
                                   ),
                                 ),

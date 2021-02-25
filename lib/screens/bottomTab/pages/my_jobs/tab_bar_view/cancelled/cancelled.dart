@@ -77,6 +77,7 @@ class _CancelledState extends State<Cancelled> {
                               time: _myJobsProvider.cancelledList[index].pickupDateTime,
                               status: _myJobsProvider.cancelledList[index].status,
                               vehicleType: _myJobsProvider.cancelledList[index].vehicleTypeName,
+                              vehicleCategory: _myJobsProvider.cancelledList[index].vehicleCategoryName,
                               price: "${Strings.aed} ${_myJobsProvider.cancelledList[index].shipperCost.round()}",
                               onAlert: () {
                                 ApplicationToast.onDescriptionAlert(context: context, description: _myJobsProvider.cancelledList[index].vehicleTypeDescription);

@@ -66,8 +66,8 @@ class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
                   startLong: double.parse(widget.PickupLongitude),
                   endLat: double.parse(widget.DropoffLatitude),
                   endLong: double.parse(widget.DropoffLongitude),
-                  apiKey: "IzaSyDHxZ--0FYqNItvE-kf3Sz2jlRtgt0Mp3Q",
-                  directionsApiKey: "AIzaSyDTLiSzdkVV8xrO9an282diUlBFMshCwAI",
+                  apiKey: "AIzaSyAERKSFYMxdSR6mrMmgyesmQOr8miAFd4c",
+                  directionsApiKey: "AIzaSyAERKSFYMxdSR6mrMmgyesmQOr8miAFd4c",
                 ),
               ),
               Container(

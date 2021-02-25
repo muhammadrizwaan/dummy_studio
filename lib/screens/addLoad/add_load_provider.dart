@@ -111,6 +111,7 @@ class AddLoadProvider extends ChangeNotifier {
       @required List imagesList,
       @required String Rate,
       @required int distance,
+        @required String goodTypeName
       }) async {
     try {
       token = await getToken.onToken();
@@ -176,7 +177,8 @@ class AddLoadProvider extends ChangeNotifier {
               vehicleTypeId: vehicleTypeId,
               vehicleCategoryId: vehicleCategoryId,
               images: imagesList,
-              Distance: distance
+              Distance: distance,
+              goodTypeName: goodTypeName,
             ),
           ),
         );

@@ -18,6 +18,8 @@ const String getHistoryApi = "$apiBaseUrl/api/Loads/MyLoadHistory?userId={userId
 const String getGoodTypeApi = "$apiBaseUrl/api/GoodTypes";
 const String getVehicleTypeApi = "$apiBaseUrl/api/Vehicle/GetVehicleTypes";
 const String deleteLoadApi = "$apiBaseUrl/api/Loads/DeleteLoad?loadId={loadId}";
+const String getLoadCostApi = "$apiBaseUrl/api/Loads/GetLoadCostsByLoadId?loadId=";
+const String getShipperDiscountApi = "$apiBaseUrl/api/Loads/GetShipperIndividualDiscount?userId={userId}";
 const String estimatedLoadPriceApi = "$apiBaseUrl/api/Loads/EstimatedLoadPrice";
 const String getUpdateUserInformationApi = "$apiBaseUrl/api/Accounts/UpdateUserInformation";
 

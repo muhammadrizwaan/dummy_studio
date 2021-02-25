@@ -90,23 +90,12 @@ class _InvoiceDetailState extends State<InvoiceDetail> {
                                             .completedDate),
                                     _invoiceDetailComponents.getTotalContainer(
                                         context: context,
-                                        jobName: _invoiceDetailProvider
-                                            .invoiceDetailResponse
-                                            .result
-                                            .invoiceId
-                                            .toString(),
-                                        weight: _invoiceDetailProvider
-                                            .invoiceDetailResponse
-                                            .result
-                                            .weight,
+                                        jobName: _invoiceDetailProvider.invoiceDetailResponse.result.invoiceId.toString(),
+                                        weight: _invoiceDetailProvider.invoiceDetailResponse.result.weight,
                                         shipperCost: _invoiceDetailProvider.invoiceDetailResponse.result.shipperCost.toString(),
                                         couponDiscount: _invoiceDetailProvider.invoiceDetailResponse.result.couponDiscount.toString(),
                                         vatAmount: _invoiceDetailProvider.invoiceDetailResponse.result.vatAmount.round().toString(),
-                                        total: _invoiceDetailProvider
-                                            .invoiceDetailResponse
-                                            .result
-                                            .totalShipperCost
-                                            .toString()),
+                                        total: _invoiceDetailProvider.invoiceDetailResponse.result.totalShipperCost.toString()),
                                     _invoiceDetailComponents.getInvoiceLable("Status"),
                                     _invoiceDetailComponents.getStatus(
                                         status: "Loading",

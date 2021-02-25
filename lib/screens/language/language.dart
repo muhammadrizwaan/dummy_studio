@@ -77,29 +77,32 @@ class _LanguageState extends State<Language> {
                                 ),
                                 Expanded(
                                   child: DropdownButtonHideUnderline(
-                                    child: DropdownButton(
-                                      icon: Icon(Icons.keyboard_arrow_down),
-                                        value: _value,
-                                        items: [
-                                          DropdownMenuItem(
-                                            child: TextView.getLightTextLanguage(
-                                              "English",
-                                              color: AppColors.colorBlack,
+                                    child: ButtonTheme(
+                                      alignedDropdown: true,
+                                      child: DropdownButton(
+                                        icon: Icon(Icons.keyboard_arrow_down),
+                                          value: _value,
+                                          items: [
+                                            DropdownMenuItem(
+                                              child: TextView.getLightTextLanguage(
+                                                "English",
+                                                color: AppColors.colorBlack,
+                                              ),
+                                              value: 1,
                                             ),
-                                            value: 1,
-                                          ),
-                                          DropdownMenuItem(
-                                              child: TextView.getLightTextLanguage("Urdu", color: AppColors.colorBlack),
-                                              value: 2),
-                                          DropdownMenuItem(
-                                              child: TextView.getLightTextLanguage( "Arabic", color: AppColors.colorBlack,),
-                                              value: 3),
-                                        ],
-                                        onChanged: (value) {
-                                          setState(() {
-                                            _value = value;
-                                          });
-                                        }),
+                                            DropdownMenuItem(
+                                                child: TextView.getLightTextLanguage("Urdu", color: AppColors.colorBlack),
+                                                value: 2),
+                                            DropdownMenuItem(
+                                                child: TextView.getLightTextLanguage( "Arabic", color: AppColors.colorBlack,),
+                                                value: 3),
+                                          ],
+                                          onChanged: (value) {
+                                            setState(() {
+                                              _value = value;
+                                            });
+                                          }),
+                                    ),
                                   ),
                                 ),
                               ],

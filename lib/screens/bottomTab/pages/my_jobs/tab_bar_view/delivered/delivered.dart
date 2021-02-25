@@ -84,6 +84,7 @@ class _DeliveredState extends State<Delivered> {
                                   time: _myJobsProvider.deliveredList[index].pickupDateTime,
                                   status: _myJobsProvider.deliveredList[index].status,
                                   vehicleType: _myJobsProvider.deliveredList[index].vehicleTypeName,
+                                    vehicleCategory: _myJobsProvider.deliveredList[index].vehicleCategoryName,
                                   price: "${Strings.aed} ${_myJobsProvider.deliveredList[index].shipperCost.round()}",
                                   onAlert: () {
                                     ApplicationToast.onDescriptionAlert(
