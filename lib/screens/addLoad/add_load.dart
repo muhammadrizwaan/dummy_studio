@@ -5,17 +5,14 @@ import 'package:fluttericon/entypo_icons.dart';
 import 'package:lottie/lottie.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/addLoad/add_load_components.dart';
 import 'package:truckoom_shipper/screens/addLoad/add_load_provider.dart';
-import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_details.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
-import 'package:truckoom_shipper/widgets/loader.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class AddLoad extends StatefulWidget {

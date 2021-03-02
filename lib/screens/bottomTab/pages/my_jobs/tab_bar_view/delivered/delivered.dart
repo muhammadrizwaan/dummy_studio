@@ -239,7 +239,7 @@ class _DeliveredState extends State<Delivered> {
                                             comment: description.text,
                                         );
                                         
-                                    hideLoader(context);
+                                    // hideLoader(context);
                                     rating = 0.0;
                                     description.text = "";
                                     // Navigator.pop(context);

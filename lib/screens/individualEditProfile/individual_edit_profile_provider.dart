@@ -8,6 +8,7 @@ import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
+import 'package:truckoom_shipper/models/api_models/cities_response.dart';
 import 'package:truckoom_shipper/models/api_models/edit_profile_response.dart';
 import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/network/network_helper.dart';
@@ -23,10 +24,11 @@ import 'package:flutter/material.dart';
 
 class IndividualEditProfileProvider extends ChangeNotifier {
   BuildContext context;
+
   NetworkHelper _networkHelper = NetworkHelperImpl();
   EditProfileResponse editProfileResponse = EditProfileResponse.empty();
-
   GenericDecodeEncode genericDecodeEncode = GenericDecodeEncode();
+  CitiesResponse citiesResponse = CitiesResponse.empty();
   CustomPopup _loader = CustomPopup();
   GetToken _getToken = GetToken();
   final picker = ImagePicker();
@@ -38,14 +40,62 @@ class IndividualEditProfileProvider extends ChangeNotifier {
   bool isImagePicked;
   double currentTime;
   var connectivity;
+  bool isDataFetched = false;
+  List<dynamic> cityList = List<dynamic>();
 
   init(BuildContext context) async {
     this.context = context;
     deviceId = "";
+    isDataFetched = false;
+    cityList = [];
     isImagePicked = false;
     imagePath = "";
     token = "";
     connectivity = "";
+    await getCities(context: context);
+  }
+
+  Future getCities({@required BuildContext context}) async {
+    try {
+      connectivity = await Connectivity().checkConnectivity();
+      if (connectivity == ConnectivityResult.none) {
+        ApplicationToast.getErrorToast(durationTime: 3,
+            heading: Strings.error,
+            subHeading: Strings.internetConnectionError);
+      }
+      else {
+        http.Response response = await _networkHelper.get(
+          citiesApi,
+        );
+        if (response.statusCode == 200) {
+          citiesResponse = CitiesResponse.fromJson(
+              genericDecodeEncode.decodeJson(response.body));
+          if (citiesResponse.code == 1) {
+            for(int i = 0; i < citiesResponse.result.length - 1; i++){
+              cityList.add(citiesResponse.result[i]);
+            }
+            isDataFetched = true;
+            notifyListeners();
+          }
+          else {
+            ApplicationToast.getErrorToast(durationTime: 3,
+                heading: Strings.error,
+                subHeading: citiesResponse.message);
+          }
+        }
+        else {
+          ApplicationToast.getErrorToast(durationTime: 3,
+              heading: Strings.error,
+              subHeading: Strings.somethingWentWrong);
+        }
+      }
+    }
+    catch(error){
+      print(error.toString());
+    }
+  }
+  CitiesResponse getCitiesList(){
+    return this.citiesResponse;
   }
 
   Future onEditImage({@required BuildContext context}) async {
@@ -109,6 +159,7 @@ class IndividualEditProfileProvider extends ChangeNotifier {
     @required String name,
     @required String password,
     @required String confirmPassword,
+    @required String cityId
   }) async {
     try {
       int userId = await Constants.getUserId();
@@ -154,7 +205,8 @@ class IndividualEditProfileProvider extends ChangeNotifier {
             "UserId": userId,
             "FullName": name,
             "Password": password,
-            "DeviceId": deviceId
+            "DeviceId": deviceId,
+            "CityId": cityId
           },
         );
         if (response.statusCode == 200) {
@@ -165,6 +217,8 @@ class IndividualEditProfileProvider extends ChangeNotifier {
             await Constants.setUserEmail(editProfileResponse.result.email);
             await Constants.setPassword(editProfileResponse.result.password);
             await Constants.setUserName(editProfileResponse.result.fullName);
+            Constants.setCityId(editProfileResponse.result.cityId);
+            Constants.setCityName(editProfileResponse.result.cityName);
             _loader.hideLoader(context);
             print('Updated user');
             Navigator.pushReplacement(

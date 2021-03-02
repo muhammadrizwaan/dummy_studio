@@ -7,6 +7,7 @@ import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:date_time_format/date_time_format.dart';
+import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 class PlacedComponents{
 
@@ -83,46 +84,7 @@ class PlacedComponents{
                 children: [
                   Row(
                     children: [
-                      Container(
-                        height: AppSizes.height * 0.043,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              width: 6,
-                              height: 6,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: AppColors.yellow
-                              ),
-                            ),
-                            Container(
-                              width: 3,
-                              height: 3,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: AppColors.grey
-                              ),
-                            ),
-                            Container(
-                              width: 3,
-                              height: 3,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: AppColors.grey
-                              ),
-                            ),
-                            Container(
-                              width: 6,
-                              height: 6,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: AppColors.yellow
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
+                      CommonWidgets.getLocationPointers(),
                       SizedBox(
                         width: AppSizes.width * 0.01,
                       ),

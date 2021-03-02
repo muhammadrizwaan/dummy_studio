@@ -36,9 +36,10 @@ class SignUpProvider extends ChangeNotifier {
   init(BuildContext context) async {
     this.context = context;
     isDataFetched = false;
+    cityList = [];
     deviceId = "";
     connectivity = "";
-    // await getCities(context: context);
+    await getCities(context: context);
   }
 
   Future getCities({@required BuildContext context}) async {
@@ -58,7 +59,7 @@ class SignUpProvider extends ChangeNotifier {
               genericDecodeEncode.decodeJson(response.body));
           if (citiesResponse.code == 1) {
             for(int i = 0; i < citiesResponse.result.length - 1; i++){
-              cityList.add(citiesResponse.result[i].cityId);
+              cityList.add(citiesResponse.result[i]);
             }
             isDataFetched = true;
             notifyListeners();
@@ -92,6 +93,7 @@ class SignUpProvider extends ChangeNotifier {
     @required String password,
     @required String confirmPassword,
     @required bool onCheck,
+    @required String cityId
   }) async {
     try {
       deviceId = await PreferenceUtils.getString(Strings.deviceId);
@@ -131,13 +133,23 @@ class SignUpProvider extends ChangeNotifier {
           heading: Strings.error,
           subHeading: Strings.passwordMatchErrorText,
         );
-      } else if (onCheck == false) {
+      } else if (cityId == null) {
+        ApplicationToast.getErrorToast(
+          durationTime: 3,
+          heading: Strings.error,
+          subHeading: Strings.cityErrorText,
+        );
+
+      }
+      else if (onCheck == false) {
         ApplicationToast.getErrorToast(
           durationTime: 3,
           heading: Strings.error,
           subHeading: Strings.checkBoxErrorText,
         );
-      } else {
+
+      }
+      else {
         _loader.showLoader(context: context);
         http.Response response = await _networkHelper.post(
           individualSignUp,
@@ -149,13 +161,15 @@ class SignUpProvider extends ChangeNotifier {
             "Email": email,
             "Phone": cell,
             "Password": password,
-            "DeviceId": deviceId
+            "DeviceId": deviceId,
+            "CityId": cityId
           },
         );
         if(response.statusCode == 200){
           commonResponse = CommonResponse.fromJson(genericDecodeEncode.decodeJson(response.body));
           if(commonResponse.code == 1){
-
+            print('cityid');
+            print(commonResponse.result.user.cityId);
             Constants.setToken(commonResponse.result.token.accessToken);
             Constants.setUserEmail(commonResponse.result.user.email);
             Constants.setPassword(commonResponse.result.user.password);
@@ -163,6 +177,8 @@ class SignUpProvider extends ChangeNotifier {
             Constants.setUserName(commonResponse.result.user.fullName);
             Constants.setUserPhone(commonResponse.result.user.phone);
             Constants.setUser(Strings.indiviual);
+            Constants.setCityId(commonResponse.result.user.cityId);
+            Constants.setCityName(commonResponse.result.user.cityName);
 
             ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
             currentTime = await (((ms / 1000) / 60).round()).toDouble();

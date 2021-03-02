@@ -235,6 +235,10 @@ PODS:
     - Reachability
   - device_info (0.0.1):
     - Flutter
+  - esys_flutter_share (0.0.1):
+    - Flutter
+  - ext_storage (0.0.1):
+    - Flutter
   - Firebase/Analytics (6.31.0):
     - Firebase/Core
   - Firebase/Auth (6.31.0):
@@ -322,6 +326,8 @@ PODS:
   - Flutter (1.0.0)
   - flutter_absolute_path (0.0.1):
     - Flutter
+  - flutter_downloader (0.0.1):
+    - Flutter
   - flutter_native_image (0.0.1):
     - Flutter
   - fluttertoastalert (0.0.1):
@@ -407,6 +413,10 @@ PODS:
     - nanopb/encode (= 1.30906.0)
   - nanopb/decode (1.30906.0)
   - nanopb/encode (1.30906.0)
+  - path_provider (0.0.1):
+    - Flutter
+  - permission_handler (4.4.0):
+    - Flutter
   - PromisesObjC (1.2.10)
   - Protobuf (3.13.0)
   - Reachability (3.2)
@@ -421,6 +431,8 @@ DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - connectivity (from `.symlinks/plugins/connectivity/ios`)
   - device_info (from `.symlinks/plugins/device_info/ios`)
+  - esys_flutter_share (from `.symlinks/plugins/esys_flutter_share/ios`)
+  - ext_storage (from `.symlinks/plugins/ext_storage/ios`)
   - Firebase/Analytics
   - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
@@ -428,6 +440,7 @@ DEPENDENCIES:
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
   - flutter_absolute_path (from `.symlinks/plugins/flutter_absolute_path/ios`)
+  - flutter_downloader (from `.symlinks/plugins/flutter_downloader/ios`)
   - flutter_native_image (from `.symlinks/plugins/flutter_native_image/ios`)
   - fluttertoastalert (from `.symlinks/plugins/fluttertoastalert/ios`)
   - geocoder (from `.symlinks/plugins/geocoder/ios`)
@@ -437,6 +450,8 @@ DEPENDENCIES:
   - location (from `.symlinks/plugins/location/ios`)
   - multi_image_picker (from `.symlinks/plugins/multi_image_picker/ios`)
   - multipart_request (from `.symlinks/plugins/multipart_request/ios`)
+  - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
 
@@ -480,6 +495,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/connectivity/ios"
   device_info:
     :path: ".symlinks/plugins/device_info/ios"
+  esys_flutter_share:
+    :path: ".symlinks/plugins/esys_flutter_share/ios"
+  ext_storage:
+    :path: ".symlinks/plugins/ext_storage/ios"
   firebase_analytics:
     :path: ".symlinks/plugins/firebase_analytics/ios"
   firebase_auth:
@@ -492,6 +511,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_absolute_path:
     :path: ".symlinks/plugins/flutter_absolute_path/ios"
+  flutter_downloader:
+    :path: ".symlinks/plugins/flutter_downloader/ios"
   flutter_native_image:
     :path: ".symlinks/plugins/flutter_native_image/ios"
   fluttertoastalert:
@@ -510,6 +531,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/multi_image_picker/ios"
   multipart_request:
     :path: ".symlinks/plugins/multipart_request/ios"
+  path_provider:
+    :path: ".symlinks/plugins/path_provider/ios"
+  permission_handler:
+    :path: ".symlinks/plugins/permission_handler/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
   url_launcher:
@@ -526,6 +551,8 @@ SPEC CHECKSUMS:
   cloud_firestore: 10fd4a09ebffc33efd64708106e2e7de701fe9ae
   connectivity: c4130b2985d4ef6fd26f9702e886bd5260681467
   device_info: d7d233b645a32c40dfdc212de5cf646ca482f175
+  esys_flutter_share: 403498dab005b36ce1f8d7aff377e81f0621b0b4
+  ext_storage: 4eaf3a84d5594106e2ebcc2502248cfde53c8fa1
   Firebase: 87483fa19acfdf99244523f2389e931927b91457
   firebase_analytics: 9118044ffb98bee71d84733fc594f5134fe4bc1b
   firebase_auth: d99b993c1405096e66c58211b1cd956c23eed1c5
@@ -541,6 +568,7 @@ SPEC CHECKSUMS:
   FirebaseMessaging: 82d75b3770a78bbce470769a6980429608b4c407
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   flutter_absolute_path: 5adb13678c88f0bdfba527f3851f9543d01dde66
+  flutter_downloader: 058b9c41564a90500f67f3e432e3524613a7fd83
   flutter_native_image: 9c0b7451838484458e5b0fae007b86a4c2d4bdfe
   fluttertoastalert: d495c35eb40caa4fac869197570c6773282cb6df
   geocoder: 3cfab70531a0b367e917bafe82df4c30f6d4c45a
@@ -559,6 +587,8 @@ SPEC CHECKSUMS:
   multi_image_picker: c068931d08240565e0615fb01437d16984909183
   multipart_request: 1d959b9c5697a47347842aaf6b9cfd9a82ee9cf9
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
+  path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
+  permission_handler: f615215121f43c1640d2b8500d4ad749512828a8
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96

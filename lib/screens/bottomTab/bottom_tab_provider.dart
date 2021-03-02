@@ -9,6 +9,7 @@ class BottomTabProvider extends ChangeNotifier{
 
   init({@required BuildContext context}) async{
     this.context = context;
+    currentIndex = 1;
   }
   setCurrentIndex(int index){
     this.currentIndex = index;

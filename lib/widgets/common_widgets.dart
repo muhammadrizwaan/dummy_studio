@@ -1,3 +1,4 @@
+import 'package:date_time_format/date_time_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -369,6 +370,73 @@ class CommonWidgets {
               child: Image(
                   image: AssetImage(
                       'assets/png/check_circle_fill_pn.png'))),
+        ],
+      ),
+    );
+  }
+
+  static Widget getTextFieldWithImage(
+      {@required bool isPassword,
+        @required String leftIcon,
+        @required TextEditingController textEditingController,
+        @required String hintText,
+      }) {
+    return Container(
+      height: AppSizes.height * 0.07,
+      width: AppSizes.width * 0.85,
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.02),
+      decoration: BoxDecoration(
+        color: AppColors.lightGray,
+        border: Border.all(color: AppColors.lightGray),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            height: AppSizes.height * 0.03,
+            width: AppSizes.width * 0.075,
+            child: Image(
+              image: AssetImage(leftIcon),
+              // fit: BoxFit.cover,
+            ),
+          ),
+          Center(
+            child: Container(
+              // color: AppColors.yellow,
+              padding: EdgeInsets.only(left: 5),
+              width: AppSizes.width * 0.62,
+              // height: AppSizes.height * 0.05,
+              child: TextField(
+                style: TextStyle(
+                  decoration: TextDecoration.none,
+                  fontFamily: Assets.poppinsLight,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                ),
+                controller: textEditingController,
+                obscureText: isPassword,
+                decoration: InputDecoration(
+                  hintText: hintText,
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(
+                    decoration: TextDecoration.none,
+                    fontSize: 12,
+                    fontFamily: Assets.poppinsLight,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Container(
+              height: AppSizes.height * 0.035,
+              width: AppSizes.width * 0.075,
+              child: Image(
+                  image: AssetImage(
+                      'assets/png/check_circle_fill_pn.png'),
+              ),
+          ),
         ],
       ),
     );
@@ -936,6 +1004,69 @@ class CommonWidgets {
         )
       ],
     );
+  }
+
+  static Widget getSignatureBox({@required String eSignature}) {
+    return Container(
+      margin: EdgeInsets.only(top: AppSizes.height * 0.01, bottom: 20),
+      height: AppSizes.height * 0.18,
+      width: AppSizes.width,
+      decoration: BoxDecoration(
+        color: AppColors.lightGray,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Image(
+        image: NetworkImage(eSignature),
+        // image: AssetImage(Assets.signature),
+      ),
+    );
+  }
+
+  static Widget getLocationPointers() {
+    return Container(
+      height: AppSizes.height * 0.043,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            width: 6,
+            height: 6,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: AppColors.colorBlack
+            ),
+          ),
+          Container(
+            width: 3,
+            height: 3,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: AppColors.grey
+            ),
+          ),
+          Container(
+            width: 3,
+            height: 3,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: AppColors.grey
+            ),
+          ),
+          Container(
+            width: 6,
+            height: 6,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: AppColors.yellow
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  static getDateTimeFormate({@required String time}){
+    return DateTimeFormat.format(DateTime.parse(time), format: 'M j Y, g:i a');
   }
 
 }

@@ -55,6 +55,7 @@ class LoginProvider extends ChangeNotifier {
   }) async {
     try {
       deviceId = await PreferenceUtils.getString(Strings.deviceId);
+      print(deviceId);
       connectivityResult = await (Connectivity().checkConnectivity());
       if (connectivityResult == ConnectivityResult.none) {
         ApplicationToast.getErrorToast(
@@ -93,9 +94,9 @@ class LoginProvider extends ChangeNotifier {
 
             Constants.setUserPhone(commonResponse.result.user.phone != null? commonResponse.result.user.phone:"");
             Constants.setUser(commonResponse.result.user.isBusinessAccount? Strings.business: Strings.indiviual);
+            Constants.setCityName(commonResponse.result.user.cityName);
+            Constants.setCityId(commonResponse.result.user.cityId != null? commonResponse.result.user.cityId:0);
             if(commonResponse.result.user.isBusinessAccount) {
-              Constants.setCityName(commonResponse.result.user.cityName);
-              Constants.setCityId(commonResponse.result.user.cityId != null? commonResponse.result.user.cityId:0);
               if (commonResponse.result.user.companyInformation.length > 0) {
                 Constants.setCommpanyName(commonResponse.result.user.companyInformation[0].companyName);
                 Constants.setCommpanyPhone(commonResponse.result.user.companyInformation[0].contactNumber);
@@ -113,7 +114,6 @@ class LoginProvider extends ChangeNotifier {
               context: context,
               text: Strings.loginSuccessful,
               onNavigate: () {
-                _bottomTabProvider.setCurrentIndex(1);
                 Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: BottomTab()), ModalRoute.withName(Routes.login));
               },
             );

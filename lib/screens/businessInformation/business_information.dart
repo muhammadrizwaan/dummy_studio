@@ -72,7 +72,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               CommonWidgets.getAppBarCross(
-                  iconName: 'cross_icon.png',
+                  iconName: 'back_arrow_otp.png',
                   text: "Already have an account? ",
                   clickableText: "Login",
                   onTap: () {
@@ -298,7 +298,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
     try {
       images = [];
       images = await MultiImagePicker.pickImages(
-        maxImages: 2,
+        maxImages: 10,
         enableCamera: true,
         selectedAssets: images,
         cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),

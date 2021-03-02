@@ -69,7 +69,7 @@ class PaymentProvider extends ChangeNotifier {
           _loadCostResponse = LoadCostResponse.fromJson(_genericDecodeEncode.decodeJson(response.body));
           if(_loadCostResponse.code == 1){
             print('Cost success');
-
+            shiperCost = _loadCostResponse.result.finalCost;
             isDataFetched = true;
             notifyListeners();
           }

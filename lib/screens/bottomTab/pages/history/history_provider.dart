@@ -30,6 +30,7 @@ class HistoryProvider extends ChangeNotifier{
     this.context = context;
     connectivityResult = "";
     token = "";
+    isDataFetched = false;
     isLoading = false;
     histroyList = [];
     await getPlacedLoad(context: context, pageNumber: page );

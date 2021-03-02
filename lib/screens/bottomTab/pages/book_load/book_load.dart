@@ -187,6 +187,7 @@ class _BookLoadState extends State<BookLoad> {
                                             children: [
                                               _bookLoadComponents.onLocationPickerButton(
                                                 context: context,
+                                                buttonId: 1,
                                                 onPress: () async {
                                                   Prediction p =
                                                   await PlacesAutocomplete.show(
@@ -199,6 +200,7 @@ class _BookLoadState extends State<BookLoad> {
                                               SizedBox(height: AppSizes.height * 0.02),
                                               _bookLoadComponents.onLocationPickerButton(
                                                 context: context,
+                                                buttonId: 2,
                                                 onPress: () async {
                                                   Prediction p =
                                                   await PlacesAutocomplete.show(

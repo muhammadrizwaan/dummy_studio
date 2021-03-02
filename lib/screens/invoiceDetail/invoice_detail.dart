@@ -113,7 +113,7 @@ class _InvoiceDetailState extends State<InvoiceDetail> {
                                     _invoiceDetailComponents.getInvoiceLable("E-Signature"),
                                     _invoiceDetailProvider.invoiceDetailResponse.result.eSignature == null ?
                                     CommonWidgets.onNullData(text: "No Signature") :
-                                    _invoiceDetailComponents.getSignatureBox(eSignature: ""),
+                                    CommonWidgets.getSignatureBox(eSignature: _invoiceDetailProvider.invoiceDetailResponse.result.eSignature),
 
                                     _invoiceDetailComponents
                                         .getInvoiceLable("Reviews"),

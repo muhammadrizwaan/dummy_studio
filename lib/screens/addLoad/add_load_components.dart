@@ -30,7 +30,7 @@ class AddLoadComponents {
                       height: 8,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
-                          color: AppColors.yellow),
+                          color: AppColors.colorBlack),
                     ),
                     Container(
                       width: 4,

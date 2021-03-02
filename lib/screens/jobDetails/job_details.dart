@@ -259,6 +259,12 @@ class _JobDetailsState extends State<JobDetails> {
                                   ):
                                   CommonWidgets.onNullData(text: "No Images"),
                                   SizedBox(height: AppSizes.height * 0.02),
+                                  _jobDetailsProvider.loadDetailResponse.result.eSignaturePath == "" ?
+                                  Container():
+                                  CommonWidgets.getSubHeadingText(text: Strings.receiverSignature),
+                                  _jobDetailsProvider.loadDetailResponse.result.eSignaturePath == "" ?
+                                  Container() :
+                                  CommonWidgets.getSignatureBox(eSignature: _jobDetailsProvider.loadDetailResponse.result.eSignaturePath),
                                 ],
                               ),
                             )

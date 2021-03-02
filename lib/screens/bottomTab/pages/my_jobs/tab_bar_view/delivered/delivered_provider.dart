@@ -99,12 +99,14 @@ class DeliveredProvider extends ChangeNotifier{
             durationTime: 3,
             heading: Strings.error,
             subHeading: Strings.ratingErrorText);
-      } else if (comment.isEmpty) {
-        ApplicationToast.getErrorToast(
-            durationTime: 3,
-            heading: Strings.error,
-            subHeading: Strings.reviewDescriptionErrorText);
-      } else {
+      }
+      // else if (comment.isEmpty) {
+      //   ApplicationToast.getErrorToast(
+      //       durationTime: 3,
+      //       heading: Strings.error,
+      //       subHeading: Strings.reviewDescriptionErrorText);
+      // }
+      else {
         _loader.showLoader(context: context);
         token = await getToken.onToken();
         http.Response response = await _networkHelper.post(saveRatingApi, headers: {
@@ -123,6 +125,7 @@ class DeliveredProvider extends ChangeNotifier{
               genericDecodeEncode.decodeJson(response.body));
           if (_reviewsResponse.code == 1) {
             _loader.hideLoader(context);
+            Navigator.pop(context);
             print('reting success');
 
           } else {

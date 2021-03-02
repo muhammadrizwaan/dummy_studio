@@ -43,7 +43,7 @@ class IndividualEditProfileComponents{
 
   Widget getTextField(
       {@required bool isPassword,
-        @required IconData leftIcon,
+        @required String leftIcon,
         @required TextEditingController textEditingController,
         @required String hintText}) {
     return Container(
@@ -59,17 +59,19 @@ class IndividualEditProfileComponents{
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Opacity(
-              opacity: 0.7,
-              child: Icon(
-                leftIcon,
-                size: 20,
-              )),
+          Container(
+            height: AppSizes.height * 0.025,
+            width: AppSizes.width * 0.07,
+            child: Image(
+              image: AssetImage(leftIcon),
+              fit: BoxFit.cover,
+            ),
+          ),
           Center(
             child: Container(
               // color: AppColors.yellow,
               padding: EdgeInsets.only(left: 5),
-              width: AppSizes.width * 0.65,
+              width: AppSizes.width * 0.62,
               // height: AppSizes.height * 0.05,
               child: TextField(
                 style: TextStyle(
@@ -95,7 +97,7 @@ class IndividualEditProfileComponents{
           ),
           Container(
               height: AppSizes.height * 0.035,
-              width: AppSizes.width * 0.085,
+              width: AppSizes.width * 0.075,
               child: Image(
                   image: AssetImage(
                       'assets/png/check_circle_fill_pn.png'))),

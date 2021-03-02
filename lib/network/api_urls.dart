@@ -44,7 +44,8 @@ const String getApplyCouponApi = "$apiBaseUrl/api/ApplyPromoCode?promoCode={Coup
 const String acceptedByShipperApi = "$apiBaseUrl/api/Loads/AcceptedByShipper";
 
 const String uploadLoadImages = "$apiBaseUrl/api/Loads/UploadLoadImages";
-const String uploadLicenseImages = "$apiBaseUrl/api/Accounts/UploadUserLicenses";
+// const String uploadLicenseImages = "$apiBaseUrl/api/Accounts/UploadUserLicenses";
+const String uploadLicenseImages = "$apiBaseUrl/api/Accounts/UploadBusinessLicense";
 const String getTermsApi = "$apiBaseUrl/api/Terms";
 const String saveRatingApi = "$apiBaseUrl/api/Rating/SaveRating";
 

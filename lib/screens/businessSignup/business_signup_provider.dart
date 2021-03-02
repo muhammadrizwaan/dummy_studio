@@ -31,10 +31,12 @@ class BusinessSignupProvider extends ChangeNotifier {
   int id;
   double ms;
   double currentTime;
+  int userId = 0;
 
   init({@required BuildContext context}) async {
     this.context = context;
     devicedId = "";
+    userId = 0;
     connectivity = "";
     isDataFetched = false;
     description = [];
@@ -52,6 +54,8 @@ class BusinessSignupProvider extends ChangeNotifier {
     @required bool onCheck,
   }) async {
     try {
+      print('userId');
+      print(userId);
       devicedId = await PreferenceUtils.getString(Strings.deviceId);
       connectivity = await Connectivity().checkConnectivity();
       if (connectivity == ConnectivityResult.none) {
@@ -102,6 +106,7 @@ class BusinessSignupProvider extends ChangeNotifier {
               "Content-Type": "application/json",
             },
             body: {
+              "UserId":userId,
               "FullName": name,
               "Email": email,
               "Phone": cell,
@@ -124,7 +129,7 @@ class BusinessSignupProvider extends ChangeNotifier {
             Constants.setCityName(_commonResponse.result.user.cityName);
             Constants.setCityId(_commonResponse.result.user.cityId);
             Constants.setUser(Strings.business);
-
+            userId = _commonResponse.result.user.userId;
             ms = ((new DateTime.now()).millisecondsSinceEpoch).toDouble();
             currentTime = await (((ms / 1000) / 60).round()).toDouble();
             await PreferenceUtils.setDouble(Strings.tokenTime, currentTime);

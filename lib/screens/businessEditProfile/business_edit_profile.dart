@@ -350,7 +350,7 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
       images = [];
       images = await MultiImagePicker.pickImages(
 
-        maxImages: 2,
+        maxImages: 10,
         enableCamera: true,
         selectedAssets: images,
 

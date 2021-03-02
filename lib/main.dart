@@ -6,8 +6,11 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/providers/multi_provider.dart';
 import 'package:truckoom_shipper/res/assets.dart';
+import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/routes/routes.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
+
+import 'commons/utils.dart';
 
 
 void main() {
@@ -28,26 +31,27 @@ class _MyAppState extends State<MyApp> {
   final _firebaseMessaging = FirebaseMessaging();
 
   configureFcm(){
-    FirebaseMessaging().getToken().then((value) {
-      ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: value);
-      print("The fCM  tokeen is: "+ value);
+    FirebaseMessaging().getToken().then((value) async{
+      await PreferenceUtils.setString(Strings.deviceId, value);
+      // ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: value);
+      // print("The fCM  tokeen is: "+ value);
     });
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
         print("onMessage: $message");
         // _showItemDialog(message);
-        ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "message received");
+        ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "Message Received");
       },
       // onBackgroundMessage: myBackgroundMessageHandler,
       onLaunch: (Map<String, dynamic> message) async {
         print("onLaunch: $message");
         // _navigateToItemDetail(message);
-        ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "message received");
+        ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "Message Received");
       },
       onResume: (Map<String, dynamic> message) async {
         print("onResume: $message");
         // _navigateToItemDetail(message);
-        ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "message received");
+        ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "Message Received");
       },
     );
   }
@@ -60,7 +64,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-  // configureFcm();
+  configureFcm();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
