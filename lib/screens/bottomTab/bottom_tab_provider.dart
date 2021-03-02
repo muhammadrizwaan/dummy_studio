@@ -1,6 +1,5 @@
 
 import 'package:flutter/cupertino.dart';
-import 'package:truckoom_shipper/contsants/constants.dart';
 
 
 class BottomTabProvider extends ChangeNotifier{
@@ -10,6 +9,7 @@ class BottomTabProvider extends ChangeNotifier{
 
   init({@required BuildContext context}) async{
     this.context = context;
+    currentIndex = 1;
   }
   setCurrentIndex(int index){
     this.currentIndex = index;

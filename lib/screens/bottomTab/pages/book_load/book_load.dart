@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -26,6 +25,7 @@ class BookLoad extends StatefulWidget {
 
 class _BookLoadState extends State<BookLoad> {
   GoogleMapController mapController;
+  CameraPosition _initialLocation = CameraPosition(target: LatLng(0.0, 0.0));
   LatLng _center = LatLng(30.3753, 69.3451);
   BookLoadComponents _bookLoadComponents;
   BookLoadProvider _bookLoadProvider;
@@ -117,6 +117,10 @@ class _BookLoadState extends State<BookLoad> {
     pickup_longitude = "54.576599";
     dropoff_latitude = "18.216797";
     dropoff_longitude = "42.503765";
+    // pickup_latitude = "";
+    // pickup_longitude = "";
+    // dropoff_latitude = "";
+    // dropoff_longitude = "";
     pickup_location = "";
     dropoff_location = "";
   }
@@ -127,45 +131,39 @@ class _BookLoadState extends State<BookLoad> {
         child: Scaffold(
           body: Stack(
             children: [
-              NestedScrollView(
-                  headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled){
-                    return <Widget>[
-                      SliverAppBar(
-                        expandedHeight: AppSizes.height * 0.5,
-                        pinned: true,
-                        automaticallyImplyLeading: true,
-                        floating: false,
-                        toolbarHeight: 0,
-                        backgroundColor: AppColors.white,
-                        flexibleSpace: FlexibleSpaceBar(
-                            background: Column(
-                              children: [
-                                CommonWidgets.tabsAppBar1(
-                                  text: "Book a Load",
-                                  iconName: FontAwesome5.bell,
-                                  onPress: () {
-                                    Navigator.push(context, SlideRightRoute(page: Notifications()));
-                                  },),
-                                Expanded(
-                                  // height:AppSizes.height * 0.4,
-                                  child:  MapView(
-                                    startLat: double.parse(pickup_latitude),
-                                    startLong: double.parse(pickup_longitude),
-                                    endLat: double.parse(dropoff_latitude),
-                                    endLong: double.parse(dropoff_longitude),
-                                    apiKey: "AIzaSyDTLiSzdkVV8xrO9an282diUlBFMshCwAI",
-                                    directionsApiKey: "AIzaSyDTLiSzdkVV8xrO9an282diUlBFMshCwAI",
-                                  ),
-                                ),
-                              ],
-                            )
-                        ),
-                      )
-                    ];
+              Container(
+                height: AppSizes.height * 0.7,
+                child: GoogleMap(
+                  initialCameraPosition: _initialLocation,
+                  myLocationEnabled: true,
+                  myLocationButtonEnabled: false,
+                  mapType: MapType.normal,
+                  zoomGesturesEnabled: true,
+                  // markers: markers != null ? Set<Marker>.from(markers) : null,
+                  zoomControlsEnabled: false,
+                  // polylines: Set<Polyline>.of(polylines.values),
+                  onMapCreated: (GoogleMapController controller) {mapController = controller;
                   },
-                  body: Container(
+                ),
+              ),
+              Positioned(
+                top: 0,
+                child: CommonWidgets.tabsAppBar1(
+                  text: "Book a Load",
+                  iconName: FontAwesome5.bell,
+                  onPress: () {
+                    Navigator.push(context, SlideRightRoute(page: Notifications()));
+                  },),
+              ),
+
+              DraggableScrollableSheet(
+                initialChildSize: 0.32,
+                minChildSize:  0.32,
+                maxChildSize: 0.91,
+                  builder:(BuildContext context, myScrollControler){
+                  return Container(
                       height: AppSizes.height * 0.5,
-                      padding: EdgeInsets.only(top: AppSizes.height * 0.01),
+                      padding: EdgeInsets.only(top: AppSizes.height * 0.01, bottom: AppSizes.height * 0.1),
                       decoration: BoxDecoration(
                         color: AppColors.white,
                       ),
@@ -176,6 +174,7 @@ class _BookLoadState extends State<BookLoad> {
                               _bookLoadComponents.getSlidingUpLine(),
                               Expanded(
                                 child: ListView(
+                                  controller: myScrollControler,
                                   children: [
                                     Container(
                                       margin: EdgeInsets.symmetric(
@@ -188,6 +187,7 @@ class _BookLoadState extends State<BookLoad> {
                                             children: [
                                               _bookLoadComponents.onLocationPickerButton(
                                                 context: context,
+                                                buttonId: 1,
                                                 onPress: () async {
                                                   Prediction p =
                                                   await PlacesAutocomplete.show(
@@ -200,6 +200,7 @@ class _BookLoadState extends State<BookLoad> {
                                               SizedBox(height: AppSizes.height * 0.02),
                                               _bookLoadComponents.onLocationPickerButton(
                                                 context: context,
+                                                buttonId: 2,
                                                 onPress: () async {
                                                   Prediction p =
                                                   await PlacesAutocomplete.show(
@@ -225,19 +226,19 @@ class _BookLoadState extends State<BookLoad> {
                                     Wrap(
                                       children: [
                                         ...List.generate(
-                                            5,
+                                            10,
                                                 (index) => Column(
-                                                  children: [
-                                                    _bookLoadComponents.getHistroyText(
+                                              children: [
+                                                _bookLoadComponents.getHistroyText(
                                                     context: context, text: "at Khor Fakkan"),
-                                                    SizedBox(height: AppSizes.height *0.01),
-                                                    Container(
-                                                      margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
-                                                        height: 1,
-                                                      color: AppColors.grey,
-                                                    )
-                                                  ],
-                                                )),
+                                                SizedBox(height: AppSizes.height *0.01),
+                                                Container(
+                                                  margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
+                                                  height: 1,
+                                                  color: AppColors.grey,
+                                                )
+                                              ],
+                                            )),
                                       ],
                                     ),
                                   ],
@@ -246,48 +247,239 @@ class _BookLoadState extends State<BookLoad> {
                             ],
                           ),
                         ],
-                      ))
+                      ));
+                    },
               ),
               Align(
                   alignment: Alignment.bottomCenter,
                   child:
                   Container(
-                    height: AppSizes.height * 0.07,
-                    margin: EdgeInsets.only(
-                      // bottom: AppSizes.width * 0.03,
-                        left: AppSizes.width * 0.05,
-                        right: AppSizes.width * 0.05),
-                    decoration: BoxDecoration(
-                      color: AppColors.yellow,
-                      borderRadius: BorderRadius.circular(
-                        08,
+                    // height: AppSizes.height * 0.07,
+                    color: AppColors.white,
+                    child: Container(
+                      height: AppSizes.height * 0.07,
+                      margin: EdgeInsets.only(
+                          bottom: AppSizes.width * 0.03,
+                          left: AppSizes.width * 0.05,
+                          right: AppSizes.width * 0.05),
+                      decoration: BoxDecoration(
+                        color: AppColors.yellow,
+                        borderRadius: BorderRadius.circular(
+                          08,
+                        ),
                       ),
-                    ),
-                    width: AppSizes.width,
-                    child: FlatButton(
-                      onPressed: () {
-                        _bookLoadProvider.onNavigateNext(
-                            context: context,
-                            pickup_latitude: pickup_latitude,
-                            pickup_longitude: pickup_longitude,
-                            dropoff_latitude: dropoff_latitude,
-                            dropoff_longitude: dropoff_longitude,
-                            pickup_location: pickup_location,
-                            dropoff_location: dropoff_location,
-                            distance: coordinateDistance(double.parse(pickup_latitude) , double.parse(pickup_longitude), double.parse(dropoff_latitude), double.parse(dropoff_longitude)).round()
-                        );
-                      },
-                      child: TextView.getBottomButtonText04(
-                        "Next",
-                        color: AppColors.white,
+                      width: AppSizes.width,
+                      child: FlatButton(
+                        onPressed: () {
+                          _bookLoadProvider.onNavigateNext(
+                              context: context,
+                              pickup_latitude: pickup_latitude,
+                              pickup_longitude: pickup_longitude,
+                              dropoff_latitude: dropoff_latitude,
+                              dropoff_longitude: dropoff_longitude,
+                              pickup_location: pickup_location,
+                              dropoff_location: dropoff_location,
+                              distance: double.parse(MapView.distanceBetweenLocations).toInt()
+                            // distance: coordinateDistance(double.parse(pickup_latitude) , double.parse(pickup_longitude), double.parse(dropoff_latitude), double.parse(dropoff_longitude)).round()
+                          );
+                        },
+                        child: TextView.getBottomButtonText04(
+                          "Next",
+                          color: AppColors.white,
+                        ),
                       ),
                     ),
                   )
               ),
+
             ],
-          )
+          ),
         ),
     );
+
+    // return SafeArea(
+    //     child: Scaffold(
+    //       body: Stack(
+    //         children: [
+    //           NestedScrollView(
+    //               headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled){
+    //                 return <Widget>[
+    //                   SliverAppBar(
+    //                     expandedHeight: AppSizes.height * 0.6,
+    //                     pinned: true,
+    //                     automaticallyImplyLeading: true,
+    //                     floating: false,
+    //                     toolbarHeight: 0,
+    //                     backgroundColor: AppColors.white,
+    //                     flexibleSpace: FlexibleSpaceBar(
+    //                         background: Column(
+    //                           children: [
+    //                             CommonWidgets.tabsAppBar1(
+    //                               text: "Book a Load",
+    //                               iconName: FontAwesome5.bell,
+    //                               onPress: () {
+    //                                 Navigator.push(context, SlideRightRoute(page: Notifications()));
+    //                               },),
+    //                             Expanded(
+    //                               // height:AppSizes.height * 0.4,
+    //                               child:
+    //                               GoogleMap(
+    //                                 initialCameraPosition: _initialLocation,
+    //                                 myLocationEnabled: true,
+    //                                 myLocationButtonEnabled: false,
+    //                                 mapType: MapType.normal,
+    //                                 zoomGesturesEnabled: true,
+    //                                 // markers: markers != null ? Set<Marker>.from(markers) : null,
+    //                                 zoomControlsEnabled: false,
+    //                                 // polylines: Set<Polyline>.of(polylines.values),
+    //                                 onMapCreated: (GoogleMapController controller) {mapController = controller;
+    //                                 },
+    //                               ),
+    //                               // MapView(
+    //                               //   startLat: double.parse(pickup_latitude),
+    //                               //   startLong: double.parse(pickup_longitude),
+    //                               //   endLat: double.parse(dropoff_latitude),
+    //                               //   endLong: double.parse(dropoff_longitude),
+    //                               //   apiKey: "AIzaSyDTLiSzdkVV8xrO9an282diUlBFMshCwAI",
+    //                               //   directionsApiKey: "AIzaSyDTLiSzdkVV8xrO9an282diUlBFMshCwAI",
+    //                               // ),
+    //                             ),
+    //                           ],
+    //                         )
+    //                     ),
+    //                   )
+    //                 ];
+    //               },
+    //               body: Container(
+    //                   height: AppSizes.height * 0.5,
+    //                   padding: EdgeInsets.only(top: AppSizes.height * 0.01),
+    //                   decoration: BoxDecoration(
+    //                     color: AppColors.white,
+    //                   ),
+    //                   child: Stack(
+    //                     children: [
+    //                       Column(
+    //                         children: [
+    //                           _bookLoadComponents.getSlidingUpLine(),
+    //                           Expanded(
+    //                             child: ListView(
+    //                               children: [
+    //                                 Container(
+    //                                   margin: EdgeInsets.symmetric(
+    //                                       horizontal: AppSizes.width * 0.05),
+    //                                   child: Row(
+    //                                     children: [
+    //                                       _bookLoadComponents.getLocationImage(),
+    //                                       SizedBox(width: AppSizes.width * 0.02),
+    //                                       Column(
+    //                                         children: [
+    //                                           _bookLoadComponents.onLocationPickerButton(
+    //                                             context: context,
+    //                                             onPress: () async {
+    //                                               Prediction p =
+    //                                               await PlacesAutocomplete.show(
+    //                                                   context: context, apiKey: _apiKey);
+    //                                               onDisplayPrediction(p, isDeparture: true);
+    //                                             },
+    //                                             text: pickupText,
+    //                                             isSelected: isPickUp,
+    //                                           ),
+    //                                           SizedBox(height: AppSizes.height * 0.02),
+    //                                           _bookLoadComponents.onLocationPickerButton(
+    //                                             context: context,
+    //                                             onPress: () async {
+    //                                               Prediction p =
+    //                                               await PlacesAutocomplete.show(
+    //                                                   context: context, apiKey: _apiKey);
+    //                                               onDisplayPrediction(p, isDeparture: false);
+    //                                             },
+    //                                             text: dropoffText,
+    //                                             isSelected: isDropOff,
+    //                                           )
+    //                                         ],
+    //                                       )
+    //                                     ],
+    //                                   ),
+    //                                 ),
+    //                                 _bookLoadComponents.getHorizontalLine(),
+    //                                 SizedBox(height: AppSizes.height * 0.02),
+    //                                 Padding(
+    //                                   padding: EdgeInsets.symmetric(
+    //                                       horizontal: AppSizes.width * 0.05),
+    //                                   child: _bookLoadComponents.getLocationPickupText(
+    //                                       text: "Recent Locations"),
+    //                                 ),
+    //                                 Wrap(
+    //                                   children: [
+    //                                     ...List.generate(
+    //                                         5,
+    //                                             (index) => Column(
+    //                                               children: [
+    //                                                 _bookLoadComponents.getHistroyText(
+    //                                                 context: context, text: "at Khor Fakkan"),
+    //                                                 SizedBox(height: AppSizes.height *0.01),
+    //                                                 Container(
+    //                                                   margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
+    //                                                     height: 1,
+    //                                                   color: AppColors.grey,
+    //                                                 )
+    //                                               ],
+    //                                             )),
+    //                                   ],
+    //                                 ),
+    //                               ],
+    //                             ),
+    //                           ),
+    //                         ],
+    //                       ),
+    //                     ],
+    //                   ))
+    //           ),
+    //           Align(
+    //               alignment: Alignment.bottomCenter,
+    //               child:
+    //               Container(
+    //                 // height: AppSizes.height * 0.07,
+    //                 color: AppColors.white,
+    //                 child: Container(
+    //                   height: AppSizes.height * 0.07,
+    //                   margin: EdgeInsets.only(
+    //                     bottom: AppSizes.width * 0.03,
+    //                       left: AppSizes.width * 0.05,
+    //                       right: AppSizes.width * 0.05),
+    //                   decoration: BoxDecoration(
+    //                     color: AppColors.yellow,
+    //                     borderRadius: BorderRadius.circular(
+    //                       08,
+    //                     ),
+    //                   ),
+    //                   width: AppSizes.width,
+    //                   child: FlatButton(
+    //                     onPressed: () {
+    //                       _bookLoadProvider.onNavigateNext(
+    //                           context: context,
+    //                           pickup_latitude: pickup_latitude,
+    //                           pickup_longitude: pickup_longitude,
+    //                           dropoff_latitude: dropoff_latitude,
+    //                           dropoff_longitude: dropoff_longitude,
+    //                           pickup_location: pickup_location,
+    //                           dropoff_location: dropoff_location,
+    //                           distance: double.parse(MapView.distanceBetweenLocations).toInt()
+    //                           // distance: coordinateDistance(double.parse(pickup_latitude) , double.parse(pickup_longitude), double.parse(dropoff_latitude), double.parse(dropoff_longitude)).round()
+    //                       );
+    //                     },
+    //                     child: TextView.getBottomButtonText04(
+    //                       "Next",
+    //                       color: AppColors.white,
+    //                     ),
+    //                   ),
+    //                 ),
+    //               )
+    //           ),
+    //         ],
+    //       )
+    //     ),
+    // );
   }
 
   coordinateDistance(lat1, lon1, lat2, lon2) {

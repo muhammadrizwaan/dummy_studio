@@ -5,16 +5,14 @@ import 'package:fluttericon/entypo_icons.dart';
 import 'package:lottie/lottie.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/addLoad/add_load_components.dart';
 import 'package:truckoom_shipper/screens/addLoad/add_load_provider.dart';
-import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_details.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
-import 'package:truckoom_shipper/widgets/loader.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class AddLoad extends StatefulWidget {
@@ -81,6 +79,8 @@ class _AddLoadState extends State<AddLoad> {
     _addLoadProvider = Provider.of<AddLoadProvider>(context, listen: false);
     _addLoadProvider.init(context: context);
   }
+
+
 
 
   @override
@@ -175,11 +175,10 @@ class _AddLoadState extends State<AddLoad> {
                                 SizedBox(height: AppSizes.height * 0.01),
                                 _addLoadComponents.getPhoneField(
                                     leftIcon: Entypo.mobile,
-                                    hintText: 'Enter Receiver Phone',
-                                    textEditingController: receiver_phone),
-                                SizedBox(
-                                  height: AppSizes.height * 0.02,
+                                    textEditingController: receiver_phone,
+                                    hintText: Strings.phonePlaceholderText
                                 ),
+                                SizedBox(height: AppSizes.height * 0.02),
                                 CommonWidgets.getSubHeadingText(
                                     text: "Good type"),
                                 SizedBox(height: AppSizes.height * 0.01),
@@ -207,31 +206,33 @@ class _AddLoadState extends State<AddLoad> {
                                       ),
                                       Expanded(
                                         child: DropdownButtonHideUnderline(
-                                          child: DropdownButton<String>(
-                                            icon:
-                                                Icon(Icons.keyboard_arrow_down),
-                                            isExpanded: true,
-                                            value: _selectedValue,
-                                            hint: TextView.getLightText04(
-                                              "Select GoodType",
-                                              color: AppColors.colorBlack,
+                                          child: ButtonTheme(
+                                            child: DropdownButton<String>(
+                                              icon:
+                                                  Icon(Icons.keyboard_arrow_down),
+                                              isExpanded: true,
+                                              value: _selectedValue,
+                                              hint: TextView.getLightText04(
+                                                "Select GoodType",
+                                                color: AppColors.colorBlack,
+                                              ),
+                                              items: _addLoadProvider.description
+                                                  .map<DropdownMenuItem<String>>(
+                                                      (String value) {
+                                                return DropdownMenuItem<String>(
+                                                  value: value,
+                                                  child: TextView.getLightText04(
+                                                    value,
+                                                    color: AppColors.colorBlack,
+                                                  ),
+                                                );
+                                              }).toList(),
+                                              onChanged: (String value) {
+                                                setState(() {
+                                                  _selectedValue = value;
+                                                });
+                                              },
                                             ),
-                                            items: _addLoadProvider.description
-                                                .map<DropdownMenuItem<String>>(
-                                                    (String value) {
-                                              return DropdownMenuItem<String>(
-                                                value: value,
-                                                child: TextView.getLightText04(
-                                                  value,
-                                                  color: AppColors.colorBlack,
-                                                ),
-                                              );
-                                            }).toList(),
-                                            onChanged: (String value) {
-                                              setState(() {
-                                                _selectedValue = value;
-                                              });
-                                            },
                                           ),
                                         ),
                                       ),
@@ -370,7 +371,8 @@ class _AddLoadState extends State<AddLoad> {
                                         vehicleTypeId: widget.VehicleTypeId,
                                         imagesList: images,
                                         Rate: tolalRate.toString(),
-                                        distance: widget.Distance
+                                        distance: widget.Distance,
+                                        goodTypeName: _selectedValue
                                       );
                                     }),
                                 SizedBox(height: AppSizes.height * 0.02)

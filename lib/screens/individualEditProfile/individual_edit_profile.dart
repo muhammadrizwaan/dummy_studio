@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/entypo_icons.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/res/assets.dart';
@@ -9,6 +10,7 @@ import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/individualEditProfile/individual_edit_profile_components.dart';
 import 'package:truckoom_shipper/screens/individualEditProfile/individual_edit_profile_provider.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
+import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class IndividualEditProfile extends StatefulWidget {
   @override
@@ -19,7 +21,7 @@ class _IndividualEditProfileState extends State<IndividualEditProfile> {
   IndividualEditProfileComponents _individualEditProfileComponents;
   IndividualEditProfileProvider _individualEditProfileProvider;
   TextEditingController _name, _email, _password, _confirm_password;
-
+  String _cityId = Constants.getCityId().toString();
   @override
   void initState() {
     super.initState();
@@ -43,7 +45,8 @@ class _IndividualEditProfileState extends State<IndividualEditProfile> {
           width: AppSizes.width,
           color: AppColors.white,
           // padding: EdgeInsets.all(AppSizes.width * 0.05),
-          child: Column(
+          child: _individualEditProfileProvider.isDataFetched?
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -84,11 +87,18 @@ class _IndividualEditProfileState extends State<IndividualEditProfile> {
                           SizedBox(
                             height: 10,
                           ),
-                          CommonWidgets.getTextField(
+                          // CommonWidgets.getTextField(
+                          //     isPassword: false,
+                          //     leftIcon: Entypo.user,
+                          //     textEditingController: _name,
+                          //     hintText: "Enter Name",
+                          // ),
+                          CommonWidgets.getTextFieldWithImage(
                               isPassword: false,
-                              leftIcon: Entypo.user,
+                              leftIcon: Assets.nameImage,
                               textEditingController: _name,
-                              hintText: "Enter Name"),
+                              hintText: "Enter Name",
+                          ),
                           SizedBox(
                             height: 30,
                           ),
@@ -98,9 +108,10 @@ class _IndividualEditProfileState extends State<IndividualEditProfile> {
                           ),
                           _individualEditProfileComponents.getTextField(
                               isPassword: false,
-                              leftIcon: Icons.mail,
+                              leftIcon: Assets.emailImage,
                               textEditingController: _email,
-                              hintText: "Enter Email"),
+                              hintText: "Enter Email",
+                          ),
                           SizedBox(
                             height: 30,
                           ),
@@ -108,9 +119,14 @@ class _IndividualEditProfileState extends State<IndividualEditProfile> {
                           SizedBox(
                             height: 10,
                           ),
-                          CommonWidgets.getTextField(
+                          // CommonWidgets.getTextField(
+                          //     isPassword: true,
+                          //     leftIcon: Entypo.lock,
+                          //     textEditingController: _password,
+                          //     hintText: "Enter Password"),
+                          CommonWidgets.getTextFieldWithImage(
                               isPassword: true,
-                              leftIcon: Entypo.lock,
+                              leftIcon: Assets.passwordImage,
                               textEditingController: _password,
                               hintText: "Enter Password"),
                           SizedBox(
@@ -121,11 +137,63 @@ class _IndividualEditProfileState extends State<IndividualEditProfile> {
                           SizedBox(
                             height: 10,
                           ),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getTextFieldWithImage(
                               isPassword: true,
-                              leftIcon: Entypo.lock,
+                              leftIcon: Assets.passwordImage,
                               textEditingController: _confirm_password,
-                              hintText: "Confirm Password"),
+                              hintText: "Confirm Password",
+                          ),
+                          SizedBox(height: AppSizes.height * 0.02),
+                          CommonWidgets.getSubHeadingText(
+                              text: "City"),
+                          SizedBox(height: AppSizes.height * 0.01),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            height: AppSizes.height * 0.07,
+                            width: AppSizes.width * 0.85,
+                            decoration: BoxDecoration(
+                              color: AppColors.lightGray,
+                              border: Border.all(color: AppColors.lightGray),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Row(
+                              children: [
+                                Container(
+                                    height: AppSizes.height * 0.06,
+                                    width: AppSizes.width * 0.06,
+                                    child: Image.asset(Assets.vehicle)),
+                                SizedBox(width: AppSizes.width*0.03),
+                                Expanded(
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButton<dynamic>(
+                                      icon: Icon(Icons.keyboard_arrow_down),
+                                      isExpanded: true,
+                                      value: _cityId,
+                                      hint: TextView.getLightText04(
+                                        "Select city",
+                                        color: AppColors.colorBlack,
+                                      ),
+                                      items: _individualEditProfileProvider.cityList
+                                          .map((item) =>
+                                          DropdownMenuItem(
+                                            value: item.cityId.toString(),
+                                            child: TextView.getLightText04(
+                                              item.description,
+                                              color: AppColors.colorBlack,
+                                            ),
+                                          )
+                                      ).toList(),
+                                      onChanged: (value) {
+                                        setState (() {
+                                          _cityId = value.toString();
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                           SizedBox(
                             height: 30,
                           ),
@@ -135,7 +203,9 @@ class _IndividualEditProfileState extends State<IndividualEditProfile> {
                                 _individualEditProfileProvider.individualUpdateProfile(context: context,
                                     name: _name.text,
                                     password: _password.text,
-                                    confirmPassword: _confirm_password.text);
+                                    confirmPassword: _confirm_password.text,
+                                  cityId: _cityId
+                                );
                               }),
                           SizedBox(height: AppSizes.height * 0.02),
                         ],
@@ -145,6 +215,12 @@ class _IndividualEditProfileState extends State<IndividualEditProfile> {
                 ),
               )
             ],
+          ):
+          Center(
+            child: Container(
+              height: AppSizes.height * 0.15,
+              child: Lottie.asset(Assets.apiLoading, fit: BoxFit.cover),
+            ),
           ),
         ),
       ),

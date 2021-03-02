@@ -69,6 +69,13 @@ class Assets {
   static const String apiLoading = "assets/json/loader.json";
 
 
+  // New Images for Shipper
+  static const String nameImage = "assets/png/nameImage.png";
+  static const String emailImage = "assets/png/emailImage.png";
+  static const String passwordImage = "assets/png/passwordImage.png";
+  static const String phoneImage = "assets/png/phoneImage.png";
+  static const String LicenseImage = "assets/png/LicenseImage.png";
+
 
 
 // App Fonts

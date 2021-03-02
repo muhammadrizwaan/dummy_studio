@@ -5,6 +5,7 @@ import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
+import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class InvoiceDetailComponents {
@@ -14,21 +15,20 @@ class InvoiceDetailComponents {
       child: Container(
         child: Column(
           children: [
-            //SizedBox(height: AppSizes.height * 0.02),
-            Container(
-              height: AppSizes.height * 0.12,
-              width: AppSizes.width * 0.25,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100)
-              ),
-              child: Image(
-                image: invoiceLogo == ""
-                    ? AssetImage(Assets.invoiceLogo)
-                    : NetworkImage('$baseUrl' + '$invoiceLogo'),
-                fit: BoxFit.cover,
-              ),
-            ),
-            SizedBox(height: AppSizes.height * 0.02),
+            // Container(
+            //   height: AppSizes.height * 0.12,
+            //   width: AppSizes.width * 0.25,
+            //   decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.circular(100)
+            //   ),
+            //   child: Image(
+            //     image: invoiceLogo == ""
+            //         ? AssetImage(Assets.invoiceLogo)
+            //         : NetworkImage('$baseUrl' + '$invoiceLogo'),
+            //     fit: BoxFit.cover,
+            //   ),
+            // ),
+            // SizedBox(height: AppSizes.height * 0.02),
             Text(
               name,
               style: TextStyle(
@@ -69,13 +69,71 @@ class InvoiceDetailComponents {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: EdgeInsets.only(top: 6),
-                height: AppSizes.height * 0.108,
-                child: Image(
-                  image: AssetImage(Assets.locationCircleIcon),
-                  fit: BoxFit.cover,
+                height: AppSizes.height * 0.105,
+                padding: EdgeInsets.only(top: AppSizes.height * 0.006),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: 8,
+                      height: 8,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.colorBlack),
+                    ),
+                    Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.grey),
+                    ),
+                    Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.grey),
+                    ),
+                    Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.grey),
+                    ),
+                    Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.grey),
+                    ),
+                    Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.grey),
+                    ),
+                    Container(
+                      width: 8,
+                      height: 8,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.yellow),
+                    )
+                  ],
                 ),
               ),
+              // Container(
+              //   padding: EdgeInsets.only(top: 6),
+              //   height: AppSizes.height * 0.108,
+              //   child: Image(
+              //     image: AssetImage(Assets.locationCircleIcon),
+              //     fit: BoxFit.cover,
+              //   ),
+              // ),
               SizedBox(width: AppSizes.width * 0.05),
               Container(
                 // height: AppSizes.height * 0.14,
@@ -215,7 +273,8 @@ class InvoiceDetailComponents {
                 ),
               ),
               Text(
-                dateTime,
+                // dateTime,
+                CommonWidgets.getDateTimeFormate(time: dateTime),
                 style: TextStyle(
                   fontFamily: Assets.poppinsLight,
                   fontSize: 12,
@@ -247,7 +306,8 @@ class InvoiceDetailComponents {
                 ),
               ),
               Text(
-                dateTime,
+                // dateTime,
+                CommonWidgets.getDateTimeFormate(time: dateTime),
                 style: TextStyle(
                     fontFamily: Assets.poppinsMedium,
                     fontSize: 12,
@@ -483,21 +543,6 @@ class InvoiceDetailComponents {
     );
   }
 
-  Widget getSignatureBox({@required String eSignature}) {
-    return Container(
-      margin: EdgeInsets.only(top: 20, bottom: 20),
-      height: AppSizes.height * 0.18,
-      width: AppSizes.width,
-      decoration: BoxDecoration(
-        color: AppColors.lightGray,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Image(
-        image: NetworkImage(eSignature),
-        // image: AssetImage(Assets.signature),
-      ),
-    );
-  }
 
   Widget getReviewContainer() {
     return Container(

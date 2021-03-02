@@ -8,96 +8,129 @@ import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
-import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/dispatch/dispatch_components.dart';
-import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/dispatch/dispatch_provider.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs_provider.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/delivered/delivered_components.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/delivered/delivered_provider.dart';
 import 'package:truckoom_shipper/screens/jobDetails/job_details.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
-class Dispatch extends StatefulWidget {
+class Delivered extends StatefulWidget {
   @override
-  _DispatchState createState() => _DispatchState();
+  _DeliveredState createState() => _DeliveredState();
 }
 
-class _DispatchState extends State<Dispatch> {
-  DispatchComponents _dispatchComponents;
-  DispatchedProvider _dispatchedProvider;
+class _DeliveredState extends State<Delivered> {
+
+  DeliveredComponents _deliveredComponents;
+  DeliveredProvider _deliveredProvider;
   TextEditingController description;
+  MyJobsProvider _myJobsProvider;
+  ScrollController _scrollController = new ScrollController();
+  int pageNumber = 0;
   var rating;
 
   @override
   void initState() {
     super.initState();
     rating = 0.0;
-    _dispatchComponents = DispatchComponents();
-    _dispatchedProvider = Provider.of<DispatchedProvider>(context, listen: false);
-    _dispatchedProvider.init(context: context);
+    pageNumber = 0;
+    _deliveredComponents = DeliveredComponents();
+    _deliveredProvider = Provider.of<DeliveredProvider>(context, listen: false);
+    _deliveredProvider.init(context: context);
     description = TextEditingController();
+    _myJobsProvider = Provider.of<MyJobsProvider>(context, listen: false);
+    _scrollController
+      ..addListener(() {
+        if (_scrollController.position.maxScrollExtent == _scrollController.offset) {
+          pageNumber = pageNumber + 1;
+          _deliveredProvider.setIsLoading(true);
+          setState(() {});
+          _deliveredProvider.getDeliveredLoad(context: context, pageNumber: pageNumber);
+        }
+      });
   }
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<DispatchedProvider>(context, listen: true);
+    Provider.of<DeliveredProvider>(context, listen: true);
     return Container(
       margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
       color: Colors.white,
-      child: _dispatchedProvider.isDataFetched
-          ? _dispatchedProvider.tabbarResponse.result.length > 0
-              ? ListView.builder(
-                  itemCount: _dispatchedProvider.tabbarResponse.result.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        SizedBox(
-                          height: AppSizes.height * 0.02,
-                        ),
-                        _dispatchComponents.getJobContainer(
-                          jobDetail: _dispatchedProvider.tabbarResponse.result[index].loadId.toString(),
-                          pickUpLocation: _dispatchedProvider.tabbarResponse.result[index].pickupLocation,
-                          destinationLocation: _dispatchedProvider.tabbarResponse.result[index].dropoffLocation,
-                          startDate: _dispatchedProvider.tabbarResponse.result[index].pickupDateTime,
-                          time: _dispatchedProvider.tabbarResponse.result[index].pickupDateTime,
-                          status: _dispatchedProvider.tabbarResponse.result[index].status,
-                          vehicleType: _dispatchedProvider.tabbarResponse.result[index].vehicleTypeName,
-                          price: "${Strings.aed} ${_dispatchedProvider.tabbarResponse.result[index].shipperCost.round()}",
-                          onAlert: () {
-                            ApplicationToast.onDescriptionAlert(
-                                context: context,
-                                description: _dispatchedProvider.tabbarResponse.result[index].vehicleTypeDescription);
-                          },
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                SlideRightRoute(page: JobDetails(status: "Dispatch", loadId: _dispatchedProvider.tabbarResponse.result[index].loadId)));
-                          },
-                          onReviews: (){
-                            _onRatingAlert(
-                                _dispatchedProvider.tabbarResponse.result[index].assignedDriverId,
-                              _dispatchedProvider.tabbarResponse.result[index].loadId,
+      child:
+      Column(
+        children: [
+          Expanded(
+            child: _myJobsProvider.deliveredList.length > 0 ?
+            RefreshIndicator(
+              color: AppColors.yellow,
+              onRefresh: () => onRefresh(),
+                      child: ListView.builder(
+                          controller: _scrollController,
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          itemCount: _myJobsProvider.deliveredList.length,
+                          itemBuilder: (context, index) {
+                            return Column(
+                              children: [
+                                SizedBox(
+                                  height: AppSizes.height * 0.02,
+                                ),
+                                _deliveredComponents.getJobContainer(
+                                  jobDetail: _myJobsProvider.deliveredList[index].loadId.toString(),
+                                  pickUpLocation: _myJobsProvider.deliveredList[index].pickupLocation,
+                                  destinationLocation: _myJobsProvider.deliveredList[index].dropoffLocation,
+                                  startDate: _myJobsProvider.deliveredList[index].pickupDateTime,
+                                  time: _myJobsProvider.deliveredList[index].pickupDateTime,
+                                  status: _myJobsProvider.deliveredList[index].status,
+                                  vehicleType: _myJobsProvider.deliveredList[index].vehicleTypeName,
+                                    vehicleCategory: _myJobsProvider.deliveredList[index].vehicleCategoryName,
+                                  price: "${Strings.aed} ${_myJobsProvider.deliveredList[index].shipperCost.round()}",
+                                  onAlert: () {
+                                    ApplicationToast.onDescriptionAlert(
+                                        context: context,
+                                        description: _myJobsProvider.deliveredList[index].vehicleTypeDescription);
+                                  },
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        SlideRightRoute(page: JobDetails(status: "Dispatch", loadId: _myJobsProvider.deliveredList[index].loadId)));
+                                  },
+                                  onReviews: (){
+                                    _onRatingAlert(
+                                        _myJobsProvider.deliveredList[index].assignedDriverId,
+                                      _myJobsProvider.deliveredList[index].loadId,
+                                    );
+                                  }
+                                ),
+                                SizedBox(
+                                  height: AppSizes.height * 0.02,
+                                ),
+                              ],
                             );
-                          }
-                        ),
-                        SizedBox(
-                          height: AppSizes.height * 0.02,
-                        ),
-                      ],
-                    );
-                  })
-              : Center(
-                  child: Container(
-                      height: AppSizes.height * 0.15,
-                      // width: AppSizes.width,
-                      child:
-                          CommonWidgets.onNullData(text: Strings.noAvailableLoads)),
-                )
-          : Center(
-              child: Container(
-                height: AppSizes.height * 0.15,
-                // width: AppSizes.width,
-                child: Lottie.asset(Assets.apiLoading, fit: BoxFit.cover),
+                          }),
+                    )
+                    : Center(
+                        child: Container(
+                            height: AppSizes.height * 0.15,
+                            // width: AppSizes.width,
+                            child:
+                                CommonWidgets.onNullData(text: Strings.noAvailableLoads)),
+                      ),
+          ),
+          _deliveredProvider.isLoading?
+          Container(
+            height:  AppSizes.height * 0.1,
+            color: Colors.transparent,
+            child: Center(
+              child: new CircularProgressIndicator(
+                valueColor: new AlwaysStoppedAnimation<Color>(AppColors.yellow),
               ),
             ),
+          ):
+          Container(),
+        ],
+      )
     );
   }
 
@@ -198,7 +231,7 @@ class _DispatchState extends State<Dispatch> {
                                   SizedBox(height: AppSizes.height * 0.03),
                                   CommonWidgets.getBottomButton(
                                       text: Strings.submit, onPress: () {
-                                        _dispatchedProvider.onRatingAndReviews(
+                                        _deliveredProvider.onRatingAndReviews(
                                             context: context,
                                             score: rating,
                                             driverId: driverId,
@@ -206,7 +239,7 @@ class _DispatchState extends State<Dispatch> {
                                             comment: description.text,
                                         );
                                         
-                                    hideLoader(context);
+                                    // hideLoader(context);
                                     rating = 0.0;
                                     description.text = "";
                                     // Navigator.pop(context);
@@ -253,5 +286,10 @@ class _DispatchState extends State<Dispatch> {
   }
   hideLoader(BuildContext context) {
     Navigator.of(context).pop();
+  }
+
+  Future<Null> onRefresh() async{
+    pageNumber = 0;
+    await _myJobsProvider.getLoads(context: context);
   }
 }

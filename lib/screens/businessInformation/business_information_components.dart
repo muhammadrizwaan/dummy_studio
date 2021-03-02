@@ -1,6 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttericon/entypo_icons.dart';
 import 'package:fluttericon/linearicons_free_icons.dart';
 import 'package:fluttericon/web_symbols_icons.dart';
@@ -12,6 +13,7 @@ import 'package:truckoom_shipper/widgets/text_views.dart';
 class BusinessInformationComponents {
   Widget getBusinessSignupStep() {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Text(
           'Step ',
@@ -22,7 +24,7 @@ class BusinessInformationComponents {
           ),
         ),
         Text(
-          '02',
+          '2 0f 2',
           style: TextStyle(
             fontSize: 15,
             fontFamily: Assets.poppinsRegular,

@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
@@ -17,6 +18,7 @@ import 'package:truckoom_shipper/network/network_helper_impl.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/routes/routes.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
+import 'package:truckoom_shipper/screens/bottomTab/bottom_tab_provider.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/loader.dart';
 import 'package:http/http.dart' as http;
@@ -29,6 +31,7 @@ class LoginProvider extends ChangeNotifier {
   NetworkHelper _networkHelper = NetworkHelperImpl();
   CommonResponse commonResponse = CommonResponse.empty();
   GenericDecodeEncode genericDecodeEncode = GenericDecodeEncode();
+  BottomTabProvider _bottomTabProvider;
   TokenResponse tokenResponse = TokenResponse.empty();
 
   CustomPopup _loader = CustomPopup();
@@ -38,6 +41,7 @@ class LoginProvider extends ChangeNotifier {
   var connectivityResult;
 
   init(BuildContext context) async {
+    _bottomTabProvider = Provider.of(context, listen: false);
     tempToken = deviceId = "";
     connectivityResult = "";
     this.context = context;
@@ -51,6 +55,7 @@ class LoginProvider extends ChangeNotifier {
   }) async {
     try {
       deviceId = await PreferenceUtils.getString(Strings.deviceId);
+      print(deviceId);
       connectivityResult = await (Connectivity().checkConnectivity());
       if (connectivityResult == ConnectivityResult.none) {
         ApplicationToast.getErrorToast(
@@ -81,7 +86,6 @@ class LoginProvider extends ChangeNotifier {
           commonResponse = CommonResponse.fromJson(genericDecodeEncode.decodeJson(response.body));
           if (commonResponse.code == 1) {
             Constants.setToken(commonResponse.result.token.accessToken);
-            print(commonResponse.result.token.accessToken);
             await Constants.setUserEmail(commonResponse.result.user.email);
             Constants.setPassword(commonResponse.result.user.password);
             Constants.setUserId(commonResponse.result.user.userId);
@@ -90,9 +94,9 @@ class LoginProvider extends ChangeNotifier {
 
             Constants.setUserPhone(commonResponse.result.user.phone != null? commonResponse.result.user.phone:"");
             Constants.setUser(commonResponse.result.user.isBusinessAccount? Strings.business: Strings.indiviual);
+            Constants.setCityName(commonResponse.result.user.cityName);
+            Constants.setCityId(commonResponse.result.user.cityId != null? commonResponse.result.user.cityId:0);
             if(commonResponse.result.user.isBusinessAccount) {
-              Constants.setCityName(commonResponse.result.user.cityName);
-              Constants.setCityId(commonResponse.result.user.cityId != null? commonResponse.result.user.cityId:0);
               if (commonResponse.result.user.companyInformation.length > 0) {
                 Constants.setCommpanyName(commonResponse.result.user.companyInformation[0].companyName);
                 Constants.setCommpanyPhone(commonResponse.result.user.companyInformation[0].contactNumber);
@@ -113,8 +117,6 @@ class LoginProvider extends ChangeNotifier {
                 Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: BottomTab()), ModalRoute.withName(Routes.login));
               },
             );
-
-
           } else {
             _loader.hideLoader(context);
             ApplicationToast.getErrorToast(

@@ -90,13 +90,8 @@ class _BusinessSignupState extends State<BusinessSignup> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              CommonWidgets.getHeadingText(text: 'Signup'),
-                              _businessSignupComponents.getBusinessSignupStep()
-                            ],
-                          ),
+                          CommonWidgets.getHeadingText(text: 'Signup'),
+                          _businessSignupComponents.getBusinessSignupStep(),
                           // CommonWidgets.getHeading1Text(text: 'Signup'),
                           SizedBox(height: AppSizes.height * 0.04),
                           CommonWidgets.getSubHeadingText(text: "Full Name"),
@@ -160,30 +155,33 @@ class _BusinessSignupState extends State<BusinessSignup> {
                               ),
                               Expanded(
                                 child: DropdownButtonHideUnderline(
-                                  child: DropdownButton<String>(
-                                    icon: Icon(Icons.keyboard_arrow_down),
-                                    isExpanded: true,
-                                    value: _selectedValue,
-                                    hint: TextView.getLightText04(
-                                      "Select City",
-                                      color: AppColors.colorBlack,
+                                  child: ButtonTheme(
+                                    alignedDropdown: true,
+                                    child: DropdownButton<String>(
+                                      icon: Icon(Icons.keyboard_arrow_down),
+                                      isExpanded: true,
+                                      value: _selectedValue,
+                                      hint: TextView.getLightText04(
+                                        "Select City",
+                                        color: AppColors.colorBlack,
+                                      ),
+                                      items: _businessSignupProvider.description
+                                          .map<DropdownMenuItem<String>>(
+                                              (String value) {
+                                            return DropdownMenuItem<String>(
+                                              value: value,
+                                              child: TextView.getLightText04(
+                                                value,
+                                                color: AppColors.colorBlack,
+                                              ),
+                                            );
+                                          }).toList(),
+                                      onChanged: (String value) {
+                                        setState(() {
+                                          _selectedValue = value;
+                                        });
+                                      },
                                     ),
-                                    items: _businessSignupProvider.description
-                                        .map<DropdownMenuItem<String>>(
-                                            (String value) {
-                                          return DropdownMenuItem<String>(
-                                            value: value,
-                                            child: TextView.getLightText04(
-                                              value,
-                                              color: AppColors.colorBlack,
-                                            ),
-                                          );
-                                        }).toList(),
-                                    onChanged: (String value) {
-                                      setState(() {
-                                        _selectedValue = value;
-                                      });
-                                    },
                                   ),
                                 ),
                               ),
@@ -206,6 +204,7 @@ class _BusinessSignupState extends State<BusinessSignup> {
                                   confirmPassword: confirm_Password.text,
                                   city: getCityId(),
                                   onCheck: onCheck,
+
                                 );
                               }),
                           SizedBox(height: AppSizes.height * 0.02),
@@ -280,7 +279,8 @@ class _BusinessSignupState extends State<BusinessSignup> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              _phoneNumberProvider.getTermsAndConditions(context: context);
+                              // _phoneNumberProvider.getTermsAndConditions(context: context);
+                              CommonWidgets.launchURL();
                             })
                     ]),
               ),

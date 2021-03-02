@@ -38,7 +38,7 @@ class _FAQsExpandableState extends State<FAQsExpandable> {
           trailing: Icon(isExpanded ? FontAwesome5.chevron_down : FontAwesome5.chevron_right, size: 20, color: AppColors.colorBlack.withOpacity(0.4), ),
           title: Container(
             padding: EdgeInsets.only(left: AppSizes.width*0.035),
-            child: TextView.getLabelText04("FAQs", color: AppColors.colorBlack.withOpacity(0.6)),
+            child: TextView.getLabelText04("Others", color: AppColors.colorBlack.withOpacity(0.6)),
 
           ),
           children: [
@@ -48,6 +48,23 @@ class _FAQsExpandableState extends State<FAQsExpandable> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Container(
+                    height: 1,
+                    color: AppColors.colorBlack.withOpacity(0.1),
+                  ),
+                  GestureDetector(
+                    onTap: (){
+                      launchURL("http://truckoom.jinnbytedev.com/");
+                    },
+                    child: Container(
+                      height: AppSizes.height * 0.06,
+                      padding: EdgeInsets.only(left: AppSizes.width*0.08),
+                      child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: TextView.getLabelText04("FAQs", color: AppColors.colorBlack.withOpacity(0.6))),
+                    ),
+                  ),
+                  SizedBox(height: 05),
                   Container(
                     height: 1,
                     color: AppColors.colorBlack.withOpacity(0.1),

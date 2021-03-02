@@ -9,6 +9,7 @@ import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/businessInformation/business_information_components.dart';
 import 'package:truckoom_shipper/screens/businessInformation/business_information_provider.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
@@ -16,6 +17,7 @@ import 'package:truckoom_shipper/screens/phoneNumber/phone_number_provider.dart'
 import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../animations/slide_right.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 
@@ -70,7 +72,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               CommonWidgets.getAppBarCross(
-                  iconName: 'cross_icon.png',
+                  iconName: 'back_arrow_otp.png',
                   text: "Already have an account? ",
                   clickableText: "Login",
                   onTap: () {
@@ -87,15 +89,10 @@ class _BusinessInformationState extends State<BusinessInformation> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              CommonWidgets.getHeadingText(
-                                  text: 'Business Information'),
-                              _businessInformationComponents
-                                  .getBusinessSignupStep()
-                            ],
-                          ),
+                          CommonWidgets.getHeadingText(
+                              text: 'Business Information'),
+                          _businessInformationComponents
+                              .getBusinessSignupStep(),
                           SizedBox(height: AppSizes.height * 0.04),
                           CommonWidgets.getSubHeadingText(
                               text: "Business Name"),
@@ -113,11 +110,11 @@ class _BusinessInformationState extends State<BusinessInformation> {
                               isPassword: false,
                               leftIcon: Entypo.mobile,
                               textEditingController: contact_number,
-                              hintText: "Enter Contact Number"),
+                              hintText: Strings.phonePlaceholderText),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "TRN"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          CommonWidgets.getPhoneNumberField(
+                          CommonWidgets.getTRNField(
                               isPassword: false,
                               leftIcon: Entypo.mobile,
                               textEditingController: trn,
@@ -248,7 +245,9 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              _phoneNumberProvider.getTermsAndConditions(context: context);
+                            CommonWidgets.launchURL();
+                              // launchURL("http://truckoom.jinnbytedev.com/");
+                              // _phoneNumberProvider.getTermsAndConditions(context: context);
                             })
                     ]),
               ),
@@ -299,7 +298,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
     try {
       images = [];
       images = await MultiImagePicker.pickImages(
-        maxImages: 2,
+        maxImages: 10,
         enableCamera: true,
         selectedAssets: images,
         cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),

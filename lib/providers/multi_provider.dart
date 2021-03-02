@@ -5,13 +5,11 @@ import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_detail_provid
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab_provider.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/book_load/book_load_provider.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/history/history_provider.dart';
-import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs_provider.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/accepted/accepted_provider.dart';
-import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/cancelled/cancelled.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/cancelled/cancelled_provider.dart';
-import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/dispatch/dispatch_provider.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/delivered/delivered_provider.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/in_process/in_process_provider.dart';
-import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/my_jobs_provider.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/placed/placed_provider.dart';
 import 'package:truckoom_shipper/screens/businessEditProfile/business_edit_profile_provider.dart';
 import 'package:truckoom_shipper/screens/businessInformation/business_information_provider.dart';
@@ -174,8 +172,8 @@ final multiProviders = [
     create: (_) => InProcessProvider(),
     lazy: true,
   ),
-  ChangeNotifierProvider<DispatchedProvider>(
-    create: (_) => DispatchedProvider(),
+  ChangeNotifierProvider<DeliveredProvider>(
+    create: (_) => DeliveredProvider(),
     lazy: true,
   ),
   ChangeNotifierProvider<CancelledProvider>(

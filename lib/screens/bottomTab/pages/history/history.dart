@@ -92,6 +92,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                             price: "${Strings.aed} ${_historyProvider.histroyList[index].shipperCost.round()}",
                             status: _historyProvider.histroyList[index].status,
                             vehicleType: _historyProvider.histroyList[index].vehicleTypeName,
+                            vehicleCategory: _historyProvider.histroyList[index].vehicleTypeName,
                             startTime: _historyProvider.histroyList[index].pickupTime,
                             endTime: _historyProvider.histroyList[index].pickupTime,
                             onTap: () {
@@ -140,9 +141,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
         ));
   }
 
-  // Future<Null> onRefresh() async{
-  //   await Future.delayed(Duration(seconds: 3));
-  // }
 
   Future<Null> onRefresh() async{
     pageNumber = 0;

@@ -45,10 +45,6 @@ class _IndividualProfileState extends State<IndividualProfile> {
                   onTap: (){Navigator.pop(context);},
                   onBellTap: (){
                     Navigator.pushReplacement(context, SlideRightRoute(page: IndividualEditProfile()));
-                    // widget.tag == Strings.indiviual
-                    //     ? Navigator.push(context, SlideRightRoute(page: IndividualEditProfile()))
-                    //     : Navigator.push(
-                    //     context, SlideRightRoute(page: BusinessEditProfile()));
                   }
               ),
               Expanded(
@@ -69,6 +65,8 @@ class _IndividualProfileState extends State<IndividualProfile> {
                               name: Constants.getUserName(),
                               email: Constants.getUserEmail(),
                               password: Constants.getPassword(),
+                            phone: Constants.getUserPhone(),
+                            city: Constants.getCityName()
                           )
                         ],
                       ),

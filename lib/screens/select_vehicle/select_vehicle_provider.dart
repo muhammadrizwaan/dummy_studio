@@ -2,8 +2,10 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/get_token.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
 import 'package:truckoom_shipper/models/api_models/estimated_rate_response.dart';
+import 'package:truckoom_shipper/models/api_models/shipper_discount_response.dart';
 import 'package:truckoom_shipper/models/api_models/vehicle_category_response.dart';
 import 'package:truckoom_shipper/models/api_models/vehicle_type_response.dart';
 import 'package:truckoom_shipper/network/api_urls.dart';
@@ -24,22 +26,65 @@ class SelectVehicleProvider extends ChangeNotifier{
   VehicleTypeResponse _vehicleTypeResponse = VehicleTypeResponse.empty();
   VehicleCategoryResponse _vehicleCategoryResponse = VehicleCategoryResponse.empty();
   VehicleTypeResponse filteredResult = VehicleTypeResponse.empty();
+  ShipperDiscountResponse _shipperDiscountResponse = ShipperDiscountResponse.empty();
   CustomPopup _laoder = CustomPopup();
   GenericDecodeEncode _genericDecodeEncode = GenericDecodeEncode();
   EstimatedRateResponse _estimatedRateResponse = EstimatedRateResponse.empty();
   GetToken getToken = GetToken();
   List<String> description = List<String>();
+  double shipperDiscount = 0.0;
 
   bool isDataFetched;
   bool _isVehicleFetched = false;
 
   init({@required BuildContext context}) async{
     isDataFetched = false;
+    shipperDiscount = 0.0;
     filteredResult =  VehicleTypeResponse.empty();
     token = "";
     description =[];
     await _getGoodTypesApi();
+    await getShipperDiscount();
     this.context = context;
+  }
+
+  Future getShipperDiscount() async{
+    try{
+      token = await getToken.onToken();
+      connectivityResult = Connectivity().checkConnectivity();
+      if(connectivityResult == ConnectivityResult.none){
+        ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: Strings.internetConnectionError);
+      }
+      else{
+        int userId = Constants.getUserId();
+        String tempUrl = getShipperDiscountApi.replaceAll("{userId}", '$userId');
+        http.Response response = await _networkHelper.get(
+            tempUrl,
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': token
+            }
+        );
+        if(response.statusCode == 200){
+          _shipperDiscountResponse = ShipperDiscountResponse.fromJson(_genericDecodeEncode.decodeJson(response.body));
+          if(_shipperDiscountResponse.code == 1){
+            shipperDiscount = _shipperDiscountResponse.result.shipperDiscount;
+            print('Shipper discont');
+            print(_shipperDiscountResponse.result.shipperDiscount);
+          }
+          else{
+            ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: _shipperDiscountResponse.message);
+          }
+
+        }
+        else{
+          ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: Strings.somethingWentWrong);
+        }
+      }
+    }
+    catch(error){
+      print(error.toString());
+    }
   }
 
   Future _getGoodTypesApi() async{
@@ -173,7 +218,8 @@ class SelectVehicleProvider extends ChangeNotifier{
           "Distance": distance,
           "VehicleCount": 1,
           "IsRoundTrip": false,
-          "VehicleCategoryId": vehicleCategoryId
+          "VehicleCategoryId": vehicleCategoryId,
+          "ShipperDiscount": shipperDiscount
         });
         if (response.statusCode == 200) {
           _estimatedRateResponse = EstimatedRateResponse.fromJson(
@@ -181,6 +227,7 @@ class SelectVehicleProvider extends ChangeNotifier{
           if (_estimatedRateResponse.code == 1) {
             _laoder.hideLoader(context);
             print('Estimated Rate Success');
+            print(_estimatedRateResponse.result.shipperIndividualDiscount);
             Navigator.push(
                 context,
                 SlideRightRoute(

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/octicons_icons.dart';
+import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 import '../../../../res/assets.dart';
 import '../../../../res/colors.dart';
@@ -16,6 +17,7 @@ class HistoryComponents {
     @required String price,
     @required String status,
     @required String vehicleType,
+    @required String vehicleCategory,
     @required String startTime,
     @required String endTime,
     @required Function onInvoice,
@@ -80,82 +82,9 @@ class HistoryComponents {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Row(
-                //   children: [
-                //     Image(
-                //       image: AssetImage(Assets.df_pk_job),
-                //     ),
-                //     SizedBox(
-                //       width: AppSizes.width * 0.01,
-                //     ),
-                //     Column(
-                //       crossAxisAlignment: CrossAxisAlignment.start,
-                //       children: [
-                //         Text(
-                //           pickUpLocation,
-                //           style: TextStyle(
-                //             fontSize: 12,
-                //             fontFamily: Assets.poppinsRegular,
-                //             color: AppColors.locationText,
-                //             // fontWeight: FontWeight.bold
-                //           ),
-                //         ),
-                //         SizedBox(height: AppSizes.height * 0.01),
-                //         Text(
-                //           destinationLocation,
-                //           style: TextStyle(
-                //             fontSize: 12,
-                //             fontFamily: Assets.poppinsRegular,
-                //             color: AppColors.locationText,
-                //             // fontWeight: FontWeight.bold
-                //           ),
-                //         ),
-                //       ],
-                //     ),
-                //   ],
-                // ),
                 Row(
                   children: [
-                    Container(
-                      height: AppSizes.height * 0.043,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 6,
-                            height: 6,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: AppColors.yellow
-                            ),
-                          ),
-                          Container(
-                            width: 3,
-                            height: 3,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: AppColors.grey
-                            ),
-                          ),
-                          Container(
-                            width: 3,
-                            height: 3,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: AppColors.grey
-                            ),
-                          ),
-                          Container(
-                            width: 6,
-                            height: 6,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: AppColors.yellow
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
+                    CommonWidgets.getLocationPointers(),
                     SizedBox(
                       width: AppSizes.width * 0.01,
                     ),
@@ -275,6 +204,32 @@ class HistoryComponents {
                     fontFamily: Assets.poppinsMedium,
                     color: AppColors.yellow,
                     fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: AppSizes.height * 0.01,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+            Text(
+            'Vehicle Category:',
+            style: TextStyle(
+              fontSize: 12,
+              fontFamily: Assets.poppinsRegular,
+              color: AppColors.locationText,
+              // fontWeight: FontWeight.bold
+            ),
+            ),
+              Text(
+                vehicleCategory,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontFamily: Assets.poppinsMedium,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
