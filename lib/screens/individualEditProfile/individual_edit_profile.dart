@@ -145,7 +145,7 @@ class _IndividualEditProfileState extends State<IndividualEditProfile> {
                           ),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(
-                              text: "City"),
+                              text: "Emirates"),
                           SizedBox(height: AppSizes.height * 0.01),
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 10),
@@ -170,7 +170,7 @@ class _IndividualEditProfileState extends State<IndividualEditProfile> {
                                       isExpanded: true,
                                       value: _cityId,
                                       hint: TextView.getLightText04(
-                                        "Select city",
+                                        "Choose Emirates",
                                         color: AppColors.colorBlack,
                                       ),
                                       items: _individualEditProfileProvider.cityList

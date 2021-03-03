@@ -145,136 +145,141 @@ class _DeliveredState extends State<Delivered> {
                 child: Scaffold(
                   backgroundColor: AppColors.blackTextColor.withOpacity(0.5),
                   body: Center(
-                    child: Stack(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(
-                            left: AppSizes.width * 0.12,
-                            right: AppSizes.width * 0.12,
-                            top: AppSizes.width * 0.07,
-                          ),
-                          padding: EdgeInsets.all(AppSizes.height * 0.02),
-                          height: AppSizes.height * 0.45,
-                          width: AppSizes.width,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border:
-                            Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
-                            borderRadius: BorderRadius.circular(
-                              10,
+                    child: Container(
+                      child: Stack(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(
+                              left: AppSizes.width * 0.12,
+                              right: AppSizes.width * 0.12,
+                              top: AppSizes.width * 0.07,
+                            ),
+                            padding: EdgeInsets.all(AppSizes.height * 0.02),
+                            height: AppSizes.height * 0.45,
+                            width: AppSizes.width,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border:
+                              Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
+                              borderRadius: BorderRadius.circular(
+                                10,
+                              ),
+                            ),
+                            child: ListView(
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(height: AppSizes.height * 0.02),
+                                    TextView.getRatingPopUpHeaderText("Review & Ratings", color: AppColors.colorBlack),
+                                    SizedBox(height: AppSizes.height * 0.02),
+                                    SmoothStarRating(
+                                      rating: rating,
+                                      isReadOnly: false,
+                                      size: 30,
+                                      color: AppColors.yellow,
+                                      borderColor: AppColors.grey,
+                                      filledIconData: Icons.star,
+                                      halfFilledIconData: Icons.star_half,
+                                      defaultIconData: Icons.star_border,
+                                      starCount: 5,
+                                      allowHalfRating: true,
+                                      spacing: 2.0,
+                                      onRated: (value) {
+                                        rating = value;
+                                      },
+                                    ),
+                                    SizedBox(height: AppSizes.height * 0.02),
+                                    TextView.getLightText04("Remarks",
+                                        color: AppColors.colorBlack,
+                                        textAlign: TextAlign.center),
+                                    SizedBox(height: AppSizes.height * 0.02),
+                                    Container(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: AppSizes.width * 0.02),
+                                      height: AppSizes.height * 0.12,
+                                      decoration: BoxDecoration(
+                                          color: AppColors.white,
+                                          borderRadius: BorderRadius.circular(5),
+                                          border:
+                                          Border.all(color: AppColors.borderColor)),
+                                      child: TextField(
+                                          style: TextStyle(
+                                              decoration: TextDecoration.none,
+                                              fontFamily: Assets.poppinsLight,
+                                              fontSize: 12,
+                                              color: AppColors.colorBlack),
+                                          keyboardType: TextInputType.multiline,
+                                          minLines: 1,
+                                          //Normal textInputField will be displayed
+                                          maxLines: 5,
+                                          controller: description,
+                                          // readOnly: true,
+                                          decoration: InputDecoration(
+                                            // prefixIcon: Image(image: AssetImage('$leftIcon')) ,
+                                            hintText: "Description",
+                                            border: InputBorder.none,
+                                            hintStyle: TextStyle(
+                                              decoration: TextDecoration.none,
+                                              fontSize: 12,
+                                              color: AppColors.colorBlack.withOpacity(0.6),
+                                              fontFamily: Assets.poppinsLight,
+                                            ),
+                                          ),
+                                          textAlignVertical: TextAlignVertical.top),
+                                    ),
+                                    SizedBox(height: AppSizes.height * 0.03),
+                                    Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: CommonWidgets.getBottomButton(
+                                          text: Strings.submit, onPress: () {
+                                            _deliveredProvider.onRatingAndReviews(
+                                                context: context,
+                                                score: rating,
+                                                driverId: driverId,
+                                                loadId: loadId,
+                                                comment: description.text,
+                                            );
+
+                                        // hideLoader(context);
+                                        rating = 0.0;
+                                        description.text = "";
+                                        // Navigator.pop(context);
+                                        // Navigator.push(context, SlideRightRoute(page: Invoice()));
+                                      }),
+                                    )
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
-                          child: ListView(
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SizedBox(height: AppSizes.height * 0.02),
-                                  TextView.getRatingPopUpHeaderText("Review & Ratings", color: AppColors.colorBlack),
-                                  SizedBox(height: AppSizes.height * 0.02),
-                                  SmoothStarRating(
-                                    rating: rating,
-                                    isReadOnly: false,
-                                    size: 30,
-                                    color: AppColors.yellow,
-                                    borderColor: AppColors.grey,
-                                    filledIconData: Icons.star,
-                                    halfFilledIconData: Icons.star_half,
-                                    defaultIconData: Icons.star_border,
-                                    starCount: 5,
-                                    allowHalfRating: true,
-                                    spacing: 2.0,
-                                    onRated: (value) {
-                                      rating = value;
-                                    },
-                                  ),
-                                  SizedBox(height: AppSizes.height * 0.02),
-                                  TextView.getLightText04("Remarks",
-                                      color: AppColors.colorBlack,
-                                      textAlign: TextAlign.center),
-                                  SizedBox(height: AppSizes.height * 0.02),
-                                  Container(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: AppSizes.width * 0.02),
-                                    height: AppSizes.height * 0.15,
-                                    decoration: BoxDecoration(
-                                        color: AppColors.white,
-                                        borderRadius: BorderRadius.circular(5),
-                                        border:
-                                        Border.all(color: AppColors.borderColor)),
-                                    child: TextField(
-                                        style: TextStyle(
-                                            decoration: TextDecoration.none,
-                                            fontFamily: Assets.poppinsLight,
-                                            fontSize: 12,
-                                            color: AppColors.colorBlack),
-                                        keyboardType: TextInputType.multiline,
-                                        minLines: 1,
-                                        //Normal textInputField will be displayed
-                                        maxLines: 5,
-                                        controller: description,
-                                        // readOnly: true,
-                                        decoration: InputDecoration(
-                                          // prefixIcon: Image(image: AssetImage('$leftIcon')) ,
-                                          hintText: "Description",
-                                          border: InputBorder.none,
-                                          hintStyle: TextStyle(
-                                            decoration: TextDecoration.none,
-                                            fontSize: 12,
-                                            color: AppColors.colorBlack.withOpacity(0.6),
-                                            fontFamily: Assets.poppinsLight,
-                                          ),
-                                        ),
-                                        textAlignVertical: TextAlignVertical.top),
-                                  ),
-                                  SizedBox(height: AppSizes.height * 0.03),
-                                  CommonWidgets.getBottomButton(
-                                      text: Strings.submit, onPress: () {
-                                        _deliveredProvider.onRatingAndReviews(
-                                            context: context,
-                                            score: rating,
-                                            driverId: driverId,
-                                            loadId: loadId,
-                                            comment: description.text,
-                                        );
-                                        
-                                    // hideLoader(context);
-                                    rating = 0.0;
-                                    description.text = "";
-                                    // Navigator.pop(context);
-                                    // Navigator.push(context, SlideRightRoute(page: Invoice()));
-                                  })
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        // GestureDetector(
-                        //   onTap: () {
-                        //     Navigator.pop(context);
-                        //   },
-                        //   child: Container(
-                        //     margin: EdgeInsets.only(
-                        //         left: AppSizes.width * 0.81,
-                        //         top: AppSizes.height * 0.015),
-                        //     height: AppSizes.width * 0.1,
-                        //     width: AppSizes.width * 0.1,
-                        //     decoration: BoxDecoration(
-                        //       color: AppColors.white,
-                        //       border: Border.all(color: AppColors.yellow),
-                        //       borderRadius: BorderRadius.circular(
-                        //         50,
-                        //       ),
-                        //     ),
-                        //     child: Icon(
-                        //       Icons.clear,
-                        //       color: AppColors.yellow,
-                        //       size: 25,
-                        //     ),
-                        //   ),
-                        // ),
-                      ],
+                          // GestureDetector(
+                          //   onTap: () {
+                          //     Navigator.pop(context);
+                          //   },
+                          //   child: Container(
+                          //     margin: EdgeInsets.only(
+                          //         left: AppSizes.width * 0.81,
+                          //         top: AppSizes.height * 0.015),
+                          //     height: AppSizes.width * 0.1,
+                          //     width: AppSizes.width * 0.1,
+                          //     decoration: BoxDecoration(
+                          //       color: AppColors.white,
+                          //       border: Border.all(color: AppColors.yellow),
+                          //       borderRadius: BorderRadius.circular(
+                          //         50,
+                          //       ),
+                          //     ),
+                          //     child: Icon(
+                          //       Icons.clear,
+                          //       color: AppColors.yellow,
+                          //       size: 25,
+                          //     ),
+                          //   ),
+                          // ),
+                        ],
+                      ),
                     ),
                   ),
                 )

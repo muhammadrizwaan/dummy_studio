@@ -120,10 +120,17 @@ class _JobDetailsState extends State<JobDetails> {
                                   // ),
                                   // SizedBox(height: AppSizes.height * 0.001),
                                   // TextView.getLabel2Text04(_jobDetailsProvider.loadDetailResponse.result.isRoundTrip? "Yes": "No", color: AppColors.colorBlack),
-                                  CommonWidgets.getLoadDetailCommonText(
-                                    icon: Entypo.user,
+                                  CommonWidgets.getLoadDetailLableWithImage(
+                                    image: Assets.loadIcon,
+                                    lable: Strings.loadId,
+                                    text: _jobDetailsProvider.loadDetailResponse.result.loadId.toString(),
+                                  ),
+                                  SizedBox(height: AppSizes.height * 0.02),
+
+                                  CommonWidgets.getLoadDetailLableWithImage(
+                                    image: Assets.roundTripIcon,
                                     lable: Strings.roundTrip,
-                                    text: _jobDetailsProvider.loadDetailResponse.result.isRoundTrip? "Yes": "No",
+                                    text: _jobDetailsProvider.loadDetailResponse.result.isRoundTrip ? "Yes" : "No",
                                   ),
                                   SizedBox(height: AppSizes.height * 0.02),
 
@@ -137,7 +144,7 @@ class _JobDetailsState extends State<JobDetails> {
                                   CommonWidgets.getLoadDetailCommonText(
                                     icon: LineariconsFree.license,
                                     lable: Strings.pickupDateAndTime,
-                                    text: _jobDetailsProvider.loadDetailResponse.result.pickupDateTime,
+                                    text: CommonWidgets.getDateTimeFormate(time: _jobDetailsProvider.loadDetailResponse.result.pickupDateTime) ,
                                   ),
                                   SizedBox(height: AppSizes.height * 0.02),
 
@@ -195,7 +202,7 @@ class _JobDetailsState extends State<JobDetails> {
                                   CommonWidgets.getLoadDetailLableWithImage(
                                     image: Assets.weightIcon,
                                     lable: Strings.weight,
-                                    text: _jobDetailsProvider.loadDetailResponse.result.vehicle,
+                                    text: _jobDetailsProvider.loadDetailResponse.result.weight,
                                   ),
                                   SizedBox(height: AppSizes.height * 0.02),
 

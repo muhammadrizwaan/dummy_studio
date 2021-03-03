@@ -98,10 +98,10 @@ class SelectVechileComponents {
                   height: AppSizes.height * 0.07,
                     width: AppSizes.width * 0.16,
                     decoration: BoxDecoration(
-                      color: AppColors.yellow,
+                      // color: AppColors.yellow,
                       borderRadius: BorderRadius.circular(5)
                     ),
-                    child: Image(image: leftIcon != ""? NetworkImage(leftIcon): AssetImage(Assets.vehicle_img),
+                    child: Image(image: NetworkImage(leftIcon),
                     fit: BoxFit.fill,
                     ),
                 ),

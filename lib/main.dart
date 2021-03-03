@@ -40,18 +40,18 @@ class _MyAppState extends State<MyApp> {
       onMessage: (Map<String, dynamic> message) async {
         print("onMessage: $message");
         // _showItemDialog(message);
-        ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "Message Received");
+        // ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "Message Received");
       },
       // onBackgroundMessage: myBackgroundMessageHandler,
       onLaunch: (Map<String, dynamic> message) async {
         print("onLaunch: $message");
         // _navigateToItemDetail(message);
-        ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "Message Received");
+        // ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "Message Received");
       },
       onResume: (Map<String, dynamic> message) async {
         print("onResume: $message");
         // _navigateToItemDetail(message);
-        ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "Message Received");
+        // ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "Message Received");
       },
     );
   }

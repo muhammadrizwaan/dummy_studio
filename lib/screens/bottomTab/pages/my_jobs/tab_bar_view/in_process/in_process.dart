@@ -78,6 +78,7 @@ class _InProcessState extends State<InProcess> {
                           startDate: _myJobsProvider.inProcessList[index].pickupDateTime,
                           time:  _myJobsProvider.inProcessList[index].pickupDateTime,
                           status: _myJobsProvider.inProcessList[index].status,
+                          statusId: _myJobsProvider.inProcessList[index].loadStatusId,
                           vehicleType: _myJobsProvider.inProcessList[index].vehicleTypeName,
                           vehicleCategory: _myJobsProvider.inProcessList[index].vehicleCategoryName,
                           price: "${Strings.aed} ${_myJobsProvider.inProcessList[index].shipperCost.round()}",

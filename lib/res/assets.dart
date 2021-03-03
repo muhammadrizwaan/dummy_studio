@@ -75,6 +75,7 @@ class Assets {
   static const String passwordImage = "assets/png/passwordImage.png";
   static const String phoneImage = "assets/png/phoneImage.png";
   static const String LicenseImage = "assets/png/LicenseImage.png";
+  static const String roundTripIcon = "assets/png/roundTripIcon.png";
 
 
 

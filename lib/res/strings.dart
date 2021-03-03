@@ -18,6 +18,8 @@ class Strings {
   static const String loginSuccessful = "Login Successful";
   static const String aed = "AED";
   static const String yes = "Yes";
+  static const String approve = "Approve";
+  static const String cancel = "Cancel";
   static const String no = "No";
   static const String logOutPopupText = "Are you sure you want to Sign Out";
   static const String cancelLoadAlertText = "Are you sure you want to cancel the Load?";
@@ -35,6 +37,7 @@ class Strings {
   static const String receiverName = "Receiver Name";
   static const String receiverPhone = "Receiver Phone";
   static const String goodType = "Good Type";
+  static const String loadId = "Job ID";
   static const String weight = "Weight";
   static const String description = "Description";
   static const String notification = "Notification";

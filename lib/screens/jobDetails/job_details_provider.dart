@@ -34,6 +34,7 @@ class JobDetailsProvider extends ChangeNotifier{
   init({@required BuildContext context, @required int loadId}) async{
     this.context = context;
     connectivityResult = "";
+    isDataFetched = false;
     token = "";
     _placedProvider = Provider.of<PlacedProvider>(context, listen: false);
     await getLoadDetail(context: context, loadId: loadId);

@@ -26,6 +26,7 @@ class DriverDetailProvider extends ChangeNotifier{
   String token;
   init({@required BuildContext context, @required int driverId}) async{
     this.context = context;
+    isDataFetched = false;
     connectivityResult = "";
     token = "";
     await getDriverDetail(context: context, driverId: driverId);

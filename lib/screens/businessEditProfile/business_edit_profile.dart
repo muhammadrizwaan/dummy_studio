@@ -180,7 +180,7 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
                           CommonWidgets.getSubHeadingText(
-                              text: 'City'
+                              text: 'Emirates'
                           ),
                           SizedBox(height: AppSizes.height * 0.01,),
                           Container(

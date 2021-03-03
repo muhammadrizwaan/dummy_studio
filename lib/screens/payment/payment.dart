@@ -65,7 +65,7 @@ class _PaymentState extends State<Payment> {
                         },
                     ),
                     CommonWidgets.getWalletPriceBox(
-                        walletPrice: "258,000.00"
+                        walletPrice: _paymentProvider.getLoadCostData().result.finalCost.toString()
                     ),
                     Expanded(
                       child: ListView(
