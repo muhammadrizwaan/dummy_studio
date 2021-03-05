@@ -54,7 +54,6 @@ class _FAQsExpandableState extends State<FAQsExpandable> {
                   ),
                   GestureDetector(
                     onTap: (){
-                      // launchURL("tel://<03427341547>");
                       launchURL("http://truckoom.jinnbytedev.com/");
                     },
                     child: Container(

@@ -67,11 +67,12 @@ class _HistoryScreenState extends State<HistoryScreen> {
             ),
             Expanded(
               child: _historyProvider.isDataFetched?
-              _historyProvider.histroyList.length > 0?
+
               RefreshIndicator(
                 color: AppColors.yellow,
                 onRefresh: () => onRefresh(),
-                child: ListView.builder(
+                child: _historyProvider.histroyList.length > 0?
+                ListView.builder(
                     itemCount: _historyProvider.histroyList.length,
                     controller: _scrollController,
                     physics: const AlwaysScrollableScrollPhysics(),
@@ -108,23 +109,24 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         ]),
                       );
                     }
-                ),
-              ):
-              Center(
-                child: Container(
-                    height: AppSizes.height * 0.15,
-                    // width: AppSizes.width,
-                    child: CommonWidgets.onNullData(text: Strings.noAvailableLoads)
-                ),
+                ):Center(
+                  child: Container(
+                      height: AppSizes.height * 0.15,
+                      // width: AppSizes.width,
+                      child: CommonWidgets.onNullData(text: Strings.noAvailableLoads)
+                  ),
+                )
               )
-                  :
-              Center(
-                child: Container(
-                  height: AppSizes.height * 0.15,
-                  // width: AppSizes.width,
-                  child: Lottie.asset(Assets.apiLoading, fit: BoxFit.cover),
-                ),
-              ),
+                  :ListView(
+                children: [
+                  Container(
+                      padding: EdgeInsets.symmetric(vertical: AppSizes.height * 0.3),
+                      // height: AppSizes.height * 0.15,
+                      // width: AppSizes.width,
+                      child: CommonWidgets.onNullData(text: Strings.noAvailableLoads)
+                  ),
+                ],
+              )
             ),
             _historyProvider.isLoading?
             Container(

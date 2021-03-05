@@ -56,11 +56,11 @@ class _PlacedState extends State<Placed> {
           Column(
             children: [
               Expanded(
-                child: _myJobsProvider.placedList.length > 0?
-                  RefreshIndicator(
+                child:RefreshIndicator(
                   color: AppColors.yellow,
                   onRefresh: () => onRefresh(),
-                    child: ListView.builder(
+                    child: _myJobsProvider.placedList.length > 0?
+                    ListView.builder(
                         controller: _scrollController,
                         physics: const AlwaysScrollableScrollPhysics(),
                 itemCount: _myJobsProvider.placedList.length,
@@ -93,14 +93,15 @@ class _PlacedState extends State<Placed> {
                     ],
                   );
                   }
-        ),
-      ):Center(
-                  child: Container(
-                      height: AppSizes.height * 0.15,
-                      // width: AppSizes.width,
-                      child: CommonWidgets.onNullData(text: Strings.noAvailableLoads)
-                  ),
-                ),
+                ):ListView(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(vertical: AppSizes.height * 0.3),
+                            child: CommonWidgets.onNullData(text: Strings.noAvailableLoads)
+                        ),
+                      ],
+                    )
+              )
               ),
               _placedProvider.isLoading?
               Container(

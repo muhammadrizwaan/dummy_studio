@@ -76,6 +76,9 @@ class Assets {
   static const String phoneImage = "assets/png/phoneImage.png";
   static const String LicenseImage = "assets/png/LicenseImage.png";
   static const String roundTripIcon = "assets/png/roundTripIcon.png";
+  static const String pickupLocationImage = "assets/png/pickupLocationImage.png";
+  static const String dropoffLocationImage = "assets/png/dropoffLocationImage.png";
+  static const String googleMapImage = "assets/png/googleMapImage.png";
 
 
 

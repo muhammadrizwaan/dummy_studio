@@ -134,6 +134,7 @@ class BusinessSignupProvider extends ChangeNotifier {
             currentTime = await (((ms / 1000) / 60).round()).toDouble();
             await PreferenceUtils.setDouble(Strings.tokenTime, currentTime);
             _loader.hideLoader(context);
+            
             Navigator.push(context, SlideRightRoute(
                 page: BusinessInformation(userId: _commonResponse.result.user.userId,)));
           }

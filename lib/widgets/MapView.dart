@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:truckoom_shipper/res/assets.dart';
+import 'package:truckoom_shipper/res/colors.dart';
 import 'dart:math' show cos, sqrt, asin;
 import 'package:truckoom_shipper/utilities/toast.dart';
 
@@ -49,11 +52,22 @@ class _MapViewState extends State<MapView> {
     super.dispose();
     polylines = _currentPosition = destinationCoordinates =startCoordinates = markers = widget.startLong = widget.startLat = widget.endLong = widget.endLat = null;
   }
+  BitmapDescriptor pickupMarker;
+  BitmapDescriptor dropoffMarker;
+
+  void setCustomPickupMarker()async{
+    pickupMarker = await BitmapDescriptor.fromAssetImage(ImageConfiguration(), Assets.pickupLocationImage);
+  }
+  void setCustomdropoffMarker()async{
+    dropoffMarker = await BitmapDescriptor.fromAssetImage(ImageConfiguration(), Assets.dropoffLocationImage);
+  }
 
   @override
   void initState() {
     super.initState();
     _getCurrentLocation();
+    setCustomPickupMarker();
+    setCustomdropoffMarker();
     startCoordinates = Position(latitude: widget.startLat, longitude: widget.startLong);
     destinationCoordinates = Position(latitude: widget.endLat, longitude: widget.endLong);
     // Start Location Marker
@@ -67,7 +81,8 @@ class _MapViewState extends State<MapView> {
         title: 'Start',
         snippet: "starting location",
       ),
-      icon: BitmapDescriptor.defaultMarker,
+      // icon: BitmapDescriptor.defaultMarker,
+      icon: pickupMarker,
     );
 
 // Destination Location Marker
@@ -81,7 +96,7 @@ class _MapViewState extends State<MapView> {
         title: 'Destination',
         snippet: "destination location",
       ),
-      icon: BitmapDescriptor.defaultMarker,
+      icon: dropoffMarker,
     );
     // Add the markers to the list
     markers.add(startMarker);
@@ -250,7 +265,7 @@ class _MapViewState extends State<MapView> {
     // Initializing Polyline
     Polyline polyline = Polyline(
       polylineId: id,
-      color: Colors.blue,
+      color: AppColors.yellow,
       points: polylineCoordinates,
       width: 5,
     );
@@ -260,7 +275,7 @@ class _MapViewState extends State<MapView> {
       polylines[id] = polyline;
       print("PLOYLINE DRAWN :::::::::::" + polyline.points.toString());
     });
-
+    _viewBothCoordinates();
     getDistance();
   }
   ///////////////////////////////////////////////////////////////////////
@@ -296,5 +311,38 @@ class _MapViewState extends State<MapView> {
         c((lat2 - lat1) * p) / 2 +
         c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
     return 12742 * asin(sqrt(a));
+  }
+
+  _viewBothCoordinates(){
+    // Calculating to check that
+    // Define two position variables
+    Position _northeastCoordinates;
+    Position _southwestCoordinates;
+// southwest coordinate <= northeast coordinate
+    if (startCoordinates.latitude <= destinationCoordinates.latitude) {
+      _southwestCoordinates = startCoordinates;
+      _northeastCoordinates = destinationCoordinates;
+    } else {
+      _southwestCoordinates = destinationCoordinates;
+      _northeastCoordinates = startCoordinates;
+    }
+
+// Accommodate the two locations within the
+// camera view of the map
+    mapController.animateCamera(
+      CameraUpdate.newLatLngBounds(
+        LatLngBounds(
+          northeast: LatLng(
+            _northeastCoordinates.latitude,
+            _northeastCoordinates.longitude,
+          ),
+          southwest: LatLng(
+            _southwestCoordinates.latitude,
+            _southwestCoordinates.longitude,
+          ),
+        ),
+        100.0, // padding
+      ),
+    );
   }
 }

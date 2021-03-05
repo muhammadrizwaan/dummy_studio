@@ -62,11 +62,11 @@ class _DeliveredState extends State<Delivered> {
       Column(
         children: [
           Expanded(
-            child: _myJobsProvider.deliveredList.length > 0 ?
-            RefreshIndicator(
+            child: RefreshIndicator(
               color: AppColors.yellow,
               onRefresh: () => onRefresh(),
-                      child: ListView.builder(
+                      child: _myJobsProvider.deliveredList.length > 0 ?
+                      ListView.builder(
                           controller: _scrollController,
                           physics: const AlwaysScrollableScrollPhysics(),
                           itemCount: _myJobsProvider.deliveredList.length,
@@ -108,15 +108,16 @@ class _DeliveredState extends State<Delivered> {
                                 ),
                               ],
                             );
-                          }),
+                          }):ListView(
+                        children: [
+                          Container(
+                              padding: EdgeInsets.symmetric(vertical: AppSizes.height * 0.3),
+                              child: CommonWidgets.onNullData(text: Strings.noAvailableLoads)
+                          ),
+                        ],
+                      )
                     )
-                    : Center(
-                        child: Container(
-                            height: AppSizes.height * 0.15,
-                            // width: AppSizes.width,
-                            child:
-                                CommonWidgets.onNullData(text: Strings.noAvailableLoads)),
-                      ),
+
           ),
           _deliveredProvider.isLoading?
           Container(
