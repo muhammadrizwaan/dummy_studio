@@ -7,6 +7,7 @@ import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'dart:math' show cos, sqrt, asin;
 import 'package:truckoom_shipper/utilities/toast.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MapView extends StatefulWidget {
   double startLat,startLong,endLat,endLong;
@@ -56,9 +57,9 @@ class _MapViewState extends State<MapView> {
   BitmapDescriptor dropoffMarker;
 
   void setCustomPickupMarker()async{
-    pickupMarker = await BitmapDescriptor.fromAssetImage(ImageConfiguration(), Assets.pickupLocationImage);
+    pickupMarker = await BitmapDescriptor.fromAssetImage(ImageConfiguration(), Assets.edit_icon);
   }
-  void setCustomdropoffMarker()async{
+  void setCustomDropoffMarker()async{
     dropoffMarker = await BitmapDescriptor.fromAssetImage(ImageConfiguration(), Assets.dropoffLocationImage);
   }
 
@@ -67,7 +68,7 @@ class _MapViewState extends State<MapView> {
     super.initState();
     _getCurrentLocation();
     setCustomPickupMarker();
-    setCustomdropoffMarker();
+    setCustomDropoffMarker();
     startCoordinates = Position(latitude: widget.startLat, longitude: widget.startLong);
     destinationCoordinates = Position(latitude: widget.endLat, longitude: widget.endLong);
     // Start Location Marker
@@ -81,7 +82,7 @@ class _MapViewState extends State<MapView> {
         title: 'Start',
         snippet: "starting location",
       ),
-      // icon: BitmapDescriptor.defaultMarker,
+      // icon: BitmapDescriptor.fromAssetImage(ImageConfiguration, assetName),
       icon: pickupMarker,
     );
 
@@ -136,6 +137,24 @@ class _MapViewState extends State<MapView> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                    ClipOval(
+                      child: Material(
+                        color: Colors.blueGrey, // button color
+                        child: InkWell(
+                          splashColor: Colors.red, // inkwell color
+                          child: SizedBox(
+                            width: 25,
+                            height: 25,
+                            child: Icon(Icons.location_pin,color: Colors.white,),
+                          ),
+                          onTap: () {
+                            // on button tap
+                            openMap();
+                          },
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 10,),
                     ClipOval(
                       child: Material(
                         color: Colors.blueGrey, // button color
@@ -210,6 +229,14 @@ class _MapViewState extends State<MapView> {
         ),
       ),
     );
+  }
+  openMap() async {
+    String googleUrl = 'https://www.google.com/maps/search/?api=1&query=${widget.endLat},${widget.endLong}';
+    if (await canLaunch(googleUrl)) {
+      await launch(googleUrl);
+    } else {
+      throw 'Could not open the map.';
+    }
   }
 
 
