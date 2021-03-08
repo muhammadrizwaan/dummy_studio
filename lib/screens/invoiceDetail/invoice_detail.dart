@@ -90,23 +90,12 @@ class _InvoiceDetailState extends State<InvoiceDetail> {
                                             .completedDate),
                                     _invoiceDetailComponents.getTotalContainer(
                                         context: context,
-                                        jobName: _invoiceDetailProvider
-                                            .invoiceDetailResponse
-                                            .result
-                                            .invoiceId
-                                            .toString(),
-                                        weight: _invoiceDetailProvider
-                                            .invoiceDetailResponse
-                                            .result
-                                            .weight,
+                                        jobName: _invoiceDetailProvider.invoiceDetailResponse.result.invoiceId.toString(),
+                                        weight: _invoiceDetailProvider.invoiceDetailResponse.result.weight,
                                         shipperCost: _invoiceDetailProvider.invoiceDetailResponse.result.shipperCost.toString(),
                                         couponDiscount: _invoiceDetailProvider.invoiceDetailResponse.result.couponDiscount.toString(),
                                         vatAmount: _invoiceDetailProvider.invoiceDetailResponse.result.vatAmount.round().toString(),
-                                        total: _invoiceDetailProvider
-                                            .invoiceDetailResponse
-                                            .result
-                                            .totalShipperCost
-                                            .toString()),
+                                        total: _invoiceDetailProvider.invoiceDetailResponse.result.totalShipperCost.toString()),
                                     _invoiceDetailComponents.getInvoiceLable("Status"),
                                     _invoiceDetailComponents.getStatus(
                                         status: "Loading",
@@ -124,7 +113,7 @@ class _InvoiceDetailState extends State<InvoiceDetail> {
                                     _invoiceDetailComponents.getInvoiceLable("E-Signature"),
                                     _invoiceDetailProvider.invoiceDetailResponse.result.eSignature == null ?
                                     CommonWidgets.onNullData(text: "No Signature") :
-                                    _invoiceDetailComponents.getSignatureBox(eSignature: ""),
+                                    CommonWidgets.getSignatureBox(eSignature: _invoiceDetailProvider.invoiceDetailResponse.result.eSignature),
 
                                     _invoiceDetailComponents
                                         .getInvoiceLable("Reviews"),
@@ -184,8 +173,21 @@ class _InvoiceDetailState extends State<InvoiceDetail> {
                             _invoiceDetailComponents.getInvoiceButtonsContainer(
                                 share: "Share",
                                 download: "Download",
-                                onShare: () {},
-                                onDownload: () {}),
+                                onShare: () {
+                                  _invoiceDetailProvider.getInvoiceDownload(
+                                      context: context,
+                                      Id: widget.Id,
+                                      differentiate: 1
+                                  );
+                                },
+                                onDownload: () {
+                                  _invoiceDetailProvider.getInvoiceDownload(
+                                      context: context,
+                                      Id: widget.Id,
+                                      differentiate: 0
+                                  );
+                                },
+                            ),
                       ),
                     )
                   ],

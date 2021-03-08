@@ -38,6 +38,12 @@ class _BottomTabState extends State<BottomTab> {
     search = TextEditingController();
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   _currentPage(){
     if(_bottomTabProvider.currentIndex == 0){
       return BookLoad();

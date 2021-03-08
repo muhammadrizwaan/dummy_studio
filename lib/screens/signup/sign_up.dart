@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/elusive_icons.dart';
 import 'package:fluttericon/entypo_icons.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/res/assets.dart';
@@ -12,6 +14,7 @@ import 'package:truckoom_shipper/screens/phoneNumber/phone_number_provider.dart'
 import 'package:truckoom_shipper/screens/signup/sign_up_components.dart';
 import 'package:truckoom_shipper/screens/signup/sign_up_provider.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
+import 'package:truckoom_shipper/widgets/text_views.dart';
 
 
 class SignUP extends StatefulWidget {
@@ -29,6 +32,7 @@ class _SignUPState extends State<SignUP> {
   PhoneNumberProvider _phoneNumberProvider;
   TextEditingController _name, _email, _password, _confirm_password;
   bool onCheck = false;
+  String _cityId;
 
   void initState() {
     _signUpProvider = Provider.of<SignUpProvider>(context, listen: false);
@@ -40,6 +44,11 @@ class _SignUPState extends State<SignUP> {
     _password = TextEditingController();
     _confirm_password = TextEditingController();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -57,7 +66,9 @@ class _SignUPState extends State<SignUP> {
             right: AppSizes.width * 0.08,
             top: AppSizes.width * 0.08,
           ),
-          child: Column(
+          child:
+          _signUpProvider.isDataFetched?
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -124,6 +135,57 @@ class _SignUPState extends State<SignUP> {
                               leftIcon: Entypo.lock,
                               textEditingController: _confirm_password,
                               hintText: "Confirm Password"),
+                          SizedBox(height: AppSizes.height * 0.02),
+                          CommonWidgets.getSubHeadingText(
+                              text: "Emirates"),
+                          SizedBox(height: AppSizes.height * 0.01),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            height: AppSizes.height * 0.07,
+                            width: AppSizes.width * 0.85,
+                            decoration: BoxDecoration(
+                              color: AppColors.lightGray,
+                              border: Border.all(color: AppColors.lightGray),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Row(
+                              children: [
+                                Container(
+                                    height: AppSizes.height * 0.06,
+                                    width: AppSizes.width * 0.06,
+                                    child: Image.asset(Assets.vehicle)),
+                                SizedBox(width: AppSizes.width*0.03),
+                                Expanded(
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButton<dynamic>(
+                                      icon: Icon(Icons.keyboard_arrow_down),
+                                      isExpanded: true,
+                                      value: _cityId,
+                                      hint: TextView.getLightText04(
+                                        "Choose Emirates",
+                                        color: AppColors.colorBlack,
+                                      ),
+                                      items: _signUpProvider.cityList
+                                          .map((item) =>
+                                          DropdownMenuItem(
+                                            value: item.cityId.toString(),
+                                            child: TextView.getLightText04(
+                                              item.description,
+                                              color: AppColors.colorBlack,
+                                            ),
+                                          )
+                                      ).toList(),
+                                      onChanged: (value) {
+                                        setState (() {
+                                          _cityId = value.toString();
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                           SizedBox(height: AppSizes.height * 0.03),
                           _getTermsAndCondition(),
                           SizedBox(height: AppSizes.height * 0.01),
@@ -140,7 +202,9 @@ class _SignUPState extends State<SignUP> {
                                   email: _email.text,
                                   password: _password.text,
                                   confirmPassword: _confirm_password.text,
-                                  onCheck: onCheck);
+                                  onCheck: onCheck,
+                                cityId: _cityId
+                              );
                               // _alertDialogueContainer();
                             },
                           ),
@@ -152,13 +216,17 @@ class _SignUPState extends State<SignUP> {
                 ),
               )
             ],
+          ):
+          Center(
+            child: Container(
+              height: AppSizes.height * 0.15,
+              child: Lottie.asset(Assets.apiLoading, fit: BoxFit.cover),
+            ),
           ),
         ),
       ),
     );
   }
-
-
 
   _getTermsAndCondition() {
     return Row(
@@ -212,7 +280,8 @@ class _SignUPState extends State<SignUP> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              _phoneNumberProvider.getTermsAndConditions(context: context);
+                              CommonWidgets.launchURL();
+                              // _phoneNumberProvider.getTermsAndConditions(context: context);
                             })
                     ]),
               ),

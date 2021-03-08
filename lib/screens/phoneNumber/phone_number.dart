@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:fluttericon/entypo_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
+import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/checkUserType/check_user.dart';
 import 'package:truckoom_shipper/screens/phoneNumber/phone_number_components.dart';
 import 'package:truckoom_shipper/screens/phoneNumber/phone_number_provider.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../res/assets.dart';
 import '../../res/colors.dart';
 import '../../res/sizes.dart';
@@ -103,7 +105,7 @@ class _PhoneNumberState extends State<PhoneNumber> {
                           CommonWidgets.getPhoneNumberField(isPassword: false,
                               leftIcon: Entypo.mobile,
                               textEditingController: phone_number,
-                              hintText: "Enter Phone Number",
+                              hintText: Strings.phonePlaceholderText,
                           ),
                           SizedBox(height: AppSizes.height * 0.03),
                           _getTermsAndCondition(),
@@ -182,7 +184,7 @@ class _PhoneNumberState extends State<PhoneNumber> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              _phoneNumberProvider.getTermsAndConditions(context: context);
+                              CommonWidgets.launchURL();
                             })
                     ]),
               ),

@@ -260,6 +260,7 @@ class JobDetailsComponents {
     @required String tag,
   }) {
     return Container(
+      width: AppSizes.width,
       padding: EdgeInsets.only(
         left: AppSizes.width * 0.05,
         right: AppSizes.width * 0.05,

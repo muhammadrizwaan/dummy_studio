@@ -70,7 +70,7 @@ class Result {
   int _cityId;
   String _cityName;
   String _deviceId;
-  int _emiratesId;
+  String _emiratesId;
   bool _isBusinessAccount;
   bool _isAvailable;
   List<CompanyInformation> _companyInformation;
@@ -92,7 +92,7 @@ class Result {
   int get cityId => _cityId;
   String get cityName => _cityName;
   String get deviceId => _deviceId;
-  int get emiratesId => _emiratesId;
+  String get emiratesId => _emiratesId;
   bool get isBusinessAccount => _isBusinessAccount;
   bool get isAvailable => _isAvailable;
   List<CompanyInformation> get companyInformation => _companyInformation;
@@ -114,8 +114,8 @@ class Result {
       String profilePicture, 
       int cityId, 
       String cityName, 
-      String deviceId, 
-      int emiratesId, 
+      String deviceId,
+      String emiratesId,
       bool isBusinessAccount, 
       bool isAvailable, 
       List<CompanyInformation> companyInformation, 

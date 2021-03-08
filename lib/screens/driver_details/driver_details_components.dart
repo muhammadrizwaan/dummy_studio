@@ -24,6 +24,7 @@ class DriverDetailComponents {
     @required String email,
     @required String phone_number,
     @required String License_number,
+    @required String driverId
   }) {
     return Container(
       decoration: BoxDecoration(
@@ -143,6 +144,35 @@ class DriverDetailComponents {
                 ),
                 Text(
                   License_number,
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontFamily: Assets.poppinsLight,
+                    color: AppColors.profileTextColor,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Divider(
+            height: 10,
+          ),
+          Container(
+            padding: EdgeInsets.all(AppSizes.width * 0.02),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Driver ID',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontFamily: Assets.poppinsLight,
+                    color: AppColors.profileTextColor,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
+                Text(
+                  driverId,
                   style: TextStyle(
                     fontSize: 12,
                     fontFamily: Assets.poppinsLight,

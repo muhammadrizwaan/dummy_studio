@@ -69,6 +69,17 @@ class Assets {
   static const String apiLoading = "assets/json/loader.json";
 
 
+  // New Images for Shipper
+  static const String nameImage = "assets/png/nameImage.png";
+  static const String emailImage = "assets/png/emailImage.png";
+  static const String passwordImage = "assets/png/passwordImage.png";
+  static const String phoneImage = "assets/png/phoneImage.png";
+  static const String LicenseImage = "assets/png/LicenseImage.png";
+  static const String roundTripIcon = "assets/png/roundTripIcon.png";
+  static const String pickupLocationImage = "assets/png/pickupLocationImage.png";
+  static const String dropoffLocationImage = "assets/png/dropoffLocationImage.png";
+  static const String googleMapImage = "assets/png/googleMapImage.png";
+
 
 
 // App Fonts

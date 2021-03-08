@@ -55,7 +55,7 @@ class BookLoadComponents{
             height: 8,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
-                color: AppColors.yellow
+                color: AppColors.colorBlack
             ),
           ),
           Container(
@@ -127,7 +127,12 @@ class BookLoadComponents{
     );
   }
 
-  Widget onLocationPickerButton({@required BuildContext context, @required Function onPress, @required String text, @required bool isSelected}){
+  Widget onLocationPickerButton({
+    @required BuildContext context,
+    @required Function onPress,
+    @required int buttonId,
+    @required String text,
+    @required bool isSelected}){
     return GestureDetector(
       onTap: () => onPress(),
       child: Container(
@@ -147,8 +152,7 @@ class BookLoadComponents{
             Icon(
               Elusive.location,
               size: 20,
-              color:
-              AppColors.colorBlack.withOpacity(0.8),
+              color: buttonId == 1? AppColors.colorBlack : AppColors.yellow,
             ),
             SizedBox(
               width: 10,

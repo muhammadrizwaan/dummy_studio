@@ -7,6 +7,7 @@ import 'package:fluttericon/octicons_icons.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class AcceptedComponents{
@@ -18,6 +19,7 @@ class AcceptedComponents{
         @required String time,
         @required String status,
         @required String vehicleType,
+        @required String vehicleCategory,
         @required String price,
         @required Function onClickPay,
         @required Function onClickCancel,
@@ -82,84 +84,9 @@ class AcceptedComponents{
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Row(
-                  //   children: [
-                  //     Image(
-                  //       image: AssetImage(Assets.df_pk_job),
-                  //     ),
-                  //     SizedBox(
-                  //       width: AppSizes.width * 0.01,
-                  //     ),
-                  //     Column(
-                  //       crossAxisAlignment: CrossAxisAlignment.start,
-                  //       children: [
-                  //         Text(
-                  //           pickUpLocation,
-                  //           style: TextStyle(
-                  //             fontSize: 12,
-                  //             fontFamily: Assets.poppinsRegular,
-                  //             color: AppColors.locationText,
-                  //             // fontWeight: FontWeight.bold
-                  //           ),
-                  //         ),
-                  //         SizedBox(
-                  //           height: AppSizes.height * 0.01,
-                  //         ),
-                  //         Text(
-                  //           destinationLocation,
-                  //           style: TextStyle(
-                  //             fontSize: 12,
-                  //             fontFamily: Assets.poppinsRegular,
-                  //             color: AppColors.locationText,
-                  //             // fontWeight: FontWeight.bold
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ],
-                  // ),
                   Row(
                     children: [
-                      Container(
-                        height: AppSizes.height * 0.043,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              width: 6,
-                              height: 6,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: AppColors.yellow
-                              ),
-                            ),
-                            Container(
-                              width: 3,
-                              height: 3,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: AppColors.grey
-                              ),
-                            ),
-                            Container(
-                              width: 3,
-                              height: 3,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: AppColors.grey
-                              ),
-                            ),
-                            Container(
-                              width: 6,
-                              height: 6,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: AppColors.yellow
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
+                      CommonWidgets.getLocationPointers(),
                       SizedBox(
                         width: AppSizes.width * 0.01,
                       ),
@@ -256,6 +183,31 @@ class AcceptedComponents{
                       fontSize: 12,
                       fontFamily: Assets.poppinsMedium,
                       color: AppColors.yellow,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: AppSizes.height * 0.01,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Vehicle Category:',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontFamily: Assets.poppinsRegular,
+                    color: AppColors.locationText,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
+                Text(
+                  vehicleCategory,
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontFamily: Assets.poppinsMedium,
+                      color: AppColors.colorBlack,
                       fontWeight: FontWeight.bold),
                 ),
               ],

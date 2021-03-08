@@ -9,15 +9,33 @@ import 'package:truckoom_shipper/res/sizes.dart';
 
 class BusinessProfileComponents{
   Widget getProfileImage({@required String profileImg}){
-    return Container(
-      child: Center(
-        child: CircleAvatar(
-          backgroundImage: profileImg != ""? NetworkImage(baseUrl+profileImg): AssetImage(Assets.profileImg),
-          radius: 50.0,
-          backgroundColor: AppColors.white,
+    return InkWell(
+      child: Align(
+        alignment: Alignment.center,
+        child: Container(
+          height: AppSizes.height*0.2,
+          width: AppSizes.width*0.4,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            image: DecorationImage(
+              image: NetworkImage(
+                baseUrl+profileImg,
+              ),
+              fit: BoxFit.fill,
+            ),
+          ),
         ),
       ),
     );
+    //   Container(
+    //   child: Center(
+    //     child: CircleAvatar(
+    //       backgroundImage: profileImg != ""? NetworkImage(baseUrl+profileImg): AssetImage(Assets.profileImg),
+    //       radius: 50.0,
+    //       backgroundColor: AppColors.white,
+    //     ),
+    //   ),
+    // );
   }
 
   Widget getBusinessProfileContainer(
@@ -26,6 +44,8 @@ class BusinessProfileComponents{
         @required String email,
         @required String password,
         @required String country,
+        @required String phone,
+        @required String userId
       })
   {
     return Container(
@@ -124,7 +144,32 @@ class BusinessProfileComponents{
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('City',
+                Text('Phone',
+                  style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsLight,
+                    color: AppColors.profileTextColor,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
+                Text(phone,
+                  style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsLight,
+                    color: AppColors.profileTextColor,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Divider(height: 10,),
+          Container(
+            padding: EdgeInsets.all(AppSizes.width * 0.02),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Emirates',
                   style: TextStyle(
                     fontSize:12,
                     fontFamily: Assets.poppinsLight,
@@ -133,6 +178,31 @@ class BusinessProfileComponents{
                   ),
                 ),
                 Text(country,
+                  style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsLight,
+                    color: AppColors.profileTextColor,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Divider(height: 10,),
+          Container(
+            padding: EdgeInsets.all(AppSizes.width * 0.02),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('User ID',
+                  style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsLight,
+                    color: AppColors.profileTextColor,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
+                Text(userId,
                   style: TextStyle(
                     fontSize:12,
                     fontFamily: Assets.poppinsLight,

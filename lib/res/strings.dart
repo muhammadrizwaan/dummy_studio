@@ -18,10 +18,17 @@ class Strings {
   static const String loginSuccessful = "Login Successful";
   static const String aed = "AED";
   static const String yes = "Yes";
+  static const String approve = "Approve";
+  static const String cancel = "Cancel";
   static const String no = "No";
+  static const String logOutPopupText = "Are you sure you want to Sign Out";
   static const String cancelLoadAlertText = "Are you sure you want to cancel the Load?";
   static const String paymentAlertText = "Are you sure you want to Pay?";
   static const String deleteLoadAlertText = "Are you sure you want to cancel the job?";
+  static const String phonePlaceholderText = "+971501234567";
+  static const String invoiceDownload = "Invoice Downloaded Successfully";
+  static const String receiverSignature = "Receiver Signature";
+
 
   static const String roundTrip = "Round Trip";
   static const String pickupDateAndTime = "Pickup date and time";
@@ -30,6 +37,7 @@ class Strings {
   static const String receiverName = "Receiver Name";
   static const String receiverPhone = "Receiver Phone";
   static const String goodType = "Good Type";
+  static const String loadId = "Job ID";
   static const String weight = "Weight";
   static const String description = "Description";
   static const String notification = "Notification";
@@ -95,4 +103,12 @@ class Strings {
   static const String goodTypeErrorText = "Please select GoodType";
   static const String pickupLocationErrorText = "Please select Pickup Location";
   static const String dropoffLocationErrorText = "Please select Dropoff Location";
+
+
+  // Tabs Strings
+  static const String placedText = "Placed";
+  static const String acceptedText = "Accepted";
+  static const String inProcessText = "InProcess";
+  static const String cancelledText = "Cancelled";
+  static const String deliveredText = "Delivered";
 }

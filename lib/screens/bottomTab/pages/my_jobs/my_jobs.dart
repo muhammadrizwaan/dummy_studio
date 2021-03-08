@@ -4,18 +4,24 @@ import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/res/assets.dart';
+import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs_components.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/accepted/accepted.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/accepted/accepted_provider.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/cancelled/cancelled.dart';
-import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/dispatch/dispatch.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/cancelled/cancelled_provider.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/delivered/delivered.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/delivered/delivered_provider.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/in_process/in_process.dart';
-import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/my_jobs_provider.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/in_process/in_process_provider.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/placed/placed.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/placed/placed_provider.dart';
 import 'package:truckoom_shipper/screens/notifications/notifications.dart';
 import '../../../../animations/slide_right.dart';
 import '../../../../res/colors.dart';
 import '../../../../res/sizes.dart';
 import '../../../../widgets/common_widgets.dart';
+import 'my_jobs_provider.dart';
 
 class MyJobs extends StatefulWidget {
 
@@ -26,6 +32,12 @@ class MyJobs extends StatefulWidget {
 class _MyJobsState extends State<MyJobs> {
   MyJobsComponents _jobsComponents;
   MyJobsProvider _myJobsProvider;
+  PlacedProvider _placedProvider;
+  AcceptedProvider _acceptedProvider;
+  InProcessProvider _inProcessProvider;
+  CancelledProvider _cancelledProvider;
+  DeliveredProvider _deliveredProvider;
+
   int count;
 
   @override
@@ -33,6 +45,11 @@ class _MyJobsState extends State<MyJobs> {
     super.initState();
     _myJobsProvider = Provider.of<MyJobsProvider>(context, listen: false);
     _myJobsProvider.init(context: context);
+    _placedProvider = Provider.of<PlacedProvider>(context, listen: false);
+    _acceptedProvider = Provider.of<AcceptedProvider>(context, listen: false);
+    _inProcessProvider = Provider.of<InProcessProvider>(context, listen: false);
+    _cancelledProvider = Provider.of<CancelledProvider>(context, listen: false);
+    _deliveredProvider = Provider.of<DeliveredProvider>(context, listen: false);
     count = 0;
     _jobsComponents = MyJobsComponents();
   }
@@ -41,6 +58,11 @@ class _MyJobsState extends State<MyJobs> {
   @override
   Widget build(BuildContext context) {
     Provider.of<MyJobsProvider>(context, listen: true);
+    Provider.of<PlacedProvider>(context, listen: true);
+    Provider.of<AcceptedProvider>(context, listen: true);
+    Provider.of<InProcessProvider>(context, listen: true);
+    Provider.of<CancelledProvider>(context, listen: true);
+    Provider.of<DeliveredProvider>(context, listen: true);
     return DefaultTabController(
       length: 5,
       child: Container(
@@ -77,76 +99,26 @@ class _MyJobsState extends State<MyJobs> {
                     color: AppColors.yellow,
                   ),
                   tabs: [
-                    Container(
-                      width: AppSizes.width * 0.3,
-                      // width: AppSizes.width * 0.25,
-                      height: AppSizes.height*0.045,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: AppColors.yellow,
-                        ),
-                        borderRadius: BorderRadius.circular(05),
-                      ),
-                      child: Tab(
-                        child: Text("Placed (${_myJobsProvider.onLoadCounts().result.placed})",),
-                      ),
+                    _jobsComponents.getTab(
+                        text: Strings.placedText,
+                        count: _myJobsProvider.placedCount
                     ),
-                    Container(
-                      width: AppSizes.width * 0.3,
-                      // width: AppSizes.width * 0.25,
-                      height: AppSizes.height*0.045,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: AppColors.yellow,
-                        ),
-                        borderRadius: BorderRadius.circular(05),
-                      ),
-                      child: Tab(
-                        child: Text("Accepted (${_myJobsProvider.onLoadCounts().result.acceptedByTransporter})",),
-                      ),
+                    _jobsComponents.getTab(
+                        text: Strings.acceptedText,
+                        count: _myJobsProvider.acceptedCount
                     ),
-                    Container(
-                      width: AppSizes.width * 0.3,
-                      // width: AppSizes.width * 0.25,
-                      height: AppSizes.height*0.045,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: AppColors.yellow,
-                        ),
-                        borderRadius: BorderRadius.circular(05),
-                      ),
-                      child: Tab(
-                        child: Text("In Process (${_myJobsProvider.onLoadCounts().result.acceptedByShipper})",),
-                      ),
+                    _jobsComponents.getTab(
+                        text: Strings.inProcessText,
+                        count: _myJobsProvider.inProcessCount
                     ),
-                    Container(
-                      width: AppSizes.width * 0.3,
-                      // width: AppSizes.width * 0.25,
-                      height: AppSizes.height*0.045,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: AppColors.yellow,
-                        ),
-                        borderRadius: BorderRadius.circular(05),
-                      ),
-                      child: Tab(
-                        child: Text("Delivered (${_myJobsProvider.onLoadCounts().result.delivered})",),
-                      ),
+                    _jobsComponents.getTab(
+                        text: Strings.deliveredText,
+                        count: _myJobsProvider.deliveredCount
                     ),
-                    Container(
-                      width: AppSizes.width * 0.3,
-                      // width: AppSizes.width * 0.25,
-                      height: AppSizes.height*0.045,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: AppColors.yellow,
-                        ),
-                        borderRadius: BorderRadius.circular(05),
-                      ),
-                      child: Tab(
-                        child: Text("Canceled (${_myJobsProvider.onLoadCounts().result.rejectedByShipper})",),
-                      ),
-                    ),
+                    _jobsComponents.getTab(
+                        text: Strings.cancelledText,
+                        count: _myJobsProvider.cancelledCount
+                    )
                   ],
                 ),
               ),
@@ -160,7 +132,7 @@ class _MyJobsState extends State<MyJobs> {
                     Placed(),
                     Accepted(),
                     InProcess(),
-                    Dispatch(),
+                    Delivered(),
                     Cancelled(),
                   ],
                 ),

@@ -47,4 +47,8 @@ class PreferenceUtils {
     return _prefsInstance.getBool (key) ?? defValue ?? false;
   }
 
+  static void clear(){
+    _prefsInstance.clear();
+  }
+
 }

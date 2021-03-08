@@ -3,6 +3,7 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/get_token.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
 import 'package:truckoom_shipper/models/api_models/load_detail_response.dart';
@@ -10,6 +11,7 @@ import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/network/network_helper.dart';
 import 'package:truckoom_shipper/network/network_helper_impl.dart';
 import 'package:truckoom_shipper/res/strings.dart';
+import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/placed/placed_provider.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:http/http.dart' as http;
@@ -32,6 +34,7 @@ class JobDetailsProvider extends ChangeNotifier{
   init({@required BuildContext context, @required int loadId}) async{
     this.context = context;
     connectivityResult = "";
+    isDataFetched = false;
     token = "";
     _placedProvider = Provider.of<PlacedProvider>(context, listen: false);
     await getLoadDetail(context: context, loadId: loadId);
@@ -94,8 +97,8 @@ class JobDetailsProvider extends ChangeNotifier{
           print('deleted load');
           notifyListeners();
           _loader.hideLoader(context);
-          Navigator.pop(context);
-          _placedProvider.getPlacedLoad(context: context);
+          // Navigator.pop(context);
+          Navigator.pushReplacement(context, SlideRightRoute(page: BottomTab()));
           ApplicationToast.getSuccessToast(durationTime: 3, heading: Strings.success, subHeading: "Operation performed Succesfully");
         } else {
           ApplicationToast.getErrorToast(

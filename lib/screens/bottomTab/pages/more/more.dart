@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/contsants/constants.dart';
-import 'package:truckoom_shipper/routes/routes.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/more/more_components.dart';
 import 'package:truckoom_shipper/screens/businessProfile/business_profile.dart';
 import 'package:truckoom_shipper/screens/language/language.dart';
 import 'package:truckoom_shipper/screens/wallet/wallet.dart';
+import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/faqs_expandable.dart';
 import 'package:truckoom_shipper/widgets/language_expandable_container.dart';
 import '../../../../animations/slide_right.dart';
+import '../../../../main.dart';
 import '../../../../res/colors.dart';
 import '../../../../res/sizes.dart';
 import '../../../../res/strings.dart';
@@ -38,6 +39,12 @@ class _MoreState extends State<More> {
     _moreComponents = MoreComponents();
     print('device id');
     print(PreferenceUtils.getString(Strings.deviceId));
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 
   @override
@@ -109,7 +116,16 @@ class _MoreState extends State<More> {
                   _moreComponents.touchableButton(
                     text: 'Logout',
                     onPress: () {
-                      onLogout();
+                      ApplicationToast.getLogOutPopup(
+                        context: context,
+                        onAcceptText: Strings.yes,
+                        onRejectText: Strings.no,
+                        onAccept: (){
+                          onLogout();
+                        },
+                        onReject: (){Navigator.pop(context);},
+                        headerText: Strings.logOutPopupText,
+                      );
                     },
                   ),
                   Divider(
@@ -123,23 +139,8 @@ class _MoreState extends State<More> {
   }
 
   onLogout() async{
-    Constants.setUserEmail("");
-    Constants.setCityId(0);
-    Constants.setCityName("");
-    Constants.setPassword("");
-    Constants.setToken("");
-    Constants.setUser("");
-    Constants.setUserId(0);
-    Constants.setUserImage("");
-    Constants.setUserName("");
-    Constants.setUserPhone("");
-    Constants.setLicenseExpiryDate("");
-    Constants.setCommpanyTrn("");
-    Constants.setCommpanyPhone("");
-    Constants.setCommpanyName("");
-    await Constants.setLicenseImages([]);
-    Navigator.pushAndRemoveUntil(context, SlideRightRoute(page: Language()), (route) => false);
-    // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => Language()), ModalRoute.withName(Routes.bottomTab));
+    PreferenceUtils.clear();
+    MyApp().restartApp(context: context);
   }
 
 

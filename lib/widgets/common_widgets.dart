@@ -1,15 +1,19 @@
+import 'package:date_time_format/date_time_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttericon/elusive_icons.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../res/colors.dart';
 
@@ -66,8 +70,8 @@ class CommonWidgets {
           GestureDetector(
             onTap: () => onCouponPress(),
             child: Container(
-              height: AppSizes.height * 0.05,
-              width: AppSizes.width * 0.1,
+              height: AppSizes.height * 0.06,
+              width: AppSizes.width * 0.13,
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(15)),
               child: Image(
@@ -78,7 +82,7 @@ class CommonWidgets {
           ),
           SizedBox(width: AppSizes.width * 0.02),
           Container(
-            width: AppSizes.width * 0.76,
+            width: AppSizes.width * 0.75,
             height: AppSizes.height * 0.06,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
@@ -205,6 +209,7 @@ class CommonWidgets {
       @required IconData iconName,
       @required Function onPress}) {
     return Container(
+      width:  AppSizes.width,
       padding: EdgeInsets.all(AppSizes.width * 0.05),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -246,6 +251,7 @@ class CommonWidgets {
   static Widget tabsAppBar2(
       {@required String text, @required Function onPress}) {
     return Container(
+      width: AppSizes.width,
       padding: EdgeInsets.only(
         left: AppSizes.width * 0.05,
         top: AppSizes.width * 0.05,
@@ -369,6 +375,73 @@ class CommonWidgets {
     );
   }
 
+  static Widget getTextFieldWithImage(
+      {@required bool isPassword,
+        @required String leftIcon,
+        @required TextEditingController textEditingController,
+        @required String hintText,
+      }) {
+    return Container(
+      height: AppSizes.height * 0.07,
+      width: AppSizes.width * 0.85,
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.02),
+      decoration: BoxDecoration(
+        color: AppColors.lightGray,
+        border: Border.all(color: AppColors.lightGray),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            height: AppSizes.height * 0.03,
+            width: AppSizes.width * 0.075,
+            child: Image(
+              image: AssetImage(leftIcon),
+              // fit: BoxFit.cover,
+            ),
+          ),
+          Center(
+            child: Container(
+              // color: AppColors.yellow,
+              padding: EdgeInsets.only(left: 5),
+              width: AppSizes.width * 0.62,
+              // height: AppSizes.height * 0.05,
+              child: TextField(
+                style: TextStyle(
+                  decoration: TextDecoration.none,
+                  fontFamily: Assets.poppinsLight,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                ),
+                controller: textEditingController,
+                obscureText: isPassword,
+                decoration: InputDecoration(
+                  hintText: hintText,
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(
+                    decoration: TextDecoration.none,
+                    fontSize: 12,
+                    fontFamily: Assets.poppinsLight,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Container(
+              height: AppSizes.height * 0.035,
+              width: AppSizes.width * 0.075,
+              child: Image(
+                  image: AssetImage(
+                      'assets/png/check_circle_fill_pn.png'),
+              ),
+          ),
+        ],
+      ),
+    );
+  }
+
   static Widget getPhoneNumberField(
       {@required bool isPassword,
         @required IconData leftIcon,
@@ -401,6 +474,69 @@ class CommonWidgets {
               // height: AppSizes.height * 0.05,
               child: TextField(
                 keyboardType: TextInputType.phone,
+                style: TextStyle(
+                  decoration: TextDecoration.none,
+                  fontFamily: Assets.poppinsLight,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                ),
+                controller: textEditingController,
+                obscureText: isPassword,
+                decoration: InputDecoration(
+                  hintText: hintText,
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(
+                    decoration: TextDecoration.none,
+                    fontSize: 12,
+                    fontFamily: Assets.poppinsLight,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Container(
+              height: AppSizes.height * 0.035,
+              width: AppSizes.width * 0.085,
+              child: Image(
+                  image: AssetImage(
+                      'assets/png/check_circle_fill_pn.png'))),
+        ],
+      ),
+    );
+  }
+  static Widget getTRNField(
+      {@required bool isPassword,
+        @required IconData leftIcon,
+        @required TextEditingController textEditingController,
+        @required String hintText}) {
+    return Container(
+      height: AppSizes.height * 0.07,
+      width: AppSizes.width * 0.85,
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.02),
+      decoration: BoxDecoration(
+        color: AppColors.lightGray,
+        border: Border.all(color: AppColors.lightGray),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Opacity(
+              opacity: 0.7,
+              child: Icon(
+                leftIcon,
+                size: 20,
+              )),
+          Center(
+            child: Container(
+              // color: AppColors.yellow,
+              padding: EdgeInsets.only(left: 5),
+              width: AppSizes.width * 0.65,
+              // height: AppSizes.height * 0.05,
+              child: TextField(
+                keyboardType: TextInputType.phone,
+                inputFormatters: [LengthLimitingTextInputFormatter(15)],
                 style: TextStyle(
                   decoration: TextDecoration.none,
                   fontFamily: Assets.poppinsLight,
@@ -778,6 +914,159 @@ class CommonWidgets {
         ],
       ),
     );
+  }
+
+  static launchURL() async {
+    if (await canLaunch(termsAndConditionLink)) {
+      await launch(termsAndConditionLink);
+    } else {
+      throw 'Could not launch $termsAndConditionLink';
+    }
+  }
+
+  static Widget getLoadDetailCommonText({
+    @required IconData icon,
+    @required String text,
+    @required String lable
+  }){
+    return Row(
+      children: [
+        Container(
+          height: AppSizes.height * 0.05,
+          width: AppSizes.width * 0.1,
+          decoration: BoxDecoration(
+              color: AppColors.lightGray,
+              borderRadius: BorderRadius.circular(5)
+          ),
+          child: Opacity(
+              opacity: 0.7,
+              child: Icon(
+                icon,
+                size: 20,
+              )),
+        ),
+        SizedBox(width: AppSizes.width * 0.02),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextView.getLabelText04(
+                lable,
+                color: AppColors.colorBlack
+            ),
+            SizedBox(height: AppSizes.height * 0.001),
+            TextView.getLabel2Text04(
+              text,
+              color: AppColors.colorBlack,
+            ),
+          ],
+        )
+      ],
+    );
+  }
+
+  static Widget getLoadDetailLableWithImage({
+    @required String image,
+    @required String text,
+    @required String lable
+  }){
+    return Row(
+      children: [
+        Container(
+          height: AppSizes.height * 0.05,
+          width: AppSizes.width * 0.1,
+          decoration: BoxDecoration(
+              color: AppColors.lightGray,
+              borderRadius: BorderRadius.circular(5)
+          ),
+          child: Container(
+            margin: EdgeInsets.all(AppSizes.width * 0.02),
+            height: AppSizes.height * 0.001,
+            width: AppSizes.width * 0.001,
+            child: Image.asset(image),
+          ),
+        ),
+        SizedBox(width: AppSizes.width * 0.02),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextView.getLabelText04(
+                lable,
+                color: AppColors.colorBlack
+            ),
+            SizedBox(height: AppSizes.height * 0.001),
+            TextView.getLabel2Text04(
+              text,
+              color: AppColors.colorBlack,
+            ),
+          ],
+        )
+      ],
+    );
+  }
+
+  static Widget getSignatureBox({@required String eSignature}) {
+    return Container(
+      margin: EdgeInsets.only(top: AppSizes.height * 0.01, bottom: 20),
+      height: AppSizes.height * 0.18,
+      width: AppSizes.width,
+      decoration: BoxDecoration(
+        color: AppColors.lightGray,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Image(
+        image: NetworkImage(eSignature),
+        // image: AssetImage(Assets.signature),
+      ),
+    );
+  }
+
+  static Widget getLocationPointers() {
+    return Container(
+      height: AppSizes.height * 0.043,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            width: 6,
+            height: 6,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: AppColors.colorBlack
+            ),
+          ),
+          Container(
+            width: 3,
+            height: 3,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: AppColors.grey
+            ),
+          ),
+          Container(
+            width: 3,
+            height: 3,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: AppColors.grey
+            ),
+          ),
+          Container(
+            width: 6,
+            height: 6,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: AppColors.yellow
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  static getDateTimeFormate({@required String time}){
+    return DateTimeFormat.format(DateTime.parse(time), format: 'M j Y, g:i a');
   }
 
 }

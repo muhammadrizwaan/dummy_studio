@@ -51,6 +51,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
         Provider.of<SelectVehicleProvider>(context, listen: false);
     _selectVehicleProvider.init(context: context);
     id = 0;
+
     vehicleCategoryId = 0;
     vehicleTypeId = 0;
     isSelect = false;
@@ -254,28 +255,32 @@ class _SelectVehicleState extends State<SelectVehicle> {
               alignment: Alignment.bottomCenter,
               child: isSelect
                   ? Container(
-                      height: AppSizes.height * 0.07,
-                      margin: EdgeInsets.only(
-                          bottom: AppSizes.width * 0.03,
-                          left: AppSizes.width * 0.05,
-                          right: AppSizes.width * 0.05),
-                      decoration: BoxDecoration(
-                        color: AppColors.yellow,
-                        borderRadius: BorderRadius.circular(
-                          08,
+                color: AppColors.white,
+                    padding: EdgeInsets.only(top: AppSizes.height * 0.01),
+                    child: Container(
+                        height: AppSizes.height * 0.07,
+                        margin: EdgeInsets.only(
+                            bottom: AppSizes.width * 0.03,
+                            left: AppSizes.width * 0.05,
+                            right: AppSizes.width * 0.05),
+                        decoration: BoxDecoration(
+                          color: AppColors.yellow,
+                          borderRadius: BorderRadius.circular(
+                            08,
+                          ),
+                        ),
+                        width: AppSizes.width,
+                        child: FlatButton(
+                          onPressed: () {
+                            onNavigateNest();
+                          },
+                          child: TextView.getBottomButtonText04(
+                            "Next",
+                            color: AppColors.white,
+                          ),
                         ),
                       ),
-                      width: AppSizes.width,
-                      child: FlatButton(
-                        onPressed: () {
-                          onNavigateNest();
-                        },
-                        child: TextView.getBottomButtonText04(
-                          "Next",
-                          color: AppColors.white,
-                        ),
-                      ),
-                    )
+                  )
                   : Container(),
             ),
           ],
@@ -284,20 +289,6 @@ class _SelectVehicleState extends State<SelectVehicle> {
     );
   }
 
-  int _getVehicleTypeId() {
-    int tempGoodTypeId = 0;
-    for (int i = 0;
-        i < _selectVehicleProvider.getVehicleType().result.length;
-        i++) {
-      if (_selectedValue ==
-          _selectVehicleProvider.getVehicleType().result[i].description) {
-        tempGoodTypeId =
-            _selectVehicleProvider.getVehicleType().result[i].vehicleTypeId;
-        break;
-      }
-    }
-    return tempGoodTypeId;
-  }
 
   onNavigateNest() {
     // _selectVehicleProvider.data = [];
