@@ -6,6 +6,7 @@ import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/history/history_components.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/history/history_provider.dart';
+import 'package:truckoom_shipper/screens/jobDetails/job_details.dart';
 import 'package:truckoom_shipper/screens/notifications/notifications.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
 import '../../../../animations/slide_right.dart';
@@ -66,12 +67,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
               height: 20,
             ),
             Expanded(
-              child: _historyProvider.isDataFetched?
-              _historyProvider.histroyList.length > 0?
-              RefreshIndicator(
+              child: RefreshIndicator(
                 color: AppColors.yellow,
                 onRefresh: () => onRefresh(),
-                child: ListView.builder(
+                child: _historyProvider.histroyList.length > 0?
+                ListView.builder(
                     itemCount: _historyProvider.histroyList.length,
                     controller: _scrollController,
                     physics: const AlwaysScrollableScrollPhysics(),
@@ -87,20 +87,23 @@ class _HistoryScreenState extends State<HistoryScreen> {
                             jobDetail: _historyProvider.histroyList[index].loadId.toString(),
                             pickUpLocation: _historyProvider.histroyList[index].pickupLocation,
                             destinationLocation: _historyProvider.histroyList[index].dropoffLocation,
-                            startDate: _historyProvider.histroyList[index].pickupDate,
-                            endDate: _historyProvider.histroyList[index].pickupDate,
-                            price: "${Strings.aed} ${_historyProvider.histroyList[index].shipperCost.round()}",
+                            startDate: _historyProvider.histroyList[index].pickupDateTime,
+                            endDate: _historyProvider.histroyList[index].dropoffDateTime,
+                            price: "${Strings.aed} ${_historyProvider.histroyList[index].shipperCost}",
                             status: _historyProvider.histroyList[index].status,
                             vehicleType: _historyProvider.histroyList[index].vehicleTypeName,
                             vehicleCategory: _historyProvider.histroyList[index].vehicleTypeName,
-                            startTime: _historyProvider.histroyList[index].pickupTime,
-                            endTime: _historyProvider.histroyList[index].pickupTime,
+                            startTime: _historyProvider.histroyList[index].pickupDateTime,
+                            endTime: _historyProvider.histroyList[index].dropoffDateTime,
                             onTap: () {
                               ApplicationToast.onDescriptionAlert(context: context, description: _historyProvider.histroyList[index].vehicleTypeDescription);
                             },
                             onInvoice: () {
                               Navigator.push(context, SlideRightRoute(page: InvoiceDetail(Id:_historyProvider.histroyList[index].loadId)));
                             },
+                            onDetail: (){
+                              Navigator.push(context, SlideRightRoute(page: JobDetails(status:"InProcess", loadId: _historyProvider.histroyList[index].loadId)));
+                            }
                           ),
                           SizedBox(
                             height: AppSizes.height * 0.02,
@@ -108,23 +111,18 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         ]),
                       );
                     }
-                ),
-              ):
-              Center(
-                child: Container(
-                    height: AppSizes.height * 0.15,
-                    // width: AppSizes.width,
-                    child: CommonWidgets.onNullData(text: Strings.noAvailableLoads)
-                ),
+                ):ListView(
+                  children: [
+                    Container(
+                        padding: EdgeInsets.symmetric(vertical: AppSizes.height * 0.3),
+                        // height: AppSizes.height * 0.15,
+                        // width: AppSizes.width,
+                        child: CommonWidgets.onNullData(text: Strings.noAvailableLoads)
+                    ),
+                  ],
+                )
               )
-                  :
-              Center(
-                child: Container(
-                  height: AppSizes.height * 0.15,
-                  // width: AppSizes.width,
-                  child: Lottie.asset(Assets.apiLoading, fit: BoxFit.cover),
-                ),
-              ),
+
             ),
             _historyProvider.isLoading?
             Container(

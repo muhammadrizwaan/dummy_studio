@@ -82,7 +82,9 @@ class _BusinessProfileState extends State<BusinessProfile> {
                                   email: Constants.getUserEmail(),
                                   password: Constants.getPassword(),
                                   phone: Constants.getUserPhone(),
-                                  country: Constants.getCityName()),
+                                  country: Constants.getCityName(),
+                                  userId: Constants.getUserId().toString()
+                          ),
                           SizedBox(height: AppSizes.height * 0.02),
                           _businessProfileComponents.getProfileLable(
                               lableText: "Business Information"),

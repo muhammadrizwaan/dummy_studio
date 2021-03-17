@@ -21,7 +21,8 @@ class CheckUser extends StatefulWidget {
 class _CheckUserState extends State<CheckUser> {
   CheckUserComponents checkUserComponents;
   bool button_indiviual, button_businees;
-
+  List products = [];
+  int i = 0;
 
   @override
   void initState() {
@@ -68,6 +69,7 @@ class _CheckUserState extends State<CheckUser> {
                        button_indiviual = true;
                        button_businees = false;
                      });
+                     // addData();
                      Navigator.push(context, SlideRightRoute(page: PhoneNumber(tag: Strings.indiviual,)));
                    },
                    state: button_indiviual),
@@ -79,6 +81,7 @@ class _CheckUserState extends State<CheckUser> {
                      button_indiviual = false;
                      button_businees = true;
                    });
+                   // onRemoveData(0);
                    Navigator.push(context, SlideRightRoute(page: PhoneNumber(tag: Strings.business,)));
                  },
                  state: button_businees,
@@ -90,4 +93,33 @@ class _CheckUserState extends State<CheckUser> {
      ),
     );
   }
+
+  addData(){
+    var productMap = {
+      'name': "an",
+      'price': 25,
+      'NO': i,
+    };
+    i++;
+    products.add(productMap);
+    print(products.length);
+    for(int i =0; i< products.length; i++){
+      print('name is');
+      print(products[i]['name']+products[i]['NO'].toString());
+    }
+  }
+  //
+  // onRemoveData(int index){
+  //   List tempData = [];
+  //   for(int i =0; i< products.length; i++){
+  //     if(products[i]['NO'] != index){
+  //       tempData.add(products[i]);
+  //     }
+  //   }
+  //   products = tempData;
+  //   for(int i =0; i< products.length; i++){
+  //     print('name is');
+  //     print(products[i]['name']+products[i]['NO'].toString());
+  //   }
+  // }
 }

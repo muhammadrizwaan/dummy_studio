@@ -9,7 +9,7 @@ import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/routes/routes.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
-
+import 'dart:io' as io;
 import 'commons/utils.dart';
 
 
@@ -40,18 +40,18 @@ class _MyAppState extends State<MyApp> {
       onMessage: (Map<String, dynamic> message) async {
         print("onMessage: $message");
         // _showItemDialog(message);
-        ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "Message Received");
+        // ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "Notification Received");
       },
       // onBackgroundMessage: myBackgroundMessageHandler,
       onLaunch: (Map<String, dynamic> message) async {
         print("onLaunch: $message");
         // _navigateToItemDetail(message);
-        ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "Message Received");
+        // ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "Notification Received");
       },
       onResume: (Map<String, dynamic> message) async {
         print("onResume: $message");
         // _navigateToItemDetail(message);
-        ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "Message Received");
+        // ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "Notification Received");
       },
     );
   }
@@ -60,6 +60,14 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       key = UniqueKey();
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if(io.Platform.isIOS){
+      _firebaseMessaging.requestNotificationPermissions(IosNotificationSettings());
+    }
   }
 
   @override

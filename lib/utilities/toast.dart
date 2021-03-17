@@ -6,6 +6,7 @@ import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
+import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
@@ -416,7 +417,7 @@ class ApplicationToast {
                                     ),
                                   ),
                                   alignment: Alignment.center,
-                                  child: TextView.getTabBarButtonText(Strings.yes,
+                                  child: TextView.getTabBarButtonText(Strings.approve,
                                       color: Colors.white),
                                 ),
                               ),
@@ -436,7 +437,7 @@ class ApplicationToast {
                                         color: AppColors.yellow,
                                       )),
                                   alignment: Alignment.center,
-                                  child: TextView.getTabBarButtonText(Strings.no,
+                                  child: TextView.getTabBarButtonText(Strings.cancel,
                                       color: AppColors.yellow),
                                 ),
                               ),
@@ -539,7 +540,7 @@ class ApplicationToast {
                                     ),
                                   ),
                                   alignment: Alignment.center,
-                                  child: TextView.getTabBarButtonText(Strings.yes,
+                                  child: TextView.getTabBarButtonText(Strings.approve,
                                       color: Colors.white),
                                 ),
                               ),
@@ -559,7 +560,7 @@ class ApplicationToast {
                                         color: AppColors.yellow,
                                       )),
                                   alignment: Alignment.center,
-                                  child: TextView.getTabBarButtonText(Strings.no,
+                                  child: TextView.getTabBarButtonText(Strings.cancel,
                                       color: AppColors.yellow),
                                 ),
                               ),
@@ -717,6 +718,137 @@ class ApplicationToast {
                   ],
                 ),
               ),
+            );
+          },
+        )
+      },
+    };
+  }
+
+  static onReportIssue({
+    @required BuildContext context,
+    @required String heading,
+    @required String lable,
+    @required String placeHolder,
+    @required Function onPress,
+    @required TextEditingController reasonControler,
+    @required Function onClose
+  }) {
+    return {
+      {
+        showDialog(
+          context: context,
+          builder: (_) {
+            return Material(
+                color: AppColors.blackTextColor.withOpacity(0.5),
+                child: Scaffold(
+                  backgroundColor: AppColors.blackTextColor.withOpacity(0.5),
+                  body: Center(
+                    child: Container(
+                      child: Stack(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(
+                              left: AppSizes.width * 0.12,
+                              right: AppSizes.width * 0.12,
+                              top: AppSizes.width * 0.07,
+                            ),
+                            padding: EdgeInsets.all(AppSizes.height * 0.02),
+                            height: AppSizes.height * 0.41,
+                            width: AppSizes.width,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border:
+                              Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
+                              borderRadius: BorderRadius.circular(
+                                10,
+                              ),
+                            ),
+                            child: ListView(
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(height: AppSizes.height * 0.02),
+                                    TextView.getRatingPopUpHeaderText(heading, color: AppColors.colorBlack),
+                                    SizedBox(height: AppSizes.height * 0.02),
+                                    TextView.getLightText04(lable,
+                                        color: AppColors.colorBlack,
+                                        textAlign: TextAlign.center),
+                                    SizedBox(height: AppSizes.height * 0.01),
+                                    Container(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: AppSizes.width * 0.02),
+                                      height: AppSizes.height * 0.12,
+                                      decoration: BoxDecoration(
+                                          color: AppColors.white,
+                                          borderRadius: BorderRadius.circular(5),
+                                          border:
+                                          Border.all(color: AppColors.borderColor)),
+                                      child: TextField(
+                                          style: TextStyle(
+                                              decoration: TextDecoration.none,
+                                              fontFamily: Assets.poppinsLight,
+                                              fontSize: 12,
+                                              color: AppColors.colorBlack),
+                                          keyboardType: TextInputType.multiline,
+                                          minLines: 1,
+                                          //Normal textInputField will be displayed
+                                          maxLines: 5,
+                                          controller: reasonControler,
+                                          // readOnly: true,
+                                          decoration: InputDecoration(
+                                            // prefixIcon: Image(image: AssetImage('$leftIcon')) ,
+                                            hintText: placeHolder,
+                                            border: InputBorder.none,
+                                            hintStyle: TextStyle(
+                                              decoration: TextDecoration.none,
+                                              fontSize: 12,
+                                              color: AppColors.colorBlack.withOpacity(0.6),
+                                              fontFamily: Assets.poppinsLight,
+                                            ),
+                                          ),
+                                          textAlignVertical: TextAlignVertical.top),
+                                    ),
+                                    SizedBox(height: AppSizes.height * 0.03),
+                                    Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: CommonWidgets.getBottomButton(
+                                          text: Strings.submit, onPress: () => onPress()),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () => onClose(),
+                            child: Container(
+                              margin: EdgeInsets.only(
+                                  left: AppSizes.width * 0.81,
+                                  top: AppSizes.height * 0.015),
+                              height: AppSizes.width * 0.1,
+                              width: AppSizes.width * 0.1,
+                              decoration: BoxDecoration(
+                                color: AppColors.white,
+                                border: Border.all(color: AppColors.yellow),
+                                borderRadius: BorderRadius.circular(
+                                  50,
+                                ),
+                              ),
+                              child: Icon(
+                                Icons.clear,
+                                color: AppColors.yellow,
+                                size: 25,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )
             );
           },
         )

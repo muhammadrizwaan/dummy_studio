@@ -38,7 +38,7 @@ class _FAQsExpandableState extends State<FAQsExpandable> {
           trailing: Icon(isExpanded ? FontAwesome5.chevron_down : FontAwesome5.chevron_right, size: 20, color: AppColors.colorBlack.withOpacity(0.4), ),
           title: Container(
             padding: EdgeInsets.only(left: AppSizes.width*0.035),
-            child: TextView.getLabelText04("Others", color: AppColors.colorBlack.withOpacity(0.6)),
+            child: TextView.getLabelText04("Help", color: AppColors.colorBlack.withOpacity(0.6)),
 
           ),
           children: [

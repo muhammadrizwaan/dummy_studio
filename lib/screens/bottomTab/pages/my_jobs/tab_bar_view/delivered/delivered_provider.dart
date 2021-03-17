@@ -124,9 +124,10 @@ class DeliveredProvider extends ChangeNotifier{
           _reviewsResponse = ReviewsResponse.fromJson(
               genericDecodeEncode.decodeJson(response.body));
           if (_reviewsResponse.code == 1) {
+            _myJobsProvider.deliveredList = _reviewsResponse.result.delivered;
+            notifyListeners();
             _loader.hideLoader(context);
             Navigator.pop(context);
-            print('reting success');
 
           } else {
             _loader.hideLoader(context);

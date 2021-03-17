@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:truckoom_shipper/res/assets.dart';
+import 'package:truckoom_shipper/res/colors.dart';
 import 'dart:math' show cos, sqrt, asin;
 import 'package:truckoom_shipper/utilities/toast.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MapView extends StatefulWidget {
   double startLat,startLong,endLat,endLong;
@@ -12,7 +16,25 @@ class MapView extends StatefulWidget {
   static String distanceBetweenLocations = "0.0";
   // String getDistance() => _distanceBetweenLocations;
   // String getTotalDistance() => _MapViewState
-
+  // static _MapViewState _map_state;
+  // MapView({@required this.startLat,@required this.startLong, @required this.endLat,@required this.endLong, @required this.apiKey,@required this.directionsApiKey})
+  // {
+  //   if (_map_state != null) {
+  //     if(_map_state.mounted){
+  //
+  //       _map_state.setCustomMarker().then((value) {
+  //         _map_state._getInitialLocation();
+  //       });
+  //
+  //         }
+  //   }
+  // }
+  //
+  // @override
+  // _MapViewState createState() {
+  //   _map_state = _MapViewState();
+  //   return _map_state;
+  // }
   MapView({@required this.startLat,@required this.startLong, @required this.endLat,@required this.endLong, @required this.apiKey,@required this.directionsApiKey});
 
   @override
@@ -49,47 +71,63 @@ class _MapViewState extends State<MapView> {
     super.dispose();
     polylines = _currentPosition = destinationCoordinates =startCoordinates = markers = widget.startLong = widget.startLat = widget.endLong = widget.endLat = null;
   }
+  BitmapDescriptor pickupMarker;
+  BitmapDescriptor dropoffMarker;
+
+
+  Future<void> setCustomMarker() async{
+    startCoordinates = Position(latitude: widget.startLat, longitude: widget.startLong);
+    destinationCoordinates = Position(latitude: widget.endLat, longitude: widget.endLong);
+    // Start Location Marker
+    if(widget.startLat != null) {
+      Marker startMarker = Marker(
+        markerId: MarkerId('$startCoordinates'),
+        position: LatLng(
+          startCoordinates.latitude,
+          startCoordinates.longitude,
+        ),
+        infoWindow: InfoWindow(
+          title: 'Start',
+          snippet: "starting location",
+        ),
+        icon: await BitmapDescriptor.fromAssetImage(
+            ImageConfiguration(), Assets.pickupLocationImage),
+        // icon: pickupMarker,
+      );
+// Destination Location Marker
+      if (widget.endLong != null) {
+        Marker destinationMarker = Marker(
+          markerId: MarkerId('$destinationCoordinates'),
+          position: LatLng(
+            destinationCoordinates.latitude,
+            destinationCoordinates.longitude,
+          ),
+          infoWindow: InfoWindow(
+            title: 'Destination',
+            snippet: "destination location",
+          ),
+          icon: await BitmapDescriptor.fromAssetImage(
+              ImageConfiguration(), Assets.dropoffLocationImage),
+        );
+        markers.add(destinationMarker);
+      }
+
+      // Add the markers to the list
+      markers.add(startMarker);
+    }
+    // setState(() {
+    //
+    // });
+    return;
+  }
 
   @override
   void initState() {
     super.initState();
-    _getCurrentLocation();
-    startCoordinates = Position(latitude: widget.startLat, longitude: widget.startLong);
-    destinationCoordinates = Position(latitude: widget.endLat, longitude: widget.endLong);
-    // Start Location Marker
-    Marker startMarker = Marker(
-      markerId: MarkerId('$startCoordinates'),
-      position: LatLng(
-        startCoordinates.latitude,
-        startCoordinates.longitude,
-      ),
-      infoWindow: InfoWindow(
-        title: 'Start',
-        snippet: "starting location",
-      ),
-      icon: BitmapDescriptor.defaultMarker,
-    );
-
-// Destination Location Marker
-    Marker destinationMarker = Marker(
-      markerId: MarkerId('$destinationCoordinates'),
-      position: LatLng(
-        destinationCoordinates.latitude,
-        destinationCoordinates.longitude,
-      ),
-      infoWindow: InfoWindow(
-        title: 'Destination',
-        snippet: "destination location",
-      ),
-      icon: BitmapDescriptor.defaultMarker,
-    );
-    // Add the markers to the list
-    markers.add(startMarker);
-    markers.add(destinationMarker);
-
+    // _getCurrentLocation();
+    _getInitialLocation();
+    setCustomMarker();
     _createPolylines(startCoordinates, destinationCoordinates);
-
-
   }
 
 
@@ -101,6 +139,7 @@ class _MapViewState extends State<MapView> {
           children: <Widget>[
             GoogleMap(
               initialCameraPosition: _initialLocation,
+              // initialCameraPosition: _currentPosition,
               myLocationEnabled: true,
               myLocationButtonEnabled: false,
               mapType: MapType.normal,
@@ -121,6 +160,15 @@ class _MapViewState extends State<MapView> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                    InkWell(
+                      // splashColor: Colors.red, // inkwell color
+                      child: Image.asset(Assets.googleMapImage, width: 30, height: 30,),
+                      onTap: () {
+                        // on button tap
+                        openMap();
+                      },
+                    ),
+                    SizedBox(height: 10,),
                     ClipOval(
                       child: Material(
                         color: Colors.blueGrey, // button color
@@ -196,6 +244,47 @@ class _MapViewState extends State<MapView> {
       ),
     );
   }
+  openMap() async {
+    String googleUrl = 'https://www.google.com/maps/search/?api=1&query=${widget.endLat},${widget.endLong}';
+    if (await canLaunch(googleUrl)) {
+      await launch(googleUrl);
+    } else {
+      throw 'Could not open the map.';
+    }
+  }
+
+  _getInitialLocation() async{
+    await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
+        .then((Position position) async {
+      setState(() {
+        // Store the position in the variable
+        _initialLocation = CameraPosition(target: LatLng(position.latitude, position.longitude));
+        widget.startLat != null?
+        mapController.animateCamera(
+          CameraUpdate.newCameraPosition(
+            CameraPosition(
+              target: LatLng(widget.startLat, widget.startLong),//LatLng(position.latitude, position.longitude),
+              zoom: 8.0,
+
+            ),
+          ),
+        ):
+        mapController.animateCamera(
+          CameraUpdate.newCameraPosition(
+            CameraPosition(
+              target: LatLng(position.latitude, position.longitude),//LatLng(position.latitude, position.longitude),
+              zoom: 8.0,
+
+            ),
+          ),
+        );
+        print('CURRENT POS: $_currentPosition');// For moving the camera to current location
+
+      });
+    }).catchError((e) {
+      print(e);
+    });
+  }
 
 
   // Method for retrieving the current location
@@ -205,14 +294,14 @@ class _MapViewState extends State<MapView> {
       setState(() {
         // Store the position in the variable
         _currentPosition = position;
-
         print('CURRENT POS: $_currentPosition');
 
         // For moving the camera to current location
         mapController.animateCamera(
           CameraUpdate.newCameraPosition(
             CameraPosition(
-              target: LatLng(widget.startLat,widget.startLong),//LatLng(position.latitude, position.longitude),
+              // target: LatLng(widget.startLat,widget.startLong),//LatLng(position.latitude, position.longitude),
+              target: LatLng(position.latitude, position.longitude),//LatLng(position.latitude, position.longitude),
               zoom: 8.0,
 
             ),
@@ -250,7 +339,7 @@ class _MapViewState extends State<MapView> {
     // Initializing Polyline
     Polyline polyline = Polyline(
       polylineId: id,
-      color: Colors.blue,
+      color: AppColors.yellow,
       points: polylineCoordinates,
       width: 5,
     );
@@ -260,7 +349,7 @@ class _MapViewState extends State<MapView> {
       polylines[id] = polyline;
       print("PLOYLINE DRAWN :::::::::::" + polyline.points.toString());
     });
-
+    _viewBothCoordinates();
     getDistance();
   }
   ///////////////////////////////////////////////////////////////////////
@@ -296,5 +385,38 @@ class _MapViewState extends State<MapView> {
         c((lat2 - lat1) * p) / 2 +
         c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
     return 12742 * asin(sqrt(a));
+  }
+
+  _viewBothCoordinates(){
+    // Calculating to check that
+    // Define two position variables
+    Position _northeastCoordinates;
+    Position _southwestCoordinates;
+// southwest coordinate <= northeast coordinate
+    if (startCoordinates.latitude <= destinationCoordinates.latitude) {
+      _southwestCoordinates = startCoordinates;
+      _northeastCoordinates = destinationCoordinates;
+    } else {
+      _southwestCoordinates = destinationCoordinates;
+      _northeastCoordinates = startCoordinates;
+    }
+
+// Accommodate the two locations within the
+// camera view of the map
+    mapController.animateCamera(
+      CameraUpdate.newLatLngBounds(
+        LatLngBounds(
+          northeast: LatLng(
+            _northeastCoordinates.latitude,
+            _northeastCoordinates.longitude,
+          ),
+          southwest: LatLng(
+            _southwestCoordinates.latitude,
+            _southwestCoordinates.longitude,
+          ),
+        ),
+        100.0, // padding
+      ),
+    );
   }
 }

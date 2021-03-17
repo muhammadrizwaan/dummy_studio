@@ -205,8 +205,8 @@ class _BookLoadDetailsState extends State<BookLoadDetails> {
                                     // SizedBox(height: AppSizes.height * 0.02),
 
 
-                                    CommonWidgets.getLoadDetailCommonText(
-                                      icon: Entypo.user,
+                                    CommonWidgets.getLoadDetailLableWithImage(
+                                      image: Assets.roundTripIcon,
                                       lable: Strings.roundTrip,
                                       text: widget.isRoundTrip ? "Yes" : "No",
                                     ),

@@ -56,11 +56,11 @@ class _InProcessState extends State<InProcess> {
           Column(
             children: [
               Expanded(
-                child: _myJobsProvider.inProcessList.length > 0?
-                RefreshIndicator(
+                child:RefreshIndicator(
                   color: AppColors.yellow,
                   onRefresh: () => onRefresh(),
-                  child: ListView.builder(
+                  child: _myJobsProvider.inProcessList.length > 0?
+                  ListView.builder(
                       controller: _scrollController,
                       physics: const AlwaysScrollableScrollPhysics(),
                     itemCount: _myJobsProvider.inProcessList.length,
@@ -78,9 +78,10 @@ class _InProcessState extends State<InProcess> {
                           startDate: _myJobsProvider.inProcessList[index].pickupDateTime,
                           time:  _myJobsProvider.inProcessList[index].pickupDateTime,
                           status: _myJobsProvider.inProcessList[index].status,
+                          statusId: _myJobsProvider.inProcessList[index].loadStatusId,
                           vehicleType: _myJobsProvider.inProcessList[index].vehicleTypeName,
                           vehicleCategory: _myJobsProvider.inProcessList[index].vehicleCategoryName,
-                          price: "${Strings.aed} ${_myJobsProvider.inProcessList[index].shipperCost.round()}",
+                          price: "${Strings.aed} ${_myJobsProvider.inProcessList[index].shipperCost}",
                           onAlert: (){
                             ApplicationToast.onDescriptionAlert(context: context, description: _myJobsProvider.inProcessList[index].vehicleTypeDescription);
                           },
@@ -96,15 +97,15 @@ class _InProcessState extends State<InProcess> {
                         ),
                       ],
                     );
-                  }),
-                ):
-                Center(
-                  child: Container(
-                      height: AppSizes.height * 0.15,
-                      // width: AppSizes.width,
-                      child: CommonWidgets.onNullData(text: Strings.noAvailableLoads)
-                  ),
-                ),
+                  }):ListView(
+                    children: [
+                      Container(
+                          padding: EdgeInsets.symmetric(vertical: AppSizes.height * 0.3),
+                          child: CommonWidgets.onNullData(text: Strings.noAvailableLoads)
+                      ),
+                    ],
+                  )
+                )
               ),
               _inProcessProvider.isLoading?
               Container(

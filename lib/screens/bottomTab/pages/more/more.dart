@@ -126,7 +126,6 @@ class _MoreState extends State<More> {
                         onReject: (){Navigator.pop(context);},
                         headerText: Strings.logOutPopupText,
                       );
-                      // onLogout();
                     },
                   ),
                   Divider(

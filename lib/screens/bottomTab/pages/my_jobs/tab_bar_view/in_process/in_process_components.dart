@@ -22,6 +22,7 @@ class InProcessComponents {
       @required String vehicleType,
         @required String vehicleCategory,
       @required String price,
+        @required int statusId,
       @required Function onTap,
       @required Function onAlert,
       @required Function onDriverDetail}) {
@@ -254,7 +255,8 @@ class InProcessComponents {
             SizedBox(
               height: AppSizes.height * 0.01,
             ),
-            status == 'Ready To Load'?
+            statusId == 5?
+            Container():
             Container(
               width: AppSizes.width,
               height: AppSizes.height * 0.06,
@@ -272,7 +274,7 @@ class InProcessComponents {
                   color: AppColors.white.withOpacity(0.95),
                 ),
               ),
-            ):Container()
+            )
           ],
         ),
       ),

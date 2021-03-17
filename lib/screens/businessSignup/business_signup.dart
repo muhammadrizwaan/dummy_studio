@@ -131,7 +131,7 @@ class _BusinessSignupState extends State<BusinessSignup> {
                               hintText: "Confirm Password"
                           ),
                           SizedBox(height: AppSizes.height * 0.02),
-                          CommonWidgets.getSubHeadingText(text: "City"),
+                          CommonWidgets.getSubHeadingText(text: "Emirates"),
                           SizedBox(height: AppSizes.height * 0.01),
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 10),
@@ -162,7 +162,7 @@ class _BusinessSignupState extends State<BusinessSignup> {
                                       isExpanded: true,
                                       value: _selectedValue,
                                       hint: TextView.getLightText04(
-                                        "Select City",
+                                        "Choose Emirates",
                                         color: AppColors.colorBlack,
                                       ),
                                       items: _businessSignupProvider.description

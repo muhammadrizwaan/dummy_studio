@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
-import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
@@ -55,11 +53,11 @@ class _CancelledState extends State<Cancelled> {
           Column(
             children: [
               Expanded(
-                child: _myJobsProvider.cancelledList.length > 0?
-                RefreshIndicator(
+                child:RefreshIndicator(
                   color: AppColors.yellow,
                   onRefresh: () => onRefresh(),
-                  child: ListView.builder(
+                  child: _myJobsProvider.cancelledList.length > 0?
+                  ListView.builder(
                       controller: _scrollController,
                       physics: const AlwaysScrollableScrollPhysics(),
                       itemCount: _myJobsProvider.cancelledList.length,
@@ -78,7 +76,7 @@ class _CancelledState extends State<Cancelled> {
                               status: _myJobsProvider.cancelledList[index].status,
                               vehicleType: _myJobsProvider.cancelledList[index].vehicleTypeName,
                               vehicleCategory: _myJobsProvider.cancelledList[index].vehicleCategoryName,
-                              price: "${Strings.aed} ${_myJobsProvider.cancelledList[index].shipperCost.round()}",
+                              price: "${Strings.aed} ${_myJobsProvider.cancelledList[index].shipperCost}",
                               onAlert: () {
                                 ApplicationToast.onDescriptionAlert(context: context, description: _myJobsProvider.cancelledList[index].vehicleTypeDescription);
                               },
@@ -92,15 +90,15 @@ class _CancelledState extends State<Cancelled> {
                             ),
                           ],
                         );
-                      }),
-                ):
-                Center(
-                  child: Container(
-                      height: AppSizes.height * 0.15,
-                      // width: AppSizes.width,
-                      child: CommonWidgets.onNullData(text: Strings.noAvailableLoads)
-                  ),
-                ),
+                      }):ListView(
+                    children: [
+                      Container(
+                          padding: EdgeInsets.symmetric(vertical: AppSizes.height * 0.3),
+                          child: CommonWidgets.onNullData(text: Strings.noAvailableLoads)
+                      ),
+                    ],
+                  )
+                )
               ),
               _cancelledProvider.isLoading?
               Container(

@@ -44,7 +44,8 @@ class BusinessProfileComponents{
         @required String email,
         @required String password,
         @required String country,
-        @required String phone
+        @required String phone,
+        @required String userId
       })
   {
     return Container(
@@ -168,7 +169,7 @@ class BusinessProfileComponents{
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('City',
+                Text('Emirates',
                   style: TextStyle(
                     fontSize:12,
                     fontFamily: Assets.poppinsLight,
@@ -177,6 +178,31 @@ class BusinessProfileComponents{
                   ),
                 ),
                 Text(country,
+                  style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsLight,
+                    color: AppColors.profileTextColor,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Divider(height: 10,),
+          Container(
+            padding: EdgeInsets.all(AppSizes.width * 0.02),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('User ID',
+                  style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsLight,
+                    color: AppColors.profileTextColor,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
+                Text(userId,
                   style: TextStyle(
                     fontSize:12,
                     fontFamily: Assets.poppinsLight,

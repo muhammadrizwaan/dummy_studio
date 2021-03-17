@@ -240,7 +240,8 @@ class InvoiceDetailComponents {
                 ],
               ),
               Text(
-                dateTime,
+                // dateTime,
+                CommonWidgets.getDateTimeFormate(time: dateTime),
                 style: TextStyle(
                   fontFamily: Assets.poppinsRegular,
                   fontSize: 12,

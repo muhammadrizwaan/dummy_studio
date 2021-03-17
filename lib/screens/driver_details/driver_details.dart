@@ -81,7 +81,8 @@ class _DriverDetailScreenState extends State<DriverDetailScreen> {
                               name: _driverDetailProvider.driverDetailResponse.result.fullName,
                               email: _driverDetailProvider.driverDetailResponse.result.email,
                               phone_number: _driverDetailProvider.driverDetailResponse.result.phoneNumber !=null?_driverDetailProvider.driverDetailResponse.result.phoneNumber:"",
-                              License_number: _driverDetailProvider.driverDetailResponse.result.licenseNumber
+                              License_number: _driverDetailProvider.driverDetailResponse.result.licenseNumber,
+                            driverId: _driverDetailProvider.driverDetailResponse.result.userId.toString()
                           ),
                           SizedBox(height: AppSizes.height * 0.03,),
                           _driverDetailProvider.driverDetailResponse.result.licenseImages.length > 0 ?

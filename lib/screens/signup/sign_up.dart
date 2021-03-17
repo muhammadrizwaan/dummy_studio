@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttericon/elusive_icons.dart';
 import 'package:fluttericon/entypo_icons.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -137,7 +136,7 @@ class _SignUPState extends State<SignUP> {
                               hintText: "Confirm Password"),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(
-                              text: "City"),
+                              text: "Emirates"),
                           SizedBox(height: AppSizes.height * 0.01),
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 10),
@@ -162,7 +161,7 @@ class _SignUPState extends State<SignUP> {
                                       isExpanded: true,
                                       value: _cityId,
                                       hint: TextView.getLightText04(
-                                        "Select city",
+                                        "Choose Emirates",
                                         color: AppColors.colorBlack,
                                       ),
                                       items: _signUpProvider.cityList

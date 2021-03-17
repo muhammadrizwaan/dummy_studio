@@ -69,7 +69,7 @@ class _AddLoadState extends State<AddLoad> {
     receiver_name = TextEditingController();
     receiver_phone = TextEditingController();
     weight = TextEditingController();
-    num_of_vehicle = TextEditingController();
+    num_of_vehicle = TextEditingController(text: "1");
     description = TextEditingController();
     num_of_vehicle.addListener(() {_estimateRate();});
     pickedDate = DateTime.now();
