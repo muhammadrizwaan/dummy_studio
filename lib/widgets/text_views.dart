@@ -320,7 +320,7 @@ class TextView {
       text,
       textAlign: textAlign,
       softWrap: true,
-      maxLines: 1,
+      maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
         decoration: TextDecoration.none,
@@ -362,6 +362,20 @@ class TextView {
       ),
     );
   }
-
+  static Text getDriverTableDataText(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 10,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        decoration: TextDecoration.none,
+        fontSize: 9,
+        fontFamily: Assets.poppinsLight,
+        color: color,
+      ),
+    );
+  }
 
 }

@@ -25,6 +25,9 @@ class Strings {
   static const String cancelLoadAlertText = "Are you sure you want to cancel the Load?";
   static const String paymentAlertText = "Are you sure you want to Pay?";
   static const String deleteLoadAlertText = "Are you sure you want to cancel the job?";
+  static const String reasonText = "Reason";
+  static const String pleaseEnterReasonText = "Please Enter the Reason";
+  static const String enterReasonText = "Enter Reason";
   static const String phonePlaceholderText = "+971501234567";
   static const String invoiceDownload = "Invoice Downloaded Successfully";
   static const String receiverSignature = "Receiver Signature";
@@ -103,6 +106,7 @@ class Strings {
   static const String goodTypeErrorText = "Please select GoodType";
   static const String pickupLocationErrorText = "Please select Pickup Location";
   static const String dropoffLocationErrorText = "Please select Dropoff Location";
+
 
 
   // Tabs Strings

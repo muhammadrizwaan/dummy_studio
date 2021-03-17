@@ -65,7 +65,7 @@ class _PaymentState extends State<Payment> {
                         },
                     ),
                     CommonWidgets.getWalletPriceBox(
-                        walletPrice: _paymentProvider.getLoadCostData().result.finalCost.toString()
+                        walletPrice: _paymentProvider.totalPrice.toString()
                     ),
                     Expanded(
                       child: ListView(
@@ -117,10 +117,10 @@ class _PaymentState extends State<Payment> {
                                 _paymentComponents.getTotalContainer(
                                     context: context,
                                     jobName: _paymentProvider.getLoadCostData().result.loadId.toString(),
-                                    total: _paymentProvider.getLoadCostData().result.finalCost.toString(),
-                                    couponDiscount: _paymentProvider.getLoadCostData().result.couponDiscount.toString(),
-                                    vatAmount: _paymentProvider.getLoadCostData().result.valueAddedTax.toString(),
-                                    shipperCost: _paymentProvider.getLoadCostData().result.shipperCost.toString(),
+                                    total: _paymentProvider.totalPrice.toString(),
+                                    couponDiscount: _paymentProvider.couponDiscount.toString(),
+                                    vatAmount: _paymentProvider.vatAmount.toString(),
+                                    shipperCost: _paymentProvider.newShipperCost.toString(),
                                 ),
 
                                 // Container(

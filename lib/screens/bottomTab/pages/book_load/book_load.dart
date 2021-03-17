@@ -35,12 +35,8 @@ class _BookLoadState extends State<BookLoad> {
   String pickupText, dropoffText;
   GoogleMapsPlaces _places = GoogleMapsPlaces();
   String _apiKey = "AIzaSyDTLiSzdkVV8xrO9an282diUlBFMshCwAI";
-  String pickup_latitude;
-  String pickup_longitude;
-  String dropoff_latitude;
-  String dropoff_longitude;
+  double pickup_latitude, pickup_longitude, dropoff_latitude, dropoff_longitude;
   String pickup_location;
-
   String dropoff_location;
 
   Future<Null> onDisplayPrediction(Prediction p,
@@ -54,18 +50,14 @@ class _BookLoadState extends State<BookLoad> {
         double lat = detail.result?.geometry?.location?.lat;
         double lng = detail.result?.geometry?.location?.lng;
 
-        var address =
-            await Geocoder.local.findAddressesFromQuery(p.description);
-        // this.pickup_location = address.first.locality ?? address.first.addressLine;
-        // this.pickup_latitude = lat.toString();
-        // this.pickup_longitude = lng.toString();
+        var address = await Geocoder.local.findAddressesFromQuery(p.description);
         print('pickup location');
         print(address);
         setState(() {
           pickupText = address.first.addressLine;
           pickup_location = address.first.addressLine;
-          pickup_latitude = lat.toString();
-          pickup_longitude = lng.toString();
+          pickup_latitude = lat;
+          pickup_longitude = lng;
           isPickUp = true;
         });
       } else {
@@ -84,15 +76,14 @@ class _BookLoadState extends State<BookLoad> {
         var address =
             await Geocoder.local.findAddressesFromQuery(p.description);
         // this.dropoff_location = address.first.locality ?? address.first.addressLine;
-        // this.dropoff_latitude = lat.toString();
-        // this.dropoff_longitude = lng.toString();
         print('dropoff location');
-        print(address.first.addressLine);
+        print(lat);
+        print(lat);
         setState(() {
           dropoffText = address.first.addressLine;
           dropoff_location = address.first.addressLine;
-          dropoff_latitude = lat.toString();
-          dropoff_longitude = lng.toString();
+          dropoff_latitude = lat;
+          dropoff_longitude = lng;
           isDropOff = true;
         });
       } else {
@@ -113,14 +104,14 @@ class _BookLoadState extends State<BookLoad> {
     pickupText = "Select Pickup Location";
     dropoffText = "Select Dropoff Location";
     _bookLoadComponents = BookLoadComponents();
-    pickup_latitude = "24.421555";
-    pickup_longitude = "54.576599";
-    dropoff_latitude = "18.216797";
-    dropoff_longitude = "42.503765";
-    // pickup_latitude = "";
-    // pickup_longitude = "";
-    // dropoff_latitude = "";
-    // dropoff_longitude = "";
+    // pickup_latitude = 32.166351;
+    // pickup_longitude = 74.195900;
+    // dropoff_latitude = 31.582045;
+    // dropoff_longitude = 74.329376;
+    pickup_latitude = null;
+    pickup_longitude = null;
+    dropoff_latitude = null;
+    dropoff_longitude = null;
     pickup_location = "";
     dropoff_location = "";
   }
@@ -132,18 +123,14 @@ class _BookLoadState extends State<BookLoad> {
           body: Stack(
             children: [
               Container(
-                height: AppSizes.height * 0.7,
-                child: GoogleMap(
-                  initialCameraPosition: _initialLocation,
-                  myLocationEnabled: true,
-                  myLocationButtonEnabled: false,
-                  mapType: MapType.normal,
-                  zoomGesturesEnabled: true,
-                  // markers: markers != null ? Set<Marker>.from(markers) : null,
-                  zoomControlsEnabled: false,
-                  // polylines: Set<Polyline>.of(polylines.values),
-                  onMapCreated: (GoogleMapController controller) {mapController = controller;
-                  },
+                height: AppSizes.height * 0.6,
+                child: MapView(
+                  startLat:pickup_latitude ,
+                  startLong: pickup_longitude,
+                  endLat: dropoff_latitude,
+                  endLong: dropoff_longitude,
+                  apiKey: "AIzaSyAERKSFYMxdSR6mrMmgyesmQOr8miAFd4c",
+                  directionsApiKey: "AIzaSyAERKSFYMxdSR6mrMmgyesmQOr8miAFd4c",
                 ),
               ),
               Positioned(
@@ -273,10 +260,10 @@ class _BookLoadState extends State<BookLoad> {
                         onPressed: () {
                           _bookLoadProvider.onNavigateNext(
                               context: context,
-                              pickup_latitude: pickup_latitude,
-                              pickup_longitude: pickup_longitude,
-                              dropoff_latitude: dropoff_latitude,
-                              dropoff_longitude: dropoff_longitude,
+                              pickup_latitude: pickup_latitude.toString(),
+                              pickup_longitude: pickup_longitude.toString(),
+                              dropoff_latitude: dropoff_latitude.toString(),
+                              dropoff_longitude: dropoff_longitude.toString(),
                               pickup_location: pickup_location,
                               dropoff_location: dropoff_location,
                               distance: double.parse(MapView.distanceBetweenLocations).toInt()

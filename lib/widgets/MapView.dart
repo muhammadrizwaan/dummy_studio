@@ -16,7 +16,25 @@ class MapView extends StatefulWidget {
   static String distanceBetweenLocations = "0.0";
   // String getDistance() => _distanceBetweenLocations;
   // String getTotalDistance() => _MapViewState
-
+  // static _MapViewState _map_state;
+  // MapView({@required this.startLat,@required this.startLong, @required this.endLat,@required this.endLong, @required this.apiKey,@required this.directionsApiKey})
+  // {
+  //   if (_map_state != null) {
+  //     if(_map_state.mounted){
+  //
+  //       _map_state.setCustomMarker().then((value) {
+  //         _map_state._getInitialLocation();
+  //       });
+  //
+  //         }
+  //   }
+  // }
+  //
+  // @override
+  // _MapViewState createState() {
+  //   _map_state = _MapViewState();
+  //   return _map_state;
+  // }
   MapView({@required this.startLat,@required this.startLong, @required this.endLat,@required this.endLong, @required this.apiKey,@required this.directionsApiKey});
 
   @override
@@ -56,56 +74,60 @@ class _MapViewState extends State<MapView> {
   BitmapDescriptor pickupMarker;
   BitmapDescriptor dropoffMarker;
 
-  void setCustomPickupMarker()async{
-    pickupMarker = await BitmapDescriptor.fromAssetImage(ImageConfiguration(), Assets.edit_icon);
-  }
-  void setCustomDropoffMarker()async{
-    dropoffMarker = await BitmapDescriptor.fromAssetImage(ImageConfiguration(), Assets.dropoffLocationImage);
+
+  Future<void> setCustomMarker() async{
+    startCoordinates = Position(latitude: widget.startLat, longitude: widget.startLong);
+    destinationCoordinates = Position(latitude: widget.endLat, longitude: widget.endLong);
+    // Start Location Marker
+    if(widget.startLat != null) {
+      Marker startMarker = Marker(
+        markerId: MarkerId('$startCoordinates'),
+        position: LatLng(
+          startCoordinates.latitude,
+          startCoordinates.longitude,
+        ),
+        infoWindow: InfoWindow(
+          title: 'Start',
+          snippet: "starting location",
+        ),
+        icon: await BitmapDescriptor.fromAssetImage(
+            ImageConfiguration(), Assets.pickupLocationImage),
+        // icon: pickupMarker,
+      );
+// Destination Location Marker
+      if (widget.endLong != null) {
+        Marker destinationMarker = Marker(
+          markerId: MarkerId('$destinationCoordinates'),
+          position: LatLng(
+            destinationCoordinates.latitude,
+            destinationCoordinates.longitude,
+          ),
+          infoWindow: InfoWindow(
+            title: 'Destination',
+            snippet: "destination location",
+          ),
+          icon: await BitmapDescriptor.fromAssetImage(
+              ImageConfiguration(), Assets.dropoffLocationImage),
+        );
+        markers.add(destinationMarker);
+      }
+
+      // Add the markers to the list
+      markers.add(startMarker);
+    }
+    // setState(() {
+    //
+    // });
+    return;
   }
 
   @override
   void initState() {
     super.initState();
-    _getCurrentLocation();
-    setCustomPickupMarker();
-    setCustomDropoffMarker();
-    startCoordinates = Position(latitude: widget.startLat, longitude: widget.startLong);
-    destinationCoordinates = Position(latitude: widget.endLat, longitude: widget.endLong);
-    // Start Location Marker
-    Marker startMarker = Marker(
-      markerId: MarkerId('$startCoordinates'),
-      position: LatLng(
-        startCoordinates.latitude,
-        startCoordinates.longitude,
-      ),
-      infoWindow: InfoWindow(
-        title: 'Start',
-        snippet: "starting location",
-      ),
-      // icon: BitmapDescriptor.fromAssetImage(ImageConfiguration, assetName),
-      icon: pickupMarker,
-    );
-
-// Destination Location Marker
-    Marker destinationMarker = Marker(
-      markerId: MarkerId('$destinationCoordinates'),
-      position: LatLng(
-        destinationCoordinates.latitude,
-        destinationCoordinates.longitude,
-      ),
-      infoWindow: InfoWindow(
-        title: 'Destination',
-        snippet: "destination location",
-      ),
-      icon: dropoffMarker,
-    );
-    // Add the markers to the list
-    markers.add(startMarker);
-    markers.add(destinationMarker);
-
+    // _getCurrentLocation();
+    _getInitialLocation();
+    setCustomMarker();
     _createPolylines(startCoordinates, destinationCoordinates);
-
-
   }
 
 
@@ -117,6 +139,7 @@ class _MapViewState extends State<MapView> {
           children: <Widget>[
             GoogleMap(
               initialCameraPosition: _initialLocation,
+              // initialCameraPosition: _currentPosition,
               myLocationEnabled: true,
               myLocationButtonEnabled: false,
               mapType: MapType.normal,
@@ -137,22 +160,13 @@ class _MapViewState extends State<MapView> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    ClipOval(
-                      child: Material(
-                        color: Colors.blueGrey, // button color
-                        child: InkWell(
-                          splashColor: Colors.red, // inkwell color
-                          child: SizedBox(
-                            width: 25,
-                            height: 25,
-                            child: Icon(Icons.location_pin,color: Colors.white,),
-                          ),
-                          onTap: () {
-                            // on button tap
-                            openMap();
-                          },
-                        ),
-                      ),
+                    InkWell(
+                      // splashColor: Colors.red, // inkwell color
+                      child: Image.asset(Assets.googleMapImage, width: 30, height: 30,),
+                      onTap: () {
+                        // on button tap
+                        openMap();
+                      },
                     ),
                     SizedBox(height: 10,),
                     ClipOval(
@@ -239,6 +253,39 @@ class _MapViewState extends State<MapView> {
     }
   }
 
+  _getInitialLocation() async{
+    await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
+        .then((Position position) async {
+      setState(() {
+        // Store the position in the variable
+        _initialLocation = CameraPosition(target: LatLng(position.latitude, position.longitude));
+        widget.startLat != null?
+        mapController.animateCamera(
+          CameraUpdate.newCameraPosition(
+            CameraPosition(
+              target: LatLng(widget.startLat, widget.startLong),//LatLng(position.latitude, position.longitude),
+              zoom: 8.0,
+
+            ),
+          ),
+        ):
+        mapController.animateCamera(
+          CameraUpdate.newCameraPosition(
+            CameraPosition(
+              target: LatLng(position.latitude, position.longitude),//LatLng(position.latitude, position.longitude),
+              zoom: 8.0,
+
+            ),
+          ),
+        );
+        print('CURRENT POS: $_currentPosition');// For moving the camera to current location
+
+      });
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
 
   // Method for retrieving the current location
   _getCurrentLocation() async {
@@ -247,14 +294,14 @@ class _MapViewState extends State<MapView> {
       setState(() {
         // Store the position in the variable
         _currentPosition = position;
-
         print('CURRENT POS: $_currentPosition');
 
         // For moving the camera to current location
         mapController.animateCamera(
           CameraUpdate.newCameraPosition(
             CameraPosition(
-              target: LatLng(widget.startLat,widget.startLong),//LatLng(position.latitude, position.longitude),
+              // target: LatLng(widget.startLat,widget.startLong),//LatLng(position.latitude, position.longitude),
+              target: LatLng(position.latitude, position.longitude),//LatLng(position.latitude, position.longitude),
               zoom: 8.0,
 
             ),

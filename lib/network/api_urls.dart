@@ -18,14 +18,14 @@ const String getHistoryApi = "$apiBaseUrl/api/Loads/MyLoadHistory?userId={userId
 const String getGoodTypeApi = "$apiBaseUrl/api/GoodTypes";
 const String getVehicleTypeApi = "$apiBaseUrl/api/Vehicle/GetVehicleTypes";
 const String deleteLoadApi = "$apiBaseUrl/api/Loads/DeleteLoad?loadId={loadId}";
-const String getLoadCostApi = "$apiBaseUrl/api/Loads/GetLoadCostsByLoadId?loadId=";
+const String getLoadCostApi = "$apiBaseUrl/api/Loads/GetLoadCostsByLoadId?loadId={loadId}&userId={userId}";
 const String getShipperDiscountApi = "$apiBaseUrl/api/Loads/GetShipperIndividualDiscount?userId={userId}";
 const String estimatedLoadPriceApi = "$apiBaseUrl/api/Loads/EstimatedLoadPrice";
 const String getUpdateUserInformationApi = "$apiBaseUrl/api/Accounts/UpdateUserInformation";
 
 const String getLoadsApi = "$apiBaseUrl/api/Loads/GetShipperLoads?userId={userId}";
 const String saveLoadApi = "$apiBaseUrl/api/Loads/SaveLoad";
-const String getLoadDetailApi = "$apiBaseUrl/api/Loads/GetLoadDetailsByLoadId?loadId={loadId}";
+const String getLoadDetailApi = "$apiBaseUrl/api/Loads/GetLoadDetailsByLoadId?loadId={loadId}&userId={userId}";
 const String getDriverDetailApi = "$apiBaseUrl/api//Users/GetDriverDetails?driverId={driverId}";
 const String getInvoiceDetailApi = "$apiBaseUrl/api/Transactions/GetInvoiceDetails?transactionId={Id}";
 const String uploadProfilePictureApi = "$apiBaseUrl/api/Accounts/UploadProfilePicture";

@@ -33,25 +33,25 @@ class _MyAppState extends State<MyApp> {
   configureFcm(){
     FirebaseMessaging().getToken().then((value) async{
       await PreferenceUtils.setString(Strings.deviceId, value);
-      ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: value);
+      // ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: value);
       // print("The fCM  tokeen is: "+ value);
     });
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
         print("onMessage: $message");
         // _showItemDialog(message);
-        ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "Notification Received");
+        // ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "Notification Received");
       },
       // onBackgroundMessage: myBackgroundMessageHandler,
       onLaunch: (Map<String, dynamic> message) async {
         print("onLaunch: $message");
         // _navigateToItemDetail(message);
-        ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "Notification Received");
+        // ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "Notification Received");
       },
       onResume: (Map<String, dynamic> message) async {
         print("onResume: $message");
         // _navigateToItemDetail(message);
-        ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "Notification Received");
+        // ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "Notification Received");
       },
     );
   }

@@ -73,19 +73,20 @@ class _DeliveredState extends State<Delivered> {
                           itemBuilder: (context, index) {
                             return Column(
                               children: [
-                                SizedBox(
-                                  height: AppSizes.height * 0.02,
-                                ),
+                                SizedBox(height: AppSizes.height * 0.02),
                                 _deliveredComponents.getJobContainer(
+                                  isRated:_myJobsProvider.deliveredList[index].isRated,
                                   jobDetail: _myJobsProvider.deliveredList[index].loadId.toString(),
                                   pickUpLocation: _myJobsProvider.deliveredList[index].pickupLocation,
                                   destinationLocation: _myJobsProvider.deliveredList[index].dropoffLocation,
                                   startDate: _myJobsProvider.deliveredList[index].pickupDateTime,
-                                  time: _myJobsProvider.deliveredList[index].pickupDateTime,
+                                    endDate: _myJobsProvider.deliveredList[index].dropoffDateTime,
+                                  startTime: _myJobsProvider.deliveredList[index].pickupDateTime,
+                                    endTime: _myJobsProvider.deliveredList[index].dropoffDateTime,
                                   status: _myJobsProvider.deliveredList[index].status,
                                   vehicleType: _myJobsProvider.deliveredList[index].vehicleTypeName,
                                     vehicleCategory: _myJobsProvider.deliveredList[index].vehicleCategoryName,
-                                  price: "${Strings.aed} ${_myJobsProvider.deliveredList[index].shipperCost.round()}",
+                                  price: "${Strings.aed} ${_myJobsProvider.deliveredList[index].shipperCost}",
                                   onAlert: () {
                                     ApplicationToast.onDescriptionAlert(
                                         context: context,
@@ -102,6 +103,7 @@ class _DeliveredState extends State<Delivered> {
                                       _myJobsProvider.deliveredList[index].loadId,
                                     );
                                   }
+
                                 ),
                                 SizedBox(
                                   height: AppSizes.height * 0.02,
