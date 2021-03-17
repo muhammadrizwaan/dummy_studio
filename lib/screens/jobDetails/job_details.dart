@@ -28,13 +28,14 @@ class JobDetails extends StatefulWidget {
 
 class _JobDetailsState extends State<JobDetails> {
   LatLng _center = LatLng(30.3753, 69.3451);
-
+  TextEditingController reasonControler;
   JobDetailsComponents _jobDetailsComponents;
   JobDetailsProvider _jobDetailsProvider;
 
   @override
   void initState() {
     super.initState();
+    reasonControler = TextEditingController();
     _jobDetailsComponents = JobDetailsComponents();
     _jobDetailsProvider = Provider.of<JobDetailsProvider>(context, listen: false);
     _jobDetailsProvider.init(context: context, loadId: widget.loadId);
@@ -55,6 +56,10 @@ class _JobDetailsState extends State<JobDetails> {
                   startLong: _jobDetailsProvider.loadDetailResponse.result.pickupLongitude,
                   endLat: _jobDetailsProvider.loadDetailResponse.result.dropoffLatitude,
                   endLong: _jobDetailsProvider.loadDetailResponse.result.dropoffLongitude,
+                  // startLat: null,
+                  // startLong: null,
+                  // endLat: null,
+                  // endLong: null,
                   apiKey: "AIzaSyAERKSFYMxdSR6mrMmgyesmQOr8miAFd4c",
                   directionsApiKey: "AIzaSyAERKSFYMxdSR6mrMmgyesmQOr8miAFd4c",
                 ),
@@ -67,10 +72,23 @@ class _JobDetailsState extends State<JobDetails> {
                     onPress: (){Navigator.pop(context);},
                     clickableText: "Delete",
                     onTap: () {
-                      ApplicationToast.onLoadAlert(context: context, onCancellLoad: (){
-                        _jobDetailsProvider.onDeleteLoad(context: context, loadId: widget.loadId);
-                        Navigator.pop(context);
-                      }, text: Strings.deleteLoadAlertText);
+                      ApplicationToast.onReportIssue(
+                          context: context,
+                          heading: Strings.deleteLoadAlertText,
+                          lable: Strings.reasonText,
+                          placeHolder: Strings.enterReasonText,
+                          onPress: (){
+                            _jobDetailsProvider.onDeleteLoad(
+                                context: context,
+                                loadId: widget.loadId,
+                              reason: reasonControler.text
+                            );
+                          },
+                        onClose: (){
+                          hideLoader(context);
+                        },
+                        reasonControler: reasonControler,
+                      );
                     }),
               ),
               DraggableScrollableSheet(
@@ -114,12 +132,6 @@ class _JobDetailsState extends State<JobDetails> {
                                       pickupLocation: _jobDetailsProvider.loadDetailResponse.result.pickupLocation,
                                       dropOffLocation: _jobDetailsProvider.loadDetailResponse.result.dropoffLocation
                                   ),
-                                  // TextView.getLabelText04(
-                                  //     Strings.roundTrip,
-                                  //     color: AppColors.colorBlack
-                                  // ),
-                                  // SizedBox(height: AppSizes.height * 0.001),
-                                  // TextView.getLabel2Text04(_jobDetailsProvider.loadDetailResponse.result.isRoundTrip? "Yes": "No", color: AppColors.colorBlack),
                                   CommonWidgets.getLoadDetailLableWithImage(
                                     image: Assets.loadIcon,
                                     lable: Strings.loadId,
@@ -134,13 +146,6 @@ class _JobDetailsState extends State<JobDetails> {
                                   ),
                                   SizedBox(height: AppSizes.height * 0.02),
 
-                                  // TextView.getLabelText04(
-                                  //     Strings.pickupDateAndTime,
-                                  //     color: AppColors.colorBlack
-                                  // ),
-                                  // SizedBox(height: AppSizes.height * 0.001),
-                                  // TextView.getLabel2Text04(_jobDetailsProvider.loadDetailResponse.result.pickupDateTime, color: AppColors.colorBlack),
-                                  // SizedBox(height: AppSizes.height * 0.02),
                                   CommonWidgets.getLoadDetailCommonText(
                                     icon: LineariconsFree.license,
                                     lable: Strings.pickupDateAndTime,
@@ -148,27 +153,12 @@ class _JobDetailsState extends State<JobDetails> {
                                   ),
                                   SizedBox(height: AppSizes.height * 0.02),
 
-                                  // TextView.getLabelText04(
-                                  //     Strings.receiverName,
-                                  //     color: AppColors.colorBlack
-                                  // ),
-                                  // SizedBox(height: AppSizes.height * 0.001),
-                                  // TextView.getLabel2Text04(_jobDetailsProvider.loadDetailResponse.result.receiverName, color: AppColors.colorBlack),
-                                  // SizedBox(height: AppSizes.height * 0.02),
-
                                   CommonWidgets.getLoadDetailCommonText(
                                     icon: Entypo.user,
                                     lable: Strings.receiverName,
                                     text: _jobDetailsProvider.loadDetailResponse.result.receiverName,
                                   ),
                                   SizedBox(height: AppSizes.height * 0.02),
-                                  // TextView.getLabelText04(
-                                  //     Strings.receiverPhone,
-                                  //     color: AppColors.colorBlack
-                                  // ),
-                                  // SizedBox(height: AppSizes.height * 0.001),
-                                  // TextView.getLabel2Text04(_jobDetailsProvider.loadDetailResponse.result.receiverPhone, color: AppColors.colorBlack),
-                                  // SizedBox(height: AppSizes.height * 0.02),
 
                                   CommonWidgets.getLoadDetailCommonText(
                                     icon: Entypo.mobile,
@@ -177,27 +167,12 @@ class _JobDetailsState extends State<JobDetails> {
                                   ),
                                   SizedBox(height: AppSizes.height * 0.02),
 
-                                  // TextView.getLabelText04(
-                                  //     Strings.goodType,
-                                  //     color: AppColors.colorBlack
-                                  // ),
-                                  // SizedBox(height: AppSizes.height * 0.001),
-                                  // TextView.getLabel2Text04(_jobDetailsProvider.loadDetailResponse.result.goodType, color: AppColors.colorBlack),
-                                  // SizedBox(height: AppSizes.height * 0.02),
                                   CommonWidgets.getLoadDetailLableWithImage(
                                     image: Assets.loadIcon,
                                     lable: Strings.goodType,
                                     text: _jobDetailsProvider.loadDetailResponse.result.goodType,
                                   ),
                                   SizedBox(height: AppSizes.height * 0.02),
-
-                                  // TextView.getLabelText04(
-                                  //     Strings.weight,
-                                  //     color: AppColors.colorBlack
-                                  // ),
-                                  // SizedBox(height: AppSizes.height * 0.001),
-                                  // TextView.getLabel2Text04(_jobDetailsProvider.loadDetailResponse.result.vehicle, color: AppColors.colorBlack),
-                                  // SizedBox(height: AppSizes.height * 0.02),
 
                                   CommonWidgets.getLoadDetailLableWithImage(
                                     image: Assets.weightIcon,
@@ -206,14 +181,6 @@ class _JobDetailsState extends State<JobDetails> {
                                   ),
                                   SizedBox(height: AppSizes.height * 0.02),
 
-                                  // TextView.getLabelText04(
-                                  //     "No of Vehicle",
-                                  //     color: AppColors.colorBlack
-                                  // ),
-                                  // SizedBox(height: AppSizes.height * 0.001),
-                                  // TextView.getLabel2Text04(_jobDetailsProvider.loadDetailResponse.result.noOfVehicles.toString(), color: AppColors.colorBlack),
-                                  // SizedBox(height: AppSizes.height * 0.02),
-
                                   CommonWidgets.getLoadDetailLableWithImage(
                                     image: Assets.vehicle,
                                     lable: "No of Vehicle",
@@ -221,24 +188,32 @@ class _JobDetailsState extends State<JobDetails> {
                                   ),
                                   SizedBox(height: AppSizes.height * 0.02),
 
-                                  // TextView.getLabelText04(
-                                  //     Strings.description,
-                                  //     color: AppColors.colorBlack
-                                  // ),
-                                  // SizedBox(height: AppSizes.height * 0.001),
-                                  // TextView.getDescriptionText(
-                                  //     _jobDetailsProvider.loadDetailResponse.result.description,
-                                  //     color: AppColors.colorBlack
-                                  // ),
-                                  // SizedBox(height: AppSizes.height * 0.02),
-
                                   CommonWidgets.getLoadDetailCommonText(
                                     icon: Icons.message,
                                     lable: Strings.description,
                                     text: _jobDetailsProvider.loadDetailResponse.result.description,
                                   ),
-                                  SizedBox(height: AppSizes.height * 0.02),
 
+                                  _jobDetailsProvider.loadDetailResponse.result.loadCarriers.length > 0?
+                                  _jobDetailsComponents.getAssignTable():
+                                      Container(),
+
+                                  _jobDetailsProvider.loadDetailResponse.result.loadCarriers.length > 0?
+                                  Wrap(
+                                    children: [
+                                      ...List.generate(
+                                        _jobDetailsProvider.loadDetailResponse.result.loadCarriers.length,
+                                            (index) => _jobDetailsComponents.getTableData(
+                                          sr:  index,
+                                          driver: _jobDetailsProvider.loadDetailResponse.result.loadCarriers[index].assignedDriver,
+                                          vehicle: _jobDetailsProvider.loadDetailResponse.result.loadCarriers[index].assignedVehicle + ' | ' + _jobDetailsProvider.loadDetailResponse.result.loadCarriers[index].vehiclePlateNo,
+                                          status: _jobDetailsProvider.loadDetailResponse.result.loadCarriers[index].loadStatus
+                                        ),
+                                      )
+                                    ],
+                                  ):
+                                      Container(),
+                                  SizedBox(height: AppSizes.height * 0.02),
                                   _jobDetailsProvider.loadDetailResponse.result.loadFiles.isNotEmpty?Container(
                                     height: AppSizes.height * 0.1,
                                     child: ListView.builder(
@@ -294,251 +269,9 @@ class _JobDetailsState extends State<JobDetails> {
         )
     );
 
-
-
-    // return SafeArea(
-    //   child:  _jobDetailsProvider.isDataFetched? Scaffold(
-    //       body: Container(
-    //         child: NestedScrollView(
-    //           headerSliverBuilder: (BuildContext context,bool innerBoxIsScrolled){
-    //             return <Widget>[
-    //               SliverAppBar(
-    //                 expandedHeight: AppSizes.height * 0.62,
-    //                 pinned: true,
-    //                 automaticallyImplyLeading: true,
-    //                 floating: false,
-    //                 toolbarHeight: 0,
-    //                 backgroundColor: AppColors.white,
-    //                 flexibleSpace: FlexibleSpaceBar(
-    //                   background: Column(
-    //                     children: [
-    //                       _jobDetailsComponents.gettabsAppBarDelete(
-    //                           text: Strings.jobDetails,
-    //                           tag: widget.status,
-    //                           onPress: (){Navigator.pop(context);},
-    //                           clickableText: "Delete",
-    //                           onTap: () {
-    //                             ApplicationToast.onLoadAlert(context: context, onCancellLoad: (){
-    //                               _jobDetailsProvider.onDeleteLoad(context: context, loadId: widget.loadId);
-    //                               Navigator.pop(context);
-    //                             }, text: Strings.deleteLoadAlertText);
-    //                           }),
-    //                       SizedBox(height: AppSizes.height * 0.005),
-    //                       Expanded(
-    //                         child: MapView(
-    //                           startLat: _jobDetailsProvider.loadDetailResponse.result.pickupLatitude,
-    //                           startLong: _jobDetailsProvider.loadDetailResponse.result.pickupLongitude,
-    //                           endLat: _jobDetailsProvider.loadDetailResponse.result.dropoffLatitude,
-    //                           endLong: _jobDetailsProvider.loadDetailResponse.result.dropoffLongitude,
-    //                           apiKey: "AIzaSyAERKSFYMxdSR6mrMmgyesmQOr8miAFd4c",
-    //                           directionsApiKey: "AIzaSyAERKSFYMxdSR6mrMmgyesmQOr8miAFd4c",
-    //                         ),
-    //                         ),
-    //                       ],
-    //                   ),
-    //                 ),
-    //               )
-    //             ];
-    //           },
-    //           body: Container(
-    //             // height: AppSizes.height,
-    //           width: AppSizes.width,
-    //             color: AppColors.white,
-    //             child: Column(
-    //               children: [
-    //                 SizedBox(height: AppSizes.height * 0.01),
-    //                 Align(
-    //                   alignment: Alignment.center,
-    //                   child: Container(
-    //                     height: AppSizes.height * 0.008,
-    //                     width: AppSizes.width * 0.40,
-    //                     decoration: BoxDecoration(
-    //                       color: AppColors.dragContainerslider,
-    //                       borderRadius: BorderRadius.circular(10),
-    //                     ),
-    //                   ),
-    //                 ),
-    //                 SizedBox(height: AppSizes.height * 0.01),
-    //                 Expanded(
-    //                   child: ListView(
-    //                     children: [
-    //                       CommonWidgets.getWalletPriceBox(
-    //                           walletPrice: _jobDetailsProvider.loadDetailResponse.result.shipperCost.toString()
-    //                       ),
-    //                       Container(
-    //                         padding: EdgeInsets.only(left: 15, right: 15),
-    //                         child: Column(
-    //                           crossAxisAlignment: CrossAxisAlignment.start,
-    //                           children: [
-    //
-    //                             _jobDetailsComponents.getLocationContainer(
-    //                                 pickupLocation: _jobDetailsProvider.loadDetailResponse.result.pickupLocation,
-    //                                 dropOffLocation: _jobDetailsProvider.loadDetailResponse.result.dropoffLocation
-    //                             ),
-    //                             // TextView.getLabelText04(
-    //                             //     Strings.roundTrip,
-    //                             //     color: AppColors.colorBlack
-    //                             // ),
-    //                             // SizedBox(height: AppSizes.height * 0.001),
-    //                             // TextView.getLabel2Text04(_jobDetailsProvider.loadDetailResponse.result.isRoundTrip? "Yes": "No", color: AppColors.colorBlack),
-    //                             CommonWidgets.getLoadDetailCommonText(
-    //                               icon: Entypo.user,
-    //                               lable: Strings.roundTrip,
-    //                               text: _jobDetailsProvider.loadDetailResponse.result.isRoundTrip? "Yes": "No",
-    //                             ),
-    //                             SizedBox(height: AppSizes.height * 0.02),
-    //
-    //                             // TextView.getLabelText04(
-    //                             //     Strings.pickupDateAndTime,
-    //                             //     color: AppColors.colorBlack
-    //                             // ),
-    //                             // SizedBox(height: AppSizes.height * 0.001),
-    //                             // TextView.getLabel2Text04(_jobDetailsProvider.loadDetailResponse.result.pickupDateTime, color: AppColors.colorBlack),
-    //                             // SizedBox(height: AppSizes.height * 0.02),
-    //                             CommonWidgets.getLoadDetailCommonText(
-    //                               icon: LineariconsFree.license,
-    //                               lable: Strings.pickupDateAndTime,
-    //                               text: _jobDetailsProvider.loadDetailResponse.result.pickupDateTime,
-    //                             ),
-    //                             SizedBox(height: AppSizes.height * 0.02),
-    //
-    //                             // TextView.getLabelText04(
-    //                             //     Strings.receiverName,
-    //                             //     color: AppColors.colorBlack
-    //                             // ),
-    //                             // SizedBox(height: AppSizes.height * 0.001),
-    //                             // TextView.getLabel2Text04(_jobDetailsProvider.loadDetailResponse.result.receiverName, color: AppColors.colorBlack),
-    //                             // SizedBox(height: AppSizes.height * 0.02),
-    //
-    //                             CommonWidgets.getLoadDetailCommonText(
-    //                               icon: Entypo.user,
-    //                               lable: Strings.receiverName,
-    //                               text: _jobDetailsProvider.loadDetailResponse.result.receiverName,
-    //                             ),
-    //                             SizedBox(height: AppSizes.height * 0.02),
-    //                             // TextView.getLabelText04(
-    //                             //     Strings.receiverPhone,
-    //                             //     color: AppColors.colorBlack
-    //                             // ),
-    //                             // SizedBox(height: AppSizes.height * 0.001),
-    //                             // TextView.getLabel2Text04(_jobDetailsProvider.loadDetailResponse.result.receiverPhone, color: AppColors.colorBlack),
-    //                             // SizedBox(height: AppSizes.height * 0.02),
-    //
-    //                             CommonWidgets.getLoadDetailCommonText(
-    //                               icon: Entypo.mobile,
-    //                               lable: Strings.receiverPhone,
-    //                               text: _jobDetailsProvider.loadDetailResponse.result.receiverPhone,
-    //                             ),
-    //                             SizedBox(height: AppSizes.height * 0.02),
-    //
-    //                             // TextView.getLabelText04(
-    //                             //     Strings.goodType,
-    //                             //     color: AppColors.colorBlack
-    //                             // ),
-    //                             // SizedBox(height: AppSizes.height * 0.001),
-    //                             // TextView.getLabel2Text04(_jobDetailsProvider.loadDetailResponse.result.goodType, color: AppColors.colorBlack),
-    //                             // SizedBox(height: AppSizes.height * 0.02),
-    //                             CommonWidgets.getLoadDetailLableWithImage(
-    //                               image: Assets.loadIcon,
-    //                               lable: Strings.goodType,
-    //                               text: _jobDetailsProvider.loadDetailResponse.result.goodType,
-    //                             ),
-    //                             SizedBox(height: AppSizes.height * 0.02),
-    //
-    //                             // TextView.getLabelText04(
-    //                             //     Strings.weight,
-    //                             //     color: AppColors.colorBlack
-    //                             // ),
-    //                             // SizedBox(height: AppSizes.height * 0.001),
-    //                             // TextView.getLabel2Text04(_jobDetailsProvider.loadDetailResponse.result.vehicle, color: AppColors.colorBlack),
-    //                             // SizedBox(height: AppSizes.height * 0.02),
-    //
-    //                             CommonWidgets.getLoadDetailLableWithImage(
-    //                               image: Assets.weightIcon,
-    //                               lable: Strings.weight,
-    //                               text: _jobDetailsProvider.loadDetailResponse.result.vehicle,
-    //                             ),
-    //                             SizedBox(height: AppSizes.height * 0.02),
-    //
-    //                             // TextView.getLabelText04(
-    //                             //     "No of Vehicle",
-    //                             //     color: AppColors.colorBlack
-    //                             // ),
-    //                             // SizedBox(height: AppSizes.height * 0.001),
-    //                             // TextView.getLabel2Text04(_jobDetailsProvider.loadDetailResponse.result.noOfVehicles.toString(), color: AppColors.colorBlack),
-    //                             // SizedBox(height: AppSizes.height * 0.02),
-    //
-    //                             CommonWidgets.getLoadDetailLableWithImage(
-    //                               image: Assets.vehicle,
-    //                               lable: "No of Vehicle",
-    //                               text: _jobDetailsProvider.loadDetailResponse.result.noOfVehicles.toString(),
-    //                             ),
-    //                             SizedBox(height: AppSizes.height * 0.02),
-    //
-    //                             // TextView.getLabelText04(
-    //                             //     Strings.description,
-    //                             //     color: AppColors.colorBlack
-    //                             // ),
-    //                             // SizedBox(height: AppSizes.height * 0.001),
-    //                             // TextView.getDescriptionText(
-    //                             //     _jobDetailsProvider.loadDetailResponse.result.description,
-    //                             //     color: AppColors.colorBlack
-    //                             // ),
-    //                             // SizedBox(height: AppSizes.height * 0.02),
-    //
-    //                             CommonWidgets.getLoadDetailCommonText(
-    //                               icon: Icons.message,
-    //                               lable: Strings.description,
-    //                               text: _jobDetailsProvider.loadDetailResponse.result.description,
-    //                             ),
-    //                             SizedBox(height: AppSizes.height * 0.02),
-    //
-    //                             _jobDetailsProvider.loadDetailResponse.result.loadFiles.isNotEmpty?Container(
-    //                               height: AppSizes.height * 0.1,
-    //                               child: ListView.builder(
-    //                                   scrollDirection: Axis.horizontal,
-    //                                   itemCount: _jobDetailsProvider.loadDetailResponse.result.loadFiles.length,
-    //                                   itemBuilder: (context, index){
-    //                                     return Row(
-    //                                       children: [
-    //                                         SizedBox(width: AppSizes.width * 0.01,),
-    //                                         Container(
-    //                                           height: AppSizes.height * 0.1,
-    //                                           width: AppSizes.width * 0.2,
-    //                                           decoration: BoxDecoration(
-    //                                             borderRadius: BorderRadius.circular(5),
-    //                                           ),
-    //                                           child: Image(
-    //                                             image: NetworkImage(baseUrl+_jobDetailsProvider.loadDetailResponse.result.loadFiles[index].filePath),
-    //                                             fit: BoxFit.cover,
-    //                                           ),
-    //                                         ),
-    //                                         SizedBox(width: AppSizes.width * 0.01,),
-    //                                       ],
-    //                                     );
-    //                                   }),
-    //                             ):
-    //                             CommonWidgets.onNullData(text: "No Images"),
-    //                             SizedBox(height: AppSizes.height * 0.02),
-    //                           ],
-    //                         ),
-    //                       )
-    //                     ],
-    //                   ),
-    //                 ),
-    //               ],
-    //             ),
-    //         ),
-    //         ),
-    //       )
-    //   ):
-    //   Center(
-    //     child: Container(
-    //       height: AppSizes.height * 0.15,
-    //       // width: AppSizes.width,
-    //       child: Lottie.asset(Assets.apiLoading, fit: BoxFit.cover),
-    //     ),
-    //   ),
-    // );
+  }
+  hideLoader(BuildContext context) {
+    reasonControler.text = "";
+    Navigator.of(context).pop();
   }
 }

@@ -1,7 +1,6 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/get_token.dart';
 import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
@@ -17,7 +16,6 @@ import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/routes/routes.dart';
-import 'package:truckoom_shipper/screens/bank/bank_screen.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/loader.dart';
 import 'package:http/http.dart' as http;
@@ -28,7 +26,6 @@ class PaymentProvider extends ChangeNotifier {
   GenericDecodeEncode _genericDecodeEncode = GenericDecodeEncode();
   NetworkHelper _networkHelper = NetworkHelperImpl();
   CouponCodeResponse _couponCodeResponse = CouponCodeResponse.empty();
-  StatusUpdateResponse _statusUpdateResponse = StatusUpdateResponse.empty();
   LoadCostResponse _loadCostResponse = LoadCostResponse.empty();
   LoadsResponse _loadsResponse = LoadsResponse.empty();
   CustomPopup _loader = CustomPopup();
@@ -37,29 +34,32 @@ class PaymentProvider extends ChangeNotifier {
 
   var connectivityResult;
   int couponId;
-  double shiperCost;
+  double shiperCost, newShipperCost, couponDiscount, vatAmount, totalPrice;
   String token;
 
   init({@required BuildContext context, @required int LoadId}) async {
     this.context = context;
+    isDataFetched = false;
     connectivityResult = "";
     token = "";
     couponId = 0;
-    shiperCost = 0;
+    shiperCost = newShipperCost = couponDiscount = vatAmount = totalPrice = 0;
     await getLoadCost(context: context, loadId: LoadId);
-
   }
 
   Future getLoadCost({@required BuildContext context, @required int loadId}) async{
     try{
+      int userId = Constants.getUserId();
       token = await getToken.onToken();
       connectivityResult = await Connectivity().checkConnectivity();
       if(connectivityResult == ConnectivityResult.none){
         ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: Strings.internetConnectionError);
       }
       else{
+        String tempUrl = getLoadCostApi.replaceAll("{loadId}", '$loadId');
+        String url = tempUrl.replaceAll("{userId}", '$loadId');
         http.Response response = await _networkHelper.get(
-            getLoadCostApi+loadId.toString(),
+            url,
             headers: {
               'Content-Type': 'application/json',
               'Authorization': token
@@ -68,8 +68,11 @@ class PaymentProvider extends ChangeNotifier {
         if(response.statusCode == 200){
           _loadCostResponse = LoadCostResponse.fromJson(_genericDecodeEncode.decodeJson(response.body));
           if(_loadCostResponse.code == 1){
-            print('Cost success');
-            shiperCost = _loadCostResponse.result.finalCost;
+            newShipperCost = _loadCostResponse.result.finalCost;
+            totalPrice = _loadCostResponse.result.finalCost;
+            couponDiscount = _loadCostResponse.result.couponDiscount;
+            vatAmount = _loadCostResponse.result.valueAddedTax;
+            // shiperCost = _loadCostResponse.result.finalCost;
             isDataFetched = true;
             notifyListeners();
           }
@@ -116,7 +119,12 @@ class PaymentProvider extends ChangeNotifier {
           if (_couponCodeResponse.code == 1) {
             couponId = _couponCodeResponse.result.couponId;
             shiperCost = _couponCodeResponse.result.newFinalCost;
-            print('Promo code api called');
+
+            newShipperCost = _couponCodeResponse.result.newShipperCost;
+            totalPrice = _couponCodeResponse.result.newFinalCost;
+            couponDiscount = _couponCodeResponse.result.discountAmount;
+            vatAmount = _couponCodeResponse.result.vatAmount;
+            notifyListeners();
             _loader.hideLoader(context);
             ApplicationToast.getSuccessToast(durationTime: 3, heading: Strings.success, subHeading: "Operation performed Succesfully");
             Navigator.of(context).pop();

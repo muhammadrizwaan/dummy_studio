@@ -22,6 +22,7 @@ class _AcceptedState extends State<Accepted> {
   AcceptedComponents _acceptedComponents;
   AcceptedProvider _acceptedProvider;
   MyJobsProvider _myJobsProvider;
+  TextEditingController reasonControler;
   ScrollController _scrollController = new ScrollController();
   int pageNumber = 0;
 
@@ -29,6 +30,7 @@ class _AcceptedState extends State<Accepted> {
   void initState() {
     super.initState();
     pageNumber = 0;
+    reasonControler = TextEditingController();
     _acceptedComponents = AcceptedComponents();
     _acceptedProvider = Provider.of<AcceptedProvider>(context, listen: false);
     _acceptedProvider.init(context: context);
@@ -77,7 +79,7 @@ class _AcceptedState extends State<Accepted> {
                                 status: _myJobsProvider.acceptedList[index].status,
                                 vehicleType: _myJobsProvider.acceptedList[index].vehicleTypeName,
                                 vehicleCategory: _myJobsProvider.acceptedList[index].vehicleCategoryName,
-                                price: "${Strings.aed} ${_myJobsProvider.acceptedList[index].shipperCost.round()}",
+                                price: "${Strings.aed} ${_myJobsProvider.acceptedList[index].shipperCost}",
                                 onAlert: () {
                                   ApplicationToast.onDescriptionAlert(context: context, description: _myJobsProvider.acceptedList[index].vehicleTypeDescription);
                                 },
@@ -89,11 +91,22 @@ class _AcceptedState extends State<Accepted> {
                                   Navigator.push(context, SlideRightRoute(page: Payment(loadId: _myJobsProvider.acceptedList[index].loadId)));
                                 },
                                 onClickCancel: () {
-                                  ApplicationToast.onLoadAlert(context: context, onCancellLoad: (){
-                                    _acceptedProvider.onCancellLoad(context: context, loadId: _myJobsProvider.acceptedList[index].loadId);
-                                    Navigator.pop(context);
-                                  },
-                                    text: Strings.cancelLoadAlertText,
+                                  ApplicationToast.onReportIssue(
+                                    context: context,
+                                    heading: Strings.deleteLoadAlertText,
+                                    lable: Strings.reasonText,
+                                    placeHolder: Strings.enterReasonText,
+                                    onPress: (){
+                                      _acceptedProvider.onCancellLoad(
+                                          context: context,
+                                          loadId: _myJobsProvider.acceptedList[index].loadId,
+                                          reason: reasonControler.text
+                                      );
+                                    },
+                                    onClose: (){
+                                      hideLoader(context);
+                                    },
+                                    reasonControler: reasonControler,
                                   );
                                 }),
                             SizedBox(
@@ -129,5 +142,10 @@ class _AcceptedState extends State<Accepted> {
   Future<Null> onRefresh() async{
     pageNumber = 0;
     await _myJobsProvider.getLoads(context: context);
+  }
+
+  hideLoader(BuildContext context) {
+    reasonControler.text = "";
+    Navigator.of(context).pop();
   }
 }

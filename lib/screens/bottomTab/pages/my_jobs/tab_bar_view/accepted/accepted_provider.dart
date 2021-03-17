@@ -80,7 +80,10 @@ class AcceptedProvider extends ChangeNotifier {
   }
 
   Future onCancellLoad(
-      {@required BuildContext context, @required int loadId}) async {
+      {@required BuildContext context,
+        @required int loadId,
+        @required String reason,
+      }) async {
     try {
       token = await getToken.onToken();
       connectivityResult = await Connectivity().checkConnectivity();
@@ -89,7 +92,13 @@ class AcceptedProvider extends ChangeNotifier {
             durationTime: 3,
             heading: Strings.error,
             subHeading: Strings.internetConnectionError);
-      } else {
+      } else if (reason.isEmpty) {
+        ApplicationToast.getErrorToast(
+            durationTime: 3,
+            heading: Strings.error,
+            subHeading: Strings.pleaseEnterReasonText);
+      }
+      else {
         _loader.showLoader(context: context);
         userId = await Constants.getUserId();
         http.Response response = await _networkHelper.post(cancellLoadApi, headers: {
@@ -98,7 +107,8 @@ class AcceptedProvider extends ChangeNotifier {
         },
           body: {
             "LoadId": loadId,
-            "UserId": userId
+            "UserId": userId,
+            "Reason": reason
           }
         );
         if (response.statusCode == 200) {
@@ -116,13 +126,15 @@ class AcceptedProvider extends ChangeNotifier {
             _myJobsProvider.deliveredCount =_loadsResponse.result.counts.delivered;
             _loader.hideLoader(context);
             notifyListeners();
+            Navigator.of(context).pop();
             ApplicationToast.getSuccessToast(durationTime: 3, heading: Strings.success, subHeading: _loadsResponse.message);
           }
         } else {
           ApplicationToast.getErrorToast(
               durationTime: 3,
               heading: Strings.error,
-              subHeading: Strings.somethingWentWrong);
+              subHeading: Strings.somethingWentWrong,
+          );
         }
       }
     } catch (error) {

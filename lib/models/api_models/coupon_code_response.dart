@@ -1,6 +1,6 @@
 /// Message : "Operation performed Succesfully"
 /// Code : 1
-/// Result : {"CouponId":22,"ShipperCost":19320.0,"NewShipperCost":19310.0,"NewFinalCost":20275.5}
+/// Result : {"CouponId":34,"ShipperCost":440.0,"NewShipperCost":430.0,"NewFinalCost":434.3,"DiscountAmount":10.0,"VatAmount":4.3}
 
 class CouponCodeResponse {
   String _message;
@@ -40,31 +40,41 @@ class CouponCodeResponse {
 
 }
 
-/// CouponId : 22
-/// ShipperCost : 19320.0
-/// NewShipperCost : 19310.0
-/// NewFinalCost : 20275.5
+/// CouponId : 34
+/// ShipperCost : 440.0
+/// NewShipperCost : 430.0
+/// NewFinalCost : 434.3
+/// DiscountAmount : 10.0
+/// VatAmount : 4.3
 
 class Result {
   int _couponId;
   double _shipperCost;
   double _newShipperCost;
   double _newFinalCost;
+  double _discountAmount;
+  double _vatAmount;
 
   int get couponId => _couponId;
   double get shipperCost => _shipperCost;
   double get newShipperCost => _newShipperCost;
   double get newFinalCost => _newFinalCost;
+  double get discountAmount => _discountAmount;
+  double get vatAmount => _vatAmount;
 
   Result({
       int couponId, 
       double shipperCost, 
       double newShipperCost, 
-      double newFinalCost}){
+      double newFinalCost, 
+      double discountAmount, 
+      double vatAmount}){
     _couponId = couponId;
     _shipperCost = shipperCost;
     _newShipperCost = newShipperCost;
     _newFinalCost = newFinalCost;
+    _discountAmount = discountAmount;
+    _vatAmount = vatAmount;
 }
 
   Result.fromJson(dynamic json) {
@@ -72,6 +82,8 @@ class Result {
     _shipperCost = json["ShipperCost"];
     _newShipperCost = json["NewShipperCost"];
     _newFinalCost = json["NewFinalCost"];
+    _discountAmount = json["DiscountAmount"];
+    _vatAmount = json["VatAmount"];
   }
 
   Map<String, dynamic> toJson() {
@@ -80,6 +92,8 @@ class Result {
     map["ShipperCost"] = _shipperCost;
     map["NewShipperCost"] = _newShipperCost;
     map["NewFinalCost"] = _newFinalCost;
+    map["DiscountAmount"] = _discountAmount;
+    map["VatAmount"] = _vatAmount;
     return map;
   }
 

@@ -79,7 +79,7 @@ class _PlacedState extends State<Placed> {
                         status: _myJobsProvider.placedList[index].status,
                         vehicleType: _myJobsProvider.placedList[index].vehicleTypeName,
                         vehicleCategory: _myJobsProvider.placedList[index].vehicleCategoryName,
-                        price: "${Strings.aed} ${_myJobsProvider.placedList[index].shipperCost.round()}",
+                        price: "${Strings.aed} ${_myJobsProvider.placedList[index].shipperCost}",
                         onAlert: () {
                           ApplicationToast.onDescriptionAlert(context: context, description: _myJobsProvider.placedList[index].vehicleTypeDescription);
                         },

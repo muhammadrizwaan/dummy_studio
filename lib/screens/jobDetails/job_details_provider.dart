@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/get_token.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/generic_decode_encode/generic.dart';
 import 'package:truckoom_shipper/models/api_models/load_detail_response.dart';
 import 'package:truckoom_shipper/network/api_urls.dart';
@@ -42,6 +43,7 @@ class JobDetailsProvider extends ChangeNotifier{
 
   Future getLoadDetail({@required BuildContext context, @required int loadId}) async{
     try{
+      int userId = Constants.getUserId();
       token = await getToken.onToken();
       connectivityResult = await Connectivity().checkConnectivity();
       if(connectivityResult == ConnectivityResult.none){
@@ -49,8 +51,9 @@ class JobDetailsProvider extends ChangeNotifier{
       }
       else{
         String tempUrl = getLoadDetailApi.replaceAll("{loadId}", '$loadId');
+        String url = tempUrl.replaceAll("{userId}", '$userId');
         http.Response response = await _networkHelper.get(
-            tempUrl,
+            url,
             headers: {
               'Content-Type': 'application/json',
               'Authorization': token
@@ -77,8 +80,12 @@ class JobDetailsProvider extends ChangeNotifier{
   }
 
   Future onDeleteLoad(
-      {@required BuildContext context, @required int loadId}) async {
+      {@required BuildContext context,
+        @required int loadId,
+        @required String reason,
+      }) async {
     try {
+      int userId = Constants.getUserId();
       token = await getToken.onToken();
       connectivityResult = await Connectivity().checkConnectivity();
       if (connectivityResult == ConnectivityResult.none) {
@@ -86,13 +93,25 @@ class JobDetailsProvider extends ChangeNotifier{
             durationTime: 3,
             heading: Strings.error,
             subHeading: Strings.internetConnectionError);
-      } else {
+      } else if (reason.isEmpty) {
+        ApplicationToast.getErrorToast(
+            durationTime: 3,
+            heading: Strings.error,
+            subHeading: Strings.pleaseEnterReasonText);
+      }
+      else {
         _loader.showLoader(context: context);
-        String tempUrl = deleteLoadApi.replaceAll("{loadId}", '$loadId');
-        http.Response response = await _networkHelper.post(tempUrl, headers: {
+
+        http.Response response = await _networkHelper.post(deleteLoadApi, headers: {
           'Content-Type': 'application/json',
           'Authorization': token
-        });
+        },
+          body: {
+            "LoadId":loadId,
+            "DoneBy":userId,
+            "Remarks":reason
+          }
+        );
         if (response.statusCode == 200) {
           print('deleted load');
           notifyListeners();
