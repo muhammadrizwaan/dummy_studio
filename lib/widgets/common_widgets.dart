@@ -206,7 +206,7 @@ class CommonWidgets {
 
   static Widget tabsAppBar1(
       {@required String text,
-      @required IconData iconName,
+      @required String iconName,
       @required Function onPress}) {
     return Container(
       width:  AppSizes.width,
@@ -237,11 +237,15 @@ class CommonWidgets {
           ),
           GestureDetector(
             onTap: () => onPress(),
-            child: Icon(
-              iconName,
-              size: 25,
-              color: AppColors.colorBlack.withOpacity(0.6),
-            ),
+            child: Container(
+              height: AppSizes.height * 0.05,
+              width: AppSizes.width * 0.05,
+              // height: 30,
+              // width: 30,
+              child: Image(
+                image: AssetImage(iconName),
+              ),
+            )
           ),
         ],
       ),

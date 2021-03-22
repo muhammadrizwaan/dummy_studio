@@ -5,6 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
+import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/book_load/book_load_components.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/book_load/book_load_provider.dart';
 import 'package:truckoom_shipper/screens/notifications/notifications.dart';
@@ -17,6 +19,8 @@ import '../../../../widgets/common_widgets.dart';
 import 'package:geocoder/geocoder.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
+
+import '../../bottom_tab.dart';
 
 class BookLoad extends StatefulWidget {
   @override
@@ -116,6 +120,14 @@ class _BookLoadState extends State<BookLoad> {
     dropoff_location = "";
   }
 
+  setNotification(){
+    Constants.setNotification(false);
+    Navigator.push(context, SlideRightRoute(page: Notifications()));
+    if(bottomTabState.mounted){
+      bottomTabState.setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -137,9 +149,9 @@ class _BookLoadState extends State<BookLoad> {
                 top: 0,
                 child: CommonWidgets.tabsAppBar1(
                   text: "Book a Load",
-                  iconName: FontAwesome5.bell,
+                  iconName: Constants.getNotification()  == false? Assets.notificationIcon: Assets.notificationReceiveIcon,
                   onPress: () {
-                    Navigator.push(context, SlideRightRoute(page: Notifications()));
+                    setNotification();
                   },),
               ),
 

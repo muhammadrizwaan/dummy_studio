@@ -66,6 +66,7 @@ class Strings {
   static const String passwordKey = "PasswordKey";
   static const String userIdKey = "UserIdKey";
   static const String userTypeKey = "UserTypeKey";
+  static const String notificationIconKey = "NotificationIconKey";
   static const String tokenKey = "TokenKey";
   static const String licenseExpiryDateKey = "LicenseExpiryDateKey";
   static const String cityNameKey = "CityNameKey";

@@ -119,7 +119,6 @@ class PaymentProvider extends ChangeNotifier {
           if (_couponCodeResponse.code == 1) {
             couponId = _couponCodeResponse.result.couponId;
             shiperCost = _couponCodeResponse.result.newFinalCost;
-
             newShipperCost = _couponCodeResponse.result.newShipperCost;
             totalPrice = _couponCodeResponse.result.newFinalCost;
             couponDiscount = _couponCodeResponse.result.discountAmount;
@@ -134,7 +133,8 @@ class PaymentProvider extends ChangeNotifier {
             ApplicationToast.getErrorToast(
                 durationTime: 3,
                 heading: Strings.error,
-                subHeading: _couponCodeResponse.message);
+                subHeading: _couponCodeResponse.message,
+            );
           }
         } else {
           _loader.hideLoader(context);
@@ -175,7 +175,7 @@ class PaymentProvider extends ChangeNotifier {
             "UserId": userId,
             "CouponId": couponId, // send as zero if no coupon applied, / get coupon id from apply coupon response
             "PaymentMethodId": 2,
-            "AmountPaid": shiperCost.toString(), // send as zero if no coupon was applied / get new shipper cost from apply coupon response
+            "AmountPaid": newShipperCost.toString(), // send as zero if no coupon was applied / get new shipper cost from apply coupon response
             "TransactionNumber": "a6a8t82138762138gas2",
             "Status": "200",
             "Response": "Captured"

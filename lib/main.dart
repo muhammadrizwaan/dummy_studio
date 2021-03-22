@@ -4,10 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/providers/multi_provider.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/routes/routes.dart';
+import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
 import 'dart:io' as io;
 import 'commons/utils.dart';
@@ -39,17 +42,29 @@ class _MyAppState extends State<MyApp> {
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
         print("onMessage: $message");
+        Constants.setNotification(true);
+        if(bottomTabState.mounted){
+          bottomTabState.setState(() {});
+        }
         // _showItemDialog(message);
         // ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "Notification Received");
       },
       // onBackgroundMessage: myBackgroundMessageHandler,
       onLaunch: (Map<String, dynamic> message) async {
         print("onLaunch: $message");
+        Constants.setNotification(true);
+        if(bottomTabState.mounted){
+          bottomTabState.setState(() {});
+        }
         // _navigateToItemDetail(message);
         // ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "Notification Received");
       },
       onResume: (Map<String, dynamic> message) async {
         print("onResume: $message");
+        Constants.setNotification(true);
+        if(bottomTabState.mounted){
+          bottomTabState.setState(() {});
+        }
         // _navigateToItemDetail(message);
         // ApplicationToast.getSuccessToast(durationTime: 3, heading: null, subHeading: "Notification Received");
       },
