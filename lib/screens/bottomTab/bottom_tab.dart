@@ -11,11 +11,14 @@ import 'package:truckoom_shipper/screens/bottomTab/pages/history/history.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/more/more.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs.dart';
 
-
+_BottomTabState bottomTabState;
 class BottomTab extends StatefulWidget {
 
   @override
-  _BottomTabState createState() => _BottomTabState();
+  _BottomTabState createState() {
+    bottomTabState =  _BottomTabState();
+    return bottomTabState;
+  }
 }
 
 class _BottomTabState extends State<BottomTab> {

@@ -13,6 +13,7 @@ class Constants{
   static String password;
   static int userId;
   static bool userType;
+  static bool notification;
   static String companyName;
   static String companyPhone;
   static String companyTrn;
@@ -46,6 +47,10 @@ class Constants{
   static bool getUserType(){
     userType = PreferenceUtils.getBool(Strings.userTypeKey);
     return userType;
+  }
+  static bool getNotification(){
+    notification = PreferenceUtils.getBool(Strings.notificationIconKey);
+    return notification;
   }
   static String getCommpanyName(){
     companyName = PreferenceUtils.getString(Strings.companyNameKey);
@@ -113,6 +118,9 @@ class Constants{
   }
   static setUserType(bool userType){
     PreferenceUtils.setBool(Strings.userTypeKey, userType);
+  }
+  static setNotification(bool notification){
+    PreferenceUtils.setBool(Strings.notificationIconKey, notification);
   }
   static setCommpanyName(String companyName){
     PreferenceUtils.setString(Strings.companyNameKey, companyName);

@@ -3,10 +3,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
+import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs.dart';
 import 'package:truckoom_shipper/screens/notifications/notifications_components.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
@@ -23,6 +26,8 @@ class _NotificationsState extends State<Notifications> {
   void initState() {
     _notificationsComponents = NotificationsComponents();
   }
+
+
 
   @override
   Widget build(BuildContext context) {

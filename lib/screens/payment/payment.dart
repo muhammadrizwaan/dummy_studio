@@ -223,7 +223,10 @@ class _PaymentState extends State<Payment> {
                           text: 'Submit',
                           onPress: (){
                             ApplicationToast.onPayConfirmationAlert(context: context, onCancellLoad: (){
-                              _paymentProvider.onAcceptedByShipper(context: context, loadId: widget.loadId);
+                              _paymentProvider.onAcceptedByShipper(
+                                  context: context,
+                                  loadId: widget.loadId,
+                              );
                               Navigator.pop(context);
                             },
                               text: Strings.paymentAlertText,

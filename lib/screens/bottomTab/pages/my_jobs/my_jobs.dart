@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs_components.dart';
@@ -21,12 +22,15 @@ import '../../../../animations/slide_right.dart';
 import '../../../../res/colors.dart';
 import '../../../../res/sizes.dart';
 import '../../../../widgets/common_widgets.dart';
+import '../../bottom_tab.dart';
 import 'my_jobs_provider.dart';
 
+_MyJobsState myJobsState;
 class MyJobs extends StatefulWidget {
 
   @override
   _MyJobsState createState() => _MyJobsState();
+
 }
 
 class _MyJobsState extends State<MyJobs> {
@@ -53,6 +57,13 @@ class _MyJobsState extends State<MyJobs> {
     count = 0;
     _jobsComponents = MyJobsComponents();
   }
+  setNotification(){
+    Constants.setNotification(false);
+    Navigator.push(context, SlideRightRoute(page: Notifications()));
+    if(bottomTabState.mounted){
+      bottomTabState.setState(() {});
+    }
+  }
 
 
   @override
@@ -75,9 +86,9 @@ class _MyJobsState extends State<MyJobs> {
             children: [
               CommonWidgets.tabsAppBar1(
                 text: "My Jobs",
-                iconName: FontAwesome5.bell,
+                iconName: Constants.getNotification()  == false? Assets.notificationIcon: Assets.notificationReceiveIcon,
                 onPress: () {
-                  Navigator.push(context, SlideRightRoute(page: Notifications()));
+                  setNotification();
                 },
               ),
               SizedBox(

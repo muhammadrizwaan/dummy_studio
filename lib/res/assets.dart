@@ -80,6 +80,8 @@ class Assets {
   static const String dropoffLocationImage = "assets/png/dropoffLocationImage.png";
   static const String googleMapImage = "assets/png/googleMapImage.png";
 
+  static const String notificationIcon = "assets/png/notificationIcon.png";
+  static const String notificationReceiveIcon = "assets/png/notificationReceiveIcon.png";
 
 
 // App Fonts

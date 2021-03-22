@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:truckoom_shipper/commons/utils.dart';
 import 'package:truckoom_shipper/contsants/constants.dart';
+import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/more/more_components.dart';
 import 'package:truckoom_shipper/screens/businessProfile/business_profile.dart';
 import 'package:truckoom_shipper/screens/language/language.dart';
@@ -20,6 +21,7 @@ import '../../../contact_us/contact_us.dart';
 import '../../../individualProfile/individual_profile.dart';
 import '../../../notifications/notifications.dart';
 import '../../../referrals/referrals.dart';
+import '../../bottom_tab.dart';
 
 class More extends StatefulWidget {
   String tag;
@@ -46,6 +48,13 @@ class _MoreState extends State<More> {
     // TODO: implement dispose
     super.dispose();
   }
+  setNotification(){
+    Constants.setNotification(false);
+    Navigator.push(context, SlideRightRoute(page: Notifications()));
+    if(bottomTabState.mounted){
+      bottomTabState.setState(() {});
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +65,10 @@ class _MoreState extends State<More> {
         child: Column(
           children: [
             CommonWidgets.tabsAppBar1(
-                text: "More", iconName: FontAwesome5.bell, onPress: () {
-                  Navigator.push(context, SlideRightRoute(page: Notifications()));
+                text: "More",
+                iconName: Constants.getNotification()  == false? Assets.notificationIcon: Assets.notificationReceiveIcon,
+                onPress: () {
+                  setNotification();
             }),
             Expanded(
               child: ListView(
