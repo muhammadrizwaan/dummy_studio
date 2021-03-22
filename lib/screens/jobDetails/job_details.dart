@@ -245,7 +245,7 @@ class _JobDetailsState extends State<JobDetails> {
                                   Container():
                                   CommonWidgets.getSubHeadingText(text: Strings.receiverSignature),
                                   _jobDetailsProvider.loadDetailResponse.result.eSignaturePath == "" ?
-                                  Container() :
+                                  Container():
                                   CommonWidgets.getSignatureBox(eSignature: _jobDetailsProvider.loadDetailResponse.result.eSignaturePath),
                                 ],
                               ),
