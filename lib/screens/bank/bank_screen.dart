@@ -49,36 +49,36 @@ class _BankState extends State<Bank> {
                             CommonWidgets.getSubHeadingText(
                                 text: "Account Holder Name"),
                             SizedBox(height: AppSizes.height * 0.01),
-                            CommonWidgets.getTextField(
+                            CommonWidgets.getTextFieldWithImage(
                                 isPassword: false,
-                                leftIcon: Entypo.user,
+                                image: Assets.userNameIcon,
                                 // textEditingController: name,
                                 hintText: "Mathew due"
                             ),
                             SizedBox(height: AppSizes.height * 0.02),
                             CommonWidgets.getSubHeadingText(text: "Card Number"),
                             SizedBox(height: AppSizes.height * 0.01),
-                            CommonWidgets.getTextField(
+                            CommonWidgets.getTextFieldWithImage(
                                 isPassword: false,
-                                leftIcon: MdiIcons.dialpad,
+                                image: Assets.plateNumberIcon,
                                 // textEditingController: name,
                                 hintText: "0123-0123-0123-0123"
                             ),
                             SizedBox(height: AppSizes.height * 0.02),
                             CommonWidgets.getSubHeadingText(text: "CVC Code"),
                             SizedBox(height: AppSizes.height * 0.01),
-                            CommonWidgets.getTextField(
+                            CommonWidgets.getTextFieldWithImage(
                                 isPassword: false,
-                                leftIcon: MdiIcons.dialpad,
+                                image: Assets.plateNumberIcon,
                                 // textEditingController: name,
                                 hintText: "012"
                             ),
                             SizedBox(height: AppSizes.height * 0.02),
                             CommonWidgets.getSubHeadingText(text: "Expiry Date"),
                             SizedBox(height: AppSizes.height * 0.01),
-                            CommonWidgets.getTextField(
+                            CommonWidgets.getTextFieldWithImage(
                                 isPassword: false,
-                                leftIcon: MdiIcons.dialpad,
+                                image: Assets.plateNumberIcon,
                                 // textEditingController: name,
                                 hintText: "01/2020"
                             ),

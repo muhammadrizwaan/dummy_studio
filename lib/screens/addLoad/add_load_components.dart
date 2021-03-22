@@ -208,7 +208,7 @@ class AddLoadComponents {
   }
 
   Widget getNameTextField({
-    @required IconData leftIcon,
+    @required String image,
     @required String hintText,
     @required TextEditingController textEditingController,
   }) {
@@ -224,16 +224,16 @@ class AddLoadComponents {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Opacity(
-              opacity: 0.7,
-              child: Icon(
-                leftIcon,
-                size: 20,
-              )),
+          Container(
+            height: AppSizes.height * 0.06,
+            width: AppSizes.width * 0.06,
+            child: Image.asset(image,
+            ),
+          ),
           // Image(image: AssetImage('$leftIcon')) ,
           Container(
             margin: EdgeInsets.only(left: 5),
-            width: AppSizes.width * 0.8,
+            width: AppSizes.width * 0.7,
             // color: AppColors.yellow,
             child: TextField(
               style: TextStyle(
@@ -262,7 +262,7 @@ class AddLoadComponents {
   }
 
   Widget getPhoneField({
-    @required IconData leftIcon,
+    @required String image,
     @required String hintText,
     @required TextEditingController textEditingController,
   }) {
@@ -278,16 +278,16 @@ class AddLoadComponents {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Opacity(
-              opacity: 0.7,
-              child: Icon(
-                leftIcon,
-                size: 20,
-              )),
+          Container(
+            height: AppSizes.height * 0.06,
+            width: AppSizes.width * 0.06,
+            child: Image.asset(image,
+            ),
+          ),
           // Image(image: AssetImage('$leftIcon')) ,
           Container(
             margin: EdgeInsets.only(left: 5),
-            width: AppSizes.width * 0.8,
+            width: AppSizes.width * 0.7,
             // color: AppColors.yellow,
             child: TextField(
               style: TextStyle(
@@ -497,7 +497,7 @@ class AddLoadComponents {
   // }
 
   Widget getMessageTextField({
-    @required IconData leftIcon,
+    @required String image,
     @required String hintText,
     @required TextEditingController textEditingController,
   }) {
@@ -516,11 +516,10 @@ class AddLoadComponents {
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 15),
-            child: Opacity(
-              opacity: 0.7,
-              child: Icon(
-                leftIcon,
-                size: 20,
+            child: Container(
+              height: AppSizes.height * 0.03,
+              width: AppSizes.width * 0.06,
+              child: Image.asset(image,
               ),
             ),
             // child: Image(image: AssetImage(Assets.messageIcon)),
@@ -576,11 +575,10 @@ class AddLoadComponents {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Opacity(
-              opacity: 0.6,
-              child: Icon(
-                LineariconsFree.license,
-                size: 20,
+            Container(
+              height: AppSizes.height * 0.06,
+              width: AppSizes.width * 0.06,
+              child: Image.asset(Assets.licenseExpiryIcon,
               ),
             ),
             Expanded(

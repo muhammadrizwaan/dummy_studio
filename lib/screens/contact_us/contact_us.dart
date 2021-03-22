@@ -66,7 +66,7 @@ class _ContactUsState extends State<ContactUs> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05, ),
                     child: _contactUsComponents.getNameTextField(
-                        leftIcon: Entypo.user,
+                        image: Assets.userNameIcon,
                         hintText: 'Enter Subject',
                         textEditingController: name
                     ),
@@ -81,7 +81,7 @@ class _ContactUsState extends State<ContactUs> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05, ),
                     child: _contactUsComponents.getMessageTextField(
-                        leftIcon: Icons.message,
+                        image: Assets.descriptionbookIcon,
                         hintText: 'Enter Message',
                         textEditingController: message
                     ),

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
+import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/forgotPassword/forgot_password_components.dart';
@@ -72,9 +73,9 @@ class _ForgotPassowrdState extends State<ForgotPassowrd> {
                           SizedBox(height: AppSizes.height * 0.05,),
                           CommonWidgets.getSubHeadingText(text: "Email"),
                           SizedBox(height: AppSizes.height * 0.01,),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getTextFieldWithImage(
                               isPassword: false,
-                              leftIcon: Icons.mail,
+                              image: Assets.mailIcon,
                               textEditingController: email,
                               hintText: "Enter Email"
                           ),

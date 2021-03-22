@@ -149,10 +149,12 @@ class BookLoadComponents{
             borderRadius: BorderRadius.circular(5)),
         child: Row(
           children: [
-            Icon(
-              Elusive.location,
-              size: 20,
-              color: buttonId == 1? AppColors.colorBlack : AppColors.yellow,
+            Container(
+              height: AppSizes.height * 0.06,
+              width: AppSizes.width * 0.06,
+              child: Image.asset(
+                Assets.countryIcon,
+              ),
             ),
             SizedBox(
               width: 10,
@@ -194,10 +196,12 @@ class BookLoadComponents{
                 borderRadius: BorderRadius.circular(8)),
             child: Row(
               children: [
-                Icon(
-                  Elusive.location,
-                  size: 20,
-                  color: AppColors.colorBlack.withOpacity(0.8),
+                Container(
+                  height: AppSizes.height * 0.06,
+                  width: AppSizes.width * 0.06,
+                  child: Image.asset(
+                    Assets.countryIcon,
+                  ),
                 ),
               ],
             ),

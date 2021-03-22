@@ -164,7 +164,7 @@ class _AddLoadState extends State<AddLoad> {
                                     text: "Receiver Name"),
                                 SizedBox(height: AppSizes.height * 0.01),
                                 _addLoadComponents.getNameTextField(
-                                    leftIcon: Entypo.user,
+                                    image: Assets.userNameIcon,
                                     hintText: 'Enter Receiver Name',
                                     textEditingController: receiver_name),
                                 SizedBox(
@@ -174,7 +174,7 @@ class _AddLoadState extends State<AddLoad> {
                                     text: "Receiver Phone"),
                                 SizedBox(height: AppSizes.height * 0.01),
                                 _addLoadComponents.getPhoneField(
-                                    leftIcon: Entypo.mobile,
+                                    image: Assets.phoneIconNew,
                                     textEditingController: receiver_phone,
                                     hintText: Strings.phonePlaceholderText
                                 ),
@@ -265,7 +265,7 @@ class _AddLoadState extends State<AddLoad> {
                                     text: "Description"),
                                 SizedBox(height: AppSizes.height * 0.01),
                                 _addLoadComponents.getMessageTextField(
-                                    leftIcon: Icons.message,
+                                    image: Assets.descriptionbookIcon,
                                     hintText: 'Enter Description',
                                     textEditingController: description),
                                 SizedBox(height: AppSizes.height * 0.03),

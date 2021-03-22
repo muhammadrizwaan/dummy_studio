@@ -381,7 +381,7 @@ class CommonWidgets {
 
   static Widget getTextFieldWithImage(
       {@required bool isPassword,
-        @required String leftIcon,
+        @required String image,
         @required TextEditingController textEditingController,
         @required String hintText,
       }) {
@@ -398,19 +398,22 @@ class CommonWidgets {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            height: AppSizes.height * 0.03,
-            width: AppSizes.width * 0.075,
-            child: Image(
-              image: AssetImage(leftIcon),
-              // fit: BoxFit.cover,
+          Padding(
+            padding: const EdgeInsets.only(left: 2, right: 6),
+            child: Container(
+              height: AppSizes.height * 0.06,
+              width: AppSizes.width * 0.06,
+              child: Image.asset(
+                image,
+              ),
             ),
+            // child: Image(image: AssetImage(Assets.goodsType)),
           ),
           Center(
             child: Container(
               // color: AppColors.yellow,
-              padding: EdgeInsets.only(left: 5),
-              width: AppSizes.width * 0.62,
+              //padding: EdgeInsets.only(left: 5),
+              width: AppSizes.width * 0.6,
               // height: AppSizes.height * 0.05,
               child: TextField(
                 style: TextStyle(
@@ -508,9 +511,10 @@ class CommonWidgets {
       ),
     );
   }
-  static Widget getTRNField(
+
+  static Widget getPhoneNumberFieldWithImage(
       {@required bool isPassword,
-        @required IconData leftIcon,
+        @required String image,
         @required TextEditingController textEditingController,
         @required String hintText}) {
     return Container(
@@ -524,19 +528,86 @@ class CommonWidgets {
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Opacity(
-              opacity: 0.7,
-              child: Icon(
-                leftIcon,
-                size: 20,
-              )),
+          Padding(
+            padding: const EdgeInsets.only(left: 2, right: 6),
+            child: Container(
+              height: AppSizes.height * 0.06,
+              width: AppSizes.width * 0.06,
+              child: Image.asset(
+                image,
+              ),
+            ),
+          ),
           Center(
             child: Container(
               // color: AppColors.yellow,
               padding: EdgeInsets.only(left: 5),
-              width: AppSizes.width * 0.65,
+              width: AppSizes.width * 0.6,
+              // height: AppSizes.height * 0.05,
+              child: TextField(
+                keyboardType: TextInputType.phone,
+                style: TextStyle(
+                  decoration: TextDecoration.none,
+                  fontFamily: Assets.poppinsLight,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                ),
+                controller: textEditingController,
+                obscureText: isPassword,
+                decoration: InputDecoration(
+                  hintText: hintText,
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(
+                    decoration: TextDecoration.none,
+                    fontSize: 12,
+                    fontFamily: Assets.poppinsLight,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Container(
+              height: AppSizes.height * 0.035,
+              width: AppSizes.width * 0.085,
+              child: Image(
+                  image: AssetImage(
+                      'assets/png/check_circle_fill_pn.png'))),
+        ],
+      ),
+    );
+  }
+  static Widget getTRNField(
+      {@required bool isPassword,
+        @required String image,
+        @required TextEditingController textEditingController,
+        @required String hintText}) {
+    return Container(
+      height: AppSizes.height * 0.07,
+      width: AppSizes.width * 0.85,
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.03),
+      decoration: BoxDecoration(
+        color: AppColors.lightGray,
+        border: Border.all(color: AppColors.lightGray),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            height: AppSizes.height * 0.06,
+            width: AppSizes.width * 0.06,
+            child: Image.asset(
+              image,
+            ),
+          ),
+          Center(
+            child: Container(
+              // color: AppColors.yellow,
+              padding: EdgeInsets.only(left: 5),
+              width: AppSizes.width * 0.6,
               // height: AppSizes.height * 0.05,
               child: TextField(
                 keyboardType: TextInputType.phone,
@@ -929,7 +1000,7 @@ class CommonWidgets {
   }
 
   static Widget getLoadDetailCommonText({
-    @required IconData icon,
+    @required String image,
     @required String text,
     @required String lable
   }){
@@ -942,12 +1013,12 @@ class CommonWidgets {
               color: AppColors.lightGray,
               borderRadius: BorderRadius.circular(5)
           ),
-          child: Opacity(
-              opacity: 0.7,
-              child: Icon(
-                icon,
-                size: 20,
-              )),
+          child: Container(
+            margin: EdgeInsets.all(AppSizes.width * 0.02),
+            height: AppSizes.height * 0.001,
+            width: AppSizes.width * 0.001,
+            child: Image.asset(image),
+          ),
         ),
         SizedBox(width: AppSizes.width * 0.02),
         Column(

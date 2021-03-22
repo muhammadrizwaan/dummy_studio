@@ -102,8 +102,8 @@ class _PhoneNumberState extends State<PhoneNumber> {
                           //   hintText: "Phone Number",
                           //   filledField: filled
                           // ),
-                          CommonWidgets.getPhoneNumberField(isPassword: false,
-                              leftIcon: Entypo.mobile,
+                          CommonWidgets.getPhoneNumberFieldWithImage(isPassword: false,
+                              image: Assets.phoneIconNew,
                               textEditingController: phone_number,
                               hintText: Strings.phonePlaceholderText,
                           ),
