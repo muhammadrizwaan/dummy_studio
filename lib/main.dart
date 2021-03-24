@@ -10,10 +10,9 @@ import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/routes/routes.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab.dart';
-import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs.dart';
-import 'package:truckoom_shipper/utilities/toast.dart';
 import 'dart:io' as io;
 import 'commons/utils.dart';
+
 
 
 void main() {
