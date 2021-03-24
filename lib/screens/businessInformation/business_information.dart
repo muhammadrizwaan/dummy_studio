@@ -97,18 +97,18 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           CommonWidgets.getSubHeadingText(
                               text: "Business Name"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getTextFieldWithImage(
                               isPassword: false,
-                              leftIcon: Entypo.user,
+                              image: Assets.userNameIcon,
                               textEditingController: business_name,
                               hintText: "Enter Business Name"),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(
                               text: "Contact Number"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          CommonWidgets.getPhoneNumberField(
+                          CommonWidgets.getPhoneNumberFieldWithImage(
                               isPassword: false,
-                              leftIcon: Entypo.mobile,
+                              image: Assets.phoneIconNew,
                               textEditingController: contact_number,
                               hintText: Strings.phonePlaceholderText),
                           SizedBox(height: AppSizes.height * 0.02),
@@ -116,7 +116,7 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getTRNField(
                               isPassword: false,
-                              leftIcon: Entypo.mobile,
+                              image: Assets.phoneIconNew,
                               textEditingController: trn,
                               hintText: "Enter TRN"),
                           SizedBox(height: AppSizes.height * 0.02),

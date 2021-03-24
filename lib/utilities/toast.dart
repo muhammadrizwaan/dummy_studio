@@ -211,11 +211,10 @@ class ApplicationToast {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Opacity(
-                                opacity: 0.6,
-                                child: Icon(
-                                  Icons.message,
-                                  size: 20,
+                              Container(
+                                height: AppSizes.height * 0.026,
+                                width: AppSizes.width * 0.06,
+                                child: Image.asset(Assets.descriptionbookIcon,
                                 ),
                               ),
                               SizedBox(width: AppSizes.width * 0.01),

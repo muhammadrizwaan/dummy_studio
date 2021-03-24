@@ -67,6 +67,19 @@ class Assets {
   static const String cardIcon = "assets/png/card_icon.png";
   // static const String apiLoading = "assets/json/loader1.json";
   static const String apiLoading = "assets/json/loader.json";
+  //
+  static const String languageIcon = "assets/png/languageIcon.png";
+  static const String userNameIcon = "assets/png/userNameIcon.png";
+  static const String passwordIcon = "assets/png/passwordIcon.png";
+  static const String mailIcon = "assets/png/mailIcon.png";
+  static const String phoneIconNew = "assets/png/phoneIcon.png";
+  static const String countryIcon = "assets/png/countryIcon.png";
+  static const String plateNumberIcon = "assets/png/plateNumberIcon.png";
+  static const String licenseExpiryIcon = "assets/png/licenseExpiryIcon.png";
+  static const String descriptionbookIcon = "assets/png/descriptionbookIcon.png";
+  static const String calendarIcon = "assets/png/calendarIcon.png";
+  static const String priceIconNew = "assets/png/priceIcon.png";
+  static const String landlineIconNew = "assets/png/landlineIcon.png";
 
 
   // New Images for Shipper

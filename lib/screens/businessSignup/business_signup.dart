@@ -96,26 +96,26 @@ class _BusinessSignupState extends State<BusinessSignup> {
                           SizedBox(height: AppSizes.height * 0.04),
                           CommonWidgets.getSubHeadingText(text: "Full Name"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getTextFieldWithImage(
                               isPassword: false,
-                              leftIcon: Entypo.user,
+                              image: Assets.userNameIcon,
                               textEditingController: name,
                               hintText: "Enter Full Name"
                           ),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "Email"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getTextFieldWithImage(
                               isPassword: false,
-                              leftIcon: Icons.mail,
+                              image: Assets.mailIcon,
                               textEditingController: email,
                               hintText: "Enter Email"),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "Password"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getTextFieldWithImage(
                               isPassword: true,
-                              leftIcon: Entypo.lock,
+                              image: Assets.passwordIcon,
                               textEditingController: password,
                               hintText: "Enter Password"
                           ),
@@ -124,9 +124,9 @@ class _BusinessSignupState extends State<BusinessSignup> {
                           CommonWidgets.getSubHeadingText(
                               text: "Confirm Password"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getTextFieldWithImage(
                               isPassword: true,
-                              leftIcon: Entypo.lock,
+                              image: Assets.passwordIcon,
                               textEditingController: confirm_Password,
                               hintText: "Confirm Password"
                           ),
@@ -144,13 +144,10 @@ class _BusinessSignupState extends State<BusinessSignup> {
                           ),
                           child: Row(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 10),
-                                child: Icon(
-                                  Elusive.location,
-                                  size: 20,
-                                  color:
-                                  AppColors.colorBlack.withOpacity(0.8),
+                              Container(
+                                height: AppSizes.height * 0.06,
+                                width: AppSizes.width * 0.06,
+                                child: Image.asset(Assets.countryIcon,
                                 ),
                               ),
                               Expanded(

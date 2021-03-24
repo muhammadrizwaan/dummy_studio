@@ -69,11 +69,12 @@ class _LanguageState extends State<Language> {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(right: 10),
-                                  child: Icon(
-                                    Icons.language,
-                                    color: AppColors.colorBlack.withOpacity(0.75),
+                                  child: Container(
+                                    height: AppSizes.height * 0.06,
+                                    width: AppSizes.width * 0.06,
+                                    child: Image.asset(Assets.languageIcon,
+                                    ),
                                   ),
-                                  // child: Image(image: AssetImage('assets/png/location_icon.png')),
                                 ),
                                 Expanded(
                                   child: DropdownButtonHideUnderline(

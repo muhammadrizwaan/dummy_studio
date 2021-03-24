@@ -103,35 +103,35 @@ class _SignUPState extends State<SignUP> {
                           SizedBox(height: AppSizes.height * 0.04),
                           CommonWidgets.getSubHeadingText(text: "Full Name"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getTextFieldWithImage(
                               isPassword: false,
-                              leftIcon: Entypo.user,
+                              image: Assets.userNameIcon,
                               textEditingController: _name,
                               hintText: "Enter Name"),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "Email"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getTextFieldWithImage(
                             isPassword: false,
-                            leftIcon: Icons.email,
+                            image: Assets.mailIcon,
                             textEditingController: _email,
                             hintText: "Enter Email",
                           ),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "Password"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getTextFieldWithImage(
                               isPassword: true,
-                              leftIcon: Entypo.lock,
+                              image: Assets.passwordIcon,
                               textEditingController: _password,
                               hintText: "Enter Password"),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(
                               text: "Confirm Password"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getTextFieldWithImage(
                               isPassword: true,
-                              leftIcon: Entypo.lock,
+                              image: Assets.passwordIcon,
                               textEditingController: _confirm_password,
                               hintText: "Confirm Password"),
                           SizedBox(height: AppSizes.height * 0.02),
@@ -149,10 +149,16 @@ class _SignUPState extends State<SignUP> {
                             ),
                             child: Row(
                               children: [
-                                Container(
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 2, ),
+                                  child: Container(
                                     height: AppSizes.height * 0.06,
                                     width: AppSizes.width * 0.06,
-                                    child: Image.asset(Assets.vehicle)),
+                                    child: Image.asset(
+                                      Assets.countryIcon,
+                                    ),
+                                  ),
+                                ),
                                 SizedBox(width: AppSizes.width*0.03),
                                 Expanded(
                                   child: DropdownButtonHideUnderline(

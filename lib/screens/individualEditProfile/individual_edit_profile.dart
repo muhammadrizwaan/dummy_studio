@@ -95,7 +95,7 @@ class _IndividualEditProfileState extends State<IndividualEditProfile> {
                           // ),
                           CommonWidgets.getTextFieldWithImage(
                               isPassword: false,
-                              leftIcon: Assets.nameImage,
+                              image: Assets.userNameIcon,
                               textEditingController: _name,
                               hintText: "Enter Name",
                           ),
@@ -106,9 +106,9 @@ class _IndividualEditProfileState extends State<IndividualEditProfile> {
                           SizedBox(
                             height: 10,
                           ),
-                          _individualEditProfileComponents.getTextField(
+                          CommonWidgets.getTextFieldWithImage(
                               isPassword: false,
-                              leftIcon: Assets.emailImage,
+                              image: Assets.mailIcon,
                               textEditingController: _email,
                               hintText: "Enter Email",
                           ),
@@ -126,7 +126,7 @@ class _IndividualEditProfileState extends State<IndividualEditProfile> {
                           //     hintText: "Enter Password"),
                           CommonWidgets.getTextFieldWithImage(
                               isPassword: true,
-                              leftIcon: Assets.passwordImage,
+                              image: Assets.passwordIcon,
                               textEditingController: _password,
                               hintText: "Enter Password"),
                           SizedBox(
@@ -139,7 +139,7 @@ class _IndividualEditProfileState extends State<IndividualEditProfile> {
                           ),
                           CommonWidgets.getTextFieldWithImage(
                               isPassword: true,
-                              leftIcon: Assets.passwordImage,
+                              image: Assets.passwordIcon,
                               textEditingController: _confirm_password,
                               hintText: "Confirm Password",
                           ),
@@ -161,7 +161,7 @@ class _IndividualEditProfileState extends State<IndividualEditProfile> {
                                 Container(
                                     height: AppSizes.height * 0.06,
                                     width: AppSizes.width * 0.06,
-                                    child: Image.asset(Assets.vehicle)),
+                                    child: Image.asset(Assets.countryIcon)),
                                 SizedBox(width: AppSizes.width*0.03),
                                 Expanded(
                                   child: DropdownButtonHideUnderline(

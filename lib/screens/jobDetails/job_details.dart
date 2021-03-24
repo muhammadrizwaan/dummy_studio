@@ -147,21 +147,21 @@ class _JobDetailsState extends State<JobDetails> {
                                   SizedBox(height: AppSizes.height * 0.02),
 
                                   CommonWidgets.getLoadDetailCommonText(
-                                    icon: LineariconsFree.license,
+                                    image: Assets.licenseExpiryIcon,
                                     lable: Strings.pickupDateAndTime,
                                     text: CommonWidgets.getDateTimeFormate(time: _jobDetailsProvider.loadDetailResponse.result.pickupDateTime) ,
                                   ),
                                   SizedBox(height: AppSizes.height * 0.02),
 
                                   CommonWidgets.getLoadDetailCommonText(
-                                    icon: Entypo.user,
+                                    image: Assets.userNameIcon,
                                     lable: Strings.receiverName,
                                     text: _jobDetailsProvider.loadDetailResponse.result.receiverName,
                                   ),
                                   SizedBox(height: AppSizes.height * 0.02),
 
                                   CommonWidgets.getLoadDetailCommonText(
-                                    icon: Entypo.mobile,
+                                    image: Assets.phoneIconNew,
                                     lable: Strings.receiverPhone,
                                     text: _jobDetailsProvider.loadDetailResponse.result.receiverPhone,
                                   ),
@@ -189,7 +189,7 @@ class _JobDetailsState extends State<JobDetails> {
                                   SizedBox(height: AppSizes.height * 0.02),
 
                                   CommonWidgets.getLoadDetailCommonText(
-                                    icon: Icons.message,
+                                    image: Assets.descriptionbookIcon,
                                     lable: Strings.description,
                                     text: _jobDetailsProvider.loadDetailResponse.result.description,
                                   ),
@@ -245,7 +245,7 @@ class _JobDetailsState extends State<JobDetails> {
                                   Container():
                                   CommonWidgets.getSubHeadingText(text: Strings.receiverSignature),
                                   _jobDetailsProvider.loadDetailResponse.result.eSignaturePath == "" ?
-                                  Container() :
+                                  Container():
                                   CommonWidgets.getSignatureBox(eSignature: _jobDetailsProvider.loadDetailResponse.result.eSignaturePath),
                                 ],
                               ),

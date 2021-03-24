@@ -144,17 +144,17 @@ class BusinessEditProfileComponents{
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Opacity(
-              opacity: 0.6,
-              child: Icon(
-                LineariconsFree.license,
-                size: 20,
+            Container(
+              height: AppSizes.height * 0.06,
+              width: AppSizes.width * 0.06,
+              child: Image.asset(
+                Assets.licenseExpiryIcon,
               ),
             ),
             Center(
               child: Container(
                 padding: EdgeInsets.only(left: 5),
-                width: AppSizes.width * 0.65,
+                width: AppSizes.width * 0.6,
                 child:
                 TextView.getLabel2Text04(date, color: AppColors.colorBlack),
               ),
@@ -172,13 +172,13 @@ class BusinessEditProfileComponents{
 
   Widget getTextField(
       {@required bool isPassword,
-        @required IconData leftIcon,
+        @required String image,
         @required TextEditingController textEditingController,
         @required String hintText}) {
     return Container(
       height: AppSizes.height * 0.07,
       width: AppSizes.width * 0.85,
-      padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.02),
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.03),
       decoration: BoxDecoration(
         color: AppColors.lightGray,
         border: Border.all(color: AppColors.lightGray),
@@ -188,17 +188,18 @@ class BusinessEditProfileComponents{
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Opacity(
-              opacity: 0.7,
-              child: Icon(
-                leftIcon,
-                size: 20,
-              )),
+          Container(
+            height: AppSizes.height * 0.06,
+            width: AppSizes.width * 0.06,
+            child: Image.asset(
+              image,
+            ),
+          ),
           Center(
             child: Container(
               // color: AppColors.yellow,
               padding: EdgeInsets.only(left: 5),
-              width: AppSizes.width * 0.65,
+              width: AppSizes.width * 0.6,
               // height: AppSizes.height * 0.05,
               child: TextField(
                 style: TextStyle(

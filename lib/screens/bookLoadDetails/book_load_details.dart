@@ -213,14 +213,14 @@ class _BookLoadDetailsState extends State<BookLoadDetails> {
                                     SizedBox(height: AppSizes.height * 0.02),
 
                                     CommonWidgets.getLoadDetailCommonText(
-                                      icon: LineariconsFree.license,
+                                      image: Assets.licenseExpiryIcon,
                                       lable: Strings.pickupDateAndTime,
                                       text: widget.pickUpDate,
                                     ),
                                     SizedBox(height: AppSizes.height * 0.02),
 
                                     CommonWidgets.getLoadDetailCommonText(
-                                      icon: Entypo.user,
+                                      image: Assets.userNameIcon,
                                       lable: Strings.receiverName,
                                       text: widget.name,
                                     ),
@@ -228,7 +228,7 @@ class _BookLoadDetailsState extends State<BookLoadDetails> {
 
 
                                     CommonWidgets.getLoadDetailCommonText(
-                                      icon: Entypo.mobile,
+                                      image: Assets.phoneIconNew,
                                       lable: Strings.receiverPhone,
                                       text: widget.phone,
                                     ),
@@ -259,7 +259,7 @@ class _BookLoadDetailsState extends State<BookLoadDetails> {
 
 
                                     CommonWidgets.getLoadDetailCommonText(
-                                      icon: Icons.message,
+                                      image: Assets.descriptionbookIcon,
                                       lable: Strings.description,
                                       text: widget.description,
                                     ),

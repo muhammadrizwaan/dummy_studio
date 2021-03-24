@@ -93,9 +93,9 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                               text: 'Full Name'
                           ),
                           SizedBox(height: AppSizes.height * 0.01,),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getTextFieldWithImage(
                               isPassword: false,
-                              leftIcon: Entypo.user,
+                              image: Assets.userNameIcon,
                               textEditingController: _name,
                               hintText: 'Enter Full Name'
                           ),
@@ -106,7 +106,7 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                           SizedBox(height: AppSizes.height * 0.01,),
                           _businessEditProfileComponents.getTextField(
                               isPassword: false,
-                              leftIcon: Icons.mail,
+                              image: Assets.mailIcon,
                               textEditingController: _email,
                               hintText: 'Enter Email'
                           ),
@@ -116,9 +116,9 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                           SizedBox(
                             height: 10,
                           ),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getTextFieldWithImage(
                               isPassword: true,
-                              leftIcon: Entypo.lock,
+                              image: Assets.passwordIcon,
                               textEditingController: _password,
                               hintText: "Enter Password"),
                           SizedBox(
@@ -129,9 +129,9 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                           SizedBox(
                             height: 10,
                           ),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getTextFieldWithImage(
                               isPassword: true,
-                              leftIcon: Entypo.lock,
+                              image: Assets.passwordIcon,
                               textEditingController: _confirmPassword,
                               hintText: "Confirm Password"),
                           SizedBox(height: AppSizes.height * 0.03,),
@@ -139,9 +139,9 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                               text: 'Business Name'
                           ),
                           SizedBox(height: AppSizes.height * 0.01,),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getTextFieldWithImage(
                               isPassword: false,
-                              leftIcon: Entypo.user,
+                              image: Assets.userNameIcon,
                               textEditingController: _businessName,
                               hintText: 'Enter Business Name'
                           ),
@@ -161,9 +161,9 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                               text: 'Contact Number'
                           ),
                           SizedBox(height: AppSizes.height * 0.01,),
-                          CommonWidgets.getPhoneNumberField(
+                          CommonWidgets.getPhoneNumberFieldWithImage(
                               isPassword: false,
-                              leftIcon: Entypo.mobile,
+                              image: Assets.phoneIconNew,
                               textEditingController: _businessPhone,
                               hintText: Strings.phonePlaceholderText
                           ),
@@ -174,7 +174,7 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                           SizedBox(height: AppSizes.height * 0.01,),
                           CommonWidgets.getTRNField(
                               isPassword: false,
-                              leftIcon: Entypo.mobile,
+                              image: Assets.phoneIconNew,
                               textEditingController: _trn,
                               hintText: 'Enter TRN'
                           ),
@@ -194,9 +194,12 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                             ),
                             child: Row(
                               children: [
-                                Padding(
-                                    padding: const EdgeInsets.only(right: 10),
-                                    child: Icon(Linecons.location, size: 20,)
+                                Container(
+                                  height: AppSizes.height * 0.06,
+                                  width: AppSizes.width * 0.06,
+                                  child: Image.asset(
+                                    Assets.countryIcon,
+                                  ),
                                 ),
                                 Expanded(
                                   child: DropdownButtonHideUnderline(

@@ -5,6 +5,7 @@ import 'package:fluttericon/entypo_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
 import 'package:truckoom_shipper/commons/get_token.dart';
+import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
@@ -104,9 +105,9 @@ class _LoginState extends State<Login> {
                               SizedBox(
                                 height: AppSizes.height * 0.01,
                               ),
-                              CommonWidgets.getTextField(
+                              CommonWidgets.getTextFieldWithImage(
                                   isPassword: false,
-                                  leftIcon: Entypo.user,
+                                  image: Assets.userNameIcon,
                                   textEditingController: email,
                                   hintText: "Enter Email/Phone Number"),
                               SizedBox(
@@ -116,9 +117,9 @@ class _LoginState extends State<Login> {
                               SizedBox(
                                 height: AppSizes.height * 0.01,
                               ),
-                              CommonWidgets.getTextField(
+                              CommonWidgets.getTextFieldWithImage(
                                   isPassword: true,
-                                  leftIcon: Entypo.lock,
+                                  image: Assets.passwordIcon,
                                   textEditingController: password,
                                   hintText: "Enter Password"),
                               SizedBox(height: AppSizes.height * 0.08),
