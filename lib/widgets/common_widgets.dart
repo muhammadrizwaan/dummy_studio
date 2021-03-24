@@ -398,17 +398,7 @@ class CommonWidgets {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 2, right: 6),
-            child: Container(
-              height: AppSizes.height * 0.06,
-              width: AppSizes.width * 0.06,
-              child: Image.asset(
-                image,
-              ),
-            ),
-            // child: Image(image: AssetImage(Assets.goodsType)),
-          ),
+          getImageContainer(image),
           Center(
             child: Container(
               // color: AppColors.yellow,
@@ -445,6 +435,20 @@ class CommonWidgets {
               ),
           ),
         ],
+      ),
+    );
+  }
+
+  static Widget getImageContainer(String image){
+    return Container(
+      height: AppSizes.height*0.035,
+      width: AppSizes.width*0.06,
+      decoration: BoxDecoration(
+        shape: BoxShape.rectangle,
+        image: DecorationImage(
+          image: AssetImage(image),
+          fit: BoxFit.contain,
+        ),
       ),
     );
   }

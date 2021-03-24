@@ -134,9 +134,9 @@ class _BusinessSignupState extends State<BusinessSignup> {
                           CommonWidgets.getSubHeadingText(text: "Emirates"),
                           SizedBox(height: AppSizes.height * 0.01),
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.02),
                           height: AppSizes.height * 0.07,
-                          width: AppSizes.width * 0.85,
+                          width: AppSizes.width,
                           decoration: BoxDecoration(
                             color: AppColors.lightGray,
                             border: Border.all(color: AppColors.lightGray),
@@ -144,12 +144,7 @@ class _BusinessSignupState extends State<BusinessSignup> {
                           ),
                           child: Row(
                             children: [
-                              Container(
-                                height: AppSizes.height * 0.06,
-                                width: AppSizes.width * 0.06,
-                                child: Image.asset(Assets.countryIcon,
-                                ),
-                              ),
+                              CommonWidgets.getImageContainer(Assets.countryIcon),
                               Expanded(
                                 child: DropdownButtonHideUnderline(
                                   child: ButtonTheme(

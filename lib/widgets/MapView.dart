@@ -6,7 +6,6 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'dart:math' show cos, sqrt, asin;
-import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MapView extends StatefulWidget {
