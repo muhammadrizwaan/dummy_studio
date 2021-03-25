@@ -40,19 +40,20 @@ class _SelectVehicleState extends State<SelectVehicle> {
   TextEditingController _search;
   bool isSelect;
   String _selectedValue;
-  int id, vehicleCategoryId, vehicleTypeId;
+  int id, vehicleCategoryId;
+  // int vehicleTypeId;
 
   @override
   void initState() {
     super.initState();
     _selectVehicleComponents = SelectVechileComponents();
-
+    _search = TextEditingController();
     _selectVehicleProvider = Provider.of<SelectVehicleProvider>(context, listen: false);
     _selectVehicleProvider.init(context: context);
     id = 0;
 
     vehicleCategoryId = 0;
-    vehicleTypeId = 0;
+    // vehicleTypeId = 0;
     isSelect = false;
 
     _search.addListener(() {
@@ -75,7 +76,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
 
       }
     });
-    _search = TextEditingController(text: _selectVehicleProvider.getVehicleType().result[0].name);
+
   }
 
   @override
@@ -113,45 +114,34 @@ class _SelectVehicleState extends State<SelectVehicle> {
                           child: _selectVehicleComponents.getTextField(
                             leftIcon: Assets.searchIcon,
                             textEditingController: _search,
+                            // hintText: _selectVehicleProvider.getVehicleType().result[0].name,
                             hintText: "Search",
                           ),
                         ),
                         SizedBox(height: AppSizes.height * 0.01),
-                        _selectVehicleProvider.getIsVehicleFetched()
-                            ? _selectVehicleProvider
-                                        .getFilteredList()
-                                        .result
-                                        .length >
-                                    0
-                                ? Expanded(
+                        _selectVehicleProvider.getIsVehicleFetched() ?
+                        _selectVehicleProvider.getFilteredList().result.length > 0 ?
+                        Expanded(
                                     child: ListView.builder(
-                                        itemCount: _selectVehicleProvider
-                                            .getFilteredList()
-                                            .result
-                                            .length,
+                                        itemCount: _selectVehicleProvider.getFilteredList().result.length,
                                         itemBuilder: (context, index) {
                                           return Container(
                                             child: Column(
                                               children: [
                                                 _selectVehicleComponents.getGoodsType(
                                                   context: context,
-                                                  onPress: () {
+                                                  onPress: () async{
                                                     FocusManager.instance.primaryFocus.unfocus();
-                                                    vehicleTypeId = _selectVehicleProvider.getFilteredList().result[index].vehicleTypeId;
-                                                    _selectVehicleProvider.onGetCategory(
-                                                        context: context,
-                                                        vehicleId:
-                                                            _selectVehicleProvider
-                                                                .getFilteredList()
-                                                                .result[index]
-                                                                .vehicleTypeId);
-                                                    _search.text = "";
+                                                    // vehicleTypeId = _selectVehicleProvider.getFilteredList().result[index].vehicleTypeId;
+                                                    _selectVehicleProvider.setVehicleTypeId(_selectVehicleProvider.getFilteredList().result[index].vehicleTypeId);
                                                     isSelect = false;
+                                                    await _selectVehicleProvider.onGetCategory(
+                                                        context: context,
+                                                        vehicleId: _selectVehicleProvider.getFilteredList().result[index].vehicleTypeId);
+                                                    _search.text = "";
+
                                                   },
-                                                  text: _selectVehicleProvider
-                                                      .getFilteredList()
-                                                      .result[index]
-                                                      .name,
+                                                  text: _selectVehicleProvider.getFilteredList().result[index].name,
                                                 ),
                                               ],
                                             ),
@@ -159,17 +149,10 @@ class _SelectVehicleState extends State<SelectVehicle> {
                                         }),
                                   )
                                 : Container()
-                            : _selectVehicleProvider
-                                        .getCategoryResponse()
-                                        .result
-                                        .length >
-                                    0
+                            : _selectVehicleProvider.getCategoryResponse().result.length > 0
                                 ? Expanded(
                                     child: ListView.builder(
-                                        itemCount: _selectVehicleProvider
-                                            .getCategoryResponse()
-                                            .result
-                                            .length,
+                                        itemCount: _selectVehicleProvider.getCategoryResponse().result.length,
                                         itemBuilder: (context, index) {
                                           return Container(
                                             child: Column(
@@ -178,58 +161,27 @@ class _SelectVehicleState extends State<SelectVehicle> {
                                                   height:
                                                       AppSizes.height * 0.01,
                                                 ),
-                                                _selectVehicleComponents
-                                                    .getVehicleDetail(
-                                                  leftIcon:
-                                                      _selectVehicleProvider
-                                                          .getCategoryResponse()
-                                                          .result[index]
-                                                          .vehicleCategoryImage,
+                                                _selectVehicleComponents.getVehicleDetail(
+                                                  leftIcon: _selectVehicleProvider.getCategoryResponse().result[index].vehicleCategoryImage,
                                                   vehicleType:
-                                                      _selectVehicleProvider
-                                                          .getCategoryResponse()
-                                                          .result[index]
-                                                          .vehicleCategory,
-                                                  vehicleDetail:
-                                                      _selectVehicleProvider
-                                                          .getCategoryResponse()
-                                                          .result[index]
-                                                          .vehicleType,
-                                                  Category:
-                                                      _selectVehicleProvider
-                                                          .getCategoryResponse()
-                                                          .result[index]
-                                                          .vehicleType,
+                                                      _selectVehicleProvider.getCategoryResponse().result[index].vehicleCategory,
+                                                  vehicleDetail: _selectVehicleProvider.getCategoryResponse().result[index].vehicleType,
+                                                  Category: _selectVehicleProvider.getCategoryResponse().result[index].vehicleType,
                                                   onLoadDetail: () {
                                                     setState(() {
                                                       isSelect = true;
-                                                      id = _selectVehicleProvider
-                                                          .getCategoryResponse()
-                                                          .result[index]
-                                                          .vehicleCategoryId;
-                                                      vehicleCategoryId =
-                                                          _selectVehicleProvider
-                                                              .getCategoryResponse()
-                                                              .result[index]
-                                                              .vehicleCategoryId;
+                                                      id = _selectVehicleProvider.getCategoryResponse().result[index].vehicleCategoryId;
+                                                      vehicleCategoryId = _selectVehicleProvider.getCategoryResponse().result[index].vehicleCategoryId;
                                                     });
                                                   },
-                                                  isSelect: id ==
-                                                          _selectVehicleProvider
-                                                              .getCategoryResponse()
-                                                              .result[index]
-                                                              .vehicleCategoryId
+                                                  isSelect: id == _selectVehicleProvider.getCategoryResponse().result[index].vehicleCategoryId
                                                       ? true
                                                       : false,
                                                   onAlert: () {
                                                     ApplicationToast
                                                         .onDescriptionAlert(
                                                       context: context,
-                                                      description:
-                                                          _selectVehicleProvider
-                                                              .getCategoryResponse()
-                                                              .result[index]
-                                                              .vehicleDescription,
+                                                      description: _selectVehicleProvider.getCategoryResponse().result[index].vehicleDescription,
                                                     );
                                                   },
                                                 ),
@@ -297,6 +249,8 @@ class _SelectVehicleState extends State<SelectVehicle> {
       isSelect = false;
       id = 0;
     });
+    print('vehicle Type');
+    print(_selectVehicleProvider.vehicleTypeId);
     _selectVehicleProvider.onEstimatedRate(
       context: context,
       pickupLatitude: widget.PickupLatitude,
@@ -305,7 +259,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
       dropoffLongitude: widget.DropoffLongitude,
       pickupLocation: widget.PickupLocation,
       dropoffLocation: widget.DropoffLocation,
-      VehicleTypeId: vehicleTypeId,
+      VehicleTypeId: _selectVehicleProvider.vehicleTypeId,
       vehicleCategoryId: vehicleCategoryId,
       distance: widget.Distance,
     );

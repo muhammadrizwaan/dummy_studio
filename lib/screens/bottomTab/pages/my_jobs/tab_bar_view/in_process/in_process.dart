@@ -1,16 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
-import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs_provider.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/in_process/in_process_components.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/in_process/in_process_provider.dart';
-import 'package:truckoom_shipper/screens/driver_details/driver_details.dart';
 import 'package:truckoom_shipper/screens/drivers/drivers.dart';
 import 'package:truckoom_shipper/screens/jobDetails/job_details.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
@@ -91,7 +88,6 @@ class _InProcessState extends State<InProcess> {
                           },
                           onDriverDetail: () {
                             Navigator.push(context, SlideRightRoute(page: Drivers(loadId: _myJobsProvider.inProcessList[index].loadId)));
-                            // Navigator.push(context, SlideRightRoute(page: DriverDetailScreen(driverId:_myJobsProvider.inProcessList[index].assignedDriverId)));
                           },
                         ),
                         SizedBox(

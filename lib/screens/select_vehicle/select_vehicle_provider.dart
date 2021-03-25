@@ -33,7 +33,7 @@ class SelectVehicleProvider extends ChangeNotifier{
   GetToken getToken = GetToken();
   List<String> description = List<String>();
   double shipperDiscount = 0.0;
-
+  int vehicleTypeId;
   bool isDataFetched;
   bool _isVehicleFetched = false;
 
@@ -105,8 +105,9 @@ class SelectVehicleProvider extends ChangeNotifier{
         if(response.statusCode == 200){
           _vehicleTypeResponse = VehicleTypeResponse.fromJson(_genericDecodeEncode.decodeJson(response.body));
           if(_vehicleTypeResponse.code == 1){
-            await onGetCategory(context: context, vehicleId: _vehicleTypeResponse.result[1].vehicleTypeId);
-            _isVehicleFetched = true;
+            vehicleTypeId = _vehicleTypeResponse.result[0].vehicleTypeId;
+            await onGetCategory(context: context, vehicleId: vehicleTypeId);
+            // _isVehicleFetched = true;
             isDataFetched = true;
             // notifyListeners();
           }
@@ -153,7 +154,8 @@ class SelectVehicleProvider extends ChangeNotifier{
           if(_vehicleCategoryResponse.code == 1){
             print(_vehicleCategoryResponse.result.length);
             // _laoder.hideLoader(context);
-            // _isVehicleFetched = false;
+            // isDataFetched = true;
+            _isVehicleFetched = false;
             print('category api called');
             notifyListeners();
           }
@@ -281,6 +283,10 @@ class SelectVehicleProvider extends ChangeNotifier{
       return true;
     }
     return false;
+  }
+
+  setVehicleTypeId(int id){
+    vehicleTypeId = id;
   }
 
   setData(listData){

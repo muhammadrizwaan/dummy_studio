@@ -32,7 +32,7 @@ const String uploadProfilePictureApi = "$apiBaseUrl/api/Accounts/UploadProfilePi
 const String cancellLoadApi = "$apiBaseUrl/api/Loads/RejectedByShipper";
 const String getVehicleByVehicleId = "$apiBaseUrl/api/Vehicle/GetVehicleCategoriesByVehicleTypeId?id={vehicleId}";
 const String getWalletApi = "$apiBaseUrl/api/Wallet/GetShipperWallet?userId={userId}";
-
+const String getDriversApi = "$apiBaseUrl/api/Loads/GetLoadDriversDetailsLoadId?loadId={loadId}&userId={userId}";
 // Load status Apis
 const String getPlacedLoadApi = "$apiBaseUrl/api/Loads/GetMyPlacedLoadsShipper?userId={userId}&pageIndex=";
 const String getAcceptedLoadApi = "$apiBaseUrl/api/Loads/GetMyAcceptedLoadsShipper?userId={userId}&pageIndex=";

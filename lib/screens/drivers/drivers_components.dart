@@ -11,7 +11,7 @@ class DriversCompnents{
   Widget getAssignTable() {
     return Container(
       width: AppSizes.width,
-      margin: EdgeInsets.symmetric(vertical: AppSizes.height * 0.02),
+      margin: EdgeInsets.symmetric(vertical: AppSizes.height * 0.02, horizontal: AppSizes.width * 0.05),
       child: Column(
         children: [
           Row(
@@ -99,16 +99,17 @@ class DriversCompnents{
     @required int sr,
     @required String driver,
     @required String vehicle,
-    @required String status
+    @required String status,
+    @required Function onPress
   }){
     return Container(
       width: AppSizes.width,
       color: AppColors.white,
-
+      margin: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: AppSizes.height * 0.01),
+            padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.01),
             child: Row(
               children: [
                 Container(
@@ -116,9 +117,12 @@ class DriversCompnents{
                     child: TextView.getDriverTableDataText((sr + 1).toString(), color: AppColors.WalletTableDataColor)
                 ),
                 SizedBox(width: AppSizes.width*0.02),
-                Container(
-                    width: AppSizes.width * 0.23,
-                    child: TextView.getDriverTableDataText(driver, color: AppColors.WalletTableDataColor)
+                GestureDetector(
+                  onTap: () => onPress(),
+                  child: Container(
+                      width: AppSizes.width * 0.23,
+                      child: TextView.getDriverTableDataText(driver, color: AppColors.WalletTableDataColor)
+                  ),
                 ),
                 SizedBox(width: AppSizes.width*0.02),
                 Container(

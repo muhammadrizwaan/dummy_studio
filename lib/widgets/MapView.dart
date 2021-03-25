@@ -245,6 +245,7 @@ class _MapViewState extends State<MapView> {
   }
   openMap() async {
     String googleUrl = 'https://www.google.com/maps/search/?api=1&query=${widget.endLat},${widget.endLong}';
+    // String googleUrl = 'https://www.google.com/maps/search/?api=1&query=jinnbyte 227 DHA phase 4 lahore';
     if (await canLaunch(googleUrl)) {
       await launch(googleUrl);
     } else {
