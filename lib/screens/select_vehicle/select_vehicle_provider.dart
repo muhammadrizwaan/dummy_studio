@@ -105,10 +105,10 @@ class SelectVehicleProvider extends ChangeNotifier{
         if(response.statusCode == 200){
           _vehicleTypeResponse = VehicleTypeResponse.fromJson(_genericDecodeEncode.decodeJson(response.body));
           if(_vehicleTypeResponse.code == 1){
-            // await onGetCategory(context: context, vehicleId: _vehicleTypeResponse.result[0].vehicleTypeId);
+            await onGetCategory(context: context, vehicleId: _vehicleTypeResponse.result[1].vehicleTypeId);
             _isVehicleFetched = true;
             isDataFetched = true;
-            notifyListeners();
+            // notifyListeners();
           }
           else{
             ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: _vehicleTypeResponse.message);
@@ -139,7 +139,7 @@ class SelectVehicleProvider extends ChangeNotifier{
         ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: Strings.internetConnectionError);
       }
       else{
-        _laoder.showLoader(context: context);
+        // _laoder.showLoader(context: context);
         String url = getVehicleByVehicleId.replaceAll("{vehicleId}", '$vehicleId');
         http.Response response = await _networkHelper.get(
             url,
@@ -152,8 +152,8 @@ class SelectVehicleProvider extends ChangeNotifier{
           _vehicleCategoryResponse = VehicleCategoryResponse.fromJson(_genericDecodeEncode.decodeJson(response.body));
           if(_vehicleCategoryResponse.code == 1){
             print(_vehicleCategoryResponse.result.length);
-            _laoder.hideLoader(context);
-            _isVehicleFetched = false;
+            // _laoder.hideLoader(context);
+            // _isVehicleFetched = false;
             print('category api called');
             notifyListeners();
           }

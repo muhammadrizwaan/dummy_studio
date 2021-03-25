@@ -46,9 +46,8 @@ class _SelectVehicleState extends State<SelectVehicle> {
   void initState() {
     super.initState();
     _selectVehicleComponents = SelectVechileComponents();
-    _search = TextEditingController();
-    _selectVehicleProvider =
-        Provider.of<SelectVehicleProvider>(context, listen: false);
+
+    _selectVehicleProvider = Provider.of<SelectVehicleProvider>(context, listen: false);
     _selectVehicleProvider.init(context: context);
     id = 0;
 
@@ -76,6 +75,7 @@ class _SelectVehicleState extends State<SelectVehicle> {
 
       }
     });
+    _search = TextEditingController(text: _selectVehicleProvider.getVehicleType().result[0].name);
   }
 
   @override

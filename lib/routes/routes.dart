@@ -59,6 +59,7 @@ class Routes {
   static const String bookLoadDetails = '/bookLoadDetails';
   static const String confirmBookLoad = '/confirmBookLoad';
 
+
   static final routes = {
     splash: (context) => Splash(),
     checkUser: (context) => CheckUser(),
@@ -89,5 +90,6 @@ class Routes {
     jobDetails: (context) => JobDetails(),
     bookLoadDetails: (context) => BookLoadDetails(),
     confirmBookLoad: (context) => ConfirmBookLoad(),
+
   };
 }

@@ -11,6 +11,7 @@ import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs_provide
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/in_process/in_process_components.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/in_process/in_process_provider.dart';
 import 'package:truckoom_shipper/screens/driver_details/driver_details.dart';
+import 'package:truckoom_shipper/screens/drivers/drivers.dart';
 import 'package:truckoom_shipper/screens/jobDetails/job_details.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
@@ -89,7 +90,8 @@ class _InProcessState extends State<InProcess> {
                             Navigator.push(context, SlideRightRoute(page: JobDetails(status:"InProcess", loadId: _myJobsProvider.inProcessList[index].loadId)));
                           },
                           onDriverDetail: () {
-                            Navigator.push(context, SlideRightRoute(page: DriverDetailScreen(driverId:_myJobsProvider.inProcessList[index].assignedDriverId)));
+                            Navigator.push(context, SlideRightRoute(page: Drivers(loadId: _myJobsProvider.inProcessList[index].loadId)));
+                            // Navigator.push(context, SlideRightRoute(page: DriverDetailScreen(driverId:_myJobsProvider.inProcessList[index].assignedDriverId)));
                           },
                         ),
                         SizedBox(

@@ -19,6 +19,7 @@ import 'package:truckoom_shipper/screens/checkUserType/check_user_provider.dart'
 import 'package:truckoom_shipper/screens/confirmBookLoad/confirm_book_load_Provider.dart';
 import 'package:truckoom_shipper/screens/contact_us/contact_us_provider.dart';
 import 'package:truckoom_shipper/screens/driver_details/driver_details_provider.dart';
+import 'package:truckoom_shipper/screens/drivers/drivers_provider.dart';
 import 'package:truckoom_shipper/screens/forgotPassword/forgot_password_provider.dart';
 import 'package:truckoom_shipper/screens/individualEditProfile/individual_edit_profile_provider.dart';
 import 'package:truckoom_shipper/screens/individualPayment/individual_payment_provider.dart';
@@ -196,4 +197,9 @@ final multiProviders = [
     create: (_) => MyJobsProvider(),
     lazy: true,
   ),
+  ChangeNotifierProvider<DriversProvider>(
+    create: (_) => DriversProvider(),
+    lazy: true,
+  ),
+
 ];
