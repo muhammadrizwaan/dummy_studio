@@ -53,3 +53,7 @@ const String saveRatingApi = "$apiBaseUrl/api/Rating/SaveRating";
 const String termsAndConditionLink = "http://truckoom.jinnbytedev.com/";
 const String getInvoiceDownloadApi = "$apiBaseUrl/api/Transactions/DownloadInvoice?loadId=";
 
+// Maps apis
+const String getMapApi = "AIzaSyAERKSFYMxdSR6mrMmgyesmQOr8miAFd4c";
+const String getDirectionsApi = "AIzaSyAERKSFYMxdSR6mrMmgyesmQOr8miAFd4c";
+

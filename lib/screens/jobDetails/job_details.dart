@@ -62,6 +62,7 @@ class _JobDetailsState extends State<JobDetails> {
                   // endLong: null,
                   apiKey: "AIzaSyAERKSFYMxdSR6mrMmgyesmQOr8miAFd4c",
                   directionsApiKey: "AIzaSyAERKSFYMxdSR6mrMmgyesmQOr8miAFd4c",
+                  driversList: _jobDetailsProvider.loadDetailResponse.result.loadCarriers,
                 ),
               ),
               Positioned(

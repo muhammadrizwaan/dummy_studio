@@ -80,6 +80,7 @@ class Assets {
   static const String calendarIcon = "assets/png/calendarIcon.png";
   static const String priceIconNew = "assets/png/priceIcon.png";
   static const String landlineIconNew = "assets/png/landlineIcon.png";
+  static const String driverVehicleIcon = "assets/png/driverVehicle.png";
 
 
   // New Images for Shipper

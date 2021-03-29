@@ -1,6 +1,6 @@
 /// Message : "Operation performed Succesfully"
 /// Code : 1
-/// Result : {"LoadId":461,"LoadName":"eyeggr","FullName":"Transporter 1","Email":"t1@gmail.com","Phone":"+156455617389","Description":"eyeggr","PickupLocation":"Dubai Festival City - Dubai - United Arab Emirates","PickupLatitude":25.219184599999991,"PickupLongitude":55.3518905,"DropoffLocation":"Dubai - United Arab Emirates","DropoffLatitude":25.2048493,"DropoffLongitude":55.2707828,"Weight":"1","LoadStatusId":9,"Status":"On The Way","VehicleCategoryId":20,"Vehicle":"4.2 Ton","ShipperCost":310.5,"FinalCost":313.6,"CostForTransporter":186.3,"TransporterCost":186.3,"NoOfVehicles":1,"ReceiverName":"gsgsvev","ReceiverPhone":"+971523658965","GoodTypeId":7,"GoodType":"Goodtype 1","PickupDateTime":"2021-03-19T15:21:00","IsRoundTrip":true,"IsActive":true,"CreatedBy":486,"AssignedDriverId":275,"AssignedTransporterId":274,"AssignedVehicleId":276,"LoadFiles":[{"LoadFilesId":389,"LoadId":461,"FilePath":"http://apitruckoom.jinnbytedev.com/Files/Loads/IMG_1615447320532_compressed8638116004173217445.jpg"}],"ESignaturePath":"","LoadCarriers":[{"LoadCarrierId":346,"LoadId":461,"AssignedDriver":"Driver T1","AssignedDriverId":275,"AssignedVehicle":"vehicle 2","AssignedVehicleId":276,"VehiclePlateNo":"8383838383","LoadStatus":"Accepted By Shipper"}]}
+/// Result : {"LoadId":367,"LoadName":"Sensitive Good","FullName":"Transporter 1","Email":"t1@gmail.com","ShipperName":"Test Busi","ShipperPhone":"+971501211122","Phone":"+156455617389","Description":"Sensitive Good","PickupLocation":"Peco Road","PickupLatitude":31.5387449,"PickupLongitude":74.3336802,"DropoffLocation":"Creative Bugs","DropoffLatitude":31.4646271,"DropoffLongitude":74.3873937,"Weight":"45 Ton","LoadStatusId":9,"Status":"On The Way","VehicleCategoryId":18,"Vehicle":"Vehicle Category desc","ShipperCost":19320.0,"FinalCost":20286.0,"CostForTransporter":11592.0,"TransporterCost":11592.0,"NoOfVehicles":20,"ReceiverName":"Hamza","ReceiverPhone":"3000209","GoodTypeId":7,"GoodType":"Goodtype 1","PickupDateTime":"2021-10-10T00:00:00","IsRoundTrip":false,"IsActive":true,"CreatedBy":264,"AssignedDriverId":275,"AssignedTransporterId":274,"AssignedVehicleId":161,"LoadFiles":[{"LoadFilesId":546,"LoadId":367,"FilePath":"http://apitruckoom.jinnbytedev.com/Files/Loads/IMG_1616743503294_compressed7957011039678123676.jpg"},{"LoadFilesId":547,"LoadId":367,"FilePath":"http://apitruckoom.jinnbytedev.com/Files/Loads/IMG_1616743504237_compressed8022946655132812854.jpg"},{"LoadFilesId":548,"LoadId":367,"FilePath":"http://apitruckoom.jinnbytedev.com/Files/Loads/IMG_1616743505066_compressed6804676868126639435.jpg"},{"LoadFilesId":549,"LoadId":367,"FilePath":"http://apitruckoom.jinnbytedev.com/Files/Loads/IMG_1616743505213_compressed6933295527716329925.jpg"},{"LoadFilesId":550,"LoadId":367,"FilePath":"http://apitruckoom.jinnbytedev.com/Files/Loads/IMG_1616743506000_compressed1258743138483981893.jpg"}],"ESignaturePath":"","LoadCarriers":[{"LoadCarrierId":271,"LoadId":367,"AssignedDriver":"Driver T1","AssignedDriverId":275,"AssignedVehicle":"t1 Vehicle","AssignedVehicleId":161,"VehiclePlateNo":"214214214","LoadStatus":"Unloading","Longitude":74.3895553,"Latitude":31.4646349}]}
 
 class LoadDetailResponse {
   String _message;
@@ -11,7 +11,16 @@ class LoadDetailResponse {
   int get code => _code;
   Result get result => _result;
 
- LoadDetailResponse.empty();
+//   LoadDetailResponse({
+//       String message,
+//       int code,
+//       Result result}){
+//     _message = message;
+//     _code = code;
+//     _result = result;
+// }
+
+  LoadDetailResponse.empty();
 
   LoadDetailResponse.fromJson(dynamic json) {
     _message = json["Message"];
@@ -31,48 +40,52 @@ class LoadDetailResponse {
 
 }
 
-/// LoadId : 461
-/// LoadName : "eyeggr"
+/// LoadId : 367
+/// LoadName : "Sensitive Good"
 /// FullName : "Transporter 1"
 /// Email : "t1@gmail.com"
+/// ShipperName : "Test Busi"
+/// ShipperPhone : "+971501211122"
 /// Phone : "+156455617389"
-/// Description : "eyeggr"
-/// PickupLocation : "Dubai Festival City - Dubai - United Arab Emirates"
-/// PickupLatitude : 25.219184599999991
-/// PickupLongitude : 55.3518905
-/// DropoffLocation : "Dubai - United Arab Emirates"
-/// DropoffLatitude : 25.2048493
-/// DropoffLongitude : 55.2707828
-/// Weight : "1"
+/// Description : "Sensitive Good"
+/// PickupLocation : "Peco Road"
+/// PickupLatitude : 31.5387449
+/// PickupLongitude : 74.3336802
+/// DropoffLocation : "Creative Bugs"
+/// DropoffLatitude : 31.4646271
+/// DropoffLongitude : 74.3873937
+/// Weight : "45 Ton"
 /// LoadStatusId : 9
 /// Status : "On The Way"
-/// VehicleCategoryId : 20
-/// Vehicle : "4.2 Ton"
-/// ShipperCost : 310.5
-/// FinalCost : 313.6
-/// CostForTransporter : 186.3
-/// TransporterCost : 186.3
-/// NoOfVehicles : 1
-/// ReceiverName : "gsgsvev"
-/// ReceiverPhone : "+971523658965"
+/// VehicleCategoryId : 18
+/// Vehicle : "Vehicle Category desc"
+/// ShipperCost : 19320.0
+/// FinalCost : 20286.0
+/// CostForTransporter : 11592.0
+/// TransporterCost : 11592.0
+/// NoOfVehicles : 20
+/// ReceiverName : "Hamza"
+/// ReceiverPhone : "3000209"
 /// GoodTypeId : 7
 /// GoodType : "Goodtype 1"
-/// PickupDateTime : "2021-03-19T15:21:00"
-/// IsRoundTrip : true
+/// PickupDateTime : "2021-10-10T00:00:00"
+/// IsRoundTrip : false
 /// IsActive : true
-/// CreatedBy : 486
+/// CreatedBy : 264
 /// AssignedDriverId : 275
 /// AssignedTransporterId : 274
-/// AssignedVehicleId : 276
-/// LoadFiles : [{"LoadFilesId":389,"LoadId":461,"FilePath":"http://apitruckoom.jinnbytedev.com/Files/Loads/IMG_1615447320532_compressed8638116004173217445.jpg"}]
+/// AssignedVehicleId : 161
+/// LoadFiles : [{"LoadFilesId":546,"LoadId":367,"FilePath":"http://apitruckoom.jinnbytedev.com/Files/Loads/IMG_1616743503294_compressed7957011039678123676.jpg"},{"LoadFilesId":547,"LoadId":367,"FilePath":"http://apitruckoom.jinnbytedev.com/Files/Loads/IMG_1616743504237_compressed8022946655132812854.jpg"},{"LoadFilesId":548,"LoadId":367,"FilePath":"http://apitruckoom.jinnbytedev.com/Files/Loads/IMG_1616743505066_compressed6804676868126639435.jpg"},{"LoadFilesId":549,"LoadId":367,"FilePath":"http://apitruckoom.jinnbytedev.com/Files/Loads/IMG_1616743505213_compressed6933295527716329925.jpg"},{"LoadFilesId":550,"LoadId":367,"FilePath":"http://apitruckoom.jinnbytedev.com/Files/Loads/IMG_1616743506000_compressed1258743138483981893.jpg"}]
 /// ESignaturePath : ""
-/// LoadCarriers : [{"LoadCarrierId":346,"LoadId":461,"AssignedDriver":"Driver T1","AssignedDriverId":275,"AssignedVehicle":"vehicle 2","AssignedVehicleId":276,"VehiclePlateNo":"8383838383","LoadStatus":"Accepted By Shipper"}]
+/// LoadCarriers : [{"LoadCarrierId":271,"LoadId":367,"AssignedDriver":"Driver T1","AssignedDriverId":275,"AssignedVehicle":"t1 Vehicle","AssignedVehicleId":161,"VehiclePlateNo":"214214214","LoadStatus":"Unloading","Longitude":74.3895553,"Latitude":31.4646349}]
 
 class Result {
   int _loadId;
   String _loadName;
   String _fullName;
   String _email;
+  String _shipperName;
+  String _shipperPhone;
   String _phone;
   String _description;
   String _pickupLocation;
@@ -110,6 +123,8 @@ class Result {
   String get loadName => _loadName;
   String get fullName => _fullName;
   String get email => _email;
+  String get shipperName => _shipperName;
+  String get shipperPhone => _shipperPhone;
   String get phone => _phone;
   String get description => _description;
   String get pickupLocation => _pickupLocation;
@@ -148,6 +163,8 @@ class Result {
       String loadName, 
       String fullName, 
       String email, 
+      String shipperName, 
+      String shipperPhone, 
       String phone, 
       String description, 
       String pickupLocation, 
@@ -184,6 +201,8 @@ class Result {
     _loadName = loadName;
     _fullName = fullName;
     _email = email;
+    _shipperName = shipperName;
+    _shipperPhone = shipperPhone;
     _phone = phone;
     _description = description;
     _pickupLocation = pickupLocation;
@@ -223,6 +242,8 @@ class Result {
     _loadName = json["LoadName"];
     _fullName = json["FullName"];
     _email = json["Email"];
+    _shipperName = json["ShipperName"];
+    _shipperPhone = json["ShipperPhone"];
     _phone = json["Phone"];
     _description = json["Description"];
     _pickupLocation = json["PickupLocation"];
@@ -273,6 +294,8 @@ class Result {
     map["LoadName"] = _loadName;
     map["FullName"] = _fullName;
     map["Email"] = _email;
+    map["ShipperName"] = _shipperName;
+    map["ShipperPhone"] = _shipperPhone;
     map["Phone"] = _phone;
     map["Description"] = _description;
     map["PickupLocation"] = _pickupLocation;
@@ -314,14 +337,16 @@ class Result {
 
 }
 
-/// LoadCarrierId : 346
-/// LoadId : 461
+/// LoadCarrierId : 271
+/// LoadId : 367
 /// AssignedDriver : "Driver T1"
 /// AssignedDriverId : 275
-/// AssignedVehicle : "vehicle 2"
-/// AssignedVehicleId : 276
-/// VehiclePlateNo : "8383838383"
-/// LoadStatus : "Accepted By Shipper"
+/// AssignedVehicle : "t1 Vehicle"
+/// AssignedVehicleId : 161
+/// VehiclePlateNo : "214214214"
+/// LoadStatus : "Unloading"
+/// Longitude : 74.3895553
+/// Latitude : 31.4646349
 
 class LoadCarriers {
   int _loadCarrierId;
@@ -332,6 +357,8 @@ class LoadCarriers {
   int _assignedVehicleId;
   String _vehiclePlateNo;
   String _loadStatus;
+  double _longitude;
+  double _latitude;
 
   int get loadCarrierId => _loadCarrierId;
   int get loadId => _loadId;
@@ -341,6 +368,8 @@ class LoadCarriers {
   int get assignedVehicleId => _assignedVehicleId;
   String get vehiclePlateNo => _vehiclePlateNo;
   String get loadStatus => _loadStatus;
+  double get longitude => _longitude;
+  double get latitude => _latitude;
 
   LoadCarriers({
       int loadCarrierId, 
@@ -350,7 +379,9 @@ class LoadCarriers {
       String assignedVehicle, 
       int assignedVehicleId, 
       String vehiclePlateNo, 
-      String loadStatus}){
+      String loadStatus, 
+      double longitude, 
+      double latitude}){
     _loadCarrierId = loadCarrierId;
     _loadId = loadId;
     _assignedDriver = assignedDriver;
@@ -359,6 +390,8 @@ class LoadCarriers {
     _assignedVehicleId = assignedVehicleId;
     _vehiclePlateNo = vehiclePlateNo;
     _loadStatus = loadStatus;
+    _longitude = longitude;
+    _latitude = latitude;
 }
 
   LoadCarriers.fromJson(dynamic json) {
@@ -370,6 +403,8 @@ class LoadCarriers {
     _assignedVehicleId = json["AssignedVehicleId"];
     _vehiclePlateNo = json["VehiclePlateNo"];
     _loadStatus = json["LoadStatus"];
+    _longitude = json["Longitude"];
+    _latitude = json["Latitude"];
   }
 
   Map<String, dynamic> toJson() {
@@ -382,14 +417,16 @@ class LoadCarriers {
     map["AssignedVehicleId"] = _assignedVehicleId;
     map["VehiclePlateNo"] = _vehiclePlateNo;
     map["LoadStatus"] = _loadStatus;
+    map["Longitude"] = _longitude;
+    map["Latitude"] = _latitude;
     return map;
   }
 
 }
 
-/// LoadFilesId : 389
-/// LoadId : 461
-/// FilePath : "http://apitruckoom.jinnbytedev.com/Files/Loads/IMG_1615447320532_compressed8638116004173217445.jpg"
+/// LoadFilesId : 546
+/// LoadId : 367
+/// FilePath : "http://apitruckoom.jinnbytedev.com/Files/Loads/IMG_1616743503294_compressed7957011039678123676.jpg"
 
 class LoadFiles {
   int _loadFilesId;

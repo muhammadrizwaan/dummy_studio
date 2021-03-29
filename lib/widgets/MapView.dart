@@ -1,5 +1,8 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
@@ -7,11 +10,13 @@ import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'dart:math' show cos, sqrt, asin;
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:ui' as ui;
 
 class MapView extends StatefulWidget {
   double startLat,startLong,endLat,endLong;
   var apiKey;
   var directionsApiKey;
+  List driversList;
   static String distanceBetweenLocations = "0.0";
   // String getDistance() => _distanceBetweenLocations;
   // String getTotalDistance() => _MapViewState
@@ -34,7 +39,9 @@ class MapView extends StatefulWidget {
   //   _map_state = _MapViewState();
   //   return _map_state;
   // }
-  MapView({@required this.startLat,@required this.startLong, @required this.endLat,@required this.endLong, @required this.apiKey,@required this.directionsApiKey});
+
+  static _MapViewState _map_state;
+  MapView({@required this.startLat,@required this.startLong, @required this.endLat,@required this.endLong, @required this.apiKey,@required this.directionsApiKey, @required this.driversList});
 
   @override
   _MapViewState createState() => _MapViewState();
@@ -45,6 +52,7 @@ class _MapViewState extends State<MapView> {
   CameraPosition _initialLocation = CameraPosition(target: LatLng(0.0, 0.0));
   Position startCoordinates;
   Position destinationCoordinates;
+  Position driverLocation;
 
   // For controlling the view of the Map
   GoogleMapController mapController;
@@ -73,10 +81,47 @@ class _MapViewState extends State<MapView> {
   BitmapDescriptor pickupMarker;
   BitmapDescriptor dropoffMarker;
 
+  Future<Uint8List> getBytesFromAsset(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png)).buffer.asUint8List();
+  }
+
+  onDriverMarkers() async{
+    List drivers = widget.driversList;
+    if(drivers.isNotEmpty){
+    for(int i = 0; i< drivers.length; i++) {
+      driverLocation = Position(latitude: drivers[i].latitude, longitude: drivers[i].longitude);
+      final Uint8List dropoffMarker = await getBytesFromAsset(
+          Assets.driverVehicleIcon, 40);
+      markers.removeWhere((element) =>
+      element.markerId.value == drivers[i].assignedDriverId.toString());
+      Marker destinationMarker = Marker(
+          markerId: MarkerId(drivers[i].assignedDriverId.toString()),
+          position: LatLng(
+            driverLocation.latitude,
+            driverLocation.longitude,
+          ),
+          infoWindow: InfoWindow(
+            title: 'Driver',
+            snippet: drivers[i].assignedDriver,
+          ),
+          icon: await BitmapDescriptor.fromBytes(dropoffMarker)
+      );
+      markers.add(destinationMarker);
+    }
+    }
+  }
+
+
+
 
   Future<void> setCustomMarker() async{
     startCoordinates = Position(latitude: widget.startLat, longitude: widget.startLong);
     destinationCoordinates = Position(latitude: widget.endLat, longitude: widget.endLong);
+    final Uint8List pickupMarker = await getBytesFromAsset(Assets.pickupLocationImage, 40);
+    final Uint8List dropoffMarker = await getBytesFromAsset(Assets.dropoffLocationImage, 40);
     // Start Location Marker
     if(widget.startLat != null) {
       Marker startMarker = Marker(
@@ -89,8 +134,8 @@ class _MapViewState extends State<MapView> {
           title: 'Start',
           snippet: "starting location",
         ),
-        icon: await BitmapDescriptor.fromAssetImage(
-            ImageConfiguration(), Assets.pickupLocationImage),
+        // icon: await BitmapDescriptor.fromAssetImage(ImageConfiguration(), Assets.pickupLocationImage),
+        icon: await BitmapDescriptor.fromBytes(pickupMarker)
         // icon: pickupMarker,
       );
 // Destination Location Marker
@@ -105,8 +150,7 @@ class _MapViewState extends State<MapView> {
             title: 'Destination',
             snippet: "destination location",
           ),
-          icon: await BitmapDescriptor.fromAssetImage(
-              ImageConfiguration(), Assets.dropoffLocationImage),
+          icon: await BitmapDescriptor.fromBytes(dropoffMarker)
         );
         markers.add(destinationMarker);
       }
@@ -114,9 +158,6 @@ class _MapViewState extends State<MapView> {
       // Add the markers to the list
       markers.add(startMarker);
     }
-    // setState(() {
-    //
-    // });
     return;
   }
 
@@ -125,6 +166,7 @@ class _MapViewState extends State<MapView> {
     super.initState();
     // _getCurrentLocation();
     _getInitialLocation();
+    onDriverMarkers();
     setCustomMarker();
     _createPolylines(startCoordinates, destinationCoordinates);
   }
@@ -300,7 +342,6 @@ class _MapViewState extends State<MapView> {
         mapController.animateCamera(
           CameraUpdate.newCameraPosition(
             CameraPosition(
-              // target: LatLng(widget.startLat,widget.startLong),//LatLng(position.latitude, position.longitude),
               target: LatLng(position.latitude, position.longitude),//LatLng(position.latitude, position.longitude),
               zoom: 8.0,
 

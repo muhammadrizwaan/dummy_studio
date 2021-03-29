@@ -120,8 +120,7 @@ class _InvoiceDetailState extends State<InvoiceDetail> {
                                     SizedBox(height: AppSizes.height * 0.02),
                                     //_invoiceDetailComponents.getReviewContainer(),
                                     SmoothStarRating(
-                                      rating: _invoiceDetailProvider
-                                          .invoiceDetailResponse.result.rating,
+                                      rating: _invoiceDetailProvider.invoiceDetailResponse.result.rating,
                                       isReadOnly: true,
                                       size: 30,
                                       color: AppColors.yellow,
