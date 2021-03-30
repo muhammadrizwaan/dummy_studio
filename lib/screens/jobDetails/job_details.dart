@@ -40,6 +40,11 @@ class _JobDetailsState extends State<JobDetails> {
     _jobDetailsProvider = Provider.of<JobDetailsProvider>(context, listen: false);
     _jobDetailsProvider.init(context: context, loadId: widget.loadId);
   }
+  @override
+  void dispose() {
+    super.dispose();
+    _jobDetailsProvider.onCancelTimer();
+  }
 
   @override
   Widget build(BuildContext context) {

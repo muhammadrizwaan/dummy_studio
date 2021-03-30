@@ -1,6 +1,6 @@
 /// Message : "Operation performed Succesfully"
 /// Code : 1
-/// Result : {"InvoiceId":10,"TransporterLogo":"/Files/UserImages/image_picker8590741799748320093.jpg","TransporterName":"Transporter 100","PickupLocation":"MM Alam Rd, Theh Block J Gulberg III, Lahore, Punjab, Pakistan","DropOffLocation":"Ferozepur Road & Kalma Chowk Flyover, Garden Block Garden Town, Lahore, Punjab, Pakistan","CompletedDate":"Jan 22 2021  2:54PM","Weight":"55","ShipperCost":295113.0,"CouponDiscount":0.0,"VatPercentage":0.0,"VatAmount":47218.08,"TotalShipperCost":342331.08,"TransporterCost":177067.8,"LoadStatus":[{"LoadStatusId":1,"Status":"Placed","Date":"Jan 19 2021  8:09AM"},{"LoadStatusId":2,"Status":"Assigned By Admin\n","Date":"Jan 19 2021 12:37PM"},{"LoadStatusId":3,"Status":"Accepted By Transporter","Date":"Jan 19 2021 12:40PM"},{"LoadStatusId":5,"Status":"Accepted By Shipper","Date":"Jan 19 2021  2:04PM"},{"LoadStatusId":8,"Status":"Loading","Date":"Jan 21 2021  1:54AM"},{"LoadStatusId":9,"Status":"On The Way","Date":"Jan 21 2021  1:54AM"},{"LoadStatusId":10,"Status":"Unloading","Date":"Jan 21 2021  1:54AM"},{"LoadStatusId":11,"Status":"Delivered","Date":"Jan 22 2021  2:54PM"}],"ESignature":null,"Rating":0.0,"Remarks":""}
+/// Result : {"InvoiceId":530,"TransporterLogo":"http://truckoom.jinnbytedev.com/Content/ComingSoon/assets/Images/logo_final.png","TransporterName":"abdullah","PickupLocation":"Lahore, Punjab, Pakistan","DropOffLocation":"Karachi, Karachi City, Sindh, Pakistan","CompletedDate":"2021-03-29T07:25:58.103","Weight":"5","ShipperCost":28818.0,"CouponDiscount":0.0,"VatPercentage":0.01,"VatAmount":288.18,"TotalShipperCost":29106.18,"TransporterCost":17290.8,"LoadStatus":[{"LoadStatusId":1,"Status":"Placed","Date":"2021-03-29T04:35:44.08"},{"LoadStatusId":2,"Status":"Assigned By Admin\n","Date":"2021-03-29T07:12:32.653"},{"LoadStatusId":3,"Status":"Accepted By Transporter","Date":"2021-03-29T07:12:54.15"},{"LoadStatusId":5,"Status":"Accepted By Shipper","Date":"2021-03-29T07:14:13.6"},{"LoadStatusId":8,"Status":"Loading","Date":"2021-03-29T07:20:31.303"},{"LoadStatusId":9,"Status":"On The Way","Date":"2021-03-29T07:25:17.59"},{"LoadStatusId":10,"Status":"Unloading","Date":"2021-03-29T07:25:31.293"},{"LoadStatusId":11,"Status":"Delivered","Date":"2021-03-29T07:25:58.103"}],"ESignature":"http://apitruckoom.jinnbytedev.com/Files/Loads/00994454load_image.jpg","Rating":2.0,"Remarks":"","RatingByTransporter":5.0,"RemarksByTransporter":""}
 
 class InvoiceDetailResponse {
   String _message;
@@ -19,7 +19,6 @@ class InvoiceDetailResponse {
 //     _code = code;
 //     _result = result;
 // }
-
   InvoiceDetailResponse.empty();
 
   InvoiceDetailResponse.fromJson(dynamic json) {
@@ -40,23 +39,25 @@ class InvoiceDetailResponse {
 
 }
 
-/// InvoiceId : 10
-/// TransporterLogo : "/Files/UserImages/image_picker8590741799748320093.jpg"
-/// TransporterName : "Transporter 100"
-/// PickupLocation : "MM Alam Rd, Theh Block J Gulberg III, Lahore, Punjab, Pakistan"
-/// DropOffLocation : "Ferozepur Road & Kalma Chowk Flyover, Garden Block Garden Town, Lahore, Punjab, Pakistan"
-/// CompletedDate : "Jan 22 2021  2:54PM"
-/// Weight : "55"
-/// ShipperCost : 295113.0
+/// InvoiceId : 530
+/// TransporterLogo : "http://truckoom.jinnbytedev.com/Content/ComingSoon/assets/Images/logo_final.png"
+/// TransporterName : "abdullah"
+/// PickupLocation : "Lahore, Punjab, Pakistan"
+/// DropOffLocation : "Karachi, Karachi City, Sindh, Pakistan"
+/// CompletedDate : "2021-03-29T07:25:58.103"
+/// Weight : "5"
+/// ShipperCost : 28818.0
 /// CouponDiscount : 0.0
-/// VatPercentage : 0.0
-/// VatAmount : 47218.08
-/// TotalShipperCost : 342331.08
-/// TransporterCost : 177067.8
-/// LoadStatus : [{"LoadStatusId":1,"Status":"Placed","Date":"Jan 19 2021  8:09AM"},{"LoadStatusId":2,"Status":"Assigned By Admin\n","Date":"Jan 19 2021 12:37PM"},{"LoadStatusId":3,"Status":"Accepted By Transporter","Date":"Jan 19 2021 12:40PM"},{"LoadStatusId":5,"Status":"Accepted By Shipper","Date":"Jan 19 2021  2:04PM"},{"LoadStatusId":8,"Status":"Loading","Date":"Jan 21 2021  1:54AM"},{"LoadStatusId":9,"Status":"On The Way","Date":"Jan 21 2021  1:54AM"},{"LoadStatusId":10,"Status":"Unloading","Date":"Jan 21 2021  1:54AM"},{"LoadStatusId":11,"Status":"Delivered","Date":"Jan 22 2021  2:54PM"}]
-/// ESignature : null
-/// Rating : 0.0
+/// VatPercentage : 0.01
+/// VatAmount : 288.18
+/// TotalShipperCost : 29106.18
+/// TransporterCost : 17290.8
+/// LoadStatus : [{"LoadStatusId":1,"Status":"Placed","Date":"2021-03-29T04:35:44.08"},{"LoadStatusId":2,"Status":"Assigned By Admin\n","Date":"2021-03-29T07:12:32.653"},{"LoadStatusId":3,"Status":"Accepted By Transporter","Date":"2021-03-29T07:12:54.15"},{"LoadStatusId":5,"Status":"Accepted By Shipper","Date":"2021-03-29T07:14:13.6"},{"LoadStatusId":8,"Status":"Loading","Date":"2021-03-29T07:20:31.303"},{"LoadStatusId":9,"Status":"On The Way","Date":"2021-03-29T07:25:17.59"},{"LoadStatusId":10,"Status":"Unloading","Date":"2021-03-29T07:25:31.293"},{"LoadStatusId":11,"Status":"Delivered","Date":"2021-03-29T07:25:58.103"}]
+/// ESignature : "http://apitruckoom.jinnbytedev.com/Files/Loads/00994454load_image.jpg"
+/// Rating : 2.0
 /// Remarks : ""
+/// RatingByTransporter : 5.0
+/// RemarksByTransporter : ""
 
 class Result {
   int _invoiceId;
@@ -73,9 +74,11 @@ class Result {
   double _totalShipperCost;
   double _transporterCost;
   List<LoadStatus> _loadStatus;
-  dynamic _eSignature;
+  String _eSignature;
   double _rating;
   String _remarks;
+  double _ratingByTransporter;
+  String _remarksByTransporter;
 
   int get invoiceId => _invoiceId;
   String get transporterLogo => _transporterLogo;
@@ -91,9 +94,11 @@ class Result {
   double get totalShipperCost => _totalShipperCost;
   double get transporterCost => _transporterCost;
   List<LoadStatus> get loadStatus => _loadStatus;
-  dynamic get eSignature => _eSignature;
+  String get eSignature => _eSignature;
   double get rating => _rating;
   String get remarks => _remarks;
+  double get ratingByTransporter => _ratingByTransporter;
+  String get remarksByTransporter => _remarksByTransporter;
 
   Result({
       int invoiceId, 
@@ -110,9 +115,11 @@ class Result {
       double totalShipperCost, 
       double transporterCost, 
       List<LoadStatus> loadStatus, 
-      dynamic eSignature, 
+      String eSignature, 
       double rating, 
-      String remarks}){
+      String remarks, 
+      double ratingByTransporter, 
+      String remarksByTransporter}){
     _invoiceId = invoiceId;
     _transporterLogo = transporterLogo;
     _transporterName = transporterName;
@@ -130,6 +137,8 @@ class Result {
     _eSignature = eSignature;
     _rating = rating;
     _remarks = remarks;
+    _ratingByTransporter = ratingByTransporter;
+    _remarksByTransporter = remarksByTransporter;
 }
 
   Result.fromJson(dynamic json) {
@@ -155,6 +164,8 @@ class Result {
     _eSignature = json["ESignature"];
     _rating = json["Rating"];
     _remarks = json["Remarks"];
+    _ratingByTransporter = json["RatingByTransporter"];
+    _remarksByTransporter = json["RemarksByTransporter"];
   }
 
   Map<String, dynamic> toJson() {
@@ -178,6 +189,8 @@ class Result {
     map["ESignature"] = _eSignature;
     map["Rating"] = _rating;
     map["Remarks"] = _remarks;
+    map["RatingByTransporter"] = _ratingByTransporter;
+    map["RemarksByTransporter"] = _remarksByTransporter;
     return map;
   }
 
@@ -185,7 +198,7 @@ class Result {
 
 /// LoadStatusId : 1
 /// Status : "Placed"
-/// Date : "Jan 19 2021  8:09AM"
+/// Date : "2021-03-29T04:35:44.08"
 
 class LoadStatus {
   int _loadStatusId;

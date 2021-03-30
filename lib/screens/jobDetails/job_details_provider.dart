@@ -1,5 +1,7 @@
 
 
+import 'dart:async';
+
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -28,17 +30,45 @@ class JobDetailsProvider extends ChangeNotifier{
   CustomPopup _loader = CustomPopup();
   GetToken getToken = GetToken();
   bool isDataFetched = false;
-
+  int counter = 10;
   var connectivityResult;
   int userId;
   String token;
+  Timer _timer;
+  int jobId;
+  bool isStoped = false;
+
   init({@required BuildContext context, @required int loadId}) async{
     this.context = context;
     connectivityResult = "";
+    jobId = loadId;
     isDataFetched = false;
+    isStoped = false;
     token = "";
     _placedProvider = Provider.of<PlacedProvider>(context, listen: false);
     await getLoadDetail(context: context, loadId: loadId);
+  }
+
+  _startTimer() {
+    counter = 10;
+    _timer = Timer.periodic(Duration(seconds:1), (timer) {
+      if(counter > 0){
+        counter --;
+        print('counter value is');
+        print(counter);
+      }
+      else {
+        _timer.cancel();
+        if(isStoped == false){
+          getLoadDetail(context: context, loadId: jobId);
+        }
+
+      }
+    });
+  }
+  onCancelTimer(){
+    _timer.cancel();
+    isStoped == true;
   }
 
   Future getLoadDetail({@required BuildContext context, @required int loadId}) async{
@@ -64,6 +94,8 @@ class JobDetailsProvider extends ChangeNotifier{
           if(loadDetailResponse.code == 1){
             isDataFetched = true;
             notifyListeners();
+            print('api success');
+            _startTimer();
           }
           else{
             ApplicationToast.getErrorToast(durationTime: 3, heading: Strings.error, subHeading: loadDetailResponse.message);

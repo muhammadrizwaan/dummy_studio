@@ -118,14 +118,6 @@ class _BookLoadState extends State<BookLoad> {
                   onMapCreated: (GoogleMapController controller) {mapController = controller;
                   },
                 ),
-                // MapView(
-                //   startLat:pickup_latitude ,
-                //   startLong: pickup_longitude,
-                //   endLat: dropoff_latitude,
-                //   endLong: dropoff_longitude,
-                //   apiKey: "AIzaSyAERKSFYMxdSR6mrMmgyesmQOr8miAFd4c",
-                //   directionsApiKey: "AIzaSyAERKSFYMxdSR6mrMmgyesmQOr8miAFd4c",
-                // ),
               ),
               Positioned(
                 top: 0,
@@ -459,7 +451,7 @@ class _BookLoadState extends State<BookLoad> {
       polylineId: id,
       color: AppColors.yellow,
       points: polylineCoordinates,
-      width: 3,
+      width: 5,
     );
 
     // Adding the polyline to the map
@@ -470,28 +462,24 @@ class _BookLoadState extends State<BookLoad> {
     _viewBothCoordinates();
   }
   _viewBothCoordinates(){
-    Position _northeastCoordinates;
-    Position _southwestCoordinates;
-    if (startCoordinates.latitude <= destinationCoordinates.latitude) {
-      _southwestCoordinates = startCoordinates;
-      _northeastCoordinates = destinationCoordinates;
-    } else {
-      _southwestCoordinates = destinationCoordinates;
-      _northeastCoordinates = startCoordinates;
+
+    LatLngBounds latLngBounds;
+    if (startCoordinates.latitude > destinationCoordinates.latitude && startCoordinates.longitude > destinationCoordinates.longitude) {
+      latLngBounds = LatLngBounds(southwest: LatLng(destinationCoordinates.latitude, destinationCoordinates.longitude), northeast: LatLng(startCoordinates.latitude, startCoordinates.longitude));
+    }
+    else if(startCoordinates.longitude > destinationCoordinates.longitude){
+      latLngBounds = LatLngBounds(southwest: LatLng(startCoordinates.latitude, destinationCoordinates.longitude), northeast: LatLng(destinationCoordinates.latitude, startCoordinates.longitude));
+    }
+    else if(startCoordinates.latitude > destinationCoordinates.latitude){
+      latLngBounds = LatLngBounds(southwest: LatLng(destinationCoordinates.latitude, startCoordinates.longitude), northeast: LatLng(startCoordinates.latitude, destinationCoordinates.longitude));
+    }
+    else{
+      latLngBounds = LatLngBounds(southwest: LatLng(startCoordinates.latitude, startCoordinates.longitude), northeast: LatLng(destinationCoordinates.latitude, destinationCoordinates.longitude));
     }
 
     mapController.animateCamera(
       CameraUpdate.newLatLngBounds(
-        LatLngBounds(
-          northeast: LatLng(
-            _northeastCoordinates.latitude,
-            _northeastCoordinates.longitude,
-          ),
-          southwest: LatLng(
-            _southwestCoordinates.latitude,
-            _southwestCoordinates.longitude,
-          ),
-        ),
+        latLngBounds,
         100.0, // padding
       ),
     );

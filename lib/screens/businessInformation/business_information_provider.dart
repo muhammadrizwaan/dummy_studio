@@ -159,7 +159,7 @@ class BusinessInformationProvider extends ChangeNotifier {
         final filePath = await FlutterAbsolutePath.getAbsolutePath(images[i].identifier);
         File tempFile = File(filePath);
         File compressedFile = await FlutterNativeImage.compressImage(tempFile.path,
-          quality: 5,);
+          quality: 20,);
         multipart.add(await MultipartFile.fromFile(compressedFile.path, filename: compressedFile.path.split("/").last));
       }
 

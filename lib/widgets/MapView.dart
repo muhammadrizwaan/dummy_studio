@@ -94,7 +94,7 @@ class _MapViewState extends State<MapView> {
     for(int i = 0; i< drivers.length; i++) {
       driverLocation = Position(latitude: drivers[i].latitude, longitude: drivers[i].longitude);
       final Uint8List dropoffMarker = await getBytesFromAsset(
-          Assets.driverVehicleIcon, 40);
+          Assets.driverVehicleIcon, 80);
       markers.removeWhere((element) =>
       element.markerId.value == drivers[i].assignedDriverId.toString());
       Marker destinationMarker = Marker(
@@ -166,7 +166,7 @@ class _MapViewState extends State<MapView> {
     super.initState();
     // _getCurrentLocation();
     _getInitialLocation();
-    onDriverMarkers();
+    // onDriverMarkers();
     setCustomMarker();
     _createPolylines(startCoordinates, destinationCoordinates);
   }
@@ -174,6 +174,7 @@ class _MapViewState extends State<MapView> {
 
   @override
   Widget build(BuildContext context) {
+    onDriverMarkers();
     return Container(
       child: Scaffold(
         body: Stack(
@@ -429,35 +430,55 @@ class _MapViewState extends State<MapView> {
   }
 
   _viewBothCoordinates(){
-    // Calculating to check that
-    // Define two position variables
-    Position _northeastCoordinates;
-    Position _southwestCoordinates;
-// southwest coordinate <= northeast coordinate
-    if (startCoordinates.latitude <= destinationCoordinates.latitude) {
-      _southwestCoordinates = startCoordinates;
-      _northeastCoordinates = destinationCoordinates;
-    } else {
-      _southwestCoordinates = destinationCoordinates;
-      _northeastCoordinates = startCoordinates;
+    LatLngBounds latLngBounds;
+    if (startCoordinates.latitude > destinationCoordinates.latitude && startCoordinates.longitude > destinationCoordinates.longitude) {
+      latLngBounds = LatLngBounds(southwest: LatLng(destinationCoordinates.latitude, destinationCoordinates.longitude), northeast: LatLng(startCoordinates.latitude, startCoordinates.longitude));
+    }
+    else if(startCoordinates.longitude > destinationCoordinates.longitude){
+      latLngBounds = LatLngBounds(southwest: LatLng(startCoordinates.latitude, destinationCoordinates.longitude), northeast: LatLng(destinationCoordinates.latitude, startCoordinates.longitude));
+    }
+    else if(startCoordinates.latitude > destinationCoordinates.latitude){
+      latLngBounds = LatLngBounds(southwest: LatLng(destinationCoordinates.latitude, startCoordinates.longitude), northeast: LatLng(startCoordinates.latitude, destinationCoordinates.longitude));
+    }
+    else{
+      latLngBounds = LatLngBounds(southwest: LatLng(startCoordinates.latitude, startCoordinates.longitude), northeast: LatLng(destinationCoordinates.latitude, destinationCoordinates.longitude));
     }
 
-// Accommodate the two locations within the
-// camera view of the map
     mapController.animateCamera(
       CameraUpdate.newLatLngBounds(
-        LatLngBounds(
-          northeast: LatLng(
-            _northeastCoordinates.latitude,
-            _northeastCoordinates.longitude,
-          ),
-          southwest: LatLng(
-            _southwestCoordinates.latitude,
-            _southwestCoordinates.longitude,
-          ),
-        ),
+        latLngBounds,
         100.0, // padding
       ),
     );
+    // Calculating to check that
+    // Define two position variables
+//     Position _northeastCoordinates;
+//     Position _southwestCoordinates;
+// // southwest coordinate <= northeast coordinate
+//     if (startCoordinates.latitude <= destinationCoordinates.latitude) {
+//       _southwestCoordinates = startCoordinates;
+//       _northeastCoordinates = destinationCoordinates;
+//     } else {
+//       _southwestCoordinates = destinationCoordinates;
+//       _northeastCoordinates = startCoordinates;
+//     }
+//
+// // Accommodate the two locations within the
+// // camera view of the map
+//     mapController.animateCamera(
+//       CameraUpdate.newLatLngBounds(
+//         LatLngBounds(
+//           northeast: LatLng(
+//             _northeastCoordinates.latitude,
+//             _northeastCoordinates.longitude,
+//           ),
+//           southwest: LatLng(
+//             _southwestCoordinates.latitude,
+//             _southwestCoordinates.longitude,
+//           ),
+//         ),
+//         100.0, // padding
+//       ),
+//     );
   }
 }

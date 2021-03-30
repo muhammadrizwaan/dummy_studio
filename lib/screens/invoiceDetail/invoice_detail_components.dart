@@ -29,14 +29,14 @@ class InvoiceDetailComponents {
             //   ),
             // ),
             // SizedBox(height: AppSizes.height * 0.02),
-            Text(
-              name,
-              style: TextStyle(
-                  fontFamily: Assets.poppinsRegular,
-                  fontSize: 18,
-                  color: AppColors.colorBlack,
-                  fontWeight: FontWeight.bold),
-            )
+            // Text(
+            //   name,
+            //   style: TextStyle(
+            //       fontFamily: Assets.poppinsRegular,
+            //       fontSize: 18,
+            //       color: AppColors.colorBlack,
+            //       fontWeight: FontWeight.bold),
+            // )
           ],
         ),
       ),
