@@ -21,6 +21,23 @@ class TextView {
       ),
     );
   }
+  static Text getPoppinsMediumF20L3BoldText(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 3,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        decoration: TextDecoration.none,
+        fontSize: 20,
+        fontFamily: Assets.poppinsMedium,
+        color: color,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
   static Text getLightText05(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
     return Text(
       text,
@@ -53,6 +70,21 @@ class TextView {
       ),
     );
   }
+  static Text getSearchText(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w300,
+        fontFamily: Assets.poppinsLight,
+          color: color,
+      ),
+    );
+  }
 
 
   static Text getHeadingText04(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
@@ -76,7 +108,21 @@ class TextView {
       text,
       textAlign: textAlign,
       softWrap: true,
-      maxLines: 3,
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        fontSize: 14,
+        fontFamily: Assets.poppinsRegular,
+        color: color,
+      ),
+    );
+  }
+  static Text getLocationTextField(final text, {@required final color,  final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 1,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
         fontSize: 14,
@@ -274,7 +320,7 @@ class TextView {
       text,
       textAlign: textAlign,
       softWrap: true,
-      maxLines: 1,
+      maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
         decoration: TextDecoration.none,
@@ -285,4 +331,51 @@ class TextView {
       ),
     );
   }
+
+  static Text getWalletTableDataText(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        decoration: TextDecoration.none,
+        fontSize: 9,
+        fontFamily: Assets.poppinsLight,
+        color: color,
+      ),
+    );
+  }
+  static Text getWalletTableDataBoldText(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        decoration: TextDecoration.none,
+        fontSize: 9,
+        fontFamily: Assets.poppinsBold,
+        color: color,
+      ),
+    );
+  }
+  static Text getDriverTableDataText(final text, {@required final color, final TextAlign textAlign = TextAlign.start}){
+    return Text(
+      text,
+      textAlign: textAlign,
+      softWrap: true,
+      maxLines: 10,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        decoration: TextDecoration.none,
+        fontSize: 9,
+        fontFamily: Assets.poppinsLight,
+        color: color,
+      ),
+    );
+  }
+
 }

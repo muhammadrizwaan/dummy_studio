@@ -19,6 +19,7 @@ class Assets {
   //
 
   static const String walletIcon = "assets/png/wallet_icon.png";
+  static const String walletIcon2 = "assets/png/wallet2.png";
   static const String bellIconPressed = "assets/png/bell_icon_pressed.png";
   static const String bellIconUnpress = "assets/png/bell_icon_unpress.png";
   static const String backArrow = "assets/png/back_arrow.png";
@@ -43,6 +44,8 @@ class Assets {
   static const String phoneNumber = "assets/png/icon_phone_pn.png";
   static const String vehicle = "assets/png/vehicle.png";
   static const String goodsType = "assets/png/goods_type.png";
+  static const String loadIcon = "assets/png/load.png";
+  static const String weightIcon = "assets/png/weight.png";
 
   static const String locationCircleIcon = "assets/png/location_circle_icon.png";
   static const String ratingReviewIcon = "assets/png/rating_review_icon.png";
@@ -62,9 +65,37 @@ class Assets {
   static const String radioActiveIcon = "assets/png/radio_active_icon.png";
   static const String radioUnactiveIcon = "assets/png/radio_unactive_icon.png";
   static const String cardIcon = "assets/png/card_icon.png";
-  static const String apiLoading = "assets/json/truckoom_loading.json";
+  // static const String apiLoading = "assets/json/loader1.json";
+  static const String apiLoading = "assets/json/loader.json";
+  //
+  static const String languageIcon = "assets/png/languageIcon.png";
+  static const String userNameIcon = "assets/png/userNameIcon.png";
+  static const String passwordIcon = "assets/png/passwordIcon.png";
+  static const String mailIcon = "assets/png/mailIcon.png";
+  static const String phoneIconNew = "assets/png/phoneIcon.png";
+  static const String countryIcon = "assets/png/countryIcon.png";
+  static const String plateNumberIcon = "assets/png/plateNumberIcon.png";
+  static const String licenseExpiryIcon = "assets/png/licenseExpiryIcon.png";
+  static const String descriptionbookIcon = "assets/png/descriptionbookIcon.png";
+  static const String calendarIcon = "assets/png/calendarIcon.png";
+  static const String priceIconNew = "assets/png/priceIcon.png";
+  static const String landlineIconNew = "assets/png/landlineIcon.png";
+  static const String driverVehicleIcon = "assets/png/driverVehicle.png";
 
 
+  // New Images for Shipper
+  static const String nameImage = "assets/png/nameImage.png";
+  static const String emailImage = "assets/png/emailImage.png";
+  static const String passwordImage = "assets/png/passwordImage.png";
+  static const String phoneImage = "assets/png/phoneImage.png";
+  static const String LicenseImage = "assets/png/LicenseImage.png";
+  static const String roundTripIcon = "assets/png/roundTripIcon.png";
+  static const String pickupLocationImage = "assets/png/pickupLocationImage.png";
+  static const String dropoffLocationImage = "assets/png/dropoffLocationImage.png";
+  static const String googleMapImage = "assets/png/googleMapImage.png";
+
+  static const String notificationIcon = "assets/png/notificationIcon.png";
+  static const String notificationReceiveIcon = "assets/png/notificationReceiveIcon.png";
 
 
 // App Fonts

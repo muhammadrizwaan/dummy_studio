@@ -1,35 +1,87 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/linearicons_free_icons.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class AddLoadComponents {
-  Widget getLocationContainer(){
+
+  Widget getLocationContainer(
+      {@required String pickupLocation, @required String dropOffLocation}) {
     return Container(
-      // margin: EdgeInsets.only(top: 20),
-      // padding: EdgeInsets.all(AppSizes.width * 0.05),
-      // decoration: BoxDecoration(
-      //     borderRadius: BorderRadius.circular(10),
-      //     border: Border.all(color: AppColors.borderColor)
-      // ),
+      margin: EdgeInsets.only(
+          top: AppSizes.height * 0.02, left: AppSizes.width * 0.04),
+      color: Colors.white,
       child: Column(
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: AppSizes.height * 0.12,
-                child: Image(image: AssetImage(Assets.userLocation),
-                  fit: BoxFit.cover,
+                height: AppSizes.height * 0.0975,
+                padding: EdgeInsets.only(top: AppSizes.height * 0.0045),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: 8,
+                      height: 8,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.colorBlack),
+                    ),
+                    Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.grey),
+                    ),
+                    Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.grey),
+                    ),
+                    Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.grey),
+                    ),
+                    Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.grey),
+                    ),
+                    Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.grey),
+                    ),
+                    Container(
+                      width: 8,
+                      height: 8,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.yellow),
+                    )
+                  ],
                 ),
               ),
               SizedBox(width: AppSizes.width * 0.03),
               Container(
                 // height: AppSizes.height * 0.14,
                 child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   // crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
@@ -42,7 +94,8 @@ class AddLoadComponents {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Pickup Location',
+                          Text(
+                            'Pickup Location',
                             style: TextStyle(
                               fontFamily: Assets.poppinsRegular,
                               fontSize: 12,
@@ -51,7 +104,9 @@ class AddLoadComponents {
                             ),
                           ),
                           SizedBox(height: AppSizes.height * 0.002),
-                          Text('1 Ash Park, Pembroke Dock, SA7254, Drury Lane, Oldham, OL9 7PH',
+                          Text(
+                            pickupLocation,
+                            maxLines: 2,
                             style: TextStyle(
                               fontFamily: Assets.poppinsLight,
                               fontSize: 12,
@@ -62,9 +117,9 @@ class AddLoadComponents {
                         ],
                       ),
                     ),
-                    SizedBox(height: AppSizes.height * 0.01),
+                    // SizedBox(height: AppSizes.height * 0.01),
                     Container(
-                      // height: AppSizes.height * 0.08,
+                      height: AppSizes.height * 0.082,
                       width: AppSizes.width * 0.7,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -73,7 +128,8 @@ class AddLoadComponents {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Dropoff Location',
+                          Text(
+                            'Dropoff Location',
                             style: TextStyle(
                               fontFamily: Assets.poppinsRegular,
                               fontSize: 12,
@@ -82,7 +138,9 @@ class AddLoadComponents {
                             ),
                           ),
                           SizedBox(height: AppSizes.height * 0.002),
-                          Text('1 Ash Park, Pembroke Dock, SA6478, Drury Lane, Dubai, OL9 7PH',
+                          Text(
+                            dropOffLocation,
+                            maxLines: 2,
                             style: TextStyle(
                               fontFamily: Assets.poppinsLight,
                               fontSize: 12,
@@ -103,37 +161,43 @@ class AddLoadComponents {
     );
   }
 
-  Widget getExpectedRate(){
+  Widget getExpectedRate() {
     return Container(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: 21,
+              width: 21,
               height: 21,
-              child: Image(image: AssetImage(Assets.percentageIcon,),
+              child: Image(
+                image: AssetImage(
+                  Assets.percentageIcon,
+                ),
                 fit: BoxFit.fill,
-              )
+              )),
+          SizedBox(
+            width: AppSizes.width * 0.03,
           ),
-          SizedBox(width: AppSizes.width * 0.03,),
           Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Rate',
+                Text(
+                  'Rate',
                   style: TextStyle(
-                    fontFamily: Assets.poppinsRegular,
-                    fontSize: 12,
-                    color: AppColors.colorBlack
-                  ),
+                      fontFamily: Assets.poppinsRegular,
+                      fontSize: 12,
+                      color: AppColors.colorBlack),
                 ),
-                SizedBox(height: AppSizes.height * 0.01,),
-                Text('AED 10,000',
+                SizedBox(
+                  height: AppSizes.height * 0.01,
+                ),
+                Text(
+                  'AED 10,000',
                   style: TextStyle(
                       fontFamily: Assets.poppinsLight,
                       fontSize: 12,
-                      color: AppColors.colorBlack
-                  ),
+                      color: AppColors.colorBlack),
                 )
               ],
             ),
@@ -143,8 +207,11 @@ class AddLoadComponents {
     );
   }
 
-  Widget getNameTextField(
-      { @required IconData leftIcon, @required String hintText, @required TextEditingController textEditingController,}) {
+  Widget getNameTextField({
+    @required String image,
+    @required String hintText,
+    @required TextEditingController textEditingController,
+  }) {
     return Container(
       height: AppSizes.height * 0.07,
       width: AppSizes.width,
@@ -157,16 +224,16 @@ class AddLoadComponents {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Opacity(
-              opacity: 0.7,
-              child: Icon(
-                leftIcon,
-                size: 20,
-              )),
+          Container(
+            height: AppSizes.height * 0.06,
+            width: AppSizes.width * 0.06,
+            child: Image.asset(image,
+            ),
+          ),
           // Image(image: AssetImage('$leftIcon')) ,
           Container(
             margin: EdgeInsets.only(left: 5),
-            width: AppSizes.width * 0.8,
+            width: AppSizes.width * 0.7,
             // color: AppColors.yellow,
             child: TextField(
               style: TextStyle(
@@ -194,12 +261,250 @@ class AddLoadComponents {
     );
   }
 
-  Widget getMessageTextField(
-      { @required IconData leftIcon, @required String hintText, @required TextEditingController textEditingController,}) {
+  Widget getPhoneField({
+    @required String image,
+    @required String hintText,
+    @required TextEditingController textEditingController,
+  }) {
+    return Container(
+      height: AppSizes.height * 0.07,
+      width: AppSizes.width,
+      padding: EdgeInsets.only(left: 10),
+      decoration: BoxDecoration(
+        color: AppColors.lightGray,
+        // border: Border.all(color: AppColors.borderColor),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            height: AppSizes.height * 0.06,
+            width: AppSizes.width * 0.06,
+            child: Image.asset(image,
+            ),
+          ),
+          // Image(image: AssetImage('$leftIcon')) ,
+          Container(
+            margin: EdgeInsets.only(left: 5),
+            width: AppSizes.width * 0.7,
+            // color: AppColors.yellow,
+            child: TextField(
+              style: TextStyle(
+                decoration: TextDecoration.none,
+                fontFamily: Assets.poppinsLight,
+                fontSize: 12,
+                color: AppColors.colorBlack,
+              ),
+              keyboardType: TextInputType.phone,
+              controller: textEditingController,
+              // readOnly: true,
+              decoration: InputDecoration(
+                hintText: hintText,
+                border: InputBorder.none,
+                hintStyle: TextStyle(
+                  decoration: TextDecoration.none,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                  fontFamily: Assets.poppinsLight,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget getTextField({
+    @required String leftIcon,
+    @required String hintText,
+    @required TextEditingController textEditingController,
+  }) {
+    return Container(
+      height: AppSizes.height * 0.07,
+      width: AppSizes.width,
+      padding: EdgeInsets.only(left: 10),
+      decoration: BoxDecoration(
+        color: AppColors.lightGray,
+        // border: Border.all(color: AppColors.borderColor),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 5),
+            child: Container(
+              height: AppSizes.height * 0.06,
+              width: AppSizes.width * 0.06,
+              child: Image.asset(
+                leftIcon,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.only(left: 5),
+              // color: AppColors.yellow,
+              child: TextField(
+                style: TextStyle(
+                  decoration: TextDecoration.none,
+                  fontFamily: Assets.poppinsLight,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                ),
+                controller: textEditingController,
+                // readOnly: true,
+                decoration: InputDecoration(
+                  hintText: hintText,
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(
+                    decoration: TextDecoration.none,
+                    fontSize: 12,
+                    color: AppColors.colorBlack,
+                    fontFamily: Assets.poppinsLight,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget getNumberField({
+    @required String leftIcon,
+    @required String hintText,
+    @required TextEditingController textEditingController,
+  }) {
+    return Container(
+      height: AppSizes.height * 0.07,
+      width: AppSizes.width,
+      padding: EdgeInsets.only(left: 10),
+      decoration: BoxDecoration(
+        color: AppColors.lightGray,
+        // border: Border.all(color: AppColors.borderColor),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 5),
+            child: Container(
+              height: AppSizes.height * 0.06,
+              width: AppSizes.width * 0.06,
+              child: Image.asset(
+                leftIcon,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.only(left: 5),
+              // color: AppColors.yellow,
+              child: TextField(
+                style: TextStyle(
+                  decoration: TextDecoration.none,
+                  fontFamily: Assets.poppinsLight,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                ),
+                keyboardType: TextInputType.number,
+                controller: textEditingController,
+                // readOnly: true,
+                decoration: InputDecoration(
+                  hintText: hintText,
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(
+                    decoration: TextDecoration.none,
+                    fontSize: 12,
+                    color: AppColors.colorBlack,
+                    fontFamily: Assets.poppinsLight,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Widget getVehicleField({
+  //   @required String leftIcon,
+  //   @required String hintText,
+  //   @required TextEditingController textEditingController,
+  // }) {
+  //   return Container(
+  //     height: AppSizes.height * 0.07,
+  //     width: AppSizes.width,
+  //     padding: EdgeInsets.only(left: 10),
+  //     decoration: BoxDecoration(
+  //       color: AppColors.lightGray,
+  //       // border: Border.all(color: AppColors.borderColor),
+  //       borderRadius: BorderRadius.circular(5),
+  //     ),
+  //     child: Row(
+  //       crossAxisAlignment: CrossAxisAlignment.center,
+  //       children: [
+  //         Padding(
+  //           padding: const EdgeInsets.only(right: 5),
+  //           child: Container(
+  //             height: AppSizes.height * 0.06,
+  //             width: AppSizes.width * 0.06,
+  //             child: Image.asset(
+  //               leftIcon,
+  //             ),
+  //           ),
+  //         ),
+  //         Expanded(
+  //           child: Container(
+  //             margin: EdgeInsets.only(left: 5),
+  //             // color: AppColors.yellow,
+  //             child: TextField(
+  //               onChanged: (text) {
+  //                 // print("First text field: $text");
+  //                 notifilisterns
+  //               },
+  //               style: TextStyle(
+  //                 decoration: TextDecoration.none,
+  //                 fontFamily: Assets.poppinsLight,
+  //                 fontSize: 12,
+  //                 color: AppColors.colorBlack,
+  //               ),
+  //               keyboardType: TextInputType.number,
+  //               controller: textEditingController,
+  //               // readOnly: true,
+  //               decoration: InputDecoration(
+  //                 hintText: hintText,
+  //                 border: InputBorder.none,
+  //                 hintStyle: TextStyle(
+  //                   decoration: TextDecoration.none,
+  //                   fontSize: 12,
+  //                   color: AppColors.colorBlack,
+  //                   fontFamily: Assets.poppinsLight,
+  //                 ),
+  //               ),
+  //             ),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
+  Widget getMessageTextField({
+    @required String image,
+    @required String hintText,
+    @required TextEditingController textEditingController,
+  }) {
     return Container(
       height: AppSizes.height * 0.12,
       width: AppSizes.width,
-      padding: EdgeInsets.symmetric( horizontal: AppSizes.width * 0.03),
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.03),
       decoration: BoxDecoration(
         color: AppColors.lightGray,
         // border: Border.all(color: AppColors.borderColor),
@@ -211,16 +516,17 @@ class AddLoadComponents {
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 15),
-            child: Opacity(
-              opacity: 0.7,
-              child: Icon(
-                leftIcon,
-                size: 20,
+            child: Container(
+              height: AppSizes.height * 0.03,
+              width: AppSizes.width * 0.06,
+              child: Image.asset(image,
               ),
             ),
             // child: Image(image: AssetImage(Assets.messageIcon)),
           ),
-          SizedBox(width: AppSizes.width * 0.02,),
+          SizedBox(
+            width: AppSizes.width * 0.02,
+          ),
           Container(
             width: AppSizes.width * 0.75,
             child: TextField(
@@ -228,10 +534,10 @@ class AddLoadComponents {
                     decoration: TextDecoration.none,
                     fontFamily: Assets.poppinsLight,
                     fontSize: 12,
-                    color: AppColors.colorBlack
-                ),
+                    color: AppColors.colorBlack),
                 keyboardType: TextInputType.multiline,
-                minLines: 1,//Normal textInputField will be displayed
+                minLines: 1,
+                //Normal textInputField will be displayed
                 maxLines: 5,
                 controller: textEditingController,
                 // readOnly: true,
@@ -246,10 +552,47 @@ class AddLoadComponents {
                     fontFamily: Assets.poppinsLight,
                   ),
                 ),
-                textAlignVertical: TextAlignVertical.top
-            ),
+                textAlignVertical: TextAlignVertical.top),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget getDateField({@required String date, @required Function onDate}) {
+    return GestureDetector(
+      onTap: () => onDate(),
+      child: Container(
+        height: AppSizes.height * 0.07,
+        width: AppSizes.width,
+        padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.02),
+        decoration: BoxDecoration(
+          color: AppColors.lightGray,
+          border: Border.all(color: AppColors.lightGray),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              height: AppSizes.height * 0.06,
+              width: AppSizes.width * 0.06,
+              child: Image.asset(Assets.licenseExpiryIcon,
+              ),
+            ),
+            Expanded(
+              child: Center(
+                child: Container(
+                  padding: EdgeInsets.only(left: 5),
+                  width: AppSizes.width,
+                  child: TextView.getLabel2Text04(date,
+                      color: AppColors.colorBlack),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

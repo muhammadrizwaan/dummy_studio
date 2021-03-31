@@ -1,3 +1,4 @@
+import 'package:date_time_format/date_time_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/octicons_icons.dart';
@@ -6,6 +7,7 @@ import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/screens/driver_details/driver_details.dart';
+import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class InProcessComponents {
@@ -17,12 +19,16 @@ class InProcessComponents {
       @required String startDate,
       @required String time,
       @required String status,
+      @required String vehicleType,
+        @required String vehicleCategory,
       @required String price,
-      @required Function onTap,
-      @required Function onAlert,
-      @required Function onClickPay}) {
+        @required int statusId,
+      @required Function onLoadDetail,
+      @required Function onVehicleType,
+      @required Function onVehicleCategory,
+      @required Function onDriverDetail}) {
     return GestureDetector(
-      onTap: ()=> onTap(),
+      onTap: ()=> onLoadDetail(),
       child: Container(
         padding: EdgeInsets.all(AppSizes.width * 0.03),
         decoration: BoxDecoration(
@@ -45,7 +51,7 @@ class InProcessComponents {
                 Row(
                   children: [
                     Text(
-                      'Job ID: ',
+                      'Load ID: ',
                       style: TextStyle(
                           fontSize: 12,
                           fontFamily: Assets.poppinsMedium,
@@ -81,37 +87,40 @@ class InProcessComponents {
                 children: [
                   Row(
                     children: [
-                      Image(
-                        image: AssetImage(Assets.df_pk_job),
-                      ),
+                      CommonWidgets.getLocationPointers(),
                       SizedBox(
                         width: AppSizes.width * 0.01,
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            pickUpLocation,
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontFamily: Assets.poppinsRegular,
-                              color: AppColors.locationText,
-                              // fontWeight: FontWeight.bold
+                      Container(
+                        width: AppSizes.width * 0.4,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              pickUpLocation,
+                              maxLines: 1,
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontFamily: Assets.poppinsRegular,
+                                color: AppColors.locationText,
+                                // fontWeight: FontWeight.bold
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            height: AppSizes.height * 0.01,
-                          ),
-                          Text(
-                            destinationLocation,
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontFamily: Assets.poppinsRegular,
-                              color: AppColors.locationText,
-                              // fontWeight: FontWeight.bold
+                            SizedBox(
+                              height: AppSizes.height * 0.01,
                             ),
-                          ),
-                        ],
+                            Text(
+                              destinationLocation,
+                              maxLines: 1,
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontFamily: Assets.poppinsRegular,
+                                color: AppColors.locationText,
+                                // fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -123,7 +132,7 @@ class InProcessComponents {
                         Row(
                           children: [
                             Text(
-                              startDate,
+                              DateTimeFormat.format(DateTime.parse(startDate), format: 'M j, Y'),
                               style: TextStyle(
                                 fontSize: 12,
                                 fontFamily: Assets.poppinsRegular,
@@ -135,7 +144,7 @@ class InProcessComponents {
                               width: 4,
                             ),
                             Text(
-                              time,
+                              DateTimeFormat.format(DateTime.parse(time), format: r'g:i a'),
                               style: TextStyle(
                                 fontSize: 12,
                                 fontFamily: Assets.poppinsRegular,
@@ -197,7 +206,7 @@ class InProcessComponents {
                 Row(
                   children: [
                     Text(
-                      'Suzuki',
+                      vehicleType,
                       style: TextStyle(
                           fontSize: 12,
                           fontFamily: Assets.poppinsMedium,
@@ -208,7 +217,7 @@ class InProcessComponents {
                       width: AppSizes.width * 0.01,
                     ),
                     GestureDetector(
-                      onTap: ()=> onAlert(),
+                      onTap: ()=> onVehicleType(),
                       child: Icon(
                         Octicons.info,
                         size: 20,
@@ -222,6 +231,48 @@ class InProcessComponents {
             SizedBox(
               height: AppSizes.height * 0.01,
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Vehicle Category:',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontFamily: Assets.poppinsRegular,
+                    color: AppColors.locationText,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      vehicleCategory,
+                      style: TextStyle(
+                          fontSize: 12,
+                          fontFamily: Assets.poppinsMedium,
+                          color: AppColors.colorBlack,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      width: AppSizes.width * 0.01,
+                    ),
+                    GestureDetector(
+                      onTap: ()=> onVehicleCategory(),
+                      child: Icon(
+                        Octicons.info,
+                        size: 20,
+                        color: AppColors.colorBlack.withOpacity(0.70),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(
+              height: AppSizes.height * 0.01,
+            ),
+            statusId == 5?
+            Container():
             Container(
               width: AppSizes.width,
               height: AppSizes.height * 0.06,
@@ -233,16 +284,13 @@ class InProcessComponents {
                 color: AppColors.yellow,
               ),
               child: FlatButton(
-                onPressed: () {
-                  Navigator.push(
-                      context, SlideRightRoute(page: DriverDetailScreen()));
-                },
+                onPressed: () => onDriverDetail(),
                 child: TextView.getLabelText04(
                   "See Driver Detail",
                   color: AppColors.white.withOpacity(0.95),
                 ),
               ),
-            ),
+            )
           ],
         ),
       ),

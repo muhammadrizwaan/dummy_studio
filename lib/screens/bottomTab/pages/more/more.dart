@@ -1,14 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
-import 'package:fluttericon/linecons_icons.dart';
-import 'package:truckoom_shipper/models/api_models/login_response.dart';
+import 'package:truckoom_shipper/commons/utils.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
+import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/more/more_components.dart';
 import 'package:truckoom_shipper/screens/businessProfile/business_profile.dart';
+import 'package:truckoom_shipper/screens/language/language.dart';
+import 'package:truckoom_shipper/screens/wallet/wallet.dart';
+import 'package:truckoom_shipper/utilities/toast.dart';
+import 'package:truckoom_shipper/widgets/faqs_expandable.dart';
 import 'package:truckoom_shipper/widgets/language_expandable_container.dart';
-
 import '../../../../animations/slide_right.dart';
-import '../../../../res/assets.dart';
+import '../../../../main.dart';
 import '../../../../res/colors.dart';
 import '../../../../res/sizes.dart';
 import '../../../../res/strings.dart';
@@ -17,6 +21,7 @@ import '../../../contact_us/contact_us.dart';
 import '../../../individualProfile/individual_profile.dart';
 import '../../../notifications/notifications.dart';
 import '../../../referrals/referrals.dart';
+import '../../bottom_tab.dart';
 
 class More extends StatefulWidget {
   String tag;
@@ -28,12 +33,27 @@ class More extends StatefulWidget {
 
 class _MoreState extends State<More> {
   MoreComponents _moreComponents;
-
+  
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _moreComponents = MoreComponents();
+    print('device id');
+    print(PreferenceUtils.getString(Strings.deviceId));
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+  setNotification(){
+    Constants.setNotification(false);
+    Navigator.push(context, SlideRightRoute(page: Notifications()));
+    if(bottomTabState.mounted){
+      bottomTabState.setState(() {});
+    }
   }
 
   @override
@@ -45,21 +65,23 @@ class _MoreState extends State<More> {
         child: Column(
           children: [
             CommonWidgets.tabsAppBar1(
-                text: "More", iconName: FontAwesome5.bell, onPress: () {
-                  Navigator.push(context, SlideRightRoute(page: Notifications()));
+                text: "More",
+                iconName: Constants.getNotification()  == false? Assets.notificationIcon: Assets.notificationReceiveIcon,
+                onPress: () {
+                  setNotification();
             }),
             Expanded(
               child: ListView(
                 children: [
                   _moreComponents.getProfileContainer(
-                    ProfileImg: Assets.profileImg,
-                    name: 'Matthew',
-                    email: 'Matthew@gmail.com',
+                    profileImg: Constants.getUserImage(),
+                    name: Constants.getUserName(),
+                    email: Constants.getUserEmail(),
                     onPress: () {
-                      if(widget.tag == Strings.indiviual){
+                      if(Constants.getUser() == Strings.indiviual){
                         Navigator.push(context, SlideRightRoute(page: IndividualProfile()));
                       }
-                      else if(widget.tag == Strings.business){
+                      else if(Constants.getUser() == Strings.business){
                         Navigator.push(context, SlideRightRoute(page: BusinessProfile()));
                       }
                     },
@@ -85,20 +107,36 @@ class _MoreState extends State<More> {
                   Divider(
                     height: 10,
                   ),
-                  // _moreComponents.getSOSbutton(
-                  //   text: 'Language',
-                  //   onPress: () {
-                  //     // Navigator.pop(
-                  //     //     context, SlideRightRoute(page: DriverDetails()));
-                  //   },
-                  // ),
                   LanguageContainer(),
+                  Divider(
+                    height: 10,
+                  ),
+                  FAQsExpandable(),
+                  Divider(
+                    height: 10,
+                  ),
+                  _moreComponents.touchableButton(
+                    text: 'Wallet',
+                    onPress: () {
+                      Navigator.push(context, SlideRightRoute(page: Wallet()));
+                    },
+                  ),
                   Divider(
                     height: 10,
                   ),
                   _moreComponents.touchableButton(
                     text: 'Logout',
                     onPress: () {
+                      ApplicationToast.getLogOutPopup(
+                        context: context,
+                        onAcceptText: Strings.yes,
+                        onRejectText: Strings.no,
+                        onAccept: (){
+                          onLogout();
+                        },
+                        onReject: (){Navigator.pop(context);},
+                        headerText: Strings.logOutPopupText,
+                      );
                     },
                   ),
                   Divider(
@@ -109,6 +147,11 @@ class _MoreState extends State<More> {
             ),
           ],
         ));
+  }
+
+  onLogout() async{
+    PreferenceUtils.clear();
+    MyApp().restartApp(context: context);
   }
 
 

@@ -1,45 +1,61 @@
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/elusive_icons.dart';
 import 'package:fluttericon/entypo_icons.dart';
-import 'package:fluttericon/linecons_icons.dart';
+import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
+import 'package:truckoom_shipper/models/api_models/phone_number_response.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
-import 'package:truckoom_shipper/screens/businessInformation/business_information.dart';
 import 'package:truckoom_shipper/screens/businessSignup/business_signup_components.dart';
+import 'package:truckoom_shipper/screens/businessSignup/business_signup_provider.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
+import 'package:truckoom_shipper/screens/phoneNumber/phone_number_provider.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
+import 'package:truckoom_shipper/widgets/loader.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class BusinessSignup extends StatefulWidget {
-  String tag;
+  String cell;
 
-  BusinessSignup({@required this.tag});
+  BusinessSignup({@required this.cell});
+
   @override
   _BusinessSignupState createState() => _BusinessSignupState();
 }
 
 class _BusinessSignupState extends State<BusinessSignup> {
   BusinessSignupComponents _businessSignupComponents;
+  PhoneNumberProvider _phoneNumberProvider;
   TextEditingController name, email, password, confirm_Password;
+  BusinessSignupProvider _businessSignupProvider;
+  CustomPopup _loader = CustomPopup();
   bool onCheck = false;
-  int _value = 1;
+  String _selectedValue;
+
 
   @override
   void initState() {
+
     _businessSignupComponents = BusinessSignupComponents();
+    _businessSignupProvider = Provider.of<BusinessSignupProvider>(context, listen: false);
+    _businessSignupProvider.init(context: context);
+    _phoneNumberProvider = Provider.of<PhoneNumberProvider>(context, listen: false);
+    _phoneNumberProvider.init(context);
+
     name = TextEditingController();
     email = TextEditingController();
     password = TextEditingController();
     confirm_Password = TextEditingController();
   }
+
   @override
   Widget build(BuildContext context) {
+    Provider.of<BusinessSignupProvider>(context, listen: true);
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -52,7 +68,7 @@ class _BusinessSignupState extends State<BusinessSignup> {
           height: AppSizes.height,
           width: AppSizes.width,
           color: AppColors.white,
-          child: Column(
+          child: _businessSignupProvider.isDataFetched? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -66,14 +82,6 @@ class _BusinessSignupState extends State<BusinessSignup> {
                 onTap: () {
                   Navigator.push(context, SlideRightRoute(page: Login()));
                 },),
-              /*CommonWidgets.getAppBar(
-                  iconName: 'cross_icon.png',
-                  text: "Already have an account? ",
-                  clickableText: "Login",
-                  onTap: (){Navigator.push(context, SlideRightRoute(page: Login()));},
-                  onPress: () {
-                    Navigator.pop(context);
-                  }),*/
               Expanded(
                 child: ListView(
                   children: [
@@ -82,124 +90,115 @@ class _BusinessSignupState extends State<BusinessSignup> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              CommonWidgets.getHeadingText(text: 'Signup'),
-                              _businessSignupComponents.getBusinessSignupStep()
-                            ],
-                          ),
+                          CommonWidgets.getHeadingText(text: 'Signup'),
+                          _businessSignupComponents.getBusinessSignupStep(),
                           // CommonWidgets.getHeading1Text(text: 'Signup'),
                           SizedBox(height: AppSizes.height * 0.04),
                           CommonWidgets.getSubHeadingText(text: "Full Name"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getTextFieldWithImage(
                               isPassword: false,
-                              leftIcon: Entypo.user,
+                              image: Assets.userNameIcon,
                               textEditingController: name,
-                              hintText: "Enter Name"
+                              hintText: "Enter Full Name"
                           ),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "Email"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getTextFieldWithImage(
                               isPassword: false,
-                              leftIcon: Icons.mail,
+                              image: Assets.mailIcon,
                               textEditingController: email,
-                              hintText: "Enter Email"
-                          ),
+                              hintText: "Enter Email"),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "Password"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getTextFieldWithImage(
                               isPassword: true,
-                              leftIcon: Entypo.lock,
+                              image: Assets.passwordIcon,
                               textEditingController: password,
                               hintText: "Enter Password"
                           ),
 
                           SizedBox(height: AppSizes.height * 0.02),
-                          CommonWidgets.getSubHeadingText(text: "Confirm Password"),
+                          CommonWidgets.getSubHeadingText(
+                              text: "Confirm Password"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getTextFieldWithImage(
                               isPassword: true,
-                              leftIcon: Entypo.lock,
+                              image: Assets.passwordIcon,
                               textEditingController: confirm_Password,
                               hintText: "Confirm Password"
                           ),
                           SizedBox(height: AppSizes.height * 0.02),
-                          CommonWidgets.getSubHeadingText(text: "City"),
+                          CommonWidgets.getSubHeadingText(text: "Emirates"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
-                            height: AppSizes.height * 0.06,
-                            width: AppSizes.width,
-                            decoration: BoxDecoration(
-                              color: AppColors.lightGray,
-                              border: Border.all(color: AppColors.lightGray),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 10),
-                                  child: Icon(Elusive.location, size: 20, color: AppColors.colorBlack.withOpacity(0.8),),
-                                ) ,
-                                Expanded(
-                                  child: DropdownButtonHideUnderline(
-                                    child: DropdownButton(
-                                        icon: Icon(Icons.keyboard_arrow_down),
-                                        value: _value,
-                                        items: [
-                                          DropdownMenuItem(
-                                            child: TextView.getLightText04(
-                                              "Netherlands",
-                                              color: AppColors.colorBlack,
-                                            ),
-                                            value: 1,
-                                          ),
-                                          DropdownMenuItem(
-                                            child: TextView.getLightText04(
-                                              "New Zealand",
-                                              color: AppColors.colorBlack,
-                                            ),
-                                            value: 2,
-                                          ),
-                                          DropdownMenuItem(
-                                            child: TextView.getLightText04(
-                                              "Nepal",
-                                              color: AppColors.colorBlack,
-                                            ),
-                                            value: 3,
-                                          ),
-                                          DropdownMenuItem(
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.02),
+                          height: AppSizes.height * 0.07,
+                          width: AppSizes.width,
+                          decoration: BoxDecoration(
+                            color: AppColors.lightGray,
+                            border: Border.all(color: AppColors.lightGray),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Row(
+                            children: [
+                              CommonWidgets.getImageContainer(Assets.countryIcon),
+                              Expanded(
+                                child: DropdownButtonHideUnderline(
+                                  child: ButtonTheme(
+                                    alignedDropdown: true,
+                                    child: DropdownButton<String>(
+                                      icon: Icon(Icons.keyboard_arrow_down),
+                                      isExpanded: true,
+                                      value: _selectedValue,
+                                      hint: TextView.getLightText04(
+                                        "Choose Emirates",
+                                        color: AppColors.colorBlack,
+                                      ),
+                                      items: _businessSignupProvider.description
+                                          .map<DropdownMenuItem<String>>(
+                                              (String value) {
+                                            return DropdownMenuItem<String>(
+                                              value: value,
                                               child: TextView.getLightText04(
-                                                "Malaysia",
+                                                value,
                                                 color: AppColors.colorBlack,
                                               ),
-                                              value: 4
-                                          ),
-                                        ],
-                                        onChanged: (value) {
-                                          setState(() {
-                                            _value = value;
-                                          });
-                                        }
+                                            );
+                                          }).toList(),
+                                      onChanged: (String value) {
+                                        setState(() {
+                                          _selectedValue = value;
+                                        });
+                                      },
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
+                        ),
+
                           SizedBox(height: AppSizes.height * 0.02),
                           _getTermsAndCondition(),
                           SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getBottomButton(
                               text: "Next",
                               onPress: () {
-                                Navigator.push(context, SlideRightRoute(page: BusinessInformation(tag: widget.tag,)));
-                              }
-                          ),
+                                _businessSignupProvider.getBusinessSignup(
+                                  context: context,
+                                  cell: widget.cell,
+                                  name: name.text,
+                                  email: email.text,
+                                  password: password.text,
+                                  confirmPassword: confirm_Password.text,
+                                  city: getCityId(),
+                                  onCheck: onCheck,
+
+                                );
+                              }),
                           SizedBox(height: AppSizes.height * 0.02),
                         ],
                       ),
@@ -208,10 +207,17 @@ class _BusinessSignupState extends State<BusinessSignup> {
                 ),
               )
             ],
+          ):
+          Center(
+            child: Container(
+              height: AppSizes.height * 0.15,
+              child: Lottie.asset(Assets.apiLoading, fit: BoxFit.cover),
+            ),
           ),
         ),
       ),
     );
+
   }
 
   _getTermsAndCondition() {
@@ -258,14 +264,15 @@ class _BusinessSignupState extends State<BusinessSignup> {
                       TextSpan(
                           text: 'Terms and Conditions',
                           style: TextStyle(
-                              color: Colors.amber,
-                              fontSize: 12,
-                              fontFamily: Assets.poppinsMedium,
-                              // fontWeight: FontWeight.bold
+                            color: Colors.amber,
+                            fontSize: 12,
+                            fontFamily: Assets.poppinsMedium,
+                            // fontWeight: FontWeight.bold
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              // navigate to desired screen
+                              // _phoneNumberProvider.getTermsAndConditions(context: context);
+                              CommonWidgets.launchURL();
                             })
                     ]),
               ),
@@ -276,4 +283,14 @@ class _BusinessSignupState extends State<BusinessSignup> {
     );
   }
 
+  int getCityId() {
+    int tempCityId = 0;
+    for (int i = 0; i < _businessSignupProvider.getCitiesList().result.length; i++) {
+      if (_selectedValue == _businessSignupProvider.getCitiesList().result[i].description) {
+        tempCityId = _businessSignupProvider.getCitiesList().result[i].cityId;
+        break;
+      }
+    }
+    return tempCityId;
+  }
 }

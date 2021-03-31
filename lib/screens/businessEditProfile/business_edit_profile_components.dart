@@ -3,7 +3,9 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/linearicons_free_icons.dart';
 import 'package:fluttericon/web_symbols_icons.dart';
+import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
@@ -14,8 +16,8 @@ class BusinessEditProfileComponents{
     return Align(
       alignment: Alignment.center,
       child: Container(
-        height: AppSizes.height * 0.12,
-        width: AppSizes.width * 0.24,
+        // height: AppSizes.height * 0.12,
+        // width: AppSizes.width * 0.24,
         child: CircleAvatar(
           child: Stack(
             children: [
@@ -35,7 +37,7 @@ class BusinessEditProfileComponents{
               ),
             ],
           ),
-          backgroundImage: AssetImage(profileImg),
+          backgroundImage: profileImg != ""? NetworkImage(baseUrl+profileImg): AssetImage(Assets.profileImg),
           radius: 50.0,
           backgroundColor: AppColors.white,
         ),
@@ -83,7 +85,8 @@ class BusinessEditProfileComponents{
     @required Function onPress
   }) {
     return Container(
-      padding: EdgeInsets.all(AppSizes.width * 0.05),
+      height: AppSizes.height * 0.09,
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -99,15 +102,7 @@ class BusinessEditProfileComponents{
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            text,
-            style: TextStyle(
-              fontFamily: Assets.poppinsMedium,
-              fontSize: 22,
-              color: AppColors.colorBlack,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          TextView.getAppBarText(text, color: AppColors.colorBlack),
           GestureDetector(
             onTap: () => onPress(),
             child: Container(
@@ -120,6 +115,112 @@ class BusinessEditProfileComponents{
               ),
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget getDateField({@required String date, @required Function onDate}) {
+    return GestureDetector(
+      onTap: () => onDate(),
+      child: Container(
+        height: AppSizes.height * 0.07,
+        width: AppSizes.width,
+        padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.02),
+        decoration: BoxDecoration(
+          color: AppColors.lightGray,
+          border: Border.all(color: AppColors.lightGray),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              height: AppSizes.height * 0.06,
+              width: AppSizes.width * 0.06,
+              child: Image.asset(
+                Assets.licenseExpiryIcon,
+              ),
+            ),
+            Center(
+              child: Container(
+                padding: EdgeInsets.only(left: 5),
+                width: AppSizes.width * 0.6,
+                child:
+                TextView.getLabel2Text04(date, color: AppColors.colorBlack),
+              ),
+            ),
+            Container(
+              height: AppSizes.height * 0.035,
+              width: AppSizes.width * 0.085,
+              child: Image(
+                  image: AssetImage('assets/png/check_circle_fill_pn.png')),),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget getTextField(
+      {@required bool isPassword,
+        @required String image,
+        @required TextEditingController textEditingController,
+        @required String hintText}) {
+    return Container(
+      height: AppSizes.height * 0.07,
+      width: AppSizes.width * 0.85,
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.03),
+      decoration: BoxDecoration(
+        color: AppColors.lightGray,
+        border: Border.all(color: AppColors.lightGray),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            height: AppSizes.height * 0.06,
+            width: AppSizes.width * 0.06,
+            child: Image.asset(
+              image,
+            ),
+          ),
+          Center(
+            child: Container(
+              // color: AppColors.yellow,
+              padding: EdgeInsets.only(left: 5),
+              width: AppSizes.width * 0.6,
+              // height: AppSizes.height * 0.05,
+              child: TextField(
+                style: TextStyle(
+                  decoration: TextDecoration.none,
+                  fontFamily: Assets.poppinsLight,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                ),
+                controller: textEditingController,
+                obscureText: isPassword,
+                readOnly: true,
+                decoration: InputDecoration(
+                  hintText: hintText,
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(
+                    decoration: TextDecoration.none,
+                    fontSize: 12,
+                    fontFamily: Assets.poppinsLight,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Container(
+              height: AppSizes.height * 0.035,
+              width: AppSizes.width * 0.085,
+              child: Image(
+                  image: AssetImage(
+                      'assets/png/check_circle_fill_pn.png'))),
         ],
       ),
     );

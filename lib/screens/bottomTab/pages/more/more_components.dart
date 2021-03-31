@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
 import '../../../../res/assets.dart';
@@ -62,7 +63,7 @@ class MoreComponents{
 
   Widget getProfileContainer({
     @required Function onPress,
-    @required String ProfileImg,
+    @required String profileImg,
     @required String name,
     @required String email,
   }) {
@@ -77,11 +78,10 @@ class MoreComponents{
               width: AppSizes.width * 0.02,
             ),
             CircleAvatar(
-              backgroundImage: AssetImage(ProfileImg),
+              backgroundImage: profileImg != ""? NetworkImage(baseUrl+profileImg): AssetImage(Assets.profileImg),
               radius: 50.0,
               backgroundColor: AppColors.white,
             ),
-            // Image(image: AssetImage(Assets.profileImg),),
             SizedBox(
               width: AppSizes.width * 0.03,
             ),

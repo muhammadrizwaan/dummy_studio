@@ -1,65 +1,94 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
-import 'package:fluttericon/linecons_icons.dart';
+import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
+import 'package:truckoom_shipper/res/assets.dart';
+import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs_components.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/accepted/accepted.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/accepted/accepted_provider.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/cancelled/cancelled.dart';
-import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/dispatch/dispatch.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/cancelled/cancelled_provider.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/delivered/delivered.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/delivered/delivered_provider.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/in_process/in_process.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/in_process/in_process_provider.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/placed/placed.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/placed/placed_provider.dart';
 import 'package:truckoom_shipper/screens/notifications/notifications.dart';
 import '../../../../animations/slide_right.dart';
 import '../../../../res/colors.dart';
 import '../../../../res/sizes.dart';
-import '../../../../res/strings.dart';
 import '../../../../widgets/common_widgets.dart';
-import '../../../wallet/wallet.dart';
+import '../../bottom_tab.dart';
+import 'my_jobs_provider.dart';
 
+_MyJobsState myJobsState;
 class MyJobs extends StatefulWidget {
-  String tag;
-
-  MyJobs({@required this.tag});
 
   @override
   _MyJobsState createState() => _MyJobsState();
+
 }
 
 class _MyJobsState extends State<MyJobs> {
   MyJobsComponents _jobsComponents;
+  MyJobsProvider _myJobsProvider;
+  PlacedProvider _placedProvider;
+  AcceptedProvider _acceptedProvider;
+  InProcessProvider _inProcessProvider;
+  CancelledProvider _cancelledProvider;
+  DeliveredProvider _deliveredProvider;
+
   int count;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    _myJobsProvider = Provider.of<MyJobsProvider>(context, listen: false);
+    _myJobsProvider.init(context: context);
+    _placedProvider = Provider.of<PlacedProvider>(context, listen: false);
+    _acceptedProvider = Provider.of<AcceptedProvider>(context, listen: false);
+    _inProcessProvider = Provider.of<InProcessProvider>(context, listen: false);
+    _cancelledProvider = Provider.of<CancelledProvider>(context, listen: false);
+    _deliveredProvider = Provider.of<DeliveredProvider>(context, listen: false);
     count = 0;
     _jobsComponents = MyJobsComponents();
+  }
+  setNotification() async{
+    Constants.setNotification(false);
+    await Navigator.push(context, SlideRightRoute(page: Notifications()));
+    if(bottomTabState.mounted){
+      bottomTabState.setState(() {});
+    }
   }
 
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<MyJobsProvider>(context, listen: true);
+    Provider.of<PlacedProvider>(context, listen: true);
+    Provider.of<AcceptedProvider>(context, listen: true);
+    Provider.of<InProcessProvider>(context, listen: true);
+    Provider.of<CancelledProvider>(context, listen: true);
+    Provider.of<DeliveredProvider>(context, listen: true);
     return DefaultTabController(
       length: 5,
       child: Container(
           height: AppSizes.height,
           width: AppSizes.width,
           color: AppColors.white,
-          child: Column(
+          child: _myJobsProvider.isDataFetched?
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CommonWidgets.tabsAppBar1(
                 text: "My Jobs",
-                iconName: widget.tag == Strings.indiviual
-                    ? FontAwesome5.bell
-                    : Linecons.wallet,
+                iconName: Constants.getNotification()  == false? Assets.notificationIcon: Assets.notificationReceiveIcon,
                 onPress: () {
-                  widget.tag == Strings.indiviual
-                      ? Navigator.push(
-                          context, SlideRightRoute(page: Notifications()))
-                      : Navigator.push(
-                          context, SlideRightRoute(page: Wallet()));
+                  setNotification();
                 },
               ),
               SizedBox(
@@ -81,71 +110,26 @@ class _MyJobsState extends State<MyJobs> {
                     color: AppColors.yellow,
                   ),
                   tabs: [
-                    Container(
-                      width: AppSizes.width * 0.25,
-                      height: AppSizes.height*0.045,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: AppColors.yellow,
-                        ),
-                        borderRadius: BorderRadius.circular(05),
-                      ),
-                      child: Tab(
-                        child: Text("Placed",),
-                      ),
+                    _jobsComponents.getTab(
+                        text: Strings.placedText,
+                        count: _myJobsProvider.placedCount
                     ),
-                    Container(
-                      width: AppSizes.width * 0.25,
-                      height: AppSizes.height*0.045,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: AppColors.yellow,
-                        ),
-                        borderRadius: BorderRadius.circular(05),
-                      ),
-                      child: Tab(
-                        child: Text("Accepted",),
-                      ),
+                    _jobsComponents.getTab(
+                        text: Strings.acceptedText,
+                        count: _myJobsProvider.acceptedCount
                     ),
-                    Container(
-                      width: AppSizes.width * 0.25,
-                      height: AppSizes.height*0.045,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: AppColors.yellow,
-                        ),
-                        borderRadius: BorderRadius.circular(05),
-                      ),
-                      child: Tab(
-                        child: Text("In Process",),
-                      ),
+                    _jobsComponents.getTab(
+                        text: Strings.inProcessText,
+                        count: _myJobsProvider.inProcessCount
                     ),
-                    Container(
-                      width: AppSizes.width * 0.25,
-                      height: AppSizes.height*0.045,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: AppColors.yellow,
-                        ),
-                        borderRadius: BorderRadius.circular(05),
-                      ),
-                      child: Tab(
-                        child: Text("Dispatched",),
-                      ),
+                    _jobsComponents.getTab(
+                        text: Strings.deliveredText,
+                        count: _myJobsProvider.deliveredCount
                     ),
-                    Container(
-                      width: AppSizes.width * 0.25,
-                      height: AppSizes.height*0.045,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: AppColors.yellow,
-                        ),
-                        borderRadius: BorderRadius.circular(05),
-                      ),
-                      child: Tab(
-                        child: Text("Cancelled",),
-                      ),
-                    ),
+                    _jobsComponents.getTab(
+                        text: Strings.cancelledText,
+                        count: _myJobsProvider.cancelledCount
+                    )
                   ],
                 ),
               ),
@@ -159,13 +143,22 @@ class _MyJobsState extends State<MyJobs> {
                     Placed(),
                     Accepted(),
                     InProcess(),
-                    Dispatch(),
+                    Delivered(),
                     Cancelled(),
                   ],
                 ),
               ),
             ],
-          )),
+          ):
+          Center(
+            child: Container(
+              height: AppSizes.height * 0.15,
+              // width: AppSizes.width,
+              child: Lottie.asset(Assets.apiLoading, fit: BoxFit.cover),
+            ),
+          ),
+      ),
+
     );
   }
 }

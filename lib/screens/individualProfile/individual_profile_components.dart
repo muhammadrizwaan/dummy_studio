@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
+import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
@@ -12,8 +13,8 @@ class IndividualProfileComponents{
   Widget getProfileImage({@required String profileImg}){
     return Container(
       child: CircleAvatar(
-        backgroundImage: AssetImage(profileImg),
-        radius: 75.0,
+        backgroundImage:profileImg != ""? NetworkImage(baseUrl+profileImg): AssetImage(Assets.profileImg),
+        radius: 50.0,
         backgroundColor: AppColors.white,
       ),
     );
@@ -24,6 +25,9 @@ class IndividualProfileComponents{
         @required String name,
         @required String email,
         @required String password,
+        @required String phone,
+        @required String city,
+        @required String userId
       })
   {
     return Container(
@@ -137,6 +141,84 @@ class IndividualProfileComponents{
                 //     ),
                 //   ),
                 // )
+              ],
+            ),
+          ),
+          Divider(height: 10,),
+          Container(
+            height: AppSizes.height*0.05,
+            padding: EdgeInsets.all(AppSizes.width * 0.02),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Phone Number',
+                  style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsLight,
+                    color: AppColors.profileTextColor,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
+                Text(phone,
+                  style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsLight,
+                    color: AppColors.profileTextColor,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Divider(height: 10,),
+          Container(
+            height: AppSizes.height*0.05,
+            padding: EdgeInsets.all(AppSizes.width * 0.02),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Emirates',
+                  style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsLight,
+                    color: AppColors.profileTextColor,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
+                Text(city,
+                  style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsLight,
+                    color: AppColors.profileTextColor,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Divider(height: 10,),
+          Container(
+            height: AppSizes.height*0.05,
+            padding: EdgeInsets.all(AppSizes.width * 0.02),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('User ID',
+                  style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsLight,
+                    color: AppColors.profileTextColor,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
+                Text(userId,
+                  style: TextStyle(
+                    fontSize:12,
+                    fontFamily: Assets.poppinsLight,
+                    color: AppColors.profileTextColor,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
               ],
             ),
           ),

@@ -6,7 +6,7 @@ import 'package:truckoom_shipper/res/sizes.dart';
 
 class ContactUsComponents {
   Widget getNameTextField({
-    @required IconData leftIcon,
+    @required String image,
     @required String hintText,
     @required TextEditingController textEditingController,
   }) {
@@ -21,15 +21,16 @@ class ContactUsComponents {
       ),
       child: Row(
         children: [
-          Opacity(
-            opacity: 0.6,
-              child: Icon(
-            leftIcon,
-            size: 20,
-          )),
+          Container(
+            height: AppSizes.height * 0.06,
+            width: AppSizes.width * 0.06,
+            child: Image.asset(
+              image,
+            ),
+          ),
           Container(
             margin: EdgeInsets.only(left: 5),
-            width: AppSizes.width * 0.8,
+            width: AppSizes.width * 0.6,
             child: TextField(
               style: TextStyle(
                   decoration: TextDecoration.none,
@@ -57,7 +58,7 @@ class ContactUsComponents {
   }
 
   Widget getMessageTextField({
-    @required IconData leftIcon,
+    @required String image,
     @required String hintText,
     @required TextEditingController textEditingController,
   }) {
@@ -75,12 +76,12 @@ class ContactUsComponents {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 15),
-            child: Opacity(
-              opacity: 0.6,
-              child: Icon(
-                leftIcon,
-                size: 20,
+            padding: const EdgeInsets.only(left: 2, right: 6),
+            child: Container(
+              height: AppSizes.height * 0.06,
+              width: AppSizes.width * 0.06,
+              child: Image.asset(
+                image,
               ),
             ),
           ),
@@ -88,7 +89,7 @@ class ContactUsComponents {
             width: AppSizes.width * 0.02,
           ),
           Container(
-            width: AppSizes.width * 0.75,
+            width: AppSizes.width * 0.7,
             child: TextField(
                 style: TextStyle(
                     decoration: TextDecoration.none,

@@ -1,17 +1,19 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class IndividualEditProfileComponents{
   Widget getProfileImage({@required String profileImg, @required Function onPress}){
     return Align(
       alignment: Alignment.center,
       child: Container(
-        height: AppSizes.height * 0.12,
-        width: AppSizes.width * 0.24,
+        // height: AppSizes.height * 0.12,
+        // width: AppSizes.width * 0.24,
         child: CircleAvatar(
           child: Stack(
             children: [
@@ -31,10 +33,75 @@ class IndividualEditProfileComponents{
               ),
             ],
           ),
-          backgroundImage: AssetImage(profileImg),
+          backgroundImage: profileImg != ""? NetworkImage(baseUrl+profileImg): AssetImage(Assets.profileImg),
           radius: 50.0,
           backgroundColor: AppColors.white,
         ),
+      ),
+    );
+  }
+
+  Widget getTextField(
+      {@required bool isPassword,
+        @required String leftIcon,
+        @required TextEditingController textEditingController,
+        @required String hintText}) {
+    return Container(
+      height: AppSizes.height * 0.07,
+      width: AppSizes.width * 0.85,
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.02),
+      decoration: BoxDecoration(
+        color: AppColors.lightGray,
+        border: Border.all(color: AppColors.lightGray),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            height: AppSizes.height * 0.025,
+            width: AppSizes.width * 0.07,
+            child: Image(
+              image: AssetImage(leftIcon),
+              fit: BoxFit.cover,
+            ),
+          ),
+          Center(
+            child: Container(
+              // color: AppColors.yellow,
+              padding: EdgeInsets.only(left: 5),
+              width: AppSizes.width * 0.62,
+              // height: AppSizes.height * 0.05,
+              child: TextField(
+                style: TextStyle(
+                  decoration: TextDecoration.none,
+                  fontFamily: Assets.poppinsLight,
+                  fontSize: 12,
+                  color: AppColors.colorBlack,
+                ),
+                controller: textEditingController,
+                obscureText: isPassword,
+                readOnly: true,
+                decoration: InputDecoration(
+                  hintText: hintText,
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(
+                    decoration: TextDecoration.none,
+                    fontSize: 12,
+                    fontFamily: Assets.poppinsLight,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Container(
+              height: AppSizes.height * 0.035,
+              width: AppSizes.width * 0.075,
+              child: Image(
+                  image: AssetImage(
+                      'assets/png/check_circle_fill_pn.png'))),
+        ],
       ),
     );
   }
@@ -45,7 +112,8 @@ class IndividualEditProfileComponents{
     @required Function onPress
   }) {
     return Container(
-      padding: EdgeInsets.all(AppSizes.width * 0.05),
+      height: AppSizes.height * 0.09,
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -61,15 +129,16 @@ class IndividualEditProfileComponents{
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            text,
-            style: TextStyle(
-              fontFamily: Assets.poppinsMedium,
-              fontSize: 22,
-              color: AppColors.colorBlack,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          TextView.getAppBarText(text, color: AppColors.colorBlack),
+          // Text(
+          //   text,
+          //   style: TextStyle(
+          //     fontFamily: Assets.poppinsMedium,
+          //     fontSize: 22,
+          //     color: AppColors.colorBlack,
+          //     fontWeight: FontWeight.bold,
+          //   ),
+          // ),
           GestureDetector(
             onTap: () => onPress(),
             child: Container(

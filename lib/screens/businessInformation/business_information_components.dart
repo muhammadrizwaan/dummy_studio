@@ -1,6 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttericon/entypo_icons.dart';
 import 'package:fluttericon/linearicons_free_icons.dart';
 import 'package:fluttericon/web_symbols_icons.dart';
@@ -12,6 +13,7 @@ import 'package:truckoom_shipper/widgets/text_views.dart';
 class BusinessInformationComponents {
   Widget getBusinessSignupStep() {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Text(
           'Step ',
@@ -22,7 +24,7 @@ class BusinessInformationComponents {
           ),
         ),
         Text(
-          '02',
+          '2 0f 2',
           style: TextStyle(
             fontSize: 15,
             fontFamily: Assets.poppinsRegular,
@@ -47,8 +49,7 @@ class BusinessInformationComponents {
           radius: Radius.circular(5),
           // padding: EdgeInsets.all(16),
           child: ClipRRect(
-            borderRadius:
-            BorderRadius.all(Radius.circular(5)),
+            borderRadius: BorderRadius.all(Radius.circular(5)),
             child: Container(
               width: AppSizes.width * 0.82,
               height: AppSizes.height * 0.07,
@@ -56,12 +57,19 @@ class BusinessInformationComponents {
                 color: AppColors.lightGray,
               ),
               child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-               Icon(WebSymbols.plus_circle, size: 15, color: AppColors.colorBlack.withOpacity(0.9),),
-                TextView.getLabelText04(' Attach Copy of License', color: AppColors.colorBlack.withOpacity(0.4),),
-              ],
-            ),
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    WebSymbols.plus_circle,
+                    size: 15,
+                    color: AppColors.colorBlack.withOpacity(0.9),
+                  ),
+                  TextView.getLabelText04(
+                    ' Attach Copy of License',
+                    color: AppColors.colorBlack.withOpacity(0.4),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -69,58 +77,43 @@ class BusinessInformationComponents {
     );
   }
 
-  Widget getTextField(
-      {@required bool isPassword,
-      @required TextEditingController textEditingController,
-      @required String hintText}) {
-    return Container(
-      height: AppSizes.height * 0.07,
-      width: AppSizes.width * 0.85,
-      padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.02),
-      decoration: BoxDecoration(
-        color: AppColors.lightGray,
-        border: Border.all(color: AppColors.lightGray),
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Opacity(
-            opacity: 0.6,
-            child: Icon(
-              LineariconsFree.license,
-              size: 20,
-            ),
-          ),
-          Center(
-            child: Container(
-              // color: AppColors.yellow,
-              width: AppSizes.width * 0.65,
-              // height: AppSizes.height * 0.05,
-              child: TextField(
-                style: TextStyle(
-                  decoration: TextDecoration.none,
-                  fontFamily: Assets.poppinsLight,
-                  fontSize: 12,
-                  color: AppColors.colorBlack,
-                ),
-                controller: textEditingController,
-                obscureText: isPassword,
-                decoration: InputDecoration(
-                  hintText: hintText,
-                  border: InputBorder.none,
-                  hintStyle: TextStyle(
-                    decoration: TextDecoration.none,
-                    fontSize: 13,
-                    fontFamily: Assets.poppinsLight,
-                  ),
-                ),
+  Widget getDateField({@required String date, @required Function onDate}) {
+    return GestureDetector(
+      onTap: () => onDate(),
+      child: Container(
+        height: AppSizes.height * 0.07,
+        width: AppSizes.width,
+        padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.025),
+        decoration: BoxDecoration(
+          color: AppColors.lightGray,
+          border: Border.all(color: AppColors.lightGray),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              height: AppSizes.height * 0.06,
+              width: AppSizes.width * 0.06,
+              child: Image.asset(Assets.licenseExpiryIcon,
               ),
             ),
-          ),
-          Image(image: AssetImage('assets/png/check_circle_fill_pn.png')),
-        ],
+            Center(
+              child: Container(
+                padding: EdgeInsets.only(left: 5),
+                width: AppSizes.width * 0.6,
+                child:
+                    TextView.getLabel2Text04(date, color: AppColors.colorBlack),
+              ),
+            ),
+            Container(
+                height: AppSizes.height * 0.035,
+                width: AppSizes.width * 0.085,
+                child: Image(
+                    image: AssetImage('assets/png/check_circle_fill_pn.png')),),
+          ],
+        ),
       ),
     );
   }

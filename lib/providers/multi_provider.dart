@@ -3,13 +3,23 @@ import 'package:truckoom_shipper/screens/Splash/splash_provider.dart';
 import 'package:truckoom_shipper/screens/addLoad/add_load_provider.dart';
 import 'package:truckoom_shipper/screens/bookLoadDetails/book_load_detail_provider.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab_provider.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/book_load/book_load_provider.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/history/history_provider.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs_provider.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/accepted/accepted_provider.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/cancelled/cancelled_provider.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/delivered/delivered_provider.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/in_process/in_process_provider.dart';
+import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/placed/placed_provider.dart';
 import 'package:truckoom_shipper/screens/businessEditProfile/business_edit_profile_provider.dart';
+import 'package:truckoom_shipper/screens/businessInformation/business_information_provider.dart';
 import 'package:truckoom_shipper/screens/businessProfile/business_profile_provider.dart';
 import 'package:truckoom_shipper/screens/businessSignup/business_signup_provider.dart';
 import 'package:truckoom_shipper/screens/checkUserType/check_user_provider.dart';
 import 'package:truckoom_shipper/screens/confirmBookLoad/confirm_book_load_Provider.dart';
 import 'package:truckoom_shipper/screens/contact_us/contact_us_provider.dart';
 import 'package:truckoom_shipper/screens/driver_details/driver_details_provider.dart';
+import 'package:truckoom_shipper/screens/drivers/drivers_provider.dart';
 import 'package:truckoom_shipper/screens/forgotPassword/forgot_password_provider.dart';
 import 'package:truckoom_shipper/screens/individualEditProfile/individual_edit_profile_provider.dart';
 import 'package:truckoom_shipper/screens/individualPayment/individual_payment_provider.dart';
@@ -25,7 +35,10 @@ import 'package:truckoom_shipper/screens/payment/payment_provider.dart';
 import 'package:truckoom_shipper/screens/phoneNumber/phone_number_provider.dart';
 import 'package:truckoom_shipper/screens/referrals/referrals_provider.dart';
 import 'package:truckoom_shipper/screens/resetPassword/reset_password_provider.dart';
-import 'package:truckoom_shipper/screens/wallet/wallet_provier.dart';
+import 'package:truckoom_shipper/screens/select_vehicle/select_vehicle_provider.dart';
+import 'package:truckoom_shipper/screens/signup/sign_up_provider.dart';
+import 'package:truckoom_shipper/screens/wallet/wallet_provider.dart';
+
 
 final multiProviders = [
   ChangeNotifierProvider<SplashProvider>(
@@ -140,4 +153,53 @@ final multiProviders = [
     create: (_) => ConfirmBookLoadProvider(),
     lazy: true,
   ),
+  ChangeNotifierProvider<SignUpProvider>(
+    create: (_) => SignUpProvider(),
+    lazy: true,
+  ),
+  ChangeNotifierProvider<BusinessInformationProvider>(
+    create: (_) => BusinessInformationProvider(),
+    lazy: true,
+  ),
+  ChangeNotifierProvider<PlacedProvider>(
+    create: (_) => PlacedProvider(),
+    lazy: true,
+  ),
+  ChangeNotifierProvider<AcceptedProvider>(
+    create: (_) => AcceptedProvider(),
+    lazy: true,
+  ),
+  ChangeNotifierProvider<InProcessProvider>(
+    create: (_) => InProcessProvider(),
+    lazy: true,
+  ),
+  ChangeNotifierProvider<DeliveredProvider>(
+    create: (_) => DeliveredProvider(),
+    lazy: true,
+  ),
+  ChangeNotifierProvider<CancelledProvider>(
+    create: (_) => CancelledProvider(),
+    lazy: true,
+  ),
+  ChangeNotifierProvider<HistoryProvider>(
+    create: (_) => HistoryProvider(),
+    lazy: true,
+  ),
+  ChangeNotifierProvider<SelectVehicleProvider>(
+    create: (_) => SelectVehicleProvider(),
+    lazy: true,
+  ),
+  ChangeNotifierProvider<BookLoadProvider>(
+    create: (_) => BookLoadProvider(),
+    lazy: true,
+  ),
+  ChangeNotifierProvider<MyJobsProvider>(
+    create: (_) => MyJobsProvider(),
+    lazy: true,
+  ),
+  ChangeNotifierProvider<DriversProvider>(
+    create: (_) => DriversProvider(),
+    lazy: true,
+  ),
+
 ];

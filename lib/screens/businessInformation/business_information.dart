@@ -1,24 +1,30 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:fluttericon/entypo_icons.dart';
-import 'package:fluttericon/linearicons_free_icons.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
+import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/businessInformation/business_information_components.dart';
-import 'package:truckoom_shipper/screens/businessProfile/business_profile.dart';
+import 'package:truckoom_shipper/screens/businessInformation/business_information_provider.dart';
 import 'package:truckoom_shipper/screens/login/login.dart';
+import 'package:truckoom_shipper/screens/phoneNumber/phone_number_provider.dart';
+import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
-
+import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../animations/slide_right.dart';
-import '../bottomTab/bottom_tab.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 
 class BusinessInformation extends StatefulWidget {
-  String tag;
+  int userId;
 
-  BusinessInformation({@required this.tag});
+  BusinessInformation({@required this.userId});
 
   @override
   _BusinessInformationState createState() => _BusinessInformationState();
@@ -26,22 +32,30 @@ class BusinessInformation extends StatefulWidget {
 
 class _BusinessInformationState extends State<BusinessInformation> {
   BusinessInformationComponents _businessInformationComponents;
-  TextEditingController business_name, contact_number, trn, license_date;
-
+  BusinessInformationProvider _businessInformationProvider;
+  PhoneNumberProvider _phoneNumberProvider;
+  TextEditingController business_name, contact_number, trn;
+  List<Asset> images = List<Asset>();
   bool onCheck = false;
+  DateTime pickedDate;
 
   @override
   void initState() {
     super.initState();
     _businessInformationComponents = BusinessInformationComponents();
+    _businessInformationProvider = Provider.of<BusinessInformationProvider>(context, listen: false);
+    _businessInformationProvider.init(context: context);
+    _phoneNumberProvider = Provider.of<PhoneNumberProvider>(context, listen: false);
+    _phoneNumberProvider.init(context);
     business_name = TextEditingController();
     contact_number = TextEditingController();
     trn = TextEditingController();
-    license_date = TextEditingController();
+    pickedDate = DateTime.now();
   }
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<BusinessInformationProvider>(context, listen: true);
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -49,13 +63,16 @@ class _BusinessInformationState extends State<BusinessInformation> {
           height: AppSizes.height,
           width: AppSizes.width,
           color: AppColors.white,
-          padding: EdgeInsets.only(left: AppSizes.width * 0.08, right: AppSizes.width*0.08, top: AppSizes.width*0.08),
+          padding: EdgeInsets.only(
+              left: AppSizes.width * 0.08,
+              right: AppSizes.width * 0.08,
+              top: AppSizes.width * 0.08),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               CommonWidgets.getAppBarCross(
-                  iconName: 'cross_icon.png',
+                  iconName: 'back_arrow_otp.png',
                   text: "Already have an account? ",
                   clickableText: "Login",
                   onTap: () {
@@ -72,66 +89,97 @@ class _BusinessInformationState extends State<BusinessInformation> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              CommonWidgets.getHeadingText(
-                                  text: 'Business Information'),
-                              _businessInformationComponents
-                                  .getBusinessSignupStep()
-                            ],
-                          ),
-                          // CommonWidgets.getHeading1Text(text: 'Signup'),
+                          CommonWidgets.getHeadingText(
+                              text: 'Business Information'),
+                          _businessInformationComponents
+                              .getBusinessSignupStep(),
                           SizedBox(height: AppSizes.height * 0.04),
-                          CommonWidgets.getSubHeadingText(text: "Business Name"),
+                          CommonWidgets.getSubHeadingText(
+                              text: "Business Name"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getTextFieldWithImage(
                               isPassword: false,
-                              leftIcon: Entypo.user,
+                              image: Assets.userNameIcon,
                               textEditingController: business_name,
                               hintText: "Enter Business Name"),
                           SizedBox(height: AppSizes.height * 0.02),
-                          CommonWidgets.getSubHeadingText(text: "Contact Number"),
+                          CommonWidgets.getSubHeadingText(
+                              text: "Contact Number"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          CommonWidgets.getTextField(
+                          CommonWidgets.getPhoneNumberFieldWithImage(
                               isPassword: false,
-                              leftIcon: Entypo.mobile,
+                              image: Assets.phoneIconNew,
                               textEditingController: contact_number,
-                              hintText: "Enter Contact Number"),
+                              hintText: Strings.phonePlaceholderText),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(text: "TRN"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          CommonWidgets.getTextField(
-                              isPassword: true,
-                              leftIcon: Entypo.mobile,
+                          CommonWidgets.getTRNField(
+                              isPassword: false,
+                              image: Assets.phoneIconNew,
                               textEditingController: trn,
                               hintText: "Enter TRN"),
                           SizedBox(height: AppSizes.height * 0.02),
                           CommonWidgets.getSubHeadingText(
                               text: "License Expiry Date"),
                           SizedBox(height: AppSizes.height * 0.01),
-                          CommonWidgets.getTextField(
-                              isPassword: true,
-                              leftIcon: LineariconsFree.license,
-                              textEditingController: license_date,
-                              hintText: "09/22/2030"),
-                         /* _businessInformationComponents.getTextField(
-                              isPassword: true,
-                              textEditingController: license_date,
-                              hintText: "09/22/2030"
-                          ),*/
+                          _businessInformationComponents.getDateField(
+                              onDate: () {
+                                _showDate();
+                              },
+                              date:
+                                  "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}"),
                           SizedBox(height: AppSizes.height * 0.03),
                           _businessInformationComponents.getImagePicker(
                               onPress: () {
-                            // Navigator.push(context, SlideRightRoute(page: OTPAuthentication()));
+                                loadAssets();
                           }),
+                          SizedBox(height: AppSizes.height * 0.02),
+                          Constants.getLicenseImages().length > 0 ?
+                          Container(
+                            height: AppSizes.height * 0.25,
+                            child: new Swiper(
+                              itemCount: Constants.getLicenseImages().length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    // color: Colors.amber,
+                                    image: DecorationImage(
+                                        image: NetworkImage(baseUrl+(Constants.getLicenseImages()[index]["FilePath"])),
+                                        fit: BoxFit.cover),
+                                  ),
+                                );
+                              },
+                              layout: SwiperLayout.DEFAULT,
+                              viewportFraction: 0.8,
+                              // itemHeight: AppSizes.height * 0.1,
+                              scale: 0.9,
+                              pagination: new SwiperPagination(
+                                builder: new DotSwiperPaginationBuilder(
+                                  color: AppColors.grey,
+                                  activeColor: AppColors.yellow,
+                                ),
+                              ),
+                            ),
+                          ):
+                          Container(),
                           SizedBox(height: AppSizes.height * 0.02),
                           _getTermsAndCondition(),
                           SizedBox(height: AppSizes.height * 0.01),
                           CommonWidgets.getBottomButton(
                               text: "Signup",
                               onPress: () {
-                                _alertDialogueContainer();
+                                _businessInformationProvider
+                                    .getBusinessInformation(
+                                        context: context,
+                                        businessName: business_name.text,
+                                        phoneNumber: contact_number.text,
+                                        trn: trn.text,
+                                        licenseExpiryDate: pickedDate,
+                                        userId: widget.userId,
+                                        onCheck: onCheck,
+                                );
                               }),
                           SizedBox(height: AppSizes.height * 0.02),
                         ],
@@ -197,7 +245,9 @@ class _BusinessInformationState extends State<BusinessInformation> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              // navigate to desired screen
+                            CommonWidgets.launchURL();
+                              // launchURL("http://truckoom.jinnbytedev.com/");
+                              // _phoneNumberProvider.getTermsAndConditions(context: context);
                             })
                     ]),
               ),
@@ -208,111 +258,69 @@ class _BusinessInformationState extends State<BusinessInformation> {
     );
   }
 
-  _alertDialogueContainer() {
-    return {
-      {
-        showDialog(
-          context: context,
-          builder: (_) {
-            return Material(
-              color: AppColors.blackTextColor.withOpacity(0.5),
-              child: Center(
-                child: Stack(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(
-                          left: AppSizes.width * 0.08,
-                          right: AppSizes.width * 0.08),
-                      height: AppSizes.height * 0.25,
-                      width: AppSizes.width,
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(
-                        left: AppSizes.width * 0.12,
-                        right: AppSizes.width * 0.12,
-                        top: AppSizes.width * 0.07,
-                      ),
-                      padding: EdgeInsets.only(
-                        top: AppSizes.height * 0.08,
-                      ),
-                      height: AppSizes.height * 0.2,
-                      width: AppSizes.width,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border:
-                            Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Signup Successful",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                decoration: TextDecoration.none,
-                                fontSize: 20,
-                                color: AppColors.colorBlack,
-                                fontFamily: Assets.poppinsMedium,
-                              //fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  SlideRightRoute(
-                                      page: BottomTab(tag: widget.tag)),
-                                      (Route<dynamic> route) => false);
-                            },
-                            child: Text(
-                              "Tap to Continue",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  decoration: TextDecoration.none,
-                                  fontSize: 12,
-                                  color: AppColors.yellow,
-                                  fontFamily: Assets.poppinsRegular,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: AppSizes.width * 0.425),
-                      height: AppSizes.width * 0.15,
-                      width: AppSizes.width * 0.15,
-                      decoration: BoxDecoration(
-                        color: AppColors.yellow,
-                        border:
-                            Border.all(color: Color.fromRGBO(233, 233, 211, 0)),
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
-                      ),
-                      child: Icon(
-                        Icons.check,
-                        color: Colors.white,
-                        size: 40,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        )
+  _showDate() async {
+    DateTime date = await showDatePicker(
+      context: context,
+      initialDate: pickedDate,
+      firstDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
+      lastDate: DateTime(DateTime.now().year + 20),
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeData(
+            cursorColor: Colors.grey,
+            dialogBackgroundColor: Colors.white,
+            colorScheme: ColorScheme.light(primary: AppColors.yellow),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+            highlightColor: Colors.grey[400],
+            textSelectionColor: Colors.grey,
+          ),
+          child: child,
+        );
       },
-    };
+    );
+    if (date != null) {
+      setState(() {
+        pickedDate = date;
+      });
+    }
+    else {
+      ApplicationToast.getWarningToast(
+          durationTime: 3,
+          heading: "Information",
+          subHeading:
+          "No Date has been selected, by default current date is filled above");
+    }
   }
 
-  hideLoader(BuildContext context) {
-    Navigator.push(context, SlideRightRoute(page: BusinessProfile()));
+
+  Future<void> loadAssets() async {
+
+    try {
+      images = [];
+      images = await MultiImagePicker.pickImages(
+        maxImages: 10,
+        enableCamera: true,
+        selectedAssets: images,
+        cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
+        materialOptions: MaterialOptions(
+          actionBarColor: AppColors.yellowColorCode,
+          actionBarTitle: "Gallery",
+          allViewTitle: "All Photos",
+          useDetailsView: false,
+          selectCircleStrokeColor: AppColors.yellowColorCode,
+        ),
+      );
+    } on Exception catch (e) {
+      print(e.toString());
+    }
+    if(!mounted){
+      // return;
+      images = [];
+    }
+    else {
+      _businessInformationProvider.onUploadLicenseImages(
+          context: context, images: images, userId: widget.userId);
+    }
   }
+
 }

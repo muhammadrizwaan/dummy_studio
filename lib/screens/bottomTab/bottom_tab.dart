@@ -1,31 +1,31 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/linearicons_free_icons.dart';
+import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/screens/bottomTab/bottom_tab_components.dart';
+import 'package:truckoom_shipper/screens/bottomTab/bottom_tab_provider.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/book_load/book_load.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/history/history.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/more/more.dart';
 import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/my_jobs.dart';
 
-
+_BottomTabState bottomTabState;
 class BottomTab extends StatefulWidget {
-  String tag;
-
-  BottomTab({@required this.tag});
 
   @override
-  _BottomTabState createState() => _BottomTabState();
+  _BottomTabState createState() {
+    bottomTabState =  _BottomTabState();
+    return bottomTabState;
+  }
 }
 
 class _BottomTabState extends State<BottomTab> {
   BottomTabComponents _bottomTabComponents;
+  BottomTabProvider _bottomTabProvider;
   TextEditingController search;
-  int _currentIndex = 0;
-  int _value = 1;
 
-  String myTag;
   List<Widget> pages = [
     BookLoad(),
     MyJobs(),
@@ -36,24 +36,32 @@ class _BottomTabState extends State<BottomTab> {
   @override
   void initState() {
     _bottomTabComponents = BottomTabComponents();
+    _bottomTabProvider = Provider.of<BottomTabProvider>(context, listen: false);
+    _bottomTabProvider.init(context: context);
     search = TextEditingController();
-    myTag = widget.tag;
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 
   _currentPage(){
-    if(_currentIndex == 0){
-      return BookLoad(tag: widget.tag);
-    }if(_currentIndex == 1){
-      return MyJobs(tag: widget.tag);
-    }if(_currentIndex == 2){
-      return HistoryScreen(tag: widget.tag);
-    }if(_currentIndex == 3){
-      return More(tag: widget.tag);
+    if(_bottomTabProvider.currentIndex == 0){
+      return BookLoad();
+    }if(_bottomTabProvider.currentIndex == 1){
+      return MyJobs();
+    }if(_bottomTabProvider.currentIndex == 2){
+      return HistoryScreen();
+    }if(_bottomTabProvider.currentIndex == 3){
+      return More();
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<BottomTabProvider>(context, listen: true);
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -61,12 +69,13 @@ class _BottomTabState extends State<BottomTab> {
           child: _currentPage(),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentIndex,
+          currentIndex: _bottomTabProvider.currentIndex,
           backgroundColor: AppColors.white,
           type: BottomNavigationBarType.fixed,
           onTap: (index) {
             setState(() {
-              _currentIndex = index;
+              _bottomTabProvider.setCurrentIndex(index);
+              // _currentIndex = index;
             });
           },
           items: [
@@ -77,7 +86,7 @@ class _BottomTabState extends State<BottomTab> {
                     height: 22,
                     width: 22,
                     color:
-                        _currentIndex == 0 ? AppColors.yellow : AppColors.grey,
+                    _bottomTabProvider.currentIndex == 0 ? AppColors.yellow : AppColors.grey,
                   ),
                 ),
                 title: Text(
@@ -86,21 +95,21 @@ class _BottomTabState extends State<BottomTab> {
                     fontSize: 10,
                     fontFamily: Assets.poppinsRegular,
                     color:
-                        _currentIndex == 0 ? AppColors.yellow : AppColors.grey,
+                    _bottomTabProvider.currentIndex == 0 ? AppColors.yellow : AppColors.grey,
                   ),
                 )),
             BottomNavigationBarItem(
                 icon: GestureDetector(
                   child: Icon(LineariconsFree.briefcase, size: 20,  color:
-                  _currentIndex == 1 ? AppColors.yellow : AppColors.grey,)
+                  _bottomTabProvider.currentIndex == 1 ? AppColors.yellow : AppColors.grey,)
                 ),
                 title: Text(
-                  "My Jobs",
+                  "My Loads",
                   style: TextStyle(
                     fontSize: 10,
                     fontFamily: Assets.poppinsRegular,
                     color:
-                        _currentIndex == 1 ? AppColors.yellow : AppColors.grey,
+                    _bottomTabProvider.currentIndex == 1 ? AppColors.yellow : AppColors.grey,
                   ),
                 )),
             BottomNavigationBarItem(
@@ -110,7 +119,7 @@ class _BottomTabState extends State<BottomTab> {
                     height: 22,
                     width: 22,
                     color:
-                        _currentIndex == 2 ? AppColors.yellow : AppColors.grey,
+                    _bottomTabProvider.currentIndex == 2 ? AppColors.yellow : AppColors.grey,
                   ),
                 ),
                 title: Text(
@@ -119,7 +128,7 @@ class _BottomTabState extends State<BottomTab> {
                     fontSize: 10,
                     fontFamily: Assets.poppinsRegular,
                     color:
-                        _currentIndex == 2 ? AppColors.yellow : AppColors.grey,
+                    _bottomTabProvider.currentIndex == 2 ? AppColors.yellow : AppColors.grey,
                   ),
                 )),
             BottomNavigationBarItem(
@@ -129,7 +138,7 @@ class _BottomTabState extends State<BottomTab> {
                     height: 22,
                     width: 22,
                     color:
-                        _currentIndex == 3 ? AppColors.yellow : AppColors.grey,
+                    _bottomTabProvider.currentIndex == 3 ? AppColors.yellow : AppColors.grey,
                   ),
                 ),
                 title: Text(
@@ -138,7 +147,7 @@ class _BottomTabState extends State<BottomTab> {
                     fontSize: 10,
                     fontFamily: Assets.poppinsRegular,
                     color:
-                        _currentIndex == 3 ? AppColors.yellow : AppColors.grey,
+                    _bottomTabProvider.currentIndex == 3 ? AppColors.yellow : AppColors.grey,
                   ),
                 )),
           ],

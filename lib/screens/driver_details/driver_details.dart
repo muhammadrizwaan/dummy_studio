@@ -4,11 +4,17 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'package:truckoom_shipper/contsants/constants.dart';
+import 'package:truckoom_shipper/network/api_urls.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
+import 'package:truckoom_shipper/screens/driver_details/driver_details_provider.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
@@ -16,13 +22,15 @@ import 'driver_details_components.dart';
 
 class DriverDetailScreen extends StatefulWidget {
   final String tag;
-  DriverDetailScreen({@required this.tag});
+  int driverId;
+  DriverDetailScreen({@required this.tag, @required this.driverId});
   @override
   _DriverDetailScreenState createState() => _DriverDetailScreenState();
 }
 
 class _DriverDetailScreenState extends State<DriverDetailScreen> {
   DriverDetailComponents _driverDetailComponents;
+  DriverDetailProvider _driverDetailProvider;
   TextEditingController description;
   var rating = 3.0;
   @override
@@ -30,9 +38,12 @@ class _DriverDetailScreenState extends State<DriverDetailScreen> {
     super.initState();
     _driverDetailComponents = DriverDetailComponents();
     description = TextEditingController();
+    _driverDetailProvider = Provider.of<DriverDetailProvider>(context, listen: false);
+    _driverDetailProvider.init(context: context, driverId: widget.driverId);
   }
   @override
   Widget build(BuildContext context) {
+    Provider.of<DriverDetailProvider>(context, listen: true);
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -41,7 +52,7 @@ class _DriverDetailScreenState extends State<DriverDetailScreen> {
           width: AppSizes.width,
           color: AppColors.white,
           // padding: EdgeInsets.all(AppSizes.width * 0.05),
-          child: Column(
+          child: _driverDetailProvider.isDataFetched? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -55,6 +66,7 @@ class _DriverDetailScreenState extends State<DriverDetailScreen> {
                 child: ListView(
                   children: [
                     Container(
+                      height: AppSizes.height * 0.9,
                       padding: EdgeInsets.all(AppSizes.width * 0.05),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,68 +74,73 @@ class _DriverDetailScreenState extends State<DriverDetailScreen> {
                         children: [
                           SizedBox(height: AppSizes.height * 0.01,),
                           _driverDetailComponents.getProfileImage(
-                              profileImg: Assets.profileImg
+                              profileImg: _driverDetailProvider.driverDetailResponse.result.profilePicture
                           ),
                           SizedBox(height: AppSizes.height * 0.02,),
                           _driverDetailComponents.getBoxContainer(
-                              name: 'Mathew Lawson',
-                              email: 'MathewLawson@gmail.com',
-                              phone_number: '(430)214-7475',
-                              License_number: '743746-748478'
+                              name: _driverDetailProvider.driverDetailResponse.result.fullName,
+                              email: _driverDetailProvider.driverDetailResponse.result.email,
+                              phone_number: _driverDetailProvider.driverDetailResponse.result.phoneNumber !=null?_driverDetailProvider.driverDetailResponse.result.phoneNumber:"",
+                              License_number: _driverDetailProvider.driverDetailResponse.result.licenseNumber,
+                            driverId: _driverDetailProvider.driverDetailResponse.result.userId.toString()
                           ),
-                          SizedBox(height: AppSizes.height * 0.02,),
-                          _driverDetailComponents.getProfileLable(
-                              lableText: 'Reviews'
-                          ),
-                          SizedBox(height: AppSizes.height * 0.01,),
-                          _driverDetailComponents.getReviewsContainer(
-                              leftIcon: Assets.profileImg,
-                              userName: 'Mathew Lawson',
-                              message: 'Matthew Lawson is a good Driver',
-                              time: '3:41 PM',
-                            onPressReview: () {
-                              _onRatingAlert();
-                            }
-                          ),
-                          SizedBox(height: AppSizes.height * 0.01,),
-                          _driverDetailComponents.getReviewsContainer(
-                              leftIcon: Assets.profileImg,
-                              userName: 'Mathew Lawson',
-                              message: 'Matthew Lawson is a good Driver',
-                              time: '3:41 PM',
-                              onPressReview: () {
-                                _onRatingAlert();
-                              }),
-                          SizedBox(height: AppSizes.height * 0.01,),
-                          _driverDetailComponents.getReviewsContainer(
-                              leftIcon: Assets.profileImg,
-                              userName: 'Mathew Lawson',
-                              message: 'Matthew Lawson is a good Driver',
-                              time: '3:41 PM',
-                            onPressReview: () {
-                              _onRatingAlert();
-                            }
-                          ),
-                          SizedBox(height: AppSizes.height * 0.01,),
-                          _driverDetailComponents.getReviewsContainer(
-                              leftIcon: Assets.profileImg,
-                              userName: 'Mathew Lawson',
-                              message: 'Matthew Lawson is a good Driver',
-                              time: '3:41 PM',
-                              onPressReview: () {
-                                _onRatingAlert();
-                              }
-                          ),
-                          SizedBox(height: AppSizes.height * 0.01,),
-                          _driverDetailComponents.getReviewsContainer(
-                              leftIcon: Assets.profileImg,
-                              userName: 'Mathew Lawson',
-                              message: 'Matthew Lawson is a good Driver',
-                              time: '3:41 PM',
-                              onPressReview: () {
-                                _onRatingAlert();
-                              }
-                          ),
+                          SizedBox(height: AppSizes.height * 0.03,),
+                          _driverDetailProvider.driverDetailResponse.result.licenseImages.length > 0 ?
+                          Container(
+                            height: AppSizes.height * 0.25,
+                            child: new Swiper(
+                              itemCount: _driverDetailProvider.driverDetailResponse.result.licenseImages.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    // color: Colors.amber,
+                                    image: DecorationImage(
+                                        image: NetworkImage(baseUrl+_driverDetailProvider.driverDetailResponse.result.licenseImages[index].filePath),
+                                        fit: BoxFit.cover),
+                                  ),
+                                );
+                              },
+                              layout: SwiperLayout.DEFAULT,
+                              viewportFraction: 0.8,
+                              // itemHeight: AppSizes.height * 0.1,
+                              scale: 0.9,
+                              pagination: new SwiperPagination(
+                                builder: new DotSwiperPaginationBuilder(
+                                  color: AppColors.grey,
+                                  activeColor: AppColors.yellow,
+                                ),
+                              ),
+                            ),
+                          ):
+                          Container(),
+                          SizedBox(height: AppSizes.height * 0.02),
+                          // _driverDetailComponents.getProfileLable(
+                          //     lableText: 'Reviews'
+                          // ),
+                          // SizedBox(height: AppSizes.height * 0.01,),
+                          // _driverDetailProvider.driverDetailResponse.result.ratings.isNotEmpty? Expanded(
+                          //   child: ListView.builder(
+                          //     itemCount: _driverDetailProvider.driverDetailResponse.result.ratings.length,
+                          //       itemBuilder: (context, index){
+                          //       return Column(
+                          //         children: [
+                          //           SizedBox(height: AppSizes.height * 0.01,),
+                          //           _driverDetailComponents.getReviewsContainer(
+                          //               leftIcon: _driverDetailProvider.driverDetailResponse.result.ratings[index].profilePicture,
+                          //               userName: _driverDetailProvider.driverDetailResponse.result.ratings[index].fullName,
+                          //               message: _driverDetailProvider.driverDetailResponse.result.ratings[index].review,
+                          //               time: '3:41 PM',
+                          //               ratings: _driverDetailProvider.driverDetailResponse.result.ratings[index].rating.toString(),
+                          //               onPressReview: () {
+                          //                 _onRatingAlert();
+                          //               }
+                          //           ),
+                          //         ],
+                          //       );
+                          //   }),
+                          // ):
+                          // CommonWidgets.onNullData(text: "No Reviews"),
                         ],
                       ),
                     )
@@ -131,6 +148,12 @@ class _DriverDetailScreenState extends State<DriverDetailScreen> {
                 ),
               )
             ],
+          ):
+          Center(
+            child: Container(
+              height: AppSizes.height * 0.15,
+              child: Lottie.asset(Assets.apiLoading, fit: BoxFit.cover),
+            ),
           ),
         ),
       ),

@@ -6,7 +6,7 @@ import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 
 class ConfirmBookLoadComponents{
-  Widget getLocationContainer(){
+  Widget getLocationContainer({@required String pickupLocation, @required String dropOffLocation}){
     return Container(
       margin: EdgeInsets.only(top: AppSizes.height * 0.05),
       padding: EdgeInsets.all(AppSizes.width * 0.05),
@@ -28,16 +28,75 @@ class ConfirmBookLoadComponents{
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: AppSizes.height * 0.12,
-                child: Image(image: AssetImage(Assets.userLocation),
-                  fit: BoxFit.cover,
+                height: AppSizes.height * 0.0975,
+                padding: EdgeInsets.only(top: AppSizes.height * 0.0045),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: 8,
+                      height: 8,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.colorBlack
+                      ),
+                    ),
+                    Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.grey
+                      ),
+                    ),
+                    Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.grey
+                      ),
+                    ),
+                    Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.grey
+                      ),
+                    ),
+                    Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.grey
+                      ),
+                    ),
+                    Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.grey
+                      ),
+                    ),
+                    Container(
+                      width: 8,
+                      height: 8,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.yellow
+                      ),
+                    )
+                  ],
                 ),
               ),
               SizedBox(width: AppSizes.width * 0.03),
               Container(
                 // height: AppSizes.height * 0.14,
                 child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   // crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
@@ -50,16 +109,19 @@ class ConfirmBookLoadComponents{
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Pickup Location',
+                          Text(
+                            'Pickup Location',
                             style: TextStyle(
-                              fontFamily: Assets.poppinsLight,
+                              fontFamily: Assets.poppinsRegular,
                               fontSize: 12,
                               color: AppColors.colorBlack,
                               // fontWeight: FontWeight.bold
                             ),
                           ),
                           SizedBox(height: AppSizes.height * 0.002),
-                          Text('1 Ash Park, Pembroke Dock, SA7254, Drury Lane, Oldham, OL9 7PH',
+                          Text(
+                            pickupLocation,
+                            maxLines: 2,
                             style: TextStyle(
                               fontFamily: Assets.poppinsLight,
                               fontSize: 12,
@@ -70,9 +132,9 @@ class ConfirmBookLoadComponents{
                         ],
                       ),
                     ),
-                    SizedBox(height: AppSizes.height * 0.01),
+                    // SizedBox(height: AppSizes.height * 0.01),
                     Container(
-                      // height: AppSizes.height * 0.08,
+                      height: AppSizes.height * 0.082,
                       width: AppSizes.width * 0.7,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -81,20 +143,24 @@ class ConfirmBookLoadComponents{
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Dropoff Location',
+                          Text(
+                            'Dropoff Location',
                             style: TextStyle(
-                              fontFamily: Assets.poppinsLight,
+                              fontFamily: Assets.poppinsRegular,
                               fontSize: 12,
                               color: AppColors.colorBlack,
                               // fontWeight: FontWeight.bold
                             ),
                           ),
                           SizedBox(height: AppSizes.height * 0.002),
-                          Text('1 Ash Park, Pembroke Dock, SA6478, Drury Lane, Dubai, OL9 7PH',
+                          Text(
+                            dropOffLocation,
+                            maxLines: 2,
                             style: TextStyle(
                               fontFamily: Assets.poppinsLight,
                               fontSize: 12,
                               color: AppColors.colorBlack,
+                              // fontWeight: FontWeight.bold
                             ),
                           ),
                         ],

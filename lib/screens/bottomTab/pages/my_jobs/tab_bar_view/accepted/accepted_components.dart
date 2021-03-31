@@ -1,11 +1,13 @@
 
 
+import 'package:date_time_format/date_time_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/octicons_icons.dart';
 import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
+import 'package:truckoom_shipper/widgets/common_widgets.dart';
 import 'package:truckoom_shipper/widgets/text_views.dart';
 
 class AcceptedComponents{
@@ -16,14 +18,17 @@ class AcceptedComponents{
         @required String startDate,
         @required String time,
         @required String status,
+        @required String vehicleType,
+        @required String vehicleCategory,
         @required String price,
         @required Function onClickPay,
         @required Function onClickCancel,
-        @required Function onTap,
-        @required Function onAlert
+        @required Function onLoadDetail,
+        @required Function onVehicleType,
+        @required Function onVehicleCategory
       }) {
     return GestureDetector(
-      onTap: ()=> onTap(),
+      onTap: ()=> onLoadDetail(),
       child: Container(
         padding: EdgeInsets.all(AppSizes.width * 0.03),
         decoration: BoxDecoration(
@@ -46,7 +51,7 @@ class AcceptedComponents{
                 Row(
                   children: [
                     Text(
-                      'Job ID: ',
+                      'Load ID: ',
                       style: TextStyle(
                           fontSize: 12,
                           fontFamily: Assets.poppinsMedium,
@@ -82,37 +87,40 @@ class AcceptedComponents{
                 children: [
                   Row(
                     children: [
-                      Image(
-                        image: AssetImage(Assets.df_pk_job),
-                      ),
+                      CommonWidgets.getLocationPointers(),
                       SizedBox(
                         width: AppSizes.width * 0.01,
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            pickUpLocation,
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontFamily: Assets.poppinsRegular,
-                              color: AppColors.locationText,
-                              // fontWeight: FontWeight.bold
+                      Container(
+                        width: AppSizes.width * 0.4,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              pickUpLocation,
+                              maxLines: 1,
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontFamily: Assets.poppinsRegular,
+                                color: AppColors.locationText,
+                                // fontWeight: FontWeight.bold
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            height: AppSizes.height * 0.01,
-                          ),
-                          Text(
-                            destinationLocation,
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontFamily: Assets.poppinsRegular,
-                              color: AppColors.locationText,
-                              // fontWeight: FontWeight.bold
+                            SizedBox(
+                              height: AppSizes.height * 0.01,
                             ),
-                          ),
-                        ],
+                            Text(
+                              destinationLocation,
+                              maxLines: 1,
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontFamily: Assets.poppinsRegular,
+                                color: AppColors.locationText,
+                                // fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -124,7 +132,7 @@ class AcceptedComponents{
                         Row(
                           children: [
                             Text(
-                              startDate,
+                              DateTimeFormat.format(DateTime.parse(startDate), format: 'M j, Y'),
                               style: TextStyle(
                                 fontSize: 12,
                                 fontFamily: Assets.poppinsRegular,
@@ -136,7 +144,7 @@ class AcceptedComponents{
                               width: 4,
                             ),
                             Text(
-                              time,
+                              DateTimeFormat.format(DateTime.parse(time), format: r'g:i a'),
                               style: TextStyle(
                                 fontSize: 12,
                                 fontFamily: Assets.poppinsRegular,
@@ -198,7 +206,7 @@ class AcceptedComponents{
                 Row(
                   children: [
                     Text(
-                      'Suzuki',
+                      vehicleType,
                       style: TextStyle(
                           fontSize: 12,
                           fontFamily: Assets.poppinsMedium,
@@ -209,7 +217,7 @@ class AcceptedComponents{
                       width: AppSizes.width * 0.01,
                     ),
                     GestureDetector(
-                      onTap: ()=> onAlert(),
+                      onTap: ()=> onVehicleType(),
                       child: Icon(Octicons.info, size: 20, color: AppColors.colorBlack.withOpacity(0.70),),
                     ),
                   ],
@@ -220,6 +228,43 @@ class AcceptedComponents{
               height: AppSizes.height * 0.01,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Vehicle Category:',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontFamily: Assets.poppinsRegular,
+                    color: AppColors.locationText,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      vehicleCategory,
+                      style: TextStyle(
+                          fontSize: 12,
+                          fontFamily: Assets.poppinsMedium,
+                          color: AppColors.colorBlack,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      width: AppSizes.width * 0.01,
+                    ),
+                    GestureDetector(
+                      onTap: ()=> onVehicleCategory(),
+                      child: Icon(Octicons.info, size: 20, color: AppColors.colorBlack.withOpacity(0.70),),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(
+              height: AppSizes.height * 0.01,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GestureDetector(
                   onTap: () => onClickPay(),
@@ -233,9 +278,6 @@ class AcceptedComponents{
                     alignment: Alignment.center,
                     child: TextView.getLabelText04("Pay", color: Colors.white),
                   ),
-                ),
-                SizedBox(
-                  width: 20,
                 ),
                 GestureDetector(
                   onTap: () => onClickCancel(),

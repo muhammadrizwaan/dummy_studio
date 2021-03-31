@@ -2,17 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/entypo_icons.dart';
+import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
+import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/checkUserType/check_user.dart';
-import 'package:truckoom_shipper/screens/otpAuthentication/otp_authentication.dart';
 import 'package:truckoom_shipper/screens/phoneNumber/phone_number_components.dart';
+import 'package:truckoom_shipper/screens/phoneNumber/phone_number_provider.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import '../../res/assets.dart';
 import '../../res/colors.dart';
-import '../../res/sizes.dart';
-import '../../res/sizes.dart';
-import '../../res/sizes.dart';
 import '../../res/sizes.dart';
 
 class PhoneNumber extends StatefulWidget {
@@ -26,17 +25,29 @@ class PhoneNumber extends StatefulWidget {
 
 class _PhoneNumberState extends State<PhoneNumber> {
   PhoneNumberComponents _phoneNumberComponents;
+  PhoneNumberProvider _phoneNumberProvider;
   TextEditingController phone_number;
   bool onCheck = false;
+  bool filled = false;
 
   @override
   void initState() {
+    _phoneNumberProvider =
+        Provider.of<PhoneNumberProvider>(context, listen: false);
     _phoneNumberComponents = PhoneNumberComponents();
     phone_number = TextEditingController();
+    phone_number.addListener(() {
+      if (phone_number.text.length > 0) {
+        setState(() {
+          filled = true;
+        });
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<PhoneNumberProvider>(context, listen: true);
     AppSizes.initializeSize(context);
 
     return SafeArea(
@@ -47,9 +58,9 @@ class _PhoneNumberState extends State<PhoneNumber> {
           width: AppSizes.width,
           color: AppColors.white,
           padding: EdgeInsets.only(
-              left: AppSizes.width * 0.08,
-              right: AppSizes.width * 0.08,
-              top: AppSizes.width * 0.08,
+            left: AppSizes.width * 0.08,
+            right: AppSizes.width * 0.08,
+            top: AppSizes.width * 0.08,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,10 +83,10 @@ class _PhoneNumberState extends State<PhoneNumber> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(
-                            height: AppSizes.height*0.03,
+                            height: AppSizes.height * 0.03,
                           ),
                           CommonWidgets.getHeadingText(
-                              text: 'Enter Phone Number',
+                            text: 'Enter Phone Number',
                           ),
                           SizedBox(
                             height: 30,
@@ -84,25 +95,30 @@ class _PhoneNumberState extends State<PhoneNumber> {
                           SizedBox(
                             height: 10,
                           ),
-                          CommonWidgets.getTextField(
-                              isPassword: false,
-                              leftIcon: Entypo.mobile,
+                          // CommonWidgets.getTextField(
+                          //   isPassword: false,
+                          //   leftIcon: Entypo.mobile,
+                          //   textEditingController: phone_number,
+                          //   hintText: "Phone Number",
+                          //   filledField: filled
+                          // ),
+                          CommonWidgets.getPhoneNumberFieldWithImage(isPassword: false,
+                              image: Assets.phoneIconNew,
                               textEditingController: phone_number,
-                              hintText: "Phone Number"),
+                              hintText: Strings.phonePlaceholderText,
+                          ),
                           SizedBox(height: AppSizes.height * 0.03),
                           _getTermsAndCondition(),
-                          SizedBox(
-                            height: 10,
-                          ),
+                          SizedBox(height: 10),
                           CommonWidgets.getBottomButton(
                               text: "Next",
                               onPress: () {
-                                Navigator.push(
-                                    context,
-                                    SlideRightRoute(
-                                        page: OTPAuthentication(
-                                      tag: widget.tag,
-                                    )));
+                                _phoneNumberProvider.getPhoneNumber(
+                                    context: context,
+                                    phoneNumber: phone_number.text,
+                                    tag: widget.tag,
+                                    onCheck: onCheck);
+                                // Navigator.push(context, SlideRightRoute(page: OTPAuthentication(tag: widget.tag,)));
                               }),
                         ],
                       ),
@@ -161,14 +177,14 @@ class _PhoneNumberState extends State<PhoneNumber> {
                       TextSpan(
                           text: 'Terms and Conditions',
                           style: TextStyle(
-                              color: Colors.amber,
-                              fontSize: 12,
-                              fontFamily: Assets.poppinsMedium,
-                              // fontWeight: FontWeight.bold
+                            color: Colors.amber,
+                            fontSize: 12,
+                            fontFamily: Assets.poppinsMedium,
+                            // fontWeight: FontWeight.bold
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              // navigate to desired screen
+                              CommonWidgets.launchURL();
                             })
                     ]),
               ),

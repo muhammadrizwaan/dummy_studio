@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -10,11 +8,27 @@ import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
 import 'package:truckoom_shipper/screens/confirmBookLoad/confirm_book_load_components.dart';
 import 'package:truckoom_shipper/screens/select_vehicle/select_vehicle.dart';
+import 'package:truckoom_shipper/widgets/MapView.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
 
 class ConfirmBookLoad extends StatefulWidget {
-  String tag;
-  ConfirmBookLoad({@required this.tag});
+  String PickupLatitude,
+      PickupLongitude,
+      DropoffLatitude,
+      DropoffLongitude,
+      PickupLocation,
+      DropoffLocation;
+  int Distance;
+
+  ConfirmBookLoad(
+      {@required this.PickupLatitude,
+        @required this.PickupLongitude,
+        @required this.DropoffLatitude,
+        @required this.DropoffLongitude,
+        @required this.PickupLocation,
+        @required this.DropoffLocation,
+        @required this.Distance});
+
   @override
   _ConfirmBookLoadState createState() => _ConfirmBookLoadState();
 }
@@ -22,11 +36,18 @@ class ConfirmBookLoad extends StatefulWidget {
 class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
   ConfirmBookLoadComponents _confirmBookLoadComponents;
   LatLng _center = LatLng(30.3753, 69.3451);
+  MapView _currMapView;
+
   @override
   void initState() {
     super.initState();
     _confirmBookLoadComponents = ConfirmBookLoadComponents();
+    // _currMapView = _getMapView();
+    // _currMapView.getDistance();
+    print('Distance is');
+    print(double.parse(MapView.distanceBetweenLocations).toInt());
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -35,66 +56,71 @@ class _ConfirmBookLoadState extends State<ConfirmBookLoad> {
             children: [
               CommonWidgets.tabsAppBar2(
                   text: Strings.bookLoad,
-                  onPress: (){Navigator.pop(context);}
-              ),
+                  onPress: () {
+                    Navigator.pop(context);
+                  }),
               SizedBox(height: AppSizes.height * 0.005),
               Expanded(
-                child: Stack(
+                child:  MapView(
+                  startLat: double.parse(widget.PickupLatitude),
+                  startLong: double.parse(widget.PickupLongitude),
+                  endLat: double.parse(widget.DropoffLatitude),
+                  endLong: double.parse(widget.DropoffLongitude),
+                  apiKey: "AIzaSyAERKSFYMxdSR6mrMmgyesmQOr8miAFd4c",
+                  directionsApiKey: "AIzaSyAERKSFYMxdSR6mrMmgyesmQOr8miAFd4c",
+                ),
+              ),
+              Container(
+                height: AppSizes.height * 0.45,
+                padding: EdgeInsets.only(top: 20, left: 15, right: 15),
+                decoration: BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(2),
+                      topLeft: Radius.circular(2),
+                    )),
+                child: Column(
                   children: [
-                    GoogleMap(
-                      initialCameraPosition: CameraPosition(target: _center, zoom: 5),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Container(
+                        height: AppSizes.height * 0.008,
+                        width: AppSizes.width * 0.40,
+                        decoration: BoxDecoration(
+                          color: AppColors.dragContainerslider,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
                     ),
-                    SlidingUpPanel(
-                      isDraggable: true,
-                      minHeight: AppSizes.height*0.40,
-                      maxHeight: AppSizes.height*0.75,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          topRight: Radius.circular(15)),
-                      panel: _onSlidingUpPanel(),
-                    )
+                    _confirmBookLoadComponents.getLocationContainer(
+                        pickupLocation: widget.PickupLocation,
+                        dropOffLocation: widget.DropoffLocation),
+                    SizedBox(height: AppSizes.height * 0.03),
+                    CommonWidgets.getBottomButton(
+                        text: "Confirm",
+                        onPress: () {
+                          Navigator.push(
+                            context,
+                            SlideRightRoute(
+                              page: SelectVehicle(
+                                PickupLatitude: widget.PickupLatitude,
+                                PickupLongitude: widget.PickupLongitude,
+                                DropoffLatitude: widget.DropoffLatitude,
+                                DropoffLongitude: widget.DropoffLongitude,
+                                PickupLocation: widget.PickupLocation,
+                                DropoffLocation: widget.DropoffLocation,
+                                Distance: double.parse(MapView.distanceBetweenLocations).toInt(),
+                              ),
+                            ),
+                          );
+                        }),
+                    SizedBox(height: AppSizes.height * 0.02),
                   ],
                 ),
-              )
+              ),
             ],
           )
-      ),
-    );
+      ),);
   }
 
-  _onSlidingUpPanel() {
-    return Container(
-      height: AppSizes.height * 0.5,
-      padding: EdgeInsets.only(top: 20, left: 15, right: 15),
-      decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(2),
-            topLeft: Radius.circular(2),
-          )),
-      child: ListView(
-        children: [
-          Align(
-            alignment: Alignment.center,
-            child: Container(
-              height: AppSizes.height * 0.008,
-              width: AppSizes.width * 0.40,
-              decoration: BoxDecoration(
-                color: AppColors.dragContainerslider,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-          ),
-          _confirmBookLoadComponents.getLocationContainer(),
-          SizedBox(height: AppSizes.height * 0.03),
-          CommonWidgets.getBottomButton(
-              text: "Confirm",
-              onPress: () {
-                Navigator.push(context,
-                    SlideRightRoute(page: SelectVehicle(tag: widget.tag)));
-              })
-        ],
-      ),
-    );
-  }
 }
