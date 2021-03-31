@@ -87,15 +87,18 @@ class _DeliveredState extends State<Delivered> {
                                   vehicleType: _myJobsProvider.deliveredList[index].vehicleTypeName,
                                     vehicleCategory: _myJobsProvider.deliveredList[index].vehicleCategoryName,
                                   price: "${Strings.aed} ${_myJobsProvider.deliveredList[index].shipperCost}",
-                                  onAlert: () {
+                                  onVehicleType: () {
                                     ApplicationToast.onDescriptionAlert(
                                         context: context,
                                         description: _myJobsProvider.deliveredList[index].vehicleTypeDescription);
                                   },
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        SlideRightRoute(page: JobDetails(status: "Dispatch", loadId: _myJobsProvider.deliveredList[index].loadId)));
+                                    onVehicleCategory: () {
+                                      ApplicationToast.onDescriptionAlert(
+                                          context: context,
+                                          description: _myJobsProvider.deliveredList[index].vehicleCategoryDescription);
+                                    },
+                                  onLoadDetail: () {
+                                    Navigator.push(context, SlideRightRoute(page: JobDetails(status: "Dispatch", loadId: _myJobsProvider.deliveredList[index].loadId)));
                                   },
                                   onReviews: (){
                                     _onRatingAlert(
@@ -257,30 +260,6 @@ class _DeliveredState extends State<Delivered> {
                               ],
                             ),
                           ),
-                          // GestureDetector(
-                          //   onTap: () {
-                          //     Navigator.pop(context);
-                          //   },
-                          //   child: Container(
-                          //     margin: EdgeInsets.only(
-                          //         left: AppSizes.width * 0.81,
-                          //         top: AppSizes.height * 0.015),
-                          //     height: AppSizes.width * 0.1,
-                          //     width: AppSizes.width * 0.1,
-                          //     decoration: BoxDecoration(
-                          //       color: AppColors.white,
-                          //       border: Border.all(color: AppColors.yellow),
-                          //       borderRadius: BorderRadius.circular(
-                          //         50,
-                          //       ),
-                          //     ),
-                          //     child: Icon(
-                          //       Icons.clear,
-                          //       color: AppColors.yellow,
-                          //       size: 25,
-                          //     ),
-                          //   ),
-                          // ),
                         ],
                       ),
                     ),

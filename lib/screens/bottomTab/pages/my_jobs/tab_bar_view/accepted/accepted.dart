@@ -80,10 +80,13 @@ class _AcceptedState extends State<Accepted> {
                                 vehicleType: _myJobsProvider.acceptedList[index].vehicleTypeName,
                                 vehicleCategory: _myJobsProvider.acceptedList[index].vehicleCategoryName,
                                 price: "${Strings.aed} ${_myJobsProvider.acceptedList[index].shipperCost}",
-                                onAlert: () {
+                                onVehicleType: () {
                                   ApplicationToast.onDescriptionAlert(context: context, description: _myJobsProvider.acceptedList[index].vehicleTypeDescription);
                                 },
-                                onTap: () {
+                                onVehicleCategory: (){
+                                  ApplicationToast.onDescriptionAlert(context: context, description: _myJobsProvider.acceptedList[index].vehicleCategoryDescription);
+                                },
+                                onLoadDetail: () {
                                   Navigator.push(
                                       context, SlideRightRoute(page: JobDetails(status:"Accepted", loadId: _myJobsProvider.acceptedList[index].loadId)));
                                 },

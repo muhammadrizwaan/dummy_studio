@@ -339,7 +339,7 @@ class InvoiceDetailComponents {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Job ID',
+                'Load ID',
                 style: TextStyle(
                   fontFamily: Assets.poppinsLight,
                   fontSize: 12,

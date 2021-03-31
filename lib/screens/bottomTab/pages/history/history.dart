@@ -102,11 +102,14 @@ class _HistoryScreenState extends State<HistoryScreen> {
                             price: "${Strings.aed} ${_historyProvider.histroyList[index].shipperCost}",
                             status: _historyProvider.histroyList[index].status,
                             vehicleType: _historyProvider.histroyList[index].vehicleTypeName,
-                            vehicleCategory: _historyProvider.histroyList[index].vehicleTypeName,
+                            vehicleCategory: _historyProvider.histroyList[index].vehicleCategoryName,
                             startTime: _historyProvider.histroyList[index].pickupDateTime,
                             endTime: _historyProvider.histroyList[index].dropoffDateTime,
-                            onTap: () {
+                            onTypeDescription: () {
                               ApplicationToast.onDescriptionAlert(context: context, description: _historyProvider.histroyList[index].vehicleTypeDescription);
+                            },
+                            onCategoryDescription: (){
+                              ApplicationToast.onDescriptionAlert(context: context, description: _historyProvider.histroyList[index].vehicleCategoryDescription);
                             },
                             onInvoice: () {
                               Navigator.push(context, SlideRightRoute(page: InvoiceDetail(Id:_historyProvider.histroyList[index].loadId)));

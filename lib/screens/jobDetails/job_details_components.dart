@@ -261,12 +261,8 @@ class JobDetailsComponents {
   }) {
     return Container(
       width: AppSizes.width,
-      padding: EdgeInsets.only(
-        left: AppSizes.width * 0.05,
-        right: AppSizes.width * 0.05,
-        top: AppSizes.width * 0.05,
-        bottom: AppSizes.width * 0.05,
-      ),
+      height: AppSizes.height * 0.09,
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [

@@ -112,7 +112,8 @@ class IndividualEditProfileComponents{
     @required Function onPress
   }) {
     return Container(
-      padding: EdgeInsets.all(AppSizes.width * 0.05),
+      height: AppSizes.height * 0.09,
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [

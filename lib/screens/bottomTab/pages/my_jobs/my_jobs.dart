@@ -57,9 +57,9 @@ class _MyJobsState extends State<MyJobs> {
     count = 0;
     _jobsComponents = MyJobsComponents();
   }
-  setNotification(){
+  setNotification() async{
     Constants.setNotification(false);
-    Navigator.push(context, SlideRightRoute(page: Notifications()));
+    await Navigator.push(context, SlideRightRoute(page: Notifications()));
     if(bottomTabState.mounted){
       bottomTabState.setState(() {});
     }

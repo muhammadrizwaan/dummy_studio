@@ -21,11 +21,12 @@ class PlacedComponents{
         @required String vehicleType,
         @required String vehicleCategory,
         @required String price,
-        @required Function onTap,
-        @required Function onAlert,
+        @required Function onVehicleType,
+        @required Function onVehicleCategory,
+        @required Function onLoadDetail,
       }) {
     return GestureDetector(
-      onTap: ()=> onTap(),
+      onTap: ()=> onLoadDetail(),
       child: Container(
         padding: EdgeInsets.all(AppSizes.width * 0.03),
         decoration: BoxDecoration(
@@ -48,7 +49,7 @@ class PlacedComponents{
                 Row(
                   children: [
                     Text(
-                      'Job ID: ',
+                      'Load ID: ',
                       style: TextStyle(
                           fontSize: 12,
                           fontFamily: Assets.poppinsMedium,
@@ -195,31 +196,6 @@ class PlacedComponents{
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Vehicle Category:',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontFamily: Assets.poppinsRegular,
-                    color: AppColors.locationText,
-                    // fontWeight: FontWeight.bold
-                  ),
-                ),
-                Text(
-                  vehicleCategory,
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontFamily: Assets.poppinsMedium,
-                      color: AppColors.colorBlack,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: AppSizes.height * 0.01,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
                   'Vehicle Type:',
                   style: TextStyle(
                     fontSize: 12,
@@ -242,7 +218,43 @@ class PlacedComponents{
                       width: AppSizes.width * 0.01,
                     ),
                     GestureDetector(
-                      onTap: () => onAlert(),
+                      onTap: () => onVehicleType(),
+                      child: Icon(Octicons.info, size: 20, color: AppColors.colorBlack.withOpacity(0.70),),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(
+              height: AppSizes.height * 0.01,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Vehicle Category:',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontFamily: Assets.poppinsRegular,
+                    color: AppColors.locationText,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      vehicleCategory,
+                      style: TextStyle(
+                          fontSize: 12,
+                          fontFamily: Assets.poppinsMedium,
+                          color: AppColors.colorBlack,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      width: AppSizes.width * 0.01,
+                    ),
+                    GestureDetector(
+                      onTap: () => onVehicleCategory(),
                       child: Icon(Octicons.info, size: 20, color: AppColors.colorBlack.withOpacity(0.70),),
                     ),
                   ],

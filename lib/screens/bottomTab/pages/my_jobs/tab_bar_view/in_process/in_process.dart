@@ -80,10 +80,13 @@ class _InProcessState extends State<InProcess> {
                           vehicleType: _myJobsProvider.inProcessList[index].vehicleTypeName,
                           vehicleCategory: _myJobsProvider.inProcessList[index].vehicleCategoryName,
                           price: "${Strings.aed} ${_myJobsProvider.inProcessList[index].shipperCost}",
-                          onAlert: (){
+                          onVehicleType: (){
                             ApplicationToast.onDescriptionAlert(context: context, description: _myJobsProvider.inProcessList[index].vehicleTypeDescription);
                           },
-                          onTap: (){
+                          onVehicleCategory: (){
+                            ApplicationToast.onDescriptionAlert(context: context, description: _myJobsProvider.inProcessList[index].vehicleCategoryDescription);
+                          },
+                          onLoadDetail: (){
                             Navigator.push(context, SlideRightRoute(page: JobDetails(status:"InProcess", loadId: _myJobsProvider.inProcessList[index].loadId)));
                           },
                           onDriverDetail: () {

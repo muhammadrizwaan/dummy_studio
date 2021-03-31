@@ -23,7 +23,8 @@ class HistoryComponents {
     @required String startTime,
     @required String endTime,
     @required Function onInvoice,
-    @required Function onTap,
+    @required Function onTypeDescription,
+    @required Function onCategoryDescription,
     @required Function onDetail
   }) {
     return GestureDetector(
@@ -53,7 +54,7 @@ class HistoryComponents {
                 Row(
                   children: [
                     Text(
-                      'Job ID: ',
+                      'Load ID: ',
                       style: TextStyle(
                           fontSize: 12,
                           fontFamily: Assets.poppinsMedium,
@@ -218,32 +219,6 @@ class HistoryComponents {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-              Text(
-              'Vehicle Category:',
-              style: TextStyle(
-                fontSize: 12,
-                fontFamily: Assets.poppinsRegular,
-                color: AppColors.locationText,
-                // fontWeight: FontWeight.bold
-              ),
-              ),
-                Text(
-                  vehicleCategory,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontFamily: Assets.poppinsMedium,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: AppSizes.height * 0.01,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
                 Text(
                   'Vehicle Type:',
                   style: TextStyle(
@@ -268,7 +243,44 @@ class HistoryComponents {
                       width: AppSizes.width * 0.01,
                     ),
                     GestureDetector(
-                      onTap: () => onTap(),
+                      onTap: () => onTypeDescription(),
+                      child:Icon(Octicons.info, size: 20, color: AppColors.colorBlack.withOpacity(0.70),),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(
+              height: AppSizes.height * 0.01,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Vehicle Category:',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontFamily: Assets.poppinsRegular,
+                    color: AppColors.locationText,
+                    // fontWeight: FontWeight.bold
+                  ),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      vehicleCategory,
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontFamily: Assets.poppinsMedium,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(
+                      width: AppSizes.width * 0.01,
+                    ),
+                    GestureDetector(
+                      onTap: () => onCategoryDescription(),
                       child:Icon(Octicons.info, size: 20, color: AppColors.colorBlack.withOpacity(0.70),),
                     ),
                   ],

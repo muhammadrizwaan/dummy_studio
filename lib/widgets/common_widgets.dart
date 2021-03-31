@@ -210,7 +210,8 @@ class CommonWidgets {
       @required Function onPress}) {
     return Container(
       width:  AppSizes.width,
-      padding: EdgeInsets.all(AppSizes.width * 0.05),
+      height: AppSizes.height * 0.09,
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -238,12 +239,12 @@ class CommonWidgets {
           GestureDetector(
             onTap: () => onPress(),
             child: Container(
+              // color: AppColors.yellow,
               height: AppSizes.height * 0.05,
-              width: AppSizes.width * 0.05,
-              // height: 30,
-              // width: 30,
+              width: AppSizes.width * 0.07,
               child: Image(
                 image: AssetImage(iconName),
+                fit: BoxFit.contain,
               ),
             )
           ),
@@ -256,11 +257,8 @@ class CommonWidgets {
       {@required String text, @required Function onPress}) {
     return Container(
       width: AppSizes.width,
-      padding: EdgeInsets.only(
-        left: AppSizes.width * 0.05,
-        top: AppSizes.width * 0.05,
-        bottom: AppSizes.width * 0.05,
-      ),
+      height: AppSizes.height * 0.09,
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -287,7 +285,7 @@ class CommonWidgets {
           ),
           SizedBox(width: 10),
           Container(
-              width: AppSizes.width * 0.85,
+              width: AppSizes.width * 0.8,
               child: TextView.getAppBarText(
                   text, color:
               AppColors.colorBlack
@@ -956,6 +954,8 @@ class CommonWidgets {
         @required Function onBellTap
       }) {
     return Container(
+      height: AppSizes.height * 0.09,
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.width * 0.05),
       decoration: BoxDecoration(
           color: AppColors.white,
           boxShadow: [
@@ -967,8 +967,6 @@ class CommonWidgets {
             )
           ]
       ),
-      padding: EdgeInsets.all(AppSizes.width * 0.05),
-      margin: EdgeInsets.only(bottom: AppSizes.height * 0.02),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

@@ -104,7 +104,7 @@ class _BottomTabState extends State<BottomTab> {
                   _bottomTabProvider.currentIndex == 1 ? AppColors.yellow : AppColors.grey,)
                 ),
                 title: Text(
-                  "My Jobs",
+                  "My Loads",
                   style: TextStyle(
                     fontSize: 10,
                     fontFamily: Assets.poppinsRegular,

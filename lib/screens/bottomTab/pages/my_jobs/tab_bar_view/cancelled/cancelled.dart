@@ -79,10 +79,13 @@ class _CancelledState extends State<Cancelled> {
                               vehicleType: _myJobsProvider.cancelledList[index].vehicleTypeName,
                               vehicleCategory: _myJobsProvider.cancelledList[index].vehicleCategoryName,
                               price: "${Strings.aed} ${_myJobsProvider.cancelledList[index].shipperCost}",
-                              onAlert: () {
+                              onVehicleType: () {
                                 ApplicationToast.onDescriptionAlert(context: context, description: _myJobsProvider.cancelledList[index].vehicleTypeDescription);
                               },
-                              onTap: () {
+                              onVehicleCategory: () {
+                                ApplicationToast.onDescriptionAlert(context: context, description: _myJobsProvider.cancelledList[index].vehicleCategoryDescription);
+                              },
+                              onLoadDetail: () {
                                 Navigator.push(
                                     context, SlideRightRoute(page: JobDetails(status:"InProcess", loadId: _myJobsProvider.cancelledList[index].loadId)));
                               },

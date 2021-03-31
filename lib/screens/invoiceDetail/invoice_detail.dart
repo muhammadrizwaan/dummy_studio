@@ -50,9 +50,6 @@ class _InvoiceDetailState extends State<InvoiceDetail> {
                             onPress: () {
                               Navigator.pop(context);
                             }),
-                        Divider(
-                          height: 10,
-                        ),
                         Expanded(
                           child: ListView(
                             children: [

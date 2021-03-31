@@ -40,7 +40,7 @@ class Strings {
   static const String receiverName = "Receiver Name";
   static const String receiverPhone = "Receiver Phone";
   static const String goodType = "Good Type";
-  static const String loadId = "Job ID";
+  static const String loadId = "Load ID";
   static const String weight = "Weight";
   static const String description = "Description";
   static const String notification = "Notification";

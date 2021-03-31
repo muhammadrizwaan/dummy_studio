@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:truckoom_shipper/animations/slide_right.dart';
-import 'package:truckoom_shipper/res/assets.dart';
 import 'package:truckoom_shipper/res/colors.dart';
 import 'package:truckoom_shipper/res/sizes.dart';
 import 'package:truckoom_shipper/res/strings.dart';
@@ -13,7 +11,7 @@ import 'package:truckoom_shipper/screens/bottomTab/pages/my_jobs/tab_bar_view/pl
 import 'package:truckoom_shipper/screens/jobDetails/job_details.dart';
 import 'package:truckoom_shipper/utilities/toast.dart';
 import 'package:truckoom_shipper/widgets/common_widgets.dart';
-import 'package:truckoom_shipper/widgets/loader.dart';
+
 
 class Placed extends StatefulWidget {
   @override
@@ -80,12 +78,15 @@ class _PlacedState extends State<Placed> {
                         vehicleType: _myJobsProvider.placedList[index].vehicleTypeName,
                         vehicleCategory: _myJobsProvider.placedList[index].vehicleCategoryName,
                         price: "${Strings.aed} ${_myJobsProvider.placedList[index].shipperCost}",
-                        onAlert: () {
+                        onVehicleType: () {
                           ApplicationToast.onDescriptionAlert(context: context, description: _myJobsProvider.placedList[index].vehicleTypeDescription);
                         },
-                        onTap: () {
+                        onLoadDetail: () {
                           Navigator.push(context, SlideRightRoute(page: JobDetails(status:"Placed", loadId: _myJobsProvider.placedList[index].loadId)));
                         },
+                        onVehicleCategory: (){
+                          ApplicationToast.onDescriptionAlert(context: context, description: _myJobsProvider.placedList[index].vehicleCategoryDescription);
+                        }
                       ),
                       SizedBox(
                         height: AppSizes.height * 0.02,

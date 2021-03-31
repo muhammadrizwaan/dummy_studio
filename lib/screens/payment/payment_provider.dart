@@ -57,7 +57,7 @@ class PaymentProvider extends ChangeNotifier {
       }
       else{
         String tempUrl = getLoadCostApi.replaceAll("{loadId}", '$loadId');
-        String url = tempUrl.replaceAll("{userId}", '$loadId');
+        String url = tempUrl.replaceAll("{userId}", '$userId');
         http.Response response = await _networkHelper.get(
             url,
             headers: {
