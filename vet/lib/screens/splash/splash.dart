@@ -36,7 +36,6 @@ class _SplashState extends State<Splash> {
         width: sizes.width,
         color: AppColors.whiteColor,
         child: Text("Splash added",
-
           style: TextStyle(
             fontFamily: Assets.poppinsBold
           ),
